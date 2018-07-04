@@ -498,7 +498,7 @@ InstallMethod( PreInverse,
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         B := HomalgMatrix( B, 1, b * d + c * c, R );
-        A := UnionOfColumnsOp( KroneckerMat( PI, Ib ), KroneckerMat( Ic, p ) );
+        A := UnionOfColumns( KroneckerMat( PI, Ib ), KroneckerMat( Ic, p ) );
         L := DiagMat( [ KroneckerMat( Id, M ), KroneckerMat( Ic, P ) ] );
         sigma := RightDivide( B, A, L );
     else

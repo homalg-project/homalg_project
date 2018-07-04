@@ -2075,7 +2075,7 @@ InstallMethod( EliminateOverBaseRing,
     
     n := Length( monomsL );
     
-    coeffsL := UnionOfColumnsOp(
+    coeffsL := UnionOfColumns(
                        HomalgIdentityMatrix( n, B ),
                        HomalgZeroMatrix( n, m - n, B )
                        );

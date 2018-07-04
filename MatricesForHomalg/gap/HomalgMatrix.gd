@@ -247,7 +247,7 @@ DeclareProperty( "IsEmptyMatrix",
 ##    <Prop Arg="A" Name="IsDiagonalMatrix"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; matrix <A>A</A> is an identity matrix, taking possible ring relations into account.<P/>
+##      Check if the &homalg; matrix <A>A</A> is a diagonal matrix, taking possible ring relations into account.<P/>
 ##      (for the installed standard method see <Ref Meth="IsDiagonalMatrix" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
@@ -1092,17 +1092,14 @@ if not IsBound( UnionOfRows ) then
     BindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES", true );
 fi;
 
-DeclareOperation( "UnionOfColumnsOp",
+DeclareOperation( "UnionOfColumnsEager",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfColumnsEagerOp",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfColumnsOp",
-        [ IsList, IsHomalgMatrix ] );
-
+        
 if not IsBound( UnionOfColumns ) then
-    DeclareGlobalFunction( "UnionOfColumns" );
+    DeclareOperation( "UnionOfColumns",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+    DeclareOperation( "UnionOfColumns",
+        [ IsList ] );
     BindGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES", true );
 fi;
 

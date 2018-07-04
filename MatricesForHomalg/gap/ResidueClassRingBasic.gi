@@ -55,7 +55,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( M )
                    local Mrel;
                    
-                   Mrel := UnionOfColumnsOp( M );
+                   Mrel := UnionOfColumns( M );
                    
                    Mrel := HomalgResidueClassMatrix(
                                    BasisOfColumnModule( Mrel ), HomalgRing( M ) );
@@ -112,7 +112,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( M, T )
                    local Mrel, TT, bas, nz;
                    
-                   Mrel := UnionOfColumnsOp( M );
+                   Mrel := UnionOfColumns( M );
                    
                    TT := HomalgVoidMatrix( HomalgRing( Mrel ) );
                    
@@ -169,7 +169,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( A, B )
                    local Brel;
                    
-                   Brel := UnionOfColumnsOp( B );
+                   Brel := UnionOfColumns( B );
                    
                    Brel := BasisOfColumnModule( Brel );
                    
@@ -220,7 +220,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( A, B, T )
                    local Brel, TT, red;
                    
-                   Brel := UnionOfColumnsOp( B );
+                   Brel := UnionOfColumns( B );
                    
                    TT := HomalgVoidMatrix( HomalgRing( Brel ) );
                    
@@ -364,7 +364,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( M, M2 )
                    local M2rel, S;
                    
-                   M2rel := UnionOfColumnsOp( M2 );
+                   M2rel := UnionOfColumns( M2 );
                    
                    S := SyzygiesGeneratorsOfColumns( Eval( M ), M2rel );
                    
@@ -402,7 +402,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( M )
                    local Mrel;
                    
-                   Mrel := UnionOfColumnsOp( M );
+                   Mrel := UnionOfColumns( M );
                    
                    Mrel := HomalgResidueClassMatrix( ReducedBasisOfColumnModule( Mrel ), HomalgRing( M ) );
                    

@@ -649,7 +649,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorPro
         MN := UnionOfRowsOp( matM, matN );
         F := HomalgFreeLeftModule( NrGenerators( M ) * NrGenerators( N ), R );
     else
-        MN := UnionOfColumnsOp( matM, matN );
+        MN := UnionOfColumns( matM, matN );
         F := HomalgFreeRightModule( NrGenerators( M ) * NrGenerators( N ), R );
     fi;
     
@@ -825,7 +825,7 @@ InstallGlobalFunction( _functor_BaseChange_OnModules,		### defines: BaseChange (
             if left then
                 mat := UnionOfRowsOp( mat );
             else
-                mat := UnionOfColumnsOp( mat );
+                mat := UnionOfColumns( mat );
             fi;
         else
             mat := R * mat;

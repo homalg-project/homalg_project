@@ -287,7 +287,7 @@ InstallValue( GradedRingTableForSingularTools,
                NonTrivialDegreePerRowWithColPosition :=
                  function( M )
                    local L;
-                   
+
                    L := homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
                    
                    L := StringToIntList( L );

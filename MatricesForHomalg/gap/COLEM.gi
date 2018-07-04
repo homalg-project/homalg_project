@@ -204,18 +204,12 @@ InstallImmediateMethod( IsZero,
     
     e := EvalUnionOfColumns( M );
     
-    A := e[1];
-    B := e[2];
-    
-    if HasIsZero( A ) then
-        if not IsZero( A ) then
-            return false;
-        elif HasIsZero( B ) then
-            ## A is zero
-            return IsZero( B );
-        fi;
-    elif HasIsZero( B ) and not IsZero( B ) then
+    if true in List( e, function( A ) return HasIsZero( A ) and not IsZero( A ); end ) then
         return false;
+    fi;
+    
+    if ForAll( e, A -> HasIsZero( A ) and IsZero( A ) ) then
+        return true;
     fi;
     
     TryNextMethod( );
@@ -601,8 +595,7 @@ InstallImmediateMethod( IsRightInvertibleMatrix,
     
     e := EvalUnionOfColumns( M );
     
-    if ( HasIsRightInvertibleMatrix( e[1] ) and IsRightInvertibleMatrix( e[1] ) ) or
-       ( HasIsRightInvertibleMatrix( e[2] ) and IsRightInvertibleMatrix( e[2] ) ) then
+    if true in List( e, function( A ) return HasIsRightInvertibleMatrix( A ) and IsRightInvertibleMatrix( A ); end ) then
         return true;
     fi;
     
@@ -1012,15 +1005,14 @@ InstallImmediateMethod( IsDiagonalMatrix,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
-    local e, A, B;
+    local e, A;
     
     e := EvalUnionOfColumns( M );
     
     A := e[1];
-    B := e[2];
     
     if HasIsDiagonalMatrix( A ) and IsDiagonalMatrix( A )
-       and HasIsZero( B ) and IsZero( B ) then
+       and ForAll( e{[ 2 .. Length( e ) ]}, B -> HasIsZero( B ) and IsZero( B ) ) then 
         return true;
     fi;
     
@@ -1175,15 +1167,14 @@ InstallImmediateMethod( RowRankOfMatrix,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
-    local e;
+    local e, r;
     
     e := EvalUnionOfColumns( M );
     
-    if HasRowRankOfMatrix( e[1] ) and HasRowRankOfMatrix( e[2] ) then
-        if RowRankOfMatrix( e[1] ) = 0 then
-            return RowRankOfMatrix( e[2] );
-        elif RowRankOfMatrix( e[2] ) = 0 then
-            return RowRankOfMatrix( e[1] );
+    if ForAll( e, HasRowRankOfMatrix ) then
+        r := List( e, RowRankOfMatrix );
+        if Maximum( r ) = Sum( r ) then
+            return Maximum( r );
         fi;
     fi;
     
@@ -1295,23 +1286,22 @@ InstallImmediateMethod( ColumnRankOfMatrix,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
-    local e;
+    local e, r, A;
     
     e := EvalUnionOfColumns( M );
     
-    if HasColumnRankOfMatrix( e[1] ) and HasColumnRankOfMatrix( e[2] ) then
-        if ColumnRankOfMatrix( e[1] ) = 0 then
-            return ColumnRankOfMatrix( e[2] );
-        elif ColumnRankOfMatrix( e[2] ) = 0 then
-            return ColumnRankOfMatrix( e[1] );
+    if ForAll( e, HasRowRankOfMatrix ) then
+        r := List( e, RowRankOfMatrix );
+        if Maximum( r ) = Sum( r ) then
+            return Maximum( r );
         fi;
     fi;
     
-    if HasColumnRankOfMatrix( e[1] ) and ColumnRankOfMatrix( e[1] ) = NrRows( e[1] ) then
-        return NrRows( e[1] );
-    elif HasColumnRankOfMatrix( e[2] ) and ColumnRankOfMatrix( e[2] ) = NrRows( e[2] ) then
-        return NrRows( e[2] );
-    fi;
+    for A in e do
+        if HasColumnRankOfMatrix( A ) and ColumnRankOfMatrix( A ) = NrRows( A ) then
+            return NrRows( A );
+        fi;
+    od;
     
     TryNextMethod( );
     
@@ -1396,17 +1386,27 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
-    local e, c;
+    local e, c, p, result, i;
     
     e := EvalUnionOfColumns( M );
     
     if ForAll( e, HasPositionOfFirstNonZeroEntryPerRow ) then
         
-        c := NrColumns( e[1] );
+        c := 0;
         
-        e := List( e, PositionOfFirstNonZeroEntryPerRow );
+        p := List( e, PositionOfFirstNonZeroEntryPerRow );
         
-        return ListN( e[1], e[2], function( a, b ) if a > 0 then return a; elif b > 0 then return c + b; fi; return 0; end );
+        result := ListWithIdenticalEntries( Length( p[1] ), infinity );
+        
+        for i in [ 1 .. Length( e ) ] do
+        
+            result := ListN( result, p[i], function( a, b ) return Minimum( a, b + c ); end );
+        
+            c := c + NrColumns( e[i] );
+        
+        od;
+        
+        return List( result, function( a ) if a = infinity then return 0; else return a; fi; end );
         
     fi;
     
@@ -1565,10 +1565,7 @@ InstallMethod( IsZero,
     
     e := EvalUnionOfColumns( M );
     
-    A := e[1];
-    B := e[2];
-    
-    return IsZero( A ) and IsZero( B );
+    return ForAll( e, IsZero );
     
 end );
 
@@ -1758,16 +1755,15 @@ InstallMethod( IndicatorMatrixOfNonZeroEntries,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( mat )
-    local eval, n1, n2;
+    local e, n;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IndicatorMatrixOfNonZeroEntries(UnionOfColumns)", "\033[0m" );
     
-    eval := EvalUnionOfColumns( mat );
+    e := EvalUnionOfColumns( mat );
     
-    n1 := IndicatorMatrixOfNonZeroEntries( eval[1] );
-    n2 := IndicatorMatrixOfNonZeroEntries( eval[2] );
+    n := List( e, IndicatorMatrixOfNonZeroEntries );
     
-    return List( [ 1 .. Length( n1 ) ], a -> Concatenation( n1[a], n2[a] ) );
+    return List( [ 1 .. Length( n[1] ) ], a -> Concatenation( List( n, b -> b[a] ) ) );
     
 end );
 
@@ -1817,18 +1813,26 @@ InstallMethod( PositionOfFirstNonZeroEntryPerRow,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( M )
-    local e, c;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "PositionOfFirstNonZeroEntryPerRow( UnionOfColumns )", "\033[0m" );
+    local e, c, p, result, i;
     
     e := EvalUnionOfColumns( M );
     
-    c := NrColumns( e[1] );
-    
-    e := List( e, PositionOfFirstNonZeroEntryPerRow );
-    
-    return ListN( e[1], e[2], function( a, b ) if a > 0 then return a; elif b > 0 then return c + b; fi; return 0; end );
-    
+    c := 0;
+        
+    p := List( e, PositionOfFirstNonZeroEntryPerRow );
+        
+    result := ListWithIdenticalEntries( Length( p[1] ), infinity );
+        
+    for i in [ 1 .. Length( e ) ] do
+        
+        result := ListN( result, p[i], function( a, b ) return Minimum( a, b + c ); end );
+       
+        c := c + NrColumns( e[i] );
+      
+    od;
+        
+    return List( result, function( a ) if a = infinity then return 0; else return a; fi; end );
+        
 end );
 
 #-----------------------------------
@@ -2046,13 +2050,13 @@ InstallMethod( CertainRows,
         [ IsHomalgMatrix and HasEvalUnionOfColumns, IsList ],
         
   function( M, plist )
-    local AB;
+    local e;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( UnionOfColumns )", "\033[0m" );
     
-    AB := EvalUnionOfColumns( M );
+    e := EvalUnionOfColumns( M );
     
-    return UnionOfColumnsOp( CertainRows( AB[1], plist ), CertainRows( AB[2], plist ) );
+    return UnionOfColumns( List( e, a -> CertainRows( a, plist ) ) );
     
 end );
 
@@ -2180,7 +2184,7 @@ end );
 #    plistA := Filtered( plist, x -> x in columnsA );			## CAUTION: don't use Intersection(2)
 #    plistB := Filtered( plist - a, x -> x in columnsB );		## CAUTION: don't use Intersection(2)
 #    
-#    return UnionOfColumnsOp( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
+#    return UnionOfColumns( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
 #    
 #end );
 
@@ -2267,7 +2271,7 @@ end );
 #-----------------------------------
 
 ##
-InstallMethod( UnionOfColumnsOp,
+InstallMethod( UnionOfColumns,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
         
@@ -2275,12 +2279,12 @@ InstallMethod( UnionOfColumnsOp,
     
     Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( PreEval, IsHomalgMatrix )", "\033[0m" );
     
-    return UnionOfColumnsOp( PreEval( A ), B );
+    return UnionOfColumns( PreEval( A ), B );
     
 end );
 
 ##
-InstallMethod( UnionOfColumnsOp,
+InstallMethod( UnionOfColumns,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
         
@@ -2288,7 +2292,7 @@ InstallMethod( UnionOfColumnsOp,
     
     Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( IsHomalgMatrix, PreEval )", "\033[0m" );
     
-    return UnionOfColumnsOp( A, PreEval( B ) );
+    return UnionOfColumns( A, PreEval( B ) );
     
 end );
 
@@ -2319,7 +2323,7 @@ InstallMethod( DiagMat,
             L := l{[ 2 .. len ]};
             if r = 0 then
                 k := Sum( List( L, NrRows ) );
-                diag := UnionOfColumnsOp( HomalgZeroMatrix( k, c, R ), DiagMat( L ) );
+                diag := UnionOfColumns( HomalgZeroMatrix( k, c, R ), DiagMat( L ) );
             else
                 k := Sum( List( L, NrColumns ) );
                 diag := UnionOfRowsOp( HomalgZeroMatrix( r, k, R ), DiagMat( L ) );
@@ -2328,7 +2332,7 @@ InstallMethod( DiagMat,
             L := l{[ 1 .. len - 1 ]};
             if r = 0 then
                 k := Sum( List( L, NrRows ) );
-                diag := UnionOfColumnsOp( DiagMat( L ), HomalgZeroMatrix( k, c, R ) );
+                diag := UnionOfColumns( DiagMat( L ), HomalgZeroMatrix( k, c, R ) );
             else
                 k := Sum( List( L, NrColumns ) );
                 diag := UnionOfRowsOp( DiagMat( L ), HomalgZeroMatrix( r, k, R ) );
@@ -2723,13 +2727,13 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfColumns ], 15001,
         
   function( A, B )
-    local BB;
+    local b;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfColumns", "\033[0m" );
     
-    BB := EvalUnionOfColumns( B );
+    b := EvalUnionOfColumns( B );
     
-    return UnionOfColumnsOp( A * BB[1], A * BB[2] );
+    return UnionOfColumns( List( b, a -> A * a ) );
     
 end );
 
@@ -2739,18 +2743,25 @@ InstallMethod( \*,
         [ IsHomalgMatrix and HasEvalUnionOfColumns, IsHomalgMatrix ], 15001,
         
   function( A, B )
-    local AA, a1, B1, B2;
+    local e, c, result, i, k;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfColumns * IsHomalgMatrix", "\033[0m" );
     
-    AA := EvalUnionOfColumns( A );
+    e := EvalUnionOfColumns( A );
     
-    a1 := NrColumns( AA[1] );
+    c := List( e, NrColumns );
     
-    B1 := CertainRows( B, [ 1 .. a1 ] );
-    B2 := CertainRows( B, [ a1 + 1 .. NrRows( B ) ] );
+    result := e[1] * CertainRows( B, [ 1 .. c[1] ] );
     
-    return AA[1] * B1 +  AA[2] * B2;
+    for i in [ 2 .. Length( c ) ] do
+    
+        k := Sum( c{[ 1 .. i - 1 ]} );
+    
+        result := result + e[i] * CertainRows( B, [ k + 1 .. k + c[i] ] );
+    
+    od;
+    
+    return result;
     
 end );
 

@@ -631,7 +631,7 @@ InstallMethod( LeftDivide,
     ## first reduce A modulo L
     ZA := DecideZeroColumns( A, BL );
     
-    AL := UnionOfColumnsOp( ZA, BL );
+    AL := UnionOfColumns( ZA, BL );
     
     ## AL * CA = IAL
     CA := HomalgVoidMatrix( R );
@@ -952,7 +952,7 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis
         if m - NrRows( B ) = 0 and n - NrColumns( B ) = 0 then
             return B;
         elif m - NrRows( B ) = 0 and n - NrColumns( B ) > 0 then
-            return UnionOfColumnsOp( B, HomalgZeroMatrix( m, n - NrColumns( B ), R ) );
+            return UnionOfColumns( B, HomalgZeroMatrix( m, n - NrColumns( B ), R ) );
         elif m - NrRows( B ) > 0 and n - NrColumns( B ) = 0 then
             return UnionOfRowsOp( B, HomalgZeroMatrix( m - NrRows( B ), n, R ) );
         else

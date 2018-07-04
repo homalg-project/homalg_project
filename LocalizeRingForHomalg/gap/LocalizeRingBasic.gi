@@ -271,7 +271,7 @@ RelativeSyzygiesGeneratorsOfColumns :=
     
     Info( InfoLocalizeRingForHomalg, 2, "Start RelativeSyzygiesGeneratorsOfColumns with ", NrRows( M ), "x", NrColumns( M ), " and ", NrRows( N ), "x", NrColumns( N ) );
     
-    CommonDenomMatrix := UnionOfColumnsOp( M, N );
+    CommonDenomMatrix := UnionOfColumns( M, N );
     M2 := CertainColumns( CommonDenomMatrix, [ 1 .. NrColumns( M ) ] );
     N2 := CertainColumns( CommonDenomMatrix, [ NrColumns( M ) + 1 .. NrColumns( CommonDenomMatrix ) ] );
     
@@ -380,7 +380,7 @@ DecideZeroColumns :=
         B2 := HomalgLocalMatrix( DecideZeroColumns( B1, A1 ), R );
         
         if not IsZero( B2 ) then
-          A2 := UnionOfColumnsOp( A1, B1 * gens );
+          A2 := UnionOfColumns( A1, B1 * gens );
           A2 := BasisOfColumns( A2 );
           B3 := HomalgLocalMatrix( DecideZeroColumns( B1, A2 ), R );
           if IsZero( B3 ) then
@@ -388,7 +388,7 @@ DecideZeroColumns :=
           fi;
         fi;
         
-        N := UnionOfColumnsOp( N, B2 );
+        N := UnionOfColumns( N, B2 );
         
     od;
     
@@ -510,7 +510,7 @@ DecideZeroColumnsEffectively :=
         B2 := HomalgLocalMatrix( DecideZeroColumnsEffectively( B1, A1, S1 ), R );
         
         if not IsZero( B2 ) then
-          A2 := UnionOfColumnsOp( A1, B1 * gens );
+          A2 := UnionOfColumns( A1, B1 * gens );
           SS := HomalgVoidMatrix( GlobalR );
           A2 := BasisOfColumnsCoeff( A2, SS );
           S := HomalgVoidMatrix( GlobalR );
@@ -535,8 +535,8 @@ DecideZeroColumnsEffectively :=
         
         fi;
         
-        TT := UnionOfColumnsOp( TT, S );
-        N := UnionOfColumnsOp( N, B2 );
+        TT := UnionOfColumns( TT, S );
+        N := UnionOfColumns( N, B2 );
         
         Assert( 7, HomalgLocalMatrix( A1, R ) * S + HomalgLocalMatrix( B1, R ) = B2 );
         

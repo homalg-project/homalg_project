@@ -289,7 +289,7 @@ InstallMethod( UnionOfRowsOp,
 end );
 
 ##
-InstallMethod( UnionOfColumnsOp,
+InstallMethod( UnionOfColumns,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep, IsHomalgRingRelations ],
         
@@ -314,18 +314,18 @@ InstallMethod( UnionOfColumnsOp,
     
     rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
     
-    return UnionOfColumnsOp( Eval( M ), rel );
+    return UnionOfColumns( Eval( M ), rel );
     
 end );
 
 ##
-InstallMethod( UnionOfColumnsOp,
+InstallMethod( UnionOfColumns,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep ],
         
   function( M )
     
-    return UnionOfColumnsOp( M, RingRelations( HomalgRing( M ) ) );
+    return UnionOfColumns( M, RingRelations( HomalgRing( M ) ) );
     
 end );
 

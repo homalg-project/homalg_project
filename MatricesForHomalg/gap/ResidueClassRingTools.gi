@@ -313,7 +313,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                  function( A, B )
                    local N;
                    
-                   N := UnionOfColumnsOp( Eval( A ), Eval( B ) );
+                   N := UnionOfColumns( Eval( A ), Eval( B ) );
                    
                    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
                               IsReducedModuloRingRelations ) then

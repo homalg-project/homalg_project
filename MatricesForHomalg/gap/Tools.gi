@@ -658,36 +658,108 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( C )
-    local R, RP, e, A, B, U;
+    local e, i, ee, combine;
+  
+    # Make it mutable 
+    e := ShallowCopy( EvalUnionOfColumns( C ) );
     
-    R := HomalgRing( C );
+    # In case of multiple UnionOfColumns, we try to avoid
+    # recursion, since the gap stack is rather small
+    i := 1;
+    while i < Length( e ) do
+
+      if HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
+      
+        ee := EvalUnionOfColumns( e[i] );
+
+        e[i] := ee[1];
+
+        Add( e, ee[2], i + 1 );
+        
+      else
+
+        i := i + 1;
+
+      fi;
+
+    od;
     
-    RP := homalgTable( R );
+    # Combine zero matrices
+    i := 1;
+    while i + 1 < Length( e ) do
+
+      if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
+      
+        e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );
+
+        Remove( e, i + 1 );
+
+      else
+
+        i := i + 1;
+
+      fi;
+
+    od;
     
-    e :=  EvalUnionOfColumns( C );
+    # Combine the matrices
+    # But try to keep the sizes small (heuristically)
+    # to avoid a huge memory footprint
+
+    combine := function( A, B, isHomalgInternalMatrixRep )
+    local R, RP, result, U; 
     
-    A := e[1];
-    B := e[2];
+      R := HomalgRing( C );
     
-    if IsBound(RP!.UnionOfColumns) then
-        return RP!.UnionOfColumns( A, B );
-    fi;
+      RP := homalgTable( R );
+
+      if IsBound(RP!.UnionOfColumns) then
+      
+        result := RP!.UnionOfColumns( A, B );
+
+        return HomalgMatrixWithAttributes( [
+                   Eval, result,
+                   EvalUnionOfColumns, [ A, B ],
+                   NrRows, NrRows( A ),
+                   NrColumns, NrColumns( A ) + NrColumns( B )
+                   ], R );
+                   
+      fi;
     
-    if not IsHomalgInternalMatrixRep( C ) then
+      if not isHomalgInternalMatrixRep then
         Error( "could not find a procedure called UnionOfColumns ",
                "in the homalgTable of the non-internal ring\n" );
-    fi;
+      fi;
     
-    #=====# can only work for homalg internal matrices #=====#
+      #=====# can only work for homalg internal matrices #=====#
     
-    U := List( Eval( A )!.matrix, ShallowCopy );
+      U := List( Eval( A )!.matrix, ShallowCopy );
     
-    U{ [ 1 .. NrRows( A ) ] }
-      { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
-      := Eval( B )!.matrix;
+      U{ [ 1 .. NrRows( A ) ] }
+        { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
+        := Eval( B )!.matrix;
     
-    return homalgInternalMatrixHull( U );
+      result := homalgInternalMatrixHull( U );
+      result := HomalgMatrix( result, NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
+      return result;
     
+    end;
+
+    while Length( e ) > 1 do
+
+      for i in [ 1 .. Int( Length( e ) / 2 ) ] do
+
+        e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ], IsHomalgInternalMatrixRep( C ) );
+        Unbind( e[ 2 * i ] );
+
+      od;
+
+      e := Compacted( e );
+
+    od;
+  
+    return Eval( e[1] );
+
 end );
 ##  ]]></Listing>
 ##    </Description>
@@ -2561,11 +2633,7 @@ InstallMethod( ConvertRowToMatrix,
     l := List( l, GetListOfHomalgMatrixAsString );
     l := List( l, a -> CreateHomalgMatrixFromString( a, r, 1, R ) );
     
-    mat := HomalgZeroMatrix( r, 0, R );
-    
-    for j in [ 1 .. c ] do
-        mat := UnionOfColumnsOp( mat, l[j] );
-    od;
+    mat := UnionOfColumns( mat, l );
     
     return mat;
     
@@ -2636,11 +2704,7 @@ InstallMethod( ConvertMatrixToRow,
     l := List( l, GetListOfHomalgMatrixAsString );
     l := List( l, a -> CreateHomalgMatrixFromString( a, 1, r, R ) );
     
-    mat := HomalgZeroMatrix( 1, 0, R );
-    
-    for j in [ 1 .. c ] do
-        mat := UnionOfColumnsOp( mat, l[j] );
-    od;
+    mat := UnionOfColumns( l );
     
     return mat;
     
@@ -3450,8 +3514,8 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         IdV := HomalgIdentityMatrix( c, R );
         
         u := CertainColumns( IdU, [ 1 .. i - 1 ] );
-        u := UnionOfColumnsOp( u, deleted_columns[pos] );
-        u := UnionOfColumnsOp( u, CertainColumns( IdU, [ i .. r ] ) );
+        u := UnionOfColumns( u, deleted_columns[pos] );
+        u := UnionOfColumns( u, CertainColumns( IdU, [ i .. r ] ) );
         
         v := CertainRows( IdV, [ 1 .. j - 1 ] );
         v := UnionOfRowsOp( v, deleted_rows[pos] );

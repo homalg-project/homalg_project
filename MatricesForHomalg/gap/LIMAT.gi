@@ -1183,7 +1183,7 @@ end );
 #-----------------------------------
 
 ##
-InstallMethod( UnionOfColumnsOp,
+InstallMethod( UnionOfColumns,
         "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
@@ -1202,7 +1202,7 @@ InstallMethod( UnionOfColumnsOp,
 end );
 
 ##
-InstallMethod( UnionOfColumnsOp,
+InstallMethod( UnionOfColumns,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
         
@@ -1215,7 +1215,7 @@ InstallMethod( UnionOfColumnsOp,
 end );
 
 ##
-InstallMethod( UnionOfColumnsOp,
+InstallMethod( UnionOfColumns,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
@@ -1228,7 +1228,7 @@ InstallMethod( UnionOfColumnsOp,
 end );
 
 ## without this method the above two methods will be called in the wrong context!!!
-InstallMethod( UnionOfColumnsOp,
+InstallMethod( UnionOfColumns,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
@@ -2788,10 +2788,11 @@ InstallMethod( DecideZeroRowsEffectively,
     ## M = A + T * B
     SetPreEval( T, -CertainColumns( A, nz ) ); ResetFilterObj( T, IsVoidMatrix );
     
-    return UnionOfColumnsOp(
-                   UnionOfColumnsOp( CertainColumns( A, [ 1 .. nz[1] - 1 ] ),
-                           HomalgZeroMatrix( r, l, R ) ),
-                   CertainColumns( A, [ nz[l] + 1 .. c ] ) );
+    return UnionOfColumns( [
+        CertainColumns( A, [ 1 .. nz[1] - 1 ] ),
+        HomalgZeroMatrix( r, l, R ),
+        CertainColumns( A, [ nz[l] + 1 .. c ] )
+        ] );
     
 end );
 
