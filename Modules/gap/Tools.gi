@@ -1175,6 +1175,17 @@ InstallMethod( AffineDimension,
             free := HomalgZeroMatrix( 1, 1, R );
             return AffineDimension( free, weights, degrees );
         fi;
+    elif HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
+        
+        M := LeftPresentation( M );
+        
+        if IsZero( M ) then
+            return HOMALG_MODULES.DimensionOfZeroModules;
+        elif RankOfObject( M ) = 0 then
+            return 0;
+        fi;
+        
+        return 1;
     fi;
     
     RP := homalgTable( R );
@@ -1224,6 +1235,17 @@ InstallMethod( AffineDimension,
             free := HomalgZeroMatrix( 1, 1, R );
             return AffineDimension( free );
         fi;
+    elif HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
+        
+        M := LeftPresentation( M );
+        
+        if IsZero( M ) then
+            return HOMALG_MODULES.DimensionOfZeroModules;
+        elif RankOfObject( M ) = 0 then
+            return 0;
+        fi;
+        
+        return 1;
     fi;
     
     RP := homalgTable( R );
