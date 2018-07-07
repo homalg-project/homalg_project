@@ -169,8 +169,16 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
         
     fi;
     
-    exec := IO_FindExecutable( "groebner" );
-    
+    if IO_FindExecutable( "groebner" ) <> fail then
+        exec := IO_FindExecutable( "groebner" );
+    elif IO_FindExecutable( "4ti2-groebner" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-groebner" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
+
+
     filestream := IO_Popen2( exec, [ filename ]);
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
@@ -215,7 +223,14 @@ InstallGlobalFunction( 4ti2Interface_groebner_basis,
         
     fi;
     
-    exec := IO_FindExecutable( "groebner" );
+    if IO_FindExecutable( "groebner" ) <> fail then
+        exec := IO_FindExecutable( "groebner" );
+    elif IO_FindExecutable( "4ti2-groebner" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-groebner" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen2( exec, [ filename ]);
     
@@ -257,7 +272,14 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
     
-    exec := IO_FindExecutable( "hilbert" );
+    if IO_FindExecutable( "hilbert" ) <> fail then
+        exec := IO_FindExecutable( "hilbert" );
+    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-hilbert" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen2( exec, [ filename ]);
     
@@ -295,7 +317,14 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
     
     4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
     
-    exec := IO_FindExecutable( "hilbert" );
+    if IO_FindExecutable( "hilbert" ) <> fail then
+        exec := IO_FindExecutable( "hilbert" );
+    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-hilbert" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen2( exec, [ filename ]);
     
@@ -333,7 +362,14 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
     
     4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
     
-    exec := IO_FindExecutable( "hilbert" );
+    if IO_FindExecutable( "hilbert" ) <> fail then
+        exec := IO_FindExecutable( "hilbert" );
+    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-hilbert" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen2( exec, [ filename ]);
     
@@ -378,7 +414,14 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
     
-    exec := IO_FindExecutable( "hilbert" );
+    if IO_FindExecutable( "hilbert" ) <> fail then
+        exec := IO_FindExecutable( "hilbert" );
+    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-hilbert" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen2( exec, [ filename ]);
     
@@ -423,7 +466,14 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
     
-    exec := IO_FindExecutable( "hilbert" );
+    if IO_FindExecutable( "hilbert" ) <> fail then
+        exec := IO_FindExecutable( "hilbert" );
+    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-hilbert" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen2( exec, [ filename ]);
     
@@ -517,7 +567,14 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     
     4ti2Interface_Write_Matrix_To_File( concat_rhs, Concatenation( filename, ".rhs" ) );
     
-    exec := IO_FindExecutable( "zsolve" );
+    if IO_FindExecutable( "zsolve" ) <> fail then
+        exec := IO_FindExecutable( "zsolve" );
+    elif IO_FindExecutable( "4ti2-zsolve" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-zsolve" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen3( exec, [ Concatenation( "-p=", precision ), filename ] );
     
@@ -621,7 +678,14 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities,
     
     4ti2Interface_Write_Matrix_To_File( signs, Concatenation( filename, ".sign" ) );
     
-    exec := IO_FindExecutable( "graver" );
+    if IO_FindExecutable( "graver" ) <> fail then
+        exec := IO_FindExecutable( "graver" );
+    elif IO_FindExecutable( "4ti2-graver" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-graver" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen2( exec, [ filename ]);
     
@@ -649,8 +713,15 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
     filename := Filename( dir, "gap_4ti2_graver" );
     
     4ti2Interface_Write_Matrix_To_File( eqs, Concatenation( filename, ".mat" ) );
-    
-    exec := IO_FindExecutable( "graver" );
+
+    if IO_FindExecutable( "graver" ) <> fail then
+        exec := IO_FindExecutable( "graver" );
+    elif IO_FindExecutable( "4ti2-graver" ) <> fail then
+        exec := IO_FindExecutable( "4ti2-graver" );
+    else
+        Error( "4ti2 can not be found" );
+    fi;
+
     
     filestream := IO_Popen2( exec, [ filename ]);
     
