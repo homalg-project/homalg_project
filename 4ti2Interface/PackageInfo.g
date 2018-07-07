@@ -9,6 +9,7 @@ Subtitle := "A link to 4ti2",
 Version := Maximum( [
   "2017.10.04", ## Sebas' version
 ## this line prevents merge conflicts
+  "2018.07.06", ## Kamal's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
