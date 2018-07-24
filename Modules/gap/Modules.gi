@@ -1744,7 +1744,7 @@ InstallMethod( AMaximalIdealContaining,
   function( I )
     local R, A, indets, ideal, m, v, l, n_is_one, n, a, k, d;
     
-    if I = 1 then
+    if IsOne( I ) then
         Error( "expected a proper ideal\n" );
     fi;
     
@@ -1864,7 +1864,7 @@ InstallMethod( AMaximalIdealContaining,
         TryNextMethod( );
     fi;
     
-    if I = 1 then
+    if IsOne( I ) then
         Error( "expected a proper ideal\n" );
     fi;
     
@@ -1934,7 +1934,7 @@ InstallMethod( AMaximalIdealContaining,
         TryNextMethod( );
     fi;
     
-    if I = 1 then
+    if IsOne( I ) then
         Error( "expected a proper ideal\n" );
     fi;
     
