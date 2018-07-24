@@ -8,7 +8,7 @@
   
   [1X3.1-1 4ti2Interface_groebner_matrix[101X
   
-  [29X[2X4ti2Interface_groebner_matrix[102X( [3Xmatrix[103X[, [3Xordering[103X] ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_groebner_matrix[102X( [3Xmatrix[103X[, [3Xordering[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YA list of vectors[133X
   
   [33X[0;0YThis  launches  the 4ti2 groebner command with the argument as matrix input.
@@ -21,7 +21,7 @@
   
   [1X3.1-2 4ti2Interface_groebner_basis[101X
   
-  [29X[2X4ti2Interface_groebner_basis[102X( [3Xbasis[103X[, [3Xordering[103X] ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_groebner_basis[102X( [3Xbasis[103X[, [3Xordering[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YA list of vectors[133X
   
   [33X[0;0YThis  launches  the 4ti2 groebner command with the argument as matrix input.
@@ -57,8 +57,8 @@
   
   [1X3.2-1 4ti2Interface_hilbert_inequalities[101X
   
-  [29X[2X4ti2Interface_hilbert_inequalities[102X( [3XA[103X ) [32X function
-  [29X[2X4ti2Interface_hilbert_inequalities_in_positive_orthant[102X( [3XA[103X ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_hilbert_inequalities[102X( [3XA[103X ) [32X function[133X
+  [33X[1;0Y[29X[2X4ti2Interface_hilbert_inequalities_in_positive_orthant[102X( [3XA[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list of vectors[133X
   
   [33X[0;0YThis  function produces the hilbert basis of the cone C given by [3XA[103Xx >= 0 for
@@ -66,7 +66,7 @@
   
   [1X3.2-2 4ti2Interface_hilbert_equalities_in_positive_orthant[101X
   
-  [29X[2X4ti2Interface_hilbert_equalities_in_positive_orthant[102X( [3XA[103X ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_hilbert_equalities_in_positive_orthant[102X( [3XA[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list of vectors[133X
   
   [33X[0;0YThis  function  produces  the  hilbert  basis  of  the  cone  C given by the
@@ -74,8 +74,8 @@
   
   [1X3.2-3 4ti2Interface_hilbert_equalities_and_inequalities[101X
   
-  [29X[2X4ti2Interface_hilbert_equalities_and_inequalities[102X( [3XA[103X, [3XB[103X ) [32X function
-  [29X[2X4ti2Interface_hilbert_equalities_and_inequalities_in_positive_orthant[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_hilbert_equalities_and_inequalities[102X( [3XA[103X, [3XB[103X ) [32X function[133X
+  [33X[1;0Y[29X[2X4ti2Interface_hilbert_equalities_and_inequalities_in_positive_orthant[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list of vectors[133X
   
   [33X[0;0YThis  function  produces  the  hilbert  basis  of  the  cone  C given by the
@@ -129,8 +129,8 @@
   
   [1X3.3-1 4ti2Interface_zsolve_equalities_and_inequalities[101X
   
-  [29X[2X4ti2Interface_zsolve_equalities_and_inequalities[102X( [3Xeqs[103X, [3Xeqs_rhs[103X, [3Xineqs[103X, [3Xineqs_rhs[103X[, [3Xsigns[103X] ) [32X function
-  [29X[2X4ti2Interface_zsolve_equalities_and_inequalities_in_positive_orthant[102X( [3Xeqs[103X, [3Xeqs_rhs[103X, [3Xineqs[103X, [3Xineqs_rhs[103X ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_zsolve_equalities_and_inequalities[102X( [3Xeqs[103X, [3Xeqs_rhs[103X, [3Xineqs[103X, [3Xineqs_rhs[103X[, [3Xsigns[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2X4ti2Interface_zsolve_equalities_and_inequalities_in_positive_orthant[102X( [3Xeqs[103X, [3Xeqs_rhs[103X, [3Xineqs[103X, [3Xineqs_rhs[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list of three matrices[133X
   
   [33X[0;0YThis  function  produces  a  basis  of the system [3Xeqs[103X = [3Xeqs_rhs[103X and [3Xineqs[103X >=
@@ -152,8 +152,8 @@
   
   [1X3.4-1 4ti2Interface_graver_equalities[101X
   
-  [29X[2X4ti2Interface_graver_equalities[102X( [3Xeqs[103X[, [3Xsigns[103X] ) [32X function
-  [29X[2X4ti2Interface_graver_equalities_in_positive_orthant[102X( [3Xeqs[103X ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_graver_equalities[102X( [3Xeqs[103X[, [3Xsigns[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2X4ti2Interface_graver_equalities_in_positive_orthant[102X( [3Xeqs[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya matrix[133X
   
   [33X[0;0YThis  calls  the function graver with the equalities [3Xeqs[103X = 0. It outputs one

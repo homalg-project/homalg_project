@@ -6,7 +6,7 @@
   
   [1X4.1-1 4ti2Interface_Read_Matrix_From_File[101X
   
-  [29X[2X4ti2Interface_Read_Matrix_From_File[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_Read_Matrix_From_File[102X( [3Xarg[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list of vectors[133X
   
   [33X[0;0YThe  argument must be a string, representing a filename of a matrix to read.
@@ -16,7 +16,7 @@
   
   [1X4.1-2 4ti2Interface_Write_Matrix_To_File[101X
   
-  [29X[2X4ti2Interface_Write_Matrix_To_File[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_Write_Matrix_To_File[102X( [3Xarg[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YFirst  argument  must  be  a matrix, i.e. a list of list of integers. Second
@@ -26,7 +26,7 @@
   
   [1X4.1-3 4ti2Interface_Cut_Vector[101X
   
-  [29X[2X4ti2Interface_Cut_Vector[102X( [3Xvec[103X, [3Xd[103X ) [32X function
+  [33X[1;0Y[29X[2X4ti2Interface_Cut_Vector[102X( [3Xvec[103X, [3Xd[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya matrix[133X
   
   [33X[0;0YTakes the vector [3Xvec[103X and produces a matrix with [3Xd[103X columns out of the entries
