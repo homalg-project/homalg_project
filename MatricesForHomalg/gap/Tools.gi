@@ -2697,6 +2697,86 @@ InstallMethod( Eval,
     
 end );
 
+##
+InstallMethod( PrimaryDecompositionOp,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, triv;
+    
+    if IsBound( M!.PrimaryDecomposition ) then
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        if NrColumns( M ) = 0 then
+            triv := HomalgZeroMatrix( 0, 0, R );
+        else
+            triv := HomalgZeroMatrix( 0, 1, R );
+        fi;
+        M!.PrimaryDecomposition := [ [ triv, triv ] ];
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.PrimaryDecomposition ) then
+        M!.PrimaryDecomposition := RP!.PrimaryDecomposition( M );
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called PrimaryDecomposition ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RadicalDecompositionOp,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, triv;
+    
+    if IsBound( M!.RadicalDecomposition ) then
+        return M!.RadicalDecomposition;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        if NrColumns( M ) = 0 then
+            triv := HomalgZeroMatrix( 0, 0, R );
+        else
+            triv := HomalgZeroMatrix( 0, 1, R );
+        fi;
+        M!.RadicalDecomposition := [ triv ];
+        return M!.RadicalDecomposition;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.RadicalDecomposition ) then
+        M!.RadicalDecomposition := RP!.RadicalDecomposition( M );
+        return M!.RadicalDecomposition;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called RadicalDecomposition ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ##  <#GAPDoc Label="Eliminate">
 ##  <ManSection>
 ##    <Oper Arg="rel, indets" Name="Eliminate"/>

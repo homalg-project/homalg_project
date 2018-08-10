@@ -608,3 +608,50 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                
         )
  );
+
+##
+InstallMethod( PrimaryDecompositionOp,
+        "for a homalg matrix over a residue class ring",
+        [ IsHomalgResidueClassMatrixRep ],
+        
+  function( M )
+    local R, triv, rel, m;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        if NrColumns( M ) = 0 then
+            triv := HomalgIdentityMatrix( 1, R );
+        else
+            triv := HomalgZeroMatrix( 0, 1, R );
+        fi;
+        M!.PrimaryDecomposition := [ [ triv, triv ] ];
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    rel := RingRelations( R );
+    rel := MatrixOfRelations( rel );
+    rel := ListWithIdenticalEntries( NrColumns( M ), rel );
+    rel := DiagMat( rel );
+    
+    m := UnionOfRowsOp( Eval( M ), rel );
+    
+    M!.PrimaryDecomposition := List( PrimaryDecompositionOp( m ), a -> List( a, b -> R * b ) );
+    
+    return M!.PrimaryDecomposition;
+    
+end );
+
+##
+InstallMethod( RadicalDecompositionOp,
+        "for a homalg matrix over a residue class ring",
+        [ IsHomalgResidueClassMatrixRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    return List( RadicalDecompositionOp( Eval( M ) ), a -> R * a );
+    
+end );
