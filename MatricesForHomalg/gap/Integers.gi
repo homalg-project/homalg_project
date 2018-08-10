@@ -110,6 +110,25 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                
+               PrimaryDecomposition :=
+                 function( mat )
+                   local R, fac;
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only primary decomposition of one-column matrices is supported\n" );
+                   fi;
+                   
+                   R := HomalgRing( mat );
+                   
+                   ## an empty matrix is excluded by the high-level procedure
+                   mat := BasisOfRows( mat );
+                   
+                   fac := Collected( FactorsInt( AbsInt( MatElm( mat, 1, 1 ) ) ) );
+                   
+                   return List( fac, a -> [ HomalgMatrix( [ a[1]^a[2] ], 1, 1, R ), HomalgMatrix( [ a[1] ], 1, 1, R ) ] );
+                   
+                 end,
+               
                ## Must be defined if other functions are not defined
                
                RowReducedEchelonForm :=
