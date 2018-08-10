@@ -1,6 +1,6 @@
 name: Modules
-version: 2018.07.24
-date: 24/07/2018
+version: 2018.08.01
+date: 01/08/2018
 description: A homalg based package for the Abelian category of finitely presented modules over computable rings
 
 authors:
@@ -25,7 +25,7 @@ GAP: ">=4.7"
 
 needed-pkgs:
     - name: "MatricesForHomalg"
-      version: ">=2018.05.28"
+      version: ">=2018.08.01"
       url: "http://homalg-project.github.io/homalg_project/MatricesForHomalg/"
     - name: "ToolsForHomalg"
       version: ">=2013.04.12"
@@ -43,9 +43,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/Modules/PackageInfo.
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2018.07.24/Modules-2018.07.24.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2018.08.01/Modules-2018.08.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2018.07.24/Modules-2018.07.24.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2018.08.01/Modules-2018.08.01.zip
 
 abstract: The <span class="pkgname">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings
 
