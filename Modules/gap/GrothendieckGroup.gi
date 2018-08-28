@@ -206,7 +206,7 @@ end );
 ##
 InstallMethod( ZERO,
         "for an element of the Grothendieck group of a projective space",
-        [ IsElementOfGrothendieckGroupOfProjectiveSpaceRep and AssociatedPolynomial ],
+        [ IsElementOfGrothendieckGroupOfProjectiveSpaceRep and HasAssociatedPolynomial ],
         
   function( P )
     local chi, K_0;

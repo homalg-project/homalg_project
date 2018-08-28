@@ -524,7 +524,7 @@ end );
 
 ##
 InstallImmediateMethod( ZeroRows,
-        IsHomalgMatrix and EvalCertainRows, 0,
+        IsHomalgMatrix and HasEvalCertainRows, 0,
         
   function( M )
     local e;
@@ -604,7 +604,7 @@ end );
 
 ##
 InstallImmediateMethod( ZeroColumns,
-        IsHomalgMatrix and EvalCertainColumns, 0,
+        IsHomalgMatrix and HasEvalCertainColumns, 0,
         
   function( M )
     local e;
