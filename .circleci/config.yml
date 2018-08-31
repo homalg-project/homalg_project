@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: gapsystem/gap-docker:latest
+    working_directory: ~/.gap/pkg/homalg_project
+    steps:
+      - checkout
+      - run: |
+          sudo apt install -y texlive-latex-extra texlive-science curl
+          echo "SetUserPreference(\"PackagesToLoad\", []);" > ~/.gap/gap.ini
+          make ci-test
+          bash <(curl -s https://codecov.io/bash)

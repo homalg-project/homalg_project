@@ -2,3 +2,6 @@
 
 /*/doc/*.css
 /*/doc/*.js
+
+stats
+coverage.json

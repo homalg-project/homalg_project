@@ -51,6 +51,12 @@ docclean:
 test: doc
 	gap -b maketest.g
 
+test-with-coverage:	doc
+	gap --cover stats maketest.g | perl -pe 'END { exit $$status } $$status=1 if /Expected output/;'
+	echo 'LoadPackage("profiling"); OutputJsonCoverage("stats", "coverage.json");' | gap
+
+ci-test:	test-with-coverage
+
 ##
 ##  This program is free software; you can redistribute it and/or modify
 ##  it under the terms of the GNU General Public License as published by
