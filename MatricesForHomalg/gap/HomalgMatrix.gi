@@ -1121,7 +1121,7 @@ end );
 
 ##
 InstallMethod( UnionOfRowsOp,
-        "of a list and a homalg matricex",
+        "of a list and a homalg matrices",
         [ IsList, IsHomalgMatrix ],
         
   function( L, A )
@@ -1201,7 +1201,7 @@ end );
 
 ##
 InstallMethod( UnionOfColumnsOp,
-        "of a list and a homalg matricex",
+        "of a list and a homalg matrices",
         [ IsList, IsHomalgMatrix ],
         
   function( L, A )
