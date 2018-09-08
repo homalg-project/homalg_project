@@ -194,13 +194,13 @@
 
 <h5>3.2-1 SparseMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseMatrix</code>( <var class="Arg">mat</var>[, <var class="Arg">R</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseMatrix</code>( <var class="Arg">mat</var>[, <var class="Arg">R</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix over the ring <var class="Arg">R</var></p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseMatrix</code>( <var class="Arg">nrows</var>, <var class="Arg">ncols</var>, <var class="Arg">indices</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseMatrix</code>( <var class="Arg">nrows</var>, <var class="Arg">ncols</var>, <var class="Arg">indices</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix over GF(2)</p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseMatrix</code>( <var class="Arg">nrows</var>, <var class="Arg">ncols</var>, <var class="Arg">indices</var>, <var class="Arg">entries</var>[, <var class="Arg">R</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseMatrix</code>( <var class="Arg">nrows</var>, <var class="Arg">ncols</var>, <var class="Arg">indices</var>, <var class="Arg">entries</var>[, <var class="Arg">R</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix over the ring <var class="Arg">R</var></p>
 
 <p>The sparse matrix constructor. In the one-argument form the SparseMatrix constructor converts a <strong class="pkg">GAP</strong> matrix to a sparse matrix. If not provided the base ring <var class="Arg">R</var> is found automatically. For the multi-argument form <var class="Arg">nrows</var> and <var class="Arg">ncols</var> are the dimensions of the matrix. <var class="Arg">indices</var> must be a list of length <var class="Arg">nrows</var> containing lists of the column indices of the matrix in ascending order.</p>
@@ -233,7 +233,7 @@ true
 
 <h5>3.2-2 ConvertSparseMatrixToMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConvertSparseMatrixToMatrix</code>( <var class="Arg">sm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConvertSparseMatrixToMatrix</code>( <var class="Arg">sm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">GAP</strong> matrix, [], or a list of empty lists</p>
 
 <p>This function converts the sparse matrix <var class="Arg">sm</var> into a <strong class="pkg">GAP</strong> matrix. In case of <code class="code">nrows(sm)=0</code> or <code class="code">ncols(sm)=0</code> the return value is the empty list or a list of empty lists, respectively.</p>
@@ -254,14 +254,14 @@ true
 
 <h5>3.2-3 CopyMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyMat</code>( <var class="Arg">sm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyMat</code>( <var class="Arg">sm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a shallow copy of the sparse matrix <var class="Arg">sm</var></p>
 
 <p><a id="X7C46B38A8507EB61" name="X7C46B38A8507EB61"></a></p>
 
 <h5>3.2-4 GetEntry</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetEntry</code>( <var class="Arg">sm</var>, <var class="Arg">i</var>, <var class="Arg">j</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetEntry</code>( <var class="Arg">sm</var>, <var class="Arg">i</var>, <var class="Arg">j</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a ring element.</p>
 
 <p>This returns the entry <code class="code">sm[i,j]</code> of the sparse matrix <var class="Arg">sm</var></p>
@@ -270,7 +270,7 @@ true
 
 <h5>3.2-5 SetEntry</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetEntry</code>( <var class="Arg">sm</var>, <var class="Arg">i</var>, <var class="Arg">j</var>, <var class="Arg">elm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetEntry</code>( <var class="Arg">sm</var>, <var class="Arg">i</var>, <var class="Arg">j</var>, <var class="Arg">elm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: nothing.</p>
 
 <p>This sets the entry <code class="code">sm[i,j]</code> of the sparse matrix <var class="Arg">sm</var> to <var class="Arg">elm</var>.</p>
@@ -279,7 +279,7 @@ true
 
 <h5>3.2-6 AddToEntry</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToEntry</code>( <var class="Arg">sm</var>, <var class="Arg">i</var>, <var class="Arg">j</var>, <var class="Arg">elm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToEntry</code>( <var class="Arg">sm</var>, <var class="Arg">i</var>, <var class="Arg">j</var>, <var class="Arg">elm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="keyw">true</code> or a ring element</p>
 
 <p>AddToEntry adds the element <var class="Arg">elm</var> to the sparse matrix <var class="Arg">sm</var> at the <var class="Arg">(i,j)</var>-th position. This is a Method with a side effect which returns true if you tried to add zero or the sum of <code class="code">sm[i,j]</code> and <var class="Arg">elm</var> otherwise. Please use this method whenever possible.</p>
@@ -288,94 +288,94 @@ true
 
 <h5>3.2-7 SparseZeroMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseZeroMatrix</code>( <var class="Arg">nrows</var>[, <var class="Arg">ring</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseZeroMatrix</code>( <var class="Arg">nrows</var>[, <var class="Arg">ring</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse &lt;<var class="Arg">nrows</var> x <var class="Arg">nrows</var>&gt; zero matrix over the ring <var class="Arg">ring</var></p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseZeroMatrix</code>( <var class="Arg">nrows</var>, <var class="Arg">ncols</var>[, <var class="Arg">ring</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseZeroMatrix</code>( <var class="Arg">nrows</var>, <var class="Arg">ncols</var>[, <var class="Arg">ring</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse &lt;<var class="Arg">nrows</var> x <var class="Arg">ncols</var>&gt; zero matrix over the ring <var class="Arg">ring</var></p>
 
 <p><a id="X844E79E07E11A32E" name="X844E79E07E11A32E"></a></p>
 
 <h5>3.2-8 SparseIdentityMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseIdentityMatrix</code>( <var class="Arg">dim</var>[, <var class="Arg">ring</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseIdentityMatrix</code>( <var class="Arg">dim</var>[, <var class="Arg">ring</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse &lt;<var class="Arg">dim</var> x <var class="Arg">dim</var>&gt; identity matrix over the ring <var class="Arg">ring</var>. If no ring is specified (one should try to avoid this if possible) the Rationals are the default ring.</p>
 
 <p><a id="X7D91261880BF76EC" name="X7D91261880BF76EC"></a></p>
 
 <h5>3.2-9 TransposedSparseMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TransposedSparseMat</code>( <var class="Arg">sm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TransposedSparseMat</code>( <var class="Arg">sm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the transposed matrix of the sparse matrix <var class="Arg">sm</var></p>
 
 <p><a id="X7BAE852578C6B839" name="X7BAE852578C6B839"></a></p>
 
 <h5>3.2-10 CertainRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainRows</code>( <var class="Arg">sm</var>, <var class="Arg">list</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainRows</code>( <var class="Arg">sm</var>, <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the submatrix <code class="code">sm{[list]}</code> as a sparse matrix</p>
 
 <p><a id="X7CE203DF7F323F87" name="X7CE203DF7F323F87"></a></p>
 
 <h5>3.2-11 CertainColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainColumns</code>( <var class="Arg">sm</var>, <var class="Arg">list</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainColumns</code>( <var class="Arg">sm</var>, <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the submatrix <code class="code">sm{[1..nrows(sm)]}{[list]}</code> as a sparse matrix</p>
 
 <p><a id="X7DF2F2B57BE051D2" name="X7DF2F2B57BE051D2"></a></p>
 
 <h5>3.2-12 UnionOfRowsOp</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRowsOp</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRowsOp</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the row union of the sparse matrices <var class="Arg">A</var> and <var class="Arg">B</var></p>
 
 <p><a id="X79CAB77E82A85F62" name="X79CAB77E82A85F62"></a></p>
 
 <h5>3.2-13 UnionOfColumnsOp</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumnsOp</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumnsOp</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the column union of the sparse matrices <var class="Arg">A</var> and <var class="Arg">B</var></p>
 
 <p><a id="X7A0CEF5F79A86190" name="X7A0CEF5F79A86190"></a></p>
 
 <h5>3.2-14 SparseDiagMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseDiagMat</code>( <var class="Arg">list</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SparseDiagMat</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the block diagonal matrix composed of the sparse matrices in <var class="Arg">list</var></p>
 
 <p><a id="X8719F2477C0401FE" name="X8719F2477C0401FE"></a></p>
 
 <h5>3.2-15 Nrows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Nrows</code>( <var class="Arg">sm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Nrows</code>( <var class="Arg">sm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the number of rows of the sparse matrix <var class="Arg">sm</var>. This should be preferred to the equivalent <code class="code">sm!.nrows</code>.</p>
 
 <p><a id="X8300CDF181481EC6" name="X8300CDF181481EC6"></a></p>
 
 <h5>3.2-16 Ncols</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Ncols</code>( <var class="Arg">sm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Ncols</code>( <var class="Arg">sm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the number of columns of the sparse matrix <var class="Arg">sm</var>. This should be preferred to the equivalent <code class="code">sm!.ncols</code>.</p>
 
 <p><a id="X82615CEC7AD43F41" name="X82615CEC7AD43F41"></a></p>
 
 <h5>3.2-17 IndicesOfSparseMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndicesOfSparseMatrix</code>( <var class="Arg">sm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndicesOfSparseMatrix</code>( <var class="Arg">sm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the indices of the sparse matrix <var class="Arg">sm</var> as a ListList. This should be preferred to the equivalent <code class="code">sm!.indices</code>.</p>
 
 <p><a id="X7E3040828757BD37" name="X7E3040828757BD37"></a></p>
 
 <h5>3.2-18 EntriesOfSparseMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EntriesOfSparseMatrix</code>( <var class="Arg">sm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EntriesOfSparseMatrix</code>( <var class="Arg">sm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the entries of the sparse matrix <var class="Arg">sm</var> as a ListList of ring elements. This should be preferred to the equivalent <code class="code">sm!.entries</code> and has the additional advantage of working for sparse matrices over GF(2) which do not have any entries.</p>
 
 <p><a id="X85766EE5848E7402" name="X85766EE5848E7402"></a></p>
 
 <h5>3.2-19 RingOfDefinition</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingOfDefinition</code>( <var class="Arg">sm</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingOfDefinition</code>( <var class="Arg">sm</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the base ring of the sparse matrix <var class="Arg">sm</var>. This should be preferred to the equivalent <code class="code">sm!.ring</code>.</p>
 
 

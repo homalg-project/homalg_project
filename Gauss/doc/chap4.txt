@@ -38,7 +38,7 @@
   
   [1X4.2-1 EchelonMat[101X
   
-  [29X[2XEchelonMat[102X( [3Xmat[103X ) [32X method
+  [33X[1;0Y[29X[2XEchelonMat[102X( [3Xmat[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya  record  that  contains information about an echelonized form of
             the matrix [3Xmat[103X.[133X
   
@@ -98,7 +98,7 @@
   
   [1X4.2-2 EchelonMatTransformation[101X
   
-  [29X[2XEchelonMatTransformation[102X( [3Xmat[103X ) [32X method
+  [33X[1;0Y[29X[2XEchelonMatTransformation[102X( [3Xmat[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya  record  that  contains information about an echelonized form of
             the matrix [3Xmat[103X.[133X
   
@@ -187,7 +187,7 @@
   
   [1X4.2-3 ReduceMat[101X
   
-  [29X[2XReduceMat[102X( [3XA[103X, [3XB[103X ) [32X method
+  [33X[1;0Y[29X[2XReduceMat[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya  record  with  a  single  component  `reduced_matrix' := M. M is
             created  by  reducing [3XA[103X with [3XB[103X, where [3XB[103X must be in Echelon/Hermite
             form. M will have the same dimensions as [3XA[103X.[133X
@@ -223,7 +223,7 @@
   
   [1X4.2-4 ReduceMatTransformation[101X
   
-  [29X[2XReduceMatTransformation[102X( [3XA[103X, [3XB[103X ) [32X method
+  [33X[1;0Y[29X[2XReduceMatTransformation[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya  record  with a component `reduced_matrix' := M. M is created by
             reducing [3XA[103X with [3XB[103X, where [3XB[103X must be in Echelon/Hermite form. M will
             have  the  same  dimensions  as  [3XA[103X. In addition to the (identical)
@@ -284,7 +284,7 @@
   
   [1X4.2-5 KernelMat[101X
   
-  [29X[2XKernelMat[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XKernelMat[102X( [3XM[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya record with a single component `relations'.[133X
   
   [33X[0;0YIf   [3XM[103X   is   a   matrix   over   a   field  this  is  the  same  output  as
@@ -309,7 +309,7 @@
   
   [1X4.2-6 Rank[101X
   
-  [29X[2XRank[102X( [3Xsm[103X[, [3Xboundary[103X] ) [32X method
+  [33X[1;0Y[29X[2XRank[102X( [3Xsm[103X[, [3Xboundary[103X] ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe rank of the sparse matrix [3Xsm[103X. Only works for fields.[133X
   
   [33X[0;0YComputes  the  rank of a sparse matrix. If the optional argument [3Xboundary[103X is

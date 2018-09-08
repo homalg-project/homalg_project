@@ -160,7 +160,7 @@
 
 <h5>4.2-1 EchelonMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EchelonMat</code>( <var class="Arg">mat</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EchelonMat</code>( <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a record that contains information about an echelonized form of the matrix <var class="Arg">mat</var>.</p>
 
 <p>The components of this record are</p>
@@ -219,7 +219,7 @@ rec( heads := [ 1, 2, 3 ],
 
 <h5>4.2-2 EchelonMatTransformation</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EchelonMatTransformation</code>( <var class="Arg">mat</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EchelonMatTransformation</code>( <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a record that contains information about an echelonized form of the matrix <var class="Arg">mat</var>.</p>
 
 <p>The components of this record are</p>
@@ -303,7 +303,7 @@ rec( coeffs := &lt;a 3 x 5 sparse matrix over GF(2)&gt;,
 
 <h5>4.2-3 ReduceMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReduceMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReduceMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a record with a single component `reduced_matrix' := M. M is created by reducing <var class="Arg">A</var> with <var class="Arg">B</var>, where <var class="Arg">B</var> must be in Echelon/Hermite form. M will have the same dimensions as <var class="Arg">A</var>.</p>
 
 
@@ -340,7 +340,7 @@ rec( reduced_matrix := &lt;a 3 x 5 sparse matrix over GF(2)&gt; )
 
 <h5>4.2-4 ReduceMatTransformation</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReduceMatTransformation</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReduceMatTransformation</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a record with a component `reduced_matrix' := M. M is created by reducing <var class="Arg">A</var> with <var class="Arg">B</var>, where <var class="Arg">B</var> must be in Echelon/Hermite form. M will have the same dimensions as <var class="Arg">A</var>. In addition to the (identical) output as ReduceMat this record also includes the component `transformation', which stores the row operations that were needed to reduce <var class="Arg">A</var> with <var class="Arg">B</var>. This differs from "normal" transformation matrices because only rows of <var class="Arg">B</var> had to be moved. Therefore, the transformation matrix solves M = A + T * B.</p>
 
 
@@ -397,7 +397,7 @@ rec( reduced_matrix := &lt;a 3 x 5 sparse matrix over GF(2)&gt;,
 
 <h5>4.2-5 KernelMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KernelMat</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KernelMat</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a record with a single component `relations'.</p>
 
 <p>If <var class="Arg">M</var> is a matrix over a field this is the same output as <code class="func">EchelonMatTransformation</code> (<a href="chap4_mj.html#X869107627EBA2177"><span class="RefLink">4.2-2</span></a>) provides in the `relations' component, but with less memory and CPU usage. If the base ring of <var class="Arg">M</var> is a non-field, the Kernel might have additional generators, which are added to the output.</p>
@@ -422,7 +422,7 @@ rec( relations := &lt;a 1 x 2 sparse matrix over (Integers mod 4)&gt; )
 
 <h5>4.2-6 Rank</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Rank</code>( <var class="Arg">sm</var>[, <var class="Arg">boundary</var>] )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Rank</code>( <var class="Arg">sm</var>[, <var class="Arg">boundary</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the rank of the sparse matrix <var class="Arg">sm</var>. Only works for fields.</p>
 
 <p>Computes the rank of a sparse matrix. If the optional argument <var class="Arg">boundary</var> is provided, some algorithms take into account the fact that Rank(<var class="Arg">sm</var>) &lt;= <var class="Arg">boundary</var>, thus possibly terminating earlier.</p>

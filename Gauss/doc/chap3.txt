@@ -104,13 +104,13 @@
   
   [1X3.2-1 SparseMatrix[101X
   
-  [29X[2XSparseMatrix[102X( [3Xmat[103X[, [3XR[103X] ) [32X function
+  [33X[1;0Y[29X[2XSparseMatrix[102X( [3Xmat[103X[, [3XR[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya sparse matrix over the ring [3XR[103X[133X
   
-  [29X[2XSparseMatrix[102X( [3Xnrows[103X, [3Xncols[103X, [3Xindices[103X ) [32X function
+  [33X[1;0Y[29X[2XSparseMatrix[102X( [3Xnrows[103X, [3Xncols[103X, [3Xindices[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya sparse matrix over GF(2)[133X
   
-  [29X[2XSparseMatrix[102X( [3Xnrows[103X, [3Xncols[103X, [3Xindices[103X, [3Xentries[103X[, [3XR[103X] ) [32X function
+  [33X[1;0Y[29X[2XSparseMatrix[102X( [3Xnrows[103X, [3Xncols[103X, [3Xindices[103X, [3Xentries[103X[, [3XR[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya sparse matrix over the ring [3XR[103X[133X
   
   [33X[0;0YThe  sparse  matrix  constructor.  In the one-argument form the SparseMatrix
@@ -145,7 +145,7 @@
   
   [1X3.2-2 ConvertSparseMatrixToMatrix[101X
   
-  [29X[2XConvertSparseMatrixToMatrix[102X( [3Xsm[103X ) [32X method
+  [33X[1;0Y[29X[2XConvertSparseMatrixToMatrix[102X( [3Xsm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5XGAP[105X matrix, [], or a list of empty lists[133X
   
   [33X[0;0YThis  function  converts  the sparse matrix [3Xsm[103X into a [5XGAP[105X matrix. In case of
@@ -165,26 +165,26 @@
   
   [1X3.2-3 CopyMat[101X
   
-  [29X[2XCopyMat[102X( [3Xsm[103X ) [32X method
+  [33X[1;0Y[29X[2XCopyMat[102X( [3Xsm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya shallow copy of the sparse matrix [3Xsm[103X[133X
   
   [1X3.2-4 GetEntry[101X
   
-  [29X[2XGetEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X ) [32X method
+  [33X[1;0Y[29X[2XGetEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya ring element.[133X
   
   [33X[0;0YThis returns the entry [10Xsm[i,j][110X of the sparse matrix [3Xsm[103X[133X
   
   [1X3.2-5 SetEntry[101X
   
-  [29X[2XSetEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X, [3Xelm[103X ) [32X method
+  [33X[1;0Y[29X[2XSetEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X, [3Xelm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ynothing.[133X
   
   [33X[0;0YThis sets the entry [10Xsm[i,j][110X of the sparse matrix [3Xsm[103X to [3Xelm[103X.[133X
   
   [1X3.2-6 AddToEntry[101X
   
-  [29X[2XAddToEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X, [3Xelm[103X ) [32X method
+  [33X[1;0Y[29X[2XAddToEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X, [3Xelm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or a ring element[133X
   
   [33X[0;0YAddToEntry  adds  the  element  [3Xelm[103X  to the sparse matrix [3Xsm[103X at the [3X(i,j)[103X-th
@@ -194,70 +194,70 @@
   
   [1X3.2-7 SparseZeroMatrix[101X
   
-  [29X[2XSparseZeroMatrix[102X( [3Xnrows[103X[, [3Xring[103X] ) [32X function
+  [33X[1;0Y[29X[2XSparseZeroMatrix[102X( [3Xnrows[103X[, [3Xring[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya sparse <[3Xnrows[103X x [3Xnrows[103X> zero matrix over the ring [3Xring[103X[133X
   
-  [29X[2XSparseZeroMatrix[102X( [3Xnrows[103X, [3Xncols[103X[, [3Xring[103X] ) [32X function
+  [33X[1;0Y[29X[2XSparseZeroMatrix[102X( [3Xnrows[103X, [3Xncols[103X[, [3Xring[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya sparse <[3Xnrows[103X x [3Xncols[103X> zero matrix over the ring [3Xring[103X[133X
   
   [1X3.2-8 SparseIdentityMatrix[101X
   
-  [29X[2XSparseIdentityMatrix[102X( [3Xdim[103X[, [3Xring[103X] ) [32X function
+  [33X[1;0Y[29X[2XSparseIdentityMatrix[102X( [3Xdim[103X[, [3Xring[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya  sparse  <[3Xdim[103X  x  [3Xdim[103X> identity matrix over the ring [3Xring[103X. If no
             ring  is  specified (one should try to avoid this if possible) the
             Rationals are the default ring.[133X
   
   [1X3.2-9 TransposedSparseMat[101X
   
-  [29X[2XTransposedSparseMat[102X( [3Xsm[103X ) [32X method
+  [33X[1;0Y[29X[2XTransposedSparseMat[102X( [3Xsm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe transposed matrix of the sparse matrix [3Xsm[103X[133X
   
   [1X3.2-10 CertainRows[101X
   
-  [29X[2XCertainRows[102X( [3Xsm[103X, [3Xlist[103X ) [32X method
+  [33X[1;0Y[29X[2XCertainRows[102X( [3Xsm[103X, [3Xlist[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe submatrix [10Xsm{[list]}[110X as a sparse matrix[133X
   
   [1X3.2-11 CertainColumns[101X
   
-  [29X[2XCertainColumns[102X( [3Xsm[103X, [3Xlist[103X ) [32X method
+  [33X[1;0Y[29X[2XCertainColumns[102X( [3Xsm[103X, [3Xlist[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe submatrix [10Xsm{[1..nrows(sm)]}{[list]}[110X as a sparse matrix[133X
   
   [1X3.2-12 UnionOfRowsOp[101X
   
-  [29X[2XUnionOfRowsOp[102X( [3XA[103X, [3XB[103X ) [32X method
+  [33X[1;0Y[29X[2XUnionOfRowsOp[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe row union of the sparse matrices [3XA[103X and [3XB[103X[133X
   
   [1X3.2-13 UnionOfColumnsOp[101X
   
-  [29X[2XUnionOfColumnsOp[102X( [3XA[103X, [3XB[103X ) [32X method
+  [33X[1;0Y[29X[2XUnionOfColumnsOp[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe column union of the sparse matrices [3XA[103X and [3XB[103X[133X
   
   [1X3.2-14 SparseDiagMat[101X
   
-  [29X[2XSparseDiagMat[102X( [3Xlist[103X ) [32X function
+  [33X[1;0Y[29X[2XSparseDiagMat[102X( [3Xlist[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe block diagonal matrix composed of the sparse matrices in [3Xlist[103X[133X
   
   [1X3.2-15 Nrows[101X
   
-  [29X[2XNrows[102X( [3Xsm[103X ) [32X method
+  [33X[1;0Y[29X[2XNrows[102X( [3Xsm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe  number  of  rows  of  the  sparse  matrix  [3Xsm[103X. This should be
             preferred to the equivalent [10Xsm!.nrows[110X.[133X
   
   [1X3.2-16 Ncols[101X
   
-  [29X[2XNcols[102X( [3Xsm[103X ) [32X method
+  [33X[1;0Y[29X[2XNcols[102X( [3Xsm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe  number  of  columns  of  the sparse matrix [3Xsm[103X. This should be
             preferred to the equivalent [10Xsm!.ncols[110X.[133X
   
   [1X3.2-17 IndicesOfSparseMatrix[101X
   
-  [29X[2XIndicesOfSparseMatrix[102X( [3Xsm[103X ) [32X method
+  [33X[1;0Y[29X[2XIndicesOfSparseMatrix[102X( [3Xsm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe  indices of the sparse matrix [3Xsm[103X as a ListList. This should be
             preferred to the equivalent [10Xsm!.indices[110X.[133X
   
   [1X3.2-18 EntriesOfSparseMatrix[101X
   
-  [29X[2XEntriesOfSparseMatrix[102X( [3Xsm[103X ) [32X method
+  [33X[1;0Y[29X[2XEntriesOfSparseMatrix[102X( [3Xsm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe  entries  of  the  sparse  matrix  [3Xsm[103X  as  a  ListList of ring
             elements.  This  should be preferred to the equivalent [10Xsm!.entries[110X
             and  has  the  additional advantage of working for sparse matrices
@@ -265,7 +265,7 @@
   
   [1X3.2-19 RingOfDefinition[101X
   
-  [29X[2XRingOfDefinition[102X( [3Xsm[103X ) [32X method
+  [33X[1;0Y[29X[2XRingOfDefinition[102X( [3Xsm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe base ring of the sparse matrix [3Xsm[103X. This should be preferred to
             the equivalent [10Xsm!.ring[110X.[133X
   
