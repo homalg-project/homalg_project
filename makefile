@@ -20,22 +20,22 @@ docclean:
 test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToolsForHomalg test_ToricVarieties test_Modules test_homalg 
 
 ci-test: doc
-	cd Convex; $(MAKE) ci-test; cd -;
-	cd Gauss; $(MAKE) ci-test; cd -;
-	cd ExamplesForHomalg; $(MAKE) ci-test; cd -;
-	cd GaussForHomalg; $(MAKE) ci-test; cd -;
-	cd GradedModules; $(MAKE) ci-test; cd -;
-	cd HomalgToCAS; $(MAKE) ci-test; cd -;
-	cd GradedRingForHomalg; $(MAKE) ci-test; cd -;
-	cd IO_ForHomalg; $(MAKE) ci-test; cd -;
-	cd LocalizeRingForHomalg; $(MAKE) ci-test; cd -;
-	cd MatricesForHomalg; $(MAKE) ci-test; cd -;
-	cd RingsForHomalg; $(MAKE) ci-test; cd -;
-	cd SCO; $(MAKE) ci-test; cd -;
-	cd ToolsForHomalg; $(MAKE) ci-test; cd -;
-	cd ToricVarieties; $(MAKE) ci-test; cd -;
-	cd Modules; $(MAKE) ci-test; cd -;
-	cd homalg; $(MAKE) ci-test; cd -;
+	cd Convex && $(MAKE) ci-test
+	cd Gauss && $(MAKE) ci-test
+	cd ExamplesForHomalg && $(MAKE) ci-test
+	cd GaussForHomalg && $(MAKE) ci-test
+	cd GradedModules && $(MAKE) ci-test
+	cd HomalgToCAS && $(MAKE) ci-test
+	cd GradedRingForHomalg && $(MAKE) ci-test
+	cd IO_ForHomalg && $(MAKE) ci-test
+	cd LocalizeRingForHomalg && $(MAKE) ci-test
+	cd MatricesForHomalg && $(MAKE) ci-test
+	cd RingsForHomalg && $(MAKE) ci-test
+	cd SCO && $(MAKE) ci-test
+	cd ToolsForHomalg && $(MAKE) ci-test
+	cd ToricVarieties && $(MAKE) ci-test
+	cd Modules && $(MAKE) ci-test
+	cd homalg && $(MAKE) ci-test
 
 ############################################
 doc_4ti2Interface:
