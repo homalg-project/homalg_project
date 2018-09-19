@@ -22,8 +22,7 @@ test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_Gra
 ci-test: doc
 	# requires polymake and polymake interface
 	# cd Convex && $(MAKE) ci-test
-	# no tests
-	# cd Gauss && $(MAKE) ci-test
+	cd Gauss && GAPPATH=$$(dirname $$(which gap))/../ ./configure && $(MAKE) && $(MAKE) ci-test
 	cd ExamplesForHomalg && $(MAKE) ci-test
 	cd GaussForHomalg && $(MAKE) ci-test
 	cd GradedModules && $(MAKE) ci-test
