@@ -13,7 +13,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.12.13", ## Andreas's version
 ## this line prevents merge conflicts
-  "2016.08.12", ## Sebas' version
+  "2018.09.20", ## Sebas' version
 ## this line prevents merge conflicts
   "2013.07.16", ## Vinay's version
 ## this line prevents merge conflicts
@@ -213,6 +213,7 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2018.04.04" ],
+                   [ "GaussForHomalg", ">= 2018.09.20" ],
                    [ "HomalgToCAS", ">= 2015.09.30" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],

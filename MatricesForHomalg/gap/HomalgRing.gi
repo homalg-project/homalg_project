@@ -1633,23 +1633,8 @@ InstallGlobalFunction( HomalgRingOfIntegers,
         R := CreateHomalgRing( Integers );
     elif IsInt( arg[1] ) then
         c := arg[1];
-        if Length( Collected( FactorsInt( c ) ) ) = 1 then
-            if LoadPackage( "GaussForHomalg" ) <> true then
-                Error( "the package GaussForHomalg failed to load\n" );
-            fi;
-            if IsPrime( c ) then
-                if nargs > 1 and IsPosInt( arg[2] ) then
-                    d := arg[2];
-                else
-                    d := 1;
-                fi;
-                R := CreateHomalgRing( GF( c, d ) );
-                R!.NameOfPrimitiveElement := Concatenation( "Z", String( c ), "_", String( d ) );
-                SetIsFieldForHomalg( R, true );
-                SetRingProperties( R, c, d );
-            else
-                R := CreateHomalgRing( ZmodnZ( c ) );
-            fi;
+        if Length( Collected( FactorsInt( c ) ) ) = 1 and IsPackageMarkedForLoading( "GaussForHomalg", ">= 2018.09.20") then
+            R := HOMALG_RING_OF_INTEGERS_PRIME_POWER_HELPER( arg, c );
         else
             R := HomalgRingOfIntegers( );
             rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( [ c ], R );
@@ -1662,36 +1647,6 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     SetIsResidueClassRingOfTheIntegers( R, true );
     
     SetRingProperties( R, c );
-    
-    return R;
-    
-end );
-
-##  <#GAPDoc Label="HomalgFieldOfRationals">
-##  <ManSection>
-##    <Func Arg="" Name="HomalgFieldOfRationals" Label="constructor for the field of rationals"/>
-##    <Returns>a &homalg; ring</Returns>
-##    <Description>
-##      The package &GaussForHomalg; is loaded and the field of rationals <M>&QQ;</M> is returned.
-##      If &GaussForHomalg; fails to load an error is issued. <P/>
-##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallGlobalFunction( HomalgFieldOfRationals,
-  function( arg )
-    local R;
-    
-    if LoadPackage( "GaussForHomalg" ) <> true then
-        Error( "the package GaussForHomalg failed to load\n" );
-    fi;
-    
-    R := CreateHomalgRing( Rationals );
-    
-    SetIsRationalsForHomalg( R, true );
-    
-    SetRingProperties( R, 0 );
     
     return R;
     

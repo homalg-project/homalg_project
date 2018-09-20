@@ -132,3 +132,7 @@ DeclareOperation( "GetMonic",
 
 DeclareOperation( "Diff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+## This is a dummy declaration for a function actually installed
+## in GaussForHomalg
+DeclareGlobalFunction( "HOMALG_RING_OF_INTEGERS_PRIME_POWER_HELPER" );

@@ -4,7 +4,7 @@ PackageName := "GaussForHomalg",
 
 Subtitle := "Gauss functionality for the homalg project",
 
-Version := "2018.06.01",
+Version := "2018.09.20",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -73,7 +73,7 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                 [ "Gauss", ">= 2018.02.04" ],
-                [ "MatricesForHomalg", ">= 2018.02.04" ],
+                [ "MatricesForHomalg", ">= 2018.09.20" ],
                 [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []

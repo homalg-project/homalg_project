@@ -93,5 +93,30 @@ InstallMethod( CreateHomalgTable,
     
 end );
 
+##  <#GAPDoc Label="HomalgFieldOfRationals">
+##  <ManSection>
+##    <Func Arg="" Name="HomalgFieldOfRationals" Label="constructor for the field of rationals"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      The field of rationals <M>&QQ;</M> is returned.
+##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( HomalgFieldOfRationals,
+  function( arg )
+    local R;
+    
+    R := CreateHomalgRing( Rationals );
+    
+    SetIsRationalsForHomalg( R, true );
+    
+    SetRingProperties( R, 0 );
+    
+    return R;
+    
+end );
+
 ## create a globally defined field of rationals
 HOMALG_MATRICES.QQ := HomalgFieldOfRationals( );

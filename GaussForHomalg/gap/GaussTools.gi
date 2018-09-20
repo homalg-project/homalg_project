@@ -358,3 +358,23 @@ InstallValue( CommonHomalgTableForGaussTools,
 
         )
  );
+
+InstallGlobalFunction( HOMALG_RING_OF_INTEGERS_PRIME_POWER_HELPER,
+  function( argument_list, c )
+    local nargs, d, R;
+    nargs := Length( argument_list );
+    if IsPrime( c ) then
+        if nargs > 1 and IsPosInt( argument_list[2] ) then
+            d := argument_list[2];
+        else
+            d := 1;
+        fi;
+        R := CreateHomalgRing( GF( c, d ) );
+        R!.NameOfPrimitiveElement := Concatenation( "Z", String( c ), "_", String( d ) );
+        SetIsFieldForHomalg( R, true );
+        SetRingProperties( R, c, d );
+    else
+        R := CreateHomalgRing( ZmodnZ( c ) );
+    fi;
+    return R;
+end );

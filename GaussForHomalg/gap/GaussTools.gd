@@ -19,3 +19,4 @@ DeclareOperation( "Nrows",
 
 DeclareGlobalVariable( "CommonHomalgTableForGaussTools" );
 
+
