@@ -37,7 +37,7 @@ Obj REAL_CREATE_MATROID_ABSTRACT( Polymake_Data* data, Obj size, Obj elements ){
     return NULL;
   }
   
-  int nr_of_basis = INT_INTOBJ( LEN_PLIST( elements ) );
+  int nr_of_basis = LEN_PLIST( elements );
   polymake::Array<polymake::Set<int>> incMatr(nr_of_basis);
   
   for( int current_basis=1;current_basis<=nr_of_basis;current_basis++){
@@ -49,7 +49,7 @@ Obj REAL_CREATE_MATROID_ABSTRACT( Polymake_Data* data, Obj size, Obj elements ){
         return NULL;
       }
       
-      int current_length = INT_INTOBJ( LEN_PLIST( current_basis_list ) );
+      int current_length = LEN_PLIST( current_basis_list );
       
       for( int i=1;i<=current_length;i++){
           incMatr[current_basis] += INT_INTOBJ( ELM_PLIST( current_basis_list, i ) ) - 1;
