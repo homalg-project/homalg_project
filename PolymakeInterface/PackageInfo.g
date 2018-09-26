@@ -8,7 +8,6 @@ Subtitle := "A package to provide algorithms for fans and cones of polymake to o
 Version :=  Maximum( [
   "2018.09.25", ## Sebas' version
 ## this line prevents merge conflicts
-"25/09/2018", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
