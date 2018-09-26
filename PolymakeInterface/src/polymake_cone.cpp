@@ -114,7 +114,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   int len2 = LEN_PLIST( RETLI2 );
   
   Obj RETLI = NEW_PLIST( T_PLIST, len1 + 2*len2 );
-  SET_LEN_PLIST( RETLI, INTOBJ_INT( len1 + 2*len2 ) );
+  SET_LEN_PLIST( RETLI, len1 + 2*len2 );
   
   for( int i = 1; i <= len1; i++ )
     SET_ELM_PLIST( RETLI, i, ELM_PLIST( RETLI1, i ) );
@@ -236,7 +236,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   int len2 = LEN_PLIST( RETLI2 );
   
   Obj RETLI = NEW_PLIST( T_PLIST, len1 + 2*len2 );
-  SET_LEN_PLIST( RETLI, INTOBJ_INT( len1 + 2*len2 ) );
+  SET_LEN_PLIST( RETLI, len1 + 2*len2 );
   
   for( int i = 1; i <= len1; i++ )
     SET_ELM_PLIST( RETLI, i, ELM_PLIST( RETLI1, i ) );
