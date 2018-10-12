@@ -2,47 +2,47 @@
   [1X4 [33X[0;0YToric subvarieties[133X[101X
   
   
-  [1X4.1 [33X[0;0YToric subvarieties: Category and Representations[133X[101X
+  [1X4.1 [33X[0;0YThe GAP category[133X[101X
   
   [1X4.1-1 IsToricSubvariety[101X
   
-  [29X[2XIsToricSubvariety[102X( [3XM[103X ) [32X Category
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  [33X[1;0Y[29X[2XIsToricSubvariety[102X( [3XM[103X ) [32X filter[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
-  [33X[0;0YThe  [5XGAP[105X  category  of a toric subvariety. Every toric subvariety is a toric
+  [33X[0;0YThe  [3XGAP[103X  category  of a toric subvariety. Every toric subvariety is a toric
   variety, so every method applicable to toric varieties is also applicable to
   toric subvarieties.[133X
   
   
-  [1X4.2 [33X[0;0YToric subvarieties: Properties[133X[101X
+  [1X4.2 [33X[0;0YProperties[133X[101X
   
-  [1X4.2-1 IsClosed[101X
+  [1X4.2-1 IsClosedSubvariety[101X
   
-  [29X[2XIsClosed[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  [33X[1;0Y[29X[2XIsClosedSubvariety[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YChecks if the subvariety [3Xvari[103X is a closed subset of its ambient variety.[133X
   
   [1X4.2-2 IsOpen[101X
   
-  [29X[2XIsOpen[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  [33X[1;0Y[29X[2XIsOpen[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YChecks if a subvariety is a closed subset.[133X
   
   [1X4.2-3 IsWholeVariety[101X
   
-  [29X[2XIsWholeVariety[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  [33X[1;0Y[29X[2XIsWholeVariety[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YReturns true if the subvariety [3Xvari[103X is the whole variety.[133X
   
   
-  [1X4.3 [33X[0;0YToric subvarieties: Attributes[133X[101X
+  [1X4.3 [33X[0;0YAttributes[133X[101X
   
   [1X4.3-1 UnderlyingToricVariety[101X
   
-  [29X[2XUnderlyingToricVariety[102X( [3Xvari[103X ) [32X attribute
+  [33X[1;0Y[29X[2XUnderlyingToricVariety[102X( [3Xvari[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya variety[133X
   
   [33X[0;0YReturns  the  toric  variety  which  is  represented  by  [3Xvari[103X.  This method
@@ -50,7 +50,7 @@
   
   [1X4.3-2 InclusionMorphism[101X
   
-  [29X[2XInclusionMorphism[102X( [3Xvari[103X ) [32X attribute
+  [33X[1;0Y[29X[2XInclusionMorphism[102X( [3Xvari[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya morphism[133X
   
   [33X[0;0YIf the variety [3Xvari[103X is an open subvariety, this method returns the inclusion
@@ -58,28 +58,28 @@
   
   [1X4.3-3 AmbientToricVariety[101X
   
-  [29X[2XAmbientToricVariety[102X( [3Xvari[103X ) [32X attribute
+  [33X[1;0Y[29X[2XAmbientToricVariety[102X( [3Xvari[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya variety[133X
   
   [33X[0;0YReturns the ambient toric variety of the subvariety [3Xvari[103X[133X
   
   
-  [1X4.4 [33X[0;0YToric subvarieties: Methods[133X[101X
+  [1X4.4 [33X[0;0YMethods[133X[101X
   
   [1X4.4-1 ClosureOfTorusOrbitOfCone[101X
   
-  [29X[2XClosureOfTorusOrbitOfCone[102X( [3Xvari[103X, [3Xcone[103X ) [32X operation
+  [33X[1;0Y[29X[2XClosureOfTorusOrbitOfCone[102X( [3Xvari[103X, [3Xcone[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya subvariety[133X
   
   [33X[0;0YThe  method  returns the closure of the orbit of the torus contained in [3Xvari[103X
   which corresponds to the cone [3Xcone[103X as a closed subvariety of [3Xvari[103X.[133X
   
   
-  [1X4.5 [33X[0;0YToric subvarieties: Constructors[133X[101X
+  [1X4.5 [33X[0;0YConstructors[133X[101X
   
   [1X4.5-1 ToricSubvariety[101X
   
-  [29X[2XToricSubvariety[102X( [3Xvari[103X, [3Xambvari[103X ) [32X operation
+  [33X[1;0Y[29X[2XToricSubvariety[102X( [3Xvari[103X, [3Xambvari[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya subvariety[133X
   
   [33X[0;0YThe  method  returns the closure of the orbit of the torus contained in [3Xvari[103X

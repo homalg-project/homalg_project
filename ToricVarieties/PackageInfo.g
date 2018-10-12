@@ -5,13 +5,13 @@ PackageName := "ToricVarieties",
 Subtitle := "A package to handle toric varieties",
 
 Version :=  Maximum( [
-  "2015.08.12", ## Sebas' version
+  "2018.10.12", ## Sebas' version
 ## this line prevents merge conflicts
   "2015.03.31", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2015.08.12", ## Martins version
+  "2017.03.31", ## Martins version
 ## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
+  "2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -44,7 +44,6 @@ rec(
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "m.bies@thphys.uni-heidelberg.de",
-    WWWHome       := "",
     PostalAddress := Concatenation( [
                        "Martin Bies\n",
                        "Philosophenweg 19\n",
@@ -81,14 +80,18 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.7",
-  NeededOtherPackages := [ [ "Convex", ">= 2012.04.03" ],
-                           [ "GradedRingForHomalg", ">=2011.01.01" ],
-                           [ "Modules", ">=2013.06.29" ],
-                           [ "GradedModules", ">=2012.03.09" ],
-                           [ "ToolsForHomalg", ">=2013.04.11" ],
-                           [ "AutoDoc", ">=2013.07.25" ]
+  NeededOtherPackages := [ [ "NConvex", ">= 2017.01.01" ],
+                           #[ "Convex", ">= 2015.11.06" ],
+                           [ "GradedRingForHomalg", ">=2015.12.04" ],
+                           [ "Modules", ">=2016.01.20" ],
+                           [ "GradedModules", ">=2015.12.04" ],
+                           [ "ToolsForHomalg", ">=2016.02.17" ],
+                           [ "AutoDoc", ">=2016.02.16" ],
+                           [ "NormalizInterface", ">=0.9.8" ],
+                           [ "CddInterface", ">= 2017.04.02" ],
+                           [ "4ti2Interface", ">= 2015.11.06" ],
                            ],
-  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ], [ "4ti2Interface", ">=2013.03.19" ], [ "NormalizInterface", ">=0.2" ] ],
+  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ] ],
   ExternalConditions := []
                       
 ),
@@ -106,5 +109,3 @@ Autoload := false,
 Keywords := [ "Toric geometry", "Toric varieties", "Divisors", "Geometry"]
 
 ));
-
-

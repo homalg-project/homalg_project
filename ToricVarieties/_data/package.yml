@@ -1,51 +1,54 @@
 name: ToricVarieties
-version: 2015.11.06
-date: 06/11/2015
+version: 2018.10.12
+date: 12/10/2018
 description: A package to handle toric varieties
 
 authors:
     - name: Sebastian Gutsche
       url: http://wwwb.math.rwth-aachen.de/~gutsche/
     - name: Martin Bies
-      url: 
+      url: mailto:m.bies@thphys.uni-heidelberg.de
 
 maintainers:
     - name: Sebastian Gutsche
       url: http://wwwb.math.rwth-aachen.de/~gutsche/
     - name: Martin Bies
-      url: 
+      url: mailto:m.bies@thphys.uni-heidelberg.de
 
 GAP: ">=4.7"
 
 needed-pkgs:
-    - name: "Convex"
-      version: ">= 2012.04.03"
-      url: "http://homalg-project.github.io/homalg_project/Convex/"
+    - name: "NConvex"
+      version: ">= 2017.01.01"
+      url: "http://TODO/"
     - name: "GradedRingForHomalg"
-      version: ">=2011.01.01"
+      version: ">=2015.12.04"
       url: "http://homalg-project.github.io/homalg_project/GradedRingForHomalg/"
     - name: "Modules"
-      version: ">=2013.06.29"
+      version: ">=2016.01.20"
       url: "http://homalg-project.github.io/homalg_project/Modules/"
     - name: "GradedModules"
-      version: ">=2012.03.09"
+      version: ">=2015.12.04"
       url: "http://homalg-project.github.io/homalg_project/GradedModules/"
     - name: "ToolsForHomalg"
-      version: ">=2013.04.11"
+      version: ">=2016.02.17"
       url: "http://homalg-project.github.io/homalg_project/ToolsForHomalg/"
     - name: "AutoDoc"
-      version: ">=2013.07.25"
+      version: ">=2016.02.16"
       url: "https://gap-packages.github.io/AutoDoc"
+    - name: "NormalizInterface"
+      version: ">=0.9.8"
+      url: "https://gap-packages.github.io/NormalizInterface"
+    - name: "CddInterface"
+      version: ">= 2017.04.02"
+      url: "http://TODO/"
+    - name: "4ti2Interface"
+      version: ">= 2015.11.06"
+      url: "http://homalg-project.github.io/homalg_project/4ti2Interface/"
 
 suggested-pkgs:
     - name: "ToricIdeals"
       version: ">=2011.01.01"
-    - name: "4ti2Interface"
-      version: ">=2013.03.19"
-      url: "http://homalg-project.github.io/homalg_project/4ti2Interface/"
-    - name: "NormalizInterface"
-      version: ">=0.2"
-      url: "https://gap-packages.github.io/NormalizInterface"
 
 www: http://homalg-project.github.io/homalg_project/ToricVarieties/
 readme: http://homalg-project.github.io/homalg_project/ToricVarieties/README
@@ -53,9 +56,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/ToricVarieties/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2015.11.06/ToricVarieties-2015.11.06.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2018.10.12/ToricVarieties-2018.10.12.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2015.11.06/ToricVarieties-2015.11.06.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2018.10.12/ToricVarieties-2018.10.12.zip
 
 abstract: ToricVarieties provides data structures to handle toric varieties by their commutative algebra structure and by their combinatorics. For combinatorics, it uses the Convex package. Its goal is to provide a suitable framework to work with toric varieties.
 

@@ -2,135 +2,10 @@
   [1X7 [33X[0;0YToric morphisms[133X[101X
   
   
-  [1X7.1 [33X[0;0YToric morphisms: Category and Representations[133X[101X
-  
-  [1X7.1-1 IsToricMorphism[101X
-  
-  [29X[2XIsToricMorphism[102X( [3XM[103X ) [32X Category
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YThe  [5XGAP[105X  category of toric morphisms. A toric morphism is defined by a grid
-  homomorphism,  which  is  compatible  with  the  fan  structure  of  the two
-  varieties.[133X
+  [1X7.1 [33X[0;0YToric morphisms: Examples[133X[101X
   
   
-  [1X7.2 [33X[0;0YToric morphisms: Properties[133X[101X
-  
-  [1X7.2-1 IsMorphism[101X
-  
-  [29X[2XIsMorphism[102X( [3Xmorph[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the grid morphism [3Xmorph[103X respects the fan structure.[133X
-  
-  [1X7.2-2 IsProper[101X
-  
-  [29X[2XIsProper[102X( [3Xmorph[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the defined morphism [3Xmorph[103X is proper.[133X
-  
-  
-  [1X7.3 [33X[0;0YToric morphisms: Attributes[133X[101X
-  
-  [1X7.3-1 SourceObject[101X
-  
-  [29X[2XSourceObject[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya variety[133X
-  
-  [33X[0;0YReturns  the  source  object of the morphism [3Xmorph[103X. This attribute is a must
-  have.[133X
-  
-  [1X7.3-2 UnderlyingGridMorphism[101X
-  
-  [29X[2XUnderlyingGridMorphism[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya map[133X
-  
-  [33X[0;0YReturns the grid map which defines [3Xmorph[103X.[133X
-  
-  [1X7.3-3 ToricImageObject[101X
-  
-  [29X[2XToricImageObject[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya variety[133X
-  
-  [33X[0;0YReturns  the  variety  which is created by the fan which is the image of the
-  fan  of  the source of [3Xmorph[103X. This is not an image in the usual sense, but a
-  toric image.[133X
-  
-  [1X7.3-4 RangeObject[101X
-  
-  [29X[2XRangeObject[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya variety[133X
-  
-  [33X[0;0YReturns  the range of the morphism [3Xmorph[103X. If no range is given (yes, this is
-  possible), the method returns the image.[133X
-  
-  [1X7.3-5 MorphismOnWeilDivisorGroup[101X
-  
-  [29X[2XMorphismOnWeilDivisorGroup[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya morphism[133X
-  
-  [33X[0;0YReturns  the  associated  morphism between the divisor group of the range of
-  [3Xmorph[103X and the divisor group of the source.[133X
-  
-  [1X7.3-6 ClassGroup[101X
-  
-  [29X[2XClassGroup[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya morphism[133X
-  
-  [33X[0;0YReturns the associated morphism between the class groups of source and range
-  of the morphism [3Xmorph[103X[133X
-  
-  [1X7.3-7 MorphismOnCartierDivisorGroup[101X
-  
-  [29X[2XMorphismOnCartierDivisorGroup[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya morphism[133X
-  
-  [33X[0;0YReturns the associated morphism between the Cartier divisor groups of source
-  and range of the morphism [3Xmorph[103X[133X
-  
-  [1X7.3-8 PicardGroup[101X
-  
-  [29X[2XPicardGroup[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya morphism[133X
-  
-  [33X[0;0YReturns the associated morphism between the class groups of source and range
-  of the morphism [3Xmorph[103X[133X
-  
-  
-  [1X7.4 [33X[0;0YToric morphisms: Methods[133X[101X
-  
-  [1X7.4-1 UnderlyingListList[101X
-  
-  [29X[2XUnderlyingListList[102X( [3Xmorph[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya list[133X
-  
-  [33X[0;0YReturns a list of list which represents the grid homomorphism.[133X
-  
-  
-  [1X7.5 [33X[0;0YToric morphisms: Constructors[133X[101X
-  
-  [1X7.5-1 ToricMorphism[101X
-  
-  [29X[2XToricMorphism[102X( [3Xvari[103X, [3Xlis[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya morphism[133X
-  
-  [33X[0;0YReturns  the  toric  morphism  with  source [3Xvari[103X which is represented by the
-  matrix [3Xlis[103X. The range is set to the image.[133X
-  
-  [1X7.5-2 ToricMorphism[101X
-  
-  [29X[2XToricMorphism[102X( [3Xvari[103X, [3Xlis[103X, [3Xvari2[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya morphism[133X
-  
-  [33X[0;0YReturns  the  toric  morphism  with  source  [3Xvari[103X  and  range [3Xvari2[103X which is
-  represented by the matrix [3Xlis[103X.[133X
-  
-  
-  [1X7.6 [33X[0;0YToric morphisms: Examples[133X[101X
-  
-  
-  [1X7.6-1 [33X[0;0YMorphism between toric varieties and their class groups[133X[101X
+  [1X7.1-1 [33X[0;0YMorphism between toric varieties and their class groups[133X[101X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XP1 := Polytope([[0],[1]]);[127X[104X
@@ -145,12 +20,12 @@
     [4X[28X<A projective toric variety of dimension 3[128X[104X
     [4X[28X which is a product of 2 toric varieties>[128X[104X
     [4X[25Xgap>[125X [27XClassGroup( P1 );[127X[104X
-    [4X[28X<A non-torsion left module presented by 1 relation for 2 generators>[128X[104X
-    [4X[25Xgap>[125X [27XDisplay(ByASmallerPresentation(last));[127X[104X
-    [4X[28XZ^(1 x 1) [128X[104X
+    [4X[28X<A free left module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(ByASmallerPresentation(ClassGroup( P1 )));[127X[104X
+    [4X[28XZ^(1 x 1)[128X[104X
     [4X[25Xgap>[125X [27XClassGroup( P2 );[127X[104X
-    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XDisplay(ByASmallerPresentation(last));[127X[104X
+    [4X[28X<A free left module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(ByASmallerPresentation(ClassGroup( P2 )));[127X[104X
     [4X[28XZ^(1 x 1)[128X[104X
     [4X[25Xgap>[125X [27XClassGroup( P1P2 );[127X[104X
     [4X[28X<A free left module of rank 2 on free generators>[128X[104X
@@ -172,17 +47,153 @@
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XClassGroup(M);[127X[104X
     [4X[28X<A homomorphism of left modules>[128X[104X
-    [4X[25Xgap>[125X [27XDisplay(last);[127X[104X
-    [4X[28X[ [  0,  1 ],[128X[104X
-    [4X[28X  [  1,  0 ] ][128X[104X
-    [4X[28X[128X[104X
-    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
-    [4X[25Xgap>[125X [27XByASmallerPresentation(ClassGroup(M));[127X[104X
-    [4X[28X<A non-zero homomorphism of left modules>[128X[104X
-    [4X[25Xgap>[125X [27XDisplay(last);[127X[104X
+    [4X[25Xgap>[125X [27XDisplay(ClassGroup(M));[127X[104X
     [4X[28X[ [  0,  1 ],[128X[104X
     [4X[28X  [  1,  0 ] ][128X[104X
     [4X[28X[128X[104X
     [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
   [4X[32X[104X
+  
+  
+  [1X7.2 [33X[0;0YThe GAP category[133X[101X
+  
+  [1X7.2-1 IsToricMorphism[101X
+  
+  [33X[1;0Y[29X[2XIsToricMorphism[102X( [3XM[103X ) [32X filter[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YThe  [3XGAP[103X  category of toric morphisms. A toric morphism is defined by a grid
+  homomorphism,  which  is  compatible  with  the  fan  structure  of  the two
+  varieties.[133X
+  
+  
+  [1X7.3 [33X[0;0YProperties[133X[101X
+  
+  [1X7.3-1 IsMorphism[101X
+  
+  [33X[1;0Y[29X[2XIsMorphism[102X( [3Xmorph[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the grid morphism [3Xmorph[103X respects the fan structure.[133X
+  
+  [1X7.3-2 IsProper[101X
+  
+  [33X[1;0Y[29X[2XIsProper[102X( [3Xmorph[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the defined morphism [3Xmorph[103X is proper.[133X
+  
+  
+  [1X7.4 [33X[0;0YAttributes[133X[101X
+  
+  [1X7.4-1 SourceObject[101X
+  
+  [33X[1;0Y[29X[2XSourceObject[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YReturns  the  source  object of the morphism [3Xmorph[103X. This attribute is a must
+  have.[133X
+  
+  [1X7.4-2 UnderlyingGridMorphism[101X
+  
+  [33X[1;0Y[29X[2XUnderlyingGridMorphism[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya map[133X
+  
+  [33X[0;0YReturns the grid map which defines [3Xmorph[103X.[133X
+  
+  [1X7.4-3 ToricImageObject[101X
+  
+  [33X[1;0Y[29X[2XToricImageObject[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YReturns  the  variety  which is created by the fan which is the image of the
+  fan  of  the source of [3Xmorph[103X. This is not an image in the usual sense, but a
+  toric image.[133X
+  
+  [1X7.4-4 RangeObject[101X
+  
+  [33X[1;0Y[29X[2XRangeObject[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YReturns  the range of the morphism [3Xmorph[103X. If no range is given (yes, this is
+  possible), the method returns the image.[133X
+  
+  [1X7.4-5 MorphismOnWeilDivisorGroup[101X
+  
+  [33X[1;0Y[29X[2XMorphismOnWeilDivisorGroup[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns  the  associated  morphism between the divisor group of the range of
+  [3Xmorph[103X and the divisor group of the source.[133X
+  
+  [1X7.4-6 ClassGroup[101X
+  
+  [33X[1;0Y[29X[2XClassGroup[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns the associated morphism between the class groups of source and range
+  of the morphism [3Xmorph[103X[133X
+  
+  [1X7.4-7 MorphismOnCartierDivisorGroup[101X
+  
+  [33X[1;0Y[29X[2XMorphismOnCartierDivisorGroup[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns the associated morphism between the Cartier divisor groups of source
+  and range of the morphism [3Xmorph[103X[133X
+  
+  [1X7.4-8 PicardGroup[101X
+  
+  [33X[1;0Y[29X[2XPicardGroup[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns  the  associated  morphism  between  the Picard groups of source and
+  range of the morphism [3Xmorph[103X[133X
+  
+  [1X7.4-9 Source[101X
+  
+  [33X[1;0Y[29X[2XSource[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YReturn the source of the toric morphism [3Xmorph[103X.[133X
+  
+  [1X7.4-10 Range[101X
+  
+  [33X[1;0Y[29X[2XRange[102X( [3Xmorph[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YReturns the range of the toric morphism [3Xmorph[103X if specified.[133X
+  
+  [1X7.4-11 MorphismOnIthFactor[101X
+  
+  [33X[1;0Y[29X[2XMorphismOnIthFactor[102X( [3Xmorph[103X ) [32X attribute[133X
+  
+  
+  [1X7.5 [33X[0;0YMethods[133X[101X
+  
+  [1X7.5-1 UnderlyingListList[101X
+  
+  [33X[1;0Y[29X[2XUnderlyingListList[102X( [3Xmorph[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns a list of list which represents the grid homomorphism.[133X
+  
+  
+  [1X7.6 [33X[0;0YConstructors[133X[101X
+  
+  [1X7.6-1 ToricMorphism[101X
+  
+  [33X[1;0Y[29X[2XToricMorphism[102X( [3Xvari[103X, [3Xlis[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns  the  toric  morphism  with  source [3Xvari[103X which is represented by the
+  matrix [3Xlis[103X. The range is set to the image.[133X
+  
+  [1X7.6-2 ToricMorphism[101X
+  
+  [33X[1;0Y[29X[2XToricMorphism[102X( [3Xvari[103X, [3Xlis[103X, [3Xvari2[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns  the  toric  morphism  with  source  [3Xvari[103X  and  range [3Xvari2[103X which is
+  represented by the matrix [3Xlis[103X.[133X
   

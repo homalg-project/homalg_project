@@ -1,308 +1,11 @@
   
-  [1X3 [33X[0;0YToric varieties[133X[101X
+  [1X3 [33X[0;0YToric Varieties[133X[101X
   
   
-  [1X3.1 [33X[0;0YToric variety: Category and Representations[133X[101X
+  [1X3.1 [33X[0;0YToric Varieties: Examples[133X[101X
   
-  [1X3.1-1 IsToricVariety[101X
   
-  [29X[2XIsToricVariety[102X( [3XM[103X ) [32X Category
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YThe [5XGAP[105X category of a toric variety.[133X
-  
-  
-  [1X3.2 [33X[0;0YToric varieties: Properties[133X[101X
-  
-  [1X3.2-1 IsNormalVariety[101X
-  
-  [29X[2XIsNormalVariety[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the toric variety [3Xvari[103X is a normal variety.[133X
-  
-  [1X3.2-2 IsAffine[101X
-  
-  [29X[2XIsAffine[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the toric variety [3Xvari[103X is an affine variety.[133X
-  
-  [1X3.2-3 IsProjective[101X
-  
-  [29X[2XIsProjective[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the toric variety [3Xvari[103X is a projective variety.[133X
-  
-  [1X3.2-4 IsComplete[101X
-  
-  [29X[2XIsComplete[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the toric variety [3Xvari[103X is a complete variety.[133X
-  
-  [1X3.2-5 IsSmooth[101X
-  
-  [29X[2XIsSmooth[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the toric variety [3Xvari[103X is a smooth variety.[133X
-  
-  [1X3.2-6 HasTorusfactor[101X
-  
-  [29X[2XHasTorusfactor[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the toric variety [3Xvari[103X has a torus factor.[133X
-  
-  [1X3.2-7 HasNoTorusfactor[101X
-  
-  [29X[2XHasNoTorusfactor[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks if the toric variety [3Xvari[103X has no torus factor.[133X
-  
-  [1X3.2-8 IsOrbifold[101X
-  
-  [29X[2XIsOrbifold[102X( [3Xvari[103X ) [32X property
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0YChecks  if  the  toric  variety [3Xvari[103X has an orbifold, which is, in the toric
-  case, equivalent to the simpliciality of the fan.[133X
-  
-  
-  [1X3.3 [33X[0;0YToric varieties: Attributes[133X[101X
-  
-  [1X3.3-1 AffineOpenCovering[101X
-  
-  [29X[2XAffineOpenCovering[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya list[133X
-  
-  [33X[0;0YReturns  a  torus  invariant  affine  open covering of the variety [3Xvari[103X. The
-  affine open cover is computed out of the cones of the fan.[133X
-  
-  [1X3.3-2 CoxRing[101X
-  
-  [29X[2XCoxRing[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya ring[133X
-  
-  [33X[0;0YReturns  the  Cox  ring  of  the  variety [3Xvari[103X. The actual method requires a
-  string  with  a  name for the variables. A method for computing the Cox ring
-  without a variable given is not implemented. You will get an error.[133X
-  
-  [1X3.3-3 ListOfVariablesOfCoxRing[101X
-  
-  [29X[2XListOfVariablesOfCoxRing[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya list[133X
-  
-  [33X[0;0YReturns a list of the variables of the cox ring of the variety [3Xvari[103X.[133X
-  
-  [1X3.3-4 ClassGroup[101X
-  
-  [29X[2XClassGroup[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya module[133X
-  
-  [33X[0;0YReturns the class group of the variety [3Xvari[103X as factor of a free module.[133X
-  
-  [1X3.3-5 PicardGroup[101X
-  
-  [29X[2XPicardGroup[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya module[133X
-  
-  [33X[0;0YReturns the Picard group of the variety [3Xvari[103X as factor of a free module.[133X
-  
-  [1X3.3-6 TorusInvariantDivisorGroup[101X
-  
-  [29X[2XTorusInvariantDivisorGroup[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya module[133X
-  
-  [33X[0;0YReturns the subgroup of the Weil divisor group of the variety [3Xvari[103X generated
-  by  the  torus invariant prime divisors. This is always a finitely generated
-  free module over the integers.[133X
-  
-  [1X3.3-7 MapFromCharacterToPrincipalDivisor[101X
-  
-  [29X[2XMapFromCharacterToPrincipalDivisor[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya morphism[133X
-  
-  [33X[0;0YReturns  a  map  which maps an element of the character group into the torus
-  invariant  Weil  group  of  the  variety  [3Xvari[103X. This has to viewn as an help
-  method to compute divisor classes.[133X
-  
-  [1X3.3-8 Dimension[101X
-  
-  [29X[2XDimension[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Yan integer[133X
-  
-  [33X[0;0YReturns the dimension of the variety [3Xvari[103X.[133X
-  
-  [1X3.3-9 DimensionOfTorusfactor[101X
-  
-  [29X[2XDimensionOfTorusfactor[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Yan integer[133X
-  
-  [33X[0;0YReturns the dimension of the torus factor of the variety [3Xvari[103X.[133X
-  
-  [1X3.3-10 CoordinateRingOfTorus[101X
-  
-  [29X[2XCoordinateRingOfTorus[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya ring[133X
-  
-  [33X[0;0YReturns the coordinate ring of the torus of the variety [3Xvari[103X. This method is
-  not implemented, you need to call it with a second argument, which is a list
-  of strings for the variables of the ring.[133X
-  
-  [1X3.3-11 IsProductOf[101X
-  
-  [29X[2XIsProductOf[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya list[133X
-  
-  [33X[0;0YIf  the  variety  [3Xvari[103X is a product of 2 or more varieties, the list contain
-  those  varieties.  If  it  is  not  a product or at least not generated as a
-  product, the list only contains the variety itself.[133X
-  
-  [1X3.3-12 CharacterLattice[101X
-  
-  [29X[2XCharacterLattice[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya module[133X
-  
-  [33X[0;0YThe  method  returns  the character lattice of the variety [3Xvari[103X, computed as
-  the containing grid of the underlying convex object, if it exists.[133X
-  
-  [1X3.3-13 TorusInvariantPrimeDivisors[101X
-  
-  [29X[2XTorusInvariantPrimeDivisors[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya list[133X
-  
-  [33X[0;0YThe  method  returns  a  list  of  the torus invariant prime divisors of the
-  variety [3Xvari[103X.[133X
-  
-  [1X3.3-14 IrrelevantIdeal[101X
-  
-  [29X[2XIrrelevantIdeal[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Yan ideal[133X
-  
-  [33X[0;0YReturns the irrelevant ideal of the cox ring of the variety [3Xvari[103X.[133X
-  
-  [1X3.3-15 MorphismFromCoxVariety[101X
-  
-  [29X[2XMorphismFromCoxVariety[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya morphism[133X
-  
-  [33X[0;0YThe method returns the quotient morphism from the variety of the Cox ring to
-  the variety [3Xvari[103X.[133X
-  
-  [1X3.3-16 CoxVariety[101X
-  
-  [29X[2XCoxVariety[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya variety[133X
-  
-  [33X[0;0YThe method returns the Cox variety of the variety [3Xvari[103X.[133X
-  
-  [1X3.3-17 FanOfVariety[101X
-  
-  [29X[2XFanOfVariety[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya fan[133X
-  
-  [33X[0;0YReturns the fan of the variety [3Xvari[103X. This is set by default.[133X
-  
-  [1X3.3-18 CartierTorusInvariantDivisorGroup[101X
-  
-  [29X[2XCartierTorusInvariantDivisorGroup[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya module[133X
-  
-  [33X[0;0YReturns  the the group of Cartier divisors of the variety [3Xvari[103X as a subgroup
-  of the divisor group.[133X
-  
-  [1X3.3-19 NameOfVariety[101X
-  
-  [29X[2XNameOfVariety[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya string[133X
-  
-  [33X[0;0YReturns the name of the variety [3Xvari[103X if it has one and it is known or can be
-  computed.[133X
-  
-  [1X3.3-20 twitter[101X
-  
-  [29X[2Xtwitter[102X( [3Xvari[103X ) [32X attribute
-  [6XReturns:[106X  [33X[0;10Ya ring[133X
-  
-  [33X[0;0YThis  is  a dummy to get immediate methods triggered at some times. It never
-  has a value.[133X
-  
-  
-  [1X3.4 [33X[0;0YToric varieties: Methods[133X[101X
-  
-  [1X3.4-1 UnderlyingSheaf[101X
-  
-  [29X[2XUnderlyingSheaf[102X( [3Xvari[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya sheaf[133X
-  
-  [33X[0;0YThe method returns the underlying sheaf of the variety [3Xvari[103X.[133X
-  
-  [1X3.4-2 CoordinateRingOfTorus[101X
-  
-  [29X[2XCoordinateRingOfTorus[102X( [3Xvari[103X, [3Xvars[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya ring[133X
-  
-  [33X[0;0YComputes  the  coordinate  ring  of  the  torus of the variety [3Xvari[103X with the
-  variables  [3Xvars[103X.  The argument [3Xvars[103X need to be a list of strings with length
-  dimension or two times dimension.[133X
-  
-  [1X3.4-3 \*[101X
-  
-  [29X[2X\*[102X( [3Xvari1[103X, [3Xvari2[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya variety[133X
-  
-  [33X[0;0YComputes the categorial product of the varieties [3Xvari1[103X and [3Xvari2[103X.[133X
-  
-  [1X3.4-4 CharacterToRationalFunction[101X
-  
-  [29X[2XCharacterToRationalFunction[102X( [3Xelem[103X, [3Xvari[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya homalg element[133X
-  
-  [33X[0;0YComputes  the  rational function corresponding to the character grid element
-  [3Xelem[103X  or  to  the  list  of integers [3Xelem[103X. To compute rational functions you
-  first need to compute to coordinate ring of the torus of the variety [3Xvari[103X.[133X
-  
-  [1X3.4-5 CoxRing[101X
-  
-  [29X[2XCoxRing[102X( [3Xvari[103X, [3Xvars[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya ring[133X
-  
-  [33X[0;0YComputes  the  Cox  ring  of  the  variety  [3Xvari[103X.  [3Xvars[103X needs to be a string
-  containing one variable, which will be numbered by the method.[133X
-  
-  [1X3.4-6 WeilDivisorsOfVariety[101X
-  
-  [29X[2XWeilDivisorsOfVariety[102X( [3Xvari[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya list[133X
-  
-  [33X[0;0YReturns a list of the currently defined Divisors of the toric variety.[133X
-  
-  [1X3.4-7 Fan[101X
-  
-  [29X[2XFan[102X( [3Xvari[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya fan[133X
-  
-  [33X[0;0YReturns the fan of the variety [3Xvari[103X. This is a rename for FanOfVariety.[133X
-  
-  
-  [1X3.5 [33X[0;0YToric varieties: Constructors[133X[101X
-  
-  [1X3.5-1 ToricVariety[101X
-  
-  [29X[2XToricVariety[102X( [3Xconv[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya ring[133X
-  
-  [33X[0;0YCreates a toric variety out of the convex object [3Xconv[103X.[133X
-  
-  
-  [1X3.6 [33X[0;0YToric varieties: Examples[133X[101X
-  
-  
-  [1X3.6-1 [33X[0;0YThe Hirzebruch surface of index 5[133X[101X
+  [1X3.1-1 [33X[0;0YThe Hirzebruch surface of index 5[133X[101X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XH5 := Fan( [[-1,5],[0,1],[1,0],[0,-1]],[[1,2],[2,3],[3,4],[4,1]] );[127X[104X
@@ -317,12 +20,12 @@
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XIsProjective( H5 );[127X[104X
     [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XTorusInvariantPrimeDivisors(H5);[127X[104X
+    [4X[25Xgap>[125X [27XTorusInvariantPrimeDivisors( H5 );[127X[104X
     [4X[28X[ <A prime divisor of a toric variety with coordinates ( 1, 0, 0, 0 )>,[128X[104X
     [4X[28X  <A prime divisor of a toric variety with coordinates ( 0, 1, 0, 0 )>,[128X[104X
     [4X[28X  <A prime divisor of a toric variety with coordinates ( 0, 0, 1, 0 )>,[128X[104X
     [4X[28X  <A prime divisor of a toric variety with coordinates ( 0, 0, 0, 1 )> ][128X[104X
-    [4X[25Xgap>[125X [27XP := TorusInvariantPrimeDivisors(H5);[127X[104X
+    [4X[25Xgap>[125X [27XP := TorusInvariantPrimeDivisors( H5 );[127X[104X
     [4X[28X[ <A prime divisor of a toric variety with coordinates ( 1, 0, 0, 0 )>,[128X[104X
     [4X[28X  <A prime divisor of a toric variety with coordinates ( 0, 1, 0, 0 )>,[128X[104X
     [4X[28X  <A prime divisor of a toric variety with coordinates ( 0, 0, 1, 0 )>,[128X[104X
@@ -331,24 +34,444 @@
     [4X[28X<A divisor of a toric variety with coordinates ( 1, -1, 4, 0 )>[128X[104X
     [4X[25Xgap>[125X [27XA;[127X[104X
     [4X[28X<A divisor of a toric variety with coordinates ( 1, -1, 4, 0 )>[128X[104X
-    [4X[25Xgap>[125X [27XIsAmple(A);[127X[104X
+    [4X[25Xgap>[125X [27XIsAmple( A );[127X[104X
     [4X[28Xfalse[128X[104X
-    [4X[25Xgap>[125X [27XCoordinateRingOfTorus(H5,"x");[127X[104X
+    [4X[25Xgap>[125X [27XCoordinateRingOfTorus( H5,"x" );[127X[104X
     [4X[28XQ[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )[128X[104X
-    [4X[25Xgap>[125X [27XD:=CreateDivisor([0,0,0,0],H5);[127X[104X
+    [4X[25Xgap>[125X [27XD:=CreateDivisor( [ 0,0,0,0 ],H5 );[127X[104X
     [4X[28X<A divisor of a toric variety with coordinates 0>[128X[104X
-    [4X[25Xgap>[125X [27XBasisOfGlobalSections(D);[127X[104X
+    [4X[25Xgap>[125X [27XBasisOfGlobalSections( D );[127X[104X
     [4X[28X[ |[ 1 ]| ][128X[104X
-    [4X[25Xgap>[125X [27XD:=Sum(P);[127X[104X
+    [4X[25Xgap>[125X [27XD:=Sum( P );[127X[104X
     [4X[28X<A divisor of a toric variety with coordinates ( 1, 1, 1, 1 )>[128X[104X
     [4X[25Xgap>[125X [27XBasisOfGlobalSections(D);[127X[104X
     [4X[28X[ |[ x1_ ]|, |[ x1_*x2 ]|, |[ 1 ]|, |[ x2 ]|,[128X[104X
     [4X[28X  |[ x1 ]|, |[ x1*x2 ]|, |[ x1^2*x2 ]|, [128X[104X
     [4X[28X  |[ x1^3*x2 ]|, |[ x1^4*x2 ]|, |[ x1^5*x2 ]|, [128X[104X
     [4X[28X  |[ x1^6*x2 ]| ][128X[104X
-    [4X[25Xgap>[125X [27XDivisorOfCharacter([1,2],H5);[127X[104X
-    [4X[28X<A principal divisor of a toric variety with coordinates ( 9, 2, 1, -2 )>[128X[104X
-    [4X[25Xgap>[125X [27XBasisOfGlobalSections(last);[127X[104X
+    [4X[25Xgap>[125X [27Xdivi := DivisorOfCharacter( [ 1,2 ],H5 );[127X[104X
+    [4X[28X<A principal divisor of a toric variety with coordinates ( 9, -2, 2, 1 )>[128X[104X
+    [4X[25Xgap>[125X [27XBasisOfGlobalSections( divi );[127X[104X
     [4X[28X[ |[ x1_*x2_^2 ]| ][128X[104X
   [4X[32X[104X
+  
+  
+  [1X3.1-2 [33X[0;0YA smooth, complete toric variety which is not projective[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xrays := [ [1,0,0], [-1,0,0], [0,1,0], [0,-1,0], [0,0,1], [0,0,-1],[127X[104X
+    [4X[25X>[125X [27X          [2,1,1], [1,2,1], [1,1,2], [1,1,1] ];[127X[104X
+    [4X[28X[ [ 1, 0, 0 ], [ -1, 0, 0 ], [ 0, 1, 0 ], [ 0, -1, 0 ], [ 0, 0, 1 ], [ 0, 0, -1 ], [128X[104X
+    [4X[28X[ 2, 1, 1 ], [ 1, 2, 1 ], [ 1, 1, 2 ], [ 1, 1, 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xcones := [ [1,3,6], [1,4,6], [1,4,5], [2,3,6], [2,4,6], [2,3,5], [2,4,5],[127X[104X
+    [4X[25X>[125X [27X           [1,5,9], [3,5,8], [1,3,7], [1,7,9], [5,8,9], [3,7,8],[127X[104X
+    [4X[25X>[125X [27X           [7,9,10], [8,9,10], [7,8,10] ];[127X[104X
+    [4X[28X[ [ 1, 3, 6 ], [ 1, 4, 6 ], [ 1, 4, 5 ], [ 2, 3, 6 ], [ 2, 4, 6 ], [ 2, 3, 5 ],[128X[104X
+    [4X[28X  [ 2, 4, 5 ], [ 1, 5, 9 ], [ 3, 5, 8 ], [ 1, 3, 7 ], [ 1, 7, 9 ], [ 5, 8, 9 ], [128X[104X
+    [4X[28X  [ 3, 7, 8 ], [ 7, 9, 10 ], [ 8, 9, 10 ], [ 7, 8, 10 ] ][128X[104X
+    [4X[25Xgap>[125X [27XF := Fan( rays, cones );[127X[104X
+    [4X[28X<A fan in |R^3>[128X[104X
+    [4X[25Xgap>[125X [27XT := ToricVariety( F );[127X[104X
+    [4X[28X<A toric variety of dimension 3>[128X[104X
+    [4X[25Xgap>[125X [27X[ IsSmooth( T ), IsComplete( T ), IsProjective( T ) ];[127X[104X
+    [4X[28X[ true, true, false ][128X[104X
+    [4X[25Xgap>[125X [27XSRIdeal( T );[127X[104X
+    [4X[28X<A graded torsion-free (left) ideal given by 23 generators>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.2 [33X[0;0YToric variety: Category and Representations[133X[101X
+  
+  [1X3.2-1 IsToricVariety[101X
+  
+  [33X[1;0Y[29X[2XIsToricVariety[102X( [3XM[103X ) [32X filter[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if an object is a toric variety.[133X
+  
+  [1X3.2-2 IsCategoryOfToricVarieties[101X
+  
+  [33X[1;0Y[29X[2XIsCategoryOfToricVarieties[102X( [3Xobject[103X ) [32X filter[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [3XGAP[103X category of toric varieties.[133X
+  
+  [1X3.2-3 twitter[101X
+  
+  [33X[1;0Y[29X[2Xtwitter[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YThis  is  a dummy to get immediate methods triggered at some times. It never
+  has a value.[133X
+  
+  
+  [1X3.3 [33X[0;0YProperties[133X[101X
+  
+  [1X3.3-1 IsNormalVariety[101X
+  
+  [33X[1;0Y[29X[2XIsNormalVariety[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the toric variety [3Xvari[103X is a normal variety.[133X
+  
+  [1X3.3-2 IsAffine[101X
+  
+  [33X[1;0Y[29X[2XIsAffine[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the toric variety [3Xvari[103X is an affine variety.[133X
+  
+  [1X3.3-3 IsProjective[101X
+  
+  [33X[1;0Y[29X[2XIsProjective[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the toric variety [3Xvari[103X is a projective variety.[133X
+  
+  [1X3.3-4 IsSmooth[101X
+  
+  [33X[1;0Y[29X[2XIsSmooth[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the toric variety [3Xvari[103X is smooth.[133X
+  
+  [1X3.3-5 IsComplete[101X
+  
+  [33X[1;0Y[29X[2XIsComplete[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the toric variety [3Xvari[103X is complete.[133X
+  
+  [1X3.3-6 HasTorusfactor[101X
+  
+  [33X[1;0Y[29X[2XHasTorusfactor[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the toric variety [3Xvari[103X has a torus factor.[133X
+  
+  [1X3.3-7 HasNoTorusfactor[101X
+  
+  [33X[1;0Y[29X[2XHasNoTorusfactor[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the toric variety [3Xvari[103X has no torus factor.[133X
+  
+  [1X3.3-8 IsOrbifold[101X
+  
+  [33X[1;0Y[29X[2XIsOrbifold[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks  if  the  toric  variety [3Xvari[103X has an orbifold, which is, in the toric
+  case, equivalent to the simpliciality of the fan.[133X
+  
+  
+  [1X3.4 [33X[0;0YAttributes[133X[101X
+  
+  [1X3.4-1 AffineOpenCovering[101X
+  
+  [33X[1;0Y[29X[2XAffineOpenCovering[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns  a  torus  invariant  affine  open covering of the variety [3Xvari[103X. The
+  affine open cover is computed out of the cones of the fan.[133X
+  
+  [1X3.4-2 CoxRing[101X
+  
+  [33X[1;0Y[29X[2XCoxRing[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YReturns  the  Cox  ring  of  the  variety [3Xvari[103X. The actual method requires a
+  string  with  a  name for the variables. A method for computing the Cox ring
+  without a variable given is not implemented. You will get an error.[133X
+  
+  [1X3.4-3 ListOfVariablesOfCoxRing[101X
+  
+  [33X[1;0Y[29X[2XListOfVariablesOfCoxRing[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns a list of the variables of the cox ring of the variety [3Xvari[103X.[133X
+  
+  [1X3.4-4 ClassGroup[101X
+  
+  [33X[1;0Y[29X[2XClassGroup[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya module[133X
+  
+  [33X[0;0YReturns the class group of the variety [3Xvari[103X as factor of a free module.[133X
+  
+  [1X3.4-5 TorusInvariantDivisorGroup[101X
+  
+  [33X[1;0Y[29X[2XTorusInvariantDivisorGroup[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya module[133X
+  
+  [33X[0;0YReturns the subgroup of the Weil divisor group of the variety [3Xvari[103X generated
+  by  the  torus invariant prime divisors. This is always a finitely generated
+  free module over the integers.[133X
+  
+  [1X3.4-6 MapFromCharacterToPrincipalDivisor[101X
+  
+  [33X[1;0Y[29X[2XMapFromCharacterToPrincipalDivisor[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns  a  map  which maps an element of the character group into the torus
+  invariant  Weil  group  of the variety [3Xvari[103X. This has to be viewed as a help
+  method to compute divisor classes.[133X
+  
+  [1X3.4-7 MapFromWeilDivisorsToClassGroup[101X
+  
+  [33X[1;0Y[29X[2XMapFromWeilDivisorsToClassGroup[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns a map which maps a Weil divisor into the class group.[133X
+  
+  [1X3.4-8 Dimension[101X
+  
+  [33X[1;0Y[29X[2XDimension[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YReturns the dimension of the variety [3Xvari[103X.[133X
+  
+  [1X3.4-9 DimensionOfTorusfactor[101X
+  
+  [33X[1;0Y[29X[2XDimensionOfTorusfactor[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YReturns the dimension of the torus factor of the variety [3Xvari[103X.[133X
+  
+  [1X3.4-10 CoordinateRingOfTorus[101X
+  
+  [33X[1;0Y[29X[2XCoordinateRingOfTorus[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YReturns  the  coordinate  ring  of the torus of the variety [3Xvari[103X. This is by
+  default  done  with  the  variables [3Xx1[103X to [3Xxn[103X where [3Xn[103X is the dimension of the
+  variety.  To  use  a  different  set  of  variables, a convenience method is
+  provided and described in the [3Xmethods[103X section.[133X
+  
+  [1X3.4-11 ListOfVariablesOfCoordinateRingOfTorus[101X
+  
+  [33X[1;0Y[29X[2XListOfVariablesOfCoordinateRingOfTorus[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns  the  list  of  variables in the coordinate ring of the torus of the
+  variety [3Xvari[103X.[133X
+  
+  [1X3.4-12 IsProductOf[101X
+  
+  [33X[1;0Y[29X[2XIsProductOf[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YIf  the  variety [3Xvari[103X is a product of 2 or more varieties, the list contains
+  those  varieties.  If  it  is  not  a product or at least not generated as a
+  product, the list only contains the variety itself.[133X
+  
+  [1X3.4-13 CharacterLattice[101X
+  
+  [33X[1;0Y[29X[2XCharacterLattice[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya module[133X
+  
+  [33X[0;0YThe  method  returns  the character lattice of the variety [3Xvari[103X, computed as
+  the containing grid of the underlying convex object, if it exists.[133X
+  
+  [1X3.4-14 TorusInvariantPrimeDivisors[101X
+  
+  [33X[1;0Y[29X[2XTorusInvariantPrimeDivisors[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YThe  method  returns  a  list  of  the torus invariant prime divisors of the
+  variety [3Xvari[103X.[133X
+  
+  [1X3.4-15 IrrelevantIdeal[101X
+  
+  [33X[1;0Y[29X[2XIrrelevantIdeal[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Yan ideal[133X
+  
+  [33X[0;0YReturns the irrelevant ideal of the Cox ring of the variety [3Xvari[103X.[133X
+  
+  [1X3.4-16 SRIdeal[101X
+  
+  [33X[1;0Y[29X[2XSRIdeal[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Yan ideal[133X
+  
+  [33X[0;0YReturns the Stanley-Reißner ideal of the Cox ring of the variety [3Xvari[103X.[133X
+  
+  [1X3.4-17 MorphismFromCoxVariety[101X
+  
+  [33X[1;0Y[29X[2XMorphismFromCoxVariety[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YThe method returns the quotient morphism from the variety of the Cox ring to
+  the variety [3Xvari[103X.[133X
+  
+  [1X3.4-18 CoxVariety[101X
+  
+  [33X[1;0Y[29X[2XCoxVariety[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YThe method returns the Cox variety of the variety [3Xvari[103X.[133X
+  
+  [1X3.4-19 FanOfVariety[101X
+  
+  [33X[1;0Y[29X[2XFanOfVariety[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya fan[133X
+  
+  [33X[0;0YReturns the fan of the variety [3Xvari[103X. This is set by default.[133X
+  
+  [1X3.4-20 CartierTorusInvariantDivisorGroup[101X
+  
+  [33X[1;0Y[29X[2XCartierTorusInvariantDivisorGroup[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya module[133X
+  
+  [33X[0;0YReturns  the the group of Cartier divisors of the variety [3Xvari[103X as a subgroup
+  of the divisor group.[133X
+  
+  [1X3.4-21 PicardGroup[101X
+  
+  [33X[1;0Y[29X[2XPicardGroup[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya module[133X
+  
+  [33X[0;0YReturns the Picard group of the variety [3Xvari[103X as factor of a free module.[133X
+  
+  [1X3.4-22 NameOfVariety[101X
+  
+  [33X[1;0Y[29X[2XNameOfVariety[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya string[133X
+  
+  [33X[0;0YReturns the name of the variety [3Xvari[103X if it has one and it is known or can be
+  computed.[133X
+  
+  [1X3.4-23 ZariskiCotangentSheaf[101X
+  
+  [33X[1;0Y[29X[2XZariskiCotangentSheaf[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya f.p. graded [3XS[103X-module[133X
+  
+  [33X[0;0YThis  method  returns  a  f. p. graded [3XS[103X-module ([3XS[103X being the Cox ring of the
+  variety),  such  that  the  sheafification  of  this  module  is the Zariski
+  cotangent sheaf of [3Xvari[103X.[133X
+  
+  [1X3.4-24 CotangentSheaf[101X
+  
+  [33X[1;0Y[29X[2XCotangentSheaf[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya f.p. graded [3XS[103X-module[133X
+  
+  [33X[0;0YThis  method  returns  a  f. p. graded [3XS[103X-module ([3XS[103X being the Cox ring of the
+  variety), such that the sheafification of this module is the cotangent sheaf
+  of [3Xvari[103X.[133X
+  
+  [1X3.4-25 EulerCharacteristic[101X
+  
+  [33X[1;0Y[29X[2XEulerCharacteristic[102X( [3Xvari[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya non-negative integer[133X
+  
+  [33X[0;0YThis method computes the Euler characteristic of [3Xvari[103X.[133X
+  
+  
+  [1X3.5 [33X[0;0YMethods[133X[101X
+  
+  [1X3.5-1 UnderlyingSheaf[101X
+  
+  [33X[1;0Y[29X[2XUnderlyingSheaf[102X( [3Xvari[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya sheaf[133X
+  
+  [33X[0;0YThe method returns the underlying sheaf of the variety [3Xvari[103X.[133X
+  
+  [1X3.5-2 CoordinateRingOfTorus[101X
+  
+  [33X[1;0Y[29X[2XCoordinateRingOfTorus[102X( [3Xvari[103X, [3Xvars[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YComputes  the  coordinate  ring  of  the  torus of the variety [3Xvari[103X with the
+  variables  [3Xvars[103X.  The argument [3Xvars[103X need to be a list of strings with length
+  dimension or two times dimension.[133X
+  
+  [1X3.5-3 \*[101X
+  
+  [33X[1;0Y[29X[2X\*[102X( [3Xvari1[103X, [3Xvari2[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YComputes the categorial product of the varieties [3Xvari1[103X and [3Xvari2[103X.[133X
+  
+  [1X3.5-4 CharacterToRationalFunction[101X
+  
+  [33X[1;0Y[29X[2XCharacterToRationalFunction[102X( [3Xelem[103X, [3Xvari[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya homalg element[133X
+  
+  [33X[0;0YComputes  the  rational function corresponding to the character grid element
+  [3Xelem[103X  or  to  the  list of integers [3Xelem[103X. This computation needs to know the
+  coordinate  ring  of  the torus of the variety [3Xvari[103X. By default this ring is
+  introduced  with variables [3Xx1[103X to [3Xxn[103X where [3Xn[103X is the dimension of the variety.
+  If  different variables should be used, then [3XCoordinateRingOfTorus[103X has to be
+  set accordingly before calling this method.[133X
+  
+  [1X3.5-5 CoxRing[101X
+  
+  [33X[1;0Y[29X[2XCoxRing[102X( [3Xvari[103X, [3Xvars[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YComputes  the  Cox  ring  of  the  variety  [3Xvari[103X.  [3Xvars[103X needs to be a string
+  containing one variable, which will be numbered by the method.[133X
+  
+  [1X3.5-6 WeilDivisorsOfVariety[101X
+  
+  [33X[1;0Y[29X[2XWeilDivisorsOfVariety[102X( [3Xvari[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns a list of the currently defined Divisors of the toric variety.[133X
+  
+  [1X3.5-7 Fan[101X
+  
+  [33X[1;0Y[29X[2XFan[102X( [3Xvari[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya fan[133X
+  
+  [33X[0;0YReturns the fan of the variety [3Xvari[103X. This is a rename for FanOfVariety.[133X
+  
+  [1X3.5-8 Factors[101X
+  
+  [33X[1;0Y[29X[2XFactors[102X( [3Xvari[103X ) [32X operation[133X
+  
+  [1X3.5-9 BlowUpOnIthMinimalTorusOrbit[101X
+  
+  [33X[1;0Y[29X[2XBlowUpOnIthMinimalTorusOrbit[102X( [3Xvari[103X, [3Xp[103X ) [32X operation[133X
+  
+  [1X3.5-10 ZariskiCotangentSheafViaEulerSequence[101X
+  
+  [33X[1;0Y[29X[2XZariskiCotangentSheafViaEulerSequence[102X( [3Xarg[103X ) [32X function[133X
+  
+  [1X3.5-11 ZariskiCotangentSheafViaPoincareResidueMap[101X
+  
+  [33X[1;0Y[29X[2XZariskiCotangentSheafViaPoincareResidueMap[102X( [3Xarg[103X ) [32X function[133X
+  
+  [1X3.5-12 ithBettiNumber[101X
+  
+  [33X[1;0Y[29X[2XithBettiNumber[102X( [3Xvari[103X, [3Xp[103X ) [32X operation[133X
+  
+  [1X3.5-13 NrOfqRationalPoints[101X
+  
+  [33X[1;0Y[29X[2XNrOfqRationalPoints[102X( [3Xvari[103X, [3Xp[103X ) [32X operation[133X
+  
+  
+  [1X3.6 [33X[0;0YConstructors[133X[101X
+  
+  [1X3.6-1 ToricVariety[101X
+  
+  [33X[1;0Y[29X[2XToricVariety[102X( [3Xvari[103X ) [32X operation[133X
+  
+  [1X3.6-2 ToricVariety[101X
+  
+  [33X[1;0Y[29X[2XToricVariety[102X( [3Xvari[103X ) [32X operation[133X
+  
+  [1X3.6-3 ToricVariety[101X
+  
+  [33X[1;0Y[29X[2XToricVariety[102X( [3Xconv[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YCreates a toric variety out of the convex object [3Xconv[103X.[133X
+  
+  [1X3.6-4 ToricVariety[101X
+  
+  [33X[1;0Y[29X[2XToricVariety[102X( [3Xconv[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YCreates  a toric variety out of the convex object [3Xconv[103X. In addition it takes
+  a  list  of  integers. Those are used to set the degrees of the variables in
+  the Cox ring of the variety.[133X
   

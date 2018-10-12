@@ -2,11 +2,11 @@
   [1X1 [33X[0;0YIntroduction[133X[101X
   
   
-  [1X1.1 [33X[0;0YWhat is the goal of the [5XToricVarieties[105X[101X[1X package?[133X[101X
+  [1X1.1 [33X[0;0YWhat is the goal of the ToricVarieties package?[133X[101X
   
-  [33X[0;0Y[5XToricVarieties[105X  provides  data structures to handle toric varieties by their
+  [33X[0;0Y[13XToricVarieties[113X  provides  data structures to handle toric varieties by their
   commutative algebra structure and by their combinatorics. For combinatorics,
-  it  uses  the [5XConvex[105X package. Its goal is to provide a suitable framework to
+  it  uses  the [13XConvex[113X package. Its goal is to provide a suitable framework to
   work  with  toric  varieties. All combinatorial structures mentioned in this
-  manual are the ones from [5XConvex[105X.[133X
+  manual are the ones from [13XConvex[113X.[133X
   
