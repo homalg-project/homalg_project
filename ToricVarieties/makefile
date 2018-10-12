@@ -15,7 +15,7 @@ test:	doc
 	gap maketest.g
 
 test-with-coverage:	doc
-	gap --cover stats maketest.g | perl -pe 'END { exit $$status } $$status=1 if /Expected output/;'
+	! gap --banner --quitonbreak --cover stats maketest.g 2>&1 | grep -v "Running list" | grep ""
 	echo 'LoadPackage("profiling"); OutputJsonCoverage("stats", "coverage.json");' | gap
 
 ci-test:	test-with-coverage
