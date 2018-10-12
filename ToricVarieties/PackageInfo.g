@@ -5,7 +5,7 @@ PackageName := "ToricVarieties",
 Subtitle := "A package to handle toric varieties",
 
 Version :=  Maximum( [
-  "2015.08.12", ## Sebas' version
+  "2018.10.12", ## Sebas' version
 ## this line prevents merge conflicts
   "2015.03.31", ## Mohamed's version
 ## this line prevents merge conflicts
@@ -44,7 +44,6 @@ rec(
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "m.bies@thphys.uni-heidelberg.de",
-    WWWHome       := "",
     PostalAddress := Concatenation( [
                        "Martin Bies\n",
                        "Philosophenweg 19\n",
