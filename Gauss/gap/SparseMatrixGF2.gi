@@ -2,7 +2,7 @@
 ##
 ##  SparseMatrixGF2.gi          Gauss package                 Simon Goertzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B fÅ¸r Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B f√ºr Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for Gauss with sparse matrices over GF(2).
 ##
@@ -66,7 +66,7 @@ InstallMethod( GetEntry,
 
 ##
 InstallMethod( SetEntry,
-        [ IsSparseMatrixGF2Rep, IsInt, IsInt, IsRingElement ],
+        [ IsSparseMatrixGF2Rep and IsMutable, IsInt, IsInt, IsRingElement ],
   function( M, i, j, e )
     local ring, pos;
     ring := GF(2);
@@ -88,7 +88,7 @@ InstallMethod( SetEntry,
 
 ##
 InstallMethod( AddToEntry,
-        [ IsSparseMatrixGF2Rep, IsInt, IsInt, IsRingElement ],
+        [ IsSparseMatrixGF2Rep and IsMutable, IsInt, IsInt, IsRingElement ],
   function( M, i, j, e )
     local ring, pos;
     ring := GF(2);
@@ -111,7 +111,7 @@ InstallMethod( AddToEntry,
 
 ##
 InstallOtherMethod( AddToEntry,
-        [ IsSparseMatrixGF2Rep, IsInt, IsInt ],
+        [ IsSparseMatrixGF2Rep and IsMutable, IsInt, IsInt ],
   function( M, i, j )
     return AddToEntry( M, i, j, One( GF(2) ) );
   end
