@@ -99,8 +99,7 @@ DeclareGlobalFunction( "ContainerForWeakPointers" );
 #! @Description
 #!  A tool to compute the runtime of several methods.
 #! @Returns an integer
-DeclareGlobalFunction( "homalgTotalRuntimes",
-                       "an integer" );
+DeclareGlobalFunction( "homalgTotalRuntimes" );
 
 #! @Description
 #!  A tool to install equivalence between filters.

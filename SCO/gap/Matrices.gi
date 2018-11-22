@@ -22,7 +22,7 @@
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th boundary of L with the help of mu",
+InstallGlobalFunction( BoundaryOperator,
   function( i, L, mu)
     local n, tau, rho, j, boundary;
     boundary := ShallowCopy( L );
