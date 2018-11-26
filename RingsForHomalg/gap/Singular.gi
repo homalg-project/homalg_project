@@ -1358,9 +1358,9 @@ InstallMethod( PolynomialRing,
         
         ## lex order
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_fibr, var_base, "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", Concatenation( var_fibr, var_base ), "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_fibr, var_base, "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( var_fibr, var_base ), "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
         
     elif IsRecord( order ) and IsBound( order.weights ) then
@@ -1416,8 +1416,6 @@ InstallMethod( PolynomialRing,
         if order = fail then
             P := PolynomialRingWithProductOrdering( R, indets );
             SetPolynomialRingWithProductOrdering( S, P );
-            L := PolynomialRingWithLexicographicOrdering( R, indets );
-            SetPolynomialRingWithLexicographicOrdering( S, L );
             weights := Concatenation( ListWithIdenticalEntries( l - nr_var, 0 ), ListWithIdenticalEntries( nr_var, 1 ) );
             W := PolynomialRing( R, indets : order := rec( weights := weights ) );
             SetPolynomialRingWithWeightedOrdering( S, W );

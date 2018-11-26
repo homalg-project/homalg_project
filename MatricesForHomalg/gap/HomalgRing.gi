@@ -1972,6 +1972,22 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
+InstallMethod( PolynomialRingWithLexicographicOrdering,
+        "for homalg rings",
+        [ IsHomalgRing and HasIndeterminatesOfPolynomialRing ],
+        
+  function( R )
+    local indets;
+    
+    indets := IndeterminatesOfPolynomialRing( R );
+    
+    indets := List( indets, String );
+    
+    return PolynomialRing( CoefficientsRing( R ), indets : order := "lex" );
+    
+end );
+
+##
 InstallMethod( RingOfDerivations,
         "for homalg rings",
         [ IsHomalgRing and IsCommutative, IsString ], 1001,
