@@ -425,3 +425,10 @@ DeclareOperation( "PositionOfTheDefaultPresentation",
 
 DeclareOperation( "Display",
         [ IsContainerForPointers, IsString ] );
+
+DeclareGlobalFunction( "ExecForHomalg" );
+
+DeclareOperation( "ShaSum",
+        [ IsString ] );
+
+DeclareGlobalFunction( "GetTimeOfDay" );

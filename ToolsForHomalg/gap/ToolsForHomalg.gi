@@ -1517,6 +1517,76 @@ InstallMethod( ViewList,
     
 end );
 
+##
+InstallGlobalFunction( ExecForHomalg,
+  function( arg )
+    local str,  output, cmd,  i,  shell,  cs,  dir;
+    
+    str := "";
+    output := OutputTextString( str, true );
+    
+    # simply concatenate the arguments
+    cmd := ShallowCopy( arg[1] );
+    if not IsString(cmd) then
+      Error("the command ",cmd," is not a name.\n",
+      "possibly a binary is missing or has not been compiled.");
+    fi;
+    for i  in [ 2 .. Length(arg) ]  do
+        Append( cmd, " " );
+        Append( cmd, arg[i] );
+    od;
+    
+    # select the shell, bourne shell is the default: sh -c cmd
+    if ARCH_IS_WINDOWS() then
+        # on Windows, we use the native shell such that behaviour does
+        # not depend on whether cygwin is installed or not.
+	# cmd.exe is preferrable to old-style `command.com'
+        shell := Filename( DirectoriesSystemPrograms(), "cmd.exe" );
+        cs := "/C";
+    else
+        shell := Filename( DirectoriesSystemPrograms(), "sh" );
+        cs := "-c";
+    fi;
+    
+    # execute in the current directory
+    dir := DirectoryCurrent();
+    
+    # execute the command
+    Process( dir, shell, InputTextUser(), output, [ cs, cmd ] );
+    
+    return str;
+    
+end );
+
+##
+InstallMethod( ShaSum,
+        "for a string",
+        [ IsString ],
+        
+  function( str )
+    local sha;
+    
+    sha := ExecForHomalg( "echo",  "\"", str, "\" | shasum" );
+    
+    NormalizeWhitespace( sha );
+    
+    return sha{[ 1 .. Length( sha ) - 2 ]};
+    
+end );
+
+##
+InstallGlobalFunction( GetTimeOfDay,
+  function( arg )
+    local t;
+    
+    t := ExecForHomalg( "date +\"%Y-%m-%d:%H:%M:%S,%N\"" );
+    
+    NormalizeWhitespace( t );
+    
+    return t;
+    
+end );
+
 ####################################
 #
 # methods for operations:
