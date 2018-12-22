@@ -432,3 +432,11 @@ DeclareOperation( "ShaSum",
         [ IsString ] );
 
 DeclareGlobalFunction( "GetTimeOfDay" );
+
+DeclareGlobalFunction( "ReplacedStringForHomalg" );
+
+DeclareGlobalFunction( "ReplacedFileForHomalg" );
+
+DeclareGlobalFunction( "EvalReplacedFileForHomalg" );
+
+DeclareGlobalFunction( "WriteReplacedFileForHomalg" );

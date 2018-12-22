@@ -1587,6 +1587,71 @@ InstallGlobalFunction( GetTimeOfDay,
     
 end );
 
+##
+InstallGlobalFunction( ReplacedStringForHomalg,
+  function( string, L )
+    local old_new;
+    
+    for old_new in L do
+        string := ReplacedString( string, old_new[1], old_new[2] );
+    od;
+    
+    return string;
+    
+end );
+
+##
+InstallGlobalFunction( ReplacedFileForHomalg,
+  function( filename_source, L )
+    local fs, string;
+    
+    fs := IO_File( filename_source, "r" );
+    if fs = fail then
+        Error( "unable to open the file ", filename_source, " for reading\n" );
+    fi;
+    string := IO_ReadUntilEOF( fs );
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", filename_source, "\n" );
+    fi;
+    if string = fail then
+        Error( "unable to read lines from the file ", filename_source, "\n" );
+    fi;
+    
+    return ReplacedStringForHomalg( string, L );
+    
+end );
+
+##
+InstallGlobalFunction( EvalReplacedFileForHomalg,
+  function( filename_source, L )
+    local string;
+    
+    string := ReplacedFileForHomalg( filename_source, L );
+    
+    EvalString( string );
+    
+end );
+
+##
+InstallGlobalFunction( WriteReplacedFileForHomalg,
+  function( filename_source, L, filename_target )
+    local string, fs;
+    
+    string := ReplacedFileForHomalg( filename_source, L );
+    
+    fs := IO_File( filename_target, "w" );
+    if fs = fail then
+        Error( "unable to open the file ", filename_target, " for writing\n" );
+    fi;
+    if IO_WriteFlush( fs, string ) = fail then
+        Error( "unable to write in the file ", filename_target, "\n" );
+    fi;
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", filename_target, "\n" );
+    fi;
+    
+end );
+
 ####################################
 #
 # methods for operations:
