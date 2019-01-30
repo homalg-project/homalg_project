@@ -928,7 +928,7 @@ DeclareProperty( "IsIrreducibleHomalgRingElement",
 ##  |[ 181 ]|
 ##  gap> s := (1/3*One(R)+2/5)+3/7;
 ##  |[ 106 ]|
-##  gap> 1 / s;
+##  gap> s^(-1);
 ##  fail
 ##  ]]></Example>
 ##    </Description>
