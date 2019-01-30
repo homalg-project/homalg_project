@@ -1573,7 +1573,6 @@ end );
 ##  ]]></Example>
 ##  The first possibility:
 ##      <Example><![CDATA[
-##  <A homomorphism of left modules>
 ##  gap> C := HomalgComplex( N );
 ##  <A non-zero graded homology object consisting of a single left module at degre\
 ##  e 0>
@@ -1740,7 +1739,6 @@ end );
 ##  ]]></Example>
 ##  The first possibility:
 ##      <Example><![CDATA[
-##  <A homomorphism of right modules>
 ##  gap> C := HomalgCocomplex( M );
 ##  <A non-zero graded cohomology object consisting of a single right module at de\
 ##  gree 0>

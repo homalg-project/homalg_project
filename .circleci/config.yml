@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: gapsystem/gap-docker:latest
     working_directory: ~/.gap/pkg/homalg_project
@@ -11,5 +11,22 @@ jobs:
           sudo apt dist-upgrade -y
           sudo apt install -y texlive-latex-extra texlive-science curl
           echo "SetUserPreference(\"PackagesToLoad\", []);" > ~/.gap/gap.ini
+          echo "SetInfoLevel(InfoPackageLoading, 3);" > ~/.gap/gaprc
           make ci-test
           bash <(curl -s https://codecov.io/bash)
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - test
+  nightly:
+    triggers:
+      - schedule:
+          # 0:00 UTC = 1:00 CET = 2:00 CEST
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - test
