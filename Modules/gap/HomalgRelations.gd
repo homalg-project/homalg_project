@@ -231,9 +231,6 @@ DeclareOperation( "*",
 #
 ####################################
 
-DeclareSynonym ( "Reduce",
-        DecideZero );
-
 DeclareSynonym ( "BetterBasis",
         GetRidOfObsoleteRelations );
 
