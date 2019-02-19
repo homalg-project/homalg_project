@@ -2995,6 +2995,14 @@ InstallGlobalFunction( HomalgScalarMatrix,
     
 end );
 
+##
+InstallGlobalFunction( StringToHomalgColumnMatrix,
+  function( str, R )
+    
+    return HomalgMatrix( str, Length( SplitString( str, "," ) ), 1, R );
+    
+end );
+
 ##  <#GAPDoc Label="\*:MatrixBaseChange">
 ##  <ManSection>
 ##    <Oper Arg="R, mat" Name="\*" Label="copy a matrix over a different ring"/>

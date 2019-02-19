@@ -861,6 +861,8 @@ DeclareGlobalFunction( "HomalgDiagonalMatrix" );
 
 DeclareGlobalFunction( "HomalgScalarMatrix" );
 
+DeclareGlobalFunction( "StringToHomalgColumnMatrix" );
+
 DeclareGlobalFunction( "ListToListList" );
 
 DeclareOperation( "CreateHomalgMatrixFromString",
