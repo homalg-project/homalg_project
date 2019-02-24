@@ -327,6 +327,30 @@ InstallMethod( AssociatedPolynomialRing,
     
 end );
 
+##
+InstallMethod( PolynomialRingWithProductOrdering,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local B, C;
+    
+    if HasBaseRing( R ) then
+        B := BaseRing( R );
+        if HasCoefficientsRing( R ) then
+            C := CoefficientsRing( R );
+            if not IsIdenticalObj( B, C ) then
+                TryNextMethod( );
+            fi;
+        else
+            TryNextMethod( );
+        fi;
+    fi;
+    
+    return R;
+    
+end );
+
 ####################################
 #
 # methods for operations:
