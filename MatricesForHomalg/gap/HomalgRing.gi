@@ -307,7 +307,7 @@ end );
 
 ##
 InstallMethod( AssociatedPolynomialRing,
-        "for homalg ring elements",
+        "for homalg fields",
         [ IsHomalgRing and IsFieldForHomalg ],
         
   function( R )
