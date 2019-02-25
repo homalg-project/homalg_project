@@ -80,6 +80,9 @@ DeclareAttribute( "NonTrivialDegreePerRow",
 DeclareAttribute( "NonTrivialDegreePerColumn",
         IsMatrixOverGradedRing );
 
+
+DeclareOperation( "HomogeneousPartOfMatrix", [ IsMatrixOverGradedRing, IsList ] );
+
 ####################################
 #
 # global functions and operations:
