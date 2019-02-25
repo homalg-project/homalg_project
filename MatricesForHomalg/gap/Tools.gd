@@ -16,7 +16,19 @@
 
 # basic operations:
 
+DeclareOperation( "MaxDimensionalRadicalSubobjectOp",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "RadicalSubobjectOp",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "RadicalDecompositionOp",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "MaxDimensionalSubobjectOp",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "EquiDimensionalDecompositionOp",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "PrimaryDecompositionOp",

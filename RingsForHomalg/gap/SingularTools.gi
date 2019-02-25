@@ -593,6 +593,103 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               MaxDimensionalRadicalSubobject :=
+                 function( mat )
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only maximal dimensional radical subobjects of one-column matrices is supported\n" );
+                   fi;
+                   
+                   return homalgSendBlocking( [ "matrix(equiRadical(", mat, "))" ], [ "matrix" ], HOMALG_IO.Pictograms.MaxDimensionalRadicalSubobject );
+                   
+                 end,
+               
+               RadicalSubobject :=
+                 function( mat )
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only radical of one-column matrices is supported\n" );
+                   fi;
+                   
+                   return homalgSendBlocking( [ "matrix(radical(", mat, "))" ], [ "matrix" ], HOMALG_IO.Pictograms.RadicalSubobject );
+                   
+                 end,
+               
+               RadicalDecomposition :=
+                 function( mat )
+                   local R, v, c;
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only primary decomposition of one-column matrices is supported\n" );
+                   fi;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=minAssGTZ(", mat, ")" ], "need_command", HOMALG_IO.Pictograms.RadicalDecomposition );
+                   
+                   c := Int( homalgSendBlocking( [ "size(", v, "l)" ], "need_output", R, HOMALG_IO.Pictograms.RadicalDecomposition ) );
+                   
+                   return
+                     List( [ 1 .. c ],
+                           function( i )
+                             local prime;
+                             
+                             prime := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             
+                             homalgSendBlocking( [ "matrix ", prime, "[1][size(", v, "l[", i, "])]=", v, "l[", i, "]" ], "need_command", HOMALG_IO.Pictograms.RadicalDecomposition );
+                             
+                             return prime;
+                             
+                           end
+                         );
+                   
+                 end,
+               
+               MaxDimensionalSubobject :=
+                 function( mat )
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only maximal dimensional subobjects of one-column matrices is supported\n" );
+                   fi;
+                   
+                   return homalgSendBlocking( [ "matrix(equidimMax(", mat, "))" ], [ "matrix" ], HOMALG_IO.Pictograms.MaxDimensionalSubobject );
+                   
+                 end,
+               
+               EquiDimensionalDecomposition :=
+                 function( mat )
+                   local R, v, c;
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only primary decomposition of one-column matrices is supported\n" );
+                   fi;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=equidim(", mat, ")" ], "need_command", HOMALG_IO.Pictograms.RadicalDecomposition );
+                   
+                   c := Int( homalgSendBlocking( [ "size(", v, "l)" ], "need_output", R, HOMALG_IO.Pictograms.RadicalDecomposition ) );
+                   
+                   return
+                     List( [ 1 .. c ],
+                           function( i )
+                             local prime;
+                             
+                             prime := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             
+                             homalgSendBlocking( [ "matrix ", prime, "[1][size(", v, "l[", i, "])]=", v, "l[", i, "]" ], "need_command", HOMALG_IO.Pictograms.RadicalDecomposition );
+                             
+                             return prime;
+                             
+                           end
+                         );
+                   
+                 end,
+               
                PrimaryDecomposition :=
                  function( mat )
                    local R, v, c;

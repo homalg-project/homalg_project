@@ -2698,6 +2698,80 @@ InstallMethod( Eval,
 end );
 
 ##
+InstallMethod( MaxDimensionalRadicalSubobjectOp,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, rad;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        return HomalgZeroMatrix( 0, 1, R );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.MaxDimensionalRadicalSubobject) then
+        rad := RP!.MaxDimensionalRadicalSubobject( M );	## the external object
+        rad := HomalgMatrix( rad, R );
+        if IsZero( rad ) then
+            return HomalgZeroMatrix( 0, 1, R );
+        fi;
+        SetNrColumns( rad, 1 );
+        NrRows( rad );
+        IsOne( rad );
+        return rad;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called MaxDimensionalRadicalSubobject ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RadicalSubobjectOp,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, rad;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        return HomalgZeroMatrix( 0, 1, R );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.RadicalSubobject) then
+        rad := RP!.RadicalSubobject( M );	## the external object
+        rad := HomalgMatrix( rad, R );
+        if IsZero( rad ) then
+            return HomalgZeroMatrix( 0, 1, R );
+        fi;
+        SetNrColumns( rad, 1 );
+        NrRows( rad );
+        IsOne( rad );
+        return rad;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called RadicalSubobject ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( RadicalDecompositionOp,
         "for a homalg matrix",
         [ IsHomalgMatrix ],
@@ -2730,6 +2804,83 @@ InstallMethod( RadicalDecompositionOp,
     
     if not IsHomalgInternalRingRep( R ) then
         Error( "could not find a procedure called RadicalDecomposition ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( EquiDimensionalDecompositionOp,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, triv;
+    
+    if IsBound( M!.EquiDimensionalDecomposition ) then
+        return M!.EquiDimensionalDecomposition;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        if NrColumns( M ) = 0 then
+            triv := HomalgZeroMatrix( 0, 0, R );
+        else
+            triv := HomalgZeroMatrix( 0, 1, R );
+        fi;
+        M!.EquiDimensionalDecomposition := [ triv ];
+        return M!.EquiDimensionalDecomposition;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.EquiDimensionalDecomposition ) then
+        M!.EquiDimensionalDecomposition := RP!.EquiDimensionalDecomposition( M );
+        return M!.EquiDimensionalDecomposition;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called EquiDimensionalDecomposition ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( MaxDimensionalSubobjectOp,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, max;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        return HomalgZeroMatrix( 0, 1, R );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.MaxDimensionalSubobject) then
+        max := RP!.MaxDimensionalSubobject( M );	## the external object
+        max := HomalgMatrix( max, R );
+        if IsZero( max ) then
+            return HomalgZeroMatrix( 0, 1, R );
+        fi;
+        SetNrColumns( max, 1 );
+        NrRows( max );
+        IsOne( max );
+        return max;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called MaxDimensionalSubobject ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     

@@ -440,6 +440,21 @@ InstallValue( HOMALG_IO,
                 ## the constant term of the hilbert polynomial:
                 ConstantTermOfHilbertPolynomial         := "P_0",
                 
+                ## maximal dimensional radical subobject:
+                MaxDimensionalRadicalSubobject          := "V_d",
+                
+                ## radical subobject:
+                RadicalSubobject                        := "rad",
+                
+                ## radical decomposition:
+                RadicalDecomposition                    := "VxU",
+                
+                ## maximal dimensional subobject:
+                MaxDimensionalSubobject                 := "X_d",
+                
+                ## equi-dimensional decomposition:
+                EquiDimenionalDecomposition             := "XxY",
+                
                 ## primary decomposition:
                 PrimaryDecomposition                    := "YxZ",
                 
