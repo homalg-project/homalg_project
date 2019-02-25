@@ -16,10 +16,10 @@
 
 # basic operations:
 
-DeclareOperation( "PrimaryDecompositionOp",
+DeclareOperation( "RadicalDecompositionOp",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "RadicalDecompositionOp",
+DeclareOperation( "PrimaryDecompositionOp",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "Eliminate",

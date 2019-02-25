@@ -2698,46 +2698,6 @@ InstallMethod( Eval,
 end );
 
 ##
-InstallMethod( PrimaryDecompositionOp,
-        "for a homalg matrix",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    local R, RP, triv;
-    
-    if IsBound( M!.PrimaryDecomposition ) then
-        return M!.PrimaryDecomposition;
-    fi;
-    
-    R := HomalgRing( M );
-    
-    if IsZero( M ) then
-        if NrColumns( M ) = 0 then
-            triv := HomalgZeroMatrix( 0, 0, R );
-        else
-            triv := HomalgZeroMatrix( 0, 1, R );
-        fi;
-        M!.PrimaryDecomposition := [ [ triv, triv ] ];
-        return M!.PrimaryDecomposition;
-    fi;
-    
-    RP := homalgTable( R );
-    
-    if IsBound( RP!.PrimaryDecomposition ) then
-        M!.PrimaryDecomposition := RP!.PrimaryDecomposition( M );
-        return M!.PrimaryDecomposition;
-    fi;
-    
-    if not IsHomalgInternalRingRep( R ) then
-        Error( "could not find a procedure called PrimaryDecomposition ",
-               "in the homalgTable of the non-internal ring\n" );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
 InstallMethod( RadicalDecompositionOp,
         "for a homalg matrix",
         [ IsHomalgMatrix ],
@@ -2770,6 +2730,46 @@ InstallMethod( RadicalDecompositionOp,
     
     if not IsHomalgInternalRingRep( R ) then
         Error( "could not find a procedure called RadicalDecomposition ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( PrimaryDecompositionOp,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, triv;
+    
+    if IsBound( M!.PrimaryDecomposition ) then
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        if NrColumns( M ) = 0 then
+            triv := HomalgZeroMatrix( 0, 0, R );
+        else
+            triv := HomalgZeroMatrix( 0, 1, R );
+        fi;
+        M!.PrimaryDecomposition := [ [ triv, triv ] ];
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.PrimaryDecomposition ) then
+        M!.PrimaryDecomposition := RP!.PrimaryDecomposition( M );
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called PrimaryDecomposition ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
