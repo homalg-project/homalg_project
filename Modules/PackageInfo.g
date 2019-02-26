@@ -162,6 +162,8 @@ AvailabilityTest := function()
     return true;
   end,
 
+TestFile := "maketest.g",
+
 Autoload := false,
 
 
