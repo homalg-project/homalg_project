@@ -1378,10 +1378,12 @@ InstallMethod( PolynomialRing,
         var_fibr := var{[ l - nr_var + 1 .. l ]};
         
         ## block order
+        weights := Concatenation( Concatenation( List( [ 1 .. Length( var_base ) ], a -> "0," ) ), Concatenation( List( [ 1 .. Length( var_fibr ) ], a -> "1," ) ) );
+        weights := weights{[ 1 .. Length( weights ) - 1 ]}; # remove trailing comma
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_fibr, var_base, "),(dp(", nr_var, "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_base, var_fibr, "),(a(", weights, "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_fibr, var_base, "),(dp(", nr_var, "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_base, var_fibr, "),(a(", weights, "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
         
     else
