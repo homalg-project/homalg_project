@@ -707,3 +707,42 @@ InstallMethod( Diff,
     
 end );
 
+##
+InstallMethod( PolynomialsWithoutRelativeIndeterminates,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, B, base, var, S, weights, M_sub;
+    
+    if not NrColumns( M ) = 1 then
+        Error( "the number of columns must be one\n" );
+    fi;
+    
+    ## k[b][x1,x2]
+    R := HomalgRing( M );
+    
+    ## k[b]
+    B := BaseRing( R );
+    
+    ## [b]
+    base := Indeterminates( B );
+    
+    ## [x1,x2]
+    var := RelativeIndeterminatesOfPolynomialRing( R );
+    
+    ## k[b][x1,x2]
+    S := GradedRing( R );
+    
+    ## [ 0, 1, 1 ]
+    weights := Concatenation( ListWithIdenticalEntries( Length( base ), 0 ), ListWithIdenticalEntries( Length( var ), 1 ) );
+    SetWeightsOfIndeterminates( S, weights );
+    
+    M := S * M;
+    
+    ## only the rows with degree 0
+    M_sub := CertainRows( M, Positions( DegreesOfEntries( M ), [ 0 ] ) );
+    
+    return B * M_sub;
+    
+end );

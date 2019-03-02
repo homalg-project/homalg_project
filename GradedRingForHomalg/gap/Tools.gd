@@ -15,6 +15,10 @@
 #
 ####################################
 
+##
+DeclareAttribute( "PolynomialsWithoutRelativeIndeterminates",
+        IsHomalgMatrix );
+
 # basic operations:
 
 DeclareOperation( "DegreeOfRingElementFunction",
