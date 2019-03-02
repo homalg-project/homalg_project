@@ -1418,6 +1418,7 @@ InstallMethod( PolynomialRing,
         if order = fail then
             P := PolynomialRingWithProductOrdering( R, indets );
             SetPolynomialRingWithProductOrdering( S, P );
+            SetPolynomialRingWithProductOrdering( P, P );
             weights := Concatenation( ListWithIdenticalEntries( l - nr_var, 0 ), ListWithIdenticalEntries( nr_var, 1 ) );
             W := PolynomialRing( R, indets : order := rec( weights := weights ) );
             SetPolynomialRingWithWeightedOrdering( S, W );
