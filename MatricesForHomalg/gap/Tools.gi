@@ -2705,6 +2705,10 @@ InstallMethod( MaxDimensionalRadicalSubobjectOp,
   function( M )
     local R, RP, rad;
     
+    if IsBound( M!.MaxDimensionalRadicalSubobjectOp ) then
+        return M!.MaxDimensionalRadicalSubobjectOp;
+    fi;
+    
     R := HomalgRing( M );
     
     if IsZero( M ) then
@@ -2722,6 +2726,8 @@ InstallMethod( MaxDimensionalRadicalSubobjectOp,
         SetNrColumns( rad, 1 );
         NrRows( rad );
         IsOne( rad );
+        M!.MaxDimensionalRadicalSubobjectOp := rad;
+        rad!.MaxDimensionalRadicalSubobjectOp := rad;
         return rad;
     fi;
     
@@ -2742,6 +2748,10 @@ InstallMethod( RadicalSubobjectOp,
   function( M )
     local R, RP, rad;
     
+    if IsBound( M!.RadicalSubobjectOp ) then
+        return M!.RadicalSubobjectOp;
+    fi;
+    
     R := HomalgRing( M );
     
     if IsZero( M ) then
@@ -2759,6 +2769,8 @@ InstallMethod( RadicalSubobjectOp,
         SetNrColumns( rad, 1 );
         NrRows( rad );
         IsOne( rad );
+        M!.RadicalSubobjectOp := rad;
+        rad!.RadicalSubobjectOp := rad;
         return rad;
     fi;
     
@@ -2859,6 +2871,10 @@ InstallMethod( MaxDimensionalSubobjectOp,
   function( M )
     local R, RP, max;
     
+    if IsBound( M!.MaxDimensionalSubobjectOp ) then
+        return M!.MaxDimensionalSubobjectOp;
+    fi;
+    
     R := HomalgRing( M );
     
     if IsZero( M ) then
@@ -2876,6 +2892,8 @@ InstallMethod( MaxDimensionalSubobjectOp,
         SetNrColumns( max, 1 );
         NrRows( max );
         IsOne( max );
+        M!.MaxDimensionalSubobjectOp := max;
+        max!.MaxDimensionalSubobjectOp := max;
         return max;
     fi;
     
