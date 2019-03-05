@@ -98,6 +98,9 @@ DeclareAttribute( "CommonNonTrivialWeightOfIndeterminates",
 DeclareOperation( "MatrixOfWeightsOfIndeterminates",
         [ IsHomalgGradedRing ] );
 
+DeclareAttribute( "IrrelevantIdealColumnMatrix",
+        IsHomalgGradedRing );
+
 ####################################
 #
 # global functions and operations:
