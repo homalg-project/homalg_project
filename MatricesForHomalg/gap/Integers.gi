@@ -129,6 +129,23 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                
+               RadicalSubobject :=
+                 function( mat )
+                   local rad;
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only radical of one-column matrices is supported\n" );
+                   fi;
+                   
+                   ## an empty matrix is excluded by the high-level procedure
+                   mat := BasisOfRows( mat );
+                   
+                   rad := Product( PrimeDivisors( AbsInt( MatElm( mat, 1, 1 ) ) ) );
+                   
+                   return homalgInternalMatrixHull( [ [ rad ] ] );
+                   
+                 end,
+               
                ## Must be defined if other functions are not defined
                
                RowReducedEchelonForm :=
