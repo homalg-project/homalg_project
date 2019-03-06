@@ -746,3 +746,26 @@ InstallMethod( PolynomialsWithoutRelativeIndeterminates,
     return B * M_sub;
     
 end );
+
+##
+InstallMethod( PolynomialsWithoutRelativeIndeterminates,
+        "for a homalg matrix over a graded ring",
+        [ IsMatrixOverGradedRing ],
+        
+  function( M )
+    local S, B;
+    
+    if not NrColumns( M ) = 1 then
+        Error( "the number of columns must be one\n" );
+    fi;
+    
+    S := HomalgRing( M );
+    
+    B := BaseRing( UnderlyingNonGradedRing( S ) );
+    
+    ## only the rows with degree 0
+    M := CertainRows( M, Positions( DegreesOfEntries( M ), [ 0 ] ) );
+    
+    return B * M;
+    
+end );
