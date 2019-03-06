@@ -142,6 +142,12 @@ DeclareOperation( "HasDegreeGroup",
 DeclareOperation( "SetDegreeGroup",
         [ IsHomalgGradedRing, IsHomalgModule ] );
         
+DeclareAttribute( "MaximalDegreePart",
+        IsHomalgRingElement );
+        
+DeclareAttribute( "MaximalDegreePartOfColumnMatrix",
+        IsHomalgMatrix );
+        
 # constructor methods:
 
 DeclareGlobalFunction( "GradedRingElement" );
