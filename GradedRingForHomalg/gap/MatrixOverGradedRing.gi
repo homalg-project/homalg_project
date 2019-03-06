@@ -698,7 +698,7 @@ InstallMethod( HomogeneousPartOfMatrix,
 
     f := function( e, degree )
         local ev, coefficients, list_of_coeff, monomials, positions_list;
-
+        
         ev := EvalRingElement( e );
         list_of_coeff := EntriesOfHomalgMatrix( Coefficients( ev ) );
         list_of_coeff := List( list_of_coeff, c -> String(c)/S );
@@ -709,11 +709,12 @@ InstallMethod( HomogeneousPartOfMatrix,
         else
             return list_of_coeff{positions_list}*monomials{positions_list};
         fi;
-        end;
-
-        entries := List( [ 1 .. NrRows( M ) * NrColumns( M ) ], i -> f( entries[ i ], degrees[ i ] ) );
-
-        return HomalgMatrix( entries, NrRows( M ), NrCols( M ), S );
+    end;
+    
+    entries := List( [ 1 .. NrRows( M ) * NrColumns( M ) ], i -> f( entries[ i ], degrees[ i ] ) );
+    
+    return HomalgMatrix( entries, NrRows( M ), NrCols( M ), S );
+    
 end );
 
 ####################################
