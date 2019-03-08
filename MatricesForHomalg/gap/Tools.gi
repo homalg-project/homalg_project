@@ -4497,6 +4497,39 @@ InstallMethod( GetMonicUptoUnit,
 end );
 
 ##
+InstallMethod( Diff,
+        "for two homalg ring elements",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( x, r )
+    local R;
+    
+    R := HomalgRing( r );
+    
+    x := HomalgMatrix( [ x ], 1, 1, R );
+    r := HomalgMatrix( [ r ], 1, 1, R );
+    
+    return MatElm( Diff( x, r ), 1, 1 );
+    
+end );
+
+##
+InstallMethod( Diff,
+        "for a homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, var, x;
+    
+    R := HomalgRing( r );
+    var := IndeterminatesOfPolynomialRing( R );
+    x := var[Length( var )];
+    
+    return Diff( x, r );
+    
+end );
+
+##
 InstallMethod( NoetherNormalization,
         "for a homalg matrix",
         [ IsHomalgMatrix ],

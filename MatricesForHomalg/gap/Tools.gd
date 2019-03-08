@@ -144,3 +144,9 @@ DeclareOperation( "GetMonic",
 
 DeclareOperation( "Diff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "Diff",
+        [ IsHomalgRingElement, IsHomalgRingElement ] );
+
+DeclareOperation( "Diff",
+        [ IsHomalgRingElement ] );
