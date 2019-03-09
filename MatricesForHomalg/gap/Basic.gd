@@ -30,6 +30,9 @@ DeclareOperation( "BasisOfColumns",
 
 ## this implicitly declares [ IsHomalgMatrix, IsHomalgMatrix ]
 DeclareOperation( "DecideZero",
+        [ IsRingElement, IsHomalgRingElement ] );
+
+DeclareOperation( "DecideZero",
         [ IsRingElement, IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZero",

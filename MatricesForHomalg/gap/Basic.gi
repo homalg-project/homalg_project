@@ -66,6 +66,20 @@ InstallMethod( BasisOfColumns,
 
 ##
 InstallMethod( DecideZero,
+        "for a ring element and a homalg ring element",
+        [ IsRingElement, IsHomalgRingElement ],
+        
+  function( r, rel )
+    local red;
+    
+    rel := HomalgMatrix( [ rel ], 1, 1, HomalgRing( rel ) );
+    
+    return DecideZero( r, rel );
+    
+end );
+
+##
+InstallMethod( DecideZero,
         "for homalg matrices",
         [ IsRingElement, IsHomalgMatrix ],
         
