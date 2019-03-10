@@ -1205,6 +1205,9 @@ DeclareAttribute( "IndeterminatesOfExteriorRing",
 DeclareAttribute( "CoefficientsRing",
         IsHomalgRing );
 
+DeclareAttribute( "CoefficientsRing",
+        IsHomalgRingElement );
+
 ##  <#GAPDoc Label="BaseRing">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="BaseRing"/>
@@ -1350,6 +1353,9 @@ DeclareAttribute( "AssociatedGradedRing",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "AssociatedPolynomialRing",
+        IsHomalgRing );
+
+DeclareAttribute( "Size",
         IsHomalgRing );
 
 ####################################

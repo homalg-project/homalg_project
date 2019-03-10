@@ -2368,6 +2368,39 @@ InstallMethod( LcmOp,
     
 end );
 
+##
+InstallMethod( CoefficientsRing,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return CoefficientsRing( HomalgRing( r ) );
+    
+end );
+
+##
+InstallMethod( Size,
+        "for a homalg ring",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local p, d;
+    
+    p := Characteristic( R );
+    
+    if p = 0 then
+        return infinity;
+    fi;
+    
+    if not HasDegreeOverPrimeField( R ) then
+        TryNextMethod( );
+    fi;
+    
+    return p^DegreeOverPrimeField( R );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
