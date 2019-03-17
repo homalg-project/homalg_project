@@ -1355,9 +1355,6 @@ DeclareAttribute( "AssociatedGradedRing",
 DeclareAttribute( "AssociatedPolynomialRing",
         IsHomalgRing );
 
-DeclareAttribute( "Size",
-        IsHomalgRing );
-
 ####################################
 #
 # global functions and operations:
