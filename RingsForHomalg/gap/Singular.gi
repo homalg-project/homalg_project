@@ -1413,17 +1413,24 @@ InstallMethod( PolynomialRing,
     SetIsFreePolynomialRing( S, true );
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
+        
         SetBaseRing( S, R );
         SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
+        
         if order = fail then
+            
             P := PolynomialRingWithProductOrdering( R, indets );
+            
             SetPolynomialRingWithProductOrdering( S, P );
             SetPolynomialRingWithProductOrdering( P, P );
             weights := Concatenation( ListWithIdenticalEntries( l - nr_var, 0 ), ListWithIdenticalEntries( nr_var, 1 ) );
             W := PolynomialRing( R, indets : order := rec( weights := weights ) );
+            
             SetPolynomialRingWithWeightedOrdering( S, W );
             SetPolynomialRingWithWeightedOrdering( P, W );
+            
         fi;
+        
     fi;
     
     SetRingProperties( S, r, var );
