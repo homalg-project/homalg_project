@@ -1411,6 +1411,7 @@ InstallMethod( PolynomialRing,
     Perform( var, Name );
     
     SetIsFreePolynomialRing( S, true );
+    SetPolynomialRingWithDegRevLexOrdering( S, S );
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
         
@@ -1423,6 +1424,8 @@ InstallMethod( PolynomialRing,
             
             SetPolynomialRingWithProductOrdering( S, P );
             SetPolynomialRingWithProductOrdering( P, P );
+            SetPolynomialRingWithDegRevLexOrdering( P, S );
+            
             weights := Concatenation( ListWithIdenticalEntries( l - nr_var, 0 ), ListWithIdenticalEntries( nr_var, 1 ) );
             W := PolynomialRing( R, indets : order := rec( weights := weights ) );
             

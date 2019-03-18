@@ -1398,6 +1398,9 @@ DeclareGlobalFunction( "_PrepareInputForPolynomialRing" );
 DeclareOperation( "*",
         [ IsHomalgRing, IsList ] );
 
+DeclareAttribute( "PolynomialRingWithDegRevLexOrdering",
+        IsHomalgRing );
+
 DeclareOperation( "PolynomialRingWithLexicographicOrdering",
         [ IsHomalgRing, IsList ] );
 
