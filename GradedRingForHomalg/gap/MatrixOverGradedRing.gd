@@ -83,6 +83,19 @@ DeclareAttribute( "NonTrivialDegreePerColumn",
 
 DeclareOperation( "HomogeneousPartOfMatrix", [ IsMatrixOverGradedRing, IsList ] );
 
+##  <#GAPDoc Label="IsMatrixOverGradedRingWithHomogeneousEntries">
+##  <ManSection>
+##    <Prop Arg="A" Name="IsMatrixOverGradedRingWithHomogeneousEntries" Label="for matrices over graded rings"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Checks if every entry in a given matrix <A>A</A> over a graded ring is homogeneous.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsMatrixOverGradedRingWithHomogeneousEntries", 
+        IsMatrixOverGradedRing );
+
 ####################################
 #
 # global functions and operations:

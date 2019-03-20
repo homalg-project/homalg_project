@@ -54,6 +54,7 @@
     <#Include Label="DegreesOfEntries">
     <#Include Label="NonTrivialDegreePerRow">
     <#Include Label="NonTrivialDegreePerColumn">
+    <#Include Label="IsMatrixOverGradedRingWithHomogeneousEntries">
     
   </Section>
   

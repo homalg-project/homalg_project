@@ -717,6 +717,19 @@ InstallMethod( HomogeneousPartOfMatrix,
     
 end );
 
+##
+InstallMethod( IsMatrixOverGradedRingWithHomogeneousEntries,
+               [ IsMatrixOverGradedRing ],
+               
+  function( M )
+    local degrees;
+    
+    degrees := DegreesOfEntries( M );
+    
+    return HomogeneousPartOfMatrix( M, degrees ) = M;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
