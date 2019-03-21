@@ -14,6 +14,12 @@
 #
 ####################################
 
+DeclareAttribute( "RowReducedEchelonForm",
+        IsHomalgMatrix );
+
+DeclareAttribute( "ColumnReducedEchelonForm",
+        IsHomalgMatrix );
+
 DeclareAttribute( "BasisOfRowModule",
         IsHomalgMatrix );
 
@@ -49,13 +55,7 @@ DeclareGlobalFunction( "ColoredInfoForService" );
 # basic operations:
 
 DeclareOperation( "RowReducedEchelonForm",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "RowReducedEchelonForm",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "ColumnReducedEchelonForm",
-        [ IsHomalgMatrix ] );
 
 DeclareOperation( "ColumnReducedEchelonForm",
         [ IsHomalgMatrix, IsHomalgMatrix ] );

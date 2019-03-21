@@ -169,7 +169,7 @@ InstallMethod( ShallowCopy,
         
         MatchPropertiesAndAttributes( M, MM,
                 LIMAT.intrinsic_properties,
-                LIMAT.intrinsic_attributes,
+                Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
                 LIMAT.intrinsic_components
                 );
         
@@ -233,7 +233,7 @@ InstallMethod( ShallowCopy,
             
             MatchPropertiesAndAttributes( M, MM,
                     LIMAT.intrinsic_properties,
-                    LIMAT.intrinsic_attributes,
+                    Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
                     LIMAT.intrinsic_components
                     );
             
@@ -947,7 +947,7 @@ InstallMethod( \=,
             if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
                 MatchPropertiesAndAttributes( M1, M2,
                         LIMAT.intrinsic_properties,
-                        LIMAT.intrinsic_attributes,
+                        Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
                         LIMAT.intrinsic_components
                         );
             fi;
@@ -962,7 +962,7 @@ InstallMethod( \=,
         if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
             MatchPropertiesAndAttributes( M1, M2,
                     LIMAT.intrinsic_properties,
-                    LIMAT.intrinsic_attributes,
+                    Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
                     LIMAT.intrinsic_components
                     );
         fi;
