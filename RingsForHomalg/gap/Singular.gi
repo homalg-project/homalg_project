@@ -1419,7 +1419,6 @@ InstallMethod( PolynomialRing,
     Perform( var, Name );
     
     SetIsFreePolynomialRing( S, true );
-    SetPolynomialRingWithDegRevLexOrdering( S, S );
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
         
