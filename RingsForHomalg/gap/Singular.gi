@@ -1023,7 +1023,15 @@ proc PolynomialExponentsAndCoefficients (poly p)\n\
   ret_array[ 2 ] = coefficients;\n\
   \n\
   return(ret_array);\n\
-}\n\n"
+}\n\n",
+
+      MaximalDegreePart :="\n\
+proc MaximalDegreePart (poly p, weights)\n\
+{\n\
+  int d = Deg(p,weights);\n\
+  return(p - jet(p,d-1,weights));\n\
+}\n\n",
+
     )
 
 );

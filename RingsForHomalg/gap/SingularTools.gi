@@ -817,6 +817,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               MaximalDegreePart :=
+                 function( r, weights )
+                   
+                   return homalgSendBlocking( [ "MaximalDegreePart( ", r, ", intvec(", weights,") )" ], "need_output", HOMALG_IO.Pictograms.MaximalDegreePart );
+                   
+                 end,
+               
                MonomialMatrix :=
                  function( i, vars, R )
                    

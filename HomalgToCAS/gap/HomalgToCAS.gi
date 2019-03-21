@@ -177,6 +177,9 @@ InstallValue( HOMALG_IO,
                 ## degree of a multivariate polynomial
                 DegreeOfRingElement                     := "deg",
                 
+                ## maximal degree part of a polynomial
+                MaximalDegreePart                       := "mdp",
+                
                 ## is irreducible:
                 IsIrreducible                           := "irr",
                 

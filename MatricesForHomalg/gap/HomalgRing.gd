@@ -946,6 +946,9 @@ DeclareAttribute( "EvalRingElement",
 DeclareAttribute( "CoefficientsOfUnivariatePolynomial",
         IsHomalgRingElement );
 
+DeclareAttribute( "MaximalDegreePart",
+        IsHomalgRingElement );
+        
 ##  <#GAPDoc Label="Zero:ring">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="Zero" Label="for homalg rings"/>

@@ -833,6 +833,9 @@ DeclareAttribute( "ConstantTermOfHilbertPolynomial",
 DeclareAttribute( "MatrixOfSymbols",
         IsHomalgMatrix );
 
+DeclareAttribute( "MaximalDegreePartOfColumnMatrix",
+        IsHomalgMatrix );
+        
 ####################################
 #
 # global functions and operations:

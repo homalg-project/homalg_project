@@ -4698,3 +4698,77 @@ InstallMethod( ClearDenominatorsRowWise,
     return coeffs * M;
     
 end );
+
+
+##
+InstallMethod( MaximalDegreePart,
+        "for a homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, RP, var, B, base, weights, d, coeffs, monoms, plist;
+    
+    if IsZero( r ) then
+        return r;
+    fi;
+    
+    R := HomalgRing( r );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.MaximalDegreePart) then
+        if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+            var := RelativeIndeterminatesOfPolynomialRing( R );
+            B := BaseRing( R );
+            if HasIndeterminatesOfPolynomialRing( B ) then
+                base := IndeterminatesOfPolynomialRing( B );
+            else
+                base := [ ];
+            fi;
+            weights := Concatenation( ListWithIdenticalEntries( Length( base ), 0 ), ListWithIdenticalEntries( Length( var ), 1 ) );
+        else
+            var := RelativeIndeterminatesOfPolynomialRing( R );
+            weights := ListWithIdenticalEntries( Length( var ), 1 );
+        fi;
+        
+        return RingElementConstructor( R )( RP!.MaximalDegreePart( r, weights ), R );
+        
+    fi;
+    
+    d := Degree( r );
+    
+    coeffs := Coefficients( r );
+    
+    monoms := coeffs!.monomials;
+    
+    coeffs := EntriesOfHomalgMatrix( coeffs );
+    
+    plist := Positions( List( monoms, Degree ), d );
+    
+    return coeffs{plist} * monoms{plist};
+    
+end );
+
+##
+InstallMethod( MaximalDegreePartOfColumnMatrix,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R;
+    
+    if not NrColumns( M ) = 1 then
+        Error( "the number of columns is not 1\n" );
+    fi;
+    
+    if IsZero( M ) then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    M := List( EntriesOfHomalgMatrix( M ), MaximalDegreePart );
+    
+    return HomalgMatrix( M, Length( M ), 1, R );
+    
+end );
