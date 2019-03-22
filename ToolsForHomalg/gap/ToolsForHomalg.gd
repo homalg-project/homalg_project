@@ -426,6 +426,9 @@ DeclareOperation( "PositionOfTheDefaultPresentation",
 DeclareOperation( "Display",
         [ IsContainerForPointers, IsString ] );
 
+DeclareOperation( "AppendNew",
+        [ IsList, IsList ] );
+
 DeclareGlobalFunction( "ExecForHomalg" );
 
 DeclareOperation( "ShaSum",

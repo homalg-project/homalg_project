@@ -1518,6 +1518,23 @@ InstallMethod( ViewList,
 end );
 
 ##
+InstallMethod( AppendNew,
+        "for two lists",
+        [ IsList, IsList ],
+        
+  function( L, N )
+    local n, p;
+    
+    for n in N do
+        p := PositionProperty( L, l -> IsIdenticalObj( l, n ) );
+        if p = fail then
+            Add( L, n );
+        fi;
+    od;
+    
+end );
+
+##
 InstallGlobalFunction( ExecForHomalg,
   function( arg )
     local str,  output, cmd,  i,  shell,  cs,  dir;
