@@ -50,9 +50,9 @@
       
   </Section>
 
-  <Section Label="GradedRings:Attributes">
+  <Section Label="GradedRings:Attributes and Properties">
     
-    <Heading>Graded Rings: Attributes</Heading>
+    <Heading>Graded Rings: Attributes and Properties</Heading>
     
     <#Include Label="DegreeGroup">
 
@@ -61,6 +61,8 @@
     <#Include Label="WeightsOfIndeterminates">
     
     <#Include Label="MatrixOfWeightsOfIndeterminates">
+
+    <#Include Label="IsHomogeneousRingElement">
     
   </Section>
   
@@ -73,6 +75,8 @@
     <#Include Label="UnderlyingNonGradedRing:element">
     
     <#Include Label="Name">
+
+    <#Include Label="HomogeneousPartOfRingElement">
     
   </Section>
     

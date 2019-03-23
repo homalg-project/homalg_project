@@ -101,6 +101,9 @@ DeclareOperation( "MatrixOfWeightsOfIndeterminates",
 DeclareAttribute( "IrrelevantIdealColumnMatrix",
         IsHomalgGradedRing );
 
+DeclareProperty( "IsHomogeneousRingElement",
+        IsHomalgGradedRingElement );
+
 ####################################
 #
 # global functions and operations:
@@ -117,7 +120,10 @@ DeclareOperation( "UnderlyingNonGradedRing",
 
 DeclareOperation( "UnderlyingNonGradedRingElement",
         [ IsHomalgGradedRingElement ] );
-
+        
+DeclareOperation( "HomogeneousPartOfRingElement",
+        [ IsHomalgGradedRingElement, IsHomalgModuleElement ] );
+        
 DeclareOperation( "AreLinearSyzygiesAvailable",
         [ IsHomalgRing ] );
         
