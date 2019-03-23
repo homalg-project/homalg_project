@@ -80,7 +80,17 @@ DeclareAttribute( "NonTrivialDegreePerRow",
 DeclareAttribute( "NonTrivialDegreePerColumn",
         IsMatrixOverGradedRing );
 
-
+##  <#GAPDoc Label="HomogeneousPartOfMatrix">
+##  <ManSection>
+##    <Prop Arg="A, degrees" Name="HomogeneousPartOfMatrix" Label="for matrices over graded rings and listlist of degrees"/>
+##    <Returns>a homalg matrix over graded ring</Returns>
+##    <Description>
+##      The output is the homogeneous part of the matrix <A>A</A> with respect to the given degrees 
+##      <A>degrees</A>. See <A>HomogeneousPartOfRingElement</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "HomogeneousPartOfMatrix", [ IsMatrixOverGradedRing, IsList ] );
 
 ##  <#GAPDoc Label="IsMatrixOverGradedRingWithHomogeneousEntries">
