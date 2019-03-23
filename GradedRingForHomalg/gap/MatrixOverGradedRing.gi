@@ -705,11 +705,11 @@ InstallMethod( IsMatrixOverGradedRingWithHomogeneousEntries,
                [ IsMatrixOverGradedRing ],
                
   function( M )
-    local degrees;
+    local entries;
     
-    degrees := DegreesOfEntries( M );
+    entries := EntriesOfHomalgMatrix( M );
     
-    return HomogeneousPartOfMatrix( M, degrees ) = M;
+    return ForAll( entries, IsHomogeneousRingElement );
     
 end );
 
