@@ -6,7 +6,7 @@
            [1XDictionaries of External Rings for the [5XGAP[105X Package [5Xhomalg[105X[101X
   
   
-                               Version 2018.04.04
+                               Version 2018.12.10
   
   
                                  September 2015
@@ -149,7 +149,7 @@
   Schönemann.[133X
   
   [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2.[133X
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------

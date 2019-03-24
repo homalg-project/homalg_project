@@ -5,11 +5,11 @@ PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
 
 Version := Maximum( [
-  "2011.09.12", ## Markus L-H's version
+  "2018.12.02", ## Markus L-H's version
 ## this line prevents merge conflicts
   "2017.04.17", ## Markus K's version
 ## this line prevents merge conflicts
-  "2018.04.04", ## Mohamed's version
+  "2018.12.10", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.12.13", ## Andreas's version
 ## this line prevents merge conflicts
@@ -23,9 +23,7 @@ Version := Maximum( [
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-
-
-
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
@@ -212,8 +210,8 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2018.04.04" ],
-                   [ "HomalgToCAS", ">= 2015.09.30" ],
+                   [ "MatricesForHomalg", ">= 2018.12.08" ],
+                   [ "HomalgToCAS", ">= 2018.12.08" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],

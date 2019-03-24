@@ -9,7 +9,7 @@
   
   [1X3.1-1 BasisOfRowModule[101X
   
-  [29X[2XBasisOfRowModule[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XBasisOfRowModule[102X( [3XM[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XBasisOfRowModule[102X ([14X3.1-2[114X) inside the computer algebra system.[133X
@@ -38,7 +38,7 @@
   
   [1X3.1-2 BasisOfRowModule[101X
   
-  [29X[2XBasisOfRowModule[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XBasisOfRowModule[102X( [3XM[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    BasisOfRowModule := "\n\[104X
@@ -50,7 +50,7 @@
   
   [1X3.1-3 BasisOfColumnModule[101X
   
-  [29X[2XBasisOfColumnModule[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XBasisOfColumnModule[102X( [3XM[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XBasisOfColumnModule[102X ([14X3.1-4[114X) inside the computer algebra system.[133X
@@ -79,7 +79,7 @@
   
   [1X3.1-4 BasisOfColumnModule[101X
   
-  [29X[2XBasisOfColumnModule[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XBasisOfColumnModule[102X( [3XM[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    BasisOfColumnModule := "\n\[104X
@@ -91,7 +91,7 @@
   
   [1X3.1-5 DecideZeroRows[101X
   
-  [29X[2XDecideZeroRows[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XDecideZeroRows[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XDecideZeroRows[102X ([14X3.1-6[114X) inside the computer algebra system.[133X
@@ -120,7 +120,7 @@
   
   [1X3.1-6 DecideZeroRows[101X
   
-  [29X[2XDecideZeroRows[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XDecideZeroRows[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    DecideZeroRows := "\n\[104X
@@ -133,7 +133,7 @@
   
   [1X3.1-7 DecideZeroColumns[101X
   
-  [29X[2XDecideZeroColumns[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XDecideZeroColumns[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XDecideZeroColumns[102X ([14X3.1-8[114X) inside the computer algebra system.[133X
@@ -162,7 +162,7 @@
   
   [1X3.1-8 DecideZeroColumns[101X
   
-  [29X[2XDecideZeroColumns[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XDecideZeroColumns[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    DecideZeroColumns := "\n\[104X
@@ -174,7 +174,7 @@
   
   [1X3.1-9 SyzygiesGeneratorsOfRows[101X
   
-  [29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XSyzygiesGeneratorsOfRows[102X ([14X3.1-10[114X) inside the computer algebra system.[133X
@@ -203,7 +203,7 @@
   
   [1X3.1-10 SyzygiesGeneratorsOfRows[101X
   
-  [29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    SyzygiesGeneratorsOfRows := "\n\[104X
@@ -215,7 +215,7 @@
   
   [1X3.1-11 SyzygiesGeneratorsOfColumns[101X
   
-  [29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XSyzygiesGeneratorsOfColumns[102X ([14X3.1-12[114X) inside the computer algebra system.[133X
@@ -244,7 +244,7 @@
   
   [1X3.1-12 SyzygiesGeneratorsOfColumns[101X
   
-  [29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    SyzygiesGeneratorsOfColumns := "\n\[104X
@@ -256,7 +256,7 @@
   
   [1X3.1-13 BasisOfRowsCoeff[101X
   
-  [29X[2XBasisOfRowsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function
+  [33X[1;0Y[29X[2XBasisOfRowsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XBasisOfRowsCoeff[102X ([14X3.1-14[114X) inside the computer algebra system.[133X
@@ -291,7 +291,7 @@
   
   [1X3.1-14 BasisOfRowsCoeff[101X
   
-  [29X[2XBasisOfRowsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function
+  [33X[1;0Y[29X[2XBasisOfRowsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    BasisOfRowsCoeff := "\n\[104X
@@ -306,7 +306,7 @@
   
   [1X3.1-15 BasisOfColumnsCoeff[101X
   
-  [29X[2XBasisOfColumnsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function
+  [33X[1;0Y[29X[2XBasisOfColumnsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XBasisOfColumnsCoeff[102X ([14X3.1-16[114X) inside the computer algebra system.[133X
@@ -341,7 +341,7 @@
   
   [1X3.1-16 BasisOfColumnsCoeff[101X
   
-  [29X[2XBasisOfColumnsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function
+  [33X[1;0Y[29X[2XBasisOfColumnsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    BasisOfColumnsCoeff := "\n\[104X
@@ -357,7 +357,7 @@
   
   [1X3.1-17 DecideZeroRowsEffectively[101X
   
-  [29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function
+  [33X[1;0Y[29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XDecideZeroRowsEffectively[102X ([14X3.1-18[114X) inside the computer algebra system.[133X
@@ -392,7 +392,7 @@
   
   [1X3.1-18 DecideZeroRowsEffectively[101X
   
-  [29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function
+  [33X[1;0Y[29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    DecideZeroRowsEffectively := "\n\[104X
@@ -408,7 +408,7 @@
   
   [1X3.1-19 DecideZeroColumnsEffectively[101X
   
-  [29X[2XDecideZeroColumnsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function
+  [33X[1;0Y[29X[2XDecideZeroColumnsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XDecideZeroColumnsEffectively[102X ([14X3.1-20[114X) inside the computer algebra system.[133X
@@ -443,7 +443,7 @@
   
   [1X3.1-20 DecideZeroColumnsEffectively[101X
   
-  [29X[2XDecideZeroColumnsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function
+  [33X[1;0Y[29X[2XDecideZeroColumnsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    DecideZeroColumnsEffectively := "\n\[104X
@@ -459,7 +459,7 @@
   
   [1X3.1-21 RelativeSyzygiesGeneratorsOfRows[101X
   
-  [29X[2XRelativeSyzygiesGeneratorsOfRows[102X( [3XM[103X, [3XM2[103X ) [32X function
+  [33X[1;0Y[29X[2XRelativeSyzygiesGeneratorsOfRows[102X( [3XM[103X, [3XM2[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XRelativeSyzygiesGeneratorsOfRows[102X   ([14X3.1-22[114X)   inside  the  computer  algebra
@@ -489,7 +489,7 @@
   
   [1X3.1-22 RelativeSyzygiesGeneratorsOfRows[101X
   
-  [29X[2XRelativeSyzygiesGeneratorsOfRows[102X( [3XM[103X, [3XM2[103X ) [32X function
+  [33X[1;0Y[29X[2XRelativeSyzygiesGeneratorsOfRows[102X( [3XM[103X, [3XM2[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    RelativeSyzygiesGeneratorsOfRows := "\n\[104X
@@ -501,7 +501,7 @@
   
   [1X3.1-23 RelativeSyzygiesGeneratorsOfColumns[101X
   
-  [29X[2XRelativeSyzygiesGeneratorsOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X function
+  [33X[1;0Y[29X[2XRelativeSyzygiesGeneratorsOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XRelativeSyzygiesGeneratorsOfColumns[102X  ([14X3.1-24[114X)  inside  the  computer algebra
@@ -531,7 +531,7 @@
   
   [1X3.1-24 RelativeSyzygiesGeneratorsOfColumns[101X
   
-  [29X[2XRelativeSyzygiesGeneratorsOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X function
+  [33X[1;0Y[29X[2XRelativeSyzygiesGeneratorsOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    RelativeSyzygiesGeneratorsOfColumns := "\n\[104X
@@ -543,7 +543,7 @@
   
   [1X3.1-25 ReducedSyzygiesGeneratorsOfRows[101X
   
-  [29X[2XReducedSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XReducedSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XReducedSyzygiesGeneratorsOfRows[102X ([14X3.1-26[114X) inside the computer algebra system.[133X
@@ -572,7 +572,7 @@
   
   [1X3.1-26 ReducedSyzygiesGeneratorsOfRows[101X
   
-  [29X[2XReducedSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XReducedSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    ReducedSyzForHomalg := "\n\[104X
@@ -589,7 +589,7 @@
   
   [1X3.1-27 ReducedSyzygiesGeneratorsOfColumns[101X
   
-  [29X[2XReducedSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XReducedSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function[133X
   
   [33X[0;0YThis  is  the entry of the [5Xhomalg[105X table, which calls the corresponding macro
   [2XReducedSyzygiesGeneratorsOfColumns[102X  ([14X3.1-28[114X)  inside  the  computer  algebra
@@ -619,7 +619,7 @@
   
   [1X3.1-28 ReducedSyzygiesGeneratorsOfColumns[101X
   
-  [29X[2XReducedSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XReducedSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
     [4X    ReducedSyzygiesGeneratorsOfColumns := "\n\[104X
