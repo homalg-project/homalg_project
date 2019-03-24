@@ -1,6 +1,6 @@
 name: GradedRingForHomalg
-version: 2018.02.04
-date: 04/02/2018
+version: 2019.03.20
+date: 20/03/2019
 description: Endow Commutative Rings with an Abelian Grading
 
 authors:
@@ -51,9 +51,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/GradedRingForHomalg/
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2018.02.04/GradedRingForHomalg-2018.02.04.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2019.03.20/GradedRingForHomalg-2019.03.20.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2018.02.04/GradedRingForHomalg-2018.02.04.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2019.03.20/GradedRingForHomalg-2019.03.20.zip
 
 abstract: This package is part of the homalg-project and manages graded rings.
 
