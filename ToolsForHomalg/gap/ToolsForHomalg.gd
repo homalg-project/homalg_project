@@ -429,6 +429,14 @@ DeclareOperation( "Display",
 DeclareOperation( "AppendNew",
         [ IsList, IsList ] );
 
+#! @Description
+#!  Return the sublist of maximal objects in <A>L</A>
+#!  w.r.t. the partial order defined by the binary function <A>f</A>.
+#! @Arguments L, f
+#! @Returns a list
+DeclareOperation( "MaximalObjects",
+        [ IsList, IsFunction ] );
+
 DeclareGlobalFunction( "ExecForHomalg" );
 
 DeclareOperation( "ShaSum",

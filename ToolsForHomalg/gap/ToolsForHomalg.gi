@@ -1535,6 +1535,32 @@ InstallMethod( AppendNew,
 end );
 
 ##
+InstallMethod( MaximalObjects,
+        "for a list and a function",
+        [ IsList, IsFunction ],
+        
+  function( L, f )
+    local l, u, i, p;
+    
+    l := [ 1 .. Length( L ) ];
+    
+    u := [ ];
+    
+    for i in l do
+        
+        p := PositionProperty( l, j -> not j = i and not j in u and f( L[i], L[j] ) );
+        
+        if not p = fail then
+            Add( u, i );
+        fi;
+        
+    od;
+    
+    return L{Difference( l, u )};
+    
+end );
+
+##
 InstallGlobalFunction( ExecForHomalg,
   function( arg )
     local str,  output, cmd,  i,  shell,  cs,  dir;
