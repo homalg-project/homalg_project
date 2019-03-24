@@ -5,9 +5,9 @@ PackageName := "ToolsForHomalg",
 Subtitle := "Special methods and knowledge propagation tools",
 
 Version := Maximum( [
-  "2011.09.12", ## Markus' version
+  "2018.12.03", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2017.09.10", ## Mohamed's version
+  "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
   "2018.05.22", ## Sebas' version
 ## this line prevents merge conflicts
@@ -16,9 +16,7 @@ Version := Maximum( [
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-
-
-
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
@@ -98,7 +96,11 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.7",
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.0" ], [ "AutoDoc", ">=2013.11.10" ] ],
+  NeededOtherPackages := [
+                   [ "GAPDoc", ">= 1.0" ],
+                   [ "AutoDoc", ">=2013.11.10" ],
+                   [ "IO", ">=4.5.1" ],
+                   ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       

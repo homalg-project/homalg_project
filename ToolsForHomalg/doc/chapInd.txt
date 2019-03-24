@@ -84,6 +84,7 @@
   [2XLogicalImplicationsForOneHomalgObject[102X 8.1-3 
   [2XLogicalImplicationsForTwoHomalgBasicObjects[102X 8.1-4 
   [2XMatchPropertiesAndAttributes[102X 8.1-8 
+  [2XMaximalObjects[102X, for IsList, IsFunction 8.1-41 
   [2XMemoryToString[102X 8.1-37 
   [2XNewToDoList[102X 4.4-1 
   [2XPostOrder[102X, for IsTree 9.1-11 

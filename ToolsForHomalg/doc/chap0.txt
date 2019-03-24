@@ -6,7 +6,7 @@
                           [1XTools for the [5Xhomalg[105X project[101X
   
   
-                               Version 2018.05.22
+                               Version 2018.12.03
   
   
                                  December 2014
@@ -61,7 +61,7 @@
   Lange-Hegermann[133X
   
   [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2.[133X
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
@@ -197,6 +197,7 @@
       8.1-38 PrimePowerExponent
       8.1-39 ViewList
       8.1-40 homalgLaTeX
+      8.1-41 MaximalObjects
     8.2 [33X[0;0YExamplefunctions[133X
       8.2-1 ExamplesForHomalg
       8.2-2 ExamplesForHomalg
