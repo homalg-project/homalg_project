@@ -66,7 +66,7 @@
 
 <h5>4.1-1 IsHomalgGradedRingRep</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgGradedRingRep</code>( <var class="Arg">R</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgGradedRingRep</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
 <p>Returns: true or false</p>
 
 <p>The representation of <strong class="pkg">homalg</strong> graded rings.</p>
@@ -85,7 +85,7 @@ DeclareRepresentation( "IsHomalgGradedRingRep",
 
 <h5>4.1-2 IsHomalgGradedRingElementRep</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgGradedRingElementRep</code>( <var class="Arg">r</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgGradedRingElementRep</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
 <p>Returns: true or false</p>
 
 <p>The representation of elements of <strong class="pkg">homalg</strong> graded rings.</p>
@@ -107,8 +107,8 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <h5>4.2-1 HomalgGradedRingElement</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgGradedRingElement</code>( <var class="Arg">numer</var>, <var class="Arg">denom</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgGradedRingElement</code>( <var class="Arg">numer</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgGradedRingElement</code>( <var class="Arg">numer</var>, <var class="Arg">denom</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgGradedRingElement</code>( <var class="Arg">numer</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a graded ring element</p>
 
 <p>Creates the graded ring element <span class="SimpleMath"><var class="Arg">numer</var>/<var class="Arg">denom</var></span> or in the second case <span class="SimpleMath"><var class="Arg">numer</var>/1</span> for the graded ring <var class="Arg">R</var>. Both <var class="Arg">numer</var> and <var class="Arg">denom</var> may either be a string describing a valid global ring element or from the global ring or computation ring.</p>
@@ -121,7 +121,7 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <h5>4.3-1 DegreeGroup</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DegreeGroup</code>( <var class="Arg">S</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DegreeGroup</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a left ℤ-module</p>
 
 <p>The degree Abelian group of the commutative graded ring <var class="Arg">S</var>.</p>
@@ -130,7 +130,7 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <h5>4.3-2 CommonNonTrivialWeightOfIndeterminates</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CommonNonTrivialWeightOfIndeterminates</code>( <var class="Arg">S</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CommonNonTrivialWeightOfIndeterminates</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a degree</p>
 
 <p>The common nontrivial weight of the indeterminates of the graded ring <var class="Arg">S</var> if it exists. Otherwise an error is issued. WARNING: Since the DegreeGroup and WeightsOfIndeterminates are in some cases bound together, you MUST not set the DegreeGroup by hand and let the algorithm create the weights. Set both by hand, set only weights or use the method WeightsOfIndeterminates to set both. Never set the DegreeGroup without the WeightsOfIndeterminates, because it simply wont work!</p>
@@ -139,7 +139,7 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <h5>4.3-3 WeightsOfIndeterminates</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeightsOfIndeterminates</code>( <var class="Arg">S</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeightsOfIndeterminates</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a list or listlist of integers</p>
 
 <p>The list of degrees of the indeterminates of the graded ring <var class="Arg">S</var>.</p>
@@ -148,7 +148,7 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <h5>4.3-4 MatrixOfWeightsOfIndeterminates</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatrixOfWeightsOfIndeterminates</code>( <var class="Arg">S</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatrixOfWeightsOfIndeterminates</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>A <strong class="pkg">homalg</strong> matrix where the list (or listlist) of degrees of the indeterminates of the graded ring <var class="Arg">S</var> is stored.</p>
@@ -161,7 +161,7 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <h5>4.4-1 UnderlyingNonGradedRing</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingNonGradedRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingNonGradedRing</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> ring</p>
 
 <p>Internally there is a ring, in which computations take place.</p>
@@ -170,7 +170,7 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <h5>4.4-2 UnderlyingNonGradedRing</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingNonGradedRing</code>( <var class="Arg">r</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingNonGradedRing</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> ring</p>
 
 <p>Internally there is a ring, in which computations take place.</p>
@@ -179,7 +179,7 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <h5>4.4-3 Name</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Name</code>( <var class="Arg">r</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Name</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a string</p>
 
 <p>The name of the graded ring element <var class="Arg">r</var>.</p>

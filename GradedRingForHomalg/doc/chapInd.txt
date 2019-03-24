@@ -15,6 +15,7 @@
   [2XIsHomalgGradedRingElementRep[102X 4.1-2 
   [2XIsHomalgGradedRingRep[102X 4.1-1 
   [2XIsHomalgMatrixOverGradedRingRep[102X 5.1-1 
+  [2XIsMatrixOverGradedRingWithHomogeneousEntries[102X, for matrices over graded rings 5.3-4 
   [2XMatElm[102X, for matrices over graded rings 5.4-5 
   [2XMatElmAsString[102X, for matrices over graded rings 5.4-4 
   [2XMatrixOfWeightsOfIndeterminates[102X 4.3-4 

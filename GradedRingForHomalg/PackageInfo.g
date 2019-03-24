@@ -7,7 +7,7 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 Version := Maximum( [
   "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
-  "2018.02.04", ## Mohamed's version
+  "2018.12.08", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ## this line prevents merge conflicts
@@ -15,15 +15,15 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2013.02.07", ## Markus' Kirschmer version
 ## this line prevents merge conflicts
+  "2019.03.20", ## Sepp's version
+## this line prevents merge conflicts
 "2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-
-
-
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(

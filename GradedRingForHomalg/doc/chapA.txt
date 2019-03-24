@@ -21,7 +21,7 @@
   
   [1XA.2-1 MonomialMatrix[101X
   
-  [29X[2XMonomialMatrix[102X( [3Xd[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XMonomialMatrix[102X( [3Xd[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YThe column matrix of [3Xd[103X-th monomials of the [5Xhomalg[105X graded ring [3XR[103X.[133X
@@ -47,7 +47,7 @@
   
   [1XA.2-2 RandomMatrixBetweenGradedFreeLeftModules[101X
   
-  [29X[2XRandomMatrixBetweenGradedFreeLeftModules[102X( [3XdegreesS[103X, [3XdegreesT[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XRandomMatrixBetweenGradedFreeLeftModules[102X( [3XdegreesS[103X, [3XdegreesT[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YA  random [22Xr × c[122X-matrix between the graded free [13Xleft[113X modules [22X[3XR[103X^(-[3XdegreesS[103X) ->
@@ -66,7 +66,7 @@
   
   [1XA.2-3 RandomMatrixBetweenGradedFreeRightModules[101X
   
-  [29X[2XRandomMatrixBetweenGradedFreeRightModules[102X( [3XdegreesT[103X, [3XdegreesS[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XRandomMatrixBetweenGradedFreeRightModules[102X( [3XdegreesT[103X, [3XdegreesS[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YA random [22Xr × c[122X-matrix between the graded free [13Xright[113X modules [22X[3XR[103X^(-[3XdegreesS[103X) ->
@@ -84,7 +84,7 @@
   
   [1XA.2-4 Diff[101X
   
-  [29X[2XDiff[102X( [3XD[103X, [3XN[103X ) [32X operation
+  [33X[1;0Y[29X[2XDiff[102X( [3XD[103X, [3XN[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YIf  [3XD[103X  is a [22Xf × p[122X-matrix and [3XN[103X is a [22Xg × q[122X-matrix then [22XH=Diff([122X[3XD[103X,[3XN[103X[22X)[122X is an [22Xfg ×

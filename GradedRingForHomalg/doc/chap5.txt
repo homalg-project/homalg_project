@@ -22,7 +22,7 @@
   
   [1X5.1-1 IsHomalgMatrixOverGradedRingRep[101X
   
-  [29X[2XIsHomalgMatrixOverGradedRingRep[102X( [3XA[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsHomalgMatrixOverGradedRingRep[102X( [3XA[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YThe representation of [5Xhomalg[105X matrices with entries in a [5Xhomalg[105X graded ring.[133X
@@ -40,7 +40,7 @@
   
   [1X5.2-1 MatrixOverGradedRing[101X
   
-  [29X[2XMatrixOverGradedRing[102X( [3Xmat[103X, [3XS[103X ) [32X function
+  [33X[1;0Y[29X[2XMatrixOverGradedRing[102X( [3Xmat[103X, [3XS[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya matrix over a graded ring[133X
   
   [33X[0;0YCreates  a  matrix  for  the  graded  ring  [3XS[103X,  where  [3Xmat[103X  is a matrix over
@@ -51,52 +51,59 @@
   
   [1X5.3-1 DegreesOfEntries[101X
   
-  [29X[2XDegreesOfEntries[102X( [3XA[103X ) [32X attribute
+  [33X[1;0Y[29X[2XDegreesOfEntries[102X( [3XA[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya listlist of degrees/multi-degrees[133X
   
   [33X[0;0YThe matrix of degrees of the matrix [3XA[103X.[133X
   
   [1X5.3-2 NonTrivialDegreePerRow[101X
   
-  [29X[2XNonTrivialDegreePerRow[102X( [3XA[103X[, [3Xcol_degrees[103X] ) [32X attribute
+  [33X[1;0Y[29X[2XNonTrivialDegreePerRow[102X( [3XA[103X[, [3Xcol_degrees[103X] ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya list of degrees/multi-degrees[133X
   
   [33X[0;0YThe list of first nontrivial degree per row of the matrix [3XA[103X.[133X
   
   [1X5.3-3 NonTrivialDegreePerColumn[101X
   
-  [29X[2XNonTrivialDegreePerColumn[102X( [3XA[103X[, [3Xrow_degrees[103X] ) [32X attribute
+  [33X[1;0Y[29X[2XNonTrivialDegreePerColumn[102X( [3XA[103X[, [3Xrow_degrees[103X] ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya list of degrees/multi-degrees[133X
   
   [33X[0;0YThe list of first nontrivial degree per column of the matrix [3XA[103X.[133X
+  
+  [1X5.3-4 IsMatrixOverGradedRingWithHomogeneousEntries[101X
+  
+  [33X[1;0Y[29X[2XIsMatrixOverGradedRingWithHomogeneousEntries[102X( [3XA[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks if every entry in a given matrix [3XA[103X over a graded ring is homogeneous.[133X
   
   
   [1X5.4 [33X[0;0YHomogeneous Matrices: Operations and Functions[133X[101X
   
   [1X5.4-1 UnderlyingNonGradedRing[101X
   
-  [29X[2XUnderlyingNonGradedRing[102X( [3Xmat[103X ) [32X operation
+  [33X[1;0Y[29X[2XUnderlyingNonGradedRing[102X( [3Xmat[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
   
   [33X[0;0YThe nongraded ring underlying [10XHomalgRing[110X([3Xmat[103X).[133X
   
   [1X5.4-2 SetMatElm[101X
   
-  [29X[2XSetMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XSetMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation[133X
   
   [33X[0;0YChanges  the  entry  ([3Xi,j[103X)  of  the matrix [3Xmat[103X to the value [3Xr[103X. Here [3XR[103X is the
   graded [5Xhomalg[105X ring involved in these computations.[133X
   
   [1X5.4-3 AddToMatElm[101X
   
-  [29X[2XAddToMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XAddToMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation[133X
   
   [33X[0;0YChanges  the entry ([3Xi,j[103X) of the matrix [3Xmat[103X by adding the value [3Xr[103X to it. Here
   [3XR[103X is the (graded) [5Xhomalg[105X ring involved in these computations.[133X
   
   [1X5.4-4 MatElmAsString[101X
   
-  [29X[2XMatElmAsString[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XMatElmAsString[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya string[133X
   
   [33X[0;0YReturns  the  entry  ([3Xi,j[103X)  of  the  matrix  [3Xmat[103X  as a string. Here [3XR[103X is the
@@ -104,7 +111,7 @@
   
   [1X5.4-5 MatElm[101X
   
-  [29X[2XMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya graded ring element[133X
   
   [33X[0;0YReturns  the  entry  ([3Xi,j[103X)  of the matrix [3Xmat[103X. Here [3XR[103X is the (graded) [5Xhomalg[105X

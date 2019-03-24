@@ -55,7 +55,7 @@
 
 <h5>A.2-1 MonomialMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MonomialMatrix</code>( <var class="Arg">d</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MonomialMatrix</code>( <var class="Arg">d</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The column matrix of <var class="Arg">d</var>-th monomials of the <strong class="pkg">homalg</strong> graded ring <var class="Arg">R</var>.</p>
@@ -84,7 +84,7 @@ z^2
 
 <h5>A.2-2 RandomMatrixBetweenGradedFreeLeftModules</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomMatrixBetweenGradedFreeLeftModules</code>( <var class="Arg">degreesS</var>, <var class="Arg">degreesT</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomMatrixBetweenGradedFreeLeftModules</code>( <var class="Arg">degreesS</var>, <var class="Arg">degreesT</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>A random <span class="SimpleMath">r × c</span>-matrix between the graded free <em>left</em> modules <span class="SimpleMath"><var class="Arg">R</var>^(-<var class="Arg">degreesS</var>) -&gt; <var class="Arg">R</var>^(-<var class="Arg">degreesT</var>)</span>, where <span class="SimpleMath">r =</span><code class="code">Length</code><span class="SimpleMath">(</span><var class="Arg">degreesS</var><span class="SimpleMath">)</span> and <span class="SimpleMath">c =</span><code class="code">Length</code><span class="SimpleMath">(</span><var class="Arg">degreesT</var><span class="SimpleMath">)</span>.</p>
@@ -105,7 +105,7 @@ z^2
 
 <h5>A.2-3 RandomMatrixBetweenGradedFreeRightModules</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomMatrixBetweenGradedFreeRightModules</code>( <var class="Arg">degreesT</var>, <var class="Arg">degreesS</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomMatrixBetweenGradedFreeRightModules</code>( <var class="Arg">degreesT</var>, <var class="Arg">degreesS</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>A random <span class="SimpleMath">r × c</span>-matrix between the graded free <em>right</em> modules <span class="SimpleMath"><var class="Arg">R</var>^(-<var class="Arg">degreesS</var>) -&gt; <var class="Arg">R</var>^(-<var class="Arg">degreesT</var>)</span>, where <span class="SimpleMath">r =</span><code class="code">Length</code><span class="SimpleMath">(</span><var class="Arg">degreesT</var><span class="SimpleMath">)</span> and <span class="SimpleMath">c =</span><code class="code">Length</code><span class="SimpleMath">(</span><var class="Arg">degreesS</var><span class="SimpleMath">)</span>.</p>
@@ -125,7 +125,7 @@ z^2
 
 <h5>A.2-4 Diff</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Diff</code>( <var class="Arg">D</var>, <var class="Arg">N</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Diff</code>( <var class="Arg">D</var>, <var class="Arg">N</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>If <var class="Arg">D</var> is a <span class="SimpleMath">f × p</span>-matrix and <var class="Arg">N</var> is a <span class="SimpleMath">g × q</span>-matrix then <span class="SimpleMath">H=Diff(</span><var class="Arg">D</var>,<var class="Arg">N</var><span class="SimpleMath">)</span> is an <span class="SimpleMath">fg × pq</span>-matrix whose entry <span class="SimpleMath">H[g*(i-1)+j,q*(k-1)+l]</span> is the result of differentiating <var class="Arg">N</var><span class="SimpleMath">[j,l]</span> by the differential operator corresponding to <var class="Arg">D</var><span class="SimpleMath">[i,k]</span>. (Here we follow the Macaulay2 convention.)</p>

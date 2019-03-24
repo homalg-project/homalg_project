@@ -22,7 +22,7 @@
   
   [1X4.1-1 IsHomalgGradedRingRep[101X
   
-  [29X[2XIsHomalgGradedRingRep[102X( [3XR[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsHomalgGradedRingRep[102X( [3XR[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YThe representation of [5Xhomalg[105X graded rings.[133X
@@ -39,7 +39,7 @@
   
   [1X4.1-2 IsHomalgGradedRingElementRep[101X
   
-  [29X[2XIsHomalgGradedRingElementRep[102X( [3Xr[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsHomalgGradedRingElementRep[102X( [3Xr[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YThe representation of elements of [5Xhomalg[105X graded rings.[133X
@@ -57,8 +57,8 @@
   
   [1X4.2-1 HomalgGradedRingElement[101X
   
-  [29X[2XHomalgGradedRingElement[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function
-  [29X[2XHomalgGradedRingElement[102X( [3Xnumer[103X, [3XR[103X ) [32X function
+  [33X[1;0Y[29X[2XHomalgGradedRingElement[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgGradedRingElement[102X( [3Xnumer[103X, [3XR[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya graded ring element[133X
   
   [33X[0;0YCreates  the  graded  ring element [22X[3Xnumer[103X/[3Xdenom[103X[122X or in the second case [22X[3Xnumer[103X/1[122X
@@ -71,14 +71,14 @@
   
   [1X4.3-1 DegreeGroup[101X
   
-  [29X[2XDegreeGroup[102X( [3XS[103X ) [32X attribute
+  [33X[1;0Y[29X[2XDegreeGroup[102X( [3XS[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya left ℤ-module[133X
   
   [33X[0;0YThe degree Abelian group of the commutative graded ring [3XS[103X.[133X
   
   [1X4.3-2 CommonNonTrivialWeightOfIndeterminates[101X
   
-  [29X[2XCommonNonTrivialWeightOfIndeterminates[102X( [3XS[103X ) [32X attribute
+  [33X[1;0Y[29X[2XCommonNonTrivialWeightOfIndeterminates[102X( [3XS[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya degree[133X
   
   [33X[0;0YThe  common  nontrivial weight of the indeterminates of the graded ring [3XS[103X if
@@ -91,14 +91,14 @@
   
   [1X4.3-3 WeightsOfIndeterminates[101X
   
-  [29X[2XWeightsOfIndeterminates[102X( [3XS[103X ) [32X attribute
+  [33X[1;0Y[29X[2XWeightsOfIndeterminates[102X( [3XS[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya list or listlist of integers[133X
   
   [33X[0;0YThe list of degrees of the indeterminates of the graded ring [3XS[103X.[133X
   
   [1X4.3-4 MatrixOfWeightsOfIndeterminates[101X
   
-  [29X[2XMatrixOfWeightsOfIndeterminates[102X( [3XS[103X ) [32X attribute
+  [33X[1;0Y[29X[2XMatrixOfWeightsOfIndeterminates[102X( [3XS[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YA   [5Xhomalg[105X   matrix   where  the  list  (or  listlist)  of  degrees  of  the
@@ -109,21 +109,21 @@
   
   [1X4.4-1 UnderlyingNonGradedRing[101X
   
-  [29X[2XUnderlyingNonGradedRing[102X( [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XUnderlyingNonGradedRing[102X( [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
   
   [33X[0;0YInternally there is a ring, in which computations take place.[133X
   
   [1X4.4-2 UnderlyingNonGradedRing[101X
   
-  [29X[2XUnderlyingNonGradedRing[102X( [3Xr[103X ) [32X operation
+  [33X[1;0Y[29X[2XUnderlyingNonGradedRing[102X( [3Xr[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
   
   [33X[0;0YInternally there is a ring, in which computations take place.[133X
   
   [1X4.4-3 Name[101X
   
-  [29X[2XName[102X( [3Xr[103X ) [32X operation
+  [33X[1;0Y[29X[2XName[102X( [3Xr[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya string[133X
   
   [33X[0;0YThe name of the graded ring element [3Xr[103X.[133X
