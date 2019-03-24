@@ -327,6 +327,9 @@
     [4X  ## degree of a multivariate polynomial[104X
     [4X  DegreeOfRingElement                     := "deg",[104X
     [4X  [104X
+    [4X  ## maximal degree part of a polynomial[104X
+    [4X  MaximalDegreePart                       := "mdp",[104X
+    [4X  [104X
     [4X  ## is irreducible:[104X
     [4X  IsIrreducible                           := "irr",[104X
     [4X  [104X
@@ -589,6 +592,21 @@
     [4X  [104X
     [4X  ## the constant term of the hilbert polynomial:[104X
     [4X  ConstantTermOfHilbertPolynomial         := "P_0",[104X
+    [4X  [104X
+    [4X  ## maximal dimensional radical subobject:[104X
+    [4X  MaxDimensionalRadicalSubobject          := "V_d",[104X
+    [4X  [104X
+    [4X  ## radical subobject:[104X
+    [4X  RadicalSubobject                        := "rad",[104X
+    [4X  [104X
+    [4X  ## radical decomposition:[104X
+    [4X  RadicalDecomposition                    := "VxU",[104X
+    [4X  [104X
+    [4X  ## maximal dimensional subobject:[104X
+    [4X  MaxDimensionalSubobject                 := "X_d",[104X
+    [4X  [104X
+    [4X  ## equi-dimensional decomposition:[104X
+    [4X  EquiDimenionalDecomposition             := "XxY",[104X
     [4X  [104X
     [4X  ## primary decomposition:[104X
     [4X  PrimaryDecomposition                    := "YxZ",[104X
