@@ -5,9 +5,9 @@ PackageName := "MatricesForHomalg",
 Subtitle := "Matrices for the homalg project",
 
 Version := Maximum( [
-  "2011.12.05", ## Markus' version
+  "2011.12.06", ## Markus' version
 ## this line prevents merge conflicts
-  "2018.08.25", ## Mohamed's version
+  "2018.12.09", ## Mohamed's version
 ## this line prevents merge conflicts
   "2018.04.04", ## Sebas' version
 ## this line prevents merge conflicts
@@ -23,9 +23,7 @@ Version := Maximum( [
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-
-
-
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(

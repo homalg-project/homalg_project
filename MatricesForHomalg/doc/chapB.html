@@ -453,7 +453,7 @@ InstallMethod( \=,
             if are_equal then
                 MatchPropertiesAndAttributes( M1, M2,
                         LIMAT.intrinsic_properties,
-                        LIMAT.intrinsic_attributes,
+                        Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
                         LIMAT.intrinsic_components
                         );
             fi;

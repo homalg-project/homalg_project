@@ -401,7 +401,7 @@
     [4X            if are_equal then[104X
     [4X                MatchPropertiesAndAttributes( M1, M2,[104X
     [4X                        LIMAT.intrinsic_properties,[104X
-    [4X                        LIMAT.intrinsic_attributes,[104X
+    [4X                        Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),[104X
     [4X                        LIMAT.intrinsic_components[104X
     [4X                        );[104X
     [4X            fi;[104X
