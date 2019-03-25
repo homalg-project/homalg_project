@@ -6,7 +6,7 @@
                 [1XEndow Commutative Rings with an Abelian Grading[101X
   
   
-                               Version 2019.03.20
+                               Version 2019.03.21
   
   
                                  September 2015
@@ -85,15 +85,17 @@
       4.1-2 IsHomalgGradedRingElementRep
     4.2 [33X[0;0YGraded Rings: Constructors[133X
       4.2-1 HomalgGradedRingElement
-    4.3 [33X[0;0YGraded Rings: Attributes[133X
+    4.3 [33X[0;0YGraded Rings: Attributes and Properties[133X
       4.3-1 DegreeGroup
       4.3-2 CommonNonTrivialWeightOfIndeterminates
       4.3-3 WeightsOfIndeterminates
       4.3-4 MatrixOfWeightsOfIndeterminates
+      4.3-5 IsHomogeneousRingElement
     4.4 [33X[0;0YGraded Rings: Operations and Functions[133X
       4.4-1 UnderlyingNonGradedRing
       4.4-2 UnderlyingNonGradedRing
       4.4-3 Name
+      4.4-4 HomogeneousPartOfRingElement
   5 [33X[0;0YHomogeneous Matrices[133X
     5.1 [33X[0;0YHomogeneous Matrices: Category and Representations[133X
       5.1-1 IsHomalgMatrixOverGradedRingRep
@@ -103,7 +105,8 @@
       5.3-1 DegreesOfEntries
       5.3-2 NonTrivialDegreePerRow
       5.3-3 NonTrivialDegreePerColumn
-      5.3-4 IsMatrixOverGradedRingWithHomogeneousEntries
+      5.3-4 HomogeneousPartOfMatrix
+      5.3-5 IsMatrixOverGradedRingWithHomogeneousEntries
     5.4 [33X[0;0YHomogeneous Matrices: Operations and Functions[133X
       5.4-1 UnderlyingNonGradedRing
       5.4-2 SetMatElm

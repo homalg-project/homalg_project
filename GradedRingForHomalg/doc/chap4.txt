@@ -67,7 +67,7 @@
   computation ring.[133X
   
   
-  [1X4.3 [33X[0;0YGraded Rings: Attributes[133X[101X
+  [1X4.3 [33X[0;0YGraded Rings: Attributes and Properties[133X[101X
   
   [1X4.3-1 DegreeGroup[101X
   
@@ -104,6 +104,13 @@
   [33X[0;0YA   [5Xhomalg[105X   matrix   where  the  list  (or  listlist)  of  degrees  of  the
   indeterminates of the graded ring [3XS[103X is stored.[133X
   
+  [1X4.3-5 IsHomogeneousRingElement[101X
+  
+  [33X[1;0Y[29X[2XIsHomogeneousRingElement[102X( [3Xr[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Yreturns whether the graded ring element [3Xr[103X is homogeneous or not.[133X
+  
   
   [1X4.4 [33X[0;0YGraded Rings: Operations and Functions[133X[101X
   
@@ -127,4 +134,12 @@
   [6XReturns:[106X  [33X[0;10Ya string[133X
   
   [33X[0;0YThe name of the graded ring element [3Xr[103X.[133X
+  
+  [1X4.4-4 HomogeneousPartOfRingElement[101X
+  
+  [33X[1;0Y[29X[2XHomogeneousPartOfRingElement[102X( [3Xr[103X, [3Xdegree[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya graded ring element[133X
+  
+  [33X[0;0Yreturns the summand of [3Xr[103X whose monomials have the given degree [3Xdegree[103X and if
+  [3Xr[103X has no such monomials then it returns the zero element of the ring.[133X
   

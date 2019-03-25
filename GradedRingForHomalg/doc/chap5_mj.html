@@ -41,7 +41,8 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8608086E82701204">5.3-1 DegreesOfEntries</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86C3DD8479FDDB36">5.3-2 NonTrivialDegreePerRow</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X801EBD4D7DAB0672">5.3-3 NonTrivialDegreePerColumn</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B28E6B97D1A5E09">5.3-4 IsMatrixOverGradedRingWithHomogeneousEntries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B109D738475FED4">5.3-4 HomogeneousPartOfMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B28E6B97D1A5E09">5.3-5 IsMatrixOverGradedRingWithHomogeneousEntries</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X81897DD8835ACE8C">5.4 <span class="Heading">Homogeneous Matrices: Operations and Functions</span></a>
 </span>
@@ -128,9 +129,18 @@ DeclareRepresentation( "IsHomalgMatrixOverGradedRingRep",
 
 <p>The list of first nontrivial degree per column of the matrix <var class="Arg">A</var>.</p>
 
+<p><a id="X7B109D738475FED4" name="X7B109D738475FED4"></a></p>
+
+<h5>5.3-4 HomogeneousPartOfMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomogeneousPartOfMatrix</code>( <var class="Arg">A</var>, <var class="Arg">degrees</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a homalg matrix over graded ring</p>
+
+<p>The output is the homogeneous part of the matrix <var class="Arg">A</var> with respect to the given degrees <var class="Arg">degrees</var>. See <var class="Arg">HomogeneousPartOfRingElement</var>.</p>
+
 <p><a id="X7B28E6B97D1A5E09" name="X7B28E6B97D1A5E09"></a></p>
 
-<h5>5.3-4 IsMatrixOverGradedRingWithHomogeneousEntries</h5>
+<h5>5.3-5 IsMatrixOverGradedRingWithHomogeneousEntries</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMatrixOverGradedRingWithHomogeneousEntries</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>

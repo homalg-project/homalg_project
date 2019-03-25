@@ -12,10 +12,13 @@
   [5XGradedRingForHomalg[105X .-3 
   [2XHomalgGradedRingElement[102X, constructor for graded ring elements using a given numerator and one as denominator 4.2-1 
       constructor for graded ring elements using numerator and denominator 4.2-1 
+  [2XHomogeneousPartOfMatrix[102X, for matrices over graded rings and listlist of degrees 5.3-4 
+  [2XHomogeneousPartOfRingElement[102X, for homalg graded ring elements and elements in degree groups 4.4-4 
   [2XIsHomalgGradedRingElementRep[102X 4.1-2 
   [2XIsHomalgGradedRingRep[102X 4.1-1 
   [2XIsHomalgMatrixOverGradedRingRep[102X 5.1-1 
-  [2XIsMatrixOverGradedRingWithHomogeneousEntries[102X, for matrices over graded rings 5.3-4 
+  [2XIsHomogeneousRingElement[102X, for homalg graded ring elements 4.3-5 
+  [2XIsMatrixOverGradedRingWithHomogeneousEntries[102X, for matrices over graded rings 5.3-5 
   [2XMatElm[102X, for matrices over graded rings 5.4-5 
   [2XMatElmAsString[102X, for matrices over graded rings 5.4-4 
   [2XMatrixOfWeightsOfIndeterminates[102X 4.3-4 

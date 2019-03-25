@@ -33,13 +33,14 @@
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X823140CE8286BA90">4.2-1 HomalgGradedRingElement</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X80C692538711009C">4.3 <span class="Heading">Graded Rings: Attributes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7CA805077B75EAAD">4.3 <span class="Heading">Graded Rings: Attributes and Properties</span></a>
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79649FC47A744BD2">4.3-1 DegreeGroup</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X826C131D83796CC5">4.3-2 CommonNonTrivialWeightOfIndeterminates</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E43637F8431FB69">4.3-3 WeightsOfIndeterminates</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84279B6179DD4AE2">4.3-4 MatrixOfWeightsOfIndeterminates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X807A4268816DD69D">4.3-5 IsHomogeneousRingElement</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7B86A3DD7D2CE35F">4.4 <span class="Heading">Graded Rings: Operations and Functions</span></a>
 </span>
@@ -47,6 +48,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7DA1D14F87DE72D8">4.4-1 UnderlyingNonGradedRing</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8708576B84997122">4.4-2 UnderlyingNonGradedRing</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83971F1879017E3D">4.4-3 Name</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X840864B38184FF3E">4.4-4 HomogeneousPartOfRingElement</a></span>
 </div></div>
 </div>
 
@@ -113,9 +115,9 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <p>Creates the graded ring element <span class="SimpleMath"><var class="Arg">numer</var>/<var class="Arg">denom</var></span> or in the second case <span class="SimpleMath"><var class="Arg">numer</var>/1</span> for the graded ring <var class="Arg">R</var>. Both <var class="Arg">numer</var> and <var class="Arg">denom</var> may either be a string describing a valid global ring element or from the global ring or computation ring.</p>
 
-<p><a id="X80C692538711009C" name="X80C692538711009C"></a></p>
+<p><a id="X7CA805077B75EAAD" name="X7CA805077B75EAAD"></a></p>
 
-<h4>4.3 <span class="Heading">Graded Rings: Attributes</span></h4>
+<h4>4.3 <span class="Heading">Graded Rings: Attributes and Properties</span></h4>
 
 <p><a id="X79649FC47A744BD2" name="X79649FC47A744BD2"></a></p>
 
@@ -153,6 +155,15 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 
 <p>A <strong class="pkg">homalg</strong> matrix where the list (or listlist) of degrees of the indeterminates of the graded ring <var class="Arg">S</var> is stored.</p>
 
+<p><a id="X807A4268816DD69D" name="X807A4268816DD69D"></a></p>
+
+<h5>4.3-5 IsHomogeneousRingElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomogeneousRingElement</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>returns whether the graded ring element <var class="Arg">r</var> is homogeneous or not.</p>
+
 <p><a id="X7B86A3DD7D2CE35F" name="X7B86A3DD7D2CE35F"></a></p>
 
 <h4>4.4 <span class="Heading">Graded Rings: Operations and Functions</span></h4>
@@ -183,6 +194,15 @@ DeclareRepresentation( "IsHomalgGradedRingElementRep",
 <p>Returns: a string</p>
 
 <p>The name of the graded ring element <var class="Arg">r</var>.</p>
+
+<p><a id="X840864B38184FF3E" name="X840864B38184FF3E"></a></p>
+
+<h5>4.4-4 HomogeneousPartOfRingElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomogeneousPartOfRingElement</code>( <var class="Arg">r</var>, <var class="Arg">degree</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a graded ring element</p>
+
+<p>returns the summand of <var class="Arg">r</var> whose monomials have the given degree <var class="Arg">degree</var> and if <var class="Arg">r</var> has no such monomials then it returns the zero element of the ring.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
