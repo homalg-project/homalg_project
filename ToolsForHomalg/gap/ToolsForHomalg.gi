@@ -1548,6 +1548,10 @@ InstallMethod( MaximalObjects,
     
     for i in l do
         
+        if i in r then
+            continue;
+        fi;
+        
         p := PositionProperty( l, j -> not j = i and not j in r and f( L[i], L[j] ) );
         
         if not p = fail then
