@@ -1540,23 +1540,23 @@ InstallMethod( MaximalObjects,
         [ IsList, IsFunction ],
         
   function( L, f )
-    local l, u, i, p;
+    local l, r, i, p;
     
     l := [ 1 .. Length( L ) ];
     
-    u := [ ];
+    r := [ ];
     
     for i in l do
         
-        p := PositionProperty( l, j -> not j = i and not j in u and f( L[i], L[j] ) );
+        p := PositionProperty( l, j -> not j = i and not j in r and f( L[i], L[j] ) );
         
         if not p = fail then
-            Add( u, i );
+            Add( r, i );
         fi;
         
     od;
     
-    return L{Difference( l, u )};
+    return L{Difference( l, r )};
     
 end );
 
