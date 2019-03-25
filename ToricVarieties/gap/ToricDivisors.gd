@@ -125,7 +125,7 @@ DeclareAttribute( "BasisOfGlobalSections",
                   IsToricDivisor );
 
 #! @Description
-#!  Returns an integer <A>n</A> such that $n \cdot \text{divi}$ is very ample.
+#!  Returns an integer <A>n</A> such that $n \cdot $divi is very ample.
 #! @Returns an integer
 #! @Arguments divi
 DeclareAttribute( "IntegerForWhichIsSureVeryAmple",

@@ -61,3 +61,6 @@ Sebastian Gutsche
 
 @Subsection Divisors on a toric variety
 @InsertSystem Divisors
+
+@Subsection Polytope of toric divisors
+@InsertSystem PolytopeOfToricDivisor
