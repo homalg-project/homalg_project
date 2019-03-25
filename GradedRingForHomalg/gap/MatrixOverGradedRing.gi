@@ -676,44 +676,27 @@ end );
 InstallMethod( HomogeneousPartOfMatrix,
     [ IsMatrixOverGradedRing, IsList ],
     function( M, L )
-    local entries, S, f, degrees;
-
-    if IsZero( NrRows( M )*NrCols( M ) ) then
-
+    local entries, degrees;
+    
+    if IsZero( NrRows( M ) * NrCols( M ) ) then
+      
       return M;
-
+    
     fi;
-
+    
     if Length( L ) <> NrRows( M ) or Length( L[ 1 ] ) <> NrCols( M ) then
-
-        Error( "wrong input\n" );
-
-    fi;
-
-    entries := EntriesOfHomalgMatrix( M );
-
-    degrees := Concatenation( L );
-
-    S := M!.ring;
-
-    f := function( e, degree )
-        local ev, coefficients, list_of_coeff, monomials, positions_list;
         
-        ev := EvalRingElement( e );
-        list_of_coeff := EntriesOfHomalgMatrix( Coefficients( ev ) );
-        list_of_coeff := List( list_of_coeff, c -> String(c)/S );
-        monomials := List( Coefficients( ev )!.monomials, m -> String( m )/S );
-        positions_list := Positions( List( monomials, Degree ), degree );
-        if positions_list = [ ] then
-            return Zero( S );
-        else
-            return list_of_coeff{positions_list}*monomials{positions_list};
-        fi;
-    end;
+        Error( "wrong input\n" );
     
-    entries := List( [ 1 .. NrRows( M ) * NrColumns( M ) ], i -> f( entries[ i ], degrees[ i ] ) );
+    fi;
     
-    return HomalgMatrix( entries, NrRows( M ), NrCols( M ), S );
+    entries := EntriesOfHomalgMatrix( M );
+    
+    degrees := Concatenation( L );
+    
+    entries := ListN( entries, degrees, HomogeneousPartOfRingElement );
+    
+    return HomalgMatrix( entries, NrRows( M ), NrCols( M ), HomalgRing( M ) );
     
 end );
 
@@ -722,11 +705,11 @@ InstallMethod( IsMatrixOverGradedRingWithHomogeneousEntries,
                [ IsMatrixOverGradedRing ],
                
   function( M )
-    local degrees;
+    local entries;
     
-    degrees := DegreesOfEntries( M );
+    entries := EntriesOfHomalgMatrix( M );
     
-    return HomogeneousPartOfMatrix( M, degrees ) = M;
+    return ForAll( entries, IsHomogeneousRingElement );
     
 end );
 

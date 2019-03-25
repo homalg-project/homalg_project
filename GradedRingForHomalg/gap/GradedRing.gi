@@ -163,6 +163,68 @@ InstallMethod( String,
     
 end );
 
+##  <#GAPDoc Label="HomogeneousPartOfRingElement">
+##  <ManSection>
+##    <Oper Arg="r, degree" Name="HomogeneousPartOfRingElement"
+##    Label="for homalg graded ring elements and elements in degree groups"/>
+##    <Returns>a graded ring element</Returns>
+##    <Description>
+##      returns the summand of <A>r</A> whose monomials have the given degree <A>degree</A> and if 
+##      <A>r</A> has no such monomials then it returns the zero element of the ring.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( HomogeneousPartOfRingElement,
+        "for homalg graded ring elements and elements in degree groups",
+        [ IsHomalgGradedRingElement, IsHomalgModuleElement ],
+  function( r, degree )
+    local S, ev, list_of_coeff, monomials, positions_list;
+      
+    S := HomalgRing( r );
+    
+    ev := EvalRingElement( r );
+    
+    list_of_coeff := EntriesOfHomalgMatrix( Coefficients( ev ) );
+    
+    list_of_coeff := List( list_of_coeff, c -> String(c)/S );
+    
+    monomials := List( Coefficients( ev )!.monomials, m -> String( m )/S );
+    
+    positions_list := Positions( List( monomials, Degree ), degree );
+    
+    if positions_list = [ ] then
+        
+        return Zero( S );
+    
+    else
+        
+        return list_of_coeff{positions_list}*monomials{positions_list};
+    
+    fi;
+    
+end );
+
+##  <#GAPDoc Label="IsHomogeneousRingElement">
+##  <ManSection>
+##    <Oper Arg="r" Name="IsHomogeneousRingElement"
+##    Label="for homalg graded ring elements"/>
+##    <Returns> <C>true</C> or <C>false</C> </Returns>
+##    <Description>
+##      returns whether the graded ring element <A>r</A> is homogeneous or not.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( IsHomogeneousRingElement,
+        "for homalg graded ring elements",
+        [ IsHomalgGradedRingElement ],
+  function( r )
+    
+    return HomogeneousPartOfRingElement( r, Degree( r ) ) = r;
+    
+end );
+
 ##
 InstallMethod( Indeterminates,
         "for homalg graded rings",
