@@ -150,3 +150,9 @@ DeclareOperation( "Diff",
 
 DeclareOperation( "Diff",
         [ IsHomalgRingElement ] );
+
+DeclareOperation( "TangentSpaceByEquationsAtPoint",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "TangentSpaceByEquationsAtPoint",
+        [ IsHomalgMatrix, IsList ] );

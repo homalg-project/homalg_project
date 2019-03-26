@@ -4530,6 +4530,82 @@ InstallMethod( Diff,
 end );
 
 ##
+InstallMethod( TangentSpaceByEquationsAtPoint,
+        "for two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M, x )
+    local R, var, n, k, Tx, map, i, xi, Ri, m;
+    
+    if not NrColumns( M ) = 1 then
+        Error( "the number of columns of the first argument M is not 1\n" );
+    elif not NrColumns( M ) = 1 then
+        Error( "the number of columns of the second argument x is not 1\n" );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    var := IndeterminatesOfPolynomialRing( R );
+    
+    n := Length( var );
+    
+    if not n = NrRows( x ) then
+        Error( "the number of rows of the second argument x is not the number of indeterminates ", n, "\n" );
+    fi;
+    
+    k := CoefficientsRing( R );
+    
+    if not IsIdenticalObj( HomalgRing( x ), k ) then
+        Error( "the second argument is not a matrix over the coefficients ring ", k );
+    fi;
+    
+    Tx := HomalgZeroMatrix( NrRows( M ), 0, k );
+    
+    for i in [ 1 .. n ] do
+        
+        xi := String( var[i] );
+        
+        Ri := k * xi;
+        
+        xi := HomalgMatrix( [ xi / Ri ], 1, 1, Ri );
+        
+        map := UnionOfRows( Ri * CertainRows( x, [ 1 .. i - 1 ] ), xi, Ri * CertainRows( x, [ i + 1 .. n ] ) );
+        
+        map := RingMap( map, R, Ri );
+        
+        m := Diff( xi, Pullback( map, M ) );
+        
+        map := CertainRows( x, [ i ] );
+        
+        map := RingMap( map, Ri, k );
+        
+        Tx := UnionOfColumns( Tx, Pullback( map, m ) );
+        
+    od;
+    
+    return BasisOfRows( Tx );
+    
+end );
+
+##
+InstallMethod( TangentSpaceByEquationsAtPoint,
+        "for a homalg matrix and a list",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( M, x )
+    local R, k;
+    
+    R := HomalgRing( M );
+    
+    k := CoefficientsRing( R );
+    
+    x := HomalgMatrix( x, Length( x ), 1, k );
+    
+    return TangentSpaceByEquationsAtPoint( M, x );
+    
+end );
+
+##
 InstallMethod( NoetherNormalization,
         "for a homalg matrix",
         [ IsHomalgMatrix ],
