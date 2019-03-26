@@ -52,7 +52,7 @@ Obj REAL_CREATE_MATROID_ABSTRACT( Polymake_Data* data, Obj size, Obj elements ){
       int current_length = LEN_PLIST( current_basis_list );
       
       for( int i=1;i<=current_length;i++){
-          incMatr[current_basis] += INT_INTOBJ( ELM_PLIST( current_basis_list, i ) ) - 1;
+          incMatr[current_basis] += static_cast<int>(INT_INTOBJ( ELM_PLIST( current_basis_list, i ) ) - 1);
       }
       
   }

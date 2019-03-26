@@ -93,7 +93,7 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
           return NULL;
         }
 #endif
-        incMatr[i] += INT_INTOBJ( numb ) - 1;
+        incMatr[i] += static_cast<int>(INT_INTOBJ( numb ) - 1);
       }
   }
 
