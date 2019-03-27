@@ -1467,12 +1467,12 @@ end );
 ##
 InstallMethod( ToricVariety,
                " for homalg fans and a list of weights for the variables in the Cox ring",
-               [ IsList, IsList ],
+               [ IsList, IsList, IsList ],
   function( rays, cones, degrees )
     local vars;
 
     # install standard list of variable names
-    vars := List( [ 1 .. Length( ray ) ],
+    vars := List( [ 1 .. Length( rays ) ],
                             i -> JoinStringsWithSeparator( [ TORIC_VARIETIES.CoxRingIndet, i ], "_" ) );
 
     # and return result from method below
