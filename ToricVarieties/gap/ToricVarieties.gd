@@ -343,12 +343,14 @@ DeclareOperation( "CharacterToRationalFunction",
                   [ IsList, IsToricVariety ] );
 
 #! @Description
-#!  Computes the Cox ring of the variety <A>vari</A>. <A>vars</A> needs to be a string containing one variable,
-#!  which will be numbered by the method. 
+#!  Computes the Cox ring of the variety <A>vari</A>. <A>list</A> is a list of strings. If this list consists
+#! of a single entry, then this string together with an index is used to label the variables of the Cox
+#! ring. Alternatively, <A>list</A> can have as many entries as there are ray generators for this toric 
+#! variety. In this case, the strings in this list are used to label the variables of the Cox ring.
 #! @Returns a ring
-#! @Arguments vari, vars
+#! @Arguments vari, list
 DeclareOperation( "CoxRing",
-                  [ IsToricVariety, IsString ] );
+                  [ IsToricVariety, IsList ] );
 
 #! @Description
 #!  Returns a list of the currently defined Divisors of the toric variety.

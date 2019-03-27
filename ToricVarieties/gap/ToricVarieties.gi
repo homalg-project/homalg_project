@@ -561,19 +561,46 @@ end );
 RedispatchOnCondition( CoxRing, true, [ IsToricVariety ], [ HasNoTorusfactor ], 0 );
 
 ##
-RedispatchOnCondition( CoxRing, true, [ IsToricVariety, IsString ], [ HasNoTorusfactor ], 0 );
+RedispatchOnCondition( CoxRing, true, [ IsToricVariety, IsList ], [ HasNoTorusfactor ], 0 );
 
 ##
 InstallMethod( CoxRing,
                "for convex toric varieties.",
-               [ IsToricVariety and HasNoTorusfactor, IsString ],
+               [ IsToricVariety and HasNoTorusfactor, IsList ],
                
-  function( variety, variable )
-    local raylist, indeterminates, ring, class_list;
+  function( variety, variable_list )
+    local raylist, i, indeterminates, ring, class_list;
     
     raylist := RayGenerators( FanOfVariety( variety ) );
     
-    indeterminates := List( [ 1 .. Length( raylist ) ], i -> JoinStringsWithSeparator( [ variable, i ], "_" ) );
+    # check that the list of variables consists of strings
+    for i in [ 1 .. Length( variable_list ) ] do
+
+        if not IsString( variable_list[ i ] ) then
+
+            Error( "The list of variables is expected to be a list of strings" );
+            return false;
+
+        fi;
+
+    od;
+
+    # construct list of indeterminates
+    if Length( variable_list ) = 1 then
+
+        indeterminates := List( [ 1 .. Length( raylist ) ], 
+                                          i -> JoinStringsWithSeparator( [ variable_list[ 1 ], i ], "_" ) );
+
+    elif Length( variable_list ) = Length( raylist ) then
+
+        indeterminates := variable_list;
+
+    else
+
+        Error( "The length of list of variables must either be 1 or match the number of ray generators " );
+        return false;
+
+    fi;
 
     indeterminates := JoinStringsWithSeparator( indeterminates, "," );
     
