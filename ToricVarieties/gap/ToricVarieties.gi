@@ -1507,6 +1507,72 @@ end );
 
 ##
 InstallMethod( ToricVariety,
+               " for list of rays, cones, gradings and variable names",
+               [ IsList, IsList, IsList, IsList ],
+  function( rays, cones, gradings, var_names )
+    local fan, variety, rays_in_fan, shuffled_gradings, shuffled_var_names, i, pos, matrix1, matrix2, map;
+
+    # construct the fan and test that it is pointed
+    fan := Fan( rays, cones );
+    if not IsPointed( fan ) then
+
+        Error( "input fan must only contain strictly convex cones\n" );
+
+    fi;
+
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+
+    ObjectifyWithAttributes(
+                             variety, TheTypeFanToricVariety,
+                             FanOfVariety, fan
+                            );
+
+    # The ray generators in fan = Fan( rays, cones ) are shuffled w.r.t. the provided inputlist rays.
+    # Let us therefore determine the permutation matrix
+    rays_in_fan := RayGenerators( FanOfVariety( variety ) );
+    shuffled_gradings := [];
+    shuffled_var_names := [];
+    for i in [ 1 .. Length( rays_in_fan ) ] do
+        pos := Position( rays, rays_in_fan[ i ] );
+        shuffled_gradings[ i ] := gradings[ pos ];
+        shuffled_var_names[ i ] := var_names[ pos ];
+    od;
+
+    # if vari does not have a torus factor, then the gradings are set by the cokernel
+    # of the matrix, in which the rays are the rows (Cox-Schenk-Little, theorem 4.1.3)
+    # we proceed under this assumption thus
+    if HasTorusfactor( variety ) then
+        Error( Concatenation( "The method of setting the gradings by hand is currently supported ",
+                              "only for toric variety without torus factor" ) );
+        return false;
+    fi;
+
+    # now check, that the provided gradings are valid
+    matrix1 := HomalgMatrix( rays_in_fan, HOMALG_MATRICES.ZZ );
+    matrix2 := HomalgMatrix( shuffled_gradings, HOMALG_MATRICES.ZZ );
+    if not IsZero( Involution( matrix2 ) * matrix1 ) then
+
+      Error( "corrupted input - the given gradings must form (a) cokernel of the ray generators of the given fan" );
+
+    fi;
+
+    # now use this information to set the map from WeilDivisors to the class group
+    map := HomalgMap( shuffled_gradings,
+                      TorusInvariantDivisorGroup( variety ),
+                      Length( shuffled_gradings[ 1 ] ) * HOMALG_MATRICES.ZZ
+                     );
+    SetMapFromWeilDivisorsToClassGroup( variety, map );
+
+    # finally install the Cox ring with the prescribed names
+    CoxRing( variety, shuffled_var_names );
+
+    # and return the variety
+    return variety;
+
+end );
+
+##
+InstallMethod( ToricVariety,
                "for lists of attributes",
                [ IsList ],
                

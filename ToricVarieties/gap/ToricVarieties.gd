@@ -432,3 +432,16 @@ DeclareOperation( "ToricVariety",
 #! @Arguments conv, list
 DeclareOperation( "ToricVariety",
                   [ IsConvexObject, IsList ] );
+
+#! @Description
+#! Creates a toric variety from a list <A>rays</A> of ray generators and cones <A>cones</A>.
+#! Beyond the functionality of the other methods, this constructor allows to assign specific 
+#! gradings and homogeneous variable names to the ray generators of this toric variety.
+#! With respect to the order in which the rays appear in the list <A>rays</A>, we assign gradings
+#! and variable names as provided by the third and fourth argument. These are the list of gradings 
+#! <A>degree_list</A> and the list of variables names <A>var_list</A>. The former is a list of 
+#! integers and the latter a list of strings.
+#! @Returns a variety
+#! @Arguments rays, cones, degree_list, var_list
+DeclareOperation( "ToricVariety",
+                  [ IsList, IsList, IsList, IsList ] );
