@@ -1495,6 +1495,20 @@ InstallMethod( ToricVariety,
 
     fi;
 
+    # check that gradings and var_names are of correct lengths
+    if not Length( gradings ) = Length( rays ) then
+
+        Error( "For each ray generators a grading has to be provided" );
+        return false;
+
+    fi;
+    if not Length( var_names ) = Length( rays ) then
+
+        Error( "For each ray generators a variable name has to be provided" );
+        return false;
+
+    fi;
+
     variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
 
     ObjectifyWithAttributes(
