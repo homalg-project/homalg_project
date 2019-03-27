@@ -426,12 +426,15 @@ DeclareOperation( "ToricVariety",
                   [ IsConvexObject ] );
 
 #! @Description
-#!  Creates a toric variety out of the convex object <A>conv</A>. In addition it takes a list <A>list</A> of integers.
-#!  Those are used to set the degrees of the variables in the Cox ring of the variety.
+#! Creates a toric variety from a list <A>rays</A> of ray generators and cones <A>cones</A>.
+#! Beyond the functionality of the other methods, this constructor allows to assign specific 
+#! gradings to the homogeneous variables of the Cox ring.
+#! With respect to the order in which the rays appear in the list <A>rays</A>, we assign gradings
+#! as provided by the third argument <A>degree_list</A> . The latter is a list of integers.
 #! @Returns a variety
-#! @Arguments conv, list
+#! @Arguments rays, cones, degree_list
 DeclareOperation( "ToricVariety",
-                  [ IsConvexObject, IsList ] );
+                  [ IsList, IsList, IsList ] );
 
 #! @Description
 #! Creates a toric variety from a list <A>rays</A> of ray generators and cones <A>cones</A>.

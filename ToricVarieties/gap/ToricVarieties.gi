@@ -1467,41 +1467,16 @@ end );
 ##
 InstallMethod( ToricVariety,
                " for homalg fans and a list of weights for the variables in the Cox ring",
-               [ IsFan, IsList ],
-  function( fan, degrees )
-    local variety, matrix1, matrix2, map;
+               [ IsList, IsList ],
+  function( rays, cones, degrees )
+    local vars;
 
-    if not IsPointed( fan ) then
+    # install standard list of variable names
+    vars := List( [ 1 .. Length( ray ) ],
+                            i -> JoinStringsWithSeparator( [ TORIC_VARIETIES.CoxRingIndet, i ], "_" ) );
 
-        Error( "input fan must only contain strictly convex cones\n" );
-
-    fi;
-
-    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
-
-    ObjectifyWithAttributes(
-                             variety, TheTypeFanToricVariety,
-                             FanOfVariety, fan
-                            );
-
-    # check for valid input
-    matrix1 := Involution( HomalgMatrix( RayGenerators( fan ), HOMALG_MATRICES.ZZ ) );
-    matrix2 := HomalgMatrix( degrees, HOMALG_MATRICES.ZZ );
-    if not IsZero( matrix1 * matrix2 ) then
-
-      Error( "corrupted input - the given weights must form (a) cokernel of the ray generators of the given fan" );
-
-    fi;
-
-    # compute the map from the Weil divisors to the class group according to the given degrees
-    map := HomalgMap( degrees,
-                      TorusInvariantDivisorGroup( variety ),
-                      Length( degrees[ 1 ] ) * HOMALG_MATRICES.ZZ
-                     );
-    SetMapFromWeilDivisorsToClassGroup( variety, map );
-
-    # and return the variety
-    return variety;
+    # and return result from method below
+    return ToricVariety( rays, cones, degrees, vars );
 
 end );
 
