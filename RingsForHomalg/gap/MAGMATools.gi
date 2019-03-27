@@ -625,6 +625,13 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               Diff :=
+                 function( D, N )
+                   
+                   return homalgSendBlocking( [ "Diff(", D, N, ")" ], HOMALG_IO.Pictograms.Diff );
+                   
+                 end,
+               
                Evaluate :=
                  function( p, L )
                    

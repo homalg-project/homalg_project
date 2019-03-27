@@ -27,7 +27,6 @@ HOMALG_IO.Pictograms.DegreesOfEntries := "doe"; ## degrees of entries
 HOMALG_IO.Pictograms.NonTrivialDegreePerRow := "dpr"; ## degree of the first non-trivial entry per row
 HOMALG_IO.Pictograms.NonTrivialDegreePerColumn := "dpc"; ## degree of the first non-trivial entry per column
 HOMALG_IO.Pictograms.LinearSyzygiesGenerators := "lsy"; ## linear syzygies
-HOMALG_IO.Pictograms.Diff := "dif";   ## differentiate a matrix M w.r.t. a matrix D
 
 ##
 InstallValue( CommonHomalgTableForGradedRings,

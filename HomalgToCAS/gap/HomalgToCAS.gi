@@ -443,6 +443,9 @@ InstallValue( HOMALG_IO,
                 ## the constant term of the hilbert polynomial:
                 ConstantTermOfHilbertPolynomial         := "P_0",
                 
+                ## differentiate a matrix M w.r.t. a matrix D
+                Diff                                    := "dif",
+                
                 ## maximal dimensional radical subobject:
                 MaxDimensionalRadicalSubobject          := "V_d",
                 

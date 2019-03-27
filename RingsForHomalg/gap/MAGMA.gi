@@ -472,6 +472,23 @@ end if;\n\n",
 MonomialsUnivariate :=\n\
 func<f,x| [x^(i-1): i in [1..#C] | C[i] ne 0] where C:=Coefficients(f,x)>;\n\n",
     
+    ("!Diff") := "\n\
+// liefert f nach g. Reihenfolge ist der Parameter in Magma-Konvention (alles andere ist sehr komisch)\n\
+function mydiff(f,g)\n\
+  P:= Parent(f);\n\
+  assert not IsZero(g) and Parent(g) eq P;\n\
+  C, M:= CoefficientsAndMonomials(g);\n\
+  return &+ [ C[j] * &* [ P | Derivative(f, e[i], i) : i in [1..#e] | e[i] ne 0 ] where e:= Exponents(M[j]) : j in [1..#C] ];\n\
+end function;\n\n",
+    
+    Diff := "\n\
+// Frei nach dem GAP-Handbuch:\n\
+// If D is a f × p-matrix and N is a g × q-matrix then H=Diff(D,N) is an fg × pq-matrix whose entry H[g*(i-1)+j,q*(k-1)+l] is the\n\
+// result of differentiating N[j,l] by the differential operator corresponding to D[i,k]. (Here we follow the Macaulay2 convention.)\n\
+function Diff(D, N)\n\
+  return Matrix( Ncols(D) * Ncols(N), [ mydiff(N[j,l], D[i,k]) : l in [1..Ncols(N)], k in [1..Ncols(D)] , j in [1..Nrows(N)], i in [1..Nrows(D)] ] );\n\
+end function;\n\n",
+    
     )
 );
 

@@ -212,16 +212,6 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                    
                  end,
                
-               Diff :=
-                 function( D, N )
-                   local R;
-                   
-                   R := HomalgRing( D );
-                   
-                   return homalgSendBlocking( [ "map(", R, "^", NrRows( D ) * NrRows( N ), ",", R, "^", NrColumns( D ) * NrColumns( N ), ",diff(", D, N, "))" ], HOMALG_IO.Pictograms.Diff );
-                   
-                 end,
-               
         )
  );
 

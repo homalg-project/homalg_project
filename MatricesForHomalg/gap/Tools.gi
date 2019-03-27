@@ -4498,6 +4498,39 @@ end );
 
 ##
 InstallMethod( Diff,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( D, N )
+    local R, RP, diff;
+    
+    R := HomalgRing( D );
+    
+    if not IsIdenticalObj( R, HomalgRing( N ) ) then
+        Error( "the two matrices must be defined over identically the same ring\n" );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.Diff) then
+        diff := RP!.Diff( D, N );
+        if not IsHomalgMatrix( diff ) then
+            diff := HomalgMatrix( diff, NrRows( D ) * NrRows( N ), NrColumns( D ) * NrColumns( N ), R );
+        fi;
+        return diff;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called Diff ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( Diff,
         "for two homalg ring elements",
         [ IsHomalgRingElement, IsHomalgRingElement ],
         

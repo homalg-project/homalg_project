@@ -845,6 +845,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               Diff :=
+                 function( D, N )
+                   
+                   return homalgSendBlocking( [ "Diff(", D, N, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Diff );
+                   
+                 end,
+               
                Pullback :=
                  function( phi, M )
                    
