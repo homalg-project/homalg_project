@@ -542,7 +542,7 @@ InstallMethod( CoxRing,
                
   function( variety )
     
-    return CoxRing( variety, TORIC_VARIETIES.CoxRingIndet );
+    return CoxRing( variety, [ TORIC_VARIETIES.CoxRingIndet ] );
     
 end );
 
