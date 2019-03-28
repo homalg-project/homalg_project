@@ -86,12 +86,8 @@ Dependencies := rec(
                            [ "Modules", ">=2016.01.20" ],
                            [ "GradedModules", ">=2015.12.04" ],
                            [ "ToolsForHomalg", ">=2016.02.17" ],
-                           [ "AutoDoc", ">=2016.02.16" ],
-                           [ "NormalizInterface", ">=0.9.8" ],
-                           [ "CddInterface", ">= 2017.04.02" ],
-                           [ "4ti2Interface", ">= 2015.11.06" ],
-                           ],
-  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ] ],
+                           [ "AutoDoc", ">=2016.02.16" ] ],
+  SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       
 ),
