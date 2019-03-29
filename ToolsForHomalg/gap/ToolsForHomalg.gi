@@ -599,7 +599,7 @@ end );
 InstallGlobalFunction( MatchPropertiesAndAttributes,
   function( arg )
     local S, T, properties, attributes, propertiesS, propertiesT,
-          attributesS, attributesT, p, a, components, c;
+          attributesS, attributesT, p, a, components, c, attributes_do_not_check_their_equality;
     
     S := arg[1];
     T := arg[2];
@@ -653,6 +653,26 @@ InstallGlobalFunction( MatchPropertiesAndAttributes,
             elif IsBound( T!.(c) ) and not IsBound( S!.(c) ) then
                 S!.(c) := T!.(c);
             fi;
+        od;
+        
+    fi;
+    
+    if Length( arg ) > 5 then
+        ## checking their equality might again trigger MatchPropertiesAndAttributes
+        ## and cause infinite loops
+        attributes_do_not_check_their_equality := arg[6];
+        
+        attributesS := Intersection2( KnownAttributesOfObject( S ), attributes_do_not_check_their_equality );
+        attributesT := Intersection2( KnownAttributesOfObject( T ), attributes_do_not_check_their_equality );
+        
+        ## for attributes:
+        for a in Difference( attributesS, attributesT ) do
+            Setter( ValueGlobal( a ) )( T, ValueGlobal( a )( S ) );
+        od;
+        
+        ## now backwards
+        for a in Difference( attributesT, attributesS ) do
+            Setter( ValueGlobal( a ) )( S, ValueGlobal( a )( T ) );
         od;
         
     fi;

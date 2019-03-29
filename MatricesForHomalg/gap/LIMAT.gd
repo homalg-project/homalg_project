@@ -76,7 +76,7 @@ InstallValue( LIMAT,
               "PositionOfFirstNonZeroEntryPerRow",
               "PositionOfFirstNonZeroEntryPerColumn",
               ],
-            ShallowCopy_attributes :=
+            intrinsic_attributes_do_not_check_their_equality :=
             [
               "BasisOfRowModule",
               "BasisOfColumnModule",

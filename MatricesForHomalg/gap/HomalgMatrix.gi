@@ -169,8 +169,9 @@ InstallMethod( ShallowCopy,
         
         MatchPropertiesAndAttributes( M, MM,
                 LIMAT.intrinsic_properties,
-                Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
-                LIMAT.intrinsic_components
+                LIMAT.intrinsic_attributes,
+                LIMAT.intrinsic_components,
+                LIMAT.intrinsic_attributes_do_not_check_their_equality
                 );
         
         return MM;
@@ -233,8 +234,9 @@ InstallMethod( ShallowCopy,
             
             MatchPropertiesAndAttributes( M, MM,
                     LIMAT.intrinsic_properties,
-                    Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
-                    LIMAT.intrinsic_components
+                    LIMAT.intrinsic_attributes,
+                    LIMAT.intrinsic_components,
+                    LIMAT.intrinsic_attributes_do_not_check_their_equality
                     );
             
             return MM;
@@ -947,8 +949,9 @@ InstallMethod( \=,
             if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
                 MatchPropertiesAndAttributes( M1, M2,
                         LIMAT.intrinsic_properties,
-                        Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
-                        LIMAT.intrinsic_components
+                        LIMAT.intrinsic_attributes,
+                        LIMAT.intrinsic_components,
+                        LIMAT.intrinsic_attributes_do_not_check_their_equality
                         );
             fi;
             
@@ -962,8 +965,9 @@ InstallMethod( \=,
         if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
             MatchPropertiesAndAttributes( M1, M2,
                     LIMAT.intrinsic_properties,
-                    Concatenation( LIMAT.intrinsic_attributes, LIMAT.ShallowCopy_attributes ),
-                    LIMAT.intrinsic_components
+                    LIMAT.intrinsic_attributes,
+                    LIMAT.intrinsic_components,
+                    LIMAT.intrinsic_attributes_do_not_check_their_equality
                     );
         fi;
         
