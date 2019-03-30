@@ -1260,6 +1260,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         RP := homalgTable( R );
         RP!.IsUnit := RP!.IsUnit_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
     fi;
     
     return R;
@@ -1496,6 +1497,7 @@ InstallMethod( PolynomialRing,
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
     fi;
     
     return S;
@@ -1682,6 +1684,7 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
     fi;
     
     return S;
@@ -1827,6 +1830,7 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
     fi;
     
     if 0 in weights then
@@ -1959,6 +1963,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
     fi;
     
     return S;
