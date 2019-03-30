@@ -129,6 +129,25 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                
+               RadicalDecomposition :=
+                 function( mat )
+                   local R, fac;
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only primary decomposition of one-column matrices is supported\n" );
+                   fi;
+                   
+                   R := HomalgRing( mat );
+                   
+                   ## an empty matrix is excluded by the high-level procedure
+                   mat := BasisOfRows( mat );
+                   
+                   fac := PrimeDivisors( AbsInt( MatElm( mat, 1, 1 ) ) );
+                   
+                   return List( fac, a -> HomalgMatrix( [ a ], 1, 1, R ) );
+                   
+                 end,
+               
                RadicalSubobject :=
                  function( mat )
                    local rad;
