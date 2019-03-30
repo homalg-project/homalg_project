@@ -887,6 +887,30 @@ proc PrimaryDecomposition_Z (matrix m)\n\
   return(primdecZ(m))\n\
 }\n\n",
 
+    RadicalSubobject := "\n\
+proc RadicalSubobject (matrix m)\n\
+{\n\
+  return(matrix(radical(m)))\n\
+}\n\n",
+
+    RadicalSubobject_Z := "\n\
+proc RadicalSubobject_Z (matrix m)\n\
+{\n\
+  return(matrix(radicalZ(m)))\n\
+}\n\n",
+
+    RadicalDecomposition := "\n\
+proc RadicalDecomposition (matrix m)\n\
+{\n\
+  return(minAssGTZ(m))\n\
+}\n\n",
+
+    RadicalDecomposition_Z := "\n\
+proc RadicalDecomposition_Z (matrix m)\n\
+{\n\
+  return(minAssZ(m))\n\
+}\n\n",
+
     Deg := "\n\
 // start: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
 if ( defined( basering ) != 0 )\n\
@@ -1260,6 +1284,8 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         RP := homalgTable( R );
         RP!.IsUnit := RP!.IsUnit_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        RP!.RadicalSubobject := RP!.RadicalSubobject_Z;
+        RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
     fi;
@@ -1498,6 +1524,8 @@ InstallMethod( PolynomialRing,
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        RP!.RadicalSubobject := RP!.RadicalSubobject_Z;
+        RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
     fi;
@@ -1686,6 +1714,8 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        RP!.RadicalSubobject := RP!.RadicalSubobject_Z;
+        RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
     fi;
@@ -1833,6 +1863,8 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        RP!.RadicalSubobject := RP!.RadicalSubobject_Z;
+        RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
     fi;
@@ -1967,6 +1999,8 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        RP!.RadicalSubobject := RP!.RadicalSubobject_Z;
+        RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
     fi;

@@ -611,7 +611,18 @@ InstallValue( CommonHomalgTableForSingularTools,
                        Error( "only radical of one-column matrices is supported\n" );
                    fi;
                    
-                   return homalgSendBlocking( [ "matrix(radical(", mat, "))" ], [ "matrix" ], HOMALG_IO.Pictograms.RadicalSubobject );
+                   return homalgSendBlocking( [ "RadicalSubobject(", mat, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.RadicalSubobject );
+                   
+                 end,
+               
+               RadicalSubobject_Z :=
+                 function( mat )
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only radical of one-column matrices is supported\n" );
+                   fi;
+                   
+                   return homalgSendBlocking( [ "RadicalSubobject_Z(", mat, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.RadicalSubobject );
                    
                  end,
                
@@ -627,7 +638,39 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    v := homalgStream( R )!.variable_name;
                    
-                   homalgSendBlocking( [ "list ", v, "l=minAssGTZ(", mat, ")" ], "need_command", HOMALG_IO.Pictograms.RadicalDecomposition );
+                   homalgSendBlocking( [ "list ", v, "l=RadicalDecomposition(", mat, ")" ], "need_command", HOMALG_IO.Pictograms.RadicalDecomposition );
+                   
+                   c := Int( homalgSendBlocking( [ "size(", v, "l)" ], "need_output", R, HOMALG_IO.Pictograms.RadicalDecomposition ) );
+                   
+                   return
+                     List( [ 1 .. c ],
+                           function( i )
+                             local prime;
+                             
+                             prime := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             
+                             homalgSendBlocking( [ "matrix ", prime, "[1][size(", v, "l[", i, "])]=", v, "l[", i, "]" ], "need_command", HOMALG_IO.Pictograms.RadicalDecomposition );
+                             
+                             return prime;
+                             
+                           end
+                         );
+                   
+                 end,
+               
+               RadicalDecomposition_Z :=
+                 function( mat )
+                   local R, v, c;
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only primary decomposition of one-column matrices is supported\n" );
+                   fi;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=RadicalDecomposition_Z(", mat, ")" ], "need_command", HOMALG_IO.Pictograms.RadicalDecomposition );
                    
                    c := Int( homalgSendBlocking( [ "size(", v, "l)" ], "need_output", R, HOMALG_IO.Pictograms.RadicalDecomposition ) );
                    
