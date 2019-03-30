@@ -509,6 +509,17 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( Indeterminates,
+        "for homalg ring of integers",
+        [ IsHomalgRing and IsIntegersForHomalg ],
+        
+  function( R )
+    
+    return [ ];
+    
+end );
+
+##
 InstallMethod( AssignGeneratorVariables,
         "for homalg rings",
         [ IsHomalgRing ],
