@@ -1261,6 +1261,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         RP!.IsUnit := RP!.IsUnit_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
+        Unbind( RP!.MaximalDegreePart );
     fi;
     
     return R;
@@ -1498,6 +1499,7 @@ InstallMethod( PolynomialRing,
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
+        Unbind( RP!.MaximalDegreePart );
     fi;
     
     return S;
@@ -1685,6 +1687,7 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
+        Unbind( RP!.MaximalDegreePart );
     fi;
     
     return S;
@@ -1831,6 +1834,7 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
+        Unbind( RP!.MaximalDegreePart );
     fi;
     
     if 0 in weights then
@@ -1964,6 +1968,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
+        Unbind( RP!.MaximalDegreePart );
     fi;
     
     return S;
