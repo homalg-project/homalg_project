@@ -1498,6 +1498,14 @@ InstallMethod( PolynomialRing,
             
         fi;
         
+    else
+        
+        if order = fail then
+            
+            SetPolynomialRingWithDegRevLexOrdering( S, S );
+            
+        fi;
+        
     fi;
     
     SetRingProperties( S, r, var );
