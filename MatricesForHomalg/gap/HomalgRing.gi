@@ -108,7 +108,8 @@ InstallValue( CommonHomalgTableForRings,
                     brackets := [ "{", "}" ];
                     
                 ## the (free) polynomial ring (relative version):
-                elif HasRelativeIndeterminatesOfPolynomialRing( R ) then
+                elif HasBaseRing( R ) and HasRelativeIndeterminatesOfPolynomialRing( R ) and
+                  not IsIdenticalObj( R, BaseRing( R ) ) then
                     
                     var := RelativeIndeterminatesOfPolynomialRing( R );
                     
@@ -351,6 +352,13 @@ InstallMethod( PolynomialRingWithProductOrdering,
     
 end );
 
+##
+InstallMethod( BaseRing,
+        "for homalg rings",
+        [ IsHomalgRing and HasCoefficientsRing ],
+        
+  CoefficientsRing );
+
 ####################################
 #
 # methods for operations:
@@ -518,6 +526,13 @@ InstallMethod( Indeterminates,
     return [ ];
     
 end );
+
+##
+InstallMethod( RelativeIndeterminatesOfPolynomialRing,
+        "for homalg rings",
+        [ IsHomalgRing and HasCoefficientsRing ],
+        
+  IndeterminatesOfPolynomialRing );
 
 ##
 InstallMethod( AssignGeneratorVariables,
