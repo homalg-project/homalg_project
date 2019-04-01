@@ -80,3 +80,39 @@ Display( IrrelevantIdeal( P1xP1 ) );
 #! 
 #! (graded, degrees of generators: [ ( 1, 1 ), ( 1, 1 ), ( 1, 1 ), ( 1, 1 ) ])
 #! @EndExample
+
+
+
+#! @System ConvenientConstructors
+
+#! @Example
+rays := [ [1,0],[-1,0],[0,1],[0,-1] ];
+#! [ [ 1, 0 ], [ -1, 0 ], [ 0, 1 ], [ 0, -1 ] ]
+cones := [ [1,3],[1,4],[2,3],[2,4] ];
+#! [ [1,3],[1,4],[2,3],[2,4] ]
+weights := [ [1,0],[1,0],[0,1],[0,1] ];
+#! [ [1,0],[1,0],[0,1],[0,1] ]
+weights2 := [ [1,1],[1,1],[1,2],[1,2] ];
+#! [ [1,1],[1,1],[1,2],[1,2] ]
+tor1 := ToricVariety( rays, cones, weights, "x1,x2,y1,y2" );
+#! <A toric variety of dimension 2>
+CoxRing( tor1 );
+#! Q[x2,y2,y1,x1]
+#! (weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])
+tor2:= ToricVariety( rays, cones, weights, "q" );
+#! <A toric variety of dimension 2>
+CoxRing( tor2 );
+#! Q[q_2,q_4,q_3,q_1]
+#! (weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])
+tor3:= ToricVariety( rays, cones, weights );
+#! <A toric variety of dimension 2>
+CoxRing( tor3 );
+#! Q[x_2,x_4,x_3,x_1]
+#! (weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])
+tor4:= ToricVariety( rays, cones, weights2, "x1,x2,z1,z2" );
+#! <A toric variety of dimension 2>
+CoxRing( tor4 );
+#! Q[x2,z2,z1,x1]
+#! (weights: [ ( 1, 1 ), ( 1, 2 ), ( 1, 2 ), ( 1, 1 ) ])
+
+#! @EndExample
