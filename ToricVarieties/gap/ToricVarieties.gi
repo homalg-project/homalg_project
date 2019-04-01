@@ -581,7 +581,7 @@ InstallMethod( CoxRing,
     raylist := RayGenerators( FanOfVariety( variety ) );
     
     # check for valid input and, if provided, form list of final variable names
-    if Length( var_list ) <> 1 and Length( var_list ) <> Length( raylist ) then
+    if ( Length( var_list ) <> 1 and Length( var_list ) <> Length( raylist ) ) then
         Error( "either one variable name, or a variable name for each ray generator must be specified" );
     fi;
 
