@@ -566,17 +566,32 @@ RedispatchOnCondition( CoxRing, true, [ IsToricVariety, IsString ], [ HasNoTorus
 ##
 InstallMethod( CoxRing,
                "for convex toric varieties.",
-               [ IsToricVariety and HasNoTorusfactor, IsString ],
+               [ IsToricVariety and HasNoTorusfactor, IsList ],
                
-  function( variety, variable )
-    local raylist, indeterminates, ring, class_list;
+  function( variety, variable_names )
+    local var_list, raylist, indeterminates, ring, class_list;
     
+    # test for valid input
+    if not IsString( variable_names ) then
+        Error( "the variable names must be specified as a string" );
+    fi;
+
+    # identify the individual names and the ray generators
+    var_list := SplitString( variable_names, "," );
     raylist := RayGenerators( FanOfVariety( variety ) );
     
-    indeterminates := List( [ 1 .. Length( raylist ) ], i -> JoinStringsWithSeparator( [ variable, i ], "_" ) );
+    # check for valid input and, if provided, form list of final variable names
+    if Length( var_list ) <> 1 and Length( var_list ) <> Length( raylist ) then
+        Error( "either one variable name, or a variable name for each ray generator must be specified" );
+    fi;
 
-    indeterminates := JoinStringsWithSeparator( indeterminates, "," );
-    
+    if Length( var_list ) = 1 then
+        indeterminates := List( [ 1 .. Length( raylist ) ], i -> JoinStringsWithSeparator( [ var_list[ 1 ], i ], "_" ) );
+        indeterminates := JoinStringsWithSeparator( indeterminates, "," );
+    else
+        indeterminates := var_list;
+    fi;
+
     ring := GradedRing( DefaultGradedFieldForToricVarieties() * indeterminates );
     
     SetDegreeGroup( ring, ClassGroup( variety ) );
