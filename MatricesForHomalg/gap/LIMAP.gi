@@ -180,7 +180,7 @@ InstallMethod( DataOfCoordinateRingOfGraph,
         fi;
     fi;
     
-    images := phi!.images;
+    images := ImagesOfRingMap( phi );
     
     images := List( images, x -> x / ST );
     

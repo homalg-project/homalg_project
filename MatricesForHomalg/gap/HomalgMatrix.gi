@@ -3108,62 +3108,6 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( RingMap,
-        "for homalg rings",
-        [ IsHomalgMatrix, IsHomalgRing, IsHomalgRing ],
-        
-  function( images, S, T )
-    
-    if not ( NrRows( images ) = 1 or NrColumns( images ) = 1 ) then
-        Error( "the matrix must either has one row or one column\n" );
-    fi;
-    
-    return RingMap( EntriesOfHomalgMatrix( images ), S, T );
-    
-end );
-
-##
-InstallMethod( RingMap,
-        "constructor for homalg ring maps",
-        [ IsHomalgMatrix, IsHomalgRing ],
-        
-  function( mat, R )
-    local r, indets;
-    
-    r := NrRows( mat );
-    
-    if NrColumns( mat ) <> r then
-        Error( "the matrix is not quadratic\n" );
-    fi;
-    
-    indets := Indeterminates( R );
-    
-    if Length( indets ) <> r then
-        Error( "the number of indeterminates does not match the number of rows of the matrix\n" );
-    fi;
-    
-    indets := HomalgMatrix( indets, r, 1, R );
-    
-    if not IsIdenticalObj( R, HomalgRing( mat ) ) then
-        mat := R * mat;
-    fi;
-    
-    return RingMap( mat * indets, R, R );
-    
-end );
-
-##
-InstallMethod( RingMap,
-        "constructor for homalg ring maps",
-        [ IsHomalgMatrix ],
-        
-  function( mat )
-    
-    return RingMap( mat, HomalgRing( mat ) );
-    
-end );
-
-##
 InstallGlobalFunction( ListToListList,
   function( L, r, c )
     local M, i;

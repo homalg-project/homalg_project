@@ -928,15 +928,6 @@ DeclareOperation( "ConvertHomalgMatrix",
 #DeclareOperation( "*",
 #        [ IsHomalgMatrix, IsHomalgRing ] );
 
-DeclareOperation( "RingMap",
-        [ IsHomalgMatrix, IsHomalgRing, IsHomalgRing ] );
-
-DeclareOperation( "RingMap",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "RingMap",
-        [ IsHomalgMatrix ] );
-
 # basic operations:
 
 DeclareOperation( "HomalgRing",
@@ -1200,9 +1191,6 @@ DeclareOperation( "ProjectiveDegree",
 
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
         [ IsHomalgMatrix, IsList, IsList ] );
-
-DeclareOperation( "Pullback",
-        [ IsHomalgRingMap, IsHomalgMatrix ] );
 
 DeclareOperation( "NoetherNormalization",
         [ IsHomalgMatrix ] );

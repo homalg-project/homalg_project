@@ -201,13 +201,29 @@ DeclareAttribute( "CoordinateRingOfGraph",
 # constructors:
 
 DeclareOperation( "RingMap",
+        [ IsHomalgMatrix, IsHomalgRing, IsHomalgRing ] );
+
+DeclareOperation( "RingMap",
         [ IsList, IsHomalgRing, IsHomalgRing ] );
 
+DeclareOperation( "RingMap",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "RingMap",
+        [ IsHomalgMatrix ] );
+
+# attributes
+
+DeclareAttribute( "ImagesOfRingMap",
+        IsHomalgRingMap );
+
+DeclareAttribute( "ImagesOfRingMapAsColumnMatrix",
+        IsHomalgRingMap );
+
+DeclareAttribute( "DataOfCoordinateRingOfGraph",
+        IsHomalgRingMap );
+
 # basic operations:
-
-DeclareOperation( "ImagesOfRingMap",
-        [ IsHomalgRingMap ] );
-
-DeclareOperation( "DataOfCoordinateRingOfGraph",
-        [ IsHomalgRingMap ] );
+DeclareOperation( "Pullback",
+        [ IsHomalgRingMap, IsHomalgMatrix ] );
 

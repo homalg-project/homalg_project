@@ -61,7 +61,7 @@ InstallMethod( ImagesOfRingMap,
         
   function( phi )
     
-    return phi!.images;
+    return EntriesOfHomalgMatrix( ImagesOfRingMapAsColumnMatrix( phi ) );
     
 end );
 
@@ -85,15 +85,30 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
 ##
 InstallMethod( RingMap,
-        "constructor for homalg ring maps",
-        [ IsList, IsHomalgRing, IsHomalgRing ],
+        "for a homalg matrix and two homalg rings",
+        [ IsHomalgMatrix, IsHomalgRing, IsHomalgRing ],
         
   function( images, S, T )
-    local map, type;
+    local c, map, type;
     
-    map := rec( images := images );
+    c := NrColumns( images );
+    
+    if not ( c = 1 or NrRows( images ) = 1 ) then
+        Error( "the matrix must either has one row or one column\n" );
+    fi;
+    
+    if c > 1 then
+        images := Involution( images );
+    fi;
+    
+    if not IsIdenticalObj( T, HomalgRing( images ) ) then
+        images := T * images;
+    fi;
+    
+    map := rec( );
     
     if IsIdenticalObj( S, T ) then
         type := TheTypeHomalgRingSelfMap;
@@ -104,10 +119,70 @@ InstallMethod( RingMap,
     ## Objectify:
     ObjectifyWithAttributes(
             map, type,
+            ImagesOfRingMapAsColumnMatrix, images,
             Source, S,
             Range, T );
     
     return map;
+    
+end );
+
+##
+InstallMethod( RingMap,
+        "for a list and two homalg rings",
+        [ IsList, IsHomalgRing, IsHomalgRing ],
+        
+  function( images, S, T )
+    local matrix, map;
+    
+    matrix := HomalgMatrix( images, Length( images ), 1, T );
+    
+    map := RingMap( matrix, S, T );
+    
+    SetImagesOfRingMap( map, images );
+    
+    return map;
+    
+end );
+
+##
+InstallMethod( RingMap,
+        "for a homalg matrix and a homalg ring",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( mat, R )
+    local r, indets;
+    
+    r := NrRows( mat );
+    
+    if NrColumns( mat ) <> r then
+        Error( "the matrix is not quadratic\n" );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    if Length( indets ) <> r then
+        Error( "the number of indeterminates does not match the number of rows of the matrix\n" );
+    fi;
+    
+    indets := HomalgMatrix( indets, r, 1, R );
+    
+    if not IsIdenticalObj( R, HomalgRing( mat ) ) then
+        mat := R * mat;
+    fi;
+    
+    return RingMap( mat * indets, R, R );
+    
+end );
+
+##
+InstallMethod( RingMap,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( mat )
+    
+    return RingMap( mat, HomalgRing( mat ) );
     
 end );
 

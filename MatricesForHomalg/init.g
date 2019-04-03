@@ -14,10 +14,12 @@ ReadPackage( "MatricesForHomalg", "gap/MatricesForHomalg.gd" );
 ## rings
 ReadPackage( "MatricesForHomalg", "gap/homalgTable.gd" );
 ReadPackage( "MatricesForHomalg", "gap/HomalgRing.gd" );
-ReadPackage( "MatricesForHomalg", "gap/HomalgRingMap.gd" );
 
 ## matrices
 ReadPackage( "MatricesForHomalg", "gap/HomalgMatrix.gd" );
+
+## ring maps
+ReadPackage( "MatricesForHomalg", "gap/HomalgRingMap.gd" );
 
 ## ring relations
 ReadPackage( "MatricesForHomalg", "gap/HomalgRingRelations.gd" );
