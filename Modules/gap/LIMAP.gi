@@ -211,17 +211,6 @@ end );
 #
 ####################################
 
-##
-InstallMethod( ImagesOfRingMap,
-        "for homalg ring maps",
-        [ IsHomalgRingMap ],
-        
-  function( phi )
-    
-    return phi!.images;
-    
-end );
-
 ##  <#GAPDoc Label="Kernel:ringmap">
 ##  <ManSection>
 ##    <Meth Arg="phi" Name="Kernel" Label="for ring maps"/>
