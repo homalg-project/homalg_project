@@ -65,6 +65,23 @@ InstallMethod( ImagesOfRingMap,
     
 end );
 
+##
+InstallMethod( PreCompose,
+        "for two homalg ring maps",
+        [ IsHomalgRingMap, IsHomalgRingMap ],
+        
+  function( psi, phi )
+    local S, T;
+    
+    S := Source( psi );
+    T := Range( phi );
+    
+    psi := ImagesOfRingMapAsColumnMatrix( psi );
+    
+    return RingMap( Pullback( phi, psi ), S, T );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

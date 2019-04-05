@@ -227,3 +227,5 @@ DeclareAttribute( "DataOfCoordinateRingOfGraph",
 DeclareOperation( "Pullback",
         [ IsHomalgRingMap, IsHomalgMatrix ] );
 
+DeclareOperation( "PreCompose",
+        [ IsHomalgRingMap, IsHomalgRingMap ] );
