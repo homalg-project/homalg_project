@@ -2385,12 +2385,19 @@ InstallMethod( LcmOp,
         [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( p, q )
+    local R, pp, qq;
     
     if IsZero( p ) or IsZero( q ) then
         return Zero( p );
     fi;
     
-    return p * q / GcdOp( p, q );
+    R := HomalgRing( p );
+    
+    pp := HomalgMatrix( [ p ], 1, 1, R );
+    qq := HomalgMatrix( [ q ], 1, 1, R );
+    
+    ## this can be expressed categorically
+    return p * MatElm( SyzygiesOfRows( pp, qq ), 1, 1 );
     
 end );
 
