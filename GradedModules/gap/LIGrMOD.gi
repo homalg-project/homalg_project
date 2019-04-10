@@ -219,7 +219,7 @@ InstallImmediateMethod( IsZero,
         
   function( M )
     
-    return AffineDimension( M ) <= HOMALG_MODULES.DimensionOfZeroModules;
+    return AffineDimension( M ) <= HOMALG_MATRICES.DimensionOfZeroModules;
     
 end );
 
@@ -357,7 +357,7 @@ InstallMethod( IsZero,
         TryNextMethod( );
     fi;
     
-    return AffineDimension( M ) <= HOMALG_MODULES.DimensionOfZeroModules;
+    return AffineDimension( M ) <= HOMALG_MATRICES.DimensionOfZeroModules;
     
 end );
 

@@ -1390,7 +1390,7 @@ InstallMethod( AffineDimension,
     
     ## we may use AffineDimension to decide IsZero( M )
     if ( HasIsZero( M ) and IsZero( M ) ) or NrGenerators( M ) = 0 then
-        return HOMALG_MODULES.DimensionOfZeroModules;;
+        return HOMALG_MATRICES.DimensionOfZeroModules;;
     elif NrRelations( M ) = 0 and HasKrullDimension( R ) then
         return KrullDimension( R );
     fi;
@@ -1419,7 +1419,7 @@ InstallMethod( AffineDimension,
     
     ## we may use AffineDimension to decide IsZero( M )
     if ( HasIsZero( M ) and IsZero( M ) ) or NrGenerators( M ) = 0 then
-        return HOMALG_MODULES.DimensionOfZeroModules;;
+        return HOMALG_MATRICES.DimensionOfZeroModules;;
     elif NrRelations( M ) = 0 and HasKrullDimension( R ) then
         return KrullDimension( R );
     fi;

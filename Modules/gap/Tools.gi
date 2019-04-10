@@ -950,7 +950,7 @@ InstallMethod( DimensionOfHilbertPoincareSeries,
     local denom, hdeg, ldeg;
     
     if IsZero( series ) then
-        return HOMALG_MODULES.DimensionOfZeroModules;
+        return HOMALG_MATRICES.DimensionOfZeroModules;
     fi;
     
     denom := DenominatorOfRationalFunction( series );
@@ -1166,7 +1166,7 @@ InstallMethod( AffineDimension,
     
     if NrColumns( M ) = 0 then
         ## take care of n x 0 matrices
-        return HOMALG_MODULES.DimensionOfZeroModules;
+        return HOMALG_MATRICES.DimensionOfZeroModules;
     elif ZeroColumns( M ) <> [ ] then
         ## take care of matrices with zero columns, especially of 0 x n matrices
         if HasKrullDimension( R ) then
@@ -1180,7 +1180,7 @@ InstallMethod( AffineDimension,
         M := LeftPresentation( M );
         
         if IsZero( M ) then
-            return HOMALG_MODULES.DimensionOfZeroModules;
+            return HOMALG_MATRICES.DimensionOfZeroModules;
         elif RankOfObject( M ) = 0 then
             return 0;
         fi;
@@ -1226,7 +1226,7 @@ InstallMethod( AffineDimension,
     
     if NrColumns( M ) = 0 then
         ## take care of n x 0 matrices
-        return HOMALG_MODULES.DimensionOfZeroModules;
+        return HOMALG_MATRICES.DimensionOfZeroModules;
     elif ZeroColumns( M ) <> [ ] then
         ## take care of matrices with zero columns, especially of 0 x n matrices
         if HasKrullDimension( R ) then
@@ -1240,7 +1240,7 @@ InstallMethod( AffineDimension,
         M := LeftPresentation( M );
         
         if IsZero( M ) then
-            return HOMALG_MODULES.DimensionOfZeroModules;
+            return HOMALG_MATRICES.DimensionOfZeroModules;
         elif RankOfObject( M ) = 0 then
             return 0;
         fi;
@@ -1259,7 +1259,7 @@ InstallMethod( AffineDimension,
         d := RP!.AffineDimension( M );
         
         if d < 0 then
-            d := HOMALG_MODULES.DimensionOfZeroModules;
+            d := HOMALG_MATRICES.DimensionOfZeroModules;
         fi;
         
         return d;
@@ -1272,7 +1272,7 @@ InstallMethod( AffineDimension,
         hilb := HilbertPoincareSeries( M );
         
         if IsZero( hilb ) then
-            d := HOMALG_MODULES.DimensionOfZeroModules;
+            d := HOMALG_MATRICES.DimensionOfZeroModules;
         else
             d := Degree( DenominatorOfRationalFunction( hilb ) );
         fi;
@@ -1284,7 +1284,7 @@ InstallMethod( AffineDimension,
         d := RP!.AffineDimensionOfIdeal( M );
         
         if d < 0 then
-            d := HOMALG_MODULES.DimensionOfZeroModules;
+            d := HOMALG_MATRICES.DimensionOfZeroModules;
         fi;
         
         return d;
