@@ -10,11 +10,54 @@
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+DeclareAttribute( "DimensionOfHilbertPoincareSeries",
+        IsRationalFunction );
+
+DeclareAttribute( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
+        IsRationalFunction );
+
+DeclareAttribute( "HilbertPolynomialOfHilbertPoincareSeries",
+        IsRationalFunction );
+
+DeclareAttribute( "DataOfHilbertFunction",
+        IsRationalFunction );
+
+DeclareAttribute( "HilbertFunction",
+        IsRationalFunction );
+
+DeclareAttribute( "IndexOfRegularity",
+        IsRationalFunction );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
 
+DeclareGlobalFunction( "VariableForHilbertPoincareSeries" );
+
+DeclareGlobalFunction( "VariableForHilbertPolynomial" );
+
+DeclareGlobalFunction( "CoefficientsOfLaurentPolynomialsWithRange" );
+
+DeclareGlobalFunction( "SumCoefficientsOfLaurentPolynomials" );
+
+DeclareGlobalFunction( "_Binomial" );
+
 # basic operations:
+
+DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
+        [ IsRationalFunction, IsInt ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsList, IsInt, IsRingElement ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsList, IsInt ] );
 
 DeclareOperation( "MaxDimensionalRadicalSubobjectOp",
         [ IsHomalgMatrix ] );
@@ -156,3 +199,6 @@ DeclareOperation( "TangentSpaceByEquationsAtPoint",
 
 DeclareOperation( "TangentSpaceByEquationsAtPoint",
         [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "LeadingModule",
+        [ IsHomalgMatrix ] );

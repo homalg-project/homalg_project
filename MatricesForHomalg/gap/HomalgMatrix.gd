@@ -425,6 +425,9 @@ DeclareProperty( "IsReducedBasisOfColumnsMatrix",
 DeclareProperty( "IsUnitFree",
         IsHomalgMatrix );
 
+DeclareProperty( "IsPrimeModule",
+        IsHomalgMatrix );
+
 ####################################
 #
 # attributes:
