@@ -50,7 +50,7 @@ InstallGlobalFunction( VariableForHilbertPoincareSeries,
   function( arg )
     local s;
     
-    if not IsBound( HOMALG_MODULES.variable_for_Hilbert_Poincare_series ) then
+    if not IsBound( HOMALG_MATRICES.variable_for_Hilbert_Poincare_series ) then
         
         if Length( arg ) > 0 and IsString( arg[1] ) then
             s := arg[1];
@@ -60,10 +60,10 @@ InstallGlobalFunction( VariableForHilbertPoincareSeries,
         
         s := Indeterminate( Rationals, s );
         
-        HOMALG_MODULES.variable_for_Hilbert_Poincare_series := s;
+        HOMALG_MATRICES.variable_for_Hilbert_Poincare_series := s;
     fi;
     
-    return HOMALG_MODULES.variable_for_Hilbert_Poincare_series;
+    return HOMALG_MATRICES.variable_for_Hilbert_Poincare_series;
     
 end );
 
@@ -72,7 +72,7 @@ InstallGlobalFunction( VariableForHilbertPolynomial,
   function( arg )
     local t;
     
-    if not IsBound( HOMALG_MODULES.variable_for_Hilbert_polynomial ) then
+    if not IsBound( HOMALG_MATRICES.variable_for_Hilbert_polynomial ) then
         
         if Length( arg ) > 0 and IsString( arg[1] ) then
             t := arg[1];
@@ -82,10 +82,10 @@ InstallGlobalFunction( VariableForHilbertPolynomial,
         
         t := Indeterminate( Rationals, t );
         
-        HOMALG_MODULES.variable_for_Hilbert_polynomial := t;
+        HOMALG_MATRICES.variable_for_Hilbert_polynomial := t;
     fi;
     
-    return HOMALG_MODULES.variable_for_Hilbert_polynomial;
+    return HOMALG_MATRICES.variable_for_Hilbert_polynomial;
     
 end );
 
