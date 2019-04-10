@@ -2406,6 +2406,20 @@ InstallMethod( CoefficientsRing,
 end );
 
 ##
+InstallMethod( CoefficientsRing,
+        "for homalg fields",
+        [ IsHomalgRing and IsFieldForHomalg ],
+        
+  IdFunc );
+
+##
+InstallMethod( CoefficientsRing,
+        "for homalg ring of integers",
+        [ IsHomalgRing and IsIntegersForHomalg ],
+        
+  IdFunc );
+
+##
 InstallMethod( Size,
         "for a homalg ring",
         [ IsHomalgRing ],
