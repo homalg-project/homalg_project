@@ -186,6 +186,19 @@ DeclareAttribute( "DegreeOfMorphism",
 DeclareAttribute( "CoordinateRingOfGraph",
         IsHomalgRingMap );
 
+##  <#GAPDoc Label="GeneratorsOfKernelOfRingMap:ringmap">
+##  <ManSection>
+##    <Attr Arg="phi" Name="GeneratorsOfKernelOfRingMap" Label="for ring maps"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      The kernel ideal of the ring map <A>phi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "GeneratorsOfKernelOfRingMap",
+        IsHomalgRingMap );
+
 ## intrinsic attributes:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

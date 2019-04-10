@@ -45,21 +45,11 @@ InstallMethod( KernelSubobject,
         [ IsHomalgRingMap ],
         
   function( phi )
-    local G, S, T, indetsS, indetsT, rel;
+    local rel, S;
     
-    G := CoordinateRingOfGraph( phi );
+    rel := GeneratorsOfKernelOfRingMap( phi );
     
-    S := Source( phi );
-    T := Range( phi );
-    
-    indetsT := G!.indetsT;
-    
-    rel := RingRelations( G );
-    rel := MatrixOfRelations( rel );
-    
-    rel := Eliminate( rel, indetsT );
-    
-    rel := S * rel;
+    S := HomalgRing( rel );
     
     if IsBound( phi!.left ) and phi!.left = false then
         S := S * 1;
@@ -68,70 +58,6 @@ InstallMethod( KernelSubobject,
     fi;
     
     return Subobject( rel, S );
-    
-end );
-
-## KernelSubobject of projections
-InstallMethod( KernelSubobject,
-        "for homalg ring maps",
-        [ IsHomalgRingMap ],
-        
-  function( phi )
-
-    local T, mat, indetsT, lT, S, indetsS, lS, imgs, elim, zero, indets, iota;
-    
-    T := Range( phi );
-    
-    if HasRingRelations( T ) then
-        mat := MatrixOfRelations( T );
-        T := AmbientRing( T );
-    else
-        mat := HomalgZeroMatrix( 0, 1, T );
-    fi;
-    
-    indetsT := Indeterminates( T );
-    
-    lT := Length( indetsT );
-    
-    S := Source( phi );
-    
-    indetsS := Indeterminates( S );
-    
-    lS := Length( indetsS );
-    
-    imgs := ImagesOfRingMap( phi );
-    
-    elim := Difference( indetsT, imgs );
-    
-    if not Length( elim ) = lT - lS then
-        TryNextMethod( );
-    fi;
-    
-    mat := Eliminate( mat, elim );
-    
-    ## computing a basis might be expensive (delaying the output)
-    ## so leave it to the user or the next procedure
-    #mat := BasisOfRows( mat );
-    
-    zero := Zero( S );
-    
-    indets := ListWithIdenticalEntries( lT, zero );
-    
-    imgs := PositionsProperty( indetsT, a -> a in imgs );
-    
-    indets{imgs} := indetsS;
-    
-    iota := RingMap( indets, T, S );
-    
-    mat := Pullback( iota, mat );
-    
-    if IsBound( phi!.left ) and phi!.left = false then
-        S := S * 1;
-    else
-        S := 1 * S;	## the default
-    fi;
-    
-    return Subobject( mat, S );
     
 end );
 
