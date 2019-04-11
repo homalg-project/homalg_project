@@ -6617,3 +6617,356 @@ InstallMethod( IsPrimeModule,
     TryNextMethod( );
     
 end );
+
+##
+InstallMethod( IntersectWithSubalgebra,
+        "for a homalg matrix and a list",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( I, var )
+    local R, indets, J, S;
+    
+    R := HomalgRing( I );
+    
+    if not ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    if not IsSubset( indets, var ) then
+        Error( "expecting the second argument ", var,
+               " to be a subset of the set of indeterminates ", indets, "\n" );
+    fi;
+    
+    J := Eliminate( I, Difference( indets, var ) );
+    
+    S := CoefficientsRing( R ) * var;
+    
+    return S * J;
+    
+end );
+
+##
+InstallMethod( MaximalIndependentSet,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( I )
+    local R, indets, d, RP, i, combinations, u;
+    
+    R := HomalgRing( I );
+    
+    indets := Indeterminates( R );
+    
+    if IsZero( I ) then
+        return indets;
+    fi;
+    
+    I := BasisOfRowModule( I );
+    
+    d := AffineDimension( I );
+    
+    if d = 0 then
+        return [ ];
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.MaximalIndependentSet) then
+        indets := RP!.MaximalIndependentSet( I );
+        Assert( 0, Length( indets ) = d );
+        return indets;
+    fi;
+    
+    ## the fallback method
+    
+    combinations := IteratorOfCombinations( indets, d );
+    
+    for u in combinations do
+        if IsZero( IntersectWithSubalgebra( I, u ) ) then
+            return u;
+        fi;
+    od;
+    
+    Error( "oh, no maximal independent set found, this is a bug!\n" );
+    
+end );
+
+## for ideals with affine entries
+InstallMethod( MaximalIndependentSet,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( I )
+    local R, indets, d, left;
+    
+    R := HomalgRing( I );
+    
+    indets := Indeterminates( R );
+    
+    if IsZero( I ) then
+        return indets;
+    fi;
+    
+    d := AffineDimension( I );
+    
+    if d = 0 then
+        return [ ];
+    fi;
+    
+    I := BasisOfRowModule( I );
+    
+    if not ForAll( EntriesOfHomalgMatrix( I ), a -> Degree( a ) = 1 ) then
+        TryNextMethod( );
+    fi;
+    
+    I := LeadingModule( I );
+    
+    return Difference( indets, EntriesOfHomalgMatrix( I ) );
+    
+end );
+
+##
+InstallMethod( AMaximalIdealContaining,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( I )
+    local R, A, one, indets, m, v, l, n_is_one, n, a, k, d;
+    
+    R := HomalgRing( I );
+    
+    if not HasCoefficientsRing( R ) then
+        TryNextMethod( );
+    fi;
+    
+    A := CoefficientsRing( R );
+    
+    if not ( HasIsFieldForHomalg( A ) and IsFieldForHomalg( A ) ) then
+        TryNextMethod( );
+    fi;
+    
+    one := HomalgIdentityMatrix( 1, R );
+    
+    I := BasisOfRowModule( I );
+    
+    if IsZero( DecideZeroRows( one, I ) ) then
+        Error( "expected a matrix not reducing one to zero\n" );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    if IsZero( I ) then
+        return HomalgMatrix( indets, Length( indets ), 1, R );
+    fi;
+    
+    m := I;
+    
+    while AffineDimension( m ) > 0 do
+        
+        v := MaximalIndependentSet( m );
+        
+        n_is_one := true;
+        
+        while true do
+            
+            n := UnionOfRows( m, HomalgMatrix( v, Length( v ), 1, R ) );
+            
+            n := BasisOfRowModule( n );
+            
+            if not IsZero( DecideZeroRows( one, n ) ) then
+                n_is_one := false;
+                break;
+            fi;
+            
+            l := Length( v );
+            
+            if l > 1 then
+                Remove( v, l );
+            else
+                break;
+            fi;
+            
+        od;
+        
+        if n_is_one then
+            
+            v := v[1];
+            
+            a := One( R );
+            k := 1;
+            
+            while true do
+                
+                n := UnionOfRows( m, HomalgMatrix( [ v^k + a ], 1, 1, R ) );
+                
+                n := BasisOfRowModule( n );
+                
+                if not IsZero( DecideZeroRows( one, n ) ) then
+                    break;
+                fi;
+                
+                a := a + 1;
+                
+                if IsZero( a ) then
+                    k := k + 1;
+                fi;
+                
+            od;
+            
+        fi;
+        
+        m := n;
+        
+    od;
+    
+    m := RadicalDecompositionOp( m );
+    
+    d := List( m, AffineDegree );
+    
+    d := Minimum( d );
+    
+    m := First( m, p -> AffineDegree( p ) = d );
+    
+    Assert( 4, AffineDimension( m ) = 0 );
+    
+    SetAffineDimension( m, 0 );
+    
+    return m;
+    
+end );
+
+##
+InstallMethod( AMaximalIdealContaining,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( I )
+    local R, A, one, indets, S, gens, gens0, lcm, p, Rp;
+    
+    R := HomalgRing( I );
+    
+    if not HasCoefficientsRing( R ) then
+        TryNextMethod( );
+    fi;
+    
+    A := CoefficientsRing( R );
+    
+    if not ( HasIsIntegersForHomalg( A ) and IsIntegersForHomalg( A ) ) then
+        TryNextMethod( );
+    fi;
+    
+    one := HomalgIdentityMatrix( 1, R );
+    
+    I := BasisOfRowModule( I );
+    
+    if IsZero( DecideZeroRows( one, I ) ) then
+        Error( "expected a matrix not reducing one to zero\n" );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    S := A * indets;
+    
+    if IsZero( I ) then
+        return UnionOfRows( HomalgMatrix( "[2]", 1, 1, R ), HomalgMatrix( indets, Length( indets ), 1, R ) );
+    fi;
+    
+    gens := EntriesOfHomalgMatrix( S * I );
+    
+    gens0 := Filtered( gens, g -> Degree( g ) = 0 );
+    
+    if not gens0 = [ ] then
+        
+        gens0 := List( List( gens0, String ), EvalString );
+        gens0 := Gcd( gens0 );
+        
+        p := PrimeDivisors( gens0 )[1];
+        
+    else
+        
+        lcm := Iterated( List( gens, LeadingCoefficient ), LcmOp );
+        lcm := Int( String( lcm ) );
+        
+        p := 2;
+        
+        while IsInt( lcm / p ) do
+            p := NextPrimeInt( p );
+        od;
+        
+    fi;
+    
+    Assert( 4, not ( p / R ) in I );
+    
+    Rp := HomalgRingOfIntegersInUnderlyingCAS( p, A );
+    S := Rp * indets;
+    I := S * I;
+    
+    p := HomalgMatrix( [ p ], 1, 1, R );
+    
+    return UnionOfRows( p, R * AMaximalIdealContaining( I ) );
+    
+end );
+
+##
+InstallMethod( AMaximalIdealContaining,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( I )
+    local R;
+    
+    R := HomalgRing( I );
+    
+    if not ( HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    I := BasisOfRowModule( I );
+    
+    if not IsZero( I ) then
+        Error( "expected a matrix not reducing one to zero\n" );
+    fi;
+    
+    return I;
+    
+end );
+
+##
+InstallMethod( AMaximalIdealContaining,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( I )
+    local R, one;
+    
+    R := HomalgRing( I );
+    
+    if not ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    one := HomalgIdentityMatrix( 1, R );
+    
+    I := BasisOfRowModule( I );
+    
+    if IsZero( DecideZeroRows( one, I ) ) then
+        Error( "expected a matrix not reducing one to zero\n" );
+    fi;
+    
+    if IsZero( I ) then
+        return HomalgMatrix( [ 2 ], 1, 1, R );
+    fi;
+    
+    if not NrRows( I ) = 1  then
+        Error( "Hermite normal form failed to produce the cyclic generator ",
+               "of the principal ideal\n" );
+    fi;
+    
+    I := MatElm( I, 1, 1 );
+    I := Int( String( I ) );
+    
+    return HomalgMatrix( [ PrimeDivisors( I ){[1]} ], 1, 1, R );
+    
+end );

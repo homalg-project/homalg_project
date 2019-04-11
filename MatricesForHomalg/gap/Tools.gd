@@ -202,3 +202,12 @@ DeclareOperation( "TangentSpaceByEquationsAtPoint",
 
 DeclareOperation( "LeadingModule",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "IntersectWithSubalgebra",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "MaximalIndependentSet",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "AMaximalIdealContaining",
+        [ IsHomalgMatrix ] );

@@ -1742,227 +1742,29 @@ InstallMethod( AMaximalIdealContaining,
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
   function( I )
-    local R, A, indets, ideal, m, v, l, n_is_one, n, a, k, d;
+    local left, ideal;
     
-    if IsOne( I ) then
-        Error( "expected a proper ideal\n" );
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( I );
+    
+    I := MatrixOfSubobjectGenerators( I );
+    
+    if not left then
+        I := Involution( I );
     fi;
     
-    R := HomalgRing( I );
+    I := AMaximalIdealContaining( I );
     
-    if not HasCoefficientsRing( R ) then
-        TryNextMethod( );
+    if not left then
+        I := Involution( I );
     fi;
     
-    A := CoefficientsRing( R );
-    
-    if not ( HasIsFieldForHomalg( A ) and IsFieldForHomalg( A ) ) then
-        TryNextMethod( );
-    fi;
-    
-    indets := Indeterminates( R );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+    if left then
         ideal := LeftSubmodule;
     else
         ideal := RightSubmodule;
     fi;
     
-    if IsZero( I ) then
-        return ideal( indets, R );
-    fi;
-    
-    m := I;
-    
-    while AffineDimension( m ) > 0 do
-        
-        v := MaximalIndependentSet( m );
-        
-        n_is_one := true;
-        
-        while true do
-            
-            n := m + ideal( v, R );
-            
-            if not IsOne( n ) then
-                n_is_one := false;
-                break;
-            fi;
-            
-            l := Length( v );
-            
-            if l > 1 then
-                Remove( v, l );
-            else
-                break;
-            fi;
-            
-        od;
-        
-        if n_is_one then
-            
-            v := v[1];
-            
-            a := One( R );
-            k := 1;
-            
-            while true do
-                
-                n := m + ideal( [ v^k + a ], R );
-                
-                if not IsOne( n ) then
-                    break;
-                fi;
-                
-                a := a + 1;
-                
-                if IsZero( a ) then
-                    k := k + 1;
-                fi;
-                
-            od;
-            
-        fi;
-        
-        m := n;
-        
-    od;
-    
-    m := RadicalDecomposition( m );
-    
-    d := List( m, AffineDegree );
-    
-    d := Minimum( d );
-    
-    m := First( m, p -> AffineDegree( p ) = d );
-    
-    Assert( 4, AffineDimension( m ) = 0 );
-    
-    SetAffineDimension( m, 0 );
-    
-    return m;
-    
-end );
-
-##
-InstallMethod( AMaximalIdealContaining,
-        "for homalg ideals",
-        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
-        
-  function( I )
-    local R, A, ideal, union, indets, S, gens, gens0, lcm, p, Rp;
-    
-    R := HomalgRing( I );
-    
-    if not HasCoefficientsRing( R ) then
-        TryNextMethod( );
-    fi;
-    
-    A := CoefficientsRing( R );
-    
-    if not ( HasIsIntegersForHomalg( A ) and IsIntegersForHomalg( A ) ) then
-        TryNextMethod( );
-    fi;
-    
-    if IsOne( I ) then
-        Error( "expected a proper ideal\n" );
-    fi;
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
-        ideal := LeftSubmodule;
-        union := UnionOfRows;
-    else
-        ideal := RightSubmodule;
-        union := UnionOfColumns;
-    fi;
-    
-    indets := Indeterminates( R );
-    
-    S := A * indets;
-    
-    if IsZero( I ) then
-        return ideal( Concatenation( [ "2" ], indets ), R );
-    fi;
-    
-    gens := EntriesOfHomalgMatrix( S * MatrixOfSubobjectGenerators( I ) );
-    
-    gens0 := Filtered( gens, g -> Degree( g ) = 0 );
-    
-    if not gens0 = [ ] then
-        
-        gens0 := List( List( gens0, String ), EvalString );
-        gens0 := Gcd( gens0 );
-        
-        p := PrimeDivisors( gens0 )[1];
-        
-    else
-        
-        lcm := Lcm_UsingCayleyDeterminant( List( gens, LeadingCoefficient ) );
-        lcm := Int( String( lcm ) );
-        
-        p := 2;
-        
-        while IsInt( lcm / p ) do
-            p := NextPrimeInt( p );
-        od;
-        
-    fi;
-    
-    Assert( 4, not ( p / R ) in I );
-    
-    Rp := HomalgRingOfIntegersInUnderlyingCAS( p, A );
-    S := Rp * indets;
-    I := ideal( S * MatrixOfSubobjectGenerators( I ) );
-    
-    p := HomalgMatrix( [ p ], 1, 1, R );
-    
-    return ideal( union( p, R * MatrixOfSubobjectGenerators( AMaximalIdealContaining( I ) ) ) );
-    
-end );
-
-##
-InstallMethod( AMaximalIdealContaining,
-        "for homalg ideals",
-        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
-        
-  function( I )
-    local R, ideal, basis, bas, nr_entries, p, Rp;
-    
-    R := HomalgRing( I );
-    
-    if not ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) then
-        TryNextMethod( );
-    fi;
-    
-    if IsOne( I ) then
-        Error( "expected a proper ideal\n" );
-    fi;
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
-        ideal := LeftSubmodule;
-        basis := BasisOfRows;
-        nr_entries := NrRows;
-    else
-        ideal := RightSubmodule;
-        basis := BasisOfColumns;
-        nr_entries := NrColumns;
-    fi;
-    
-    if IsZero( I ) then
-        return ideal( "2", R );
-    fi;
-    
-    bas := basis( MatrixOfSubobjectGenerators( I ) );
-    
-    if not nr_entries( bas ) = 1  then
-        Error( "Hermite normal form failed to produce the cyclic generator ",
-               "of the principal ideal\n" );
-    fi;
-    
-    bas := MatElm( bas, 1, 1 );
-    bas := Int( String( bas ) );
-    
-    return ideal( PrimeDivisors( bas ){[1]}, R );
+    return ideal( I );
     
 end );
 

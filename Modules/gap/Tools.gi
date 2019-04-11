@@ -20,99 +20,7 @@ InstallMethod( IntersectWithSubalgebra,
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsList ],
         
   function( I, var )
-    local R, indets, J, S;
-    
-    R := HomalgRing( I );
-    
-    if not ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) then
-        TryNextMethod( );
-    fi;
-    
-    indets := Indeterminates( R );
-    
-    if not IsSubset( indets, var ) then
-        Error( "expecting the second argument ", var,
-               " to be a subset of the set of indeterminates ", indets, "\n" );
-    fi;
-    
-    J := Eliminate( I, Difference( indets, var ) );
-    
-    S := CoefficientsRing( R ) * var;
-    
-    return S * J;
-    
-end );
-
-##
-InstallMethod( MaximalIndependentSet,
-        "for ideals",
-        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
-        
-  function( I )
-    local R, indets, d, RP, i, combinations, u;
-    
-    R := HomalgRing( I );
-    
-    indets := Indeterminates( R );
-    
-    if IsZero( I ) then
-        return indets;
-    fi;
-    
-    d := AffineDimension( I );
-    
-    if d = 0 then
-        return [ ];
-    fi;
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.MaximalIndependentSet) then
-        i := MatrixOfSubobjectGenerators( I );
-        if not IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
-            i := Involution( i );
-        fi;
-        i := BasisOfRowModule( i );
-        indets := RP!.MaximalIndependentSet( i );
-        Assert( 0, Length( indets ) = d );
-        return indets;
-    fi;
-    
-    ## the fallback method
-    
-    combinations := IteratorOfCombinations( indets, d );
-    
-    for u in combinations do
-        if IsZero( IntersectWithSubalgebra( I, u ) ) then
-            return u;
-        fi;
-    od;
-    
-    Error( "oh, no maximal independent set found, this is a bug!\n" );
-    
-end );
-
-## for ideals with affine entries
-InstallMethod( MaximalIndependentSet,
-        "for ideals",
-        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
-        
-  function( I )
-    local R, indets, d, left;
-    
-    R := HomalgRing( I );
-    
-    indets := Indeterminates( R );
-    
-    if IsZero( I ) then
-        return indets;
-    fi;
-    
-    d := AffineDimension( I );
-    
-    if d = 0 then
-        return [ ];
-    fi;
+    local left, ideal;
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( I );
     
@@ -122,15 +30,39 @@ InstallMethod( MaximalIndependentSet,
         I := Involution( I );
     fi;
     
-    I := BasisOfRowModule( I );
+    I := IntersectWithSubalgebra( I, var );
     
-    if not ForAll( EntriesOfHomalgMatrix( I ), a -> Degree( a ) = 1 ) then
-        TryNextMethod( );
+    if not left then
+        I := Involution( I );
     fi;
     
-    I := LeadingModule( I );
+    if left then
+        ideal := LeftSubmodule;
+    else
+        ideal := RightSubmodule;
+    fi;
     
-    return Difference( indets, EntriesOfHomalgMatrix( I ) );
+    return ideal( I );
+    
+end );
+
+##
+InstallMethod( MaximalIndependentSet,
+        "for ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I )
+    local left;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( I );
+    
+    I := MatrixOfSubobjectGenerators( I );
+    
+    if not left then
+        I := Involution( I );
+    fi;
+    
+    return MaximalIndependentSet( I );
     
 end );
 
