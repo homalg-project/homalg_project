@@ -336,16 +336,8 @@ InstallMethod( PolynomialRingWithProductOrdering,
   function( R )
     local B, C;
     
-    if HasBaseRing( R ) then
-        B := BaseRing( R );
-        if HasCoefficientsRing( R ) then
-            C := CoefficientsRing( R );
-            if not IsIdenticalObj( B, C ) then
-                TryNextMethod( );
-            fi;
-        else
-            TryNextMethod( );
-        fi;
+    if not IsIdenticalObj( BaseRing( R ), CoefficientsRing( R ) ) then
+        TryNextMethod( );
     fi;
     
     return R;
