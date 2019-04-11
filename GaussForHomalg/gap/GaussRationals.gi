@@ -76,7 +76,10 @@ InstallMethod( CreateHomalgTable,
 		 RowRankOfMatrix :=
 		   function( M )
 		     return Rank( MyEval( M ) );
-                   end
+                   end,
+                 
+                 RadicalSubobject := MyEval,
+                 
           );
                  
     for component in NamesOfComponents( RP_default ) do
