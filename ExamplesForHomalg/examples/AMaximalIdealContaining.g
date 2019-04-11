@@ -6,7 +6,7 @@ indets := Indeterminates( R );
 
 LoadPackage( "Modules" );
 
-I :=LeftSubmodule( "abc,bcd,cde,adf,cgh,b3f,a3g", R );
+I := LeftSubmodule( "abc,bcd,cde,adf,cgh,b3f,a3g", R );
 
 m := AMaximalIdealContaining( I );
 
