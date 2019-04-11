@@ -753,11 +753,19 @@ InstallMethod( GradedRing,
     fi;
     
     if HasCoefficientsRing( R ) then
-        SetCoefficientsRing( S, GradedRing( CoefficientsRing( R ) ) );
+        if IsIdenticalObj( R, CoefficientsRing( R ) ) then
+            SetCoefficientsRing( S, S );
+        else
+            SetCoefficientsRing( S, GradedRing( CoefficientsRing( R ) ) );
+        fi;
     fi;
     
     if HasBaseRing( R ) then
-        SetBaseRing( S, GradedRing( BaseRing( R ) ) );
+        if IsIdenticalObj( R, BaseRing( R ) ) then
+            SetBaseRing( S, S );
+        else
+            SetBaseRing( S, GradedRing( BaseRing( R ) ) );
+        fi;
     fi;
     
     for c in LIGrRNG.ringelement_attributes do

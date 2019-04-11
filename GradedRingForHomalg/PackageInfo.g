@@ -7,7 +7,7 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 Version := Maximum( [
   "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
-  "2018.12.11", ## Mohamed's version
+  "2018.12.12", ## Mohamed's version
 ## this line prevents merge conflicts
   "2019.03.21", ## Kamal's version
 ## this line prevents merge conflicts
