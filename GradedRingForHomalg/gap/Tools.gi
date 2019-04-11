@@ -693,6 +693,10 @@ InstallMethod( PolynomialsWithoutRelativeIndeterminates,
     ## k[b]
     B := BaseRing( R );
     
+    if IsIdenticalObj( R, B ) then
+        return M;
+    fi;
+    
     ## [b]
     base := Indeterminates( B );
     
