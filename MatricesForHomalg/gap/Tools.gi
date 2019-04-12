@@ -3353,13 +3353,23 @@ InstallMethod( Pullback,
         [ IsHomalgRingMap, IsHomalgMatrix ],
         
   function( phi, M )
-    local T, r, c, RP;
+    local R, S, T, r, c, RP;
     
-    if not IsIdenticalObj( HomalgRing( Source( phi ) ), HomalgRing( M ) ) then
-        Error( "the source ring of the ring map and the ring of the matrix are not identical\n" );
-    fi;
+    R := HomalgRing( M );
+    
+    S := Source( phi );
     
     T := HomalgRing( Range( phi ) );
+    
+    if not IsIdenticalObj( S, R ) then
+        if not ( HasAmbientRing( S ) and IsIdenticalObj( AmbientRing( S ), R ) ) then
+            Error( "the source ring of the ring map phi and the ring R of the matrix are not identical\n" );
+        fi;
+        if not IsBound( phi!.RingMapFromAmbientRing ) then
+            phi!.RingMapFromAmbientRing := RingMap( ImagesOfRingMapAsColumnMatrix( phi ), AmbientRing( S ), T );
+        fi;
+        return Pullback( phi!.RingMapFromAmbientRing, M );
+    fi;
     
     r := NrRows( M );
     c := NrColumns( M );
