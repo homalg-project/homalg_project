@@ -193,6 +193,13 @@ InstallGlobalFunction( HomalgRingOfIntegersInSage,
 end );
 
 ##
+InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
+        "for an integer and homalg ring in Sage",
+        [ IsInt, IsHomalgExternalRingInSageRep ],
+        
+  HomalgRingOfIntegersInSage );
+
+##
 InstallGlobalFunction( HomalgFieldOfRationalsInSage,
   function( arg )
     local R;
@@ -210,6 +217,13 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSage,
     return R;
     
 end );
+
+##
+InstallMethod( HomalgFieldOfRationalsInUnderlyingCAS,
+        "for a homalg ring in Sage",
+        [ IsHomalgExternalRingInSageRep ],
+        
+  HomalgFieldOfRationalsInSage );
 
 ##
 InstallMethod( FieldOfFractions,

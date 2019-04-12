@@ -886,6 +886,13 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
 end );
 
 ##
+InstallMethod( HomalgFieldOfRationalsInUnderlyingCAS,
+        "for a homalg ring in Maple",
+        [ IsHomalgExternalRingInMapleRep ],
+        
+  HomalgFieldOfRationalsInMaple );
+
+##
 InstallMethod( FieldOfFractions,
         "for homalg rings in Maple",
         [ IsHomalgExternalRingInMapleRep and IsIntegersForHomalg ],

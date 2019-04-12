@@ -658,6 +658,13 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
 end );
 
 ##
+InstallMethod( HomalgFieldOfRationalsInUnderlyingCAS,
+        "for a homalg ring in MAGMA",
+        [ IsHomalgExternalRingInMAGMARep ],
+        
+  HomalgFieldOfRationalsInMAGMA );
+
+##
 InstallGlobalFunction( HomalgCyclotomicFieldInMAGMA,
   function( arg )
     local degree, var, R;

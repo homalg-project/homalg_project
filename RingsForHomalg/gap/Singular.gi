@@ -1380,6 +1380,13 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
 end );
 
 ##
+InstallMethod( HomalgFieldOfRationalsInUnderlyingCAS,
+        "for a homalg ring in Singular",
+        [ IsHomalgExternalRingInSingularRep ],
+        
+  HomalgFieldOfRationalsInSingular );
+
+##
 InstallMethod( FieldOfFractions,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep and IsIntegersForHomalg ],

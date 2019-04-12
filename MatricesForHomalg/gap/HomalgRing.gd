@@ -1375,6 +1375,9 @@ DeclareOperation( "HomalgRingOfIntegersInUnderlyingCAS",
 
 DeclareGlobalFunction( "HomalgFieldOfRationals" );
 
+DeclareOperation( "HomalgFieldOfRationalsInUnderlyingCAS",
+        [ IsHomalgRing ] );
+
 DeclareGlobalFunction( "HomalgRingElement" );
 
 DeclareOperation( "AddRationalParameters",

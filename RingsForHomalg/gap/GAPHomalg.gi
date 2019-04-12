@@ -228,6 +228,13 @@ InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
 end );
 
 ##
+InstallMethod( HomalgFieldOfRationalsInUnderlyingCAS,
+        "for a homalg ring in external GAP",
+        [ IsHomalgExternalRingInGAPRep ],
+        
+  HomalgFieldOfRationalsInExternalGAP );
+
+##
 InstallMethod( FieldOfFractions,
         "for homalg rings in GAP",
         [ IsHomalgExternalRingInGAPRep and IsIntegersForHomalg ],
