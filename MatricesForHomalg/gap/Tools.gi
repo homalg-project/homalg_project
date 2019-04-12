@@ -6185,9 +6185,29 @@ InstallMethod( AffineDegree,
         [ IsHomalgMatrix, IsList, IsList ],
         
   function( M, weights, degrees )
-    local R, RP, hilb;
+    local R, k, char, RP, hilb;
     
     R := HomalgRing( M );
+    
+    if HasCoefficientsRing( R ) then
+        k := CoefficientsRing( R );
+        
+        if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
+            char := Eliminate( BasisOfRows( M ) );
+            if not IsZero( char ) then
+                char := EntriesOfHomalgMatrix( char );
+                char := List( char, a -> EvalString( String( a ) ) );
+                char := Gcd( char );
+                if not IsPrime( char ) then
+                    Error( "AffineDegree over a mixed characteristic, here ", char, ", is not supported yet\n" );
+                fi;
+                k := HomalgRingOfIntegersInUnderlyingCAS( char, k );
+                R := k * List( Indeterminates( R ), String );
+                M := R * M;
+                M := BasisOfRows( M );
+            fi;
+        fi;
+    fi;
     
     RP := homalgTable( R );
     
@@ -6225,7 +6245,7 @@ InstallMethod( AffineDegree,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, hilb, weights, degrees;
+    local R, k, char, RP, hilb, weights, degrees;
     
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
@@ -6233,6 +6253,26 @@ InstallMethod( AffineDegree,
     fi;
     
     R := HomalgRing( M );
+    
+    if HasCoefficientsRing( R ) then
+        k := CoefficientsRing( R );
+        
+        if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
+            char := Eliminate( BasisOfRows( M ) );
+            if not IsZero( char ) then
+                char := EntriesOfHomalgMatrix( char );
+                char := List( char, a -> EvalString( String( a ) ) );
+                char := Gcd( char );
+                if not IsPrime( char ) then
+                    Error( "AffineDegree over a mixed characteristic, here ", char, ", is not supported yet\n" );
+                fi;
+                k := HomalgRingOfIntegersInUnderlyingCAS( char, k );
+                R := k * List( Indeterminates( R ), String );
+                M := R * M;
+                M := BasisOfRows( M );
+            fi;
+        fi;
+    fi;
     
     RP := homalgTable( R );
     
