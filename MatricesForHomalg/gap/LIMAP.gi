@@ -256,6 +256,8 @@ InstallMethod( GeneratorsOfKernelOfRingMap,
     
     rel := S * rel;
     
+    rel := BasisOfRows( rel );
+    
     return rel;
     
 end );
@@ -312,6 +314,8 @@ InstallMethod( GeneratorsOfKernelOfRingMap,
     iota := RingMap( indets, T, S );
     
     mat := Pullback( iota, mat );
+    
+    mat := BasisOfRows( mat );
     
     return mat;
     
