@@ -3011,11 +3011,9 @@ InstallMethod( Eliminate,
     if HasRelativeIndeterminatesOfPolynomialRing( R ) then
         indets := RelativeIndeterminatesOfPolynomialRing( R );
         B := BaseRing( R );
-    elif HasIndeterminatesOfPolynomialRing( R ) then
-        indets := IndeterminatesOfPolynomialRing( R );
-        B := CoefficientsRing( R );
     else
-        Error( "the ring is not a polynomial ring" );
+        indets := Indeterminates( R );
+        B := CoefficientsRing( R );
     fi;
     
     return B * Eliminate( rel, indets );
