@@ -6,7 +6,7 @@
   
   [1X4.1-1 KernelSubobject[101X
   
-  [29X[2XKernelSubobject[102X( [3Xphi[103X ) [32X method
+  [33X[1;0Y[29X[2XKernelSubobject[102X( [3Xphi[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X submodule[133X
   
   [33X[0;0YThe kernel ideal of the ring map [3Xphi[103X.[133X
@@ -16,7 +16,7 @@
   
   [1X4.2-1 SegreMap[101X
   
-  [29X[2XSegreMap[102X( [3XR[103X, [3Xs[103X ) [32X method
+  [33X[1;0Y[29X[2XSegreMap[102X( [3XR[103X, [3Xs[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring map[133X
   
   [33X[0;0YThe  ring  map corresponding to the Segre embedding of [22XMultiProj([3XR[103X)[122X into the
@@ -24,7 +24,7 @@
   
   [1X4.2-2 PlueckerMap[101X
   
-  [29X[2XPlueckerMap[102X( [3Xl[103X, [3Xn[103X, [3XA[103X, [3Xs[103X ) [32X method
+  [33X[1;0Y[29X[2XPlueckerMap[102X( [3Xl[103X, [3Xn[103X, [3XA[103X, [3Xs[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring map[133X
   
   [33X[0;0YThe  ring  map  corresponding  to  the Plücker embedding of the Grassmannian
@@ -33,7 +33,7 @@
   
   [1X4.2-3 VeroneseMap[101X
   
-  [29X[2XVeroneseMap[102X( [3Xn[103X, [3Xd[103X, [3XA[103X, [3Xs[103X ) [32X method
+  [33X[1;0Y[29X[2XVeroneseMap[102X( [3Xn[103X, [3Xd[103X, [3XA[103X, [3Xs[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring map[133X
   
   [33X[0;0YThe ring map corresponding to the Veronese embedding of the projective space

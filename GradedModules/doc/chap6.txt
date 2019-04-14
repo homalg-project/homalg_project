@@ -6,7 +6,7 @@
   
   [1X6.1-1 TateResolution[101X
   
-  [29X[2XTateResolution[102X( [3XM[103X, [3Xdegree_lowest[103X, [3Xdegree_highest[103X ) [32X operation
+  [33X[1;0Y[29X[2XTateResolution[102X( [3XM[103X, [3Xdegree_lowest[103X, [3Xdegree_highest[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X cocomplex[133X
   
   [33X[0;0YCompute the Tate resolution of the sheaf [3XM[103X.[133X
