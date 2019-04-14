@@ -3378,6 +3378,12 @@ InstallMethod( Pullback,
         
     fi;
     
+    if IsEmptyMatrix( ImagesOfRingMapAsColumnMatrix( phi ) ) then
+        
+        return T * M;
+        
+    fi;
+    
     RP := homalgTable( T );
     
     if IsBound( RP!.Pullback ) then
