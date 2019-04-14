@@ -7018,3 +7018,55 @@ InstallMethod( AMaximalIdealContaining,
     return HomalgMatrix( [ PrimeDivisors( I ){[1]} ], 1, 1, R );
     
 end );
+
+##
+InstallMethod( RingMapOntoRewrittenResidueClassRing,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( A )
+    local R, k, char, indets, matrix, images, zero_rows, S, map, rel;
+    
+    R := HomalgRing( A );
+    
+    k := CoefficientsRing( R );
+    
+    if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
+        char := Eliminate( A );
+        if not IsZero( char ) then
+            char := EntriesOfHomalgMatrix( char );
+            char := List( char, a -> EvalString( String( a ) ) );
+            char := Gcd( char );
+            if IsPrime( char ) then
+                k := HomalgRingOfIntegersInUnderlyingCAS( char, k );
+            fi;
+        fi;
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    matrix := HomalgMatrix( indets, Length( indets ), 1, R );
+    
+    images := DecideZero( matrix, A );
+    
+    zero_rows := ZeroRows( matrix - images );
+    
+    indets := indets{zero_rows};
+    
+    S := k * List( indets, String );
+    
+    if not zero_rows = [ ] then
+        map := RingMap( indets, S, R / A );
+        rel := GeneratorsOfKernelOfRingMap( map );
+        S := S / rel;
+    fi;
+    
+    images := S * images;
+    
+    map := RingMap( images, R, S );
+    
+    SetIsMorphism( map, true );
+    
+    return map;
+    
+end );
