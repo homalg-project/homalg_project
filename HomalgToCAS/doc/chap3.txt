@@ -593,6 +593,9 @@
     [4X  ## the constant term of the hilbert polynomial:[104X
     [4X  ConstantTermOfHilbertPolynomial         := "P_0",[104X
     [4X  [104X
+    [4X  ## differentiate a matrix M w.r.t. a matrix D[104X
+    [4X  Diff                                    := "dif",[104X
+    [4X  [104X
     [4X  ## maximal dimensional radical subobject:[104X
     [4X  MaxDimensionalRadicalSubobject          := "V_d",[104X
     [4X  [104X
