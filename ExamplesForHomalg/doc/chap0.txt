@@ -6,7 +6,7 @@
                       [1XExamples for the [5XGAP[105X package [5Xhomalg[105X[101X
   
   
-                               Version 2018.05.29
+                               Version 2019.01.07
   
   
                                    June 2015
@@ -60,7 +60,7 @@
   [33X[0;0Y© 2008-2015 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann[133X
   
   [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2.[133X
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
