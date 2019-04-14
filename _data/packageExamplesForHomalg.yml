@@ -1,6 +1,6 @@
 name: ExamplesForHomalg
-version: 2018.05.29
-date: 29/05/2018
+version: 2019.01.07
+date: 07/01/2019
 description: Examples for the GAP Package homalg
 
 authors:
@@ -19,7 +19,7 @@ GAP: ">=4.7"
 
 needed-pkgs:
     - name: "MatricesForHomalg"
-      version: ">= 2018.05.29"
+      version: ">= 2019.01.07"
       url: "http://homalg-project.github.io/homalg_project/MatricesForHomalg/"
     - name: "HomalgToCAS"
       version: ">= 2011.08.25"
@@ -28,7 +28,7 @@ needed-pkgs:
       version: ">= 2017.05.25"
       url: "http://homalg-project.github.io/homalg_project/RingsForHomalg/"
     - name: "Modules"
-      version: ">= 2017.05.02"
+      version: ">= 2019.01.07"
       url: "http://homalg-project.github.io/homalg_project/Modules/"
     - name: "homalg"
       version: ">= 2015.06.01"
@@ -43,9 +43,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/ExamplesForHomalg/Pa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2018.05.29/ExamplesForHomalg-2018.05.29.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2019.01.07/ExamplesForHomalg-2019.01.07.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2018.05.29/ExamplesForHomalg-2018.05.29.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2019.01.07/ExamplesForHomalg-2019.01.07.zip
 
 abstract: The <span class="pkgname">ExamplesForHomalg</span> package provides example scripts for the <span class="pkgname">homalg</span> package that can be used with several computer algebra systems
 

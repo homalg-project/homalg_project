@@ -1,6 +1,6 @@
 name: RingsForHomalg
-version: 2018.12.10
-date: 10/12/2018
+version: 2019.01.14
+date: 14/01/2019
 description: Dictionaries of external rings
 
 authors:
@@ -31,10 +31,10 @@ GAP: ">=4.7"
 
 needed-pkgs:
     - name: "MatricesForHomalg"
-      version: ">= 2018.12.08"
+      version: ">= 2019.01.14"
       url: "http://homalg-project.github.io/homalg_project/MatricesForHomalg/"
     - name: "HomalgToCAS"
-      version: ">= 2018.12.08"
+      version: ">= 2018.12.11"
       url: "http://homalg-project.github.io/homalg_project/HomalgToCAS/"
     - name: "GAPDoc"
       version: ">= 1.0"
@@ -46,9 +46,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/RingsForHomalg/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2018.12.10/RingsForHomalg-2018.12.10.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2019.01.14/RingsForHomalg-2019.01.14.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2018.12.10/RingsForHomalg-2018.12.10.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2019.01.14/RingsForHomalg-2019.01.14.zip
 
 abstract: The <span class="pkgname">RingsForHomalg</span> package provides small dictionaries for  <span class="pkgname">homalg</span> to speak (as much as needed of) the languages  of Singular, Macaulay2, MAGMA, Sage, and Maple
 
