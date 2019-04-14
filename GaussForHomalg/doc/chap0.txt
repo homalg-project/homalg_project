@@ -6,7 +6,7 @@
                          [1X[5XGauss[105X Functionality for [5Xhomalg[105X[101X
   
   
-                               Version 2018.06.01
+                               Version 2019.01.10
   
   
                                  September 2013
@@ -39,7 +39,7 @@
   [33X[0;0Y© 2007-2013 by Simon Goertzen[133X
   
   [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2.[133X
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
