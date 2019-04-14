@@ -3357,7 +3357,7 @@ InstallMethod( Pullback,
     
     S := Source( phi );
     
-    T := HomalgRing( Range( phi ) );
+    T := Range( phi );
     
     if not IsIdenticalObj( S, R ) then
         if not ( HasAmbientRing( S ) and IsIdenticalObj( AmbientRing( S ), R ) ) then
