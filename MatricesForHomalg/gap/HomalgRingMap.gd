@@ -225,6 +225,9 @@ DeclareOperation( "RingMap",
 DeclareOperation( "RingMap",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "RingMap",
+        [ IsHomalgRing ] );
+
 # attributes
 
 DeclareAttribute( "ImagesOfRingMap",

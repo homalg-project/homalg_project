@@ -203,6 +203,23 @@ InstallMethod( RingMap,
     
 end );
 
+##
+InstallMethod( RingMap,
+        "for a homalg ring",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local map;
+    
+    map := RingMap( Indeterminates( R ), R, R );
+    
+    SetIsMorphism( map, true );
+    SetIsOne( map, true );
+    
+    return map;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
