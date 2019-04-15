@@ -7026,6 +7026,49 @@ InstallMethod( AMaximalIdealContaining,
 end );
 
 ##
+InstallMethod( IsolateIndeterminate,
+        "for a homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, indets, l, coeffs, monoms, t, degrees, pos, i, a;
+    
+    R := HomalgRing( r );
+    
+    indets := Indeterminates( R );
+    
+    l := Length( indets );
+    
+    if l = [ ] then
+        return fail;
+    fi;
+    
+    coeffs := Coefficients( r );
+    monoms := coeffs!.monomials;
+    
+    t := Length( monoms );
+    
+    degrees := List( monoms, Degree );
+    
+    if not 1 in degrees then
+        return fail;
+    fi;
+    
+    pos := Positions( degrees, 1 );
+    
+    for i in pos do
+        a := monoms[i];
+        if not ForAll( Concatenation( [ 1 .. i - 1 ], [ i + 1 .. t ] ), j -> not IsZero( DecideZero( monoms[j], a ) ) ) then
+            continue;
+        fi;
+        return [ Position( indets, a ), a - ( r / MatElm( coeffs, i, 1 ) ) ];
+    od;
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( RingMapOntoRewrittenResidueClassRing,
         "for a homalg ring",
         [ IsHomalgRing ],

@@ -212,5 +212,8 @@ DeclareOperation( "MaximalIndependentSet",
 DeclareOperation( "AMaximalIdealContaining",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "IsolateIndeterminate",
+        [ IsHomalgRingElement ] );
+
 DeclareOperation( "RingMapOntoRewrittenResidueClassRing",
         [ IsHomalgRing ] );
