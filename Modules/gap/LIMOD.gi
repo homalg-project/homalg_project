@@ -2056,6 +2056,13 @@ InstallMethod( RadicalDecomposition,
         subobject := RightSubmodule;
     fi;
     
+    ## FIXME: PrimaryDecompostion of submodules is delegated to the factor object,
+    ## this is a bad. Until we fix it we have to take care of the unit ideal
+    if IsZero( M ) then
+        mat := HomalgIdentityMatrix( 1, HomalgRing( M ) );
+        return [ subobject( mat ) ];
+    fi;
+    
     mat := MatrixOfRelations( M );
     
     return List( RadicalDecompositionOp( tr( mat ) ),
