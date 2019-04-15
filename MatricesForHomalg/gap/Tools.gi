@@ -3360,13 +3360,26 @@ InstallMethod( Pullback,
     T := Range( phi );
     
     if not IsIdenticalObj( S, R ) then
-        if not ( HasAmbientRing( S ) and IsIdenticalObj( AmbientRing( S ), R ) ) then
+        
+        if HasAmbientRing( R ) then
+            R := AmbientRing( R );
+            M := R * M;
+        fi;
+        
+        if HasAmbientRing( S ) then
+            S := AmbientRing( S );
+        fi;
+        
+        if not IsIdenticalObj( S, R ) then
             Error( "the source ring of the ring map phi and the ring R of the matrix are not identical\n" );
         fi;
+        
         if not IsBound( phi!.RingMapFromAmbientRing ) then
-            phi!.RingMapFromAmbientRing := RingMap( ImagesOfRingMapAsColumnMatrix( phi ), AmbientRing( S ), T );
+            phi!.RingMapFromAmbientRing := RingMap( ImagesOfRingMapAsColumnMatrix( phi ), S, T );
         fi;
+        
         return Pullback( phi!.RingMapFromAmbientRing, M );
+        
     fi;
     
     r := NrRows( M );
