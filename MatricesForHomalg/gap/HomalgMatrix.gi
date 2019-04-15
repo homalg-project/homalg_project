@@ -559,9 +559,7 @@ InstallMethod( GetListListOfStringsOfMatrix,
     
     c := Characteristic( R );
     
-    if HasCoefficientsRing( R ) then
-        TryNextMethod( );
-    elif c = 0 then
+    if c = 0 then
         return List( M, a -> List( a, String ) );
     elif IsPrime( c ) then
         if HasDegreeOverPrimeField( R ) and DegreeOverPrimeField( R ) > 1 then
