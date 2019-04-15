@@ -217,3 +217,9 @@ DeclareOperation( "IsolateIndeterminate",
 
 DeclareOperation( "RingMapOntoRewrittenResidueClassRing",
         [ IsHomalgRing ] );
+
+DeclareOperation( "RingMapOntoSimplifiedOnceResidueClassRing",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "RingMapOntoSimplifiedResidueClassRing",
+        [ IsHomalgRing ] );

@@ -7141,3 +7141,88 @@ InstallMethod( RingMapOntoRewrittenResidueClassRing,
     return map;
     
 end );
+
+##
+InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
+        "for a homalg ringx",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local id, I, i, img, A, indets, new_indets, S, map;
+    
+    id := RingMap( R );
+    
+    if not HasAmbientRing( R ) then
+        return id;
+    fi;
+    
+    ## R = A / I
+    I := MatrixOfRelations( R );
+    
+    for i in [ 1 .. NrRows( I ) ] do
+        img := IsolateIndeterminate( MatElm( I, i, 1 ) );
+        if not img = fail then
+            break;
+        fi;
+    od;
+    
+    if img = fail then
+        return id;
+    fi;
+    
+    A := AmbientRing( R );
+    
+    indets := ShallowCopy( Indeterminates( A ) );
+    
+    new_indets := List( indets, String );
+    Remove( new_indets, img[1] );
+    
+    S := CoefficientsRing( A ) * new_indets;
+    
+    indets[img[1]] := img[2];
+    
+    indets := List( indets, a -> a / S );
+    
+    map := RingMap( indets, A, S );
+    
+    I := Pullback( map, I );
+    
+    I := BasisOfRows( I );
+    
+    S := S / I;
+    
+    indets := List( indets, a -> a / S );
+    
+    map := RingMap( indets, A, S );
+    
+    SetIsMorphism( map, true );
+    
+    return map;
+    
+end );
+
+##
+InstallMethod( RingMapOntoSimplifiedResidueClassRing,
+        "for a homalg ringx",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local phi, psi;
+    
+    phi := RingMapOntoRewrittenResidueClassRing( R );
+    
+    while true do
+        
+        psi := RingMapOntoSimplifiedOnceResidueClassRing( Range( phi ) );
+        
+        if HasIsOne( psi ) and IsOne( psi ) then
+            break;
+        fi;
+        
+        phi := PreCompose( phi, psi );
+        
+    od;
+    
+    return phi;
+    
+end );
