@@ -71,14 +71,21 @@ InstallMethod( PreCompose,
         [ IsHomalgRingMap, IsHomalgRingMap ],
         
   function( psi, phi )
-    local S, T;
+    local S, T, images_psi, chi;
     
     S := Source( psi );
     T := Range( phi );
     
-    psi := ImagesOfRingMapAsColumnMatrix( psi );
+    images_psi := ImagesOfRingMapAsColumnMatrix( psi );
     
-    return RingMap( Pullback( phi, psi ), S, T );
+    chi := RingMap( Pullback( phi, images_psi ), S, T );
+    
+    if HasIsMorphism( psi ) and IsMorphism( psi ) and
+       HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsMorphism( chi, true );
+    fi;
+    
+    return chi;
     
 end );
 
