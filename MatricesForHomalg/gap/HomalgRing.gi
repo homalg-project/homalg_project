@@ -1709,6 +1709,13 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     
 end );
 
+##
+InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
+        "for an integer and homalg internal ring",
+        [ IsInt, IsHomalgInternalRingRep ],
+        
+  HomalgRingOfIntegers );
+
 ##  <#GAPDoc Label="HomalgFieldOfRationals">
 ##  <ManSection>
 ##    <Func Arg="" Name="HomalgFieldOfRationals" Label="constructor for the field of rationals"/>
@@ -1738,6 +1745,13 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     return R;
     
 end );
+
+##
+InstallMethod( HomalgFieldOfRationalsInUnderlyingCAS,
+        "for a homalg internal ring",
+        [ IsHomalgInternalRingRep ],
+        
+  HomalgFieldOfRationals );
 
 ##
 InstallOtherMethod( \in,
