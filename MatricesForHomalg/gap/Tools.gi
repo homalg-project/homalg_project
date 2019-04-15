@@ -7027,18 +7027,27 @@ end );
 
 ##
 InstallMethod( RingMapOntoRewrittenResidueClassRing,
-        "for a homalg matrix",
-        [ IsHomalgMatrix ],
+        "for a homalg ring",
+        [ IsHomalgRing ],
         
-  function( A )
-    local R, k, char, indets, matrix, images, zero_rows, S, map, rel;
+  function( R )
+    local id, I, A, k, char, indets, matrix, images, zero_rows, S, map, rel;
     
-    R := HomalgRing( A );
+    id := RingMap( R );
     
-    k := CoefficientsRing( R );
+    if not HasAmbientRing( R ) then
+        return id;
+    fi;
+    
+    ## R = A / I
+    I := MatrixOfRelations( R );
+    
+    A := AmbientRing( R );
+    
+    k := CoefficientsRing( A );
     
     if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
-        char := Eliminate( A );
+        char := Eliminate( I );
         if not IsZero( char ) then
             char := EntriesOfHomalgMatrix( char );
             char := List( char, a -> EvalString( String( a ) ) );
@@ -7049,11 +7058,11 @@ InstallMethod( RingMapOntoRewrittenResidueClassRing,
         fi;
     fi;
     
-    indets := Indeterminates( R );
+    indets := Indeterminates( A );
     
-    matrix := HomalgMatrix( indets, Length( indets ), 1, R );
+    matrix := HomalgMatrix( indets, Length( indets ), 1, A );
     
-    images := DecideZero( matrix, A );
+    images := DecideZero( matrix, I );
     
     zero_rows := ZeroRows( matrix - images );
     
@@ -7062,14 +7071,14 @@ InstallMethod( RingMapOntoRewrittenResidueClassRing,
     S := k * List( indets, String );
     
     if not zero_rows = [ ] then
-        map := RingMap( indets, S, R / A );
+        map := RingMap( indets, S, R );
         rel := GeneratorsOfKernelOfRingMap( map );
         S := S / rel;
     fi;
     
     images := S * images;
     
-    map := RingMap( images, R, S );
+    map := RingMap( images, A, S );
     
     SetIsMorphism( map, true );
     

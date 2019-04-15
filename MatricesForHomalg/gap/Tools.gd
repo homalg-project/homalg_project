@@ -213,4 +213,4 @@ DeclareOperation( "AMaximalIdealContaining",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "RingMapOntoRewrittenResidueClassRing",
-        [ IsHomalgMatrix ] );
+        [ IsHomalgRing ] );
