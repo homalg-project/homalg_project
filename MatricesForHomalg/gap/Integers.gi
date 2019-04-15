@@ -165,6 +165,13 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                
+               Eliminate :=
+                 function( rel, indets, R )
+                   
+                   return homalgInternalMatrixHull( List( rel, a -> [ a ] ) );
+                   
+                 end,
+               
                ## Must be defined if other functions are not defined
                
                RowReducedEchelonForm :=
