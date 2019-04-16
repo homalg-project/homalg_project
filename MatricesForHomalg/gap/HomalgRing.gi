@@ -873,7 +873,13 @@ InstallMethod( Roots,
         [ IsHomalgRingElement ],
         
   function( r )
-    local roots;
+    local R, roots;
+    
+    R := HomalgRing( r );
+    
+    if not IsHomalgInternalRingRep( R ) then
+        TryNextMethod( );
+    fi;
     
     if not IsBound( r!.Roots ) then
         roots := RootsOfUPol( EvalString( String( r ) ) );
