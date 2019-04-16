@@ -7050,7 +7050,7 @@ InstallMethod( IsolateIndeterminate,
         [ IsHomalgRingElement ],
         
   function( r )
-    local R, indets, l, coeffs, monoms, t, degrees, pos, i, a;
+    local R, indets, l, coeffs, monoms, t, degrees, pos, i, c, a;
     
     R := HomalgRing( r );
     
@@ -7076,11 +7076,21 @@ InstallMethod( IsolateIndeterminate,
     pos := Positions( degrees, 1 );
     
     for i in pos do
+        
+        c := MatElm( coeffs, i, 1 );
+        
+        if not IsUnit( c ) then
+            continue;
+        fi;
+        
         a := monoms[i];
+        
         if not ForAll( Concatenation( [ 1 .. i - 1 ], [ i + 1 .. t ] ), j -> not IsZero( DecideZero( monoms[j], a ) ) ) then
             continue;
         fi;
-        return [ Position( indets, a ), a - ( r / MatElm( coeffs, i, 1 ) ) ];
+        
+        return [ Position( indets, a ), a - ( r / c ) ];
+        
     od;
     
     return fail;
