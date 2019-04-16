@@ -858,10 +858,45 @@ InstallMethod( Factors,
         [ IsHomalgRingElement ],
         
   function( r )
+    local R, factors, primary, prime, one, divide;
     
-    if not IsBound( r!.Factors ) then
-        r!.Factors := Factors( EvalString( String( r ) ) );
+    R := HomalgRing( r );
+    
+    if IsHomalgInternalRingRep( R ) then
+        if not IsBound( r!.Factors ) then
+            r!.Factors := Factors( EvalString( String( r ) ) );
+        fi;
     fi;
+    
+    factors := PrimaryDecompositionOp( HomalgMatrix( [ r ], 1, 1, R ) );
+    
+    primary := List( factors, a -> MatElm( a[1], 1, 1 ) );
+    prime := List( factors, a -> MatElm( a[2], 1, 1 ) );
+    
+    one := One( R );
+    
+    divide :=
+      function( q, p )
+        local list;
+        
+        list := [ ];
+        
+        repeat
+            q := q / p;
+            Add( list, p );
+        until IsZero( DecideZero( one, q ) );
+        
+        return list;
+        
+    end;
+    
+    factors := List( [ 1 .. Length( factors ) ], i -> divide( primary[i], prime[i] ) );
+    
+    factors := Concatenation( factors );
+    
+    factors[1] := ( r / Product( factors ) ) * factors[1];
+      
+    r!.Factors := factors;
     
     return r!.Factors;
     
