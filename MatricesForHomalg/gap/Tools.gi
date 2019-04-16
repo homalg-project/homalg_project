@@ -6211,6 +6211,9 @@ InstallMethod( AffineDegree,
         
         if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
             char := Eliminate( BasisOfRows( M ) );
+            if not IsIdenticalObj( k, HomalgRing( char ) ) then
+                char := Eliminate( char );
+            fi;
             if not IsZero( char ) then
                 char := EntriesOfHomalgMatrix( char );
                 char := List( char, a -> EvalString( String( a ) ) );
@@ -6276,6 +6279,9 @@ InstallMethod( AffineDegree,
         
         if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
             char := Eliminate( BasisOfRows( M ) );
+            if not IsIdenticalObj( k, HomalgRing( char ) ) then
+                char := Eliminate( char );
+            fi;
             if not IsZero( char ) then
                 char := EntriesOfHomalgMatrix( char );
                 char := List( char, a -> EvalString( String( a ) ) );
@@ -7104,6 +7110,9 @@ InstallMethod( RingMapOntoRewrittenResidueClassRing,
     
     if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
         char := Eliminate( I );
+        if not IsIdenticalObj( k, HomalgRing( char ) ) then
+            char := Eliminate( char );
+        fi;
         if not IsZero( char ) then
             char := EntriesOfHomalgMatrix( char );
             char := List( char, a -> EvalString( String( a ) ) );
