@@ -1555,7 +1555,7 @@ InstallMethod( AppendNew,
 end );
 
 ##
-InstallMethod( MaximalObjects,
+InstallMethod( PositionsOfMaximalObjects,
         "for a list and a function",
         [ IsList, IsFunction ],
         
@@ -1580,7 +1580,18 @@ InstallMethod( MaximalObjects,
         
     od;
     
-    return L{Difference( l, r )};
+    return Difference( l, r );
+    
+end );
+
+##
+InstallMethod( MaximalObjects,
+        "for a list and a function",
+        [ IsList, IsFunction ],
+        
+  function( L, f )
+    
+    return L{PositionsOfMaximalObjects( L, f )};
     
 end );
 
