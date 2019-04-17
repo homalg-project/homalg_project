@@ -949,6 +949,9 @@ DeclareAttribute( "CoefficientsOfUnivariatePolynomial",
 DeclareAttribute( "MaximalDegreePart",
         IsHomalgRingElement );
         
+DeclareAttribute( "IrreducibleFactors",
+        IsRingElement );
+
 ##  <#GAPDoc Label="Zero:ring">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="Zero" Label="for homalg rings"/>

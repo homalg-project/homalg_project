@@ -853,6 +853,37 @@ InstallMethod( homalgSetName,
   SetName );
 
 ##
+InstallMethod( IrreducibleFactors,
+        "for ring elements",
+        [ IsRingElement ],
+        
+  PrimeDivisors );
+
+##
+InstallMethod( IrreducibleFactors,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, factors;
+    
+    R := HomalgRing( r );
+    
+    if IsHomalgInternalRingRep( R ) then
+        if not IsBound( r!.IrreducibleFactors ) then
+            r!.IrreducibleFactors := PrimeDivisors( EvalString( String( r ) ) );
+        fi;
+    fi;
+    
+    factors := RadicalDecompositionOp( HomalgMatrix( [ r ], 1, 1, R ) );
+    
+    r!.Factors := List( factors, a -> MatElm( a, 1, 1 ) );
+    
+    return r!.Factors;
+    
+end );
+
+##
 InstallMethod( Factors,
         "for homalg ring elements",
         [ IsHomalgRingElement ],
