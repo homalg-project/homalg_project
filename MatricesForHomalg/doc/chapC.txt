@@ -333,9 +333,48 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case  the  matrix  was created using [2XCertainRows[102X ([14X5.5-7[114X) then the filter
+  [33X[0;0YIn  case  the  matrix  was  created  using [2XTransposedMatrix[102X ([14X5.5-7[114X) then the
+  filter  [10XHasEvalTransposedMatrix[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X
+  function [2XTransposedMatrix[102X ([14XB.1-6[114X) will be used to set the attribute [10XEval[110X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( Eval,[104X
+    [4X        "for homalg matrices (HasEvalTransposedMatrix)",[104X
+    [4X        [ IsHomalgMatrix and HasEvalTransposedMatrix ],[104X
+    [4X        [104X
+    [4X  function( C )[104X
+    [4X    local R, RP, M;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( C );[104X
+    [4X    [104X
+    [4X    RP := homalgTable( R );[104X
+    [4X    [104X
+    [4X    M :=  EvalTransposedMatrix( C );[104X
+    [4X    [104X
+    [4X    if IsBound(RP!.TransposedMatrix) then[104X
+    [4X        return RP!.TransposedMatrix( M );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    if not IsHomalgInternalMatrixRep( C ) then[104X
+    [4X        Error( "could not find a procedure called TransposedMatrix ",[104X
+    [4X               "in the homalgTable of the non-internal ring\n" );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    #=====# can only work for homalg internal matrices #=====#[104X
+    [4X    [104X
+    [4X    return homalgInternalMatrixHull( TransposedMat( Eval( M )!.matrix ) );[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [1XC.4-9 Eval[101X
+  
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
+  
+  [33X[0;0YIn  case  the  matrix  was created using [2XCertainRows[102X ([14X5.5-8[114X) then the filter
   [10XHasEvalCertainRows[110X  for  [3XC[103X  is  set  to  true  and  the [10XhomalgTable[110X function
-  [2XCertainRows[102X ([14XB.1-6[114X) will be used to set the attribute [10XEval[110X.[133X
+  [2XCertainRows[102X ([14XB.1-7[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -370,14 +409,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-9 Eval[101X
+  [1XC.4-10 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case the matrix was created using [2XCertainColumns[102X ([14X5.5-8[114X) then the filter
+  [33X[0;0YIn  case the matrix was created using [2XCertainColumns[102X ([14X5.5-9[114X) then the filter
   [10XHasEvalCertainColumns[110X  for  [3XC[103X  is  set  to true and the [10XhomalgTable[110X function
-  [2XCertainColumns[102X ([14XB.1-7[114X) will be used to set the attribute [10XEval[110X.[133X
+  [2XCertainColumns[102X ([14XB.1-8[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -413,14 +452,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-10 Eval[101X
+  [1XC.4-11 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case  the  matrix  was created using [2XUnionOfRows[102X ([14X5.5-9[114X) then the filter
+  [33X[0;0YIn  case  the  matrix was created using [2XUnionOfRows[102X ([14X5.5-10[114X) then the filter
   [10XHasEvalUnionOfRows[110X  for  [3XC[103X  is  set  to  true  and  the [10XhomalgTable[110X function
-  [2XUnionOfRows[102X ([14XB.1-8[114X) will be used to set the attribute [10XEval[110X.[133X
+  [2XUnionOfRows[102X ([14XB.1-9[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -459,14 +498,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-11 Eval[101X
+  [1XC.4-12 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn case the matrix was created using [2XUnionOfColumns[102X ([14X5.5-10[114X) then the filter
+  [33X[0;0YIn case the matrix was created using [2XUnionOfColumns[102X ([14X5.5-11[114X) then the filter
   [10XHasEvalUnionOfColumns[110X  for  [3XC[103X  is  set  to true and the [10XhomalgTable[110X function
-  [2XUnionOfColumns[102X ([14XB.1-9[114X) will be used to set the attribute [10XEval[110X.[133X
+  [2XUnionOfColumns[102X ([14XB.1-10[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -507,14 +546,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-12 Eval[101X
+  [1XC.4-13 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case  the  matrix  was  created  using  [2XDiagMat[102X ([14X5.5-11[114X) then the filter
+  [33X[0;0YIn  case  the  matrix  was  created  using  [2XDiagMat[102X ([14X5.5-12[114X) then the filter
   [10XHasEvalDiagMat[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X function [2XDiagMat[102X
-  ([14XB.1-10[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-11[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -564,14 +603,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-13 Eval[101X
+  [1XC.4-14 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case  the matrix was created using [2XKroneckerMat[102X ([14X5.5-12[114X) then the filter
+  [33X[0;0YIn  case  the matrix was created using [2XKroneckerMat[102X ([14X5.5-13[114X) then the filter
   [10XHasEvalKroneckerMat[110X  for  [3XC[103X  is  set  to  true  and the [10XhomalgTable[110X function
-  [2XKroneckerMat[102X ([14XB.1-11[114X) will be used to set the attribute [10XEval[110X.[133X
+  [2XKroneckerMat[102X ([14XB.1-12[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -613,14 +652,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-14 Eval[101X
+  [1XC.4-15 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-13[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-14[114X)  then  the  filter
   [10XHasEvalMulMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XMulMat[102X
-  ([14XB.1-12[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-13[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -686,14 +725,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-15 Eval[101X
+  [1XC.4-16 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\+[102X  ([14X5.5-14[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\+[102X  ([14X5.5-15[114X)  then  the  filter
   [10XHasEvalAddMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XAddMat[102X
-  ([14XB.1-13[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-14[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -728,14 +767,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-16 Eval[101X
+  [1XC.4-17 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\-[102X  ([14X5.5-15[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\-[102X  ([14X5.5-16[114X)  then  the  filter
   [10XHasEvalSubMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XSubMat[102X
-  ([14XB.1-14[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-15[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -770,14 +809,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-17 Eval[101X
+  [1XC.4-18 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-16[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-17[114X)  then  the  filter
   [10XHasEvalCompose[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X function [2XCompose[102X
-  ([14XB.1-15[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-16[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X

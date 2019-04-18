@@ -41,16 +41,17 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X8362669D87FD667B">C.4-5 Eval</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X84D72DF482F70AD5">C.4-6 Eval</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7928991E8768FA72">C.4-7 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X852DCBD57A742FA5">C.4-8 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X835F6F2E7D590F3D">C.4-9 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F35A61C8522A1B0">C.4-10 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7EDE6095820F8128">C.4-11 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7FD68F43831046B6">C.4-12 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X84F45FB4854A079C">C.4-13 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7B68797C7EA79B10">C.4-14 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X85971C16868BD83C">C.4-15 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X86F848318791595C">C.4-16 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F7682FC86F602C2">C.4-17 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X78D5359480EFC5AC">C.4-8 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X852DCBD57A742FA5">C.4-9 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X835F6F2E7D590F3D">C.4-10 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F35A61C8522A1B0">C.4-11 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7EDE6095820F8128">C.4-12 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7FD68F43831046B6">C.4-13 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X84F45FB4854A079C">C.4-14 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7B68797C7EA79B10">C.4-15 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X85971C16868BD83C">C.4-16 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X86F848318791595C">C.4-17 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F7682FC86F602C2">C.4-18 Eval</a></span>
 </div></div>
 </div>
 
@@ -389,14 +390,54 @@ InstallMethod( Eval,
 end );
 </pre></div>
 
-<p><a id="X852DCBD57A742FA5" name="X852DCBD57A742FA5"></a></p>
+<p><a id="X78D5359480EFC5AC" name="X78D5359480EFC5AC"></a></p>
 
 <h5>C.4-8 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">CertainRows</code> (<a href="chap5.html#X7CF5CE79796001F6"><span class="RefLink">5.5-7</span></a>) then the filter <code class="code">HasEvalCertainRows</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">CertainRows</code> (<a href="chapB.html#X7B6FC3267CD9EE9D"><span class="RefLink">B.1-6</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">TransposedMatrix</code> (<a href="chap5.html#X7D0D35B582D9C0B0"><span class="RefLink">5.5-7</span></a>) then the filter <code class="code">HasEvalTransposedMatrix</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">TransposedMatrix</code> (<a href="chapB.html#X7AD2EEE680DF472B"><span class="RefLink">B.1-6</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalTransposedMatrix)",
+        [ IsHomalgMatrix and HasEvalTransposedMatrix ],
+        
+  function( C )
+    local R, RP, M;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    M :=  EvalTransposedMatrix( C );
+    
+    if IsBound(RP!.TransposedMatrix) then
+        return RP!.TransposedMatrix( M );
+    fi;
+    
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called TransposedMatrix ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
+    
+    return homalgInternalMatrixHull( TransposedMat( Eval( M )!.matrix ) );
+    
+end );
+</pre></div>
+
+<p><a id="X852DCBD57A742FA5" name="X852DCBD57A742FA5"></a></p>
+
+<h5>C.4-9 Eval</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>In case the matrix was created using <code class="func">CertainRows</code> (<a href="chap5.html#X7CF5CE79796001F6"><span class="RefLink">5.5-8</span></a>) then the filter <code class="code">HasEvalCertainRows</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">CertainRows</code> (<a href="chapB.html#X7B6FC3267CD9EE9D"><span class="RefLink">B.1-7</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -434,12 +475,12 @@ end );
 
 <p><a id="X835F6F2E7D590F3D" name="X835F6F2E7D590F3D"></a></p>
 
-<h5>C.4-9 Eval</h5>
+<h5>C.4-10 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">CertainColumns</code> (<a href="chap5.html#X8256AF2A840B19C4"><span class="RefLink">5.5-8</span></a>) then the filter <code class="code">HasEvalCertainColumns</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">CertainColumns</code> (<a href="chapB.html#X78EADFC67D17CF04"><span class="RefLink">B.1-7</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">CertainColumns</code> (<a href="chap5.html#X8256AF2A840B19C4"><span class="RefLink">5.5-9</span></a>) then the filter <code class="code">HasEvalCertainColumns</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">CertainColumns</code> (<a href="chapB.html#X78EADFC67D17CF04"><span class="RefLink">B.1-8</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -478,12 +519,12 @@ end );
 
 <p><a id="X7F35A61C8522A1B0" name="X7F35A61C8522A1B0"></a></p>
 
-<h5>C.4-10 Eval</h5>
+<h5>C.4-11 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">UnionOfRows</code> (<a href="chap5.html#X7BC803DA871ADD55"><span class="RefLink">5.5-9</span></a>) then the filter <code class="code">HasEvalUnionOfRows</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">UnionOfRows</code> (<a href="chapB.html#X7DEB535782A3323E"><span class="RefLink">B.1-8</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">UnionOfRows</code> (<a href="chap5.html#X7BC803DA871ADD55"><span class="RefLink">5.5-10</span></a>) then the filter <code class="code">HasEvalUnionOfRows</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">UnionOfRows</code> (<a href="chapB.html#X7DEB535782A3323E"><span class="RefLink">B.1-9</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -525,12 +566,12 @@ end );
 
 <p><a id="X7EDE6095820F8128" name="X7EDE6095820F8128"></a></p>
 
-<h5>C.4-11 Eval</h5>
+<h5>C.4-12 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">UnionOfColumns</code> (<a href="chap5.html#X7F5B3A427A71C567"><span class="RefLink">5.5-10</span></a>) then the filter <code class="code">HasEvalUnionOfColumns</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">UnionOfColumns</code> (<a href="chapB.html#X7DF5DB55836D13A7"><span class="RefLink">B.1-9</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">UnionOfColumns</code> (<a href="chap5.html#X7F5B3A427A71C567"><span class="RefLink">5.5-11</span></a>) then the filter <code class="code">HasEvalUnionOfColumns</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">UnionOfColumns</code> (<a href="chapB.html#X7DF5DB55836D13A7"><span class="RefLink">B.1-10</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -574,12 +615,12 @@ end );
 
 <p><a id="X7FD68F43831046B6" name="X7FD68F43831046B6"></a></p>
 
-<h5>C.4-12 Eval</h5>
+<h5>C.4-13 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">DiagMat</code> (<a href="chap5.html#X7F2AD04C86F82240"><span class="RefLink">5.5-11</span></a>) then the filter <code class="code">HasEvalDiagMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">DiagMat</code> (<a href="chapB.html#X86C5B86981FA1F9A"><span class="RefLink">B.1-10</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">DiagMat</code> (<a href="chap5.html#X7F2AD04C86F82240"><span class="RefLink">5.5-12</span></a>) then the filter <code class="code">HasEvalDiagMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">DiagMat</code> (<a href="chapB.html#X86C5B86981FA1F9A"><span class="RefLink">B.1-11</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -632,12 +673,12 @@ end );
 
 <p><a id="X84F45FB4854A079C" name="X84F45FB4854A079C"></a></p>
 
-<h5>C.4-13 Eval</h5>
+<h5>C.4-14 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">KroneckerMat</code> (<a href="chap5.html#X7CDA5D848468A0AA"><span class="RefLink">5.5-12</span></a>) then the filter <code class="code">HasEvalKroneckerMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">KroneckerMat</code> (<a href="chapB.html#X82202A6A7FAB7174"><span class="RefLink">B.1-11</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">KroneckerMat</code> (<a href="chap5.html#X7CDA5D848468A0AA"><span class="RefLink">5.5-13</span></a>) then the filter <code class="code">HasEvalKroneckerMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">KroneckerMat</code> (<a href="chapB.html#X82202A6A7FAB7174"><span class="RefLink">B.1-12</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -682,12 +723,12 @@ end );
 
 <p><a id="X7B68797C7EA79B10" name="X7B68797C7EA79B10"></a></p>
 
-<h5>C.4-14 Eval</h5>
+<h5>C.4-15 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7D1A074278B415BE"><span class="RefLink">5.5-13</span></a>) then the filter <code class="code">HasEvalMulMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">MulMat</code> (<a href="chapB.html#X828F8C7785EEC3D1"><span class="RefLink">B.1-12</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7D1A074278B415BE"><span class="RefLink">5.5-14</span></a>) then the filter <code class="code">HasEvalMulMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">MulMat</code> (<a href="chapB.html#X828F8C7785EEC3D1"><span class="RefLink">B.1-13</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -756,12 +797,12 @@ end );
 
 <p><a id="X85971C16868BD83C" name="X85971C16868BD83C"></a></p>
 
-<h5>C.4-15 Eval</h5>
+<h5>C.4-16 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\+</code> (<a href="chap5.html#X87C773DA85B21ADF"><span class="RefLink">5.5-14</span></a>) then the filter <code class="code">HasEvalAddMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">AddMat</code> (<a href="chapB.html#X7B0B12F080A90039"><span class="RefLink">B.1-13</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\+</code> (<a href="chap5.html#X87C773DA85B21ADF"><span class="RefLink">5.5-15</span></a>) then the filter <code class="code">HasEvalAddMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">AddMat</code> (<a href="chapB.html#X7B0B12F080A90039"><span class="RefLink">B.1-14</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -799,12 +840,12 @@ end );
 
 <p><a id="X86F848318791595C" name="X86F848318791595C"></a></p>
 
-<h5>C.4-16 Eval</h5>
+<h5>C.4-17 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\-</code> (<a href="chap5.html#X784B57617B24208C"><span class="RefLink">5.5-15</span></a>) then the filter <code class="code">HasEvalSubMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">SubMat</code> (<a href="chapB.html#X7FE11AA27AE7D2D7"><span class="RefLink">B.1-14</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\-</code> (<a href="chap5.html#X784B57617B24208C"><span class="RefLink">5.5-16</span></a>) then the filter <code class="code">HasEvalSubMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">SubMat</code> (<a href="chapB.html#X7FE11AA27AE7D2D7"><span class="RefLink">B.1-15</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -842,12 +883,12 @@ end );
 
 <p><a id="X7F7682FC86F602C2" name="X7F7682FC86F602C2"></a></p>
 
-<h5>C.4-17 Eval</h5>
+<h5>C.4-18 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7F5961D78754157B"><span class="RefLink">5.5-16</span></a>) then the filter <code class="code">HasEvalCompose</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">Compose</code> (<a href="chapB.html#X7D491D957E63C3A4"><span class="RefLink">B.1-15</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7F5961D78754157B"><span class="RefLink">5.5-17</span></a>) then the filter <code class="code">HasEvalCompose</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">Compose</code> (<a href="chapB.html#X7D491D957E63C3A4"><span class="RefLink">B.1-16</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
