@@ -410,6 +410,9 @@
     [4X  ## "transpose" a matrix (with "the" involution of the ring):[104X
     [4X  Involution                              := "A^*",[104X
     [4X  [104X
+    [4X  ## transpose a matrix[104X
+    [4X  TransposedMatrix                        := "A^t",[104X
+    [4X  [104X
     [4X  ## get certain rows of a matrix:[104X
     [4X  CertainRows                             := "===",[104X
     [4X  [104X
