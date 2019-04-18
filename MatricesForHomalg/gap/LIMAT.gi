@@ -1067,6 +1067,36 @@ InstallMethod( Involution,
 end );
 
 #-----------------------------------
+# TransposedMatrix
+#-----------------------------------
+
+##
+InstallMethod( TransposedMatrix,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "TransposedMatrix( IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrColumns( M ), NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( TransposedMatrix,
+        "LIMAT: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix and IsOne ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "TransposedMatrix( IsOne(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+#-----------------------------------
 # CertainRows
 #-----------------------------------
 

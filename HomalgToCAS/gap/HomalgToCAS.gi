@@ -260,6 +260,9 @@ InstallValue( HOMALG_IO,
                 ## "transpose" a matrix (with "the" involution of the ring):
                 Involution                              := "A^*",
                 
+                ## transpose a matrix
+                TransposedMatrix                        := "A^t",
+                
                 ## get certain rows of a matrix:
                 CertainRows                             := "===",
                 

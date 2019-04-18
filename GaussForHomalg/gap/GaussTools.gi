@@ -123,6 +123,24 @@ InstallValue( CommonHomalgTableForGaussTools,
                    return TransposedSparseMat( Eval( M ) );
                    
                  end,
+##  <#GAPDoc Label="TransposedMatrix">
+##  <ManSection>
+##  <Func Arg="M" Name="TransposedMatrix"/>
+##  <Returns>a sparse matrix</Returns>
+##  <Description>
+##  This returns a sparse matrix which is the transpose of the
+##  sparse matrix stored in the <C>Eval</C> attribute of the
+##  &homalg; matrix <A>M</A>.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+               # for a general ring (field) the involution is just the transposed matrix
+               TransposedMatrix :=
+                 function( M )
+                   
+                   return TransposedSparseMat( Eval( M ) );
+                   
+                 end,
 ##  <#GAPDoc Label="CertainRows">
 ##  <ManSection>
 ##  <Func Arg="M, plist" Name="CertainRows"/>

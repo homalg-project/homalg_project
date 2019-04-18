@@ -42,6 +42,7 @@ fallback method.
 <#Include Label="IdentityMatrix:ResidueClassRing">
 
 <#Include Label="Involution:ResidueClassRing">
+<#Include Label="TransposedMatrix:ResidueClassRing">
 <#Include Label="CertainRows:ResidueClassRing">
 <#Include Label="CertainColumns:ResidueClassRing">
 <#Include Label="UnionOfRows:ResidueClassRing">

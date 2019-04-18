@@ -85,6 +85,23 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
+    
+    if HasIsZero( MI ) then
+        return IsZero( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalLeftInverse, 0,
         
   function( M )
@@ -749,6 +766,23 @@ end );
 
 ##
 InstallImmediateMethod( IsUpperTriangularMatrix,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
+    
+    if HasIsLowerTriangularMatrix( MI ) then
+        return IsLowerTriangularMatrix( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperTriangularMatrix,
         IsHomalgMatrix and HasEvalCertainRows, 0,
         
   function( M )
@@ -793,6 +827,23 @@ InstallImmediateMethod( IsLowerTriangularMatrix,
     local MI;
     
     MI := EvalInvolution( M );
+    
+    if HasIsUpperTriangularMatrix( MI ) then
+        return IsUpperTriangularMatrix( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerTriangularMatrix,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
     
     if HasIsUpperTriangularMatrix( MI ) then
         return IsUpperTriangularMatrix( MI );
@@ -859,6 +910,23 @@ end );
 
 ##
 InstallImmediateMethod( IsUpperStairCaseMatrix,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
+    
+    if HasIsLowerStairCaseMatrix( MI ) then
+        return IsLowerStairCaseMatrix( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperStairCaseMatrix,
         IsHomalgMatrix and HasEvalCertainRows, 0,
         
   function( M )
@@ -903,6 +971,23 @@ InstallImmediateMethod( IsLowerStairCaseMatrix,
     local MI;
     
     MI := EvalInvolution( M );
+    
+    if HasIsUpperStairCaseMatrix( MI ) then
+        return IsUpperStairCaseMatrix( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerStairCaseMatrix,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
     
     if HasIsUpperStairCaseMatrix( MI ) then
         return IsUpperStairCaseMatrix( MI );
@@ -1172,6 +1257,23 @@ end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
+    
+    if HasColumnRankOfMatrix( MI ) then
+        return ColumnRankOfMatrix( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
@@ -1260,6 +1362,23 @@ InstallImmediateMethod( ColumnRankOfMatrix,
     local MI;
     
     MI := EvalInvolution( M );
+    
+    if HasRowRankOfMatrix( MI ) then
+        return RowRankOfMatrix( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
     
     if HasRowRankOfMatrix( MI ) then
         return RowRankOfMatrix( MI );
@@ -1512,6 +1631,23 @@ InstallImmediateMethod( ZeroRows,
 end );
 
 ##
+InstallImmediateMethod( ZeroRows,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
+    
+    if HasZeroColumns( MI ) then
+        return ZeroColumns( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( ZeroColumns,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
@@ -1519,6 +1655,23 @@ InstallImmediateMethod( ZeroColumns,
     local MI;
     
     MI := EvalInvolution( M );
+    
+    if HasZeroRows( MI ) then
+        return ZeroRows( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ZeroColumns,
+        IsHomalgMatrix and HasEvalTransposedMatrix, 0,
+        
+  function( M )
+    local MI;
+    
+    MI := EvalTransposedMatrix( M );
     
     if HasZeroRows( MI ) then
         return ZeroRows( MI );
@@ -1667,6 +1820,19 @@ InstallMethod( ZeroRows,
     
 end );
 
+##
+InstallMethod( ZeroRows,
+        "COLEM: for homalg matrices (HasEvalTransposedMatrix)",
+        [ IsHomalgMatrix and HasEvalTransposedMatrix ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "ZeroRows( TransposedMatrix( M ) ) = ZeroColumns( M )", "\033[0m" );
+    
+    return ZeroColumns( EvalTransposedMatrix( M ) );
+    
+end );
+
 #-----------------------------------
 # ZeroColumns
 #-----------------------------------
@@ -1681,6 +1847,19 @@ InstallMethod( ZeroColumns,
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "ZeroColumns( Involution( M ) ) = ZeroRows( M )", "\033[0m" );
     
     return ZeroRows( EvalInvolution( M ) );
+    
+end );
+
+##
+InstallMethod( ZeroColumns,
+        "COLEM: for homalg matrices (HasEvalTransposedMatrix)",
+        [ IsHomalgMatrix and HasEvalTransposedMatrix ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "ZeroColumns( TransposedMatrix( M ) ) = ZeroRows( M )", "\033[0m" );
+    
+    return ZeroRows( EvalTransposedMatrix( M ) );
     
 end );
 
@@ -1940,6 +2119,54 @@ InstallMethod( Involution,
     e := EvalDiagMat( M );
     
     e := List( e, Involution );
+    
+    return DiagMat( e );
+    
+end );
+
+#-----------------------------------
+# TransposedMatrix
+#-----------------------------------
+
+##
+InstallMethod( TransposedMatrix,
+        "COLEM: for homalg matrices (HasPreEval)",
+        [ IsHomalgMatrix and HasPreEval ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "TransposedMatrix( PreEval )", "\033[0m" );
+    
+    return TransposedMatrix( PreEval( M ) );
+    
+end );
+
+##
+InstallMethod( TransposedMatrix,
+        "COLEM: for homalg matrices (HasEvalTransposedMatrix)",
+        [ IsHomalgMatrix and HasEvalTransposedMatrix ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "TransposedMatrix( TransposedMatrix )", "\033[0m" );
+    
+    return EvalTransposedMatrix( M );
+    
+end );
+
+##
+InstallMethod( TransposedMatrix,
+        "COLEM: for homalg matrices (HasEvalDiagMat)",
+        [ IsHomalgMatrix and HasEvalDiagMat ],
+        
+  function( M )
+    local e;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "TransposedMatrix( DiagMat )", "\033[0m" );
+    
+    e := EvalDiagMat( M );
+    
+    e := List( e, TransposedMatrix );
     
     return DiagMat( e );
     

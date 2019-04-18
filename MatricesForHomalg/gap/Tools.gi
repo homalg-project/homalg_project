@@ -457,6 +457,62 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="Eval:HasEvalTransposedMatrix">
+##  <ManSection>
+##    <Meth Arg="C" Name="Eval" Label="for matrices created with TransposedMatrix"/>
+##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
+##    <Description>
+##      In case the matrix was created using
+##      <Ref Meth="TransposedMatrix" Label="for matrices"/>
+##      then the filter <C>HasEvalTransposedMatrix</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="TransposedMatrix" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalTransposedMatrix)",
+        [ IsHomalgMatrix and HasEvalTransposedMatrix ],
+        
+  function( C )
+    local R, RP, M;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    M :=  EvalTransposedMatrix( C );
+    
+    if IsBound(RP!.TransposedMatrix) then
+        return RP!.TransposedMatrix( M );
+    fi;
+    
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called TransposedMatrix ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
+    
+    return homalgInternalMatrixHull( TransposedMat( Eval( M )!.matrix ) );
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="TransposedMatrix:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="M" Name="TransposedMatrix" Label="homalgTable entry"/>
+##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>TransposedMatrix</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with TransposedMatrix"/> returns
+##      <M>RP</M>!.<C>TransposedMatrix</C> applied to the content of the attribute <C>EvalTransposedMatrix</C><M>( <A>C</A> ) = <A>M</A></M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="Eval:HasEvalCertainRows">
 ##  <ManSection>
 ##    <Meth Arg="C" Name="Eval" Label="for matrices created with CertainRows"/>

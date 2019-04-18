@@ -44,6 +44,7 @@ the attribute <C>Eval</C>.
 <#Include Label="Eval:HasEvalLeftInverse">
 <#Include Label="Eval:HasEvalRightInverse">
 <#Include Label="Eval:HasEvalInvolution">
+<#Include Label="Eval:HasEvalTransposedMatrix">
 <#Include Label="Eval:HasEvalCertainRows">
 <#Include Label="Eval:HasEvalCertainColumns">
 <#Include Label="Eval:HasEvalUnionOfRows">

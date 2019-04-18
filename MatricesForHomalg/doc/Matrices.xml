@@ -111,6 +111,7 @@
 <#Include Label="RightInverseLazy">
 
 <#Include Label="Involution">
+<#Include Label="TransposedMatrix">
 <#Include Label="CertainRows">
 <#Include Label="CertainColumns">
 <#Include Label="UnionOfRows">

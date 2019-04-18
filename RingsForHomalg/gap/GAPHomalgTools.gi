@@ -116,6 +116,8 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                
                Involution := M -> homalgSendBlocking( [ "Involution(", M, ")" ], HOMALG_IO.Pictograms.Involution ),
                
+               TransposedMatrix := M -> homalgSendBlocking( [ "TransposedMatrix(", M, ")" ], HOMALG_IO.Pictograms.TransposedMatrix ),
+               
                CertainRows :=
                  function( M, plist )
                    

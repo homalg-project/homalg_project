@@ -30,6 +30,7 @@ entries.
 <#Include Label="IdentityMatrix:homalgTable_entry">
 
 <#Include Label="Involution:homalgTable_entry">
+<#Include Label="TransposedMatrix:homalgTable_entry">
 <#Include Label="CertainRows:homalgTable_entry">
 <#Include Label="CertainColumns:homalgTable_entry">
 <#Include Label="UnionOfRows:homalgTable_entry">

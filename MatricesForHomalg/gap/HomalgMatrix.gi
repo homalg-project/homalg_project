@@ -1028,6 +1028,48 @@ InstallMethod( Involution,
     
 end );
 
+##  <#GAPDoc Label="TransposedMatrix">
+##  <ManSection>
+##    <Meth Arg="M" Name="TransposedMatrix" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The twisted transpose of the &homalg; matrix <A>M</A>.<P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with TransposedMatrix"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( TransposedMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local C;
+    
+    C := HomalgMatrixWithAttributes( [
+                 EvalTransposedMatrix, M,
+                 NrRows, NrColumns( M ),
+                 NrColumns, NrRows( M ),
+                 ], HomalgRing( M ) );
+    
+    SetItsTransposedMatrix( M, C );
+    SetItsTransposedMatrix( C, M );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( TransposedMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasItsTransposedMatrix ],
+        
+  function( M )
+    
+    return ItsTransposedMatrix( M );
+    
+end );
+
 ##  <#GAPDoc Label="CertainRows">
 ##  <ManSection>
 ##    <Meth Arg="M, plist" Name="CertainRows" Label="for matrices"/>

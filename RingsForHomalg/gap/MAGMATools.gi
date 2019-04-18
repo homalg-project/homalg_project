@@ -132,6 +132,8 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                Involution := M -> homalgSendBlocking( [ "Transpose(", M, ")" ], HOMALG_IO.Pictograms.Involution ),
                
+               TranposedMatrix := M -> homalgSendBlocking( [ "Transpose(", M, ")" ], HOMALG_IO.Pictograms.TranposedMatrix ),
+               
                CertainRows :=
                  function( M, plist )
                    

@@ -218,6 +218,37 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##  </ManSection>
                ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="TransposedMatrix:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="TransposedMatrix" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="TransposedMatrix" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
+               TransposedMatrix :=
+                 function( M )
+                   local N, R;
+                   
+                   N := TransposedMat( Eval( M ) );
+                   
+                   R := HomalgRing( N );
+                   
+                   if not ( HasIsCommutative( R ) and IsCommutative( R ) and
+                            HasIsReducedModuloRingRelations( M ) and
+                            IsReducedModuloRingRelations( M ) ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
+                       N := DecideZero( N, HomalgRing( M ) );
+                   fi;
+                   
+                   return N;
+                   
+                 end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
+               
                ##  <#GAPDoc Label="CertainRows:ResidueClassRing">
                ##  <ManSection>
                ##    <Func Arg="" Name="CertainRows" Label="ResidueClassRing"/>

@@ -67,6 +67,13 @@ InstallValue( CommonHomalgTableForSageTools,
                    
                  end,
                
+               TranposedMatrix :=
+                 function( M )
+                   
+                   return homalgSendBlocking( [ M, ".transpose()" ], HOMALG_IO.Pictograms.TranposedMatrix );
+                   
+                 end,
+               
                CertainRows :=
                  function( M, plist )
                    

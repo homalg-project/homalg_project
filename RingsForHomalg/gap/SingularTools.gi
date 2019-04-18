@@ -146,6 +146,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               TransposedMatrix :=
+                 function( M )
+                   
+                   return homalgSendBlocking( [ "transpose(", M, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.TransposedMatrix );
+                   
+                 end,
+               
                CertainRows :=
                  function( M, plist )
                    
