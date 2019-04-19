@@ -4779,7 +4779,7 @@ InstallMethod( NoetherNormalization,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, r, char, indets, l, k, K, m, rand_mat, rand_inv;
+    local R, r, char, indets, l, k, K, m, pos_char, rand_mat, rand_inv;
     
     R := HomalgRing( M );
     r := CoefficientsRing( R );
@@ -4815,9 +4815,11 @@ InstallMethod( NoetherNormalization,
         return [ M, m, true, true ];
     fi;
     
+    pos_char := char > 0;
+    
     repeat
         
-        if IsPrimeInt( char ) then
+        if pos_char then
             rand_mat := Random( SL( l, K ) );
         else
             if l = 1 then
@@ -6951,10 +6953,13 @@ InstallMethod( AMaximalIdealContaining,
         
         while true do
             
+            ## the fiber over the origin of the subspace L corresponding
+            ## to the maximal independent set v
             n := UnionOfRows( m, HomalgMatrix( v, Length( v ), 1, R ) );
             
             n := BasisOfRowModule( n );
             
+            ## if the fiber is not empty then break the while loop
             if not IsZero( DecideZeroRows( one, n ) ) then
                 n_is_one := false;
                 break;
@@ -6962,6 +6967,7 @@ InstallMethod( AMaximalIdealContaining,
             
             l := Length( v );
             
+            ## try fibers over bigger coordinate subspaces of L containing the origin
             if l > 1 then
                 Remove( v, l );
             else
