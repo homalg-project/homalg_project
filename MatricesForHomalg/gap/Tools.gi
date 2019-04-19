@@ -3873,6 +3873,28 @@ InstallMethod( Random,
 end );
 
 ##
+InstallMethod( Random,
+        "for a homalg ring",
+        [ IsHomalgRing and IsRationalsForHomalg ],
+        
+  function( R )
+    
+    return Random( R, 0 );
+    
+end );
+
+##
+InstallMethod( Random,
+        "for a homalg ring",
+        [ IsHomalgRing and IsIntegersForHomalg ],
+        
+  function( R )
+    
+    return Random( R, 0 );
+    
+end );
+
+##
 InstallMethod( Value,
         "polynomial substitution",
         [ IsHomalgRingElement, IsList, IsList ],
@@ -4351,6 +4373,35 @@ InstallMethod( RandomMatrix,
     weights := ListWithIdenticalEntries( Length( Indeterminates( R ) ), 1 );
 
     return RandomMatrix( r, c, d, R, weights );
+    
+end );
+
+##
+InstallMethod( RandomMatrix,
+        "for two integers and a homalg ring",
+        [ IsInt, IsInt, IsHomalgRing ],
+        
+  function( r, c, R )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    if not IsBound(RP!.RandomPol) then
+        TryNextMethod( );
+    fi;
+    
+    return HomalgMatrix( List( [ 1 .. r * c ], a -> Random( R ) ), r, c, R );
+    
+end );
+
+##
+InstallMethod( RandomMatrix,
+        "for two integers and an internal homalg ring",
+        [ IsInt, IsInt, IsHomalgInternalRingRep ],
+        
+  function( r, c, R )
+    
+    return HomalgMatrix( RandomMat( r, c, R!.ring ), r, c, R );
     
 end );
 
