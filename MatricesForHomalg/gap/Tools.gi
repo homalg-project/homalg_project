@@ -3868,7 +3868,7 @@ InstallMethod( Random,
         
   function( R )
     
-    return Random( R, Random( [ 1 .. 10 ] ) );
+    return Random( R, RandomCombination( [ 0 .. 10 ], Random( [ 1 .. 11 ] ) ) );
     
 end );
 
