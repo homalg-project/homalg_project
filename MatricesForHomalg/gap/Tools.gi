@@ -3470,6 +3470,21 @@ InstallMethod( Pullback,
     
 end );
 
+##
+InstallMethod( Pullback,
+        "for homalg rings",
+        [ IsHomalgRingMap, IsRingElement ],
+        
+  function( phi, r )
+    
+    r := HomalgMatrix( [ r ], 1, 1, Source( phi ) );
+    
+    r := Pullback( phi, r );
+    
+    return MatElm( r, 1, 1 );
+    
+end );
+
 ####################################
 #
 # methods for operations (you probably don't urgently need to replace for an external CAS):
