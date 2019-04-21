@@ -240,8 +240,11 @@ DeclareAttribute( "DataOfCoordinateRingOfGraph",
         IsHomalgRingMap );
 
 # basic operations:
+
+if false then ## keep for future documentation
 DeclareOperation( "Pullback",
         [ IsHomalgRingMap, IsHomalgMatrix ] );
+fi;
 
 DeclareOperation( "Pullback",
         [ IsHomalgRingMap, IsRingElement ] );
