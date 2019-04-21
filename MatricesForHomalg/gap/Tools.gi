@@ -7284,6 +7284,7 @@ InstallMethod( RingMapOntoRewrittenResidueClassRing,
     map := RingMap( images, A, S );
     
     SetIsMorphism( map, true );
+    SetIsEpimorphism( map, true );
     
     return map;
     
@@ -7343,6 +7344,7 @@ InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
     map := RingMap( indets, A, S );
     
     SetIsMorphism( map, true );
+    SetIsEpimorphism( map, true );
     
     return map;
     
