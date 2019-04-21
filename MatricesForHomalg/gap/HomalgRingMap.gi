@@ -80,7 +80,16 @@ InstallMethod( PreCompose,
     
     chi := RingMap( Pullback( phi, images_psi ), S, T );
     
-    if HasIsMorphism( psi ) and IsMorphism( psi ) and
+    if HasIsIsomorphism( psi ) and IsIsomorphism( psi ) and
+       HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+        SetIsIsomorphism( chi, true );
+    elif HasIsEpimorphism( psi ) and IsEpimorphism( psi ) and
+       HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+        SetIsEpimorphism( chi, true );
+    elif HasIsMonomorphism( psi ) and IsMonomorphism( psi ) and
+       HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+        SetIsMonomorphism( chi, true );
+    elif HasIsMorphism( psi ) and IsMorphism( psi ) and
        HasIsMorphism( phi ) and IsMorphism( phi ) then
         SetIsMorphism( chi, true );
     fi;
