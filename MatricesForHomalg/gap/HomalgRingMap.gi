@@ -227,10 +227,17 @@ InstallMethod( RingMap,
   function( R )
     local map;
     
+    if IsBound( R!.IdentityMorphism ) then
+        return R!.IdentityMorphism;
+    fi;
+    
     map := RingMap( Indeterminates( R ), R, R );
     
     SetIsMorphism( map, true );
+    SetIsIsomorphism( map, true );
     SetIsOne( map, true );
+    
+    R!.IdentityMorphism := map;
     
     return map;
     
