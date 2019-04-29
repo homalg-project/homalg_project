@@ -300,7 +300,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )) and
-##      <M>S</M> be the row span of <A>M</A>, i.e. the <M>R</M>-submodule of the free module
+##      <M>S</M> be the row span of <A>M</A>, i.e. the <M>R</M>-submodule of the free left module
 ##      <M>R^{(1 \times NrColumns( <A>M</A> ))}</M> spanned by the rows of <A>M</A>. A solution to the
 ##      <Q>submodule membership problem</Q> is an algorithm which can decide if an element <M>m</M> in
 ##      <M>R^{(1 \times NrColumns( <A>M</A> ))}</M> is contained in <M>S</M> or not. And exactly like
@@ -482,7 +482,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )) and
-##      <M>S</M> be the column span of <A>M</A>, i.e. the <M>R</M>-submodule of the free module
+##      <M>S</M> be the column span of <A>M</A>, i.e. the <M>R</M>-submodule of the free right module
 ##      <M>R^{(NrRows( <A>M</A> ) \times 1)}</M> spanned by the columns of <A>M</A>. A solution to the
 ##      <Q>submodule membership problem</Q> is an algorithm which can decide if an element <M>m</M> in
 ##      <M>R^{(NrRows( <A>M</A> ) \times 1)}</M> is contained in <M>S</M> or not. And exactly like
@@ -665,7 +665,7 @@ end );
 ##    <Description>
 ##      Let <A>A</A> and <A>B</A> be matrices having the same number of columns and defined over the same ring <M>R</M>
 ##      (<M>:=</M><C>HomalgRing</C>( <A>A</A> )) and <M>S</M> be the row span of <A>B</A>,
-##      i.e. the <M>R</M>-submodule of the free module <M>R^{(1 \times NrColumns( <A>B</A> ))}</M>
+##      i.e. the <M>R</M>-submodule of the free left module <M>R^{(1 \times NrColumns( <A>B</A> ))}</M>
 ##      spanned by the rows of <A>B</A>. The result is a matrix <M>C</M> having the same shape as <A>A</A>,
 ##      for which the <M>i</M>-th row <M><A>C</A>^i</M> is equivalent to the <M>i</M>-th row <M><A>A</A>^i</M> of <A>A</A> modulo <M>S</M>,
 ##      i.e. <M><A>C</A>^i-<A>A</A>^i</M> is an element of the row span <M>S</M> of <A>B</A>. Moreover, the row <M><A>C</A>^i</M> is zero,
@@ -823,7 +823,7 @@ end );
 ##    <Description>
 ##      Let <A>A</A> and <A>B</A> be matrices having the same number of rows and defined over the same ring <M>R</M>
 ##      (<M>:=</M><C>HomalgRing</C>( <A>A</A> )) and <M>S</M> be the column span of <A>B</A>,
-##      i.e. the <M>R</M>-submodule of the free module <M>R^{(NrRows( <A>B</A> ) \times 1)}</M>
+##      i.e. the <M>R</M>-submodule of the free right module <M>R^{(NrRows( <A>B</A> ) \times 1)}</M>
 ##      spanned by the columns of <A>B</A>. The result is a matrix <M>C</M> having the same shape as <A>A</A>,
 ##      for which the <M>i</M>-th column <M><A>C</A>_i</M> is equivalent to the <M>i</M>-th column <M><A>A</A>_i</M> of <A>A</A>
 ##      modulo <M>S</M>, i.e. <M><A>C</A>_i-<A>A</A>_i</M> is an element of the column span <M>S</M> of <A>B</A>. Moreover,
@@ -982,7 +982,7 @@ end );
 ##    <Description>
 ##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )).
 ##      The matrix of row syzygies <C>SyzygiesGeneratorsOfRows</C>( <A>M</A> ) is a matrix whose rows span
-##      the left kernel of <A>M</A>, i.e. the <M>R</M>-submodule of the free module <M>R^{(1 \times NrRows( <A>M</A> ))}</M>
+##      the left kernel of <A>M</A>, i.e. the <M>R</M>-submodule of the free left module <M>R^{(1 \times NrRows( <A>M</A> ))}</M>
 ##      consisting of all rows <M>X</M> satisfying <M>X<A>M</A>=0</M>.
 ##      (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
@@ -1097,7 +1097,7 @@ end );
 ##    <Description>
 ##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )).
 ##      The matrix of column syzygies <C>SyzygiesGeneratorsOfColumns</C>( <A>M</A> ) is a matrix whose columns span
-##      the right kernel of <A>M</A>, i.e. the <M>R</M>-submodule of the free module <M>R^{(NrColumns( <A>M</A> ) \times 1)}</M>
+##      the right kernel of <A>M</A>, i.e. the <M>R</M>-submodule of the free right module <M>R^{(NrColumns( <A>M</A> ) \times 1)}</M>
 ##      consisting of all columns <M>X</M> satisfying <M><A>M</A>X=0</M>.
 ##      (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
@@ -1214,7 +1214,7 @@ end );
 ##    <Description>
 ##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )).
 ##      The matrix of <E>relative</E> row syzygies <C>SyzygiesGeneratorsOfRows</C>( <A>M</A>, <A>M2</A> ) is a matrix
-##      whose rows span the left kernel of <A>M</A> modulo <A>M2</A>, i.e. the <M>R</M>-submodule of the free module
+##      whose rows span the left kernel of <A>M</A> modulo <A>M2</A>, i.e. the <M>R</M>-submodule of the free left module
 ##      <M>R^{(1 \times NrRows( <A>M</A> ))}</M> consisting of all rows <M>X</M> satisfying <M>X<A>M</A>+Y<A>M2</A>=0</M>
 ##      for some row <M>Y \in R^{(1 \times NrRows( <A>M2</A> ))}</M>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
@@ -1334,7 +1334,7 @@ end );
 ##    <Description>
 ##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )).
 ##      The matrix of <E>relative</E> column syzygies <C>SyzygiesGeneratorsOfColumns</C>( <A>M</A>, <A>M2</A> ) is a matrix
-##      whose columns span the right kernel of <A>M</A> modulo <A>M2</A>, i.e. the <M>R</M>-submodule of the free module
+##      whose columns span the right kernel of <A>M</A> modulo <A>M2</A>, i.e. the <M>R</M>-submodule of the free right module
 ##      <M>R^{(NrColumns( <A>M</A> ) \times 1)}</M> consisting of all columns <M>X</M> satisfying <M><A>M</A>X+<A>M2</A>Y=0</M>
 ##      for some column <M>Y \in R^{(NrColumns( <A>M2</A> ) \times 1)}</M>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
