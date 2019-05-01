@@ -84,6 +84,19 @@ DeclareAttribute( "MaximalCones",
 DeclareAttribute( "FVector",
                   IsFan );
 
+##  <#GAPDoc Label="PrimitiveCollections">
+##  <ManSection>
+##    <Attr Arg="fan" Name="PrimitiveCollections"/>
+##    <Returns>a list of lists</Returns>
+##    <Description>
+##      Returns the primitive collections of the fan <A>fan</A> as a list of lists.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "PrimitiveCollections",
+                  IsFan );
+
 ####################################
 ##
 ## Properties

@@ -334,6 +334,60 @@ InstallMethod( FVector,
     
 end );
 
+##
+InstallMethod( PrimitiveCollections,
+               "for fans",
+               [ IsFan ],
+
+  function( fan )
+    local rays, max_cones, facets, all_points, d_max, primitive_collections, d, checked, facet,
+         I_minus_j, scanner, j, I;
+
+    # collect data of the fan
+    rays := RayGenerators( fan );
+    max_cones := MaximalCones( fan );
+    facets := List( [ 1 .. Length( max_cones ) ],
+                        i -> List( RayGenerators( max_cones[ i ] ), k -> Position( rays, k ) ) );
+    all_points := [ 1 .. Length( rays ) ];
+    d_max := Maximum( List( facets, i -> Length( i ) ) ) + 1;
+
+    # identify and return the primitive collections
+    primitive_collections := [];
+    for d in [ 1 .. d_max ] do
+        checked := [];
+        for facet in facets do
+            for I_minus_j in Combinations( facet, d ) do
+                scanner := Difference( all_points, Flat( I_minus_j ) );
+                for j in scanner do
+                    I := Concatenation( I_minus_j, [ j ] );
+
+                    if not I in checked then
+
+                        Add( checked, I );
+
+                        # (1) I is contained in the primitive collections iff it is not contained in any facet
+                        if ForAll( [ 1 .. Length( facets ) ],
+                                            i -> not IsSubsetSet( facets[ i ], I ) ) then
+
+                            # (2) I is generator of the primitive collections iff
+                            # primitive_collections does not contain a "smaller" generator
+                            if ForAll( [ 1 .. Length( primitive_collections ) ],
+                                            i -> not IsSubsetSet( I, primitive_collections[i] ) ) then
+
+                                # then add this new generator
+                                Append( primitive_collections, [ I ] );
+
+                            fi;
+                        fi;
+                    fi;
+                od;
+            od;
+        od;
+    od;
+    return primitive_collections;
+
+end );
+
 ####################################
 ##
 ## Properties
