@@ -6,15 +6,14 @@ PackageName := "PolymakeInterface",
 Subtitle := "A package to provide algorithms for fans and cones of polymake to other packages",
 
 Version :=  Maximum( [
-  "2018.09.25", ## Sebas' version
+  "2019.03.26", ## Sebas' version
 ## this line prevents merge conflicts
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-
-
+License := "GPL-2.0-or-later",
 
 Persons := [
  rec(
@@ -125,8 +124,16 @@ BannerString := Concatenation(
 
 Autoload := false,
 
+Keywords := [],
 
-Keywords := []
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := """
+This package may be distributed under the terms and conditions
+of the GNU Public License Version 2 or (at your option) any later version.
+"""
+    ),
+),
 
 ));
 

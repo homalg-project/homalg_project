@@ -7,10 +7,10 @@
                                    packages [101X
   
   
-                                   2018.09.25
+                                   2019.03.26
   
   
-                               25 September 2018
+                                 26 March 2019
   
   
                                 Thomas Baechler
@@ -39,6 +39,12 @@
                 [33X[0;14Y52062 Aachen[133X
                 [33X[0;14YGermany[133X
   
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
