@@ -2,9 +2,7 @@
 #define LOADGAP_H
 
 // include GAP headers
-extern "C" {
-#include <src/compiled.h>
-}
+#include "src/compiled.h"
 
 #endif
 
