@@ -32,6 +32,29 @@
   connection with the ones presented here. A few of them can be found
   in the examples and the appendix of this documentation.
   
+  <P/>Operations within &MatricesForHomalg; that take
+  matrices as input and produce a matrix as an output
+  produce homogeneous output for homogeneous input in the following cases:
+  the graded ring in question is either a polynomial ring or the exterior algebra
+  residing in &Singular;, and the called operation is one of the following listed below:
+  <List>
+    <Item><C>SyzygiesGeneratorsOfRows</C></Item>
+    <Item><C>SyzygiesGeneratorsOfColumns</C></Item>
+    <Item><C>ReducedSyzygiesGeneratorsOfRows</C></Item>
+    <Item><C>ReducedSyzygiesGeneratorsOfColumns</C></Item>
+    <Item><C>BasisOfRowModule</C></Item>
+    <Item><C>BasisOfColumnModule</C></Item>
+    <Item><C>ReducedBasisOfRowModule</C></Item>
+    <Item><C>ReducedBasisOfColumnModule</C></Item>
+    <Item><C>DecideZeroRows</C></Item>
+    <Item><C>DecideZeroColumns</C></Item>
+    <Item><C>LeftDivide</C></Item>
+    <Item><C>RightDivide</C></Item>
+  </List>
+  These operation trigger Gröbner bases computations in &Singular;, which are always
+  forced to be performed with a tail reduction by &homalg;. In particular, the resulting
+  elements of the Gröbner bases have to be homogeneous.
+  
   <Section Label="HomogeneousMatrices:Category">
 
     <Heading>Homogeneous Matrices: Category and Representations</Heading>
