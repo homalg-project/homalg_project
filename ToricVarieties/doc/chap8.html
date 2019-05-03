@@ -27,6 +27,8 @@
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A7080E77E93A36F">8.1-1 <span class="Heading">Divisors on a toric variety</span></a>
 </span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7AA4909E8359A584">8.1-2 <span class="Heading">Polytope of toric divisors</span></a>
+</span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X7819115082F3E2A6">8.2 <span class="Heading">The GAP category</span></a>
 </span>
@@ -151,6 +153,20 @@ Q[x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11]
 false
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAmple(D2);</span>
 false
+</pre></div>
+
+<p><a id="X7AA4909E8359A584" name="X7AA4909E8359A584"></a></p>
+
+<h5>8.1-2 <span class="Heading">Polytope of toric divisors</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1 := ProjectiveSpace( 1 );</span>
+&lt;A projective toric variety of dimension 1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">divisor := DivisorOfGivenClass( P1, [ -1 ] );</span>
+&lt;A divisor of a toric variety with coordinates ( -1, 0 )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">polytope := PolytopeOfDivisor( divisor );</span>
+&lt;A polytope in |R^1&gt;
 </pre></div>
 
 <p><a id="X7819115082F3E2A6" name="X7819115082F3E2A6"></a></p>
@@ -294,7 +310,7 @@ false
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntegerForWhichIsSureVeryAmple</code>( <var class="Arg">divi</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: an integer</p>
 
-<p>Returns an integer <var class="Arg">n</var> such that <span class="Math">n \cdot \text{divi}</span> is very ample.</p>
+<p>Returns an integer <var class="Arg">n</var> such that <span class="Math">n \cdot </span>divi is very ample.</p>
 
 <p><a id="X7929762F79ABFA0D" name="X7929762F79ABFA0D"></a></p>
 

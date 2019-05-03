@@ -63,6 +63,18 @@
   [4X[32X[104X
   
   
+  [1X8.1-2 [33X[0;0YPolytope of toric divisors[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XP1 := ProjectiveSpace( 1 );[127X[104X
+    [4X[28X<A projective toric variety of dimension 1>[128X[104X
+    [4X[25Xgap>[125X [27Xdivisor := DivisorOfGivenClass( P1, [ -1 ] );[127X[104X
+    [4X[28X<A divisor of a toric variety with coordinates ( -1, 0 )>[128X[104X
+    [4X[25Xgap>[125X [27Xpolytope := PolytopeOfDivisor( divisor );[127X[104X
+    [4X[28X<A polytope in |R^1>[128X[104X
+  [4X[32X[104X
+  
+  
   [1X8.2 [33X[0;0YThe GAP category[133X[101X
   
   [1X8.2-1 IsToricDivisor[101X
@@ -177,7 +189,7 @@
   [33X[1;0Y[29X[2XIntegerForWhichIsSureVeryAmple[102X( [3Xdivi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Yan integer[133X
   
-  [33X[0;0YReturns an integer [3Xn[103X such that [23Xn \cdot \text{divi}[123X is very ample.[133X
+  [33X[0;0YReturns an integer [3Xn[103X such that [23Xn \cdot [123Xdivi is very ample.[133X
   
   [1X8.4-7 AmbientToricVariety[101X
   

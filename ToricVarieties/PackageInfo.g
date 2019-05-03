@@ -9,7 +9,9 @@ Version :=  Maximum( [
 ## this line prevents merge conflicts
   "2015.03.31", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2017.03.31", ## Martins version
+  "2017.03.31", ## Martin's version
+## this line prevents merge conflicts
+  "2019.03.28", ## Kamal's version
 ## this line prevents merge conflicts
   "2015.11.06", ## Homepage update version, to be removed
 ] ),
@@ -17,9 +19,7 @@ Version :=  Maximum( [
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-
-
-
+License := "GPL-2.0-or-later",
 
 Persons := [
 rec(
@@ -43,14 +43,16 @@ rec(
     FirstNames    := "Martin",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "m.bies@thphys.uni-heidelberg.de",
+    Email         := "martin.bies@alumni.uni-heidelberg.de",
     PostalAddress := Concatenation( [
-                       "Martin Bies\n",
-                       "Philosophenweg 19\n",
-                       "69120 Heidelberg\n",
-                       "Germany" ] ),
-    Place         := "Heidelberg",
-    Institution   := "University of Heidelberg"
+                        "Physique Théorique et Mathématique \n",
+                        "Université Libre de Bruxelles \n",
+                        "Campus Plaine - CP 231 \n",
+                        "Building NO - Level 6 - Office O.6.111 \n",
+                        "1050 Brussels \n",
+                        "Belgium" ] ), 
+    Place         := "Brussels",
+    Institution   := "ULB Brussels"
   ),
 ],
 
@@ -86,12 +88,8 @@ Dependencies := rec(
                            [ "Modules", ">=2016.01.20" ],
                            [ "GradedModules", ">=2015.12.04" ],
                            [ "ToolsForHomalg", ">=2016.02.17" ],
-                           [ "AutoDoc", ">=2016.02.16" ],
-                           [ "NormalizInterface", ">=0.9.8" ],
-                           [ "CddInterface", ">= 2017.04.02" ],
-                           [ "4ti2Interface", ">= 2015.11.06" ],
-                           ],
-  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ] ],
+                           [ "AutoDoc", ">=2016.02.16" ] ],
+  SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       
 ),
@@ -102,10 +100,18 @@ AvailabilityTest := function()
   end,
 
 
-
 Autoload := false,
 
 
-Keywords := [ "Toric geometry", "Toric varieties", "Divisors", "Geometry"]
+Keywords := [ "Toric geometry", "Toric varieties", "Divisors", "Geometry"],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := """
+This package may be distributed under the terms and conditions
+of the GNU Public License Version 2 or (at your option) any later version.
+"""
+    ),
+),
 
 ));

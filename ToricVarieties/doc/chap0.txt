@@ -6,10 +6,10 @@
                      [1X A package to handle toric varieties [101X
   
   
-                                   2018.10.12
+                                   2019.03.28
   
   
-                                12 October 2018
+                                 28 March 2019
   
   
                                Sebastian Gutsche
@@ -29,12 +29,20 @@
   
   
   Martin Bies
-      Email:    [7Xmailto:m.bies@thphys.uni-heidelberg.de[107X
-      Address:  [33X[0;14YMartin Bies[133X
-                [33X[0;14YPhilosophenweg 19[133X
-                [33X[0;14Y69120 Heidelberg[133X
-                [33X[0;14YGermany[133X
+      Email:    [7Xmailto:martin.bies@alumni.uni-heidelberg.de[107X
+      Address:  [33X[0;14YPhysique Théorique et Mathématique[133X
+                [33X[0;14YUniversité Libre de Bruxelles[133X
+                [33X[0;14YCampus Plaine - CP 231[133X
+                [33X[0;14YBuilding NO - Level 6 - Office O.6.111[133X
+                [33X[0;14Y1050 Brussels[133X
+                [33X[0;14YBelgium[133X
   
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
@@ -181,6 +189,7 @@
   8 [33X[0;0YToric divisors[133X
     8.1 [33X[0;0YToric divisors: Examples[133X
       8.1-1 [33X[0;0YDivisors on a toric variety[133X
+      8.1-2 [33X[0;0YPolytope of toric divisors[133X
     8.2 [33X[0;0YThe GAP category[133X
       8.2-1 IsToricDivisor
       8.2-2 twitter
