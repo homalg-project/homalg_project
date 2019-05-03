@@ -1,6 +1,6 @@
 name: ToricVarieties
-version: 2019.03.28
-date: 28/03/2019
+version: 2019.04.01
+date: 01/04/2019
 description: A package to handle toric varieties
 
 authors:
@@ -43,9 +43,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/ToricVarieties/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2019.03.28/ToricVarieties-2019.03.28.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2019.04.01/ToricVarieties-2019.04.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2019.03.28/ToricVarieties-2019.03.28.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2019.04.01/ToricVarieties-2019.04.01.zip
 
 abstract: ToricVarieties provides data structures to handle toric varieties by their commutative algebra structure and by their combinatorics. For combinatorics, it uses the Convex package. Its goal is to provide a suitable framework to work with toric varieties.
 

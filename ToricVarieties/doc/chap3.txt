@@ -80,6 +80,40 @@
   [4X[32X[104X
   
   
+  [1X3.1-3 [33X[0;0YConvenient construction of toric varieties[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xrays := [ [1,0],[-1,0],[0,1],[0,-1] ];[127X[104X
+    [4X[28X[ [ 1, 0 ], [ -1, 0 ], [ 0, 1 ], [ 0, -1 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xcones := [ [1,3],[1,4],[2,3],[2,4] ];[127X[104X
+    [4X[28X[ [1,3],[1,4],[2,3],[2,4] ][128X[104X
+    [4X[25Xgap>[125X [27Xweights := [ [1,0],[1,0],[0,1],[0,1] ];[127X[104X
+    [4X[28X[ [1,0],[1,0],[0,1],[0,1] ][128X[104X
+    [4X[25Xgap>[125X [27Xweights2 := [ [1,1],[1,1],[1,2],[1,2] ];[127X[104X
+    [4X[28X[ [1,1],[1,1],[1,2],[1,2] ][128X[104X
+    [4X[25Xgap>[125X [27Xtor1 := ToricVariety( rays, cones, weights, "x1,x2,y1,y2" );[127X[104X
+    [4X[28X<A toric variety of dimension 2>[128X[104X
+    [4X[25Xgap>[125X [27XCoxRing( tor1 );[127X[104X
+    [4X[28XQ[x2,y2,y1,x1][128X[104X
+    [4X[28X(weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])[128X[104X
+    [4X[25Xgap>[125X [27Xtor2:= ToricVariety( rays, cones, weights, "q" );[127X[104X
+    [4X[28X<A toric variety of dimension 2>[128X[104X
+    [4X[25Xgap>[125X [27XCoxRing( tor2 );[127X[104X
+    [4X[28XQ[q_2,q_4,q_3,q_1][128X[104X
+    [4X[28X(weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])[128X[104X
+    [4X[25Xgap>[125X [27Xtor3:= ToricVariety( rays, cones, weights );[127X[104X
+    [4X[28X<A toric variety of dimension 2>[128X[104X
+    [4X[25Xgap>[125X [27XCoxRing( tor3 );[127X[104X
+    [4X[28XQ[x_2,x_4,x_3,x_1][128X[104X
+    [4X[28X(weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])[128X[104X
+    [4X[25Xgap>[125X [27Xtor4:= ToricVariety( rays, cones, weights2, "x1,x2,z1,z2" );[127X[104X
+    [4X[28X<A toric variety of dimension 2>[128X[104X
+    [4X[25Xgap>[125X [27XCoxRing( tor4 );[127X[104X
+    [4X[28XQ[x2,z2,z1,x1][128X[104X
+    [4X[28X(weights: [ ( 1, 1 ), ( 1, 2 ), ( 1, 2 ), ( 1, 1 ) ])[128X[104X
+  [4X[32X[104X
+  
+  
   [1X3.2 [33X[0;0YToric variety: Category and Representations[133X[101X
   
   [1X3.2-1 IsToricVariety[101X
@@ -407,8 +441,13 @@
   [33X[1;0Y[29X[2XCoxRing[102X( [3Xvari[103X, [3Xvars[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya ring[133X
   
-  [33X[0;0YComputes  the  Cox  ring  of  the  variety  [3Xvari[103X.  [3Xvars[103X needs to be a string
-  containing one variable, which will be numbered by the method.[133X
+  [33X[0;0YComputes  the  Cox  ring  of the variety [3Xvari[103X. [3Xvars[103X needs to be a string. We
+  allow  for  two  different  formats.  Either,  it is a string which does not
+  contain  ",".  Then  this string will be index and the resulting strings are
+  then used as names for the variables of the Cox ring. Alternatively, one can
+  also  use  a  string  containing  ",".  In this case, a "," is considered as
+  separator  and one can provide individual names for all variables of the Cox
+  ring.[133X
   
   [1X3.5-6 WeilDivisorsOfVariety[101X
   
@@ -468,10 +507,27 @@
   
   [1X3.6-4 ToricVariety[101X
   
-  [33X[1;0Y[29X[2XToricVariety[102X( [3Xconv[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XToricVariety[102X( [3Xrays[103X, [3Xcones[103X, [3Xdegree_list[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya variety[133X
   
-  [33X[0;0YCreates  a toric variety out of the convex object [3Xconv[103X. In addition it takes
-  a  list  of  integers. Those are used to set the degrees of the variables in
-  the Cox ring of the variety.[133X
+  [33X[0;0YCreates  a toric variety from a list [3Xrays[103X of ray generators and cones [3Xcones[103X.
+  Beyond  the  functionality  of the other methods, this constructor allows to
+  assign  specific gradings to the homogeneous variables of the Cox ring. With
+  respect  to  the  order in which the rays appear in the list [3Xrays[103X, we assign
+  gradings  as  provided  by  the third argument [3Xdegree_list[103X . The latter is a
+  list of integers.[133X
+  
+  [1X3.6-5 ToricVariety[101X
+  
+  [33X[1;0Y[29X[2XToricVariety[102X( [3Xrays[103X, [3Xcones[103X, [3Xdegree_list[103X, [3Xvar_list[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YCreates  a toric variety from a list [3Xrays[103X of ray generators and cones [3Xcones[103X.
+  Beyond  the  functionality  of the other methods, this constructor allows to
+  assign   specific  gradings  and  homogeneous  variable  names  to  the  ray
+  generators  of  this  toric  variety. With respect to the order in which the
+  rays  appear  in  the  list  [3Xrays[103X,  we assign gradings and variable names as
+  provided  by  the  third and fourth argument. These are the list of gradings
+  [3Xdegree_list[103X  and  the list of variables names [3Xvar_list[103X. The former is a list
+  of integers and the latter a list of strings.[133X
   

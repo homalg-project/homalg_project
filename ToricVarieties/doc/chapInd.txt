@@ -32,7 +32,7 @@
       for IsToricVariety, IsList 3.5-2 
   [2XCotangentSheaf[102X, for IsToricVariety 3.4-24 
   [2XCoxRing[102X, for IsToricVariety 3.4-2 
-      for IsToricVariety, IsString 3.5-5 
+      for IsToricVariety, IsList 3.5-5 
   [2XCoxRingOfTargetOfDivisorMorphism[102X, for IsToricDivisor 8.4-13 
       for IsToricDivisor, IsString 8.5-10 
   [2XCoxVariety[102X, for IsToricVariety 3.4-18 
@@ -114,8 +114,9 @@
       for IsToricVariety, IsList, IsToricVariety 7.6-2 
   [2XToricSubvariety[102X, for IsToricVariety, IsToricVariety 4.5-1 
   [2XToricVariety[102X, for IsConvexObject 3.6-3 
-      for IsConvexObject, IsList 3.6-4 
       for IsList 3.6-2 
+      for IsList, IsList, IsList 3.6-4 
+      for IsList, IsList, IsList, IsList 3.6-5 
       for IsToricVariety 3.6-1 
   [2XTorusInvariantDivisorGroup[102X, for IsToricVariety 3.4-5 
   [2XTorusInvariantPrimeDivisors[102X, for IsToricVariety 3.4-14 

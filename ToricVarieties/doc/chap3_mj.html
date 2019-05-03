@@ -32,6 +32,8 @@
 </span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8524CDF9849408FF">3.1-2 <span class="Heading">A smooth, complete toric variety which is not projective</span></a>
 </span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83D1336D7AA5640E">3.1-3 <span class="Heading">Convenient construction of toric varieties</span></a>
+</span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X8108B9978021989B">3.2 <span class="Heading">Toric variety: Category and Representations</span></a>
 </span>
@@ -88,7 +90,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7864ED227FC67EAF">3.5-2 CoordinateRingOfTorus</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X800F95657C3CCBC2"><code>3.5-3 \*</code></a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EB6407381DA770B">3.5-4 CharacterToRationalFunction</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83CA9A2B7C2896EE">3.5-5 CoxRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82AB2367795C5B53">3.5-5 CoxRing</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81304E6685492462">3.5-6 WeilDivisorsOfVariety</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A073EC97B7B2F58">3.5-7 Fan</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C48FD287E0B4F68">3.5-8 Factors</a></span>
@@ -104,7 +106,8 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D8E4D46802FED13">3.6-1 ToricVariety</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8202F293835E28AC">3.6-2 ToricVariety</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84BB2EF387E22171">3.6-3 ToricVariety</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A6947647A6CAF5C">3.6-4 ToricVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X87E98D4E82571595">3.6-4 ToricVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81C81F337B8C27D9">3.6-5 ToricVariety</a></span>
 </div></div>
 </div>
 
@@ -191,6 +194,42 @@ Q[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )
 [ true, true, false ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SRIdeal( T );</span>
 &lt;A graded torsion-free (left) ideal given by 23 generators&gt;
+</pre></div>
+
+<p><a id="X83D1336D7AA5640E" name="X83D1336D7AA5640E"></a></p>
+
+<h5>3.1-3 <span class="Heading">Convenient construction of toric varieties</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rays := [ [1,0],[-1,0],[0,1],[0,-1] ];</span>
+[ [ 1, 0 ], [ -1, 0 ], [ 0, 1 ], [ 0, -1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cones := [ [1,3],[1,4],[2,3],[2,4] ];</span>
+[ [1,3],[1,4],[2,3],[2,4] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">weights := [ [1,0],[1,0],[0,1],[0,1] ];</span>
+[ [1,0],[1,0],[0,1],[0,1] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">weights2 := [ [1,1],[1,1],[1,2],[1,2] ];</span>
+[ [1,1],[1,1],[1,2],[1,2] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tor1 := ToricVariety( rays, cones, weights, "x1,x2,y1,y2" );</span>
+&lt;A toric variety of dimension 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoxRing( tor1 );</span>
+Q[x2,y2,y1,x1]
+(weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tor2:= ToricVariety( rays, cones, weights, "q" );</span>
+&lt;A toric variety of dimension 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoxRing( tor2 );</span>
+Q[q_2,q_4,q_3,q_1]
+(weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tor3:= ToricVariety( rays, cones, weights );</span>
+&lt;A toric variety of dimension 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoxRing( tor3 );</span>
+Q[x_2,x_4,x_3,x_1]
+(weights: [ ( 1, 0 ), ( 0, 1 ), ( 0, 1 ), ( 1, 0 ) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tor4:= ToricVariety( rays, cones, weights2, "x1,x2,z1,z2" );</span>
+&lt;A toric variety of dimension 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoxRing( tor4 );</span>
+Q[x2,z2,z1,x1]
+(weights: [ ( 1, 1 ), ( 1, 2 ), ( 1, 2 ), ( 1, 1 ) ])
 </pre></div>
 
 <p><a id="X8108B9978021989B" name="X8108B9978021989B"></a></p>
@@ -569,14 +608,14 @@ Q[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )
 
 <p>Computes the rational function corresponding to the character grid element <var class="Arg">elem</var> or to the list of integers <var class="Arg">elem</var>. This computation needs to know the coordinate ring of the torus of the variety <var class="Arg">vari</var>. By default this ring is introduced with variables <var class="Arg">x1</var> to <var class="Arg">xn</var> where <var class="Arg">n</var> is the dimension of the variety. If different variables should be used, then <var class="Arg">CoordinateRingOfTorus</var> has to be set accordingly before calling this method.</p>
 
-<p><a id="X83CA9A2B7C2896EE" name="X83CA9A2B7C2896EE"></a></p>
+<p><a id="X82AB2367795C5B53" name="X82AB2367795C5B53"></a></p>
 
 <h5>3.5-5 CoxRing</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoxRing</code>( <var class="Arg">vari</var>, <var class="Arg">vars</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a ring</p>
 
-<p>Computes the Cox ring of the variety <var class="Arg">vari</var>. <var class="Arg">vars</var> needs to be a string containing one variable, which will be numbered by the method.</p>
+<p>Computes the Cox ring of the variety <var class="Arg">vari</var>. <var class="Arg">vars</var> needs to be a string. We allow for two different formats. Either, it is a string which does not contain ",". Then this string will be index and the resulting strings are then used as names for the variables of the Cox ring. Alternatively, one can also use a string containing ",". In this case, a "," is considered as separator and one can provide individual names for all variables of the Cox ring.</p>
 
 <p><a id="X81304E6685492462" name="X81304E6685492462"></a></p>
 
@@ -649,14 +688,23 @@ Q[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )
 
 <p>Creates a toric variety out of the convex object <var class="Arg">conv</var>.</p>
 
-<p><a id="X7A6947647A6CAF5C" name="X7A6947647A6CAF5C"></a></p>
+<p><a id="X87E98D4E82571595" name="X87E98D4E82571595"></a></p>
 
 <h5>3.6-4 ToricVariety</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricVariety</code>( <var class="Arg">conv</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricVariety</code>( <var class="Arg">rays</var>, <var class="Arg">cones</var>, <var class="Arg">degree_list</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a variety</p>
 
-<p>Creates a toric variety out of the convex object <var class="Arg">conv</var>. In addition it takes a list of integers. Those are used to set the degrees of the variables in the Cox ring of the variety.</p>
+<p>Creates a toric variety from a list <var class="Arg">rays</var> of ray generators and cones <var class="Arg">cones</var>. Beyond the functionality of the other methods, this constructor allows to assign specific gradings to the homogeneous variables of the Cox ring. With respect to the order in which the rays appear in the list <var class="Arg">rays</var>, we assign gradings as provided by the third argument <var class="Arg">degree_list</var> . The latter is a list of integers.</p>
+
+<p><a id="X81C81F337B8C27D9" name="X81C81F337B8C27D9"></a></p>
+
+<h5>3.6-5 ToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricVariety</code>( <var class="Arg">rays</var>, <var class="Arg">cones</var>, <var class="Arg">degree_list</var>, <var class="Arg">var_list</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Creates a toric variety from a list <var class="Arg">rays</var> of ray generators and cones <var class="Arg">cones</var>. Beyond the functionality of the other methods, this constructor allows to assign specific gradings and homogeneous variable names to the ray generators of this toric variety. With respect to the order in which the rays appear in the list <var class="Arg">rays</var>, we assign gradings and variable names as provided by the third and fourth argument. These are the list of gradings <var class="Arg">degree_list</var> and the list of variables names <var class="Arg">var_list</var>. The former is a list of integers and the latter a list of strings.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
