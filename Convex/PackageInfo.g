@@ -10,6 +10,7 @@ Subtitle := "A package for fan combinatorics",
 Version :=  Maximum( [
   "2017.09.02", ## Sebas' version
 ## this line prevents merge conflicts
+  "2019.05.01", ## Martin's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
