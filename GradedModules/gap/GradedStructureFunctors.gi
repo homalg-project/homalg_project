@@ -161,7 +161,6 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules, ### defines: RepresentationMapOfRingElement (object part)
-        [ IsList, IsHomalgModule ],
         
   function( l, M )
     local S, R, r, d, bd, bdp1, r_mult;
@@ -260,7 +259,6 @@ InstallFunctor( Functor_RepresentationMapOfRingElement_ForGradedModules );
 ##  <#/GAPDoc>
 ##
 InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModules, ### defines: SubmoduleGeneratedByHomogeneousPart (object part)
-        [ IsInt, IsHomalgModule ],
         
   function( d, M )
     local deg, submodule;
@@ -383,7 +381,6 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules,
-        [ IsInt, IsHomalgModule ],
         
   function( d, M )
     local deg, certain_deg1, certain_part, certain_deg2, mat, phi1, phi2, phi, M2;
@@ -491,7 +488,6 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_TruncatedModule_OnGradedModules,
-        [ IsInt, IsHomalgModule ],
         
   function( d, M )
   
@@ -534,7 +530,6 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules, ### defines: TruncatedSubmoduleRecursiveEmbed (object part)
-        [ IsInt, IsHomalgModule ],
         
   function( d, M )
     
@@ -627,7 +622,6 @@ InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
 end );
 
 InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules, ### defines: HomogeneousPartOverCoefficientsRing (object part)
-        [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( d, M )
     local S, k_graded, k, deg, emb, mat, map_having_submodule_as_its_image,
@@ -826,7 +820,6 @@ end );
 ##
 
 InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules, ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (object part)
-        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )
     

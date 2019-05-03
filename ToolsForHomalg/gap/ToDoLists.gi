@@ -284,7 +284,6 @@ end );
 
 ##
 InstallGlobalFunction( ToolsForHomalg_ToDoList_TaceProof_RecursivePart,
-                       "recursive part",
                
   function( start_list, start_obj, attr_name, attr_value )
     local todo_list, entry, i, temp_tar, source_list, source, return_list, return_trees, current_tree;

@@ -1676,7 +1676,6 @@ InstallMethod( GuessModuleOfGlobalSectionsFromATateMap,
 end );
 
 InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGradedMaps, ### defines: GuessModuleOfGlobalSectionsFromATateMap (object part)
-        [ IsInt, IsMapOfGradedModulesRep ],
         
   function( steps, phi )
     local A, n, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;

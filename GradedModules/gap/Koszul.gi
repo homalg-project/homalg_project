@@ -120,7 +120,6 @@ end );
 # RepresentationObjectOfKoszulId
 #
 InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules, ### defines: RepresentationObjectOfKoszulId (object part)
-        [ IsInt, IsGradedModuleRep ],
         
   function( d, M )
     local S, A, Base, n, omega_A, V, AM_d, socle, phi;
@@ -530,7 +529,6 @@ end );
 ##
 
 InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedModules, ### defines: KoszulRightAdjoint (object part)
-        [ IsList, IsGradedModuleRep ],
         
   function( l, M )
     local A, degree_lowest, degree_highest;
@@ -557,7 +555,6 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedMaps, ### defines: KoszulRightAdjoint (morphism part)
-        [ IsList, IsMapOfGradedModulesRep ],
   function( l, phi )
     local A, degree_lowest, degree_highest;
     
@@ -736,7 +733,6 @@ end );
 ##
 
 InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedModules, ### defines: KoszulLeftAdjoint (object part)
-        [ IsList, IsGradedModuleRep ],
         
   function( l, M )
     local A, degree_lowest, degree_highest;
@@ -763,7 +759,6 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedMaps, ### defines: KoszulLeftAdjoint (morphism part)
-        [ IsList, IsMapOfGradedModulesRep ],
   function( l, phi )
     local A, degree_lowest, degree_highest;
     

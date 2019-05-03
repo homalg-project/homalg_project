@@ -90,7 +90,6 @@ end );
 ##  currently represented by the above matrix
 ##
 InstallGlobalFunction( _Functor_TateResolution_OnGradedModules, ### defines: TateResolution (object part)
-        [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
     local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, T, positions,
@@ -381,7 +380,6 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateResolution (morphism part)
-       [ IsGradedModuleOrGradedSubmoduleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local l, A, degree_lowest, degree_highest, degree_highest2, CM, T_source, T_range, T, T2, ii, i;
@@ -570,7 +568,6 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules, ### defines: StrandOfTateResolution (object part)
-        [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
     local A, degree_lowest, degree_highest, n, M, CM, p, d_low, d_high, tate, T, i, know_regularity, ii, K, deg, certain_deg, phi, regularity, result;
@@ -793,7 +790,6 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### defines: StrandOfTateResolution (morphism part)
-       [ IsGradedModuleOrGradedSubmoduleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local l, A, degree_lowest, degree_highest, n, degree_highest2, CM, T_source, T_range, T, T2, ii, i;
