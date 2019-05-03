@@ -8,16 +8,15 @@ PackageName := "Convex",
 Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
-  "2014.08.29", ## Sebas' version
+  "2017.09.02", ## Sebas' version
 ## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
+  "2019.05.01", ## Martin's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-
-
+License := "GPL-2.0-or-later",
 
 Persons := [
 rec(
