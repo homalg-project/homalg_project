@@ -9,7 +9,9 @@ Version :=  Maximum( [
 ## this line prevents merge conflicts
   "2015.03.31", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2017.03.31", ## Martins version
+  "2017.03.31", ## Martin's version
+## this line prevents merge conflicts
+  "2019.03.28", ## Kamal's version
 ## this line prevents merge conflicts
   "2015.11.06", ## Homepage update version, to be removed
 ] ),
