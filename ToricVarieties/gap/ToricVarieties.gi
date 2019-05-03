@@ -566,17 +566,32 @@ RedispatchOnCondition( CoxRing, true, [ IsToricVariety, IsString ], [ HasNoTorus
 ##
 InstallMethod( CoxRing,
                "for convex toric varieties.",
-               [ IsToricVariety and HasNoTorusfactor, IsString ],
+               [ IsToricVariety and HasNoTorusfactor, IsList ],
                
-  function( variety, variable )
-    local raylist, indeterminates, ring, class_list;
+  function( variety, variable_names )
+    local var_list, raylist, indeterminates, ring, class_list;
     
+    # test for valid input
+    if not IsString( variable_names ) then
+        Error( "the variable names must be specified as a string" );
+    fi;
+
+    # identify the individual names and the ray generators
+    var_list := SplitString( variable_names, "," );
     raylist := RayGenerators( FanOfVariety( variety ) );
     
-    indeterminates := List( [ 1 .. Length( raylist ) ], i -> JoinStringsWithSeparator( [ variable, i ], "_" ) );
+    # check for valid input and, if provided, form list of final variable names
+    if ( Length( var_list ) <> 1 and Length( var_list ) <> Length( raylist ) ) then
+        Error( "either one variable name, or a variable name for each ray generator must be specified" );
+    fi;
 
-    indeterminates := JoinStringsWithSeparator( indeterminates, "," );
-    
+    if Length( var_list ) = 1 then
+        indeterminates := List( [ 1 .. Length( raylist ) ], i -> JoinStringsWithSeparator( [ var_list[ 1 ], i ], "_" ) );
+        indeterminates := JoinStringsWithSeparator( indeterminates, "," );
+    else
+        indeterminates := var_list;
+    fi;
+
     ring := GradedRing( DefaultGradedFieldForToricVarieties() * indeterminates );
     
     SetDegreeGroup( ring, ClassGroup( variety ) );
@@ -1439,15 +1454,59 @@ end );
 
 ##
 InstallMethod( ToricVariety,
-               " for homalg fans and a list of weights for the variables in the Cox ring",
-               [ IsFan, IsList ],
-  function( fan, degrees )
-    local variety, matrix1, matrix2, map;
+               " for lists of rays, cones and weights for the variables in the Cox ring",
+               [ IsList, IsList, IsList ],
+  function( rays, cones, degrees )
+    local vars;
 
+    # install standard list of variable names
+    vars := JoinStringsWithSeparator(
+                 List( [ 1 .. Length( rays ) ],
+                        i -> JoinStringsWithSeparator( [ TORIC_VARIETIES.CoxRingIndet, i ], "_" ) ), "," );
+
+    # and return result from method below
+    return ToricVariety( rays, cones, degrees, vars );
+
+end );
+
+##
+InstallMethod( ToricVariety,
+               " for lists of rays, cones, gradings and variable names",
+               [ IsList, IsList, IsList, IsList ],
+  function( rays, cones, gradings, indeterminates )
+    local fan, var_names_buffer, var_names, variety, rays_in_fan, shuffled_gradings, shuffled_var_names, i, pos, matrix1, matrix2, map;
+
+    # construct the fan and test that it is pointed
+    fan := Fan( rays, cones );
     if not IsPointed( fan ) then
 
         Error( "input fan must only contain strictly convex cones\n" );
 
+    fi;
+
+    # check that gradings are of correct lengths
+    if not Length( gradings ) = Length( rays ) then
+
+        Error( "For each ray generators a grading has to be provided" );
+        return false;
+
+    fi;
+
+    # test if the var_names have been given as correct input
+    if not IsString( indeterminates ) then
+        Error( "the variables names have to be provided as string" );
+    fi;
+
+    # next seperate them by ","
+    var_names_buffer := SplitString( indeterminates, "," );
+    if ( Length( var_names_buffer ) <> 1 and Length( var_names_buffer ) <> Length( rays ) ) then
+        Error( "either one variable name, or a variable name for each ray generator must be specified" );
+    fi;
+    if Length( var_names_buffer ) = 1 then
+        var_names := List( [ 1 .. Length( rays ) ],
+                                i -> JoinStringsWithSeparator( [ var_names_buffer[ 1 ], i ], "_" ) );
+    else
+        var_names := var_names_buffer;
     fi;
 
     variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
@@ -1457,21 +1516,45 @@ InstallMethod( ToricVariety,
                              FanOfVariety, fan
                             );
 
-    # check for valid input
-    matrix1 := Involution( HomalgMatrix( RayGenerators( fan ), HOMALG_MATRICES.ZZ ) );
-    matrix2 := HomalgMatrix( degrees, HOMALG_MATRICES.ZZ );
-    if not IsZero( matrix1 * matrix2 ) then
+    # The ray generators in fan = Fan( rays, cones ) are shuffled w.r.t. the provided inputlist rays.
+    # Let us therefore determine the permutation matrix
+    rays_in_fan := RayGenerators( FanOfVariety( variety ) );
+    shuffled_gradings := [];
+    shuffled_var_names := [];
+    for i in [ 1 .. Length( rays_in_fan ) ] do
+        pos := Position( rays, rays_in_fan[ i ] );
+        shuffled_gradings[ i ] := gradings[ pos ];
+        shuffled_var_names[ i ] := var_names[ pos ];
+    od;
 
-      Error( "corrupted input - the given weights must form (a) cokernel of the ray generators of the given fan" );
+    # if vari does not have a torus factor, then the gradings are set by the cokernel
+    # of the matrix, in which the rays are the rows (Cox-Schenk-Little, theorem 4.1.3)
+    # we proceed under this assumption thus
+    if HasTorusfactor( variety ) then
+        Error( Concatenation( "The method of setting the gradings by hand is currently supported ",
+                              "only for toric variety without torus factor" ) );
+        return false;
+    fi;
+
+    # now check, that the provided gradings are valid
+    matrix1 := HomalgMatrix( rays_in_fan, HOMALG_MATRICES.ZZ );
+    matrix2 := HomalgMatrix( shuffled_gradings, HOMALG_MATRICES.ZZ );
+    if not IsZero( Involution( matrix2 ) * matrix1 ) then
+
+      Error( "corrupted input - the given gradings must form (a) cokernel of the ray generators of the given fan" );
 
     fi;
 
-    # compute the map from the Weil divisors to the class group according to the given degrees
-    map := HomalgMap( degrees,
+    # now use this information to set the map from WeilDivisors to the class group
+    map := HomalgMap( shuffled_gradings,
                       TorusInvariantDivisorGroup( variety ),
-                      Length( degrees[ 1 ] ) * HOMALG_MATRICES.ZZ
+                      Length( shuffled_gradings[ 1 ] ) * HOMALG_MATRICES.ZZ
                      );
     SetMapFromWeilDivisorsToClassGroup( variety, map );
+
+    # finally install the Cox ring with the prescribed names
+    # this here needs to join the shuffled_var_names by "," Banane
+    CoxRing( variety, JoinStringsWithSeparator( shuffled_var_names, "," ) );
 
     # and return the variety
     return variety;

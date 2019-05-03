@@ -343,12 +343,15 @@ DeclareOperation( "CharacterToRationalFunction",
                   [ IsList, IsToricVariety ] );
 
 #! @Description
-#!  Computes the Cox ring of the variety <A>vari</A>. <A>vars</A> needs to be a string containing one variable,
-#!  which will be numbered by the method. 
+#!  Computes the Cox ring of the variety <A>vari</A>. <A>vars</A> needs to be a string. We allow for two
+#! different formats. Either, it is a string which does not contain ",". Then this string will be index and
+#! the resulting strings are then used as names for the variables of the Cox ring. Alternatively, one can also
+#! use a string containing ",". In this case, a "," is considered as separator and one can provide individual
+#! names for all variables of the Cox ring.
 #! @Returns a ring
 #! @Arguments vari, vars
 DeclareOperation( "CoxRing",
-                  [ IsToricVariety, IsString ] );
+                  [ IsToricVariety, IsList ] );
 
 #! @Description
 #!  Returns a list of the currently defined Divisors of the toric variety.
@@ -424,9 +427,25 @@ DeclareOperation( "ToricVariety",
                   [ IsConvexObject ] );
 
 #! @Description
-#!  Creates a toric variety out of the convex object <A>conv</A>. In addition it takes a list of integers.
-#!  Those are used to set the degrees of the variables in the Cox ring of the variety.
+#! Creates a toric variety from a list <A>rays</A> of ray generators and cones <A>cones</A>.
+#! Beyond the functionality of the other methods, this constructor allows to assign specific 
+#! gradings to the homogeneous variables of the Cox ring.
+#! With respect to the order in which the rays appear in the list <A>rays</A>, we assign gradings
+#! as provided by the third argument <A>degree_list</A> . The latter is a list of integers.
 #! @Returns a variety
-#! @Arguments conv
+#! @Arguments rays, cones, degree_list
 DeclareOperation( "ToricVariety",
-                  [ IsConvexObject, IsList ] );
+                  [ IsList, IsList, IsList ] );
+
+#! @Description
+#! Creates a toric variety from a list <A>rays</A> of ray generators and cones <A>cones</A>.
+#! Beyond the functionality of the other methods, this constructor allows to assign specific
+#! gradings and homogeneous variable names to the ray generators of this toric variety.
+#! With respect to the order in which the rays appear in the list <A>rays</A>, we assign gradings
+#! and variable names as provided by the third and fourth argument. These are the list of gradings
+#! <A>degree_list</A> and the list of variables names <A>var_list</A>. The former is a list of
+#! integers and the latter a list of strings.
+#! @Returns a variety
+#! @Arguments rays, cones, degree_list, var_list
+DeclareOperation( "ToricVariety",
+                  [ IsList, IsList, IsList, IsList ] );
