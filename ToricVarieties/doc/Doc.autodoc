@@ -24,13 +24,13 @@ Sebastian Gutsche
 @Section Toric Varieties: Examples
 
 @Subsection The Hirzebruch surface of index 5
-@InsertSystem Hirzebruch5
+@InsertChunk Hirzebruch5
 
 @Subsection A smooth, complete toric variety which is not projective
-@InsertSystem nonprojective
+@InsertChunk nonprojective
 
 @Subsection Convenient construction of toric varieties
-@InsertSystem ConvenientConstructors
+@InsertChunk ConvenientConstructors
 
 @Chapter Toric subvarieties
 
@@ -39,31 +39,31 @@ Sebastian Gutsche
 @Section Affine toric varieties: Examples
 
 @Subsection Affine space
-@InsertSystem AffineSpace
+@InsertChunk AffineSpace
 
 @Chapter Projective toric varieties
 
 @Section Projective toric varieties: Examples
 
 @Subsection P1xP1 created by a polytope
-@InsertSystem P1P1_polytope
+@InsertChunk P1P1_polytope
 
 @Subsection P1xP1 from product of P1s
-@InsertSystem P1P1_product
+@InsertChunk P1P1_product
 
 @Chapter Toric morphisms
 
 @Section Toric morphisms: Examples
 
 @Subsection Morphism between toric varieties and their class groups
-@InsertSystem Morphism
+@InsertChunk Morphism
 
 @Chapter Toric divisors
 
 @Section Toric divisors: Examples
 
 @Subsection Divisors on a toric variety
-@InsertSystem Divisors
+@InsertChunk Divisors
 
 @Subsection Polytope of toric divisors
-@InsertSystem PolytopeOfToricDivisor
+@InsertChunk PolytopeOfToricDivisor
