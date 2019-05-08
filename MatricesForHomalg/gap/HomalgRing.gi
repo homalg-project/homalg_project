@@ -2302,9 +2302,23 @@ end );
 ##
 InstallMethod( \/,
         "for strings",
+        [ IsStringRep and IsString, IsHomalgRing ],
+        
+  function( r, R )
+    
+    return HomalgRingElement( r, R );
+    
+end );
+
+##
+InstallMethod( \/,
+        "for strings",
         [ IsString, IsHomalgRing ],
         
   function( r, R )
+    
+    # IsStringRep( r ) is false since otherwise the method above would have been chosen
+    r := CopyToStringRep( r );
     
     return HomalgRingElement( r, R );
     
