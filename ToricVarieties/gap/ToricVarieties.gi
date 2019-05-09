@@ -694,80 +694,24 @@ InstallMethod( SRIdeal,
                "for toric varieties",
                [ IsToricVariety ],
   function( variety )
-    local number, generators_of_the_SR_ideal, rays_in_max_cones, rays_in_max_conesII, i, j, k, l, buffer, tester,
-          generator_list, SR_ideal;
+    local primitive_collections, SR_generators, I, k, buffer, SR_ideal;
     
-    # initialise the variables
-    number := Length( RayGenerators( FanOfVariety( variety ) ) );
-    generators_of_the_SR_ideal := [];
-    rays_in_max_cones := RaysInMaximalCones( FanOfVariety( variety ) );
-    
-    # turn the rays_in_max_cones into a list that makes the comparision simpler
-    rays_in_max_conesII := List( rays_in_max_cones, x -> Positions( x, 1 ) );
-    
-    # iterate over the subsets of [ 1.. number ] that consist of at least 2 elements
-    # then keep only those that are not contained in a maximal-cone-set
-    for i in [ 2 .. number ] do
-      
-      # so get us all subsets that consist of precisely i elements
-      buffer := Combinations( [ 1 .. number ], i );
-      
-      # and iterate over its elements
-      for j in [ 1 .. Length( buffer ) ] do
-        
-        # now check if these rays form a face of a maximal cone
-        tester := true;
-        k := 1;
-        while tester do
-          
-          if k > Length( rays_in_max_conesII ) then
-            
-            tester := false;
-            
-          elif IsSubsetSet( rays_in_max_conesII[ k ], buffer[ j ] ) then
-            
-            tester := false;
-            
-          fi;
-          
-          k := k + 1;
-          
+    # compute primitive collections of the fan
+    primitive_collections := PrimitiveCollections( FanOfVariety( variety ) );
+
+    # form monomial from the primivite collections
+    SR_generators := [];
+    for I in primitive_collections do
+        buffer := Indeterminates( CoxRing( variety ) )[ I[ 1 ] ];
+        for k in [ 2 .. Length( I ) ] do
+           buffer := buffer * Indeterminates( CoxRing( variety ) )[ I[ k ] ];
         od;
-        
-        # if k = Length( rays_in_max_conesII ) + 2 we add buffer[ j ] to the SR-ideal_generators
-        if k = Length( rays_in_max_conesII ) + 2 then
-          
-          Add( generators_of_the_SR_ideal, buffer[ j ] );
-          
-        fi;
-        
-      od;
-      
+        Add( SR_generators, buffer );
     od;
-    
-    # now turn all the sets in generators_of_the_SR_ideal into monomials and use them to generate an ideal in the
-    # Cox ring of the variety
-    generator_list := List( [ 1 .. Length( generators_of_the_SR_ideal ) ] );
-    for i in [ 1 .. Length( generators_of_the_SR_ideal ) ] do
-      
-      # form a monomial from generators_of_the_SR_ideal[ i ]
-      buffer := Indeterminates( CoxRing( variety ) )[ generators_of_the_SR_ideal[ i ][ 1 ] ];
-      for j in [ 2 .. Length( generators_of_the_SR_ideal[ i ] ) ] do
-        
-        buffer := buffer * Indeterminates( CoxRing( variety ) )[ generators_of_the_SR_ideal[ i ][ j ] ];
-        
-      od;
-      
-      # then add this monomial to the monomial list
-      generator_list[ i ] := buffer;
-      
-    od;
-    
-    # now finally construct the ideal
-    SR_ideal := GradedLeftSubmodule( generator_list, CoxRing( variety ) );
+
+    # construct and return the ideal
+    SR_ideal := GradedLeftSubmodule( SR_generators, CoxRing( variety ) );
     OnBasisOfPresentation( SR_ideal );
-    
-    # finally return the SR-ideal
     return SR_ideal;
     
 end );
