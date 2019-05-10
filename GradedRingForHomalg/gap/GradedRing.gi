@@ -445,7 +445,7 @@ InstallMethod( WeightsOfIndeterminates,
     fi;
     
     ## if A is a direct sum then MonoOfLeftSummand and MonoOfRightSummand are set
-    A := 0 * HOMALG_MATRICES.ZZ + 0 * HOMALG_MATRICES.ZZ;
+    A := 0 * HOMALG_MATRICES.ZZ + 1 * HOMALG_MATRICES.ZZ;
     
     SetDegreeGroup( S, A );
     
