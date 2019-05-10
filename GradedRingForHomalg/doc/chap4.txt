@@ -17,6 +17,41 @@
   in  connection  with  the ones presented here. A few of them can be found in
   the examples and the appendix of this documentation.[133X
   
+  [33X[0;0YOperations  within [5XMatricesForHomalg[105X that take matrices as input and produce
+  a  matrix  as  an output produce homogeneous output for homogeneous input in
+  the following cases: the graded ring in question is either a polynomial ring
+  or  the  exterior  algebra residing in [5XSingular[105X, and the called operation is
+  one of the following listed below:[133X
+  
+  [30X    [33X[0;6Y[10XSyzygiesGeneratorsOfRows[110X[133X
+  
+  [30X    [33X[0;6Y[10XSyzygiesGeneratorsOfColumns[110X[133X
+  
+  [30X    [33X[0;6Y[10XReducedSyzygiesGeneratorsOfRows[110X[133X
+  
+  [30X    [33X[0;6Y[10XReducedSyzygiesGeneratorsOfColumns[110X[133X
+  
+  [30X    [33X[0;6Y[10XBasisOfRowModule[110X[133X
+  
+  [30X    [33X[0;6Y[10XBasisOfColumnModule[110X[133X
+  
+  [30X    [33X[0;6Y[10XReducedBasisOfRowModule[110X[133X
+  
+  [30X    [33X[0;6Y[10XReducedBasisOfColumnModule[110X[133X
+  
+  [30X    [33X[0;6Y[10XDecideZeroRows[110X[133X
+  
+  [30X    [33X[0;6Y[10XDecideZeroColumns[110X[133X
+  
+  [30X    [33X[0;6Y[10XLeftDivide[110X[133X
+  
+  [30X    [33X[0;6Y[10XRightDivide[110X[133X
+  
+  [33X[0;0YThese  operation  trigger  Gröbner bases computations in [5XSingular[105X, which are
+  always  forced  to  be  performed  with  a  tail  reduction  by  [5Xhomalg[105X.  In
+  particular,  the  resulting  elements  of  the  Gröbner  bases  have  to  be
+  homogeneous.[133X
+  
   
   [1X4.1 [33X[0;0YGraded Rings: Category and Representations[133X[101X
   
