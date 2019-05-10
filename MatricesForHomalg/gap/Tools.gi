@@ -7269,9 +7269,13 @@ InstallMethod( RingMapOntoRewrittenResidueClassRing,
     
     zero_rows := ZeroRows( matrix - images );
     
-    indets := indets{zero_rows};
-    
-    S := k * List( indets, String );
+    if Length( indets ) = Length( zero_rows ) and
+       IsIdenticalObj( k, CoefficientsRing( A ) ) then
+        S := A;
+    else
+        indets := indets{zero_rows};
+        S := k * List( indets, String );
+    fi;
     
     if not zero_rows = [ ] then
         map := RingMap( indets, S, R );
