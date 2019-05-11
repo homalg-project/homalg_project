@@ -458,6 +458,34 @@ InstallMethod( WeightsOfIndeterminates,
 end );
 
 ##
+InstallMethod( WeightsOfIndeterminates,
+        "for homalg graded rings",
+        [ IsIntegersForHomalg and IsHomalgGradedRing ],
+        
+  function( S )
+
+    local A, gen_list;
+    
+    if IsBound( S!.WeightsOfIndeterminates ) then
+        
+        return S!.WeightsOfIndeterminates;
+        
+    fi;
+    
+    ## if A is a direct sum then MonoOfLeftSummand and MonoOfRightSummand are set
+    A := 0 * HOMALG_MATRICES.ZZ + 1 * HOMALG_MATRICES.ZZ;
+    
+    SetDegreeGroup( S, A );
+    
+    gen_list := GeneratingElements( A );
+    
+    S!.WeightsOfIndeterminates := gen_list;
+    
+    return gen_list;
+    
+end );
+
+##
 InstallMethod( HasWeightsOfIndeterminates,
         "for homalg graded rings",
         [ IsHomalgGradedRing ],
