@@ -1,4 +1,4 @@
-#! @System RationalNormalCone
+#! @Chunk RationalNormalCone
 
 LoadPackage( "ToricVarieties" );
 

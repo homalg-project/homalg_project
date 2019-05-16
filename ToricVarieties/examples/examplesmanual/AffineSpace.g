@@ -1,4 +1,4 @@
-#! @System AffineSpace
+#! @Chunk AffineSpace
 
 LoadPackage( "ToricVarieties" );
 

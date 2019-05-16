@@ -1,4 +1,4 @@
-#! @System PolytopeOfToricDivisor
+#! @Chunk PolytopeOfToricDivisor
 
 LoadPackage( "ToricVarieties" );
 

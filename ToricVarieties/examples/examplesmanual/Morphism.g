@@ -1,4 +1,4 @@
-#! @System Morphism
+#! @Chunk Morphism
 
 LoadPackage( "ToricVarieties" );
 

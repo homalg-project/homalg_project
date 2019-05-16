@@ -1,4 +1,4 @@
-#! @System Hirzebruch5
+#! @Chunk Hirzebruch5
 
 LoadPackage( "ToricVarieties" );
 
@@ -51,7 +51,7 @@ BasisOfGlobalSections( divi );
 #! @EndExample
 
 
-#! @System nonprojective
+#! @Chunk nonprojective
 
 #! @Example
 rays := [ [1,0,0], [-1,0,0], [0,1,0], [0,-1,0], [0,0,1], [0,0,-1],

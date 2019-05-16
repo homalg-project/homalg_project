@@ -1,4 +1,4 @@
-#! @System P1P1_polytope
+#! @Chunk P1P1_polytope
 
 LoadPackage( "ToricVarieties" );
 
@@ -41,7 +41,7 @@ Display( IrrelevantIdeal( P1P1 ) );
 #! (graded, degrees of generators: [ ( 1, 1 ), ( 1, 1 ), ( 1, 1 ), ( 1, 1 ) ])
 #! @EndExample
 
-#! @System P1P1_product
+#! @Chunk P1P1_product
 
 #! @Example
 P1 := ProjectiveSpace( 1 );
@@ -83,7 +83,7 @@ Display( IrrelevantIdeal( P1xP1 ) );
 
 
 
-#! @System ConvenientConstructors
+#! @Chunk ConvenientConstructors
 
 #! @Example
 rays := [ [1,0],[-1,0],[0,1],[0,-1] ];

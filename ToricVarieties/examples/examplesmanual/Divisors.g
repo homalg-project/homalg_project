@@ -1,4 +1,4 @@
-#! @System Divisors
+#! @Chunk Divisors
 
 LoadPackage( "ToricVarieties" );
 
