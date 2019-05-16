@@ -451,6 +451,8 @@ DeclareOperation( "ShaSum",
 
 DeclareGlobalFunction( "GetTimeOfDay" );
 
+DeclareGlobalFunction( "DotToSVG" );
+
 DeclareGlobalFunction( "ReplacedStringForHomalg" );
 
 DeclareGlobalFunction( "ReplacedFileForHomalg" );

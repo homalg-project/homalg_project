@@ -1666,6 +1666,16 @@ InstallGlobalFunction( GetTimeOfDay,
 end );
 
 ##
+InstallGlobalFunction( DotToSVG,
+  function( dotstr )
+    
+    dotstr := ReplacedString( dotstr, "\"", "\\\"" );
+    
+    return ExecForHomalg( "echo",  "\"", dotstr, "\" | dot -Tsvg" );
+    
+end );
+
+##
 InstallGlobalFunction( ReplacedStringForHomalg,
   function( string, L )
     local old_new;
