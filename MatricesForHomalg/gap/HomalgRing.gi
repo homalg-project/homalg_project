@@ -2059,6 +2059,17 @@ InstallMethod( \*,
 end );
 
 ##
+InstallOtherMethod( \[\],
+        "for homalg rings",
+        [ IsHomalgRing, IsString ], 1001, ## for this method to be triggered first it has to have at least the same rank as the above method
+        
+  function( R, indets )
+    
+    return R * indets;
+    
+end );
+
+##
 InstallMethod( \*,
         "for homalg rings",
         [ IsHomalgRing and IsFreePolynomialRing and HasCoefficientsRing,

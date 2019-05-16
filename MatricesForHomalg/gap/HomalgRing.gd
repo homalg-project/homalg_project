@@ -1407,6 +1407,9 @@ DeclareGlobalFunction( "_PrepareInputForPolynomialRing" );
 DeclareOperation( "*",
         [ IsHomalgRing, IsList ] );
 
+DeclareOperation( "\[\]",
+        [ IsHomalgRing, IsList ] );
+
 DeclareAttribute( "PolynomialRingWithDegRevLexOrdering",
         IsHomalgRing );
 
