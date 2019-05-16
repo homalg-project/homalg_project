@@ -1390,9 +1390,6 @@ DeclareOperation( "/",
         [ IsRingElement, IsHomalgRing ] );
 
 DeclareOperation( "/",
-        [ IsStringRep and IsString, IsHomalgRing ] );
-
-DeclareOperation( "/",
         [ IsString, IsHomalgRing ] );
 
 DeclareGlobalFunction( "StringToElementStringList" );
