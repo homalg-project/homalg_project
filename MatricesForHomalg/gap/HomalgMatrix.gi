@@ -3169,44 +3169,46 @@ InstallMethod( ViewObj,
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewString,
         "for interal matrix hulls",
         [ IsInternalMatrixHull ],
         
   function( o )
     
-    Print( "<A hull for a homalg internal matrix>" );
+    return "<A hull for a homalg internal matrix>";
     
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewString,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( o )
-    local R, first_attribute, not_row_or_column_matrix;
+    local R, first_attribute, str, not_row_or_column_matrix;
     
     R := HomalgRing( o );
     
     first_attribute := true;
     
+    str :="";
+    
     if HasIsVoidMatrix( o ) and IsVoidMatrix( o ) then
-        Print( "<A void" );
+        Append( str, "<A void" );
     elif HasIsInitialMatrix( o ) and IsInitialMatrix( o ) then
-        Print( "<An initial" );
+        Append( str, "<An initial" );
     elif HasIsInitialIdentityMatrix( o ) and IsInitialIdentityMatrix( o ) then
-        Print( "<An initial identity" );
+        Append( str, "<An initial identity" );
     elif not HasEval( o ) then
-        Print( "<An unevaluated" );
+        Append( str, "<An unevaluated" );
     else
-        Print( "<A" );
+        Append( str, "<A" );
         first_attribute := false;
     fi;
     
     if not ( HasIsSubidentityMatrix( o ) and IsSubidentityMatrix( o ) )
        and HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero homalg matrix
-        Print( " non-zero" );
+        Append( str, " non-zero" );
         first_attribute := true;
     fi;
     
@@ -3214,29 +3216,29 @@ InstallMethod( ViewObj,
     
     if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
         if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
-            Print( " diagonal" );
+            Append( str, " diagonal" );
         elif HasIsUpperStairCaseMatrix( o ) and IsUpperStairCaseMatrix( o ) and not_row_or_column_matrix then
             if not first_attribute then
-                Print( "n upper staircase" );
+                Append( str, "n upper staircase" );
             else
-                Print( " upper staircase" );
+                Append( str, " upper staircase" );
             fi;
         elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
-            Print( " strict upper triangular" );
+            Append( str, " strict upper triangular" );
         elif HasIsLowerStairCaseMatrix( o ) and IsLowerStairCaseMatrix( o ) and not_row_or_column_matrix then
-            Print( " lower staircase" );
+            Append( str, " lower staircase" );
         elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
-            Print( " strict lower triangular" );
+            Append( str, " strict lower triangular" );
         elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) and not ( HasNrRows( o ) and NrRows( o ) = 1 ) then
             if not first_attribute then
-                Print( "n upper triangular" );
+                Append( str, "n upper triangular" );
             else
-                Print( " upper triangular" );
+                Append( str, " upper triangular" );
             fi;
         elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) and not ( HasNrColumns( o ) and NrColumns( o ) = 1 ) then
-            Print( " lower triangular" );
+            Append( str, " lower triangular" );
         elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) and not_row_or_column_matrix then
-            Print( " triangular" );
+            Append( str, " triangular" );
         elif not first_attribute then
             first_attribute := fail;
         fi;
@@ -3249,184 +3251,205 @@ InstallMethod( ViewObj,
         
         if HasIsInvertibleMatrix( o ) and IsInvertibleMatrix( o ) then
             if not first_attribute then
-                Print( "n invertible" );
+                Append( str, "n invertible" );
             else
-                Print( " invertible" );
+                Append( str, " invertible" );
             fi;
         else
             if HasIsRightInvertibleMatrix( o ) and IsRightInvertibleMatrix( o ) then
-                Print( " right invertible" );
+                Append( str, " right invertible" );
             elif HasIsLeftRegular( o ) and IsLeftRegular( o ) then
-                Print( " left regular" );
+                Append( str, " left regular" );
             fi;
             
             if HasIsLeftInvertibleMatrix( o ) and IsLeftInvertibleMatrix( o ) then
-                Print( " left invertible" );
+                Append( str, " left invertible" );
             elif HasIsRightRegular( o ) and IsRightRegular( o ) then
-                Print( " right regular" );
+                Append( str, " right regular" );
             fi;
         fi;
     fi;
     
     if HasIsSubidentityMatrix( o ) and IsSubidentityMatrix( o ) then
-        Print( " sub-identity" );
+        Append( str, " sub-identity" );
     fi;
     
     if HasNrRows( o ) then
-        Print( " ", NrRows( o ), " " );
+        Append( str, Concatenation( " ", String( NrRows( o ) ), " " ) );
         if not HasNrColumns( o ) then
-            Print( "x ?" );
+            Append( str, "x ?" );
         fi;
     fi;
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( " ? " );
+            Append( str, " ? " );
         fi;
-        Print( "x ", NrColumns( o ) );
+        Append( str, Concatenation( "x ", String( NrColumns( o ) ) ) );
     fi;
     
     if IsMutable( o ) and HasEval( o ) then
-        Print( " mutable" );
+        Append( str, " mutable" );
     fi;
     
-    Print( " matrix over a" );
+    Append( str, " matrix over a" );
     
     if IsBound( R!.description ) then
-        Print( R!.description );
+        Append( str, R!.description );
     elif IsHomalgInternalMatrixRep( o ) then
-        Print( "n internal" );
+        Append( str, "n internal" );
     fi;
     
-    Print( " ring>" );
+    Append( str, " ring>" );
+    
+    return str;
     
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewString,
         "for homalg matrices",
         [ IsHomalgMatrix and IsPermutationMatrix ],
         
   function( o )
-    local R;
+    local str, R;
     
-    R := HomalgRing( o );
+    str := "";
     
     if HasEval( o ) then
-        Print( "<A " );
+        Append( str, "<A " );
     else
-        Print( "<An unevaluated " );
+        Append( str, "<An unevaluated " );
     fi;
     
     if HasNrRows( o ) then
-        Print( NrRows( o ), " " );
+        Append( str, Concatenation( String( NrRows( o ) ), " " ) );
         if not HasNrColumns( o ) then
-            Print( "x ?" );
+            Append( str, "x ?" );
         fi;
     fi;
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( "? " );
+            Append( str, "? " );
         fi;
-        Print( "x ", NrColumns( o ) );
+        Append( str, Concatenation( "x ", String( NrColumns( o ) ) ) );
     fi;
     
-    Print( " permutation matrix over a" );
+    Append( str, " permutation matrix over a" );
+    
+    R := HomalgRing( o );
     
     if IsBound( R!.description ) then
-        Print( R!.description );
+        Append( str, R!.description );
     elif IsHomalgInternalMatrixRep( o ) then
-        Print( "n internal" );
+        Append( str, "n internal" );
     fi;
     
-    Print( " ring>" );
+    Append( str, " ring>" );
+    
+    return str;
     
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewString,
         "for homalg matrices",
         [ IsHomalgMatrix and IsOne ],
         
   function( o )
-    local R;
+    local str, R;
     
-    R := HomalgRing( o );
+    str := "";
     
     if HasEval( o ) then
-        Print( "<A " );
+        Append( str, "<A " );
     else
-        Print( "<An unevaluated " );
+        Append( str, "<An unevaluated " );
     fi;
     
     if HasNrRows( o ) then
-        Print( NrRows( o ), " " );
+        Append( str, Concatenation( String( NrRows( o ) ), " " ) );
         if not HasNrColumns( o ) then
-            Print( "x ?" );
+            Append( str, "x ?" );
         fi;
     fi;
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( "? " );
+            Append( str, "? " );
         fi;
-        Print( "x ", NrColumns( o ) );
+        Append( str, Concatenation( "x ", String( NrColumns( o ) ) ) );
     fi;
     
-    Print( " identity matrix over a" );
+    Append( str, " identity matrix over a" );
+    
+    R := HomalgRing( o );
     
     if IsBound( R!.description ) then
-        Print( R!.description );
+        Append( str, R!.description );
     elif IsHomalgInternalMatrixRep( o ) then
-        Print( "n internal" );
+        Append( str, "n internal" );
     fi;
     
-    Print( " ring>" );
+    Append( str, " ring>" );
+    
+    return str;
     
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewString,
         "for homalg matrices",
         [ IsHomalgMatrix and IsZero ],
         
   function( o )
-    local R;
+    local str, R;
     
-    R := HomalgRing( o );
+    str := "";
     
     if HasEval( o ) then
-        Print( "<A " );
+        Append( str, "<A " );
     else
-        Print( "<An unevaluated " );
+        Append( str, "<An unevaluated " );
     fi;
     
     if HasNrRows( o ) then
-        Print( NrRows( o ), " " );
+        Append( str, Concatenation( String( NrRows( o ) ), " " ) );
         if not HasNrColumns( o ) then
-            Print( "x ?" );
+            Append( str, "x ?" );
         fi;
     fi;
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( "? " );
+            Append( str, "? " );
         fi;
-        Print( "x ", NrColumns( o ) );
+        Append( str, Concatenation( "x ", String( NrColumns( o ) ) ) );
     fi;
     
-    Print( " zero matrix over a" );
+    Append( str, " zero matrix over a" );
+    
+    R := HomalgRing( o );
     
     if IsBound( R!.description ) then
-        Print( R!.description );
+        Append( str, R!.description );
     elif IsHomalgInternalMatrixRep( o ) then
-        Print( "n internal" );
+        Append( str, "n internal" );
     fi;
     
-    Print( " ring>" );
+    Append( str, " ring>" );
+    
+    return str;
     
 end );
+
+##
+InstallMethod( String,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  ViewString );
 
 ##
 InstallMethod( Display,
