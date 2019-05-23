@@ -7226,7 +7226,7 @@ InstallMethod( IsolateIndeterminate,
 end );
 
 ##
-InstallMethod( Saturate,
+InstallOtherMethod( Saturate,
         "for two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
