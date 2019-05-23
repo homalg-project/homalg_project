@@ -7044,7 +7044,7 @@ InstallMethod( AMaximalIdealContaining,
         [ IsHomalgMatrix ],
         
   function( I )
-    local R, A, one, indets, S, gens, gens0, lcm, p, Rp;
+    local R, ZZ, one, indets, S, gens, gens0, lcm, p, Fp;
     
     R := HomalgRing( I );
     
@@ -7052,23 +7052,25 @@ InstallMethod( AMaximalIdealContaining,
         TryNextMethod( );
     fi;
     
-    A := CoefficientsRing( R );
+    ZZ := CoefficientsRing( R );
     
-    if not ( HasIsIntegersForHomalg( A ) and IsIntegersForHomalg( A ) ) then
+    if not ( HasIsIntegersForHomalg( ZZ ) and IsIntegersForHomalg( ZZ ) ) then
         TryNextMethod( );
     fi;
     
-    one := HomalgIdentityMatrix( 1, R );
+    indets := Indeterminates( R );
+    
+    S := ZZ * indets;
+    
+    I := S * I;
+    
+    one := HomalgIdentityMatrix( 1, S );
     
     I := BasisOfRowModule( I );
     
     if IsZero( DecideZeroRows( one, I ) ) then
         Error( "expected a matrix not reducing one to zero\n" );
     fi;
-    
-    indets := Indeterminates( R );
-    
-    S := A * indets;
     
     if IsZero( I ) then
         return UnionOfRows( HomalgMatrix( "[2]", 1, 1, R ), HomalgMatrix( indets, Length( indets ), 1, R ) );
@@ -7098,10 +7100,10 @@ InstallMethod( AMaximalIdealContaining,
         
     fi;
     
-    Assert( 4, not ( p / R ) in I );
+    Assert( 4, not ( p / S ) in I );
     
-    Rp := HomalgRingOfIntegersInUnderlyingCAS( p, A );
-    S := Rp * indets;
+    Fp := HomalgRingOfIntegersInUnderlyingCAS( p, ZZ );
+    S := Fp * indets;
     I := S * I;
     
     p := HomalgMatrix( [ p ], 1, 1, R );
