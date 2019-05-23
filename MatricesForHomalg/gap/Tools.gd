@@ -215,6 +215,12 @@ DeclareOperation( "AMaximalIdealContaining",
 DeclareOperation( "IsolateIndeterminate",
         [ IsHomalgRingElement ] );
 
+DeclareOperation( "Saturate",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "Saturate",
+        [ IsHomalgMatrix, IsRingElement ] );
+
 DeclareOperation( "RingMapOntoRewrittenResidueClassRing",
         [ IsHomalgRing ] );
 

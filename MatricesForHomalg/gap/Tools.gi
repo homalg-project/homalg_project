@@ -7226,6 +7226,42 @@ InstallMethod( IsolateIndeterminate,
 end );
 
 ##
+InstallMethod( Saturate,
+        "for two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( mat, r )
+    local mat_old;
+    
+    if not NrColumns( mat ) = NrColumns( r ) then
+        Error( "the matrices mat and r must have the same number of columns\n" );
+    elif not NrRows( r ) = NrColumns( r ) then
+        Error( "the matrix r is not a square matrix\n" );
+    fi;
+    
+    repeat
+        mat_old := mat;
+        mat := SyzygiesOfRows( r, mat );
+    until IsZero( DecideZeroRows( mat, mat_old ) );
+    
+    return mat;
+    
+end );
+
+##
+InstallMethod( Saturate,
+        "for a homalg matrix and a homalg ring element",
+        [ IsHomalgMatrix, IsRingElement ],
+        
+  function( mat, r )
+    
+    r := HomalgMatrix( [ r ], 1, 1, HomalgRing( mat ) );
+    
+    return Saturate( mat, r );
+    
+end );
+
+##
 InstallMethod( RingMapOntoRewrittenResidueClassRing,
         "for a homalg ring",
         [ IsHomalgRing ],
