@@ -6255,7 +6255,8 @@ InstallMethod( AffineDimension,
             free := HomalgZeroMatrix( 1, 1, R );
             return AffineDimension( free );
         fi;
-    elif HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
+    elif ( HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) ) or
+      ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) then
         
         M := BasisOfRowModule( M );
         
