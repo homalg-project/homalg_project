@@ -2821,11 +2821,14 @@ InstallMethod( RadicalSubobjectOp,
         rad := RP!.RadicalSubobject( M );	## the external object
         rad := HomalgMatrix( rad, R );
         if IsZero( rad ) then
-            return HomalgZeroMatrix( 0, 1, R );
+            rad := HomalgZeroMatrix( 0, 1, R );
         fi;
         SetNrColumns( rad, 1 );
         NrRows( rad );
         IsOne( rad );
+        if rad = M then
+            rad := M;
+        fi;
         M!.RadicalSubobjectOp := rad;
         rad!.RadicalSubobjectOp := rad;
         return rad;
