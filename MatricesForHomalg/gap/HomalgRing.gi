@@ -337,7 +337,7 @@ end );
 
 ## for the computeralgebra course
 InstallOtherMethod( CoefficientsRing,
-        "for homalg ring elements",
+        "for ring elements",
         [ IsRingElement ],
         
   function( r )
