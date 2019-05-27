@@ -307,6 +307,17 @@ InstallMethod( MinusOneMutable,
 end );
 
 ##
+InstallMethod( Characteristic,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return Characteristic( HomalgRing( r ) );
+    
+end );
+
+##
 InstallMethod( AssociatedPolynomialRing,
         "for homalg fields",
         [ IsHomalgRing and IsFieldForHomalg ],
