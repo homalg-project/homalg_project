@@ -317,6 +317,24 @@ InstallMethod( Characteristic,
     
 end );
 
+## for the computeralgebra course
+InstallOtherMethod( IndeterminatesOfPolynomialRing,
+        "for homalg ring elements",
+        [ IsRingElement ],
+        
+  function( r )
+    local R;
+    
+    if IsHomalgRingElement( r ) then
+        R := HomalgRing( r );
+    else
+        R := DefaultRing( r );
+    fi;
+    
+    return IndeterminatesOfPolynomialRing( R );
+    
+end );
+
 ##
 InstallMethod( AssociatedPolynomialRing,
         "for homalg fields",
