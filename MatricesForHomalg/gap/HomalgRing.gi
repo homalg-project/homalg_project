@@ -318,20 +318,18 @@ InstallMethod( Characteristic,
 end );
 
 ## for the computeralgebra course
-InstallOtherMethod( IndeterminatesOfPolynomialRing,
+InstallOtherMethod( IndeterminateOfLaurentPolynomial,
         "for homalg ring elements",
-        [ IsRingElement ],
+        [ IsHomalgRingElement ],
         
   function( r )
-    local R;
+    local R, indets;
     
-    if IsHomalgRingElement( r ) then
-        R := HomalgRing( r );
-    else
-        R := DefaultRing( r );
-    fi;
+    R := HomalgRing( r );
     
-    return IndeterminatesOfPolynomialRing( R );
+    indets := IndeterminatesOfPolynomialRing( R );
+    
+    return indets[Length( indets )];
     
 end );
 
