@@ -3095,6 +3095,27 @@ InstallMethod( ViewString,
 end );
 
 ##
+InstallMethod( String,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ], 10000001,
+        
+  function( o )
+    local str;
+    
+    if IsBound( o!.distinguished ) then
+        str := "<The";
+    else
+        str := "<A";
+    fi;
+    
+    Append( str, ViewString( o ) );
+    Append( str, ">" );
+    
+    return str;
+    
+end );
+
+##
 InstallMethod( Display,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
