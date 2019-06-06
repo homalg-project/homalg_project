@@ -254,7 +254,14 @@
   
   [33X[1;0Y[29X[2XhomalgLaTeX[102X( [3Xarg[103X ) [32X operation[133X
   
-  [1X8.1-41 PositionsOfMaximalObjects[101X
+  [1X8.1-41 IdenticalPosition[101X
+  
+  [33X[1;0Y[29X[2XIdenticalPosition[102X( [3XL[103X, [3Xo[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya positive integer or fail[133X
+  
+  [33X[0;0YReturn the position of the object identical to [3Xo[103X in the list [3XL[103X[133X
+  
+  [1X8.1-42 PositionsOfMaximalObjects[101X
   
   [33X[1;0Y[29X[2XPositionsOfMaximalObjects[102X( [3XL[103X, [3Xf[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list[133X
@@ -262,7 +269,7 @@
   [33X[0;0YReturn  the  list  of  positions  of maximal objects in [3XL[103X w.r.t. the partial
   order defined by the binary function [3Xf[103X.[133X
   
-  [1X8.1-42 MaximalObjects[101X
+  [1X8.1-43 MaximalObjects[101X
   
   [33X[1;0Y[29X[2XMaximalObjects[102X( [3XL[103X, [3Xf[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list[133X

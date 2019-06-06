@@ -38,6 +38,7 @@
   [2XhomalgLaTeX[102X, for IsObject 8.1-40 
   [2XhomalgNamesOfComponentsToIntLists[102X 8.1-33 
   [2XhomalgTotalRuntimes[102X 8.1-1 
+  [2XIdenticalPosition[102X, for IsList, IsObject 8.1-41 
   [2XIncreaseCounterInObject[102X 8.1-36 
   [2XIncreaseExistingCounterInObject[102X 8.1-34 
   [2XIncreaseExistingCounterInObjectWithTiming[102X 8.1-35 
@@ -84,10 +85,10 @@
   [2XLogicalImplicationsForOneHomalgObject[102X 8.1-3 
   [2XLogicalImplicationsForTwoHomalgBasicObjects[102X 8.1-4 
   [2XMatchPropertiesAndAttributes[102X 8.1-8 
-  [2XMaximalObjects[102X, for IsList, IsFunction 8.1-42 
+  [2XMaximalObjects[102X, for IsList, IsFunction 8.1-43 
   [2XMemoryToString[102X 8.1-37 
   [2XNewToDoList[102X 4.4-1 
-  [2XPositionsOfMaximalObjects[102X, for IsList, IsFunction 8.1-41 
+  [2XPositionsOfMaximalObjects[102X, for IsList, IsFunction 8.1-42 
   [2XPostOrder[102X, for IsTree 9.1-11 
   [2XPredecessor[102X, for IsTree 9.1-4 
   [2XPrimePowerExponent[102X 8.1-38 
