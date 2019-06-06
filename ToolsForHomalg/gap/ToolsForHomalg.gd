@@ -425,6 +425,13 @@ DeclareOperation( "PositionOfTheDefaultPresentation",
 DeclareOperation( "Display",
         [ IsContainerForPointers, IsString ] );
 
+#! @Description
+#!  Return the position of the object identical to <A>o</A> in the list <A>L</A>
+#! @Arguments L, o
+#! @Returns a positive integer or fail
+DeclareOperation( "IdenticalPosition",
+        [ IsList, IsObject ] );
+
 DeclareOperation( "AppendNew",
         [ IsList, IsList ] );
 

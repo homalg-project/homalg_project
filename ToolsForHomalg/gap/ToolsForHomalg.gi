@@ -1538,6 +1538,17 @@ InstallMethod( ViewList,
 end );
 
 ##
+InstallMethod( IdenticalPosition,
+        "for a list and an object",
+        [ IsList, IsObject ],
+        
+  function( L, o )
+    
+    return PositionProperty( L, x -> IsIdenticalObj( x, o ) );
+    
+end );
+
+##
 InstallMethod( AppendNew,
         "for two lists",
         [ IsList, IsList ],
@@ -1546,7 +1557,7 @@ InstallMethod( AppendNew,
     local n, p;
     
     for n in N do
-        p := PositionProperty( L, l -> IsIdenticalObj( l, n ) );
+        p := IdenticalPosition( L, n );
         if p = fail then
             Add( L, n );
         fi;
