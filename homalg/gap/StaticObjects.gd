@@ -154,6 +154,8 @@ DeclareOperation( "SetAsPreferredPresentation",
 DeclareOperation( "OnPreferredPresentation",
         [ IsHomalgStaticObject ] );
 
-DeclareOperation( "OnLastStoredPresentation",
+DeclareOperation( "OnFirstStoredPresentation",
         [ IsHomalgStaticObject ] );
 
+DeclareOperation( "OnLastStoredPresentation",
+        [ IsHomalgStaticObject ] );

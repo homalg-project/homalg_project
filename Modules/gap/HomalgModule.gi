@@ -366,6 +366,20 @@ InstallMethod( OnPreferredPresentation,
 end );
 
 ##
+InstallMethod( OnFirstStoredPresentation,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    local pos;
+    
+    SetPositionOfTheDefaultPresentation( M, 1 );
+    
+    return M;
+    
+end );
+
+##
 InstallMethod( OnLastStoredPresentation,
         "for homalg modules",
         [ IsHomalgModule ],
