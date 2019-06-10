@@ -1240,7 +1240,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg relations",
-        [ IsHomalgRelations ],
+        [ IsHomalgRelations ], 1001,
         
   function( o )
     local m, n;
@@ -1284,7 +1284,7 @@ end );
 
 InstallMethod( Display,
         "for homalg relations",
-        [ IsHomalgRelations ],
+        [ IsHomalgRelations ], 1001,
         
   function( o )
     local m, n;
