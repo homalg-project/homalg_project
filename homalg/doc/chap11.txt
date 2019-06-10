@@ -59,14 +59,14 @@
   
   [1X11.1-1 IsHomalgFunctor[101X
   
-  [29X[2XIsHomalgFunctor[102X( [3XF[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgFunctor[102X( [3XF[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X (multi-)functors.[133X
   
   [1X11.1-2 IsHomalgFunctorRep[101X
   
-  [29X[2XIsHomalgFunctorRep[102X( [3XE[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsHomalgFunctorRep[102X( [3XE[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X representation of [5Xhomalg[105X (multi-)functors.[133X
@@ -78,7 +78,7 @@
   
   [1X11.2-1 CreateHomalgFunctor[101X
   
-  [29X[2XCreateHomalgFunctor[102X( [3Xlist1[103X, [3Xlist2[103X, [3X...[103X ) [32X function
+  [33X[1;0Y[29X[2XCreateHomalgFunctor[102X( [3Xlist1[103X, [3Xlist2[103X, [3X...[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X functor[133X
   
   [33X[0;0YThis  constructor  is used to create functors for [5Xhomalg[105X from scratch. [3XlistN[103X
@@ -94,7 +94,7 @@
   
   [1X11.2-2 InsertObjectInMultiFunctor[101X
   
-  [29X[2XInsertObjectInMultiFunctor[102X( [3XF[103X, [3Xp[103X, [3Xobj[103X, [3XH[103X ) [32X operation
+  [33X[1;0Y[29X[2XInsertObjectInMultiFunctor[102X( [3XF[103X, [3Xp[103X, [3Xobj[103X, [3XH[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X functor[133X
   
   [33X[0;0YGiven a [5Xhomalg[105X multi-functor [3XF[103X with multiplicity [22Xm[122X and a string [3XH[103X return the
@@ -122,7 +122,7 @@
   
   [1X11.2-3 RightSatelliteOfCofunctor[101X
   
-  [29X[2XRightSatelliteOfCofunctor[102X( [3XF[103X[, [3Xp[103X][, [3XH[103X] ) [32X operation
+  [33X[1;0Y[29X[2XRightSatelliteOfCofunctor[102X( [3XF[103X[, [3Xp[103X][, [3XH[103X] ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X functor[133X
   
   [33X[0;0YGiven  a  [5Xhomalg[105X (multi-)functor [3XF[103X and a string [3XH[103X return the right satellite
@@ -140,7 +140,7 @@
   
   [1X11.2-4 LeftSatelliteOfFunctor[101X
   
-  [29X[2XLeftSatelliteOfFunctor[102X( [3XF[103X[, [3Xp[103X][, [3XH[103X] ) [32X operation
+  [33X[1;0Y[29X[2XLeftSatelliteOfFunctor[102X( [3XF[103X[, [3Xp[103X][, [3XH[103X] ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X functor[133X
   
   [33X[0;0YGiven a [5Xhomalg[105X (multi-)functor [3XF[103X and a string [3XH[103X return the left satellite of
@@ -158,7 +158,7 @@
   
   [1X11.2-5 RightDerivedCofunctor[101X
   
-  [29X[2XRightDerivedCofunctor[102X( [3XF[103X[, [3Xp[103X][, [3XH[103X] ) [32X operation
+  [33X[1;0Y[29X[2XRightDerivedCofunctor[102X( [3XF[103X[, [3Xp[103X][, [3XH[103X] ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X functor[133X
   
   [33X[0;0YGiven  a  [5Xhomalg[105X  (multi-)functor  [3XF[103X and a string [3XH[103X return the right derived
@@ -177,7 +177,7 @@
   
   [1X11.2-6 LeftDerivedFunctor[101X
   
-  [29X[2XLeftDerivedFunctor[102X( [3XF[103X[, [3Xp[103X][, [3XH[103X] ) [32X operation
+  [33X[1;0Y[29X[2XLeftDerivedFunctor[102X( [3XF[103X[, [3Xp[103X][, [3XH[103X] ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X functor[133X
   
   [33X[0;0YGiven  a  [5Xhomalg[105X  (multi-)functor  [3XF[103X  and a string [3XH[103X return the left derived
@@ -196,7 +196,7 @@
   
   [1X11.2-7 ComposeFunctors[101X
   
-  [29X[2XComposeFunctors[102X( [3XF[103X[, [3Xp[103X], [3XG[103X[, [3XH[103X] ) [32X operation
+  [33X[1;0Y[29X[2XComposeFunctors[102X( [3XF[103X[, [3Xp[103X], [3XG[103X[, [3XH[103X] ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X functor[133X
   
   [33X[0;0YGiven two [5Xhomalg[105X (multi-)functors [3XF[103X and [3XG[103X and a string [3XH[103X return the composed
@@ -233,7 +233,7 @@
   
   [1X11.3-1 NameOfFunctor[101X
   
-  [29X[2XNameOfFunctor[102X( [3XF[103X ) [32X attribute
+  [33X[1;0Y[29X[2XNameOfFunctor[102X( [3XF[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya string[133X
   
   [33X[0;0YThe name of the [5Xhomalg[105X functor [3XF[103X.[133X
@@ -247,7 +247,7 @@
   
   [1X11.3-2 OperationOfFunctor[101X
   
-  [29X[2XOperationOfFunctor[102X( [3XF[103X ) [32X attribute
+  [33X[1;0Y[29X[2XOperationOfFunctor[102X( [3XF[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Yan operation[133X
   
   [33X[0;0YThe operation of the functor [3XF[103X.[133X
@@ -261,7 +261,7 @@
   
   [1X11.3-3 Genesis[101X
   
-  [29X[2XGenesis[102X( [3XF[103X ) [32X attribute
+  [33X[1;0Y[29X[2XGenesis[102X( [3XF[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya list[133X
   
   [33X[0;0YThe  first entry of the returned list is the name of the constructor used to
@@ -348,7 +348,7 @@
   
   [1X11.3-4 ProcedureToReadjustGenerators[101X
   
-  [29X[2XProcedureToReadjustGenerators[102X( [3XFunctor[103X ) [32X attribute
+  [33X[1;0Y[29X[2XProcedureToReadjustGenerators[102X( [3XFunctor[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya function[133X
   
   
@@ -356,7 +356,7 @@
   
   [1X11.4-1 functor_Kernel[101X
   
-  [29X[2Xfunctor_Kernel[102X[32X global variable
+  [33X[1;0Y[29X[2Xfunctor_Kernel[102X[32X global variable[133X
   
   [33X[0;0YThe functor that associates to a map its kernel.[133X
   
@@ -379,7 +379,7 @@
   
   [1X11.4-2 functor_DefectOfExactness[101X
   
-  [29X[2Xfunctor_DefectOfExactness[102X[32X global variable
+  [33X[1;0Y[29X[2Xfunctor_DefectOfExactness[102X[32X global variable[133X
   
   [33X[0;0YThe  functor  that  associates  to  a  pair  of  composable maps with a zero
   compositum  the defect of exactness, i.e. the kernel of the outer map modulo
@@ -414,7 +414,7 @@
   
   [1X11.7-1 InstallFunctor[101X
   
-  [29X[2XInstallFunctor[102X( [3XF[103X ) [32X operation
+  [33X[1;0Y[29X[2XInstallFunctor[102X( [3XF[103X ) [32X operation[133X
   
   [33X[0;0YInstall  several methods for [5XGAP[105X operations that get declared under the name
   of  the [5Xhomalg[105X (multi-)functor [3XF[103X (--> [2XNameOfFunctor[102X ([14X11.3-1[114X)). These methods
@@ -455,7 +455,7 @@
   
   [1X11.7-2 InstallDeltaFunctor[101X
   
-  [29X[2XInstallDeltaFunctor[102X( [3XF[103X ) [32X operation
+  [33X[1;0Y[29X[2XInstallDeltaFunctor[102X( [3XF[103X ) [32X operation[133X
   
   [33X[0;0YIn case [3XF[103X is a [22Xδ[122X-functor in the sense of Grothendieck the procedure installs
   several  operations  under  the  name  of  the [5Xhomalg[105X (multi-)functor [3XF[103X (-->

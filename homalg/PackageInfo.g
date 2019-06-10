@@ -5,7 +5,7 @@ PackageName := "homalg",
 Subtitle := "A homological algebra meta-package for computable Abelian categories",
 
 Version := Maximum( [
-  "2017.09.10", ## Mohamed's version
+  "2019.02.03", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.09.17", ## Markus' version
 ## this line prevents merge conflicts
@@ -19,9 +19,7 @@ Version := Maximum( [
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-
-
-
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(

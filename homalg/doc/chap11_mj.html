@@ -115,7 +115,7 @@
 
 <h5>11.1-1 IsHomalgFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> (multi-)functors.</p>
@@ -124,7 +124,7 @@
 
 <h5>11.1-2 IsHomalgFunctorRep</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgFunctorRep</code>( <var class="Arg">E</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgFunctorRep</code>( <var class="Arg">E</var> )</td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> representation of <strong class="pkg">homalg</strong> (multi-)functors.</p>
@@ -139,7 +139,7 @@
 
 <h5>11.2-1 CreateHomalgFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateHomalgFunctor</code>( <var class="Arg">list1</var>, <var class="Arg">list2</var>, <var class="Arg">...</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateHomalgFunctor</code>( <var class="Arg">list1</var>, <var class="Arg">list2</var>, <var class="Arg">...</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> functor</p>
 
 <p>This constructor is used to create functors for <strong class="pkg">homalg</strong> from scratch. <var class="Arg">listN</var> is of the form <var class="Arg">listN = [ stringN, valueN ]</var>. <var class="Arg">stringN</var> will be the name of a component of the created functor and <var class="Arg">valueN</var> will be its value. This constructor is listed here for the sake of completeness. Its documentation is rather better placed in a <strong class="pkg">homalg</strong> programmers guide. The remaining constructors create new functors out of existing ones and are probably more interesting for end users.</p>
@@ -150,7 +150,7 @@
 
 <h5>11.2-2 InsertObjectInMultiFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InsertObjectInMultiFunctor</code>( <var class="Arg">F</var>, <var class="Arg">p</var>, <var class="Arg">obj</var>, <var class="Arg">H</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InsertObjectInMultiFunctor</code>( <var class="Arg">F</var>, <var class="Arg">p</var>, <var class="Arg">obj</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> functor</p>
 
 <p>Given a <strong class="pkg">homalg</strong> multi-functor <var class="Arg">F</var> with multiplicity <span class="SimpleMath">\(m\)</span> and a string <var class="Arg">H</var> return the functor <code class="code">Functor_</code><var class="Arg">H</var> <span class="SimpleMath">\(:=\)</span> <var class="Arg">F</var><span class="SimpleMath">\((...,\)</span><var class="Arg">obj</var><span class="SimpleMath">\(,...)\)</span>, where <var class="Arg">obj</var> is inserted at the <var class="Arg">p</var>-th position. Of course <var class="Arg">obj</var> must be an object (e.g. ring, module, ...) that can be inserted at this particular position. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11_mj.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
@@ -175,7 +175,7 @@ Z
 
 <h5>11.2-3 RightSatelliteOfCofunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightSatelliteOfCofunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightSatelliteOfCofunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> functor</p>
 
 <p>Given a <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> and a string <var class="Arg">H</var> return the right satellite of <var class="Arg">F</var> with respect to its <var class="Arg">p</var>-th argument. <var class="Arg">F</var> is assumed contravariant in its <var class="Arg">p</var>-th argument. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11_mj.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
@@ -188,7 +188,7 @@ Z
 
 <h5>11.2-4 LeftSatelliteOfFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftSatelliteOfFunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftSatelliteOfFunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> functor</p>
 
 <p>Given a <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> and a string <var class="Arg">H</var> return the left satellite of <var class="Arg">F</var> with respect to its <var class="Arg">p</var>-th argument. <var class="Arg">F</var> is assumed covariant in its <var class="Arg">p</var>-th argument. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11_mj.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
@@ -201,7 +201,7 @@ Z
 
 <h5>11.2-5 RightDerivedCofunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDerivedCofunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDerivedCofunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> functor</p>
 
 <p>Given a <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> and a string <var class="Arg">H</var> return the right derived functor of <var class="Arg">F</var> with respect to its <var class="Arg">p</var>-th argument. <var class="Arg">F</var> is assumed contravariant in its <var class="Arg">p</var>-th argument. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11_mj.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
@@ -214,7 +214,7 @@ Z
 
 <h5>11.2-6 LeftDerivedFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDerivedFunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDerivedFunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> functor</p>
 
 <p>Given a <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> and a string <var class="Arg">H</var> return the left derived functor of <var class="Arg">F</var> with respect to its <var class="Arg">p</var>-th argument. <var class="Arg">F</var> is assumed covariant in its <var class="Arg">p</var>-th argument. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11_mj.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
@@ -227,7 +227,7 @@ Z
 
 <h5>11.2-7 ComposeFunctors</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComposeFunctors</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>], <var class="Arg">G</var>[, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComposeFunctors</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>], <var class="Arg">G</var>[, <var class="Arg">H</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> functor</p>
 
 <p>Given two <strong class="pkg">homalg</strong> (multi-)functors <var class="Arg">F</var> and <var class="Arg">G</var> and a string <var class="Arg">H</var> return the composed functor <code class="code">Functor_</code><var class="Arg">H</var> <span class="SimpleMath">\(:=\)</span> <var class="Arg">F</var><span class="SimpleMath">\((...,\)</span><var class="Arg">G</var><span class="SimpleMath">\((...),...)\)</span>, where <var class="Arg">G</var> is inserted at the <var class="Arg">p</var>-th position. Of course <var class="Arg">G</var> must be a functor that can be inserted at this particular position. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11_mj.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
@@ -260,7 +260,7 @@ rings&gt;
 
 <h5>11.3-1 NameOfFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NameOfFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NameOfFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a string</p>
 
 <p>The name of the <strong class="pkg">homalg</strong> functor <var class="Arg">F</var>.</p>
@@ -277,7 +277,7 @@ Ext
 
 <h5>11.3-2 OperationOfFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OperationOfFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OperationOfFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: an operation</p>
 
 <p>The operation of the functor <var class="Arg">F</var>.</p>
@@ -294,7 +294,7 @@ Ext
 
 <h5>11.3-3 Genesis</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Genesis</code>( <var class="Arg">F</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Genesis</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a list</p>
 
 <p>The first entry of the returned list is the name of the constructor used to create the functor <var class="Arg">F</var>. The reset of the list contains arguments that were passed to this constructor for creating <var class="Arg">F</var>.</p>
@@ -397,7 +397,7 @@ ings&gt;, 1 ]
 
 <h5>11.3-4 ProcedureToReadjustGenerators</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProcedureToReadjustGenerators</code>( <var class="Arg">Functor</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProcedureToReadjustGenerators</code>( <var class="Arg">Functor</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a function</p>
 
 <p><a id="X7D83D0EB87D2D872" name="X7D83D0EB87D2D872"></a></p>
@@ -408,7 +408,7 @@ ings&gt;, 1 ]
 
 <h5>11.4-1 functor_Kernel</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; functor_Kernel</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; functor_Kernel</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
 <p>The functor that associates to a map its kernel.</p>
 
 
@@ -433,7 +433,7 @@ InstallValue( functor_Kernel,
 
 <h5>11.4-2 functor_DefectOfExactness</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; functor_DefectOfExactness</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; functor_DefectOfExactness</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
 <p>The functor that associates to a pair of composable maps with a zero compositum the defect of exactness, i.e. the kernel of the outer map modulo the image of the inner map.</p>
 
 
@@ -471,7 +471,7 @@ InstallValue( functor_DefectOfExactness,
 
 <h5>11.7-1 InstallFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Install several methods for <strong class="pkg">GAP</strong> operations that get declared under the name of the <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11_mj.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). These methods are used to apply the functor to objects, morphisms, (co)complexes of objects, and (co)chain morphisms. The objects in the (co)complexes might again be (co)complexes.</p>
 
 <p>(For purely technical reasons the multiplicity of the functor might at most be three. This restriction should disappear in future versions.)</p>
@@ -509,7 +509,7 @@ end );
 
 <h5>11.7-2 InstallDeltaFunctor</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallDeltaFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallDeltaFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>In case <var class="Arg">F</var> is a <span class="SimpleMath">\(\delta\)</span>-functor in the sense of Grothendieck the procedure installs several operations under the name of the <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11_mj.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)) allowing one to compute connecting homomorphisms, exact triangles, and associated long exact sequences. The input of these operations is a short exact sequence.</p>
 
 <p>(For purely technical reasons the multiplicity of the functor might at most be three. This restriction should disappear in future versions.)</p>

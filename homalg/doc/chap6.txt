@@ -6,7 +6,7 @@
   
   [1X6.1-1 IsHomalgComplex[101X
   
-  [29X[2XIsHomalgComplex[102X( [3XC[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgComplex[102X( [3XC[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X (co)complexes.[133X
@@ -15,7 +15,7 @@
   
   [1X6.1-2 IsComplexOfFinitelyPresentedObjectsRep[101X
   
-  [29X[2XIsComplexOfFinitelyPresentedObjectsRep[102X( [3XC[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsComplexOfFinitelyPresentedObjectsRep[102X( [3XC[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X representation of complexes of finitley presented [5Xhomalg[105X objects.[133X
@@ -26,7 +26,7 @@
   
   [1X6.1-3 IsCocomplexOfFinitelyPresentedObjectsRep[101X
   
-  [29X[2XIsCocomplexOfFinitelyPresentedObjectsRep[102X( [3XC[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsCocomplexOfFinitelyPresentedObjectsRep[102X( [3XC[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X representation of cocomplexes of finitley presented [5Xhomalg[105X objects.[133X
@@ -40,10 +40,10 @@
   
   [1X6.2-1 HomalgComplex[101X
   
-  [29X[2XHomalgComplex[102X( [3XM[103X[, [3Xd[103X] ) [32X function
-  [29X[2XHomalgComplex[102X( [3Xphi[103X[, [3Xd[103X] ) [32X function
-  [29X[2XHomalgComplex[102X( [3XC[103X[, [3Xd[103X] ) [32X function
-  [29X[2XHomalgComplex[102X( [3Xcm[103X[, [3Xd[103X] ) [32X function
+  [33X[1;0Y[29X[2XHomalgComplex[102X( [3XM[103X[, [3Xd[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgComplex[102X( [3Xphi[103X[, [3Xd[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgComplex[102X( [3XC[103X[, [3Xd[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgComplex[102X( [3Xcm[103X[, [3Xd[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YThe  first  syntax  creates  a  complex (i.e. chain complex) with the single
@@ -90,7 +90,6 @@
   [33X[0;0YThe first possibility:[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X<A homomorphism of left modules>[128X[104X
     [4X[25Xgap>[125X [27XC := HomalgComplex( N );[127X[104X
     [4X[28X<A non-zero graded homology object consisting of a single left module at degre\[128X[104X
     [4X[28Xe 0>[128X[104X
@@ -109,10 +108,10 @@
   
   [1X6.2-2 HomalgCocomplex[101X
   
-  [29X[2XHomalgCocomplex[102X( [3XM[103X[, [3Xd[103X] ) [32X function
-  [29X[2XHomalgCocomplex[102X( [3Xphi[103X[, [3Xd[103X] ) [32X function
-  [29X[2XHomalgCocomplex[102X( [3XC[103X[, [3Xd[103X] ) [32X function
-  [29X[2XHomalgCocomplex[102X( [3Xcm[103X[, [3Xd[103X] ) [32X function
+  [33X[1;0Y[29X[2XHomalgCocomplex[102X( [3XM[103X[, [3Xd[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgCocomplex[102X( [3Xphi[103X[, [3Xd[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgCocomplex[102X( [3XC[103X[, [3Xd[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgCocomplex[102X( [3Xcm[103X[, [3Xd[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YThe  first syntax creates a cocomplex (i.e. cochain complex) with the single
@@ -159,7 +158,6 @@
   [33X[0;0YThe first possibility:[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X<A homomorphism of right modules>[128X[104X
     [4X[25Xgap>[125X [27XC := HomalgCocomplex( M );[127X[104X
     [4X[28X<A non-zero graded cohomology object consisting of a single right module at de\[128X[104X
     [4X[28Xgree 0>[128X[104X
@@ -182,21 +180,21 @@
   
   [1X6.3-1 IsSequence[101X
   
-  [29X[2XIsSequence[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsSequence[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if all maps in [3XC[103X are well-defined.[133X
   
   [1X6.3-2 IsComplex[101X
   
-  [29X[2XIsComplex[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsComplex[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3XC[103X is complex.[133X
   
   [1X6.3-3 IsAcyclic[101X
   
-  [29X[2XIsAcyclic[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsAcyclic[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if  the  [5Xhomalg[105X  complex  [3XC[103X  is  acyclic,  i.e.  exact  except at its
@@ -204,7 +202,7 @@
   
   [1X6.3-4 IsRightAcyclic[101X
   
-  [29X[2XIsRightAcyclic[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsRightAcyclic[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if  the  [5Xhomalg[105X  complex  [3XC[103X is acyclic, i.e. exact except at its left
@@ -212,7 +210,7 @@
   
   [1X6.3-5 IsLeftAcyclic[101X
   
-  [29X[2XIsLeftAcyclic[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsLeftAcyclic[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if  the  [5Xhomalg[105X  complex [3XC[103X is acyclic, i.e. exact except at its right
@@ -220,7 +218,7 @@
   
   [1X6.3-6 IsGradedObject[101X
   
-  [29X[2XIsGradedObject[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGradedObject[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if  the [5Xhomalg[105X complex [3XC[103X is a graded object, i.e. if all maps between
@@ -228,35 +226,35 @@
   
   [1X6.3-7 IsExactSequence[101X
   
-  [29X[2XIsExactSequence[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsExactSequence[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X complex [3XC[103X is exact.[133X
   
   [1X6.3-8 IsShortExactSequence[101X
   
-  [29X[2XIsShortExactSequence[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsShortExactSequence[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X complex [3XC[103X is a short exact sequence.[133X
   
   [1X6.3-9 IsSplitShortExactSequence[101X
   
-  [29X[2XIsSplitShortExactSequence[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsSplitShortExactSequence[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X complex [3XC[103X is a split short exact sequence.[133X
   
   [1X6.3-10 IsTriangle[101X
   
-  [29X[2XIsTriangle[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsTriangle[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YSet to true if the [5Xhomalg[105X complex [3XC[103X is a triangle.[133X
   
   [1X6.3-11 IsExactTriangle[101X
   
-  [29X[2XIsExactTriangle[102X( [3XC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsExactTriangle[102X( [3XC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X complex [3XC[103X is an exact triangle.[133X
@@ -266,14 +264,14 @@
   
   [1X6.4-1 BettiTable[101X
   
-  [29X[2XBettiTable[102X( [3XC[103X ) [32X attribute
+  [33X[1;0Y[29X[2XBettiTable[102X( [3XC[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X diagram[133X
   
   [33X[0;0YThe Betti diagram of the [5Xhomalg[105X complex [3XC[103X of graded modules.[133X
   
   [1X6.4-2 FiltrationByShortExactSequence[101X
   
-  [29X[2XFiltrationByShortExactSequence[102X( [3XC[103X ) [32X attribute
+  [33X[1;0Y[29X[2XFiltrationByShortExactSequence[102X( [3XC[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X diagram[133X
   
   [33X[0;0YThe filtration induced by the short exact sequence [3XC[103X on its middle object.[133X
@@ -283,8 +281,8 @@
   
   [1X6.5-1 Add[101X
   
-  [29X[2XAdd[102X( [3XC[103X, [3Xphi[103X ) [32X operation
-  [29X[2XAdd[102X( [3XC[103X, [3Xmat[103X ) [32X operation
+  [33X[1;0Y[29X[2XAdd[102X( [3XC[103X, [3Xphi[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XAdd[102X( [3XC[103X, [3Xmat[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YIn  the  first  syntax  the morphism [3Xphi[103X is added to the (co)chain complex [3XC[103X
@@ -352,7 +350,7 @@
   
   [1X6.5-2 ByASmallerPresentation[101X
   
-  [29X[2XByASmallerPresentation[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XByASmallerPresentation[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YIt invokes [10XByASmallerPresentation[110X for [5Xhomalg[105X (static) objects.[133X

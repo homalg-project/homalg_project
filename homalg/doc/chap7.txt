@@ -6,7 +6,7 @@
   
   [1X7.1-1 IsHomalgChainMorphism[101X
   
-  [29X[2XIsHomalgChainMorphism[102X( [3Xcm[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgChainMorphism[102X( [3Xcm[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X (co)chain morphisms.[133X
@@ -15,7 +15,7 @@
   
   [1X7.1-2 IsHomalgChainEndomorphism[101X
   
-  [29X[2XIsHomalgChainEndomorphism[102X( [3Xcm[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgChainEndomorphism[102X( [3Xcm[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X (co)chain endomorphisms.[133X
@@ -25,7 +25,7 @@
   
   [1X7.1-3 IsChainMorphismOfFinitelyPresentedObjectsRep[101X
   
-  [29X[2XIsChainMorphismOfFinitelyPresentedObjectsRep[102X( [3Xc[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsChainMorphismOfFinitelyPresentedObjectsRep[102X( [3Xc[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe  [5XGAP[105X  representation  of  chain  morphisms  of finitely presented [5Xhomalg[105X
@@ -37,7 +37,7 @@
   
   [1X7.1-4 IsCochainMorphismOfFinitelyPresentedObjectsRep[101X
   
-  [29X[2XIsCochainMorphismOfFinitelyPresentedObjectsRep[102X( [3Xc[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsCochainMorphismOfFinitelyPresentedObjectsRep[102X( [3Xc[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe  [5XGAP[105X  representation  of  cochain morphisms of finitely presented [5Xhomalg[105X
@@ -52,7 +52,7 @@
   
   [1X7.2-1 HomalgChainMorphism[101X
   
-  [29X[2XHomalgChainMorphism[102X( [3Xphi[103X[, [3XC[103X][, [3XD[103X][, [3Xd[103X] ) [32X function
+  [33X[1;0Y[29X[2XHomalgChainMorphism[102X( [3Xphi[103X[, [3XC[103X][, [3XD[103X][, [3Xd[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X chain morphism[133X
   
   [33X[0;0YThe constructor creates a (co)chain morphism given a source [5Xhomalg[105X (co)chain
@@ -117,7 +117,7 @@
   
   [1X7.3-1 IsMorphism[101X
   
-  [29X[2XIsMorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsMorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if  [3Xcm[103X  is  a  well-defined  chain  morphism, i.e. independent of all
@@ -125,84 +125,84 @@
   
   [1X7.3-2 IsGeneralizedMorphismWithFullDomain[101X
   
-  [29X[2XIsGeneralizedMorphismWithFullDomain[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGeneralizedMorphismWithFullDomain[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3Xcm[103X is a generalized morphism.[133X
   
   [1X7.3-3 IsGeneralizedEpimorphism[101X
   
-  [29X[2XIsGeneralizedEpimorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGeneralizedEpimorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3Xcm[103X is a generalized epimorphism.[133X
   
   [1X7.3-4 IsGeneralizedMonomorphism[101X
   
-  [29X[2XIsGeneralizedMonomorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGeneralizedMonomorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3Xcm[103X is a generalized monomorphism.[133X
   
   [1X7.3-5 IsGeneralizedIsomorphism[101X
   
-  [29X[2XIsGeneralizedIsomorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGeneralizedIsomorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3Xcm[103X is a generalized isomorphism.[133X
   
   [1X7.3-6 IsOne[101X
   
-  [29X[2XIsOne[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsOne[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X chain morphism [3Xcm[103X is the identity chain morphism.[133X
   
   [1X7.3-7 IsMonomorphism[101X
   
-  [29X[2XIsMonomorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsMonomorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X chain morphism [3Xcm[103X is a monomorphism.[133X
   
   [1X7.3-8 IsEpimorphism[101X
   
-  [29X[2XIsEpimorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsEpimorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X chain morphism [3Xcm[103X is an epimorphism.[133X
   
   [1X7.3-9 IsSplitMonomorphism[101X
   
-  [29X[2XIsSplitMonomorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsSplitMonomorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X chain morphism [3Xcm[103X is a split monomorphism.[133X
   
   [1X7.3-10 IsSplitEpimorphism[101X
   
-  [29X[2XIsSplitEpimorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsSplitEpimorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X chain morphism [3Xcm[103X is a split epimorphism.[133X
   
   [1X7.3-11 IsIsomorphism[101X
   
-  [29X[2XIsIsomorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsIsomorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X chain morphism [3Xcm[103X is an isomorphism.[133X
   
   [1X7.3-12 IsAutomorphism[101X
   
-  [29X[2XIsAutomorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsAutomorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X chain morphism [3Xcm[103X is an automorphism.[133X
   
   [1X7.3-13 IsGradedMorphism[101X
   
-  [29X[2XIsGradedMorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGradedMorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if  the source and target complex of the [5Xhomalg[105X chain morphism [3Xcm[103X are
@@ -210,7 +210,7 @@
   
   [1X7.3-14 IsQuasiIsomorphism[101X
   
-  [29X[2XIsQuasiIsomorphism[102X( [3Xcm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsQuasiIsomorphism[102X( [3Xcm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X chain morphism [3Xcm[103X is a quasi-isomorphism.[133X
@@ -220,14 +220,14 @@
   
   [1X7.4-1 Source[101X
   
-  [29X[2XSource[102X( [3Xcm[103X ) [32X attribute
+  [33X[1;0Y[29X[2XSource[102X( [3Xcm[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YThe source of the [5Xhomalg[105X chain morphism [3Xcm[103X.[133X
   
   [1X7.4-2 Range[101X
   
-  [29X[2XRange[102X( [3Xcm[103X ) [32X attribute
+  [33X[1;0Y[29X[2XRange[102X( [3Xcm[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YThe target (range) of the [5Xhomalg[105X chain morphism [3Xcm[103X.[133X
@@ -237,7 +237,7 @@
   
   [1X7.5-1 ByASmallerPresentation[101X
   
-  [29X[2XByASmallerPresentation[102X( [3Xcm[103X ) [32X method
+  [33X[1;0Y[29X[2XByASmallerPresentation[102X( [3Xcm[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YSee [2XByASmallerPresentation[102X ([14X6.5-2[114X) on complexes.[133X

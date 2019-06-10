@@ -6,7 +6,7 @@
   
   [1X4.1-1 IsHomalgMorphism[101X
   
-  [29X[2XIsHomalgMorphism[102X( [3Xphi[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgMorphism[102X( [3Xphi[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThis  is  the  super  [5XGAP[105X-category  which  will  include  the [5XGAP[105X-categories
@@ -26,7 +26,7 @@
   
   [1X4.1-2 IsHomalgStaticMorphism[101X
   
-  [29X[2XIsHomalgStaticMorphism[102X( [3Xphi[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgStaticMorphism[102X( [3Xphi[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThis  is  the  super  [5XGAP[105X-category  which  will  include  the [5XGAP[105X-categories
@@ -41,7 +41,7 @@
   
   [1X4.1-3 IsHomalgEndomorphism[101X
   
-  [29X[2XIsHomalgEndomorphism[102X( [3Xphi[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgEndomorphism[102X( [3Xphi[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThis  is  the  super  [5XGAP[105X-category  which  will  include  the [5XGAP[105X-categories
@@ -56,7 +56,7 @@
   
   [1X4.1-4 IsMorphismOfFinitelyGeneratedObjectsRep[101X
   
-  [29X[2XIsMorphismOfFinitelyGeneratedObjectsRep[102X( [3Xphi[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsMorphismOfFinitelyGeneratedObjectsRep[102X( [3Xphi[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X representation of morphisms of finitley generated [5Xhomalg[105X objects.[133X
@@ -71,7 +71,7 @@
   
   [1X4.1-5 IsStaticMorphismOfFinitelyGeneratedObjectsRep[101X
   
-  [29X[2XIsStaticMorphismOfFinitelyGeneratedObjectsRep[102X( [3Xphi[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsStaticMorphismOfFinitelyGeneratedObjectsRep[102X( [3Xphi[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe  [5XGAP[105X  representation  of  static  morphisms of finitley generated [5Xhomalg[105X
@@ -96,7 +96,7 @@
   
   [1X4.3-1 IsMorphism[101X
   
-  [29X[2XIsMorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsMorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[10XIsMorphism[110X=[10Xtrue[110X means one of the following:[133X
@@ -118,84 +118,84 @@
   
   [1X4.3-2 IsGeneralizedMorphismWithFullDomain[101X
   
-  [29X[2XIsGeneralizedMorphismWithFullDomain[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGeneralizedMorphismWithFullDomain[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3Xphi[103X is a generalized morphism.[133X
   
   [1X4.3-3 IsGeneralizedEpimorphism[101X
   
-  [29X[2XIsGeneralizedEpimorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGeneralizedEpimorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3Xphi[103X is a generalized epimorphism.[133X
   
   [1X4.3-4 IsGeneralizedMonomorphism[101X
   
-  [29X[2XIsGeneralizedMonomorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGeneralizedMonomorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3Xphi[103X is a generalized monomorphism.[133X
   
   [1X4.3-5 IsGeneralizedIsomorphism[101X
   
-  [29X[2XIsGeneralizedIsomorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsGeneralizedIsomorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3Xphi[103X is a generalized isomorphism.[133X
   
   [1X4.3-6 IsOne[101X
   
-  [29X[2XIsOne[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsOne[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X morphism [3Xphi[103X is the identity morphism.[133X
   
   [1X4.3-7 IsIdempotent[101X
   
-  [29X[2XIsIdempotent[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsIdempotent[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X morphism [3Xphi[103X is an automorphism.[133X
   
   [1X4.3-8 IsMonomorphism[101X
   
-  [29X[2XIsMonomorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsMonomorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X morphism [3Xphi[103X is a monomorphism.[133X
   
   [1X4.3-9 IsEpimorphism[101X
   
-  [29X[2XIsEpimorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsEpimorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X morphism [3Xphi[103X is an epimorphism.[133X
   
   [1X4.3-10 IsSplitMonomorphism[101X
   
-  [29X[2XIsSplitMonomorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsSplitMonomorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X morphism [3Xphi[103X is a split monomorphism.[133X
   
   [1X4.3-11 IsSplitEpimorphism[101X
   
-  [29X[2XIsSplitEpimorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsSplitEpimorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X morphism [3Xphi[103X is a split epimorphism.[133X
   
   [1X4.3-12 IsIsomorphism[101X
   
-  [29X[2XIsIsomorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsIsomorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X morphism [3Xphi[103X is an isomorphism.[133X
   
   [1X4.3-13 IsAutomorphism[101X
   
-  [29X[2XIsAutomorphism[102X( [3Xphi[103X ) [32X property
+  [33X[1;0Y[29X[2XIsAutomorphism[102X( [3Xphi[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X morphism [3Xphi[103X is an automorphism.[133X
@@ -205,28 +205,28 @@
   
   [1X4.4-1 Source[101X
   
-  [29X[2XSource[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XSource[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X object[133X
   
   [33X[0;0YThe source of the [5Xhomalg[105X morphism [3Xphi[103X.[133X
   
   [1X4.4-2 Range[101X
   
-  [29X[2XRange[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XRange[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X object[133X
   
   [33X[0;0YThe target (range) of the [5Xhomalg[105X morphism [3Xphi[103X.[133X
   
   [1X4.4-3 CokernelEpi[101X
   
-  [29X[2XCokernelEpi[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XCokernelEpi[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X morphism[133X
   
   [33X[0;0YThe natural epimorphism from the [10XRange[110X[22X([122X[3Xphi[103X[22X)[122X onto the [10XCokernel[110X[22X([122X[3Xphi[103X[22X)[122X.[133X
   
   [1X4.4-4 CokernelNaturalGeneralizedIsomorphism[101X
   
-  [29X[2XCokernelNaturalGeneralizedIsomorphism[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XCokernelNaturalGeneralizedIsomorphism[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X morphism[133X
   
   [33X[0;0YThe   natural  generalized  isomorphism  from  the  [10XCokernel[110X[22X([122X[3Xphi[103X[22X)[122X  onto  the
@@ -234,7 +234,7 @@
   
   [1X4.4-5 KernelSubobject[101X
   
-  [29X[2XKernelSubobject[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XKernelSubobject[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X subobject[133X
   
   [33X[0;0YThis  constructor  returns  the  finitely  generated  kernel  of  the [5Xhomalg[105X
@@ -243,14 +243,14 @@
   
   [1X4.4-6 KernelEmb[101X
   
-  [29X[2XKernelEmb[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XKernelEmb[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X morphism[133X
   
   [33X[0;0YThe natural embedding of the [10XKernel[110X[22X([122X[3Xphi[103X[22X)[122X into the [10XSource[110X[22X([122X[3Xphi[103X[22X)[122X.[133X
   
   [1X4.4-7 ImageSubobject[101X
   
-  [29X[2XImageSubobject[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XImageSubobject[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X subobject[133X
   
   [33X[0;0YThis constructor returns the finitely generated image of the [5Xhomalg[105X morphism
@@ -259,21 +259,21 @@
   
   [1X4.4-8 ImageObjectEmb[101X
   
-  [29X[2XImageObjectEmb[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XImageObjectEmb[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X morphism[133X
   
   [33X[0;0YThe natural embedding of the [10XImageObject[110X[22X([122X[3Xphi[103X[22X)[122X into the [10XRange[110X[22X([122X[3Xphi[103X[22X)[122X.[133X
   
   [1X4.4-9 ImageObjectEpi[101X
   
-  [29X[2XImageObjectEpi[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XImageObjectEpi[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X morphism[133X
   
   [33X[0;0YThe natural epimorphism from the [10XSource[110X[22X([122X[3Xphi[103X[22X)[122X onto the [10XImageObject[110X[22X([122X[3Xphi[103X[22X)[122X.[133X
   
   [1X4.4-10 MorphismAid[101X
   
-  [29X[2XMorphismAid[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XMorphismAid[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X morphism[133X
   
   [33X[0;0YThe morphism aid map of a true generalized map.[133X
@@ -281,14 +281,14 @@
   
   [1X4.4-11 InverseOfGeneralizedMorphismWithFullDomain[101X
   
-  [29X[2XInverseOfGeneralizedMorphismWithFullDomain[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XInverseOfGeneralizedMorphismWithFullDomain[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X morphism[133X
   
   [33X[0;0YThe generalized inverse of the epimorphism [3Xphi[103X (cf. [Bar, Cor. 4.8])).[133X
   
   [1X4.4-12 DegreeOfMorphism[101X
   
-  [29X[2XDegreeOfMorphism[102X( [3Xphi[103X ) [32X attribute
+  [33X[1;0Y[29X[2XDegreeOfMorphism[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Yan integer[133X
   
   [33X[0;0YThe degree of the morphism [3Xphi[103X between graded objects.[133X
@@ -299,7 +299,7 @@
   
   [1X4.5-1 ByASmallerPresentation[101X
   
-  [29X[2XByASmallerPresentation[102X( [3Xphi[103X ) [32X method
+  [33X[1;0Y[29X[2XByASmallerPresentation[102X( [3Xphi[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X map[133X
   
   [33X[0;0YIt invokes [10XByASmallerPresentation[110X for [5Xhomalg[105X (static) objects.[133X

@@ -74,7 +74,7 @@
 
 <h5>6.1-1 IsHomalgComplex</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgComplex</code>( <var class="Arg">C</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgComplex</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> (co)complexes.</p>
@@ -85,7 +85,7 @@
 
 <h5>6.1-2 IsComplexOfFinitelyPresentedObjectsRep</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsComplexOfFinitelyPresentedObjectsRep</code>( <var class="Arg">C</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsComplexOfFinitelyPresentedObjectsRep</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> representation of complexes of finitley presented <strong class="pkg">homalg</strong> objects.</p>
@@ -96,7 +96,7 @@
 
 <h5>6.1-3 IsCocomplexOfFinitelyPresentedObjectsRep</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCocomplexOfFinitelyPresentedObjectsRep</code>( <var class="Arg">C</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCocomplexOfFinitelyPresentedObjectsRep</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> representation of cocomplexes of finitley presented <strong class="pkg">homalg</strong> objects.</p>
@@ -111,10 +111,10 @@
 
 <h5>6.2-1 HomalgComplex</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgComplex</code>( <var class="Arg">M</var>[, <var class="Arg">d</var>] )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgComplex</code>( <var class="Arg">phi</var>[, <var class="Arg">d</var>] )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgComplex</code>( <var class="Arg">C</var>[, <var class="Arg">d</var>] )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgComplex</code>( <var class="Arg">cm</var>[, <var class="Arg">d</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgComplex</code>( <var class="Arg">M</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgComplex</code>( <var class="Arg">phi</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgComplex</code>( <var class="Arg">C</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgComplex</code>( <var class="Arg">cm</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> complex</p>
 
 <p>The first syntax creates a complex (i.e. chain complex) with the single <strong class="pkg">homalg</strong> object <var class="Arg">M</var> at (homological) degree <var class="Arg">d</var>.</p>
@@ -157,7 +157,6 @@ true
 
 
 <div class="example"><pre>
-&lt;A homomorphism of left modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := HomalgComplex( N );</span>
 &lt;A non-zero graded homology object consisting of a single left module at degre\
 e 0&gt;
@@ -179,10 +178,10 @@ grees [ 0 .. 1 ]&gt;
 
 <h5>6.2-2 HomalgCocomplex</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgCocomplex</code>( <var class="Arg">M</var>[, <var class="Arg">d</var>] )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgCocomplex</code>( <var class="Arg">phi</var>[, <var class="Arg">d</var>] )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgCocomplex</code>( <var class="Arg">C</var>[, <var class="Arg">d</var>] )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgCocomplex</code>( <var class="Arg">cm</var>[, <var class="Arg">d</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgCocomplex</code>( <var class="Arg">M</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgCocomplex</code>( <var class="Arg">phi</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgCocomplex</code>( <var class="Arg">C</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgCocomplex</code>( <var class="Arg">cm</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> complex</p>
 
 <p>The first syntax creates a cocomplex (i.e. cochain complex) with the single <strong class="pkg">homalg</strong> object <var class="Arg">M</var> at (cohomological) degree <var class="Arg">d</var>.</p>
@@ -225,7 +224,6 @@ true
 
 
 <div class="example"><pre>
-&lt;A homomorphism of right modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := HomalgCocomplex( M );</span>
 &lt;A non-zero graded cohomology object consisting of a single right module at de\
 gree 0&gt;
@@ -252,7 +250,7 @@ gree 0&gt;
 
 <h5>6.3-1 IsSequence</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if all maps in <var class="Arg">C</var> are well-defined.</p>
@@ -261,7 +259,7 @@ gree 0&gt;
 
 <h5>6.3-2 IsComplex</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsComplex</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsComplex</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if <var class="Arg">C</var> is complex.</p>
@@ -270,7 +268,7 @@ gree 0&gt;
 
 <h5>6.3-3 IsAcyclic</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAcyclic</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAcyclic</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is acyclic, i.e. exact except at its boundaries.</p>
@@ -279,7 +277,7 @@ gree 0&gt;
 
 <h5>6.3-4 IsRightAcyclic</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightAcyclic</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightAcyclic</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is acyclic, i.e. exact except at its left boundary.</p>
@@ -288,7 +286,7 @@ gree 0&gt;
 
 <h5>6.3-5 IsLeftAcyclic</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftAcyclic</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftAcyclic</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is acyclic, i.e. exact except at its right boundary.</p>
@@ -297,7 +295,7 @@ gree 0&gt;
 
 <h5>6.3-6 IsGradedObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGradedObject</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGradedObject</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is a graded object, i.e. if all maps between the objects in <var class="Arg">C</var> vanish.</p>
@@ -306,7 +304,7 @@ gree 0&gt;
 
 <h5>6.3-7 IsExactSequence</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsExactSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsExactSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is exact.</p>
@@ -315,7 +313,7 @@ gree 0&gt;
 
 <h5>6.3-8 IsShortExactSequence</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsShortExactSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsShortExactSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is a short exact sequence.</p>
@@ -324,7 +322,7 @@ gree 0&gt;
 
 <h5>6.3-9 IsSplitShortExactSequence</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSplitShortExactSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSplitShortExactSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is a split short exact sequence.</p>
@@ -333,7 +331,7 @@ gree 0&gt;
 
 <h5>6.3-10 IsTriangle</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTriangle</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTriangle</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Set to true if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is a triangle.</p>
@@ -342,7 +340,7 @@ gree 0&gt;
 
 <h5>6.3-11 IsExactTriangle</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsExactTriangle</code>( <var class="Arg">C</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsExactTriangle</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> is an exact triangle.</p>
@@ -355,7 +353,7 @@ gree 0&gt;
 
 <h5>6.4-1 BettiTable</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BettiTable</code>( <var class="Arg">C</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BettiTable</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> diagram</p>
 
 <p>The Betti diagram of the <strong class="pkg">homalg</strong> complex <var class="Arg">C</var> of graded modules.</p>
@@ -364,7 +362,7 @@ gree 0&gt;
 
 <h5>6.4-2 FiltrationByShortExactSequence</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiltrationByShortExactSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiltrationByShortExactSequence</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> diagram</p>
 
 <p>The filtration induced by the short exact sequence <var class="Arg">C</var> on its middle object.</p>
@@ -377,8 +375,8 @@ gree 0&gt;
 
 <h5>6.5-1 Add</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">C</var>, <var class="Arg">phi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">C</var>, <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">C</var>, <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">C</var>, <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> complex</p>
 
 <p>In the first syntax the morphism <var class="Arg">phi</var> is added to the (co)chain complex <var class="Arg">C</var> (--&gt; <a href="chap6.html#X7B31FFA97FEE9B80"><span class="RefLink">6.2</span></a>) as the new <em>highest</em> degree morphism and the altered argument <var class="Arg">C</var> is returned. In case <var class="Arg">C</var> is a chain complex, the highest degree object in <var class="Arg">C</var> and the target of <var class="Arg">phi</var> must be <em>identical</em>. In case <var class="Arg">C</var> is a <em>co</em>chain complex, the highest degree object in <var class="Arg">C</var> and the source of <var class="Arg">phi</var> must be <em>identical</em>.</p>
@@ -435,7 +433,7 @@ false
 
 <h5>6.5-2 ByASmallerPresentation</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ByASmallerPresentation</code>( <var class="Arg">C</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ByASmallerPresentation</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> complex</p>
 
 <p>It invokes <code class="code">ByASmallerPresentation</code> for <strong class="pkg">homalg</strong> (static) objects.</p>

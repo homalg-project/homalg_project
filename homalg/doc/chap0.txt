@@ -6,7 +6,7 @@
       [1XA homological algebra meta-package for computable Abelian categories[101X
   
   
-                               Version 2017.10.26
+                               Version 2019.02.03
   
   
                                  September 2015
@@ -51,7 +51,7 @@
   [33X[0;0Y© 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann[133X
   
   [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2.[133X
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------

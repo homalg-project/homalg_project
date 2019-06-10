@@ -16,7 +16,7 @@
   
   [1X8.1-1 IsHomalgBicomplex[101X
   
-  [29X[2XIsHomalgBicomplex[102X( [3XBC[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgBicomplex[102X( [3XBC[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X bi(co)complexes.[133X
@@ -25,7 +25,7 @@
   
   [1X8.1-2 IsBicomplexOfFinitelyPresentedObjectsRep[101X
   
-  [29X[2XIsBicomplexOfFinitelyPresentedObjectsRep[102X( [3XBC[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsBicomplexOfFinitelyPresentedObjectsRep[102X( [3XBC[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe  [5XGAP[105X representation of bicomplexes (homological bicomplexes) of finitley
@@ -37,7 +37,7 @@
   
   [1X8.1-3 IsBicocomplexOfFinitelyPresentedObjectsRep[101X
   
-  [29X[2XIsBicocomplexOfFinitelyPresentedObjectsRep[102X( [3XBC[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsBicocomplexOfFinitelyPresentedObjectsRep[102X( [3XBC[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe  [5XGAP[105X  representation  of  bicocomplexes  (cohomological  bicomplexes) of
@@ -52,7 +52,7 @@
   
   [1X8.2-1 HomalgBicomplex[101X
   
-  [29X[2XHomalgBicomplex[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XHomalgBicomplex[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X bicomplex[133X
   
   [33X[0;0YThis  constructor creates a bicomplex (homological bicomplex) given a [5Xhomalg[105X
@@ -104,21 +104,21 @@
   
   [1X8.3-1 IsBisequence[101X
   
-  [29X[2XIsBisequence[102X( [3XBC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsBisequence[102X( [3XBC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if all maps in [3XBC[103X are well-defined.[133X
   
   [1X8.3-2 IsBicomplex[101X
   
-  [29X[2XIsBicomplex[102X( [3XBC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsBicomplex[102X( [3XBC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if [3XBC[103X is bicomplex.[133X
   
   [1X8.3-3 IsTransposedWRTTheAssociatedComplex[101X
   
-  [29X[2XIsTransposedWRTTheAssociatedComplex[102X( [3XBC[103X ) [32X property
+  [33X[1;0Y[29X[2XIsTransposedWRTTheAssociatedComplex[102X( [3XBC[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if  [3XBC[103X  is  transposed  with  respect  to  the  associated complex of
@@ -130,14 +130,14 @@
   
   [1X8.4-1 TotalComplex[101X
   
-  [29X[2XTotalComplex[102X( [3XBC[103X ) [32X attribute
+  [33X[1;0Y[29X[2XTotalComplex[102X( [3XBC[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X (co)complex[133X
   
   [33X[0;0YThe associated total complex.[133X
   
   [1X8.4-2 SpectralSequence[101X
   
-  [29X[2XSpectralSequence[102X( [3XBC[103X ) [32X attribute
+  [33X[1;0Y[29X[2XSpectralSequence[102X( [3XBC[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X (co)homological spectral sequence[133X
   
   [33X[0;0YThe associated spectral sequence.[133X
@@ -147,7 +147,7 @@
   
   [1X8.5-1 UnderlyingComplex[101X
   
-  [29X[2XUnderlyingComplex[102X( [3XBC[103X ) [32X function
+  [33X[1;0Y[29X[2XUnderlyingComplex[102X( [3XBC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YThe  (co)complex  of  (co)complexes underlying the (co)homological bicomplex
@@ -155,7 +155,7 @@
   
   [1X8.5-2 ByASmallerPresentation[101X
   
-  [29X[2XByASmallerPresentation[102X( [3XB[103X ) [32X method
+  [33X[1;0Y[29X[2XByASmallerPresentation[102X( [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X bicomplex[133X
   
   [33X[0;0YSee [2XByASmallerPresentation[102X ([14X6.5-2[114X) on complexes.[133X
