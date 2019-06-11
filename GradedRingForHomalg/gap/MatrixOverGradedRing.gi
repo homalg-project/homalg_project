@@ -713,6 +713,22 @@ InstallMethod( IsMatrixOverGradedRingWithHomogeneousEntries,
     
 end );
 
+##
+InstallMethod( AffineDimension,
+               [ IsMatrixOverGradedRing ],
+               
+  function( M )
+    
+    if IsZero( M ) then
+        M := HomalgZeroMatrix( NrRows( M ), NrColumns( M ), UnderlyingNonGradedRing( M ) );
+    else
+        M := Eval( M );
+    fi;
+    
+    return AffineDimension( M );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
