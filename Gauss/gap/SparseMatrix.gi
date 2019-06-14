@@ -80,16 +80,30 @@ InstallGlobalFunction( SparseMatrix,
         ring := arg[ nargs ];
         nargs := nargs - 1;
     fi;
+
+    if nargs >= 3 then
+        nrows := arg[1];
+        ncols := arg[2];
+        indices := arg[3];
+
+        if not IsList(indices) or Length(indices) <> nrows then
+            Error("<indices> must be a list of length <nrows>");
+        fi;
+
+        if not ForAll(indices, l -> IsSet(l) and IsPositionsList(l)) then
+            Error("<indices> must consist of strictly ascending lists of positive integers");
+        fi;
+    fi;
     
     if nargs = 3 then
-        return Objectify( TheTypeSparseMatrixGF2, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], ring := GF(2) ) );
+        return Objectify( TheTypeSparseMatrixGF2, rec( nrows := nrows, ncols := ncols, indices := indices, ring := GF(2) ) );
     elif nargs = 4 then
         if not IsBound( ring ) then
             ring := FindRing( arg[4] );
         fi;
-        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], ring := ring ) );
+        return Objectify( TheTypeSparseMatrix, rec( nrows := nrows, ncols := ncols, indices := indices, entries := arg[4], ring := ring ) );
     elif nargs = 5 then
-        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], ring := arg[5] ) );
+        return Objectify( TheTypeSparseMatrix, rec( nrows := nrows, ncols := ncols, indices := indices, entries := arg[4], ring := arg[5] ) );
     fi;
     
     
