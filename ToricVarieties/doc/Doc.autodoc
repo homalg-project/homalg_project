@@ -32,6 +32,9 @@ Sebastian Gutsche
 @Subsection Convenient construction of toric varieties
 @InsertChunk ConvenientConstructors
 
+@Subsection Blowups of toric varieties by star subdivisions of fans
+@InsertChunk Blowups
+
 @Chapter Toric subvarieties
 
 @Chapter Affine toric varieties
