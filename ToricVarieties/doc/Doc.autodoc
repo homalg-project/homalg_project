@@ -32,6 +32,9 @@ Sebastian Gutsche
 @Subsection Convenient construction of toric varieties
 @InsertChunk ConvenientConstructors
 
+@Subsection Toric varieties from gradings
+@InsertChunk ToricVarietiesFromGrading
+
 @Chapter Toric subvarieties
 
 @Chapter Affine toric varieties

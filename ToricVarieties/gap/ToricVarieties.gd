@@ -449,3 +449,22 @@ DeclareOperation( "ToricVariety",
 #! @Arguments rays, cones, degree_list, var_list
 DeclareOperation( "ToricVariety",
                   [ IsList, IsList, IsList, IsList ] );
+
+DeclareOperation( "DeriveToricVarietiesFromGrading",
+                  [ IsList, IsBool ] );
+
+#! @Description
+#! Given a $\mathbb{Z}^n$-grading of a polynomial ring, this method computes all toric varieties, which are
+#! normal and have no-torus factor and whose Cox ring obeys the given $\mathbb{Z}^n$-grading.
+#! @Returns a list of toric varieties
+#! @Arguments a list of lists of integers
+DeclareOperation( "ToricVarietiesFromGrading",
+                  [ IsList ] );
+
+#! @Description
+#! Given a $\mathbb{Z}^n$-grading of a polynomial ring, this method computes a toric variety, which is
+#! normal and has no-torus factor and whose Cox ring obeys the given $\mathbb{Z}^n$-grading.
+#! @Returns a toric variety
+#! @Arguments a list of lists of integers
+DeclareOperation( "ToricVarietyFromGrading",
+                  [ IsList ] );
