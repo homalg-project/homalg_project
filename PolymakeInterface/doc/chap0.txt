@@ -7,10 +7,10 @@
                                    packages [101X
   
   
-                                   2019.03.26
+                                   2019.06.01
   
   
-                                 26 March 2019
+                                  1 June 2019
   
   
                                 Thomas Baechler
@@ -31,12 +31,12 @@
   
   
   Sebastian Gutsche
-      Email:    [7Xmailto:sebastian.gutsche@rwth-aachen.de[107X
-      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/[107X
-      Address:  [33X[0;14YSebastian Gutsche[133X
-                [33X[0;14YLehrstuhl B fuer Mathematik, RWTH Aachen[133X
-                [33X[0;14YTemplergraben 64[133X
-                [33X[0;14Y52062 Aachen[133X
+      Email:    [7Xmailto:gutsche@mathematik.uni-siegen.de[107X
+      Homepage: [7Xhttps://sebasguts.github.io[107X
+      Address:  [33X[0;14YDepartment Mathematik[133X
+                [33X[0;14YUniversität Siegen[133X
+                [33X[0;14YWalter-Flex-Straße 3[133X
+                [33X[0;14Y57072 Siegen[133X
                 [33X[0;14YGermany[133X
   
   

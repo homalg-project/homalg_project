@@ -6,7 +6,7 @@ PackageName := "PolymakeInterface",
 Subtitle := "A package to provide algorithms for fans and cones of polymake to other packages",
 
 Version :=  Maximum( [
-  "2019.03.26", ## Sebas' version
+  "2019.06.01", ## Sebas' version
 ## this line prevents merge conflicts
 ] ),
 
@@ -33,26 +33,26 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen"
   ),
-rec(
-    LastName      := "Gutsche",
-    FirstNames    := "Sebastian",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "sebastian.gutsche@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
-    PostalAddress := Concatenation( [
-                       "Sebastian Gutsche\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+  rec(
+    FirstNames := "Sebastian",
+    LastName := "Gutsche",
+    IsAuthor := true,
+    IsMaintainer := true,
+    WWWHome := "https://sebasguts.github.io",
+    Email := "gutsche@mathematik.uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Department Mathematik\n",
+               "Universität Siegen\n",
+               "Walter-Flex-Straße 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/PolymakeInterface/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/PolymakeInterface/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/PolymakeInterface-", ~.Version, "/PolymakeInterface-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
