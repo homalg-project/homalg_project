@@ -7,7 +7,7 @@ Subtitle := "A package to handle toric varieties",
 Version :=  Maximum( [
   "2018.10.12", ## Sebas' version
 ## this line prevents merge conflicts
-  "2015.03.31", ## Mohamed's version
+  "2019.06.02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2019.04.02", ## Martin's version
 ## this line prevents merge conflicts

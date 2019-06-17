@@ -34,3 +34,4 @@ doc/manual.lab
 *.DS_Store
 doc/_AutoDocMainFile.xml
 doc/_Chapter_*.xml
+doc/_Chunks.xml
