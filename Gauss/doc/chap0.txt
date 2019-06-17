@@ -6,7 +6,7 @@
                       [1XExtended Gauss Functionality for [5XGAP[105X[101X
   
   
-                               Version 2018.09.08
+                               Version 2019.06.01
   
   
                                    March 2013
@@ -38,7 +38,7 @@
   [33X[0;0Y© 2007-2013 by Simon Goertzen[133X
   
   [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2.[133X
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
