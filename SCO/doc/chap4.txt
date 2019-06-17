@@ -6,7 +6,7 @@
   
   [1X4.1-1 OrbifoldTriangulation[101X
   
-  [29X[2XOrbifoldTriangulation[102X( [3XM[103X[, [3XI[103X, [3Xmu_data[103X, [3Xinfo[103X] ) [32X function
+  [33X[1;0Y[29X[2XOrbifoldTriangulation[102X( [3XM[103X[, [3XI[103X, [3Xmu_data[103X, [3Xinfo[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YOrbifoldTriangulation[133X
   
   [33X[0;0YThe  constructor  for  OrbifoldTriangulations.  Needs  the list [3XM[103X of maximal
@@ -34,7 +34,7 @@
   
   [1X4.1-2 Vertices[101X
   
-  [29X[2XVertices[102X( [3Xot[103X ) [32X method
+  [33X[1;0Y[29X[2XVertices[102X( [3Xot[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YList [3XV[103X[133X
   
   [33X[0;0YThis returns the list of vertices [3XV[103X of the orbifold triangulation [3Xot[103X. Should
@@ -42,7 +42,7 @@
   
   [1X4.1-3 Simplices[101X
   
-  [29X[2XSimplices[102X( [3Xot[103X ) [32X method
+  [33X[1;0Y[29X[2XSimplices[102X( [3Xot[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YList [3XM[103X[133X
   
   [33X[0;0YThis  returns  the list of maximal simplices [3XM[103X of the orbifold triangulation
@@ -50,7 +50,7 @@
   
   [1X4.1-4 Isotropy[101X
   
-  [29X[2XIsotropy[102X( [3Xot[103X ) [32X method
+  [33X[1;0Y[29X[2XIsotropy[102X( [3Xot[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YRecord [3XI[103X[133X
   
   [33X[0;0YThis  returns the isotropy record [3XI[103X of the orbifold triangulation [3Xot[103X. Should
@@ -58,7 +58,7 @@
   
   [1X4.1-5 Mu[101X
   
-  [29X[2XMu[102X( [3Xot[103X ) [32X method
+  [33X[1;0Y[29X[2XMu[102X( [3Xot[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YFunction [3Xmu[103X[133X
   
   [33X[0;0YThis  returns  the  function  [3Xmu[103X of the orbifold triangulation [3Xot[103X. Should be
@@ -66,7 +66,7 @@
   
   [1X4.1-6 MuData[101X
   
-  [29X[2XMuData[102X( [3Xot[103X ) [32X method
+  [33X[1;0Y[29X[2XMuData[102X( [3Xot[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YList [3Xmu_data[103X[133X
   
   [33X[0;0YThis  returns  the list [3Xmu_data[103X that encodes the function mu of the orbifold
@@ -74,7 +74,7 @@
   
   [1X4.1-7 InfoString[101X
   
-  [29X[2XInfoString[102X( [3Xot[103X ) [32X method
+  [33X[1;0Y[29X[2XInfoString[102X( [3Xot[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YString [3Xinfo[103X[133X
   
   [33X[0;0YThis  return  the  string  [3Xinfo[103X  of the orbifold triangulation [3Xot[103X. Should be
@@ -85,7 +85,7 @@
   
   [1X4.2-1 SimplicialSet[101X
   
-  [29X[2XSimplicialSet[102X( [3Xot[103X ) [32X method
+  [33X[1;0Y[29X[2XSimplicialSet[102X( [3Xot[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YSimplicialSet[133X
   
   [33X[0;0YThe  constructor  for simplicial sets based on an orbifold triangulation [3Xot[103X.
@@ -103,7 +103,7 @@
   
   [1X4.2-2 SimplicialSet[101X
   
-  [29X[2XSimplicialSet[102X( [3XS[103X, [3Xi[103X ) [32X method
+  [33X[1;0Y[29X[2XSimplicialSet[102X( [3XS[103X, [3Xi[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YList [3XS[103X_[3Xi[103X[133X
   
   [33X[0;0YThis  returns  the components of dimension [3Xi[103X of the simplicial set [3XS[103X. Should
@@ -129,7 +129,7 @@
   
   [1X4.2-3 ComputeNextDimension[101X
   
-  [29X[2XComputeNextDimension[102X( [3XS[103X ) [32X method
+  [33X[1;0Y[29X[2XComputeNextDimension[102X( [3XS[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Y[3XS[103X[133X
   
   [33X[0;0YThis computes the component of the next dimension of the simplicial set [3XS[103X. [3XS[103X
@@ -146,7 +146,7 @@
   
   [1X4.2-4 Extend[101X
   
-  [29X[2XExtend[102X( [3XS[103X, [3Xi[103X ) [32X method
+  [33X[1;0Y[29X[2XExtend[102X( [3XS[103X, [3Xi[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Y[3XS[103X[133X
   
   [33X[0;0YThis computes the components of the simplicial set [3XS[103X up to dimension [3Xi[103X. [3XS[103X is
@@ -167,7 +167,7 @@
   
   [1X4.3-1 BoundaryOperator[101X
   
-  [29X[2XBoundaryOperator[102X( [3Xi[103X, [3XL[103X, [3Xmu[103X ) [32X function
+  [33X[1;0Y[29X[2XBoundaryOperator[102X( [3Xi[103X, [3XL[103X, [3Xmu[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YList B[133X
   
   [33X[0;0YThis  returns  the  [3Xi[103Xth  boundary  of  [3XL[103X,  which  has  to be an element of a
@@ -177,7 +177,7 @@
   
   [1X4.3-2 CreateBoundaryMatrices[101X
   
-  [29X[2XCreateBoundaryMatrices[102X( [3XS[103X, [3Xd[103X, [3XR[103X ) [32X method
+  [33X[1;0Y[29X[2XCreateBoundaryMatrices[102X( [3XS[103X, [3Xd[103X, [3XR[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YList [3XM[103X[133X
   
   [33X[0;0YThis  returns  the  list  [3XM[103X  of homalg matrices over the homalg ring [3XR[103X up to
@@ -196,7 +196,7 @@
   
   [1X4.3-3 Homology[101X
   
-  [29X[2XHomology[102X( [3XM[103X[, [3XR[103X] ) [32X method
+  [33X[1;0Y[29X[2XHomology[102X( [3XM[103X[, [3XR[103X] ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YThis  returns  the  homology complex of a list [3XM[103X of [5Xhomalg[105X matrices over the
@@ -220,7 +220,7 @@
   
   [1X4.3-4 CreateCoboundaryMatrices[101X
   
-  [29X[2XCreateCoboundaryMatrices[102X( [3XS[103X[, [3Xd[103X], [3XR[103X ) [32X method
+  [33X[1;0Y[29X[2XCreateCoboundaryMatrices[102X( [3XS[103X[, [3Xd[103X], [3XR[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10YList [3XM[103X[133X
   
   [33X[0;0YThis  returns  the  list  [3XM[103X  of homalg matrices over the homalg ring [3XR[103X up to
@@ -239,7 +239,7 @@
   
   [1X4.3-5 Cohomology[101X
   
-  [29X[2XCohomology[102X( [3XM[103X[, [3XR[103X] ) [32X method
+  [33X[1;0Y[29X[2XCohomology[102X( [3XM[103X[, [3XR[103X] ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
   
   [33X[0;0YThis  returns the cohomology complex of a list [3XM[103X of [5Xhomalg[105X matrices over the
@@ -264,7 +264,7 @@
   
   [1X4.3-6 SCO_Examples[101X
   
-  [29X[2XSCO_Examples[102X(  ) [32X function
+  [33X[1;0Y[29X[2XSCO_Examples[102X(  ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis  is just an easy way to call the script [11Xexamples.g[111X, which is located in

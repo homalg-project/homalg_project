@@ -69,7 +69,7 @@ triangulations</span></h4>
 
 <h5>4.1-1 OrbifoldTriangulation</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbifoldTriangulation</code>( <var class="Arg">M</var>[, <var class="Arg">I</var>, <var class="Arg">mu_data</var>, <var class="Arg">info</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbifoldTriangulation</code>( <var class="Arg">M</var>[, <var class="Arg">I</var>, <var class="Arg">mu_data</var>, <var class="Arg">info</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: OrbifoldTriangulation</p>
 
 <p>The constructor for OrbifoldTriangulations. Needs the list <var class="Arg">M</var> of maximal simplices, the Isotropy at certain vertices as a record <var class="Arg">I</var>, and the list <var class="Arg">mu_data</var> that encodes the function mu. If only one argument is given, <var class="Arg">I</var> and <var class="Arg">mu_data</var> are supposed to be empty. In case of two arguments, <var class="Arg">mu_data</var> is supposed to be empty. If the last argument <var class="Arg">info</var> is given as a string, it is stored in the info component of the orbifold triangulation and does not count towards the total number of arguments.</p>
@@ -94,7 +94,7 @@ th Isotropy on 1 vertex and nontrivial mu-maps&gt;
 
 <h5>4.1-2 Vertices</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Vertices</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Vertices</code>( <var class="Arg">ot</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: List <var class="Arg">V</var></p>
 
 <p>This returns the list of vertices <var class="Arg">V</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.vertices</code>.</p>
@@ -103,7 +103,7 @@ th Isotropy on 1 vertex and nontrivial mu-maps&gt;
 
 <h5>4.1-3 Simplices</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Simplices</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Simplices</code>( <var class="Arg">ot</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: List <var class="Arg">M</var></p>
 
 <p>This returns the list of maximal simplices <var class="Arg">M</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.max_simplices</code>.</p>
@@ -112,7 +112,7 @@ th Isotropy on 1 vertex and nontrivial mu-maps&gt;
 
 <h5>4.1-4 Isotropy</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Isotropy</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Isotropy</code>( <var class="Arg">ot</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: Record <var class="Arg">I</var></p>
 
 <p>This returns the isotropy record <var class="Arg">I</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.isotropy</code>.</p>
@@ -121,7 +121,7 @@ th Isotropy on 1 vertex and nontrivial mu-maps&gt;
 
 <h5>4.1-5 Mu</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Mu</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Mu</code>( <var class="Arg">ot</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: Function <var class="Arg">mu</var></p>
 
 <p>This returns the function <var class="Arg">mu</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.mu</code>.</p>
@@ -130,7 +130,7 @@ th Isotropy on 1 vertex and nontrivial mu-maps&gt;
 
 <h5>4.1-6 MuData</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MuData</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MuData</code>( <var class="Arg">ot</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: List <var class="Arg">mu_data</var></p>
 
 <p>This returns the list <var class="Arg">mu_data</var> that encodes the function mu of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.mu_data</code>.</p>
@@ -139,7 +139,7 @@ th Isotropy on 1 vertex and nontrivial mu-maps&gt;
 
 <h5>4.1-7 InfoString</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoString</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoString</code>( <var class="Arg">ot</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: String <var class="Arg">info</var></p>
 
 <p>This return the string <var class="Arg">info</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.info</code>.</p>
@@ -152,7 +152,7 @@ th Isotropy on 1 vertex and nontrivial mu-maps&gt;
 
 <h5>4.2-1 SimplicialSet</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplicialSet</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplicialSet</code>( <var class="Arg">ot</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: SimplicialSet</p>
 
 <p>The constructor for simplicial sets based on an orbifold triangulation <var class="Arg">ot</var>. This just sets up the object without any computations. These can be triggered later, either explicitly or by <code class="func">SimplicialSet</code> (<a href="chap4.html#X7DC060057E853275"><span class="RefLink">4.2-2</span></a>).</p>
@@ -171,7 +171,7 @@ imension 0 with Length vector [ 4 ]&gt;
 
 <h5>4.2-2 SimplicialSet</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplicialSet</code>( <var class="Arg">S</var>, <var class="Arg">i</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplicialSet</code>( <var class="Arg">S</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: List <var class="Arg">S</var>_<var class="Arg">i</var></p>
 
 <p>This returns the components of dimension <var class="Arg">i</var> of the simplicial set <var class="Arg">S</var>. Should be used to access existing data instead of using <code class="code">S!.simplicial_set[ i + 1 ]</code>, as it has the additional side effect of computing <var class="Arg">S</var> up to dimension <var class="Arg">i</var>, thus always returning the desired result.</p>
@@ -197,7 +197,7 @@ imension 1 with Length vector [ 4, 12 ]&gt;
 
 <h5>4.2-3 ComputeNextDimension</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComputeNextDimension</code>( <var class="Arg">S</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComputeNextDimension</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: <var class="Arg">S</var></p>
 
 <p>This computes the component of the next dimension of the simplicial set <var class="Arg">S</var>. <var class="Arg">S</var> is extended as a side effect.</p>
@@ -216,7 +216,7 @@ imension 2 with Length vector [ 4, 12, 22 ]&gt;
 
 <h5>4.2-4 Extend</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Extend</code>( <var class="Arg">S</var>, <var class="Arg">i</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Extend</code>( <var class="Arg">S</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: <var class="Arg">S</var></p>
 
 <p>This computes the components of the simplicial set <var class="Arg">S</var> up to dimension <var class="Arg">i</var>. <var class="Arg">S</var> is extended as a side effect. This method is equivalent to calling <code class="func">ComputeNextDimension</code> (<a href="chap4.html#X80091ADD7F0D80F2"><span class="RefLink">4.2-3</span></a>) the appropriate number of times.</p>
@@ -240,7 +240,7 @@ computation</span></h4>
 
 <h5>4.3-1 BoundaryOperator</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BoundaryOperator</code>( <var class="Arg">i</var>, <var class="Arg">L</var>, <var class="Arg">mu</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BoundaryOperator</code>( <var class="Arg">i</var>, <var class="Arg">L</var>, <var class="Arg">mu</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: List B</p>
 
 <p>This returns the <var class="Arg">i</var>th boundary of <var class="Arg">L</var>, which has to be an element of a simplicial set. <var class="Arg">mu</var> is the function <span class="SimpleMath">μ</span> that has to be taken into account when computing orbifold boundaries. This function is used for matrix creation, there should not be much reason for calling it independently.</p>
@@ -249,7 +249,7 @@ computation</span></h4>
 
 <h5>4.3-2 CreateBoundaryMatrices</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateBoundaryMatrices</code>( <var class="Arg">S</var>, <var class="Arg">d</var>, <var class="Arg">R</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateBoundaryMatrices</code>( <var class="Arg">S</var>, <var class="Arg">d</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: List <var class="Arg">M</var></p>
 
 <p>This returns the list <var class="Arg">M</var> of homalg matrices over the homalg ring <var class="Arg">R</var> up to dimension <var class="Arg">d</var>, corresponding to the boundary matrices induced by the simplicial set <var class="Arg">S</var>. If <var class="Arg">d</var> is not given, the current dimension of <var class="Arg">S</var> is used.</p>
@@ -269,7 +269,7 @@ imension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]&gt;
 
 <h5>4.3-3 Homology</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Homology</code>( <var class="Arg">M</var>[, <var class="Arg">R</var>] )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Homology</code>( <var class="Arg">M</var>[, <var class="Arg">R</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> complex</p>
 
 <p>This returns the homology complex of a list <var class="Arg">M</var> of <strong class="pkg">homalg</strong> matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
@@ -295,7 +295,7 @@ Z
 
 <h5>4.3-4 CreateCoboundaryMatrices</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateCoboundaryMatrices</code>( <var class="Arg">S</var>[, <var class="Arg">d</var>], <var class="Arg">R</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateCoboundaryMatrices</code>( <var class="Arg">S</var>[, <var class="Arg">d</var>], <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: List <var class="Arg">M</var></p>
 
 <p>This returns the list <var class="Arg">M</var> of homalg matrices over the homalg ring <var class="Arg">R</var> up to dimension <var class="Arg">d</var>, corresponding to the coboundary matrices induced by the simplicial set <var class="Arg">S</var>. If <var class="Arg">d</var> is not given, the current dimension of <var class="Arg">S</var> is used.</p>
@@ -315,7 +315,7 @@ imension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]&gt;
 
 <h5>4.3-5 Cohomology</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cohomology</code>( <var class="Arg">M</var>[, <var class="Arg">R</var>] )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cohomology</code>( <var class="Arg">M</var>[, <var class="Arg">R</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> complex</p>
 
 <p>This returns the cohomology complex of a list <var class="Arg">M</var> of <strong class="pkg">homalg</strong> matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
@@ -342,7 +342,7 @@ Z
 
 <h5>4.3-6 SCO_Examples</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCO_Examples</code>(  )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCO_Examples</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>This is just an easy way to call the script <code class="file">examples.g</code>, which is located in <code class="file">gap/pkg/SCO/examples/</code>.</p>
