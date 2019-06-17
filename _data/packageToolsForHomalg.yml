@@ -1,21 +1,21 @@
 name: ToolsForHomalg
-version: 2019.02.17
-date: 17/02/2019
+version: 2019.06.01
+date: 01/06/2019
 description: Special methods and knowledge propagation tools
 
 authors:
     - name: Mohamed Barakat
-      url: http://www.mathematik.uni-kl.de/~barakat/
+      url: https://mohamed-barakat.github.io
     - name: Sebastian Gutsche
-      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+      url: https://sebasguts.github.io
     - name: Markus Lange-Hegermann
       url: http://wwwb.math.rwth-aachen.de/~markus/
 
 maintainers:
     - name: Mohamed Barakat
-      url: http://www.mathematik.uni-kl.de/~barakat/
+      url: https://mohamed-barakat.github.io
     - name: Sebastian Gutsche
-      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+      url: https://sebasguts.github.io
     - name: Markus Lange-Hegermann
       url: http://wwwb.math.rwth-aachen.de/~markus/
 
@@ -32,15 +32,15 @@ needed-pkgs:
       version: ">=4.5.1"
       url: "https://gap-packages.github.io/io"
 
-www: http://homalg-project.github.io/homalg_project/ToolsForHomalg/
-readme: http://homalg-project.github.io/homalg_project/ToolsForHomalg/README
-packageinfo: http://homalg-project.github.io/homalg_project/ToolsForHomalg/PackageInfo.g
+www: https://homalg-project.github.io/homalg_project/ToolsForHomalg/
+readme: https://homalg-project.github.io/homalg_project/ToolsForHomalg/README
+packageinfo: https://homalg-project.github.io/homalg_project/ToolsForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2019.02.17/ToolsForHomalg-2019.02.17.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2019.06.01/ToolsForHomalg-2019.06.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2019.02.17/ToolsForHomalg-2019.02.17.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2019.06.01/ToolsForHomalg-2019.06.01.zip
 
 abstract: The <span class="pkgname">ToolsForHomalg</span> package provides GAP extensions for the homalg project
 
