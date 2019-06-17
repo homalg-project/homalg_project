@@ -6,7 +6,7 @@
               [1XLocalize Commutative [5Xhomalg[105X Rings at Maximal Ideals[101X
   
   
-                               Version 2018.02.04
+                               Version 2019.06.01
   
   
                                  September 2015
@@ -29,11 +29,11 @@
   
   
   Mohamed Barakat
-      Email:    [7Xmailto:barakat@mathematik.uni-kl.de[107X
-      Homepage: [7Xhttp://www.mathematik.uni-kl.de/~barakat/[107X
+      Email:    [7Xmailto:mohamed.barakat@uni-siegen.de[107X
+      Homepage: [7Xhttps://mohamed-barakat.github.io[107X
       Address:  [33X[0;14YDepartment of Mathematics,[133X
-                [33X[0;14YUniversity of Kaiserslautern,[133X
-                [33X[0;14Y67653 Kaiserslautern,[133X
+                [33X[0;14YUniversity of Siegen,[133X
+                [33X[0;14Y57072 Siegen,[133X
                 [33X[0;14YGermany[133X
   
   
@@ -59,7 +59,7 @@
   [33X[0;0Y© 2009-2015 by Mohamed Barakat and Markus Lange-Hegermann[133X
   
   [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2.[133X
+  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------

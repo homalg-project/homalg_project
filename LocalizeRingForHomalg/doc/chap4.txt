@@ -31,7 +31,7 @@
   
   [1X4.1-1 IsHomalgLocalRingRep[101X
   
-  [29X[2XIsHomalgLocalRingRep[102X( [3XR[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsHomalgLocalRingRep[102X( [3XR[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YThe representation of [5Xhomalg[105X local rings.[133X
@@ -48,7 +48,7 @@
   
   [1X4.1-2 IsHomalgLocalRingElementRep[101X
   
-  [29X[2XIsHomalgLocalRingElementRep[102X( [3Xr[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsHomalgLocalRingElementRep[102X( [3Xr[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YThe representation of elements of [5Xhomalg[105X local rings.[133X
@@ -63,7 +63,7 @@
   
   [1X4.1-3 IsHomalgLocalMatrixRep[101X
   
-  [29X[2XIsHomalgLocalMatrixRep[102X( [3XA[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsHomalgLocalMatrixRep[102X( [3XA[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YThe representation of [5Xhomalg[105X matrices with entries in a [5Xhomalg[105X local ring.[133X
@@ -81,7 +81,7 @@
   
   [1X4.2-1 GeneratorsOfMaximalLeftIdeal[101X
   
-  [29X[2XGeneratorsOfMaximalLeftIdeal[102X( [3XR[103X ) [32X attribute
+  [33X[1;0Y[29X[2XGeneratorsOfMaximalLeftIdeal[102X( [3XR[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YReturns  the  generators  of  the maximal ideal, at which R was created. The
@@ -89,7 +89,7 @@
   
   [1X4.2-2 GeneratorsOfMaximalRightIdeal[101X
   
-  [29X[2XGeneratorsOfMaximalRightIdeal[102X( [3XR[103X ) [32X attribute
+  [33X[1;0Y[29X[2XGeneratorsOfMaximalRightIdeal[102X( [3XR[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YReturns  the  generators  of  the maximal ideal, at which R was created. The
@@ -100,28 +100,28 @@
   
   [1X4.3-1 AssociatedGlobalRing[101X
   
-  [29X[2XAssociatedGlobalRing[102X( [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XAssociatedGlobalRing[102X( [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring[133X
   
   [33X[0;0YThe global [5Xhomalg[105X ring, from which the local ring [3XR[103X was created.[133X
   
   [1X4.3-2 AssociatedGlobalRing[101X
   
-  [29X[2XAssociatedGlobalRing[102X( [3Xr[103X ) [32X operation
+  [33X[1;0Y[29X[2XAssociatedGlobalRing[102X( [3Xr[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring[133X
   
   [33X[0;0YThe global [5Xhomalg[105X ring, from which the local ring element [3Xr[103X was created.[133X
   
   [1X4.3-3 AssociatedGlobalRing[101X
   
-  [29X[2XAssociatedGlobalRing[102X( [3Xmat[103X ) [32X operation
+  [33X[1;0Y[29X[2XAssociatedGlobalRing[102X( [3Xmat[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring[133X
   
   [33X[0;0YThe global [5Xhomalg[105X ring, from which the local matrix [3Xmat[103X was created.[133X
   
   [1X4.3-4 Numerator[101X
   
-  [29X[2XNumerator[102X( [3Xr[103X ) [32X operation
+  [33X[1;0Y[29X[2XNumerator[102X( [3Xr[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring element[133X
   
   [33X[0;0YThe  numerator  from  a local ring element [3Xr[103X, which is a [5Xhomalg[105X ring element
@@ -129,7 +129,7 @@
   
   [1X4.3-5 Numerator[101X
   
-  [29X[2XNumerator[102X( [3Xmat[103X ) [32X operation
+  [33X[1;0Y[29X[2XNumerator[102X( [3Xmat[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X matrix[133X
   
   [33X[0;0YThe  numerator  from  a  local matrix [3Xmat[103X, which is a [5Xhomalg[105X matrix from the
@@ -137,7 +137,7 @@
   
   [1X4.3-6 Denominator[101X
   
-  [29X[2XDenominator[102X( [3Xr[103X ) [32X operation
+  [33X[1;0Y[29X[2XDenominator[102X( [3Xr[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring element[133X
   
   [33X[0;0YThe  denominator from a local ring element [3Xr[103X, which is a [5Xhomalg[105X ring element
@@ -145,7 +145,7 @@
   
   [1X4.3-7 Denominator[101X
   
-  [29X[2XDenominator[102X( [3Xmat[103X ) [32X operation
+  [33X[1;0Y[29X[2XDenominator[102X( [3Xmat[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring element[133X
   
   [33X[0;0YThe  denominator  from a local matrix [3Xmat[103X, which is a [5Xhomalg[105X matrix from the
@@ -153,28 +153,28 @@
   
   [1X4.3-8 Name[101X
   
-  [29X[2XName[102X( [3Xr[103X ) [32X operation
+  [33X[1;0Y[29X[2XName[102X( [3Xr[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya string[133X
   
   [33X[0;0YThe name of the local ring element [3Xr[103X.[133X
   
   [1X4.3-9 SetMatElm[101X
   
-  [29X[2XSetMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XSetMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation[133X
   
   [33X[0;0YChanges  the  entry  ([3Xi,j[103X) of the local matrix [3Xmat[103X to the value [3Xr[103X. Here [3XR[103X is
   the (local) [5Xhomalg[105X ring involved in these computations.[133X
   
   [1X4.3-10 AddToMatElm[101X
   
-  [29X[2XAddToMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XAddToMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation[133X
   
   [33X[0;0YChanges the entry ([3Xi,j[103X) of the local matrix [3Xmat[103X by adding the value [3Xr[103X to it.
   Here [3XR[103X is the (local) [5Xhomalg[105X ring involved in these computations.[133X
   
   [1X4.3-11 MatElmAsString[101X
   
-  [29X[2XMatElmAsString[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XMatElmAsString[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya string[133X
   
   [33X[0;0YReturns  the  entry ([3Xi,j[103X) of the local matrix [3Xmat[103X as a string. Here [3XR[103X is the
@@ -182,7 +182,7 @@
   
   [1X4.3-12 MatElm[101X
   
-  [29X[2XMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya local ring element[133X
   
   [33X[0;0YReturns  the  entry  ([3Xi,j[103X)  of  the  local matrix [3Xmat[103X. Here [3XR[103X is the (local)
@@ -190,7 +190,7 @@
   
   [1X4.3-13 Cancel[101X
   
-  [29X[2XCancel[102X( [3Xa[103X, [3Xb[103X ) [32X operation
+  [33X[1;0Y[29X[2XCancel[102X( [3Xa[103X, [3Xb[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ytwo ring elements[133X
   
   [33X[0;0YFor  [22X[3Xa[103X=a'*c[122X  and  [22X[3Xb[103X=b'*c[122X  return  [22Xa'[122X  and [22Xb'[122X. The exact form of [22Xc[122X depends on
@@ -198,7 +198,7 @@
   
   [1X4.3-14 LocalizeAt[101X
   
-  [29X[2XLocalizeAt[102X( [3XR[103X, [3Xl[103X ) [32X operation
+  [33X[1;0Y[29X[2XLocalizeAt[102X( [3XR[103X, [3Xl[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya local ring[133X
   
   [33X[0;0YIf  [3Xl[103X is a list of elements of the global ring [3XR[103X generating a maximal ideal,
@@ -207,7 +207,7 @@
   
   [1X4.3-15 LocalizeAtZero[101X
   
-  [29X[2XLocalizeAtZero[102X( [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XLocalizeAtZero[102X( [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya local ring[133X
   
   [33X[0;0YThis method creates the corresponding localization of [3XR[103X at the complement of
@@ -215,7 +215,7 @@
   
   [1X4.3-16 LocalizePolynomialRingAtZeroWithMora[101X
   
-  [29X[2XLocalizePolynomialRingAtZeroWithMora[102X( [3XR[103X ) [32X operation
+  [33X[1;0Y[29X[2XLocalizePolynomialRingAtZeroWithMora[102X( [3XR[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya local ring[133X
   
   [33X[0;0YThis  method  localizes  the  ring  [3XR[103X  at  zero  and  this localized ring is
@@ -224,8 +224,8 @@
   
   [1X4.3-17 HomalgLocalRingElement[101X
   
-  [29X[2XHomalgLocalRingElement[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function
-  [29X[2XHomalgLocalRingElement[102X( [3Xnumer[103X, [3XR[103X ) [32X function
+  [33X[1;0Y[29X[2XHomalgLocalRingElement[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgLocalRingElement[102X( [3Xnumer[103X, [3XR[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya local ring element[133X
   
   [33X[0;0YCreates the local ring element [22X[3Xnumer[103X/[3Xdenom[103X[122X or in the second case [22X[3Xnumer[103X/1[122X for
@@ -234,8 +234,8 @@
   
   [1X4.3-18 HomalgLocalMatrix[101X
   
-  [29X[2XHomalgLocalMatrix[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function
-  [29X[2XHomalgLocalMatrix[102X( [3Xnumer[103X, [3XR[103X ) [32X function
+  [33X[1;0Y[29X[2XHomalgLocalMatrix[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgLocalMatrix[102X( [3Xnumer[103X, [3XR[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya local matrix[133X
   
   [33X[0;0YCreates  the  local matrix [22X[3Xnumer[103X/[3Xdenom[103X[122X or in the second case [22X[3Xnumer[103X/1[122X for the
