@@ -5,7 +5,7 @@ PackageName := "ToolsForHomalg",
 Subtitle := "Special methods and knowledge propagation tools",
 
 Version := Maximum( [
-  "2019.02.17", ## Mohamed's version
+  "2019.06.01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
@@ -20,35 +20,34 @@ License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
-    LastName      := "Barakat",
-    FirstNames    := "Mohamed",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "barakat@mathematik.uni-kl.de",
-    WWWHome       := "http://www.mathematik.uni-kl.de/~barakat/",
-    PostalAddress := Concatenation( [
-                       "Department of Mathematics\n",
-                       "University of Kaiserslautern\n",
-                       "67653 Kaiserslautern\n",
-                       "Germany" ] ),
-    Place         := "Kaiserslautern",
-    Institution   := "University of Kaiserslautern"
+    FirstNames := "Mohamed",
+    LastName := "Barakat",
+    IsAuthor := true,
+    IsMaintainer := true,
+    Email := "mohamed.barakat@uni-siegen.de",
+    WWWHome := "https://mohamed-barakat.github.io",
+    PostalAddress := Concatenation(
+               "Walter-Flex-Str. 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
   rec(
-    LastName      := "Gutsche",
-    FirstNames    := "Sebastian",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "sebastian.gutsche@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
-    PostalAddress := Concatenation( [
-                       "Sebastian Gutsche\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+    FirstNames := "Sebastian",
+    LastName := "Gutsche",
+    IsAuthor := true,
+    IsMaintainer := true,
+    WWWHome := "https://sebasguts.github.io",
+    Email := "gutsche@mathematik.uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Department Mathematik\n",
+               "Universität Siegen\n",
+               "Walter-Flex-Straße 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
   rec(
     LastName      := "Lange-Hegermann",
@@ -70,7 +69,7 @@ Persons := [
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/ToolsForHomalg/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/ToolsForHomalg/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-", ~.Version, "/ToolsForHomalg-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),

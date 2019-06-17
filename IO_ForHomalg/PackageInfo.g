@@ -4,7 +4,7 @@ PackageName := "IO_ForHomalg",
 
 Subtitle := "IO capabilities for the homalg project",
 
-Version := "2019.01.01",
+Version := "2019.06.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -29,31 +29,31 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec(
-    IsAuthor := true,
-    IsMaintainer := true,
     FirstNames := "Mohamed",
     LastName := "Barakat",
+    IsAuthor := true,
+    IsMaintainer := true,
     WWWHome := "https://mohamed-barakat.github.io",
     Email := "mohamed.barakat@uni-siegen.de",
     PostalAddress := Concatenation(
                "Walter-Flex-Str. 3\n",
-               "57068 Siegen\n",
+               "57072 Siegen\n",
                "Germany" ),
     Place := "Siegen",
     Institution := "University of Siegen",
   ),
   rec(
-    IsAuthor := true,
-    IsMaintainer := true,
     FirstNames := "Sebastian",
     LastName := "Gutsche",
+    IsAuthor := true,
+    IsMaintainer := false,
     WWWHome := "https://algebra.mathematik.uni-siegen.de/gutsche/",
     Email := "gutsche@mathematik.uni-siegen.de",
     PostalAddress := Concatenation(
                "Department Mathematik\n",
                "Universität Siegen\n",
                "Walter-Flex-Straße 3\n",
-               "57068 Siegen\n",
+               "57072 Siegen\n",
                "Germany" ),
     Place := "Siegen",
     Institution := "University of Siegen",
@@ -95,7 +95,7 @@ Persons := [
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/IO_ForHomalg/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/IO_ForHomalg/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-", ~.Version, "/IO_ForHomalg-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),

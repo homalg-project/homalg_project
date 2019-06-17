@@ -1,5 +1,3 @@
-
-
 SetPackageInfo( rec(
 
 PackageName := "4ti2Interface",
@@ -7,7 +5,7 @@ PackageName := "4ti2Interface",
 Subtitle := "A link to 4ti2",
 
 Version := Maximum( [
-  "2017.10.04", ## Sebas' version
+  "2019.06.01", ## Sebas' version
 ## this line prevents merge conflicts
   "2018.07.06", ## Kamal's version
 ] ),
@@ -19,25 +17,25 @@ License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
-    LastName      := "Gutsche",
-    FirstNames    := "Sebastian",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "gutsche@mathematik.uni-kl.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
-    PostalAddress := Concatenation( [
-                       "Department of Mathematics\n",
-                       "University of Kaiserslautern\n",
-                       "67653 Kaiserslautern\n",
-                       "Germany" ] ),
-    Place         := "Kaiserslautern",
-    Institution   := "University of Kaiserslautern"
+    FirstNames := "Sebastian",
+    LastName := "Gutsche",
+    IsAuthor := true,
+    IsMaintainer := true,
+    WWWHome := "https://sebasguts.github.io",
+    Email := "gutsche@mathematik.uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Department Mathematik\n",
+               "Universität Siegen\n",
+               "Walter-Flex-Straße 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
-  
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/4ti2Interface/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/4ti2Interface/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-", ~.Version, "/4ti2Interface-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),

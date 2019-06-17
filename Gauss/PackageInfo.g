@@ -4,7 +4,7 @@ PackageName := "Gauss",
 
 Subtitle := "Extended Gauss functionality for GAP",
 
-Version := "2018.09.08",
+Version := "2019.06.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -13,14 +13,14 @@ License := "GPL-2.0-or-later",
 
 Persons := [
   rec( 
-    LastName      := "Goertzen",
     FirstNames    := "Simon",
+    LastName      := "Görtzen",
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/goertzen",
+    WWWHome       := "https://www.linkedin.com/in/simongoertzen/",
     PostalAddress := Concatenation( [
-                       "Simon Goertzen\n",
+                       "Simon Görtzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
@@ -29,42 +29,39 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec(
-    LastName      := "Barakat",
-    FirstNames    := "Mohamed",
-    IsAuthor      := false,
-    IsMaintainer  := true,
-    Email         := "barakat@mathematik.uni-kl.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat/",
-    PostalAddress := Concatenation( [
-                       "Mohamed Barakat\n",
-                       "Department of Mathematics\n",
-                       "University of Kaiserslautern\n",
-                       "67653 Kaiserslautern\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "University of Kaiserslautern"
+    FirstNames := "Mohamed",
+    LastName := "Barakat",
+    IsAuthor := false,
+    IsMaintainer := true,
+    Email := "mohamed.barakat@uni-siegen.de",
+    WWWHome := "https://mohamed-barakat.github.io",
+    PostalAddress := Concatenation(
+               "Walter-Flex-Str. 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
-    rec(
-    LastName      := "Gutsche",
-    FirstNames    := "Sebastian",
-    IsAuthor      := false,
-    IsMaintainer  := true,
-    Email         := "sebastian.gutsche@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
-    PostalAddress := Concatenation( [
-                       "Sebastian Gutsche\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+  rec(
+    FirstNames := "Sebastian",
+    LastName := "Gutsche",
+    IsAuthor := false,
+    IsMaintainer := true,
+    WWWHome := "https://sebasguts.github.io",
+    Email := "gutsche@mathematik.uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Department Mathematik\n",
+               "Universität Siegen\n",
+               "Walter-Flex-Straße 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
-  
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/Gauss/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/Gauss/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Gauss-", ~.Version, "/Gauss-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),

@@ -4,7 +4,7 @@ PackageName := "SCO",
 
 Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 
-Version := "2017.09.10",
+Version := "2019.06.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -13,12 +13,12 @@ License := "GPL-2.0-or-later",
 
 Persons := [
   rec( 
-    LastName      := "Görtzen",
     FirstNames    := "Simon",
+    LastName      := "Görtzen",
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/goertzen",
+    WWWHome       := "https://www.linkedin.com/in/simongoertzen/",
     PostalAddress := Concatenation( [
                        "Simon Görtzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -29,25 +29,23 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec(
-    LastName      := "Barakat",
-    FirstNames    := "Mohamed",
-    IsAuthor      := false,
-    IsMaintainer  := true,
-    Email         := "barakat@mathematik.uni-kl.de",
-    WWWHome       := "http://www.mathematik.uni-kl.de/~barakat/",
-    PostalAddress := Concatenation( [
-                       "Department of Mathematics\n",
-                       "University of Kaiserslautern\n",
-                       "67653 Kaiserslautern\n",
-                       "Germany" ] ),
-    Place         := "Kaiserslautern",
-    Institution   := "University of Kaiserslautern"
+    FirstNames := "Mohamed",
+    LastName := "Barakat",
+    IsAuthor := false,
+    IsMaintainer := true,
+    WWWHome := "https://mohamed-barakat.github.io",
+    Email := "mohamed.barakat@uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Walter-Flex-Str. 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
-  
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/SCO/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/SCO/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/SCO-", ~.Version, "/SCO-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),

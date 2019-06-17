@@ -4,7 +4,7 @@ PackageName := "ExamplesForHomalg",
 
 Subtitle := "Examples for the GAP Package homalg",
 
-Version := "2019.01.07",
+Version := "2019.06.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -13,28 +13,28 @@ License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
-    LastName      := "Barakat",
-    FirstNames    := "Mohamed",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "barakat@mathematik.uni-kl.de",
-    WWWHome       := "http://www.mathematik.uni-kl.de/~barakat/",
-    PostalAddress := Concatenation( [
-                       "Department of Mathematics\n",
-                       "University of Kaiserslautern\n",
-                       "67653 Kaiserslautern\n",
-                       "Germany" ] ),
-    Place         := "Kaiserslautern",
-    Institution   := "University of Kaiserslautern"
+    FirstNames := "Mohamed",
+    LastName := "Barakat",
+    IsAuthor := true,
+    IsMaintainer := true,
+    WWWHome := "https://mohamed-barakat.github.io",
+    Email := "mohamed.barakat@uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Walter-Flex-Str. 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
-  rec(
-    LastName      := "Görtzen",
+  rec( 
     FirstNames    := "Simon",
+    LastName      := "Görtzen",
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon/",
+    WWWHome       := "https://www.linkedin.com/in/simongoertzen/",
     PostalAddress := Concatenation( [
+                       "Simon Görtzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
@@ -43,25 +43,25 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec(
-    LastName      := "Lange-Hegermann",
     FirstNames    := "Markus",
+    LastName      := "Lange-Hegermann",
     IsAuthor      := true,
     IsMaintainer  := false,
-    Email         := "markus.lange.hegermann@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
+    Email         := "markus.lange-hegermann@hs-owl.de",
+    WWWHome       := "https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html",
     PostalAddress := Concatenation( [
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
+                       "Markus Lange-Hegermann\n",
+                       "Hochschule Ostwestfalen-Lippe\n",
+                       "Liebigstraße 87\n",
+                       "32657 Lemgo\n",
                        "Germany" ] ),
     Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+    Institution   := "Hochschule Ostwestfalen-Lippe"
   ),
-  
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/ExamplesForHomalg/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-", ~.Version, "/ExamplesForHomalg-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
