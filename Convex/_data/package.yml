@@ -1,37 +1,37 @@
 name: Convex
-version: 2019.05.01
-date: 01/05/2019
+version: 2019.06.01
+date: 01/06/2019
 description: A package for fan combinatorics
 
 authors:
     - name: Sebastian Gutsche
-      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+      url: https://sebasguts.github.io
 
 maintainers:
     - name: Sebastian Gutsche
-      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+      url: https://sebasguts.github.io
 
 GAP: ">=4.7"
 
 needed-pkgs:
     - name: "Modules"
       version: ">=2011.08.01"
-      url: "http://homalg-project.github.io/homalg_project/Modules/"
+      url: "https://homalg-project.github.io/homalg_project/Modules/"
 
 suggested-pkgs:
     - name: "PolymakeInterface"
       version: ">=2014.08.28"
-      url: "http://homalg-project.github.io/homalg_project/PolymakeInterface/"
+      url: "https://homalg-project.github.io/homalg_project/PolymakeInterface/"
 
-www: http://homalg-project.github.io/homalg_project/Convex/
-readme: http://homalg-project.github.io/homalg_project/Convex/README
-packageinfo: http://homalg-project.github.io/homalg_project/Convex/PackageInfo.g
+www: https://homalg-project.github.io/homalg_project/Convex/
+readme: https://homalg-project.github.io/homalg_project/Convex/README
+packageinfo: https://homalg-project.github.io/homalg_project/Convex/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Convex-2019.05.01/Convex-2019.05.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Convex-2019.06.01/Convex-2019.06.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Convex-2019.05.01/Convex-2019.05.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Convex-2019.06.01/Convex-2019.06.01.zip
 
 abstract: Convex provides structures and algorithms for convex geometry. It can handle convex, fans and polytopes. Not only the structures are provided, but also a collection of algorithms to handle those objects. Basically, it provides convex geometry to GAP. It is capable of communicating with the CAS polymake via the package PolymakeInterface and also provides several methods by itself.
 

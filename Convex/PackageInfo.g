@@ -1,6 +1,3 @@
-
-
-
 SetPackageInfo( rec(
 
 PackageName := "Convex",
@@ -8,7 +5,7 @@ PackageName := "Convex",
 Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
-  "2017.09.02", ## Sebas' version
+  "2019.06.01", ## Sebas' version
 ## this line prevents merge conflicts
   "2019.05.01", ## Martin's version
 ] ),
@@ -19,26 +16,26 @@ Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1
 License := "GPL-2.0-or-later",
 
 Persons := [
-rec(
-    LastName      := "Gutsche",
-    FirstNames    := "Sebastian",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "sebastian.gutsche@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
-    PostalAddress := Concatenation( [
-                       "Sebastian Gutsche\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+  rec(
+    FirstNames := "Sebastian",
+    LastName := "Gutsche",
+    IsAuthor := true,
+    IsMaintainer := true,
+    WWWHome := "https://sebasguts.github.io",
+    Email := "gutsche@mathematik.uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Department Mathematik\n",
+               "Universität Siegen\n",
+               "Walter-Flex-Straße 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/Convex/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/Convex/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Convex-", ~.Version, "/Convex-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
