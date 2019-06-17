@@ -5,7 +5,7 @@ PackageName := "GradedRingForHomalg",
 Subtitle := "Endow Commutative Rings with an Abelian Grading",
 
 Version := Maximum( [
-  "2019.04.03", ## Mohamed's version
+  "2019.06.01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
@@ -27,35 +27,34 @@ License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
-    LastName      := "Barakat",
-    FirstNames    := "Mohamed",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "barakat@mathematik.uni-kl.de",
-    WWWHome       := "http://www.mathematik.uni-kl.de/~barakat/",
-    PostalAddress := Concatenation( [
-                       "Department of Mathematics\n",
-                       "University of Kaiserslautern\n",
-                       "67653 Kaiserslautern\n",
-                       "Germany" ] ),
-    Place         := "Kaiserslautern",
-    Institution   := "University of Kaiserslautern"
+    FirstNames := "Mohamed",
+    LastName := "Barakat",
+    IsAuthor := true,
+    IsMaintainer := true,
+    Email := "mohamed.barakat@uni-siegen.de",
+    WWWHome := "https://mohamed-barakat.github.io",
+    PostalAddress := Concatenation(
+               "Walter-Flex-Str. 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
   rec(
-    LastName      := "Gutsche",
-    FirstNames    := "Sebastian",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "sebastian.gutsche@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
-    PostalAddress := Concatenation( [
-                       "Sebastian Gutsche\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+    FirstNames := "Sebastian",
+    LastName := "Gutsche",
+    IsAuthor := true,
+    IsMaintainer := true,
+    WWWHome := "https://sebasguts.github.io",
+    Email := "gutsche@mathematik.uni-siegen.de",
+    PostalAddress := Concatenation(
+               "Department Mathematik\n",
+               "Universität Siegen\n",
+               "Walter-Flex-Straße 3\n",
+               "57072 Siegen\n",
+               "Germany" ),
+    Place := "Siegen",
+    Institution := "University of Siegen",
   ),
   rec(
     LastName      := "Kirschmer",
@@ -90,20 +89,20 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec(
-    LastName      := "Lange-Hegermann",
     FirstNames    := "Markus",
+    LastName      := "Lange-Hegermann",
     IsAuthor      := true,
     IsMaintainer  := false,
-    Email         := "markus.lange.hegermann@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
+    Email         := "markus.lange-hegermann@hs-owl.de",
+    WWWHome       := "https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html",
     PostalAddress := Concatenation( [
                        "Markus Lange-Hegermann\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
+                       "Hochschule Ostwestfalen-Lippe\n",
+                       "Liebigstraße 87\n",
+                       "32657 Lemgo\n",
                        "Germany" ] ),
     Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+    Institution   := "Hochschule Ostwestfalen-Lippe"
   ),
   rec(
     LastName      := "Robertz",
@@ -125,7 +124,7 @@ Persons := [
 ],
 
 Status := "deposited",
-PackageWWWHome := "http://homalg-project.github.io/homalg_project/GradedRingForHomalg/",
+PackageWWWHome := "https://homalg-project.github.io/homalg_project/GradedRingForHomalg/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-", ~.Version, "/GradedRingForHomalg-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
