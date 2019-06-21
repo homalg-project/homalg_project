@@ -1,6 +1,6 @@
 name: ToolsForHomalg
-version: 2019.06.01
-date: 01/06/2019
+version: 2019.06.02
+date: 02/06/2019
 description: Special methods and knowledge propagation tools
 
 authors:
@@ -38,9 +38,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/ToolsForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2019.06.01/ToolsForHomalg-2019.06.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2019.06.02/ToolsForHomalg-2019.06.02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2019.06.01/ToolsForHomalg-2019.06.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2019.06.02/ToolsForHomalg-2019.06.02.zip
 
 abstract: The <span class="pkgname">ToolsForHomalg</span> package provides GAP extensions for the homalg project
 
