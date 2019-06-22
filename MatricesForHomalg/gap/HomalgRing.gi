@@ -2639,6 +2639,13 @@ end );
 ####################################
 
 ##
+InstallMethod( String,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  RingName );
+
+##
 InstallMethod( ViewObj,
         "for homalg rings",
         [ IsHomalgRing ], 100,
