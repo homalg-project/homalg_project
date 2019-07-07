@@ -780,7 +780,7 @@ DeclareAttribute( "HilbertPolynomial",
 ##  <#GAPDoc Label="AffineDimension">
 ##  <ManSection>
 ##    <Attr Arg="A" Name="AffineDimension"/>
-##    <Returns>a nonnegative integer</Returns>
+##    <Returns>an integer</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
 ##    </Description>
