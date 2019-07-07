@@ -1505,6 +1505,123 @@ InstallMethod( ToricVariety,
 
 end );
 
+
+InstallMethod( DeriveToricVarietiesFromGrading,
+               "for a list of lists of integers and a boolean",
+               [ IsList, IsBool ],
+  function( grading, single_result_desired )
+    local i, j, myZ, rays, fans, limit, varieties, shuffled_grading, variety, map;
+    
+    # (step0) check for valid input
+    
+    # input must be a list of lists
+    if ForAny( grading, IsInt ) then
+        Error( "The gradings must be given as list of lists (of integers) " );
+        return;
+    fi;
+    
+    # are the gradings all of the same length
+    if Length( DuplicateFreeList( List( [ 1 .. Length( grading ) ], i -> Length( grading[ i ] ) ) ) ) > 1 then
+      Error( "The gradings must all be of the same length " );
+      return;
+    fi;
+    
+    # are the entries of the gradings integers?
+    for i in [ 1 .. Length( grading ) ] do
+      for j in [ 1 .. Length( grading[ i ] ) ] do
+        if not IsInt( grading[ i ][ j ] ) then
+          Error( "All entries of the gradings must be integers " );
+          return;
+        fi;
+      od;
+    od;
+    
+    
+    # (step1) compute the fans compatible with these gradings
+    myZ := HomalgRingOfIntegers();
+    rays := EntriesOfHomalgMatrixAsListList( SyzygiesOfColumns( HomalgMatrix( grading, myZ ) ) );
+    fans := FansFromTriangulation( rays );
+    
+    # (step3) process the fans further
+    varieties := [];
+    
+    # (step 3.1) adapt to required output
+    if single_result_desired then
+        limit := 1;
+    else
+        limit := Length( fans );
+    fi;
+    
+    # (step 3.2) process the number of required varieties
+    for i in [ 1 .. limit ] do
+        
+        # and check its properties
+        if not IsPointed( fans[ i ] ) then
+            
+            Error( "input fan must only contain strictly convex cones" );
+            
+        elif not IsFullDimensional( fans[ i ] ) then
+            
+            Error( "currently the construction from gradings is only supported for toric varieties without torus factor" );
+            
+        fi;
+        
+        # then construct the variety
+        variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXLayers := rec() );
+        ObjectifyWithAttributes(
+                                variety, TheTypeFanToricVariety,
+                                FanOfVariety, fans[ i ]
+                                );
+        
+        # the ray generators got shuffled, so we need to shuffle the gradings accordingly
+        shuffled_grading := [];
+        for j in [ 1 .. Length( TransposedMat( grading ) ) ] do
+            Add( shuffled_grading, TransposedMat( grading )[ Position( rays, RayGenerators( fans[ i ] )[ j ] ) ] );
+        od;
+        
+        # identify the map from the Weil divisors to the class group
+        map := HomalgMap( shuffled_grading,
+                          TorusInvariantDivisorGroup( variety ),
+                          Length( shuffled_grading[ 1 ] ) * HOMALG_MATRICES.ZZ
+                        );
+        
+        # and set this map accordingly
+        SetMapFromWeilDivisorsToClassGroup( variety, map );
+        
+        # and save this variety
+        varieties[ i ] := variety;
+        
+    od;
+    
+    # (step 3.3) adjust output to required output
+    if single_result_desired then
+      varieties := varieties[ 1 ];
+    fi;
+    
+    # (step4) return the result
+    return varieties;
+    
+end );
+
+InstallMethod( ToricVarietiesFromGrading,
+               "for a list of lists of integers",
+               [ IsList ],
+  function( grading )
+        
+        return DeriveToricVarietiesFromGrading( grading, false );
+        
+end );
+
+InstallMethod( ToricVarietyFromGrading,
+               "for a list of lists of integers",
+               [ IsList ],
+  function( grading )
+        
+        return DeriveToricVarietiesFromGrading( grading, true );
+        
+end );
+
+
 ##
 InstallMethod( ToricVariety,
                "for lists of attributes",
