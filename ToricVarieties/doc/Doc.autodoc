@@ -35,6 +35,9 @@ Sebastian Gutsche
 @Subsection Toric varieties from gradings
 @InsertChunk ToricVarietiesFromGrading
 
+@Subsection Blowups of toric varieties by star subdivisions of fans
+@InsertChunk Blowups
+
 @Chapter Toric subvarieties
 
 @Chapter Affine toric varieties
