@@ -6,7 +6,7 @@
                 [1XEndow Commutative Rings with an Abelian Grading[101X
   
   
-                               Version 2019.06.01
+                               Version 2019.06.04
   
   
                                  September 2015
@@ -89,8 +89,7 @@
       4.3-1 DegreeGroup
       4.3-2 CommonNonTrivialWeightOfIndeterminates
       4.3-3 WeightsOfIndeterminates
-      4.3-4 MatrixOfWeightsOfIndeterminates
-      4.3-5 IsHomogeneousRingElement
+      4.3-4 IsHomogeneousRingElement
     4.4 [33X[0;0YGraded Rings: Operations and Functions[133X
       4.4-1 UnderlyingNonGradedRing
       4.4-2 UnderlyingNonGradedRing

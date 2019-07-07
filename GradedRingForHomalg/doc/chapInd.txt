@@ -17,11 +17,10 @@
   [2XIsHomalgGradedRingElementRep[102X 4.1-2 
   [2XIsHomalgGradedRingRep[102X 4.1-1 
   [2XIsHomalgMatrixOverGradedRingRep[102X 5.1-1 
-  [2XIsHomogeneousRingElement[102X, for homalg graded ring elements 4.3-5 
+  [2XIsHomogeneousRingElement[102X, for homalg graded ring elements 4.3-4 
   [2XIsMatrixOverGradedRingWithHomogeneousEntries[102X, for matrices over graded rings 5.3-5 
   [2XMatElm[102X, for matrices over graded rings 5.4-5 
   [2XMatElmAsString[102X, for matrices over graded rings 5.4-4 
-  [2XMatrixOfWeightsOfIndeterminates[102X 4.3-4 
   [2XMatrixOverGradedRing[102X, constructor for matrices over graded rings 5.2-1 
   [2XMonomialMatrix[102X A.2-1 
   [2XName[102X, for homalg graded ring elements 4.4-3 
