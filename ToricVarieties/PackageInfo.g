@@ -7,7 +7,7 @@ Subtitle := "A package to handle toric varieties",
 Version :=  Maximum( [
   "2018.10.12", ## Sebas' version
 ## this line prevents merge conflicts
-  "2019.06.02", ## Mohamed's version
+  "2019.07.01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2019.04.02", ## Martin's version
 ## this line prevents merge conflicts
@@ -89,7 +89,7 @@ Dependencies := rec(
                            [ "GradedModules", ">=2015.12.04" ],
                            [ "ToolsForHomalg", ">=2016.02.17" ],
                            [ "AutoDoc", ">=2016.02.16" ] ],
-  SuggestedOtherPackages := [ ],
+  SuggestedOtherPackages := [ [ "TopcomInterface", ">=2019.06.15" ] ],
   ExternalConditions := []
                       
 ),

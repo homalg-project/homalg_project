@@ -13,6 +13,7 @@
       for IsToricSubvariety 4.3-3 
   [2XAmpleDivisor[102X, for IsToricVariety and HasPolytopeOfVariety 6.5-2 
   [2XBasisOfGlobalSections[102X, for IsToricDivisor 8.4-5 
+  [2XBlowupOfToricVariety[102X, for IsToricVariety, IsList, IsString 9.1-1 
   [2XBlowUpOnIthMinimalTorusOrbit[102X, for IsToricVariety, IsInt 3.5-9 
   [2XCartierData[102X, for IsToricDivisor 8.4-1 
   [2XCartierTorusInvariantDivisorGroup[102X, for IsToricVariety 3.4-20 
@@ -106,6 +107,7 @@
   [2XRange[102X, for IsToricMorphism 7.4-10 
   [2XRangeObject[102X, for IsToricMorphism 7.4-4 
   [2XRingMorphismOfDivisor[102X, for IsToricDivisor 8.4-14 
+  [2XSequenceOfBlowupsOfToricVariety[102X, for IsToricVariety, IsList 9.1-2 
   [2XSource[102X, for IsToricMorphism 7.4-9 
   [2XSourceObject[102X, for IsToricMorphism 7.4-1 
   [2XSRIdeal[102X, for IsToricVariety 3.4-16 
@@ -113,11 +115,13 @@
   [2XToricMorphism[102X, for IsToricVariety, IsList 7.6-1 
       for IsToricVariety, IsList, IsToricVariety 7.6-2 
   [2XToricSubvariety[102X, for IsToricVariety, IsToricVariety 4.5-1 
+  [2XToricVarietiesFromGrading[102X, for IsList 3.6-6 
   [2XToricVariety[102X, for IsConvexObject 3.6-3 
       for IsList 3.6-2 
       for IsList, IsList, IsList 3.6-4 
       for IsList, IsList, IsList, IsList 3.6-5 
       for IsToricVariety 3.6-1 
+  [2XToricVarietyFromGrading[102X, for IsList 3.6-7 
   [2XTorusInvariantDivisorGroup[102X, for IsToricVariety 3.4-5 
   [2XTorusInvariantPrimeDivisors[102X, for IsToricVariety 3.4-14 
   [2Xtwitter[102X, for IsToricDivisor 8.2-2 

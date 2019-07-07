@@ -1,0 +1,28 @@
+  
+  [1X9 [33X[0;0YBlowups of toric varieties[133X[101X
+  
+  
+  [1X9.1 [33X[0;0YConstructors[133X[101X
+  
+  [1X9.1-1 BlowupOfToricVariety[101X
+  
+  [33X[1;0Y[29X[2XBlowupOfToricVariety[102X( [3Xa[103X, [3Xtoric[103X, [3Xvariety[103X, [3Xa[103X, [3Xlist[103X, [3Xand[103X, [3Xa[103X, [3Xstring[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YThe arguments are a toric variety vari, a string s which specifies the locus
+  to  be  blown  up  and  a  string which specifies how to name the new blowup
+  coordinate.  Based  on  this,  this  method  creates  the  blowup of a toric
+  variety.  This  process rests on a star sub-division of the fan (c.f. 3.3.17
+  in Cox-Little-Schenk)[133X
+  
+  [1X9.1-2 SequenceOfBlowupsOfToricVariety[101X
+  
+  [33X[1;0Y[29X[2XSequenceOfBlowupsOfToricVariety[102X( [3Xa[103X, [3Xtoric[103X, [3Xvariety[103X, [3Xand[103X, [3Xa[103X, [3Xlist[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YThe  arguments  are  a toric variety vari and a list of lists. Each entry of
+  this  list  must  contain the information for one blowup, i.e. be made up of
+  the two lists used as input for the method BlowupOfToricVariety. This method
+  then  performs  this sequence of blowups and returns the corresponding toric
+  variety.[133X
+  
