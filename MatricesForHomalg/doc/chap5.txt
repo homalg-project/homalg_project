@@ -687,7 +687,7 @@
   [1X5.4-20 AffineDimension[101X
   
   [33X[1;0Y[29X[2XAffineDimension[102X( [3XA[103X ) [32X attribute[133X
-  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
   
   [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
   
