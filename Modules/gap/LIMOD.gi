@@ -1881,6 +1881,17 @@ InstallMethod( HilbertPoincareSeries,
 end );
 
 ##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg submodule",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( M )
+    
+    return HilbertPoincareSeries( SuperObject( M ) ) - HilbertPoincareSeries( FactorObject( M ) );
+    
+end );
+
+##
 InstallMethod( HilbertPolynomial,
         "for a homalg module",
         [ IsHomalgModule ],
@@ -1888,6 +1899,17 @@ InstallMethod( HilbertPolynomial,
   function( M )
     
     return HilbertPolynomial( M, VariableForHilbertPolynomial( ) );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg submodule",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( M )
+    
+    return HilbertPolynomial( SuperObject( M ) ) - HilbertPolynomial( FactorObject( M ) );
     
 end );
 
