@@ -374,7 +374,7 @@ InstallMethod( SetMatElm,
     
     m := Eval( M );
     
-    SetMatElm( m, r, c, EvalRingElement( s ) );
+    m[ r, c ] := EvalRingElement( s );
 
     M!.Eval := m;
     
@@ -390,7 +390,7 @@ InstallMethod( AddToMatElm,
     
     #create a matrix with just one entry (i,j), which is s
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), AssociatedComputationRing( R ) );
-    SetMatElm( N, r, c, EvalRingElement( s ) );
+    N[ r, c ] := EvalRingElement( s );
     ResetFilterObj( N, IsInitialIdentityMatrix );
     
     #and add this matrix to M

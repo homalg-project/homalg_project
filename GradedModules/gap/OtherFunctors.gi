@@ -139,7 +139,7 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
     for i in [ 1 .. Length( deg ) ] do
       for j in [ 1 .. Length( deg[1] ) ] do
         if deg[i][j] <> -1 then
-          SetMatElm( mat, i, j, zero );
+          mat[ i, j ] := zero;
         fi;
       od;
     od;

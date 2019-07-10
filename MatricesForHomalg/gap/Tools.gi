@@ -2248,7 +2248,7 @@ InstallMethod( DivideEntryByUnit,
     if IsBound(RP!.DivideEntryByUnit) then
         RP!.DivideEntryByUnit( M, i, j, u );
     else
-        SetMatElm( M, i, j, M[ i, j ] / u );
+        M[ i, j ] := M[ i, j ] / u;
     fi;
     
     ## caution: we deliberately do not return a new hull for Eval( M )
@@ -2285,7 +2285,7 @@ InstallMethod( DivideRowByUnit,
             for a in [ j + 1 .. NrColumns( M ) ] do
                 DivideEntryByUnit( M, i, a, u );
             od;
-            SetMatElm( M, i, j, One( R ) );
+            M[ i, j ] := One( R );
         else
             for a in [ 1 .. NrColumns( M ) ] do
                 DivideEntryByUnit( M, i, a, u );
@@ -2341,7 +2341,7 @@ InstallMethod( DivideColumnByUnit,
             for a in [ i + 1 .. NrRows( M ) ] do
                 DivideEntryByUnit( M, a, j, u );
             od;
-            SetMatElm( M, i, j, One( R ) );
+            M[ i, j ] := One( R );
         else
             for a in [ 1 .. NrRows( M ) ] do
                 DivideEntryByUnit( M, a, j, u );
@@ -2398,36 +2398,36 @@ InstallMethod( CopyRowToIdentityMatrix,
             for l in [ 1 .. j - 1 ] do
                 r := M[ i, l ];
                 if not IsZero( r ) then
-                    SetMatElm( v, j, l, -r );
-                    SetMatElm( vi, j, l, r );
+                    v[ j, l ] := -r;
+                    vi[ j, l ] := r;
                 fi;
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
                 r := M[ i, l ];
                 if not IsZero( r ) then
-                    SetMatElm( v, j, l, -r );
-                    SetMatElm( vi, j, l, r );
+                    v[ j, l ] := -r;
+                    vi[ j, l ] := r;
                 fi;
             od;
         elif IsBound( v ) then
             ## the two for's avoid creating non-dense lists:
             for l in [ 1 .. j - 1 ] do
                 r := M[ i, l ];
-                SetMatElm( v, j, l, -r );
+                v[ j, l ] := -r;
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
                 r := M[ i, l ];
-                SetMatElm( v, j, l, -r );
+                v[ j, l ] := -r;
             od;
         elif IsBound( vi ) then
             ## the two for's avoid creating non-dense lists:
             for l in [ 1 .. j - 1 ] do
                 r := M[ i, l ];
-                SetMatElm( vi, j, l, r );
+                vi[ j, l ] := r;
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
                 r := M[ i, l ];
-                SetMatElm( vi, j, l, r );
+                vi[ j, l ] := r;
             od;
         fi;
         
@@ -2466,36 +2466,36 @@ InstallMethod( CopyColumnToIdentityMatrix,
             for k in [ 1 .. i - 1 ] do
                 r := M[ k, j ];
                 if not IsZero( r ) then
-                    SetMatElm( u, k, i, -r );
-                    SetMatElm( ui, k, i, r );
+                    u[ k, i ] := -r;
+                    ui[ k, i ] := r;
                 fi;
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
                 r := M[ k, j ];
                 if not IsZero( r ) then
-                    SetMatElm( u, k, i, -r );
-                    SetMatElm( ui, k, i, r );
+                    u[ k, i ] := -r;
+                    ui[ k, i ] := r;
                 fi;
             od;
         elif IsBound( u ) then
             ## the two for's avoid creating non-dense lists:
             for k in [ 1 .. i - 1 ] do
                 r := M[ k, j ];
-                SetMatElm( u, k, i, -r );
+                u[ k, i ] := -r;
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
                 r := M[ k, j ];
-                SetMatElm( u, k, i, -r );
+                u[ k, i ] := -r;
             od;
         elif IsBound( ui ) then
             ## the two for's avoid creating non-dense lists:
             for k in [ 1 .. i - 1 ] do
                 r := M[ k, j ];
-                SetMatElm( ui, k, i, r );
+                ui[ k, i ] := r;
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
                 r := M[ k, j ];
-                SetMatElm( ui, k, i, r );
+                ui[ k, i ] := r;
             od;
         fi;
         
@@ -2525,11 +2525,11 @@ InstallMethod( SetColumnToZero,
         
         ## the two for's avoid creating non-dense lists:
         for k in [ 1 .. i - 1 ] do
-            SetMatElm( M, k, j, zero );
+            M[ k, j ] := zero;
         od;
         
         for k in [ i + 1 .. NrRows( M ) ] do
-            SetMatElm( M, k, j, zero );
+            M[ k, j ] := zero;
         od;
         
     fi;
@@ -4000,7 +4000,7 @@ InstallMethod( Value,
     
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
-            SetMatElm( MM, i, j, Value( M[ i, j ], V, O ) );
+            MM[ i, j ] := Value( M[ i, j ], V, O );
         od;
     od;
     
@@ -4112,7 +4112,7 @@ InstallMethod( Value,
     
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
-            SetMatElm( MM, i, j, Value( M[ i, j ], V, O ) );
+            MM[ i, j ] := Value( M[ i, j ], V, O );
         od;
     od;
     

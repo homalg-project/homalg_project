@@ -2644,8 +2644,8 @@ end );
 ##      <Example><![CDATA[
 ##  gap> n := HomalgInitialMatrix( 2, 3, ZZ );
 ##  <An initial 2 x 3 matrix over an internal ring>
-##  gap> SetMatElm( n, 1, 1, "1" );
-##  gap> SetMatElm( n, 2, 3, "1" );
+##  gap> n[ 1, 1 ] := "1";;
+##  gap> n[ 2, 3 ] := "1";;
 ##  gap> MakeImmutable( n );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( n );
@@ -2749,8 +2749,8 @@ end );
 ##      <Example><![CDATA[
 ##  gap> e := HomalgInitialIdentityMatrix( 3, ZZ );
 ##  <An initial identity 3 x 3 matrix over an internal ring>
-##  gap> SetMatElm( e, 1, 2, "1" );
-##  gap> SetMatElm( e, 2, 1, "-1" );
+##  gap> e[ 1, 2 ] := "1";;
+##  gap> e[ 2, 1 ] := "-1";;
 ##  gap> MakeImmutable( e );
 ##  <A 3 x 3 matrix over an internal ring>
 ##  gap> Display( e );

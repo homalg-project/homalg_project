@@ -432,14 +432,14 @@ InstallMethod( SetMatElm,
     
     #Create a new matrix with only the one entry
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), cR );
-    SetMatElm( N, r, c, Numerator( s ) );
+    N[ r, c ] := Numerator( s );
     ResetFilterObj( N, IsInitialMatrix );
     N := HomalgLocalMatrix( N, Denominator( s ), R );
     
     #set the corresponding entry to zero in the other matrix
     m := Eval( M );
     M2 := m[1];
-    SetMatElm( M2, r, c, Zero( cR ) );
+    M2[ r, c ] := Zero( cR );
     
     #add these matrices
     e := Eval( HomalgLocalMatrix( M2, m[2], R ) + N );
@@ -468,7 +468,7 @@ InstallMethod( AddToMatElm,
     
     #create a matrix with just one entry (i,j), which is s
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), AssociatedComputationRing( R ) );
-    SetMatElm( N, r, c, Numerator( s ) );
+    N[ r, c ] := Numerator( s );
     ResetFilterObj( N, IsInitialIdentityMatrix );
     N := HomalgLocalMatrix( N, Denominator( s ), R );
     

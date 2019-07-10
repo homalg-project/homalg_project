@@ -106,7 +106,7 @@ InstallMethod( ExteriorPower,
             for j in [ 1 .. bc ] do
                 m := CertainRows( mat, rr[i] );
                 m := CertainColumns( m, cc[j] );
-                SetMatElm( power, i, j, Determinant( m ) );
+                power[ i, j ] := Determinant( m );
             od;
         od;
         
