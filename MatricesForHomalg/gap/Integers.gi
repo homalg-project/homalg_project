@@ -123,7 +123,7 @@ InstallMethod( CreateHomalgTable,
                    ## an empty matrix is excluded by the high-level procedure
                    mat := BasisOfRows( mat );
                    
-                   fac := Collected( FactorsInt( AbsInt( MatElm( mat, 1, 1 ) ) ) );
+                   fac := Collected( FactorsInt( AbsInt( mat[ 1, 1 ] ) ) );
                    
                    return List( fac, a -> [ HomalgMatrix( [ a[1]^a[2] ], 1, 1, R ), HomalgMatrix( [ a[1] ], 1, 1, R ) ] );
                    
@@ -142,7 +142,7 @@ InstallMethod( CreateHomalgTable,
                    ## an empty matrix is excluded by the high-level procedure
                    mat := BasisOfRows( mat );
                    
-                   fac := PrimeDivisors( AbsInt( MatElm( mat, 1, 1 ) ) );
+                   fac := PrimeDivisors( AbsInt( mat[ 1, 1 ] ) );
                    
                    return List( fac, a -> HomalgMatrix( [ a ], 1, 1, R ) );
                    
@@ -159,7 +159,7 @@ InstallMethod( CreateHomalgTable,
                    ## an empty matrix is excluded by the high-level procedure
                    mat := BasisOfRows( mat );
                    
-                   rad := Product( PrimeDivisors( AbsInt( MatElm( mat, 1, 1 ) ) ) );
+                   rad := Product( PrimeDivisors( AbsInt( mat[ 1, 1 ] ) ) );
                    
                    return homalgInternalMatrixHull( [ [ rad ] ] );
                    

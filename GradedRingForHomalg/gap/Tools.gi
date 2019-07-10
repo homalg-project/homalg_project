@@ -333,7 +333,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
                       return deg0;
                   fi;
                   return deg_func(
-                                 MatElm( C, r, e[r] )
+                                 C[ r, e[r] ]
                                  );
                 end );
                 
@@ -442,7 +442,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
                       return deg0;
                   fi;
                   return deg_func(
-                                 MatElm( C, e[c], c )
+                                 C[ e[c], c ]
                                  );
                 end );
                 

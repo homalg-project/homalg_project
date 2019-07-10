@@ -701,7 +701,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
       numer := LoadHomalgMatrixFromFile( Concatenation( filename, "_numerator" ), r, c, ComputationRing );
       denom := LoadHomalgMatrixFromFile( Concatenation( filename, "_denominator" ), r, c, ComputationRing );
-      denom := MatElm( denom, 1, 1 );
+      denom := denom[ 1, 1 ];
     
     elif IsExistingFile( filename ) then
     

@@ -96,7 +96,7 @@ InstallMethod( DecideZero,
         Error( "either the number of columns or the number of rows of the matrix of relations must be 1\n" );
     fi;
     
-    return MatElm( red, 1, 1 );
+    return red[ 1, 1 ];
     
 end );
 
@@ -1261,7 +1261,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 
                 ## divide the i-th row by the unit M[i][j]
                 
-                r := MatElm( M, i, j );
+                r := M[ i, j ];
                 
                 if not IsOne( r ) then
                     

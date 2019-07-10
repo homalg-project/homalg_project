@@ -195,7 +195,7 @@ InstallMethod( \/,
         return fail;
     fi;
     
-    return MatElm( au, 1, 1 );
+    return au[ 1, 1 ];
     
 end );
 
@@ -1943,10 +1943,10 @@ InstallMethod( GetColumnIndependentUnitPositions,
     for i in [ 1 .. NrRows( M ) ] do
         for k in Reversed( rest ) do
             if not [ i, k ] in poslist and
-               IsUnit( R, MatElm( M, i, k ) ) then
+               IsUnit( R, M[ i, k ] ) then
                 Add( pos, [ i, k ] );
                 rest := Filtered( rest,
-                                a -> IsZero( MatElm( M, i, a ) ) );
+                                a -> IsZero( M[ i, a ] ) );
                 break;
             fi;
         od;
@@ -2032,10 +2032,10 @@ InstallMethod( GetRowIndependentUnitPositions,
     for j in [ 1 .. NrColumns( M ) ] do
         for k in Reversed( rest ) do
             if not [ j, k ] in poslist and
-               IsUnit( R, MatElm( M, k, j ) ) then
+               IsUnit( R, M[ k, j ] ) then
                 Add( pos, [ j, k ] );
                 rest := Filtered( rest,
-                                a -> IsZero( MatElm( M, a, j ) ) );
+                                a -> IsZero( M[ a, j ] ) );
                 break;
             fi;
         od;
@@ -2106,7 +2106,7 @@ InstallMethod( GetUnitPosition,
     for i in [ 1 .. m ] do
         for j in [ 1 .. n ] do
             if not [ i, j ] in poslist and not j in poslist and
-               IsUnit( R, MatElm( M, i, j ) ) then
+               IsUnit( R, M[ i, j ] ) then
                 SetIsZero( M, false );
                 return [ i, j ];
             fi;
@@ -2248,7 +2248,7 @@ InstallMethod( DivideEntryByUnit,
     if IsBound(RP!.DivideEntryByUnit) then
         RP!.DivideEntryByUnit( M, i, j, u );
     else
-        SetMatElm( M, i, j, MatElm( M, i, j ) / u );
+        SetMatElm( M, i, j, M[ i, j ] / u );
     fi;
     
     ## caution: we deliberately do not return a new hull for Eval( M )
@@ -2396,14 +2396,14 @@ InstallMethod( CopyRowToIdentityMatrix,
         if IsBound( v ) and IsBound( vi ) then
             ## the two for's avoid creating non-dense lists:
             for l in [ 1 .. j - 1 ] do
-                r := MatElm( M, i, l );
+                r := M[ i, l ];
                 if not IsZero( r ) then
                     SetMatElm( v, j, l, -r );
                     SetMatElm( vi, j, l, r );
                 fi;
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
-                r := MatElm( M, i, l );
+                r := M[ i, l ];
                 if not IsZero( r ) then
                     SetMatElm( v, j, l, -r );
                     SetMatElm( vi, j, l, r );
@@ -2412,21 +2412,21 @@ InstallMethod( CopyRowToIdentityMatrix,
         elif IsBound( v ) then
             ## the two for's avoid creating non-dense lists:
             for l in [ 1 .. j - 1 ] do
-                r := MatElm( M, i, l );
+                r := M[ i, l ];
                 SetMatElm( v, j, l, -r );
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
-                r := MatElm( M, i, l );
+                r := M[ i, l ];
                 SetMatElm( v, j, l, -r );
             od;
         elif IsBound( vi ) then
             ## the two for's avoid creating non-dense lists:
             for l in [ 1 .. j - 1 ] do
-                r := MatElm( M, i, l );
+                r := M[ i, l ];
                 SetMatElm( vi, j, l, r );
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
-                r := MatElm( M, i, l );
+                r := M[ i, l ];
                 SetMatElm( vi, j, l, r );
             od;
         fi;
@@ -2464,14 +2464,14 @@ InstallMethod( CopyColumnToIdentityMatrix,
         if IsBound( u ) and IsBound( ui ) then
             ## the two for's avoid creating non-dense lists:
             for k in [ 1 .. i - 1 ] do
-                r := MatElm( M, k, j );
+                r := M[ k, j ];
                 if not IsZero( r ) then
                     SetMatElm( u, k, i, -r );
                     SetMatElm( ui, k, i, r );
                 fi;
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
-                r := MatElm( M, k, j );
+                r := M[ k, j ];
                 if not IsZero( r ) then
                     SetMatElm( u, k, i, -r );
                     SetMatElm( ui, k, i, r );
@@ -2480,21 +2480,21 @@ InstallMethod( CopyColumnToIdentityMatrix,
         elif IsBound( u ) then
             ## the two for's avoid creating non-dense lists:
             for k in [ 1 .. i - 1 ] do
-                r := MatElm( M, k, j );
+                r := M[ k, j ];
                 SetMatElm( u, k, i, -r );
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
-                r := MatElm( M, k, j );
+                r := M[ k, j ];
                 SetMatElm( u, k, i, -r );
             od;
         elif IsBound( ui ) then
             ## the two for's avoid creating non-dense lists:
             for k in [ 1 .. i - 1 ] do
-                r := MatElm( M, k, j );
+                r := M[ k, j ];
                 SetMatElm( ui, k, i, r );
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
-                r := MatElm( M, k, j );
+                r := M[ k, j ];
                 SetMatElm( ui, k, i, r );
             od;
         fi;
@@ -2571,7 +2571,7 @@ InstallMethod( GetCleanRowsPositions,
     
     for j in clean_columns do
         for i in [ 1 .. m ] do
-            if IsOne( MatElm( M, i, j ) ) then
+            if IsOne( M[ i, j ] ) then
                 Add( clean_rows, i );
                 break;
             fi;
@@ -3394,7 +3394,7 @@ InstallMethod( IndicatorMatrixOfNonZeroEntries,
     
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
-            if not IsZero( MatElm( mat, i, j ) ) then
+            if not IsZero( mat[ i, j ] ) then
                 result[i][j] := 1;
             fi;
         od;
@@ -3484,7 +3484,7 @@ InstallMethod( Pullback,
     
     r := Pullback( phi, r );
     
-    return MatElm( r, 1, 1 );
+    return r[ 1, 1 ];
     
 end );
 
@@ -3727,7 +3727,7 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
         i := pos[1]; j := pos[2];
         
-        e := MatElm( M, i, j );
+        e := M[ i, j ];
         
         Assert( 6, IsUnit( e ) );
         Assert( 6, not IsZero( e ) );
@@ -4000,7 +4000,7 @@ InstallMethod( Value,
     
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
-            SetMatElm( MM, i, j, Value( MatElm( M, i, j ), V, O ) );
+            SetMatElm( MM, i, j, Value( M[ i, j ], V, O ) );
         od;
     od;
     
@@ -4112,7 +4112,7 @@ InstallMethod( Value,
     
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
-            SetMatElm( MM, i, j, Value( MatElm( M, i, j ), V, O ) );
+            SetMatElm( MM, i, j, Value( M[ i, j ], V, O ) );
         od;
     od;
     
@@ -4314,7 +4314,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModulesWeighted,
         for j in [ 1 .. c ] do
             mon := MonomialMatrixWeighted( degreesS[i] - degreesT[j], R, weights );
             mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
-            mon := MatElm( mon, 1, 1 );
+            mon := mon[ 1, 1 ];
             rand[ ( i - 1 ) * c + j ] := mon;
         od;
     od;
@@ -4356,7 +4356,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModulesWeighted,
         for j in [ 1 .. c ] do
             mon := MonomialMatrixWeighted( degreesS[j] - degreesT[i], R, weights );
             mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
-            mon := MatElm( mon, 1, 1 );
+            mon := mon[ 1, 1 ];
             rand[ ( i - 1 ) * c + j ] := mon;
         od;
     od;
@@ -4487,7 +4487,7 @@ InstallMethod( GeneralLinearCombination,
     
     mat := A * mat;
     
-    r := List( indets, i -> MatElm( i * mat, 1, 1 ) );
+    r := List( indets, i -> i * mat[ 1, 1 ] );
     
     return List( r, rr -> rr / A );
     
@@ -4526,7 +4526,7 @@ InstallMethod( GetMonic,
     for p in [ 1 .. m ] do
         for q in [ 1 .. n ] do
             
-            f := MatElm( M, p, q );
+            f := M[ p, q ];
             
             if IsMonic( f ) then
                 return [ f, [ p, q ] ];
@@ -4604,7 +4604,7 @@ InstallMethod( GetMonicUptoUnit,
     for p in [ 1 .. m ] do
         for q in [ 1 .. n ] do
             
-            f := MatElm( M, p, q );
+            f := M[ p, q ];
             
             if IsMonicUptoUnit( f ) then
                 return [ f, [ p, q ] ];
@@ -7171,7 +7171,7 @@ InstallMethod( AMaximalIdealContaining,
                "of the principal ideal\n" );
     fi;
     
-    I := MatElm( I, 1, 1 );
+    I := I[ 1, 1 ];
     I := Int( String( I ) );
     
     return HomalgMatrix( [ PrimeDivisors( I ){[1]} ], 1, 1, R );
@@ -7211,7 +7211,7 @@ InstallMethod( IsolateIndeterminate,
     
     for i in pos do
         
-        c := MatElm( coeffs, i, 1 );
+        c := coeffs[ i, 1 ];
         
         if not IsUnit( c ) then
             continue;
@@ -7354,7 +7354,7 @@ InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
     I := MatrixOfRelations( R );
     
     for i in [ 1 .. NrRows( I ) ] do
-        img := IsolateIndeterminate( MatElm( I, i, 1 ) );
+        img := IsolateIndeterminate( I[ i, 1 ] );
         if not img = fail then
             break;
         fi;

@@ -483,7 +483,7 @@ InstallMethod( MatElmAsString,
         
   function( M, r, c, R )
     
-    return String( MatElm( M, r, c ) );
+    return String( M[ r, c ] );
     
 end );
 
@@ -724,7 +724,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     
     for i in [ 1 .. NrRows( M ) ] do
         for j in [ 1 .. c ] do
-            e := MatElm( M, i, j );
+            e := M[ i, j ];
             if not IsZero( e ) then
                 Add( s, [ String( i ), String( j ), String( e ) ] );
             fi;
@@ -788,7 +788,7 @@ InstallMethod( EntriesOfHomalgMatrixAsListList,
     
     cols := [ 1 .. NrColumns( M ) ];
     
-    return List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> MatElm( M, r, c ) ) );
+    return List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> M[ r, c ] ) );
     
 end );
 
@@ -1712,7 +1712,7 @@ InstallMethod( DiagonalEntries,
     
     m := Minimum( NrRows( M ), NrColumns( M ) );
     
-    return List( [ 1 .. m ], a -> MatElm( M, a, a ) );
+    return List( [ 1 .. m ], a -> M[ a, a ] );
     
 end );
 
@@ -3508,6 +3508,6 @@ InstallMethod( Trace ,
       return NrRows( C ) * One( R );
     fi;
     
-    return Sum( [ 1 .. NrRows( C ) ], i -> MatElm( C, i, i ) );
+    return Sum( [ 1 .. NrRows( C ) ], i -> C[ i, i ] );
     
 end );
