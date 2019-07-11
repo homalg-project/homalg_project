@@ -514,7 +514,7 @@ DeclareAttribute( "PreEval",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-if not IsBound( NumberRows ) then
+if not IsBound( NrRows ) then
 DeclareAttribute( "NrRows",
         IsHomalgMatrix );
 fi;
@@ -530,13 +530,11 @@ fi;
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-if not IsBound( NumberColumns ) then
-DeclareAttribute( "NrColumns",
+if not IsBound( NrCols ) then
+DeclareAttribute( "NrCols",
         IsHomalgMatrix );
-else
-DeclareSynonymAttr( "NrColumns",
-        ValueGlobal( "NumberColumns" ) );
 fi;
+DeclareSynonymAttr( "NrColumns", NrCols );
 
 ##  <#GAPDoc Label="DeterminantMat">
 ##  <ManSection>
