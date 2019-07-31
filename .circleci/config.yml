@@ -10,9 +10,8 @@ jobs:
           sudo apt update
           sudo apt dist-upgrade -y
           sudo apt install -y texlive-latex-extra texlive-science curl
-          echo "SetUserPreference(\"PackagesToLoad\", []);" > ~/.gap/gap.ini
           echo "SetInfoLevel(InfoPackageLoading, 3);" > ~/.gap/gaprc
-          make ci-test
+          TERM=dumb make ci-test
           bash <(curl -s https://codecov.io/bash)
 workflows:
   version: 2
