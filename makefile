@@ -41,7 +41,9 @@ endif
 	# cd ToolsForHomalg && $(MAKE) ci-test
 	# requires Convex
 	# cd ToricVarieties && $(MAKE) ci-test
+ifneq ($(GAP_HOME),/home/gap/inst/gap-master)
 	cd Modules && $(MAKE) ci-test
+endif
 	cd homalg && $(MAKE) ci-test
 
 ############################################
