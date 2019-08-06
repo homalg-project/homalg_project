@@ -20,9 +20,12 @@ docclean:
 test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToolsForHomalg test_ToricVarieties test_Modules test_homalg 
 
 ci-test: doc
+ifndef GAP_HOME
+$(error environment variable GAP_HOME is not set)
+endif
 	# requires polymake and polymake interface
 	# cd Convex && $(MAKE) ci-test
-	cd Gauss && GAPPATH=$$(dirname $$(which gap))/../ ./configure && $(MAKE) && $(MAKE) ci-test
+	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE) && $(MAKE) ci-test
 	cd ExamplesForHomalg && $(MAKE) ci-test
 	cd GaussForHomalg && $(MAKE) ci-test
 	cd GradedModules && $(MAKE) ci-test
