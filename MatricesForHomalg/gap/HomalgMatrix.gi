@@ -1033,7 +1033,7 @@ end );
 ##    <Meth Arg="M" Name="TransposedMatrix" Label="for matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      The twisted transpose of the &homalg; matrix <A>M</A>.<P/>
+##      The transpose of the &homalg; matrix <A>M</A>.<P/>
 ##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with TransposedMatrix"/>)
 ##    </Description>
 ##  </ManSection>
