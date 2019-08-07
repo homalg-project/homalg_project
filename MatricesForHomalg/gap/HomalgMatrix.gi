@@ -992,7 +992,7 @@ end );
 ##    <Meth Arg="M" Name="Involution" Label="for matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      The twisted transpose of the &homalg; matrix <A>M</A>.<P/>
+##      The twisted transpose of the &homalg; matrix <A>M</A>. If the underlying ring is commutative, the twist is the identity.<P/>
 ##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with Involution"/>)
 ##    </Description>
 ##  </ManSection>
