@@ -3,6 +3,12 @@ SHELL=/bin/bash
 DIRS=4ti2Interface Convex Gauss ExamplesForHomalg GaussForHomalg GradedModules HomalgToCAS GradedRingForHomalg IO_ForHomalg LocalizeRingForHomalg MatricesForHomalg PolymakeInterface RingsForHomalg SCO ToolsForHomalg ToricVarieties Modules homalg 
 ECHO=echo
 MAKE=make
+POLYMAKE_CONFIG_PATH=$(shell command -v polymake-config)
+SINGULAR_PATH=$(shell command -v Singular)
+SAGE_PATH=$(shell command -v sage)
+M2_PATH=$(shell command -v M2)
+MAGMA_PATH=$(shell command -v magma)
+MAPLE_PATH=$(shell command -v maple)
 
 all: doc test
 
@@ -26,8 +32,10 @@ endif
 	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE)
 
 ci-test: doc build
-	# requires polymake and polymake interface
-	# cd Convex && $(MAKE) ci-test
+ifneq ($(POLYMAKE_CONFIG_PATH),)
+	cd Convex && $(MAKE) ci-test
+	cd ToricVarieties && $(MAKE) ci-test
+endif
 	cd Gauss && $(MAKE) ci-test
 	cd ExamplesForHomalg && $(MAKE) ci-test
 	cd GaussForHomalg && $(MAKE) ci-test
@@ -37,13 +45,20 @@ ci-test: doc build
 	cd IO_ForHomalg && $(MAKE) ci-test
 	cd LocalizeRingForHomalg && $(MAKE) ci-test
 	cd MatricesForHomalg && $(MAKE) ci-test
-	# requires MAGMA
-	# cd RingsForHomalg && $(MAKE) ci-test
+ifneq ($(SINGULAR_PATH),)
+ifneq ($(SAGE_PATH),)
+ifneq ($(M2_PATH),)
+ifneq ($(MAGMA_PATH),)
+ifneq ($(MAPLE_PATH),)
+	cd RingsForHomalg && $(MAKE) ci-test
+endif
+endif
+endif
+endif
+endif
 	cd SCO && $(MAKE) ci-test
 	# no tests
 	# cd ToolsForHomalg && $(MAKE) ci-test
-	# requires Convex
-	# cd ToricVarieties && $(MAKE) ci-test
 	cd Modules && $(MAKE) ci-test
 	cd homalg && $(MAKE) ci-test
 
