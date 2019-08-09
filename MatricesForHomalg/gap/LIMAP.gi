@@ -160,11 +160,11 @@ InstallMethod( DataOfCoordinateRingOfGraph,
         indetsS := [ ];
     fi;
     
-    ST := List( indetsS, Name );
-    
-    Append( ST, List( indetsT, Name ) );
-    
-    ST := PolynomialRing( r, ST );
+    if HasAmbientRing( S ) then
+        ST := PolynomialRing( AmbientRing( S ), List( indetsT, Name ) );
+    else
+        ST := PolynomialRing( S, List( indetsT, Name ) );
+    fi;
     
     if HasRingRelations( S ) then
         relS := ST * MatrixOfRelations( S );
