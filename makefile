@@ -64,6 +64,7 @@ endif
 	# cd ToolsForHomalg && $(MAKE) ci-test
 	cd Modules && $(MAKE) ci-test
 	cd homalg && $(MAKE) ci-test
+	./gather_performance_data.py
 
 ############################################
 doc_4ti2Interface:

@@ -5,3 +5,5 @@
 
 stats
 coverage.json
+performance.out
+performance_data.csv
