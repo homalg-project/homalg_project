@@ -867,7 +867,8 @@
   [33X[1;0Y[29X[2XInvolution[102X( [3XM[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
-  [33X[0;0YThe twisted transpose of the [5Xhomalg[105X matrix [3XM[103X.[133X
+  [33X[0;0YThe  twisted  transpose  of  the  [5Xhomalg[105X matrix [3XM[103X. If the underlying ring is
+  commutative, the twist is the identity.[133X
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-7[114X))[133X
   
@@ -876,7 +877,7 @@
   [33X[1;0Y[29X[2XTransposedMatrix[102X( [3XM[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
-  [33X[0;0YThe twisted transpose of the [5Xhomalg[105X matrix [3XM[103X.[133X
+  [33X[0;0YThe transpose of the [5Xhomalg[105X matrix [3XM[103X.[133X
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-8[114X))[133X
   
