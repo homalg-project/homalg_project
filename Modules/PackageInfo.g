@@ -5,7 +5,7 @@ PackageName := "Modules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
 
 Version := Maximum( [
-  "2019.06.02", ## Mohamed's version
+  "2019.06.04", ## Mohamed's version
 ## this line prevents merge conflicts
   "2014.07.02", ## Markus' version
 ## this line prevents merge conflicts
@@ -16,8 +16,6 @@ Version := Maximum( [
   "2013.05.05", ## Sepp's version
 ## this line prevents merge conflicts
   "2017.06.19", ## Vinay's version
-## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
