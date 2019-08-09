@@ -29,6 +29,9 @@ build:
 ifndef GAP_HOME
 	$(error environment variable GAP_HOME is not set)
 endif
+ifneq ($(POLYMAKE_CONFIG_PATH),)
+	cd PolymakeInterface && ./configure $$GAP_HOME && $(MAKE)
+endif
 	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE)
 
 ci-test: doc build
