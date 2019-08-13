@@ -3032,6 +3032,10 @@ end );
 InstallGlobalFunction( StringToHomalgColumnMatrix,
   function( str, R )
     
+    if str in [ "", " ", "[]", "[ ]" ] then
+        return HomalgZeroMatrix( 0, 1, R );
+    fi;
+    
     return HomalgMatrix( str, Length( SplitString( str, "," ) ), 1, R );
     
 end );
