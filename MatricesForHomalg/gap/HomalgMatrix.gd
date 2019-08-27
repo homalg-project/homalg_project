@@ -239,8 +239,10 @@ DeclareProperty( "IsRightInvertibleMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+if not IsBound(IsEmptyMatrix) then # GAP >= 4.11 already provides this property
 DeclareProperty( "IsEmptyMatrix",
         IsHomalgMatrix );
+fi;
 
 ##  <#GAPDoc Label="IsDiagonalMatrix">
 ##  <ManSection>
@@ -253,8 +255,10 @@ DeclareProperty( "IsEmptyMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+if not IsBound(IsDiagonalMatrix) then # GAP >= 4.11 already provides this property
 DeclareProperty( "IsDiagonalMatrix",
         IsHomalgMatrix );
+fi;
 
 ##  <#GAPDoc Label="IsScalarMatrix">
 ##  <ManSection>
@@ -279,8 +283,10 @@ DeclareProperty( "IsScalarMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+if not IsBound(IsUpperTriangularMatrix) then # GAP >= 4.11 already provides this property
 DeclareProperty( "IsUpperTriangularMatrix",
         IsHomalgMatrix );
+fi;
 
 ##  <#GAPDoc Label="IsLowerTriangularMatrix">
 ##  <ManSection>
@@ -292,8 +298,10 @@ DeclareProperty( "IsUpperTriangularMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+if not IsBound(IsLowerTriangularMatrix) then # GAP >= 4.11 already provides this property
 DeclareProperty( "IsLowerTriangularMatrix",
         IsHomalgMatrix );
+fi;
 
 ##  <#GAPDoc Label="IsStrictUpperTriangularMatrix">
 ##  <ManSection>
