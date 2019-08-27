@@ -63,6 +63,7 @@
         <Item>IdentityMatrix</Item>
         <Item>AreEqualMatrices</Item>
         <Item>Involution</Item>
+        <Item>TransposedMatrix</Item>
         <Item>CertainRows</Item>
         <Item>CertainColumns</Item>
         <Item>UnionOfRows</Item>

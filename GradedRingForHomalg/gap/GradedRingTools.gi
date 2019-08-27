@@ -91,6 +91,11 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             return Involution( UnderlyingMatrixOverNonGradedRing( M ) );
           end,
         
+        TransposedMatrix :=
+          function( M )
+            return TransposedMatrix( UnderlyingMatrixOverNonGradedRing( M ) );
+          end,
+        
         CertainRows :=
           function( M, plist )
             return CertainRows( UnderlyingMatrixOverNonGradedRing( M ), plist );
