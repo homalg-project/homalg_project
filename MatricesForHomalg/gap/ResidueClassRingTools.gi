@@ -55,7 +55,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                        return fail;
                    fi;
                    
-                   au := MatElm( au, 1, 1 );
+                   au := au[ 1, 1 ];
                    
                    au := DecideZero( au, HomalgRing( a ) );
                    

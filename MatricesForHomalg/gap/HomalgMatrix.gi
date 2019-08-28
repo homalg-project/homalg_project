@@ -483,7 +483,7 @@ InstallMethod( MatElmAsString,
         
   function( M, r, c, R )
     
-    return String( MatElm( M, r, c ) );
+    return String( M[ r, c ] );
     
 end );
 
@@ -523,6 +523,30 @@ InstallMethod( MatElm,
     return MatElm( M, r, c, HomalgRing( M ) );
     
 end );
+
+if not CompareVersionNumbers( GAPInfo.Version, "4.10" ) then
+
+## copied from gap-4.10.2/lib/matobj.gi
+
+# Install fallback methods for m[i,j] which delegate MatElm resp. SetMatElm,
+# for old MatrixObj implementation which don't provide them. We lower the rank
+# so that these are only used as a last resort.
+InstallMethod( \[\], "for a matrix object and two positions",
+  [ IsMatrixObj, IsPosInt, IsPosInt ],
+  -RankFilter(IsMatrixObj),
+  function( m, row, col )
+    return MatElm( m, row, col );
+end );
+
+
+InstallMethod( \[\]\:\=, "for a matrix object, two positions, and an object",
+  [ IsMatrixObj and IsMutable, IsPosInt, IsPosInt, IsObject ],
+  -RankFilter(IsMatrixObj),
+  function( m, row, col, obj )
+    SetMatElm( m, row, col, obj );
+end );
+
+fi;
 
 ##
 InstallMethod( GetListOfMatrixAsString,
@@ -724,7 +748,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     
     for i in [ 1 .. NrRows( M ) ] do
         for j in [ 1 .. c ] do
-            e := MatElm( M, i, j );
+            e := M[ i, j ];
             if not IsZero( e ) then
                 Add( s, [ String( i ), String( j ), String( e ) ] );
             fi;
@@ -788,7 +812,7 @@ InstallMethod( EntriesOfHomalgMatrixAsListList,
     
     cols := [ 1 .. NrColumns( M ) ];
     
-    return List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> MatElm( M, r, c ) ) );
+    return List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> M[ r, c ] ) );
     
 end );
 
@@ -1712,7 +1736,7 @@ InstallMethod( DiagonalEntries,
     
     m := Minimum( NrRows( M ), NrColumns( M ) );
     
-    return List( [ 1 .. m ], a -> MatElm( M, a, a ) );
+    return List( [ 1 .. m ], a -> M[ a, a ] );
     
 end );
 
@@ -2644,8 +2668,8 @@ end );
 ##      <Example><![CDATA[
 ##  gap> n := HomalgInitialMatrix( 2, 3, ZZ );
 ##  <An initial 2 x 3 matrix over an internal ring>
-##  gap> SetMatElm( n, 1, 1, "1" );
-##  gap> SetMatElm( n, 2, 3, "1" );
+##  gap> n[ 1, 1 ] := "1";;
+##  gap> n[ 2, 3 ] := "1";;
 ##  gap> MakeImmutable( n );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( n );
@@ -2749,8 +2773,8 @@ end );
 ##      <Example><![CDATA[
 ##  gap> e := HomalgInitialIdentityMatrix( 3, ZZ );
 ##  <An initial identity 3 x 3 matrix over an internal ring>
-##  gap> SetMatElm( e, 1, 2, "1" );
-##  gap> SetMatElm( e, 2, 1, "-1" );
+##  gap> e[ 1, 2 ] := "1";;
+##  gap> e[ 2, 1 ] := "-1";;
 ##  gap> MakeImmutable( e );
 ##  <A 3 x 3 matrix over an internal ring>
 ##  gap> Display( e );
@@ -3508,6 +3532,6 @@ InstallMethod( Trace ,
       return NrRows( C ) * One( R );
     fi;
     
-    return Sum( [ 1 .. NrRows( C ) ], i -> MatElm( C, i, i ) );
+    return Sum( [ 1 .. NrRows( C ) ], i -> C[ i, i ] );
     
 end );

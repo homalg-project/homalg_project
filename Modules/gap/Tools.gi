@@ -158,7 +158,7 @@ InstallMethod( EliminateOverBaseRing,
               l := N[r];
               Perform( [ 1 .. Length( l ) ],
                       function( c )
-                        SetMatElm( coeffs, r, l[c], MatElm( M[r], c, 1 ) );
+                        coeffs[ r, l[c] ] := M[r][ c, 1 ];
                       end );
             end );
     

@@ -3194,9 +3194,9 @@ InstallMethod( Display,
     name := RingName( R );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        elements := List( [ 1 .. r ], i -> MatElm( rel, i, 1 ) );
+        elements := List( [ 1 .. r ], i -> rel[ i, 1 ] );
     else
-        elements := List( [ 1 .. r ], j -> MatElm( rel, 1, j ) );
+        elements := List( [ 1 .. r ], j -> rel[ 1, j ] );
     fi;
     
     elements := Filtered( elements, x -> not IsZero( x ) );

@@ -922,7 +922,7 @@ InstallMethod( IrreducibleFactors,
     
     factors := RadicalDecompositionOp( HomalgMatrix( [ r ], 1, 1, R ) );
     
-    r!.Factors := List( factors, a -> MatElm( a, 1, 1 ) );
+    r!.Factors := List( factors, a -> a[ 1, 1 ] );
     
     return r!.Factors;
     
@@ -946,8 +946,8 @@ InstallMethod( Factors,
     
     factors := PrimaryDecompositionOp( HomalgMatrix( [ r ], 1, 1, R ) );
     
-    primary := List( factors, a -> MatElm( a[1], 1, 1 ) );
-    prime := List( factors, a -> MatElm( a[2], 1, 1 ) );
+    primary := List( factors, a -> a[1][ 1, 1 ] );
+    prime := List( factors, a -> a[2][ 1, 1 ] );
     
     one := One( R );
     
@@ -2545,7 +2545,7 @@ InstallMethod( LcmOp,
     qq := HomalgMatrix( [ q ], 1, 1, R );
     
     ## this can be expressed categorically
-    return p * MatElm( SyzygiesOfRows( pp, qq ), 1, 1 );
+    return p * SyzygiesOfRows( pp, qq )[ 1, 1 ];
     
 end );
 
@@ -2567,7 +2567,7 @@ InstallOtherMethod( GcdOp,
     qq := HomalgMatrix( [ q ], 1, 1, R );
     
     ## this can be expressed categorically
-    return q / MatElm( SyzygiesOfRows( pp, qq ), 1, 1 );
+    return q / SyzygiesOfRows( pp, qq )[ 1, 1 ];
     
 end );
 

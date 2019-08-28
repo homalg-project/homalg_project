@@ -362,7 +362,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
 #                     if l <> fail then
 #                       k := l[1];
 #                       Add( pos, [ j, k ] );
-#                       rest := Filtered( rest, a -> IsZero( MatElm( M, a, j ) ) );
+#                       rest := Filtered( rest, a -> IsZero( M[ a, j ] ) );
 #                     fi;
 #                       
 #                   od;
@@ -403,7 +403,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                      if l <> fail then
                        k := l[1];
                        Add( pos, [ j, k ] );
-                       rest := Filtered( rest, a -> IsZero( MatElm( M, a, j ) ) );
+                       rest := Filtered( rest, a -> IsZero( M[ a, j ] ) );
                      fi;
                        
                    od;
