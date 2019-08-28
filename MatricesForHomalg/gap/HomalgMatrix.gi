@@ -524,6 +524,30 @@ InstallMethod( MatElm,
     
 end );
 
+if not CompareVersionNumbers( GAPInfo.Version, "4.10" ) then
+
+## copied from gap-4.10.2/lib/matobj.gi
+
+# Install fallback methods for m[i,j] which delegate MatElm resp. SetMatElm,
+# for old MatrixObj implementation which don't provide them. We lower the rank
+# so that these are only used as a last resort.
+InstallMethod( \[\], "for a matrix object and two positions",
+  [ IsMatrixObj, IsPosInt, IsPosInt ],
+  -RankFilter(IsMatrixObj),
+  function( m, row, col )
+    return MatElm( m, row, col );
+end );
+
+
+InstallMethod( \[\]\:\=, "for a matrix object, two positions, and an object",
+  [ IsMatrixObj and IsMutable, IsPosInt, IsPosInt, IsObject ],
+  -RankFilter(IsMatrixObj),
+  function( m, row, col, obj )
+    SetMatElm( m, row, col, obj );
+end );
+
+fi;
+
 ##
 InstallMethod( GetListOfMatrixAsString,
         "for matrices",
