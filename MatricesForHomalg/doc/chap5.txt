@@ -60,8 +60,8 @@
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27Xn := HomalgInitialMatrix( 2, 3, ZZ );[127X[104X
     [4X[28X<An initial 2 x 3 matrix over an internal ring>[128X[104X
-    [4X[25Xgap>[125X [27XSetMatElm( n, 1, 1, "1" );[127X[104X
-    [4X[25Xgap>[125X [27XSetMatElm( n, 2, 3, "1" );[127X[104X
+    [4X[25Xgap>[125X [27Xn[ 1, 1 ] := "1";;[127X[104X
+    [4X[25Xgap>[125X [27Xn[ 2, 3 ] := "1";;[127X[104X
     [4X[25Xgap>[125X [27XMakeImmutable( n );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( n );[127X[104X
@@ -104,8 +104,8 @@
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27Xe := HomalgInitialIdentityMatrix( 3, ZZ );[127X[104X
     [4X[28X<An initial identity 3 x 3 matrix over an internal ring>[128X[104X
-    [4X[25Xgap>[125X [27XSetMatElm( e, 1, 2, "1" );[127X[104X
-    [4X[25Xgap>[125X [27XSetMatElm( e, 2, 1, "-1" );[127X[104X
+    [4X[25Xgap>[125X [27Xe[ 1, 2 ] := "1";;[127X[104X
+    [4X[25Xgap>[125X [27Xe[ 2, 1 ] := "-1";;[127X[104X
     [4X[25Xgap>[125X [27XMakeImmutable( e );[127X[104X
     [4X[28X<A 3 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( e );[127X[104X

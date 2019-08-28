@@ -226,8 +226,8 @@ false
 <div class="example"><pre>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := HomalgInitialMatrix( 2, 3, ZZ );</span>
 &lt;An initial 2 x 3 matrix over an internal ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetMatElm( n, 1, 1, "1" );</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetMatElm( n, 2, 3, "1" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n[ 1, 1 ] := "1";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n[ 2, 3 ] := "1";;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MakeImmutable( n );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( n );</span>
@@ -268,8 +268,8 @@ false
 <div class="example"><pre>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := HomalgInitialIdentityMatrix( 3, ZZ );</span>
 &lt;An initial identity 3 x 3 matrix over an internal ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetMatElm( e, 1, 2, "1" );</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetMatElm( e, 2, 1, "-1" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e[ 1, 2 ] := "1";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e[ 2, 1 ] := "-1";;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MakeImmutable( e );</span>
 &lt;A 3 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( e );</span>

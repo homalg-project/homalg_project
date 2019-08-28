@@ -674,10 +674,10 @@ InstallMethod( GetColumnIndependentUnitPositions,
     for i in [ 1 .. NrRows( M ) ] do
         for k in Reversed( rest ) do
             if not [ i, k ] in poslist and
-               IsUnit( R, MatElm( M, i, k ) ) then
+               IsUnit( R, M[ i, k ] ) then
                 Add( pos, [ i, k ] );
                 rest := Filtered( rest,
-                                a -&gt; IsZero( MatElm( M, i, a ) ) );
+                                a -&gt; IsZero( M[ i, a ] ) );
                 break;
             fi;
         od;
@@ -744,10 +744,10 @@ InstallMethod( GetRowIndependentUnitPositions,
     for j in [ 1 .. NrColumns( M ) ] do
         for k in Reversed( rest ) do
             if not [ j, k ] in poslist and
-               IsUnit( R, MatElm( M, k, j ) ) then
+               IsUnit( R, M[ k, j ] ) then
                 Add( pos, [ j, k ] );
                 rest := Filtered( rest,
-                                a -&gt; IsZero( MatElm( M, a, j ) ) );
+                                a -&gt; IsZero( M[ a, j ] ) );
                 break;
             fi;
         od;
@@ -802,7 +802,7 @@ InstallMethod( GetUnitPosition,
     for i in [ 1 .. m ] do
         for j in [ 1 .. n ] do
             if not [ i, j ] in poslist and not j in poslist and
-               IsUnit( R, MatElm( M, i, j ) ) then
+               IsUnit( R, M[ i, j ] ) then
                 SetIsZero( M, false );
                 return [ i, j ];
             fi;

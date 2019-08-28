@@ -619,10 +619,10 @@
     [4X    for i in [ 1 .. NrRows( M ) ] do[104X
     [4X        for k in Reversed( rest ) do[104X
     [4X            if not [ i, k ] in poslist and[104X
-    [4X               IsUnit( R, MatElm( M, i, k ) ) then[104X
+    [4X               IsUnit( R, M[ i, k ] ) then[104X
     [4X                Add( pos, [ i, k ] );[104X
     [4X                rest := Filtered( rest,[104X
-    [4X                                a -> IsZero( MatElm( M, i, a ) ) );[104X
+    [4X                                a -> IsZero( M[ i, a ] ) );[104X
     [4X                break;[104X
     [4X            fi;[104X
     [4X        od;[104X
@@ -689,10 +689,10 @@
     [4X    for j in [ 1 .. NrColumns( M ) ] do[104X
     [4X        for k in Reversed( rest ) do[104X
     [4X            if not [ j, k ] in poslist and[104X
-    [4X               IsUnit( R, MatElm( M, k, j ) ) then[104X
+    [4X               IsUnit( R, M[ k, j ] ) then[104X
     [4X                Add( pos, [ j, k ] );[104X
     [4X                rest := Filtered( rest,[104X
-    [4X                                a -> IsZero( MatElm( M, a, j ) ) );[104X
+    [4X                                a -> IsZero( M[ a, j ] ) );[104X
     [4X                break;[104X
     [4X            fi;[104X
     [4X        od;[104X
@@ -747,7 +747,7 @@
     [4X    for i in [ 1 .. m ] do[104X
     [4X        for j in [ 1 .. n ] do[104X
     [4X            if not [ i, j ] in poslist and not j in poslist and[104X
-    [4X               IsUnit( R, MatElm( M, i, j ) ) then[104X
+    [4X               IsUnit( R, M[ i, j ] ) then[104X
     [4X                SetIsZero( M, false );[104X
     [4X                return [ i, j ];[104X
     [4X            fi;[104X
