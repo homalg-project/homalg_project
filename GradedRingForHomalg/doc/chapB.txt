@@ -92,6 +92,8 @@
   
   [30X    [33X[0;6YInvolution[133X
   
+  [30X    [33X[0;6YTransposedMatrix[133X
+  
   [30X    [33X[0;6YCertainRows[133X
   
   [30X    [33X[0;6YCertainColumns[133X
