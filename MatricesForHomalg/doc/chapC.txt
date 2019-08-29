@@ -59,8 +59,9 @@
     [4X    [104X
     [4X    zz := ListWithIdenticalEntries( NrColumns( C ), z );[104X
     [4X    [104X
-    [4X    return homalgInternalMatrixHull([104X
-    [4X                   List( [ 1 .. NrRows( C ) ], i -> ShallowCopy( zz ) ) );[104X
+    [4X    SetEval( C, homalgInternalMatrixHull( List( [ 1 .. NrRows( C ) ], i -> ShallowCopy( zz ) ) ) );[104X
+    [4X    [104X
+    [4X    return Eval( C );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -113,7 +114,9 @@
     [4X                  z := ShallowCopy( zz ); z[i] := o; return z;[104X
     [4X                end );[104X
     [4X    [104X
-    [4X    return homalgInternalMatrixHull( id );[104X
+    [4X    SetEval( C, homalgInternalMatrixHull( id ) );[104X
+    [4X    [104X
+    [4X    return Eval( C );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X

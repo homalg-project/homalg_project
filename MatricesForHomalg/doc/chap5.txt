@@ -39,8 +39,7 @@
   matrix  by  assigning  its  nonzero  entries.  The  property [2XIsInitialMatrix[102X
   ([14X5.3-26[114X)  is  reset  as  soon  as  the  matrix  is  evaluated.  New computed
   properties  or attributes of the matrix won't be cached, until the matrix is
-  explicitly    made    immutable   using   (-->   [2XMakeImmutable[102X   ([14XReference:
-  MakeImmutable[114X)).[133X
+  explicitly made immutable using (--> [2XMakeImmutable[102X ([14XMakeImmutable???[114X)).[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
@@ -84,7 +83,7 @@
   entries.  The  property [2XIsInitialIdentityMatrix[102X ([14X5.3-27[114X) is reset as soon as
   the matrix is evaluated. New computed properties or attributes of the matrix
   won't  be  cached,  until the matrix is explicitly made immutable using (-->
-  [2XMakeImmutable[102X ([14XReference: MakeImmutable[114X)).[133X
+  [2XMakeImmutable[102X ([14XMakeImmutable???[114X)).[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
@@ -219,8 +218,8 @@
   
   [33X[0;0YIt  is  nevertheless  recommended to use the following form to create [5Xhomalg[105X
   matrices.  This  form  can  also  be used to define external matrices. Since
-  whitespaces  (-->  [14XReference:  Whitespaces[114X) are ignored, they can be used as
-  optical delimiters:[133X
+  whitespaces  (-->  [14XWhitespaces???[114X)  are ignored, they can be used as optical
+  delimiters:[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, ZZ );[127X[104X
