@@ -291,8 +291,9 @@ InstallMethod( Eval,
     
     zz := ListWithIdenticalEntries( NrColumns( C ), z );
     
-    return homalgInternalMatrixHull(
-                   List( [ 1 .. NrRows( C ) ], i -> ShallowCopy( zz ) ) );
+    SetEval( C, homalgInternalMatrixHull( List( [ 1 .. NrRows( C ) ], i -> ShallowCopy( zz ) ) ) );
+    
+    return Eval( C );
     
 end );
 ##  ]]></Listing>
@@ -361,7 +362,9 @@ InstallMethod( Eval,
                   z := ShallowCopy( zz ); z[i] := o; return z;
                 end );
     
-    return homalgInternalMatrixHull( id );
+    SetEval( C, homalgInternalMatrixHull( id ) );
+    
+    return Eval( C );
     
 end );
 ##  ]]></Listing>
