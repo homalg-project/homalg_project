@@ -1274,7 +1274,7 @@ end );
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
         "for homalg matrices (IsZero)",
-        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 20,
+        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 40,
         
   function( C )
     local R, RP, z;
