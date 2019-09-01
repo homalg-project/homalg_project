@@ -444,7 +444,6 @@ InstallMethod( Resolution,
     
     if HasIsRightAcyclic( d ) and IsRightAcyclic( d ) then
         SetFiniteFreeResolutionExists( M, true );
-        ResetFilterObj( M, AFiniteFreeResolution );
         SetAFiniteFreeResolution( M, d );
         rank := Sum( ObjectDegreesOfComplex( d ),
                      i -> (-1)^i *  NrGenerators( CertainObject( d, i ) ) );

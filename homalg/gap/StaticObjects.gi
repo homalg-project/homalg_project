@@ -558,7 +558,6 @@ InstallMethod( ShortenResolution,
     
     SetCurrentResolution( M, d );
     
-    ResetFilterObj( M, AFiniteFreeResolution );
     SetAFiniteFreeResolution( M, d );
     
     return d;

@@ -1770,7 +1770,6 @@ InstallMethod( ProjectiveDimension,
     pd := Length( MorphismDegreesOfComplex( d ) );
     
     if pd < ld then
-        ResetFilterObj( M, AFiniteFreeResolution );
         SetAFiniteFreeResolution( M, d );
     fi;
     
