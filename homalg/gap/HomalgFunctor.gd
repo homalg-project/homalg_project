@@ -156,7 +156,7 @@ DeclareAttribute( "OperationOfFunctor",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "Genesis",
-        IsHomalgFunctor );
+        IsHomalgFunctor, "mutable" );
 
 DeclareAttribute( "IsIdentityOnObjects",
         IsHomalgFunctor );

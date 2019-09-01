@@ -6442,7 +6442,6 @@ InstallMethod( InsertObjectInMultiFunctor,
     
     Fp := CallFuncList( CreateHomalgFunctor, data );
     
-    ResetFilterObj( Fp, Genesis );
     SetGenesis( Fp, [ "InsertObjectInMultiFunctor", Functor, p, o ] );
     
     if m > 1 then
@@ -6595,7 +6594,6 @@ InstallMethod( ComposeFunctors,
     
     GF := CallFuncList( CreateHomalgFunctor, data );
     
-    ResetFilterObj( GF, Genesis );
     SetGenesis( GF, [ "ComposeFunctors", [ Functor_post, Functor_pre ], p ] );
     
     if m > 1 then
@@ -6847,7 +6845,6 @@ InstallMethod( RightSatelliteOfCofunctor,
     
     SF := CallFuncList( CreateHomalgFunctor, data );
     
-    ResetFilterObj( SF, Genesis );
     SetGenesis( SF, [ "RightSatelliteOfCofunctor", Functor, p ] );
     
     if m > 1 then
@@ -7088,7 +7085,6 @@ InstallMethod( LeftSatelliteOfFunctor,
     
     SF := CallFuncList( CreateHomalgFunctor, data );
     
-    ResetFilterObj( SF, Genesis );
     SetGenesis( SF, [ "LeftSatelliteOfFunctor", Functor, p ] );
     
     if m > 1 then
@@ -7315,7 +7311,6 @@ InstallMethod( RightDerivedCofunctor,
     
     RF := CallFuncList( CreateHomalgFunctor, data );
     
-    ResetFilterObj( RF, Genesis );
     SetGenesis( RF, [ "RightDerivedCofunctor", Functor, p ] );
     
     if m > 1 then
@@ -7544,7 +7539,6 @@ InstallMethod( LeftDerivedFunctor,
     
     LF := CallFuncList( CreateHomalgFunctor, data );
     
-    ResetFilterObj( LF, Genesis );
     SetGenesis( LF, [ "LeftDerivedFunctor", Functor, p ] );
     
     if m > 1 then
