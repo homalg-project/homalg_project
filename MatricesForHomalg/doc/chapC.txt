@@ -133,7 +133,7 @@
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
     [4X        "for homalg matrices (IsZero)",[104X
-    [4X        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 20,[104X
+    [4X        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 40,[104X
     [4X        [104X
     [4X  function( C )[104X
     [4X    local R, RP, z;[104X
