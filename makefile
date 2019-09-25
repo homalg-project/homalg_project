@@ -21,7 +21,7 @@ test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_Gra
 
 ci-test: doc
 ifndef GAP_HOME
-$(error environment variable GAP_HOME is not set)
+	$(error environment variable GAP_HOME is not set)
 endif
 	# requires polymake and polymake interface
 	# cd Convex && $(MAKE) ci-test
