@@ -1,6 +1,10 @@
 pipeline {
 	agent any
 
+	triggers {
+		cron('00 04 * * *')
+	}
+
 	options {
 		checkoutToSubdirectory('pkg/homalg_project')
 	}
