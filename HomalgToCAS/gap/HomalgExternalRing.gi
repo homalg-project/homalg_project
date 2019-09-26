@@ -371,6 +371,21 @@ InstallMethod( \/,
     
 end );
 
+## Sanity check for RingMap
+InstallMethod( RingMap,
+        "for a homalg matrix and two homalg external rings",
+        [ IsHomalgMatrix, IsHomalgExternalRingRep, IsHomalgExternalRingRep ],
+        
+  function( images, S, T )
+    
+    if not IsIdenticalObj( S!.ring!.stream, T!.ring!.stream ) then
+        Error( "the source ring and the target ring must lie in the same instance of the CAS\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
