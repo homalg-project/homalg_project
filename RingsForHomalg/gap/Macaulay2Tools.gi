@@ -121,7 +121,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                
                Involution := M -> homalgSendBlocking( [ "Involution(", M, ")" ], HOMALG_IO.Pictograms.Involution ),
                
-               TranposedMatrix := M -> homalgSendBlocking( [ "transpose(", M, ")" ], HOMALG_IO.Pictograms.TranposedMatrix ),
+               TransposedMatrix := M -> homalgSendBlocking( [ "transpose(", M, ")" ], HOMALG_IO.Pictograms.TransposedMatrix ),
                
                CertainRows :=
                  function( M, plist )
