@@ -4,4 +4,4 @@ for i in ${1-*.g}; do
   cp -uv ../$i $i
 done
 
-/usr/local/bin/replace DefaultCAS Maple *.g
+sed -i 's/DefaultCAS/Maple/g' *.g

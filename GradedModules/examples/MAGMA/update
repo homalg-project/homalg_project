@@ -4,4 +4,4 @@ for i in ${1-*.g}; do
   cp -uv ../$i $i
 done
 
-/usr/local/bin/replace DefaultCAS MAGMA *.g
+sed -i 's/DefaultCAS/MAGMA/g' *.g

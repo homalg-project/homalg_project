@@ -4,4 +4,4 @@ for i in ${1-*.g}; do
   cp -uv ../$i $i
 done
 
-/usr/local/bin/replace DefaultCAS Macaulay2 *.g
+sed -i 's/DefaultCAS/Macaulay2/g' *.g
