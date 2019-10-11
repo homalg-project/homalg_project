@@ -34,7 +34,10 @@ ifneq ($(POLYMAKE_CONFIG_PATH),)
 endif
 	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE)
 
-ci-test: doc build
+ci-prepare:
+	./ci_prepare
+
+ci-test: ci-prepare doc build
 ifneq ($(POLYMAKE_CONFIG_PATH),)
 	cd Convex && $(MAKE) ci-test
 	cd ToricVarieties && $(MAKE) ci-test
@@ -64,6 +67,9 @@ endif
 	# cd ToolsForHomalg && $(MAKE) ci-test
 	cd Modules && $(MAKE) ci-test
 	cd homalg && $(MAKE) ci-test
+	exec 9>&1; \
+	OUTPUT=$$(cd ../test_suite && ./test_homalg_project 2>&1 | tee >(cat - >&9)); \
+	! echo "$$OUTPUT" | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 	./gather_performance_data.py
 
 ############################################

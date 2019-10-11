@@ -1,0 +1,31 @@
+#!/bin/bash
+
+cd ..
+
+# TODO: MapleForHomalg
+PACKAGES_TO_CLONE="
+test_suite
+AbelianSystems
+alcove
+alexander
+CAP_project
+Conley
+D-Modules
+k-Points
+Orbifolds
+Sheaves
+SimplicialObjects
+SystemTheory
+VirtualCAS
+"
+
+for PACKAGE in $PACKAGES_TO_CLONE; do
+	if [ ! -e $PACKAGE ]; then
+		git clone "https://github.com/homalg-project/$PACKAGE.git"
+	fi
+done
+
+cp test_suite/init_homalg_project_test_suite.sample test_suite/init_homalg_project_test_suite
+sed -i "s|~/software/pkg|$PWD|g" test_suite/init_homalg_project_test_suite
+
+cd homalg_project
