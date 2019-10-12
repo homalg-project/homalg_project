@@ -39,8 +39,9 @@ ci-prepare:
 
 ci-test: ci-prepare doc build
 ifneq ($(POLYMAKE_CONFIG_PATH),)
-	cd Convex && $(MAKE) ci-test
-	cd ToricVarieties && $(MAKE) ci-test
+	# TODO
+	#cd Convex && $(MAKE) ci-test
+	#cd ToricVarieties && $(MAKE) ci-test
 endif
 	cd Gauss && $(MAKE) ci-test
 	cd ExamplesForHomalg && $(MAKE) ci-test
