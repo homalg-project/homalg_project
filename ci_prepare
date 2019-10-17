@@ -28,4 +28,7 @@ done
 cp test_suite/init_homalg_project_test_suite.sample test_suite/init_homalg_project_test_suite
 sed -i "s|~/software/pkg|$PWD|g" test_suite/init_homalg_project_test_suite
 
+# remove tests already covered by ci-test
+sed -i 's|homalg_project/[^ "]*||g' test_suite/test_packages_of_homalg_project
+
 cd homalg_project
