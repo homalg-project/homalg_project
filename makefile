@@ -12,16 +12,10 @@ MAPLE_PATH=$(shell command -v maple)
 
 all: doc test
 
-doc: 
-	-for d in $(DIRS); do ( cd $$d; $(MAKE) doc; cd - ); done
-
-doc: doc_Convex doc_Gauss doc_ExamplesForHomalg doc_GaussForHomalg doc_GradedModules doc_HomalgToCAS doc_GradedRingForHomalg doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_RingsForHomalg doc_SCO doc_ToolsForHomalg doc_ToricVarieties doc_Modules doc_homalg 
+doc: doc_4ti2Interface doc_Convex doc_Gauss doc_ExamplesForHomalg doc_GaussForHomalg doc_GradedModules doc_HomalgToCAS doc_GradedRingForHomalg doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_PolymakeInterface doc_RingsForHomalg doc_SCO doc_ToolsForHomalg doc_ToricVarieties doc_Modules doc_homalg 
 
 docclean:
 	-for d in $(DIRS); do ( cd $$d; $(MAKE) docclean; cd - ); done
-
-# test: test_Modules test_Convex
-#	-for d in $(DIRS); do ( cd $$d; $(MAKE) test; cd - ); done
 
 test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToolsForHomalg test_ToricVarieties test_Modules test_homalg 
 
