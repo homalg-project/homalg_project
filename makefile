@@ -17,7 +17,7 @@ doc: doc_4ti2Interface doc_Convex doc_Gauss doc_ExamplesForHomalg doc_GaussForHo
 docclean:
 	-for d in $(DIRS); do $(MAKE) -C $$d docclean; done
 
-test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToolsForHomalg test_ToricVarieties test_Modules test_homalg
+test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToricVarieties test_Modules test_homalg
 
 build: build_PolymakeInterface build_Gauss
 
@@ -26,7 +26,7 @@ ci-prepare:
 
 ci-run-test_suite: ci-test_test_suite_test_packages_of_homalg_project ci-test_test_suite_main_examples_of_homalg_project
 
-ci-run-tests: ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_ToolsForHomalg ci-test_homalg ci-run-test_suite
+ci-run-tests: ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_homalg ci-run-test_suite
 
 ci-test: ci-prepare doc build
 	$(MAKE) ci-run-tests
@@ -139,9 +139,6 @@ test_RingsForHomalg:
 test_SCO:
 	$(MAKE) -C SCO test
 
-test_ToolsForHomalg:
-	$(MAKE) -C ToolsForHomalg test
-
 test_ToricVarieties:
 	$(MAKE) -C ToricVarieties test
 
@@ -197,9 +194,6 @@ endif
 
 ci-test_SCO:
 	$(MAKE) -C SCO ci-test
-
-ci-test_ToolsForHomalg:
-	$(MAKE) -C ToolsForHomalg ci-test
 
 ci-test_ToricVarieties:
 	$(MAKE) -C ToricVarieties ci-test
