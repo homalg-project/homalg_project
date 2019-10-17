@@ -29,7 +29,7 @@ pipeline {
 		stage('test') {
 			steps {
 				dir('pkg/homalg_project') {
-					sh 'TERM=dumb make ci-test'
+					sh 'TERM=dumb make -j 4 ci-test'
 				}
 			}
 		}

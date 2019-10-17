@@ -31,40 +31,15 @@ endif
 ci-prepare:
 	./ci_prepare
 
-ci-test: ci-prepare doc build
-ifneq ($(POLYMAKE_CONFIG_PATH),)
-	# TODO
-	#cd Convex && $(MAKE) ci-test
-	#cd ToricVarieties && $(MAKE) ci-test
-endif
-	cd Gauss && $(MAKE) ci-test
-	cd ExamplesForHomalg && $(MAKE) ci-test
-	cd GaussForHomalg && $(MAKE) ci-test
-	cd GradedModules && $(MAKE) ci-test
-	cd HomalgToCAS && $(MAKE) ci-test
-	cd GradedRingForHomalg && $(MAKE) ci-test
-	cd IO_ForHomalg && $(MAKE) ci-test
-	cd LocalizeRingForHomalg && $(MAKE) ci-test
-	cd MatricesForHomalg && $(MAKE) ci-test
-ifneq ($(SINGULAR_PATH),)
-ifneq ($(SAGE_PATH),)
-ifneq ($(M2_PATH),)
-ifneq ($(MAGMA_PATH),)
-ifneq ($(MAPLE_PATH),)
-	cd RingsForHomalg && $(MAKE) ci-test
-endif
-endif
-endif
-endif
-endif
-	cd SCO && $(MAKE) ci-test
-	# no tests
-	# cd ToolsForHomalg && $(MAKE) ci-test
-	cd Modules && $(MAKE) ci-test
-	cd homalg && $(MAKE) ci-test
+ci-run-test_suite:
 	exec 9>&1; \
 	OUTPUT=$$(cd ../test_suite && ./test_homalg_project 2>&1 | tee >(cat - >&9)); \
 	! echo "$$OUTPUT" | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+
+ci-run-tests: ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_ToolsForHomalg ci-test_homalg ci-run-test_suite
+
+ci-test: ci-prepare doc build
+	$(MAKE) ci-run-tests
 	./gather_performance_data.py
 
 ############################################
@@ -170,3 +145,62 @@ test_Modules:
 
 test_homalg:
 	cd homalg; $(MAKE) test; cd -;
+
+############################################
+ci-test_Convex:
+	cd Convex; $(MAKE) ci-test; cd -;
+
+ci-test_Gauss:
+	cd Gauss; $(MAKE) ci-test; cd -;
+
+ci-test_ExamplesForHomalg:
+	cd ExamplesForHomalg; $(MAKE) ci-test; cd -;
+
+ci-test_GaussForHomalg:
+	cd GaussForHomalg; $(MAKE) ci-test; cd -;
+
+ci-test_GradedModules:
+	cd GradedModules; $(MAKE) ci-test; cd -;
+
+ci-test_HomalgToCAS:
+	cd HomalgToCAS; $(MAKE) ci-test; cd -;
+
+ci-test_GradedRingForHomalg:
+	cd GradedRingForHomalg; $(MAKE) ci-test; cd -;
+
+ci-test_IO_ForHomalg:
+	cd IO_ForHomalg; $(MAKE) ci-test; cd -;
+
+ci-test_LocalizeRingForHomalg:
+	cd LocalizeRingForHomalg; $(MAKE) ci-test; cd -;
+
+ci-test_MatricesForHomalg:
+	cd MatricesForHomalg; $(MAKE) ci-test; cd -;
+
+ci-test_RingsForHomalg:
+ifneq ($(SINGULAR_PATH),)
+ifneq ($(SAGE_PATH),)
+ifneq ($(M2_PATH),)
+ifneq ($(MAGMA_PATH),)
+ifneq ($(MAPLE_PATH),)
+	cd RingsForHomalg && $(MAKE) ci-test; cd -;
+endif
+endif
+endif
+endif
+endif
+
+ci-test_SCO:
+	cd SCO; $(MAKE) ci-test; cd -;
+
+ci-test_ToolsForHomalg:
+	cd ToolsForHomalg; $(MAKE) ci-test; cd -;
+
+ci-test_ToricVarieties:
+	cd ToricVarieties; $(MAKE) ci-test; cd -;
+
+ci-test_Modules:
+	cd Modules; $(MAKE) ci-test; cd -;
+
+ci-test_homalg:
+	cd homalg; $(MAKE) ci-test; cd -;
