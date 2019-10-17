@@ -24,10 +24,7 @@ build: build_PolymakeInterface build_Gauss
 ci-prepare:
 	./ci_prepare
 
-ci-run-test_suite:
-	exec 9>&1; \
-	OUTPUT=$$(cd ../test_suite && ./test_homalg_project 2>&1 | tee >(cat - >&9)); \
-	! echo "$$OUTPUT" | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+ci-run-test_suite: ci-test_test_suite_test_packages_of_homalg_project ci-test_test_suite_main_examples_of_homalg_project
 
 ci-run-tests: ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_ToolsForHomalg ci-test_homalg ci-run-test_suite
 
@@ -212,3 +209,14 @@ ci-test_Modules:
 
 ci-test_homalg:
 	cd homalg; $(MAKE) ci-test; cd -;
+
+############################################
+ci-test_test_suite_test_packages_of_homalg_project:
+	exec 9>&1; \
+	OUTPUT=$$(cd ../test_suite && ./test_packages_of_homalg_project 2>&1 | tee >(cat - >&9)); \
+	! echo "$$OUTPUT" | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+
+ci-test_test_suite_main_examples_of_homalg_project:
+	exec 9>&1; \
+	OUTPUT=$$(cd ../test_suite && ./main_examples_of_homalg_project 2>&1 | tee >(cat - >&9)); \
+	! echo "$$OUTPUT" | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
