@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 # DIRS=$$(ls -d */)
-DIRS=4ti2Interface Convex Gauss ExamplesForHomalg GaussForHomalg GradedModules HomalgToCAS GradedRingForHomalg IO_ForHomalg LocalizeRingForHomalg MatricesForHomalg PolymakeInterface RingsForHomalg SCO ToolsForHomalg ToricVarieties Modules homalg 
+DIRS=4ti2Interface Convex Gauss ExamplesForHomalg GaussForHomalg GradedModules HomalgToCAS GradedRingForHomalg IO_ForHomalg LocalizeRingForHomalg MatricesForHomalg PolymakeInterface RingsForHomalg SCO ToolsForHomalg ToricVarieties Modules homalg
 ECHO=echo
 MAKE=make
 POLYMAKE_CONFIG_PATH=$(shell command -v polymake-config)
@@ -12,12 +12,12 @@ MAPLE_PATH=$(shell command -v maple)
 
 all: doc test
 
-doc: doc_4ti2Interface doc_Convex doc_Gauss doc_ExamplesForHomalg doc_GaussForHomalg doc_GradedModules doc_HomalgToCAS doc_GradedRingForHomalg doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_PolymakeInterface doc_RingsForHomalg doc_SCO doc_ToolsForHomalg doc_ToricVarieties doc_Modules doc_homalg 
+doc: doc_4ti2Interface doc_Convex doc_Gauss doc_ExamplesForHomalg doc_GaussForHomalg doc_GradedModules doc_HomalgToCAS doc_GradedRingForHomalg doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_PolymakeInterface doc_RingsForHomalg doc_SCO doc_ToolsForHomalg doc_ToricVarieties doc_Modules doc_homalg
 
 docclean:
 	-for d in $(DIRS); do ( cd $$d; $(MAKE) docclean; cd - ); done
 
-test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToolsForHomalg test_ToricVarieties test_Modules test_homalg 
+test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToolsForHomalg test_ToricVarieties test_Modules test_homalg
 
 build:
 ifndef GAP_HOME
@@ -75,98 +75,98 @@ doc_Convex:
 	cd Convex; $(MAKE) doc; cd -;
 
 doc_Gauss:
-	cd Gauss; $(MAKE) doc; cd -; 
+	cd Gauss; $(MAKE) doc; cd -;
 
 doc_ExamplesForHomalg:
-	cd ExamplesForHomalg; $(MAKE) doc; cd -; 
+	cd ExamplesForHomalg; $(MAKE) doc; cd -;
 
 doc_GaussForHomalg:
-	cd GaussForHomalg; $(MAKE) doc; cd -; 
+	cd GaussForHomalg; $(MAKE) doc; cd -;
 
 doc_GradedModules:
-	cd GradedModules; $(MAKE) doc; cd -; 
+	cd GradedModules; $(MAKE) doc; cd -;
 
 doc_HomalgToCAS:
-	cd HomalgToCAS; $(MAKE) doc; cd -; 
+	cd HomalgToCAS; $(MAKE) doc; cd -;
 
 doc_GradedRingForHomalg:
-	cd GradedRingForHomalg; $(MAKE) doc; cd -; 
+	cd GradedRingForHomalg; $(MAKE) doc; cd -;
 
 doc_IO_ForHomalg:
-	cd IO_ForHomalg; $(MAKE) doc; cd -; 
+	cd IO_ForHomalg; $(MAKE) doc; cd -;
 
 doc_LocalizeRingForHomalg:
-	cd LocalizeRingForHomalg; $(MAKE) doc; cd -; 
+	cd LocalizeRingForHomalg; $(MAKE) doc; cd -;
 
 doc_MatricesForHomalg:
-	cd MatricesForHomalg; $(MAKE) doc; cd -; 
+	cd MatricesForHomalg; $(MAKE) doc; cd -;
 
 doc_PolymakeInterface:
-	cd PolymakeInterface; $(MAKE) doc; cd -; 
+	cd PolymakeInterface; $(MAKE) doc; cd -;
 
 doc_RingsForHomalg:
-	cd RingsForHomalg; $(MAKE) doc; cd -; 
+	cd RingsForHomalg; $(MAKE) doc; cd -;
 
 doc_SCO:
-	cd SCO; $(MAKE) doc; cd -; 
+	cd SCO; $(MAKE) doc; cd -;
 
 doc_ToolsForHomalg:
-	cd ToolsForHomalg; $(MAKE) doc; cd -; 
+	cd ToolsForHomalg; $(MAKE) doc; cd -;
 
 doc_ToricVarieties:
-	cd ToricVarieties; $(MAKE) doc; cd -; 
+	cd ToricVarieties; $(MAKE) doc; cd -;
 
 doc_Modules:
-	cd Modules; $(MAKE) doc; cd -; 
+	cd Modules; $(MAKE) doc; cd -;
 
 doc_homalg:
-	cd homalg; $(MAKE) doc; cd -; 
+	cd homalg; $(MAKE) doc; cd -;
 
 ############################################
 test_Convex:
 	cd Convex; $(MAKE) test; cd -;
 
 test_Gauss:
-	cd Gauss; $(MAKE) test; cd -; 
+	cd Gauss; $(MAKE) test; cd -;
 
 test_ExamplesForHomalg:
-	cd ExamplesForHomalg; $(MAKE) test; cd -; 
+	cd ExamplesForHomalg; $(MAKE) test; cd -;
 
 test_GaussForHomalg:
-	cd GaussForHomalg; $(MAKE) test; cd -; 
+	cd GaussForHomalg; $(MAKE) test; cd -;
 
 test_GradedModules:
-	cd GradedModules; $(MAKE) test; cd -; 
+	cd GradedModules; $(MAKE) test; cd -;
 
 test_HomalgToCAS:
-	cd HomalgToCAS; $(MAKE) test; cd -; 
+	cd HomalgToCAS; $(MAKE) test; cd -;
 
 test_GradedRingForHomalg:
-	cd GradedRingForHomalg; $(MAKE) test; cd -; 
+	cd GradedRingForHomalg; $(MAKE) test; cd -;
 
 test_IO_ForHomalg:
-	cd IO_ForHomalg; $(MAKE) test; cd -; 
+	cd IO_ForHomalg; $(MAKE) test; cd -;
 
 test_LocalizeRingForHomalg:
-	cd LocalizeRingForHomalg; $(MAKE) test; cd -; 
+	cd LocalizeRingForHomalg; $(MAKE) test; cd -;
 
 test_MatricesForHomalg:
-	cd MatricesForHomalg; $(MAKE) test; cd -; 
+	cd MatricesForHomalg; $(MAKE) test; cd -;
 
 test_RingsForHomalg:
-	cd RingsForHomalg; $(MAKE) test; cd -; 
+	cd RingsForHomalg; $(MAKE) test; cd -;
 
 test_SCO:
-	cd SCO; $(MAKE) test; cd -; 
+	cd SCO; $(MAKE) test; cd -;
 
 test_ToolsForHomalg:
-	cd ToolsForHomalg; $(MAKE) test; cd -; 
+	cd ToolsForHomalg; $(MAKE) test; cd -;
 
 test_ToricVarieties:
-	cd ToricVarieties; $(MAKE) test; cd -; 
+	cd ToricVarieties; $(MAKE) test; cd -;
 
 test_Modules:
-	cd Modules; $(MAKE) test; cd -; 
+	cd Modules; $(MAKE) test; cd -;
 
 test_homalg:
-	cd homalg; $(MAKE) test; cd -; 
+	cd homalg; $(MAKE) test; cd -;
