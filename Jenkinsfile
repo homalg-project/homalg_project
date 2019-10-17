@@ -10,22 +10,6 @@ pipeline {
 	}
 
 	stages {
-		stage('doc') {
-			steps {
-				dir('pkg/homalg_project') {
-					sh 'TERM=dumb make -j 4 doc'
-				}
-			}
-		}
-
-		stage('build') {
-			steps {
-				dir('pkg/homalg_project') {
-					sh 'TERM=dumb make build'
-				}
-			}
-		}
-
 		stage('test') {
 			steps {
 				dir('pkg/homalg_project') {

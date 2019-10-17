@@ -19,14 +19,7 @@ docclean:
 
 test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToolsForHomalg test_ToricVarieties test_Modules test_homalg
 
-build:
-ifndef GAP_HOME
-	$(error environment variable GAP_HOME is not set)
-endif
-ifneq ($(POLYMAKE_CONFIG_PATH),)
-	cd PolymakeInterface && ./configure $$GAP_HOME && $(MAKE)
-endif
-	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE)
+build: build_PolymakeInterface build_Gauss
 
 ci-prepare:
 	./ci_prepare
@@ -96,6 +89,21 @@ doc_Modules:
 
 doc_homalg:
 	cd homalg; $(MAKE) doc; cd -;
+
+############################################
+build_PolymakeInterface:
+ifndef GAP_HOME
+	$(error environment variable GAP_HOME is not set)
+endif
+ifneq ($(POLYMAKE_CONFIG_PATH),)
+	cd PolymakeInterface && ./configure $$GAP_HOME && $(MAKE)
+endif
+
+build_Gauss:
+ifndef GAP_HOME
+	$(error environment variable GAP_HOME is not set)
+endif
+	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE)
 
 ############################################
 test_Convex:
