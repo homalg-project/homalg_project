@@ -24,12 +24,7 @@ build: build_PolymakeInterface build_Gauss
 ci-prepare:
 	./ci_prepare
 
-ci-run-test_suite: ci-test_test_suite_test_packages_of_homalg_project ci-test_test_suite_main_examples_of_homalg_project
-
-ci-run-tests: ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_homalg ci-run-test_suite
-
-ci-test: ci-prepare doc build
-	$(MAKE) ci-run-tests
+ci-test: ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_homalg ci-test_test_suite_test_packages_of_homalg_project ci-test_test_suite_main_examples_of_homalg_project
 	./gather_performance_data.py
 
 ############################################
@@ -103,83 +98,83 @@ endif
 	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE)
 
 ############################################
-test_Convex:
+test_Convex: doc_Convex
 	$(MAKE) -C Convex test
 
-test_Gauss:
+test_Gauss: doc_Gauss build_Gauss
 	$(MAKE) -C Gauss test
 
-test_ExamplesForHomalg:
+test_ExamplesForHomalg: doc_ExamplesForHomalg
 	$(MAKE) -C ExamplesForHomalg test
 
-test_GaussForHomalg:
+test_GaussForHomalg: doc_GaussForHomalg
 	$(MAKE) -C GaussForHomalg test
 
-test_GradedModules:
+test_GradedModules: doc_GradedModules
 	$(MAKE) -C GradedModules test
 
-test_HomalgToCAS:
+test_HomalgToCAS: doc_HomalgToCAS
 	$(MAKE) -C HomalgToCAS test
 
-test_GradedRingForHomalg:
+test_GradedRingForHomalg: doc_GradedRingForHomalg
 	$(MAKE) -C GradedRingForHomalg test
 
-test_IO_ForHomalg:
+test_IO_ForHomalg: doc_IO_ForHomalg
 	$(MAKE) -C IO_ForHomalg test
 
-test_LocalizeRingForHomalg:
+test_LocalizeRingForHomalg: doc_LocalizeRingForHomalg
 	$(MAKE) -C LocalizeRingForHomalg test
 
-test_MatricesForHomalg:
+test_MatricesForHomalg: doc_MatricesForHomalg
 	$(MAKE) -C MatricesForHomalg test
 
-test_RingsForHomalg:
+test_RingsForHomalg: doc_RingsForHomalg
 	$(MAKE) -C RingsForHomalg test
 
-test_SCO:
+test_SCO: doc_SCO
 	$(MAKE) -C SCO test
 
-test_ToricVarieties:
+test_ToricVarieties: doc_ToricVarieties
 	$(MAKE) -C ToricVarieties test
 
-test_Modules:
+test_Modules: doc_Modules
 	$(MAKE) -C Modules test
 
-test_homalg:
+test_homalg: doc_homalg
 	$(MAKE) -C homalg test
 
 ############################################
-ci-test_Convex:
+ci-test_Convex: doc_Convex
 	$(MAKE) -C Convex ci-test
 
-ci-test_Gauss:
+ci-test_Gauss: doc_Gauss build_Gauss
 	$(MAKE) -C Gauss ci-test
 
-ci-test_ExamplesForHomalg:
+ci-test_ExamplesForHomalg: doc_ExamplesForHomalg
 	$(MAKE) -C ExamplesForHomalg ci-test
 
-ci-test_GaussForHomalg:
+ci-test_GaussForHomalg: doc_GaussForHomalg
 	$(MAKE) -C GaussForHomalg ci-test
 
-ci-test_GradedModules:
+ci-test_GradedModules: doc_GradedModules
 	$(MAKE) -C GradedModules ci-test
 
-ci-test_HomalgToCAS:
+ci-test_HomalgToCAS: doc_HomalgToCAS
 	$(MAKE) -C HomalgToCAS ci-test
 
-ci-test_GradedRingForHomalg:
+ci-test_GradedRingForHomalg: doc_GradedRingForHomalg
 	$(MAKE) -C GradedRingForHomalg ci-test
 
-ci-test_IO_ForHomalg:
+ci-test_IO_ForHomalg: doc_IO_ForHomalg
 	$(MAKE) -C IO_ForHomalg ci-test
 
-ci-test_LocalizeRingForHomalg:
+ci-test_LocalizeRingForHomalg: doc_LocalizeRingForHomalg
 	$(MAKE) -C LocalizeRingForHomalg ci-test
 
-ci-test_MatricesForHomalg:
+ci-test_MatricesForHomalg: doc_MatricesForHomalg
 	$(MAKE) -C MatricesForHomalg ci-test
 
-ci-test_RingsForHomalg:
+ci-test_RingsForHomalg: doc_RingsForHomalg
 ifneq ($(SINGULAR_PATH),)
 ifneq ($(SAGE_PATH),)
 ifneq ($(M2_PATH),)
@@ -192,25 +187,25 @@ endif
 endif
 endif
 
-ci-test_SCO:
+ci-test_SCO: doc_SCO
 	$(MAKE) -C SCO ci-test
 
-ci-test_ToricVarieties:
+ci-test_ToricVarieties: doc_ToricVarieties
 	$(MAKE) -C ToricVarieties ci-test
 
-ci-test_Modules:
+ci-test_Modules: doc_Modules
 	$(MAKE) -C Modules ci-test
 
-ci-test_homalg:
+ci-test_homalg: doc_homalg
 	$(MAKE) -C homalg ci-test
 
 ############################################
-ci-test_test_suite_test_packages_of_homalg_project:
+ci-test_test_suite_test_packages_of_homalg_project: ci-prepare build
 	exec 9>&1; \
 	OUTPUT=$$(cd ../test_suite && ./test_packages_of_homalg_project 2>&1 | tee >(cat - >&9)); \
 	! echo "$$OUTPUT" | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 
-ci-test_test_suite_main_examples_of_homalg_project:
+ci-test_test_suite_main_examples_of_homalg_project: ci-prepare build
 	exec 9>&1; \
 	OUTPUT=$$(cd ../test_suite && ./main_examples_of_homalg_project 2>&1 | tee >(cat - >&9)); \
 	! echo "$$OUTPUT" | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
