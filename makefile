@@ -98,83 +98,83 @@ endif
 	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE)
 
 ############################################
-test_Convex: doc_Convex
+test_Convex:
 	$(MAKE) -C Convex test
 
-test_Gauss: doc_Gauss build_Gauss
+test_Gauss: build_Gauss
 	$(MAKE) -C Gauss test
 
-test_ExamplesForHomalg: doc_ExamplesForHomalg
+test_ExamplesForHomalg:
 	$(MAKE) -C ExamplesForHomalg test
 
-test_GaussForHomalg: doc_GaussForHomalg
+test_GaussForHomalg:
 	$(MAKE) -C GaussForHomalg test
 
-test_GradedModules: doc_GradedModules
+test_GradedModules:
 	$(MAKE) -C GradedModules test
 
-test_HomalgToCAS: doc_HomalgToCAS
+test_HomalgToCAS:
 	$(MAKE) -C HomalgToCAS test
 
-test_GradedRingForHomalg: doc_GradedRingForHomalg
+test_GradedRingForHomalg:
 	$(MAKE) -C GradedRingForHomalg test
 
-test_IO_ForHomalg: doc_IO_ForHomalg
+test_IO_ForHomalg:
 	$(MAKE) -C IO_ForHomalg test
 
-test_LocalizeRingForHomalg: doc_LocalizeRingForHomalg
+test_LocalizeRingForHomalg:
 	$(MAKE) -C LocalizeRingForHomalg test
 
-test_MatricesForHomalg: doc_MatricesForHomalg
+test_MatricesForHomalg:
 	$(MAKE) -C MatricesForHomalg test
 
-test_RingsForHomalg: doc_RingsForHomalg
+test_RingsForHomalg:
 	$(MAKE) -C RingsForHomalg test
 
-test_SCO: doc_SCO
+test_SCO:
 	$(MAKE) -C SCO test
 
-test_ToricVarieties: doc_ToricVarieties
+test_ToricVarieties:
 	$(MAKE) -C ToricVarieties test
 
-test_Modules: doc_Modules
+test_Modules:
 	$(MAKE) -C Modules test
 
-test_homalg: doc_homalg
+test_homalg:
 	$(MAKE) -C homalg test
 
 ############################################
-ci-test_Convex: doc_Convex
+ci-test_Convex:
 	$(MAKE) -C Convex ci-test
 
-ci-test_Gauss: doc_Gauss build_Gauss
+ci-test_Gauss: build_Gauss
 	$(MAKE) -C Gauss ci-test
 
-ci-test_ExamplesForHomalg: doc_ExamplesForHomalg
+ci-test_ExamplesForHomalg:
 	$(MAKE) -C ExamplesForHomalg ci-test
 
-ci-test_GaussForHomalg: doc_GaussForHomalg
+ci-test_GaussForHomalg:
 	$(MAKE) -C GaussForHomalg ci-test
 
-ci-test_GradedModules: doc_GradedModules
+ci-test_GradedModules:
 	$(MAKE) -C GradedModules ci-test
 
-ci-test_HomalgToCAS: doc_HomalgToCAS
+ci-test_HomalgToCAS:
 	$(MAKE) -C HomalgToCAS ci-test
 
-ci-test_GradedRingForHomalg: doc_GradedRingForHomalg
+ci-test_GradedRingForHomalg:
 	$(MAKE) -C GradedRingForHomalg ci-test
 
-ci-test_IO_ForHomalg: doc_IO_ForHomalg
+ci-test_IO_ForHomalg:
 	$(MAKE) -C IO_ForHomalg ci-test
 
-ci-test_LocalizeRingForHomalg: doc_LocalizeRingForHomalg
+ci-test_LocalizeRingForHomalg:
 	$(MAKE) -C LocalizeRingForHomalg ci-test
 
-ci-test_MatricesForHomalg: doc_MatricesForHomalg
+ci-test_MatricesForHomalg:
 	$(MAKE) -C MatricesForHomalg ci-test
 
-ci-test_RingsForHomalg: doc_RingsForHomalg
+ci-test_RingsForHomalg:
 ifneq ($(SINGULAR_PATH),)
 ifneq ($(SAGE_PATH),)
 ifneq ($(M2_PATH),)
@@ -187,16 +187,16 @@ endif
 endif
 endif
 
-ci-test_SCO: doc_SCO
+ci-test_SCO:
 	$(MAKE) -C SCO ci-test
 
-ci-test_ToricVarieties: doc_ToricVarieties
+ci-test_ToricVarieties:
 	$(MAKE) -C ToricVarieties ci-test
 
-ci-test_Modules: doc_Modules
+ci-test_Modules:
 	$(MAKE) -C Modules ci-test
 
-ci-test_homalg: doc_homalg
+ci-test_homalg:
 	$(MAKE) -C homalg ci-test
 
 ############################################
