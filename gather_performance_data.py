@@ -4,8 +4,8 @@ import os
 from pathlib import Path
 
 times = {}
-for filename in Path(".").glob("*/performance.out"):
-	package_name = os.path.dirname(filename)
+for filename in Path(".").glob("**/performance.out"):
+	package_name = os.path.basename(os.path.dirname(filename))
 	print("read performance data for package", package_name)
 	with open(filename) as file:
 		content = file.read()

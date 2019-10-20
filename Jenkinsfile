@@ -25,7 +25,7 @@ pipeline {
 			group: 'homalg performance',
 			style: 'line',
 			csvSeries: [[
-				file: 'pkg/homalg_project/performance_data.csv',
+				file: 'pkg/performance_data.csv',
 				exclusionValues: '',
 				displayTableFlag: true,
 				inclusionFlag: 'OFF',

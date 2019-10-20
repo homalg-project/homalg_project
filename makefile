@@ -25,7 +25,7 @@ ci-prepare:
 	./ci_prepare
 
 ci-test: ci-test_LoadSheaves ci-test_LoadAllPackages ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_homalg ci-test_AbelianSystems ci-test_alexander ci-test_Conley ci-test_D-Modules ci-test_k-Points ci-test_Orbifolds ci-test_Sheaves ci-test_SimplicialObjects ci-test_SystemTheory ci-test_VirtualCAS ci-test_test_suite_main_examples_of_homalg_project
-	./gather_performance_data.py
+	cd .. && homalg_project/gather_performance_data.py
 
 ############################################
 doc_4ti2Interface:
