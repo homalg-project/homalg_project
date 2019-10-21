@@ -14,7 +14,7 @@ jobs:
           sudo apt dist-upgrade -y
           sudo apt install -y texlive-latex-extra texlive-science curl time python-pathlib
           echo "SetInfoLevel(InfoPackageLoading, 3);" > ~/.gap/gaprc
-          TERM=dumb make ci-test
+          TERM=dumb make -j 4 --output-sync ci-test
           [ "$GAP_HOME" != "/home/gap/inst/gap-master" ] && bash <(curl -s https://codecov.io/bash) || true
 workflows:
   version: 2
