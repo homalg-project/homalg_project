@@ -31,7 +31,6 @@ ci-test_additional_packages: ci-test_AbelianSystems ci-test_alexander ci-test_Co
 ci-test_test_suite: ci-test_test_suite_D-Modules ci-test_test_suite_ExamplesForHomalg_GAP ci-test_test_suite_ExamplesForHomalg_Macaulay ci-test_test_suite_ExamplesForHomalg_MAGMA ci-test_test_suite_ExamplesForHomalg_maple ci-test_test_suite_ExamplesForHomalg_Singular ci-test_test_suite_GradedModules_Macaulay ci-test_test_suite_GradedModules_MAGMA ci-test_test_suite_GradedModules_maple ci-test_test_suite_GradedModules_Singular ci-test_test_suite_MapleForHomalg ci-test_test_suite_RingsForHomalg ci-test_test_suite_Sheaves_Macaulay ci-test_test_suite_Sheaves_MAGMA ci-test_test_suite_Sheaves_maple ci-test_test_suite_Sheaves_Singular
 
 ci-test: ci-test_LoadSheaves ci-test_LoadAllPackages ci-test_homalg_packages ci-test_additional_packages ci-test_test_suite
-ci-test: ci-test_test_suite ci-test_LoadSheaves ci-test_LoadAllPackages ci-test_homalg_packages ci-test_additional_packages
 	cd .. && homalg_project/gather_performance_data.py
 
 ############################################
