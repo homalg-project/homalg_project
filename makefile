@@ -215,42 +215,42 @@ ci-test_LoadAllPackages: ci-prepare build
 	# TODO: make test pass and remove "|| true"
 	echo 'LoadAllPackages( );' | gap --quitonbreak || true
 
-ci-test_AbelianSystems:
+ci-test_AbelianSystems: ci-prepare
 	# TODO: make test pass and remove "|| true"
 	$(MAKE) -C ../AbelianSystems ci-test || true
 
-ci-test_alexander:
+ci-test_alexander: ci-prepare
 	$(MAKE) -C ../alexander ci-test
 
-ci-test_Conley:
+ci-test_Conley: ci-prepare
 	# TODO: make test pass and remove "|| true"
 	$(MAKE) -C ../Conley ci-test || true
 
-ci-test_D-Modules:
+ci-test_D-Modules: ci-prepare
 	# TODO: make test pass and remove "|| true"
 	$(MAKE) -C ../D-Modules ci-test || true
 
-ci-test_k-Points:
+ci-test_k-Points: ci-prepare
 	# TODO: make test pass and remove "|| true"
 	$(MAKE) -C ../k-Points ci-test || true
 
-ci-test_Orbifolds:
+ci-test_Orbifolds: ci-prepare
 	# TODO: make test pass and remove "|| true"
 	$(MAKE) -C ../Orbifolds ci-test || true
 
-ci-test_Sheaves:
+ci-test_Sheaves: ci-prepare
 	# TODO: make test pass and remove "|| true"
 	$(MAKE) -C ../Sheaves ci-test || true
 
-ci-test_SimplicialObjects:
+ci-test_SimplicialObjects: ci-prepare
 	# TODO: make test pass and remove "|| true"
 	$(MAKE) -C ../SimplicialObjects ci-test || true
 
-ci-test_SystemTheory:
+ci-test_SystemTheory: ci-prepare
 	# TODO: make test pass and remove "|| true"
 	$(MAKE) -C ../SystemTheory ci-test || true
 
-ci-test_VirtualCAS:
+ci-test_VirtualCAS: ci-prepare
 	$(MAKE) -C ../VirtualCAS ci-test
 
 ############################################
