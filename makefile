@@ -207,9 +207,7 @@ ci-test_homalg:
 
 ############################################
 ci-test_LoadSheaves: ci-prepare build
-	# TODO: fails with gap-master
-	# TODO: make test pass and remove "|| true"
-	echo 'Assert( 0, LoadPackage( "Sheaves" ) = true );' | gap --quitonbreak || true
+	echo 'Assert( 0, LoadPackage( "Sheaves" ) = true );' | gap --quitonbreak
 
 ci-test_LoadAllPackages: ci-prepare build
 	# TODO: make test pass and remove "|| true"
@@ -227,8 +225,9 @@ ci-test_Conley: ci-prepare
 	$(MAKE) -C ../Conley ci-test || true
 
 ci-test_D-Modules: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../D-Modules ci-test || true
+ifneq ($(MAPLE_PATH),)
+	$(MAKE) -C ../D-Modules ci-test
+endif
 
 ci-test_k-Points: ci-prepare
 	# TODO: make test pass and remove "|| true"
@@ -239,8 +238,7 @@ ci-test_Orbifolds: ci-prepare
 	$(MAKE) -C ../Orbifolds ci-test || true
 
 ci-test_Sheaves: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../Sheaves ci-test || true
+	$(MAKE) -C ../Sheaves ci-test
 
 ci-test_SimplicialObjects: ci-prepare
 	# TODO: make test pass and remove "|| true"
