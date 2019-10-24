@@ -1302,7 +1302,9 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 ## caution: M will now have two attributes EvalCompose and Eval
                 M := M * v;
                 
-                SetIsMutableMatrix( M, true );
+                ## attributes do not get saved for mutable objects since GAP 4.11
+                ## so we MUST evaluate M before making it mutable
+                Eval( M ); SetIsMutableMatrix( M, true );
                 
                 ## cleanup the j-th column
                 
@@ -1343,7 +1345,9 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                     break;
                 fi;
                 
-                SetIsMutableMatrix( M, true );
+                ## attributes do not get saved for mutable objects since GAP 4.11
+                ## so we MUST evaluate M before making it mutable
+                Eval( M ); SetIsMutableMatrix( M, true );
                 
                 if compute_U then
                     U := MutableCopyMat( U );
