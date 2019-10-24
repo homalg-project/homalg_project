@@ -275,7 +275,8 @@ InstallMethod( Eval,
     
     if IsBound( RP!.InitialMatrix ) then
         ResetFilterObj( C, IsInitialMatrix );
-        return RP!.InitialMatrix( C );
+        SetEval( C, RP!.InitialMatrix( C ) );
+        return Eval( C );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
@@ -339,7 +340,8 @@ InstallMethod( Eval,
     
     if IsBound( RP!.InitialIdentityMatrix ) then
         ResetFilterObj( C, IsInitialIdentityMatrix );
-        return RP!.InitialIdentityMatrix( C );
+        SetEval( C, RP!.InitialIdentityMatrix( C ) );
+        return Eval( C );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
