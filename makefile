@@ -391,10 +391,8 @@ endif
 
 ci-test_test_suite_Sheaves_Singular: ci-prepare
 ifneq ($(SINGULAR_PATH),)
-	# TODO: fails with gap-master
-	# TODO: make test pass and remove "|| true"
 	mkdir -p ../test_suite/test_suite_Sheaves_Singular; \
 	cd ../test_suite/test_suite_Sheaves_Singular; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../Sheaves_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
+	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../Sheaves_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
