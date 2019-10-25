@@ -43,7 +43,8 @@
     [4X    [104X
     [4X    if IsBound( RP!.InitialMatrix ) then[104X
     [4X        ResetFilterObj( C, IsInitialMatrix );[104X
-    [4X        return RP!.InitialMatrix( C );[104X
+    [4X        SetEval( C, RP!.InitialMatrix( C ) );[104X
+    [4X        return Eval( C );[104X
     [4X    fi;[104X
     [4X    [104X
     [4X    if not IsHomalgInternalMatrixRep( C ) then[104X
@@ -91,7 +92,8 @@
     [4X    [104X
     [4X    if IsBound( RP!.InitialIdentityMatrix ) then[104X
     [4X        ResetFilterObj( C, IsInitialIdentityMatrix );[104X
-    [4X        return RP!.InitialIdentityMatrix( C );[104X
+    [4X        SetEval( C, RP!.InitialIdentityMatrix( C ) );[104X
+    [4X        return Eval( C );[104X
     [4X    fi;[104X
     [4X    [104X
     [4X    if not IsHomalgInternalMatrixRep( C ) then[104X
