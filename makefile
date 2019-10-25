@@ -257,7 +257,7 @@ ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_D-Modules; \
 	cd ../test_suite/test_suite_D-Modules; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../D-Modules.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../D-Modules.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_ExamplesForHomalg_GAP: ci-prepare
@@ -265,7 +265,7 @@ ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_GAP; \
 	cd ../test_suite/test_suite_ExamplesForHomalg_GAP; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../ExamplesForHomalg_GAP.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_GAP.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_ExamplesForHomalg_Macaulay: ci-prepare
@@ -273,7 +273,7 @@ ifneq ($(M2_PATH),)
 	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_Macaulay; \
 	cd ../test_suite/test_suite_ExamplesForHomalg_Macaulay; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../ExamplesForHomalg_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_ExamplesForHomalg_MAGMA: ci-prepare
@@ -281,7 +281,7 @@ ifneq ($(MAGMA_PATH),)
 	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_MAGMA; \
 	cd ../test_suite/test_suite_ExamplesForHomalg_MAGMA; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../ExamplesForHomalg_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_ExamplesForHomalg_maple: ci-prepare
@@ -289,7 +289,7 @@ ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_maple; \
 	cd ../test_suite/test_suite_ExamplesForHomalg_maple; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../ExamplesForHomalg_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_ExamplesForHomalg_Singular: ci-prepare
@@ -298,7 +298,7 @@ ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_Singular; \
 	cd ../test_suite/test_suite_ExamplesForHomalg_Singular; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../ExamplesForHomalg_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 endif
 
@@ -307,7 +307,7 @@ ifneq ($(M2_PATH),)
 	mkdir -p ../test_suite/test_suite_GradedModules_Macaulay; \
 	cd ../test_suite/test_suite_GradedModules_Macaulay; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../GradedModules_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_GradedModules_MAGMA: ci-prepare
@@ -317,7 +317,7 @@ ifneq ($(MAGMA_PATH),)
 	#mkdir -p ../test_suite/test_suite_GradedModules_MAGMA; \
 	#cd ../test_suite/test_suite_GradedModules_MAGMA; \
 	#exec 9>&1; \
-	#! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../GradedModules_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
+	#! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
 endif
 
 ci-test_test_suite_GradedModules_maple: ci-prepare
@@ -325,7 +325,7 @@ ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_GradedModules_maple; \
 	cd ../test_suite/test_suite_GradedModules_maple; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../GradedModules_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_GradedModules_Singular: ci-prepare
@@ -333,7 +333,7 @@ ifneq ($(SINGULAR_PATH),)
 	mkdir -p ../test_suite/test_suite_GradedModules_Singular; \
 	cd ../test_suite/test_suite_GradedModules_Singular; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../GradedModules_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_MapleForHomalg: ci-prepare
@@ -342,7 +342,7 @@ ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_MapleForHomalg; \
 	cd ../test_suite/test_suite_MapleForHomalg; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../MapleForHomalg.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../MapleForHomalg.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
 endif
 
 ci-test_test_suite_RingsForHomalg: ci-prepare
@@ -354,7 +354,7 @@ ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_RingsForHomalg; \
 	cd ../test_suite/test_suite_RingsForHomalg; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../RingsForHomalg.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../RingsForHomalg.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 endif
 endif
@@ -367,7 +367,7 @@ ifneq ($(M2_PATH),)
 	mkdir -p ../test_suite/test_suite_Sheaves_Macaulay; \
 	cd ../test_suite/test_suite_Sheaves_Macaulay; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../Sheaves_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
 endif
 
 ci-test_test_suite_Sheaves_MAGMA: ci-prepare
@@ -375,7 +375,7 @@ ifneq ($(MAGMA_PATH),)
 	mkdir -p ../test_suite/test_suite_Sheaves_MAGMA; \
 	cd ../test_suite/test_suite_Sheaves_MAGMA; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../Sheaves_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_Sheaves_maple: ci-prepare
@@ -384,7 +384,7 @@ ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_Sheaves_maple; \
 	cd ../test_suite/test_suite_Sheaves_maple; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../Sheaves_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
 endif
 
 ci-test_test_suite_Sheaves_Singular: ci-prepare
@@ -392,5 +392,5 @@ ifneq ($(SINGULAR_PATH),)
 	mkdir -p ../test_suite/test_suite_Sheaves_Singular; \
 	cd ../test_suite/test_suite_Sheaves_Singular; \
 	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S" --output=performance.out ../Sheaves_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
+	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif

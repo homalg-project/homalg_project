@@ -6,4 +6,5 @@
 stats
 coverage.json
 performance.out
-performance_data.csv
+*_cpu_time.csv
+*_real_time.csv

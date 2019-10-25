@@ -3,24 +3,26 @@
 import os
 from pathlib import Path
 
-times = {}
+cpu_times = {}
+real_times = {}
 for filename in Path(".").glob("**/performance.out"):
 	package_name = os.path.basename(os.path.dirname(filename))
 	print("read performance data for package", package_name)
 	with open(filename) as file:
-		content = file.read()
-		parts = content.split(" ")
+		cpu_time = file.readline()
+		parts = cpu_time.split(" ")
 		if len(parts) != 2:
-			print(filename, "does not contain exactly two floats")
+			print(filename, "does not contain exactly two floats in the first line")
 			continue
-		total_time = round(float(parts[0]) + float(parts[1]), 2)
-		times[package_name] = total_time
+		total_cpu_time = round(float(parts[0]) + float(parts[1]), 2)
+		cpu_times[package_name] = total_cpu_time
+		real_time = file.readline()
+		real_times[package_name] = float(real_time)
 
-headers = []
-values = []
-for key in sorted(times.keys()):
-	headers.append('"' + key + '"')
-	values.append('"' + str(times[key]) + '"')
+for key,value in cpu_times.items():
+	with open(key + "_cpu_time.csv", "w") as file:
+		file.write(key + "\n" + str(value))
 
-with open("performance_data.csv", "w") as file:
-	file.write(",".join(headers) + "\n" + ",".join(values))
+for key,value in real_times.items():
+	with open(key + "_real_time.csv", "w") as file:
+		file.write(key + "\n" + str(value))
