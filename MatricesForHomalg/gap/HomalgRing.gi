@@ -1753,6 +1753,16 @@ InstallGlobalFunction( CreateHomalgRing,
     ## e.g. needed to construct residue class rings
     homalg_ring!.ConstructorArguments := arg;
     
+    homalg_ring!.interpret_rationals_func :=
+      function( r )
+        local d;
+        d := DenominatorRat( r ) / homalg_ring;
+        if IsZero( d ) or not IsUnit( homalg_ring, d ) then
+            return fail;
+        fi;
+        return r / homalg_ring;
+    end;
+    
     return homalg_ring;
     
 end );
