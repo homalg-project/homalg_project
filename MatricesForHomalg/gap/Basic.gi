@@ -1428,3 +1428,36 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
     return M;
     
 end );
+
+##  <#GAPDoc Label="SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices">
+##  <ManSection>
+##    <Oper Arg="M" Name="SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices" Label="for matrices"/>
+##    <Returns>a list of 5 &homalg; matrices</Returns>
+##    <Description>
+##      The input is a &homalg; matrix <A>M</A>.
+##      The output is a 5-tuple of &homalg; matrices <A>S</A>, <A>U</A>, <A>V</A>, <A>UI</A>, <A>VI</A>,
+##      such that <A> U M V = S</A>. Moreover, <A>U</A> and <A>V</A> are invertible with inverses <A>UI</A>, <A>VI</A>, respectively.
+##      The idea is that the matrix <A>S</A> should look "simpler" than <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices,
+    function( M )
+        local ring, U, V, UI, VI, S;
+        
+        ring := HomalgRing( M );
+        
+        U := HomalgVoidMatrix( ring );
+        
+        V := HomalgVoidMatrix( ring );
+        
+        UI := HomalgVoidMatrix( ring );
+        
+        VI := HomalgVoidMatrix( ring );
+        
+        S := SimplerEquivalentMatrix( M, U, V, UI, VI );
+        
+        return [ S, U, V, UI, VI ];
+        
+end );

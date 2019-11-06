@@ -167,6 +167,8 @@
 <#Include Label="GenerateSameRowModule">
 <#Include Label="GenerateSameColumnModule">
 
+<#Include Label="SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices">
+
 </Section>
 
 <!-- ############################################################ -->
