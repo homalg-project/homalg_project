@@ -111,3 +111,7 @@ DeclareGlobalFunction( "BestBasis" );
 DeclareGlobalFunction( "SimplerEquivalentMatrix" );
 
 DeclareGlobalFunction( "SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices" );
+
+DeclareGlobalFunction( "SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix" );
+
+DeclareGlobalFunction( "SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix" );

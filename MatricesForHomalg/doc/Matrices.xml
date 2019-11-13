@@ -168,6 +168,8 @@
 <#Include Label="GenerateSameColumnModule">
 
 <#Include Label="SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices">
+<#Include Label="SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix">
+<#Include Label="SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix">
 
 </Section>
 

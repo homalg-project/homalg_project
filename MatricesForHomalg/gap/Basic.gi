@@ -1461,3 +1461,81 @@ InstallGlobalFunction( SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInver
         return [ S, U, V, UI, VI ];
         
 end );
+
+##  <#GAPDoc Label="SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix">
+##  <ManSection>
+##    <Oper Arg="M" Name="SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix" Label="for matrices"/>
+##    <Returns>a list of 3 &homalg; matrices</Returns>
+##    <Description>
+##      The input is a &homalg; matrix <A>M</A>.
+##      The output is a 3-tuple of &homalg; matrices <A>S</A>, <A>T</A>, <A>TI</A>
+##      such that <A> T M = S</A>. Moreover, <A>T</A> is invertible with inverse <A>TI</A>.
+##      The idea is that the matrix <A>S</A> should look "simpler" than <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix,
+    function( M )
+        local R, RP, T, S;
+        
+        R := HomalgRing( M );
+        
+        RP := homalgTable( R );
+        
+        if IsBound(RP!.RowReducedEchelonForm) or IsBound(RP!.ColumnReducedEchelonForm) then
+            
+            T := HomalgVoidMatrix( R );
+            
+            S := RowReducedEchelonForm( M, T );
+            
+        else
+            
+            T := HomalgIdentityMatrix( NrRows( M ), R );
+            
+            S := M;
+            
+        fi;
+        
+        return [ S, T, LeftInverseLazy( T ) ];
+        
+end );
+
+##  <#GAPDoc Label="SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix">
+##  <ManSection>
+##    <Oper Arg="M" Name="SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix" Label="for matrices"/>
+##    <Returns>a list of 3 &homalg; matrices</Returns>
+##    <Description>
+##      The input is a &homalg; matrix <A>M</A>.
+##      The output is a 3-tuple of &homalg; matrices <A>S</A>, <A>T</A>, <A>TI</A>
+##      such that <A> M T = S</A>. Moreover, <A>T</A> is invertible with inverse <A>TI</A>.
+##      The idea is that the matrix <A>S</A> should look "simpler" than <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix,
+    function( M )
+        local R, RP, T, S;
+        
+        R := HomalgRing( M );
+        
+        RP := homalgTable( R );
+        
+        if IsBound(RP!.RowReducedEchelonForm) or IsBound(RP!.ColumnReducedEchelonForm) then
+            
+            T := HomalgVoidMatrix( R );
+            
+            S := ColumnReducedEchelonForm( M, T );
+            
+        else
+            
+            T := HomalgIdentityMatrix( NrColumns( M ), R );
+            
+            S := M;
+            
+        fi;
+        
+        return [ S, T, LeftInverseLazy( T ) ];
+        
+end );
