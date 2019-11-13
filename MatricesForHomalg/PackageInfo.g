@@ -20,6 +20,8 @@ Version := Maximum( [
   "2013.08.26", ## Martin's version
 ## this line prevents merge conflicts
   "2019.06.04", ## Florian's version
+## this line prevents merge conflicts
+  "2019.11.13", ## Sepp's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
