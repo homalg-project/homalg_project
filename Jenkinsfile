@@ -14,6 +14,7 @@ tests = [
 	'homalg',
 	'AbelianSystems',
 	'alexander',
+	'CAP_project',
 	'Conley',
 	'D-Modules',
 	'k-Points',
