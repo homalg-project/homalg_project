@@ -6,7 +6,7 @@
                         [1XMatrices for the [5Xhomalg[105X project[101X
   
   
-                               Version 2019.11.01
+                               Version 2019.11.13
   
   
                                    June 2015
@@ -319,6 +319,9 @@
       5.5-49 LeftDivide
       5.5-50 GenerateSameRowModule
       5.5-51 GenerateSameColumnModule
+      5.5-52 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices
+      5.5-53 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix
+      5.5-54 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix
   6 [33X[0;0YRing Relations[133X
     6.1 [33X[0;0YRing Relations: Categories and Representations[133X
       6.1-1 IsHomalgRingRelations

@@ -157,6 +157,9 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86CEB1FC7C358777">5.5-49 LeftDivide</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X82B2C4987D6D5BD3">5.5-50 GenerateSameRowModule</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X867A947682754A9A">5.5-51 GenerateSameColumnModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81CDBBBE878DC1E5">5.5-52 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X85DA10C07E7E5A3D">5.5-53 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X79C124318588F37F">5.5-54 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix</a></span>
 </div></div>
 </div>
 
@@ -1746,6 +1749,33 @@ end );
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the column span of <var class="Arg">M</var> and of <var class="Arg">N</var> are identical or not (--&gt; <code class="func">LeftDivide</code> (<a href="chap5_mj.html#X7D0EAF527F8514E0"><span class="RefLink">5.5-47</span></a>)).</p>
+
+<p><a id="X81CDBBBE878DC1E5" name="X81CDBBBE878DC1E5"></a></p>
+
+<h5>5.5-52 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of 5 <strong class="pkg">homalg</strong> matrices</p>
+
+<p>The input is a <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>. The output is a 5-tuple of <strong class="pkg">homalg</strong> matrices <var class="Arg">S</var>, <var class="Arg">U</var>, <var class="Arg">V</var>, <var class="Arg">UI</var>, <var class="Arg">VI</var>, such that <var class="Arg"> U M V = S</var>. Moreover, <var class="Arg">U</var> and <var class="Arg">V</var> are invertible with inverses <var class="Arg">UI</var>, <var class="Arg">VI</var>, respectively. The idea is that the matrix <var class="Arg">S</var> should look "simpler" than <var class="Arg">M</var>.</p>
+
+<p><a id="X85DA10C07E7E5A3D" name="X85DA10C07E7E5A3D"></a></p>
+
+<h5>5.5-53 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of 3 <strong class="pkg">homalg</strong> matrices</p>
+
+<p>The input is a <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>. The output is a 3-tuple of <strong class="pkg">homalg</strong> matrices <var class="Arg">S</var>, <var class="Arg">T</var>, <var class="Arg">TI</var> such that <var class="Arg"> T M = S</var>. Moreover, <var class="Arg">T</var> is invertible with inverse <var class="Arg">TI</var>. The idea is that the matrix <var class="Arg">S</var> should look "simpler" than <var class="Arg">M</var>.</p>
+
+<p><a id="X79C124318588F37F" name="X79C124318588F37F"></a></p>
+
+<h5>5.5-54 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of 3 <strong class="pkg">homalg</strong> matrices</p>
+
+<p>The input is a <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>. The output is a 3-tuple of <strong class="pkg">homalg</strong> matrices <var class="Arg">S</var>, <var class="Arg">T</var>, <var class="Arg">TI</var> such that <var class="Arg"> M T = S</var>. Moreover, <var class="Arg">T</var> is invertible with inverse <var class="Arg">TI</var>. The idea is that the matrix <var class="Arg">S</var> should look "simpler" than <var class="Arg">M</var>.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Next Chapter]</a>&nbsp;  </div>

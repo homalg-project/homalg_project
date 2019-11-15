@@ -295,6 +295,9 @@
   [2XRingElementConstructor[102X 3.4-3 
   [2XRingMap[102X, constructor for ring maps 4.2-1 
   [2XRowRankOfMatrix[102X 5.4-10 
+  [2XSimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[102X, for matrices 5.5-52 
+  [2XSimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-53 
+  [2XSimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-54 
   [2XSource[102X, for ring maps 4.4-1 
   [2XStableRank[102X 3.4-27 
   [2XSubMat[102X, homalgTable entry B.1-15 

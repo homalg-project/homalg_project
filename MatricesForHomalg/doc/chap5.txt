@@ -1488,3 +1488,31 @@
   [33X[0;0YCheck  if the column span of [3XM[103X and of [3XN[103X are identical or not (--> [2XLeftDivide[102X
   ([14X5.5-47[114X)).[133X
   
+  [1X5.5-52 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[101X
+  
+  [33X[1;0Y[29X[2XSimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[102X( [3XM[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya list of 5 [5Xhomalg[105X matrices[133X
+  
+  [33X[0;0YThe  input  is a [5Xhomalg[105X matrix [3XM[103X. The output is a 5-tuple of [5Xhomalg[105X matrices
+  [3XS[103X, [3XU[103X, [3XV[103X, [3XUI[103X, [3XVI[103X, such that [3X U M V = S[103X. Moreover, [3XU[103X and [3XV[103X are invertible with
+  inverses  [3XUI[103X,  [3XVI[103X,  respectively.  The idea is that the matrix [3XS[103X should look
+  "simpler" than [3XM[103X.[133X
+  
+  [1X5.5-53 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[101X
+  
+  [33X[1;0Y[29X[2XSimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[102X( [3XM[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya list of 3 [5Xhomalg[105X matrices[133X
+  
+  [33X[0;0YThe  input  is a [5Xhomalg[105X matrix [3XM[103X. The output is a 3-tuple of [5Xhomalg[105X matrices
+  [3XS[103X,  [3XT[103X, [3XTI[103X such that [3X T M = S[103X. Moreover, [3XT[103X is invertible with inverse [3XTI[103X. The
+  idea is that the matrix [3XS[103X should look "simpler" than [3XM[103X.[133X
+  
+  [1X5.5-54 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[101X
+  
+  [33X[1;0Y[29X[2XSimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[102X( [3XM[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya list of 3 [5Xhomalg[105X matrices[133X
+  
+  [33X[0;0YThe  input  is a [5Xhomalg[105X matrix [3XM[103X. The output is a 3-tuple of [5Xhomalg[105X matrices
+  [3XS[103X,  [3XT[103X, [3XTI[103X such that [3X M T = S[103X. Moreover, [3XT[103X is invertible with inverse [3XTI[103X. The
+  idea is that the matrix [3XS[103X should look "simpler" than [3XM[103X.[133X
+  
