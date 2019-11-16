@@ -711,7 +711,11 @@ InstallGlobalFunction( HomalgResidueClassRingElement,
         if IsHomalgRing( arg[2] ) then
             ring := arg[2];
             ar := [ a, ring ];
-            properties := KnownTruePropertiesOfObject( a );	## FIXME: a huge potential for problems
+            if IsHomalgRingElement( a ) then
+                properties := KnownTruePropertiesOfObject( a );	    ## FIXME: a huge potential for problems
+            else
+                properties := [ ];
+            fi;
             Add( ar, List( properties, ValueGlobal ) );  ## at least an empty list is inserted; avoids infinite loops
             return CallFuncList( HomalgResidueClassRingElement, ar );
         fi;
