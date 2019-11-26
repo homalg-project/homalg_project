@@ -45,7 +45,7 @@ pipeline {
 	agent any
 
 	triggers {
-		cron('00 04 * * *')
+		cron(env.BRANCH_NAME == 'master' ? '00 04 * * *' : '')
 	}
 
 	options {
