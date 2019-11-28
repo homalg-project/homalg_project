@@ -2490,7 +2490,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( A, B, T )
-    local R, RP, t, TI, l, m, n, id, zz, M, TT, MM;
+    local R, RP, t, l, m, n, C, CB, nn, TT, TI, M, id, zz;
     
     R := HomalgRing( B );
     
@@ -2541,11 +2541,22 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     SetNrRows( T, l );
     SetNrColumns( T, n );
     
+    C := HomalgVoidMatrix( R );
+    
+    CB := BasisOfRowsCoeff( B, C );
+    
+    nn := NrRows( CB );
+    
+    TT := HomalgVoidMatrix( R );
+    
+    SetNrRows( TT, l );
+    SetNrColumns( TT, nn );
+    
     ColoredInfoForService( "busy", "DecideZeroRowsEffectively", "( ", l, " + ", n, " ) x ", m, " : ", RingName( R ) );
     
     if IsBound(RP!.DecideZeroRowsEffectively) then
         
-        M := RP!.DecideZeroRowsEffectively( A, B, T ); ResetFilterObj( T, IsVoidMatrix );
+        M := RP!.DecideZeroRowsEffectively( A, CB, TT ); ResetFilterObj( TT, IsVoidMatrix );
         
         SetNrRows( M, l ); SetNrColumns( M, m );
         
@@ -2553,6 +2564,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
             Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
+        
+        SetEvalCompose( T, [ TT, C ] ); ResetFilterObj( T, IsVoidMatrix );
         
         ## check assertions
         Assert( 6,
@@ -2575,9 +2588,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         TI := HomalgVoidMatrix( R );
         
-        M := RP!.DecideZeroColumnsEffectively( Involution( A ), Involution( B ), TI );
+        M := RP!.DecideZeroColumnsEffectively( Involution( A ), Involution( CB ), TI ); ResetFilterObj( TI, IsVoidMatrix );
         
-        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
+        SetEvalCompose( T, [ Involution( TI ), C ] ); ResetFilterObj( T, IsVoidMatrix );
         
         SetNrRows( M, m ); SetNrColumns( M, l );
         
@@ -2617,9 +2630,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         id := HomalgIdentityMatrix( l, R );
     fi;
     
-    zz := HomalgZeroMatrix( n, l, R );
+    zz := HomalgZeroMatrix( nn, l, R );
     
-    M := UnionOfRowsOp( UnionOfColumnsOp( id, A ), UnionOfColumnsOp( zz, B ) );
+    M := UnionOfRowsOp( UnionOfColumnsOp( id, A ), UnionOfColumnsOp( zz, CB ) );
     
     TT := HomalgVoidMatrix( R );
     
@@ -2627,9 +2640,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     M := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
+    TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + nn ] );
     
-    SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, TT * C ); ResetFilterObj( T, IsVoidMatrix );
     
     if not IsZero( M ) then
         Assert( 6, not IsZero( A ) );
@@ -2672,7 +2685,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( A, B, T )
-    local R, RP, t, TI, l, m, n, id, zz, M, TT;
+    local R, RP, t, l, m, n, C, BC, nn, TT, TI, M, id, zz;
     
     R := HomalgRing( B );
     
@@ -2723,11 +2736,22 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     SetNrColumns( T, l );
     SetNrRows( T, n );
     
+    C := HomalgVoidMatrix( R );
+    
+    BC := BasisOfColumnsCoeff( B, C );
+    
+    nn := NrColumns( BC );
+    
+    TT := HomalgVoidMatrix( R );
+    
+    SetNrColumns( TT, l );
+    SetNrRows( TT, nn );
+    
     ColoredInfoForService( "busy", "DecideZeroColumnsEffectively", m, " x ( ", l, " + ", n, " ) : ", RingName( R ) );
     
     if IsBound(RP!.DecideZeroColumnsEffectively) then
         
-        M := RP!.DecideZeroColumnsEffectively( A, B, T ); ResetFilterObj( T, IsVoidMatrix );
+        M := RP!.DecideZeroColumnsEffectively( A, BC, TT ); ResetFilterObj( TT, IsVoidMatrix );
         
         SetNrColumns( M, l ); SetNrRows( M, m );
         
@@ -2735,6 +2759,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
             Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
+        
+        SetEvalCompose( T, [ C, TT ] ); ResetFilterObj( T, IsVoidMatrix );
         
         ## check assertions
         Assert( 6,
@@ -2757,9 +2783,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         TI := HomalgVoidMatrix( R );
         
-        M := RP!.DecideZeroRowsEffectively( Involution( A ), Involution( B ), TI );
+        M := RP!.DecideZeroRowsEffectively( Involution( A ), Involution( BC ), TI ); ResetFilterObj( TI, IsVoidMatrix );
         
-        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
+        SetEvalCompose( T, [ C, Involution( TI ) ] ); ResetFilterObj( T, IsVoidMatrix );
         
         SetNrColumns( M, m ); SetNrRows( M, l );
         
@@ -2799,9 +2825,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         id := HomalgIdentityMatrix( l, R );
     fi;
     
-    zz := HomalgZeroMatrix( l, n, R );
+    zz := HomalgZeroMatrix( l, nn, R );
     
-    M := UnionOfColumnsOp( UnionOfRowsOp( id, A ), UnionOfRowsOp( zz, B ) );
+    M := UnionOfColumnsOp( UnionOfRowsOp( id, A ), UnionOfRowsOp( zz, BC ) );
     
     TT := HomalgVoidMatrix( R );
     
@@ -2809,9 +2835,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     M := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
+    TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + nn ] );
     
-    SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
+    SetEvalCompose( T, [ C, TT ] ); ResetFilterObj( T, IsVoidMatrix );
     
     if not IsZero( M ) then
         Assert( 6, not IsZero( A ) );
