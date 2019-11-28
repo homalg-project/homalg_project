@@ -229,7 +229,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                  function( M )
                    local N, R;
                    
-                   N := TransposedMat( Eval( M ) );
+                   N := TransposedMatrix( Eval( M ) );
                    
                    R := HomalgRing( N );
                    
