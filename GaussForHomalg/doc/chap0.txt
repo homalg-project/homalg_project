@@ -6,7 +6,7 @@
                          [1X[5XGauss[105X Functionality for [5Xhomalg[105X[101X
   
   
-                               Version 2019.06.01
+                               Version 2019.06.02
   
   
                                  September 2013
@@ -83,12 +83,8 @@
       3.1-17 ZeroRows
       3.1-18 ZeroColumns
     3.2 [33X[0;0YThe Basic Functions and [5Xhomalg[105X table creation[133X
-      3.2-1 DecideZeroRows
-      3.2-2 DecideZeroRowsEffectively
-      3.2-3 SyzygiesGeneratorsOfRows
-      3.2-4 RelativeSyzygiesGeneratorsOfRows
-      3.2-5 RowReducedEchelonForm
-      3.2-6 CreateHomalgTable
+      3.2-1 RowReducedEchelonForm
+      3.2-2 CreateHomalgTable
     3.3 [33X[0;0YMatrix entry manipulation[133X
       3.3-1 MatElm
       3.3-2 SetMatElm

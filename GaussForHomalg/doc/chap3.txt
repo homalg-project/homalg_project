@@ -161,40 +161,7 @@
   
   [1X3.2 [33X[0;0YThe Basic Functions and [5Xhomalg[105X[101X[1X table creation[133X[101X
   
-  [1X3.2-1 DecideZeroRows[101X
-  
-  [33X[1;0Y[29X[2XDecideZeroRows[102X( [3XA[103X, [3XB[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
-  
-  [33X[0;0YThis  returns  the [5Xhomalg[105X matrix you get by row reducing the [5Xhomalg[105X matrix [3XA[103X
-  with the [5Xhomalg[105X matrix [3XB[103X.[133X
-  
-  [1X3.2-2 DecideZeroRowsEffectively[101X
-  
-  [33X[1;0Y[29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix [3XM[103X[133X
-  
-  [33X[0;0YThis returns the [5Xhomalg[105X matrix [3XM[103X you get by row reducing the [5Xhomalg[105X matrix [3XA[103X
-  with  the  [5Xhomalg[105X  matrix [3XB[103X. The transformation matrix is stored in the void
-  [5Xhomalg[105X matrix [3XT[103X as a side effect. The matrices satisfy [22XM = A + T * B[122X.[133X
-  
-  [1X3.2-3 SyzygiesGeneratorsOfRows[101X
-  
-  [33X[1;0Y[29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
-  
-  [33X[0;0YThis  returns  the  row  syzygies  of the [5Xhomalg[105X matrix [3XM[103X, again as a [5Xhomalg[105X
-  matrix.[133X
-  
-  [1X3.2-4 RelativeSyzygiesGeneratorsOfRows[101X
-  
-  [33X[1;0Y[29X[2XRelativeSyzygiesGeneratorsOfRows[102X( [3XM[103X, [3XN[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
-  
-  [33X[0;0YThe  row syzygies of [3XM[103X are returned, but now the computation interpretes the
-  rows of the [5Xhomalg[105X matrix [3XN[103X as additional zero relations.[133X
-  
-  [1X3.2-5 RowReducedEchelonForm[101X
+  [1X3.2-1 RowReducedEchelonForm[101X
   
   [33X[1;0Y[29X[2XRowReducedEchelonForm[102X( [3XM[103X[, [3XU[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix [3XN[103X[133X
@@ -205,7 +172,7 @@
   transformation  matrix  is  stored  in  the  void  [5Xhomalg[105X matrix [3XU[103X as a side
   effect. The matrices satisfy [22XN = U * M[122X.[133X
   
-  [1X3.2-6 CreateHomalgTable[101X
+  [1X3.2-2 CreateHomalgTable[101X
   
   [33X[1;0Y[29X[2XCreateHomalgTable[102X( [3XR[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X table[133X
