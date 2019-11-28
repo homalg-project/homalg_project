@@ -427,7 +427,7 @@
     [4X  function( M )[104X
     [4X    local N, R;[104X
     [4X    [104X
-    [4X    N := TransposedMat( Eval( M ) );[104X
+    [4X    N := TransposedMatrix( Eval( M ) );[104X
     [4X    [104X
     [4X    R := HomalgRing( N );[104X
     [4X    [104X
