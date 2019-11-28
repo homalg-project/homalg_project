@@ -45,10 +45,12 @@ specifically designed for &GaussForHomalg;.
 
 <Section><Heading>The Basic Functions and &homalg; table creation</Heading>
 <!-- GaussBasic.gi -->
+<!-- do not activate them to avoid confusion with &MatricesForHomalg;
 <#Include Label="DecideZeroRows">
 <#Include Label="DecideZeroRowsEffectively">
 <#Include Label="SyzygiesGeneratorsOfRows">
 <#Include Label="RelativeSyzygiesGeneratorsOfRows">
+-->
 <!-- GaussFQI.gi -->
 <#Include Label="RowReducedEchelonForm">
 <#Include Label="CreateHomalgTable">
