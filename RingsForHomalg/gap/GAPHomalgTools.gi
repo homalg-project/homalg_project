@@ -96,11 +96,25 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "HomalgInitialMatrix(", NrRows( C ), NrColumns( C ), HomalgRing( C ), ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
+                   return homalgSendBlocking( [ "HomalgZeroMatrix(", NrRows( C ), NrColumns( C ), HomalgRing( C ), ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
                
                IdentityMatrix :=
+                 function( C )
+                   
+                   return homalgSendBlocking( [ "HomalgIdentityMatrix(", NrRows( C ), HomalgRing( C ), ")" ], HOMALG_IO.Pictograms.IdentityMatrix );
+                   
+                 end,
+               
+               InitialMatrix :=
+                 function( C )
+                   
+                   return homalgSendBlocking( [ "HomalgInitialMatrix(", NrRows( C ), NrColumns( C ), HomalgRing( C ), ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
+                   
+                 end,
+               
+               InitialIdentityMatrix :=
                  function( C )
                    
                    return homalgSendBlocking( [ "HomalgInitialIdentityMatrix(", NrRows( C ), HomalgRing( C ), ")" ], HOMALG_IO.Pictograms.IdentityMatrix );

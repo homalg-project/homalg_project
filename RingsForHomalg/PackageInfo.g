@@ -5,7 +5,7 @@ PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
 
 Version := Maximum( [
-  "2019.06.01", ## Mohamed's version
+  "2019.11.29", ## Mohamed's version
 ## this line prevents merge conflicts
   "2018.12.02", ## Markus L-H's version
 ## this line prevents merge conflicts
