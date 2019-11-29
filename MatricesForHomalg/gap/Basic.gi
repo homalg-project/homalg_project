@@ -457,42 +457,25 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, CA, IA, CB, NF, X;
+    local R, T, B_;
     
     R := HomalgRing( B );
     
-    ## CA * A = IA
-    CA := HomalgVoidMatrix( R );
-    IA := BasisOfRows( A, CA );
+    ## B_ = B + T * A
+    T := HomalgVoidMatrix( R );
+    B_ := DecideZeroRowsEffectively( B, A, T );
     
-    ## knowing this will avoid computations
-    IsOne( IA );
-    
-    ## IsSpecialSubidentityMatrix( IA );	## does not increase performance
-    
-    ## NF = B + CB * IA
-    CB := HomalgVoidMatrix( R );
-    NF := DecideZeroRowsEffectively( B, IA, CB );
-    
-    ## NF <> 0
-    if not IsZero( NF ) then
+    ## if B_ does not vanish
+    if not IsZero( B_ ) then
         ## A is not a right factor of B, i.e.
         ## the rows of A are not a generating set
         return fail;
     fi;
     
-    ## CD = -CB * CA => CD * A = B
-    X := -CB * CA;
-    
     ## check assertion
-    Assert( 5, X * A = B );
+    Assert( 5, IsZero( B + T * A ) );
     
-    ## CA might not yet know its number of columns
-    SetNrColumns( X, NrRows( A ) );
-    
-    return X;
-    
-    ## technical: -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
+    return -T;
     
 end );
 
@@ -516,42 +499,25 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, CA, IA, CB, NF, X;
+    local R, T, B_;
     
     R := HomalgRing( B );
     
-    ## A * CA = IA
-    CA := HomalgVoidMatrix( R );
-    IA := BasisOfColumns( A, CA );
+    ## B_ = B + A * T
+    T := HomalgVoidMatrix( R );
+    B_ := DecideZeroColumnsEffectively( B, A, T );
     
-    ## knowing this will avoid computations
-    IsOne( IA );
-    
-    ## IsSpecialSubidentityMatrix( IA );	## does not increase performance
-    
-    ## NF = B + IA * CB
-    CB := HomalgVoidMatrix( R );
-    NF := DecideZeroColumnsEffectively( B, IA, CB );
-    
-    ## NF <> 0
-    if not IsZero( NF ) then
+    ## if B_ does not vanish
+    if not IsZero( B_ ) then
         ## A is not a left factor of B, i.e.
         ## the columns of A are not a generating set
         return fail;
     fi;
     
-    ## CD = CA * -CB => A * CD = B
-    X := CA * -CB;
-    
     ## check assertion
-    Assert( 5, A * X = B );
+    Assert( 5, IsZero( B + A * T ) );
     
-    ## CA might not yet know its number of rows
-    SetNrRows( X, NrColumns( A ) );
-    
-    return X;
-    
-    ## technical: CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
+    return -T;
     
 end );
 
@@ -571,7 +537,7 @@ InstallMethod( RightDivide,
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A, L )	## CAUTION: Do not use lazy evaluation here!!!
-    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
+    local R, BL, ZA, AL, ZB, T, B_;
     
     R := HomalgRing( B );
     
@@ -582,37 +548,24 @@ InstallMethod( RightDivide,
     
     AL := UnionOfRowsOp( ZA, BL );
     
-    ## CA * AL = IAL
-    CA := HomalgVoidMatrix( R );
-    IAL := BasisOfRows( AL, CA );
-    
     ## also reduce B modulo L
     ZB := DecideZeroRows( B, BL );
     
-    ## knowing this will avoid computations
-    IsOne( IAL );
+    ## B_ = ZB + T * AL
+    T := HomalgVoidMatrix( R );
+    B_ := DecideZeroRowsEffectively( ZB, AL, T );
     
-    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance
-    
-    ## NF = ZB + CB * IAL
-    CB := HomalgVoidMatrix( R );
-    NF := DecideZeroRowsEffectively( ZB, IAL, CB );
-    
-    ## NF <> 0
-    if not IsZero( NF ) then
+    ## if B_ does not vanish
+    if not IsZero( B_ ) then
         return fail;
     fi;
     
-    ## CD = -CB * CA => CD * A = B
-    X := -CB * CertainColumns( CA, [ 1 .. NrRows( A ) ] );
+    T := CertainColumns( T, [ 1 .. NrRows( A ) ] );
     
     ## check assertion
-    Assert( 5, IsZero( DecideZeroRows( X * A - B, BL ) ) );
+    Assert( 5, IsZero( DecideZeroRows( B + T * A, BL ) ) );
     
-    return X;
-    
-    ## technical: -CB * CA := (-CB) * CA and COLEM should take over
-    ## since CB := -matrix
+    return -T;
     
 end );
 ##  ]]></Listing>
@@ -636,7 +589,7 @@ InstallMethod( LeftDivide,
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B, L )	## CAUTION: Do not use lazy evaluation here!!!
-    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
+    local R, BL, ZA, AL, ZB, T, B_;
     
     R := HomalgRing( B );
     
@@ -647,37 +600,24 @@ InstallMethod( LeftDivide,
     
     AL := UnionOfColumnsOp( ZA, BL );
     
-    ## AL * CA = IAL
-    CA := HomalgVoidMatrix( R );
-    IAL := BasisOfColumns( AL, CA );
-    
     ## also reduce B modulo L
     ZB := DecideZeroColumns( B, BL );
     
-    ## knowing this will avoid computations
-    IsOne( IAL );
+    ## B_ = ZB + AL * T
+    T := HomalgVoidMatrix( R );
+    B_ := DecideZeroColumnsEffectively( ZB, AL, T );
     
-    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance
-    
-    ## NF = ZB + IAL * CB
-    CB := HomalgVoidMatrix( R );
-    NF := DecideZeroColumnsEffectively( ZB, IAL, CB );
-    
-    ## NF <> 0
-    if not IsZero( NF ) then
+    ## if B_ does not vanish
+    if not IsZero( B_ ) then
         return fail;
     fi;
     
-    ## CD = CA * -CB => A * CD = B
-    X := CertainRows( CA, [ 1 .. NrColumns( A ) ] ) * -CB;
+    T := CertainRows( T, [ 1 .. NrColumns( A ) ] );
     
     ## check assertion
-    Assert( 5, IsZero( DecideZeroColumns( A * X - B, BL ) ) );
+    Assert( 5, IsZero( DecideZeroColumns( B + A * T, BL ) ) );
     
-    return X;
-    
-    ## technical: CA * -CB := CA * (-CB) and COLEM should take over since
-    ## CB := -matrix
+    return -T;
     
 end );
 ##  ]]></Listing>
