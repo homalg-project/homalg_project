@@ -714,6 +714,11 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     ##     return DecideZeroRows( A, B );
     ## fi;
     
+    if HasIsZero( B ) and IsZero( B ) then
+        ## dispatch to the immediate methods
+        return DecideZeroRows( A, B );
+    fi;
+    
     R := HomalgRing( B );
     
     R!.asserts.DecideZeroRowsWRTNonBasis( B );
@@ -872,6 +877,11 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     ##     ## dispatch to the immediate methods
     ##     return DecideZeroColumns( A, B );
     ## fi;
+    
+    if HasIsZero( B ) and IsZero( B ) then
+        ## dispatch to the immediate methods
+        return DecideZeroColumns( A, B );
+    fi;
     
     R := HomalgRing( B );
     
@@ -2545,6 +2555,16 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     CB := BasisOfRowsCoeff( B, C );
     
+    ## knowing this will avoid computations
+    IsOne( CB );
+    
+    ## IsSpecialSubidentityMatrix( CB );	## does not increase performance
+    
+    if HasIsZero( B ) and IsZero( B ) then
+        ## dispatch to the immediate methods
+        return DecideZeroRowsEffectively( A, B, T );
+    fi;
+    
     nn := NrRows( CB );
     
     TT := HomalgVoidMatrix( R );
@@ -2739,6 +2759,16 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     C := HomalgVoidMatrix( R );
     
     BC := BasisOfColumnsCoeff( B, C );
+    
+    ## knowing this will avoid computations
+    IsOne( BC );
+    
+    ## IsSpecialSubidentityMatrix( BC );	## does not increase performance
+    
+    if HasIsZero( B ) and IsZero( B ) then
+        ## dispatch to the immediate methods
+        return DecideZeroColumnsEffectively( A, B, T );
+    fi;
     
     nn := NrColumns( BC );
     
