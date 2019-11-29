@@ -1362,7 +1362,7 @@
     [4X        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],[104X
     [4X        [104X
     [4X  function( B, A, L )	## CAUTION: Do not use lazy evaluation here!!![104X
-    [4X    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;[104X
+    [4X    local R, BL, ZA, AL, ZB, T, B_;[104X
     [4X    [104X
     [4X    R := HomalgRing( B );[104X
     [4X    [104X
@@ -1373,37 +1373,24 @@
     [4X    [104X
     [4X    AL := UnionOfRowsOp( ZA, BL );[104X
     [4X    [104X
-    [4X    ## CA * AL = IAL[104X
-    [4X    CA := HomalgVoidMatrix( R );[104X
-    [4X    IAL := BasisOfRows( AL, CA );[104X
-    [4X    [104X
     [4X    ## also reduce B modulo L[104X
     [4X    ZB := DecideZeroRows( B, BL );[104X
     [4X    [104X
-    [4X    ## knowing this will avoid computations[104X
-    [4X    IsOne( IAL );[104X
+    [4X    ## B_ = ZB + T * AL[104X
+    [4X    T := HomalgVoidMatrix( R );[104X
+    [4X    B_ := DecideZeroRowsEffectively( ZB, AL, T );[104X
     [4X    [104X
-    [4X    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance[104X
-    [4X    [104X
-    [4X    ## NF = ZB + CB * IAL[104X
-    [4X    CB := HomalgVoidMatrix( R );[104X
-    [4X    NF := DecideZeroRowsEffectively( ZB, IAL, CB );[104X
-    [4X    [104X
-    [4X    ## NF <> 0[104X
-    [4X    if not IsZero( NF ) then[104X
+    [4X    ## if B_ does not vanish[104X
+    [4X    if not IsZero( B_ ) then[104X
     [4X        return fail;[104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    ## CD = -CB * CA => CD * A = B[104X
-    [4X    X := -CB * CertainColumns( CA, [ 1 .. NrRows( A ) ] );[104X
+    [4X    T := CertainColumns( T, [ 1 .. NrRows( A ) ] );[104X
     [4X    [104X
     [4X    ## check assertion[104X
-    [4X    Assert( 5, IsZero( DecideZeroRows( X * A - B, BL ) ) );[104X
+    [4X    Assert( 5, IsZero( DecideZeroRows( B + T * A, BL ) ) );[104X
     [4X    [104X
-    [4X    return X;[104X
-    [4X    [104X
-    [4X    ## technical: -CB * CA := (-CB) * CA and COLEM should take over[104X
-    [4X    ## since CB := -matrix[104X
+    [4X    return -T;[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -1426,7 +1413,7 @@
     [4X        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],[104X
     [4X        [104X
     [4X  function( A, B, L )	## CAUTION: Do not use lazy evaluation here!!![104X
-    [4X    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;[104X
+    [4X    local R, BL, ZA, AL, ZB, T, B_;[104X
     [4X    [104X
     [4X    R := HomalgRing( B );[104X
     [4X    [104X
@@ -1437,37 +1424,24 @@
     [4X    [104X
     [4X    AL := UnionOfColumnsOp( ZA, BL );[104X
     [4X    [104X
-    [4X    ## AL * CA = IAL[104X
-    [4X    CA := HomalgVoidMatrix( R );[104X
-    [4X    IAL := BasisOfColumns( AL, CA );[104X
-    [4X    [104X
     [4X    ## also reduce B modulo L[104X
     [4X    ZB := DecideZeroColumns( B, BL );[104X
     [4X    [104X
-    [4X    ## knowing this will avoid computations[104X
-    [4X    IsOne( IAL );[104X
+    [4X    ## B_ = ZB + AL * T[104X
+    [4X    T := HomalgVoidMatrix( R );[104X
+    [4X    B_ := DecideZeroColumnsEffectively( ZB, AL, T );[104X
     [4X    [104X
-    [4X    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance[104X
-    [4X    [104X
-    [4X    ## NF = ZB + IAL * CB[104X
-    [4X    CB := HomalgVoidMatrix( R );[104X
-    [4X    NF := DecideZeroColumnsEffectively( ZB, IAL, CB );[104X
-    [4X    [104X
-    [4X    ## NF <> 0[104X
-    [4X    if not IsZero( NF ) then[104X
+    [4X    ## if B_ does not vanish[104X
+    [4X    if not IsZero( B_ ) then[104X
     [4X        return fail;[104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    ## CD = CA * -CB => A * CD = B[104X
-    [4X    X := CertainRows( CA, [ 1 .. NrColumns( A ) ] ) * -CB;[104X
+    [4X    T := CertainRows( T, [ 1 .. NrColumns( A ) ] );[104X
     [4X    [104X
     [4X    ## check assertion[104X
-    [4X    Assert( 5, IsZero( DecideZeroColumns( A * X - B, BL ) ) );[104X
+    [4X    Assert( 5, IsZero( DecideZeroColumns( B + A * T, BL ) ) );[104X
     [4X    [104X
-    [4X    return X;[104X
-    [4X    [104X
-    [4X    ## technical: CA * -CB := CA * (-CB) and COLEM should take over since[104X
-    [4X    ## CB := -matrix[104X
+    [4X    return -T;[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X

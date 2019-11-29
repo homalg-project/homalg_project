@@ -1624,7 +1624,7 @@ InstallMethod( RightDivide,
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A, L )	## CAUTION: Do not use lazy evaluation here!!!
-    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
+    local R, BL, ZA, AL, ZB, T, B_;
     
     R := HomalgRing( B );
     
@@ -1635,37 +1635,24 @@ InstallMethod( RightDivide,
     
     AL := UnionOfRowsOp( ZA, BL );
     
-    ## CA * AL = IAL
-    CA := HomalgVoidMatrix( R );
-    IAL := BasisOfRows( AL, CA );
-    
     ## also reduce B modulo L
     ZB := DecideZeroRows( B, BL );
     
-    ## knowing this will avoid computations
-    IsOne( IAL );
+    ## B_ = ZB + T * AL
+    T := HomalgVoidMatrix( R );
+    B_ := DecideZeroRowsEffectively( ZB, AL, T );
     
-    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance
-    
-    ## NF = ZB + CB * IAL
-    CB := HomalgVoidMatrix( R );
-    NF := DecideZeroRowsEffectively( ZB, IAL, CB );
-    
-    ## NF &lt;&gt; 0
-    if not IsZero( NF ) then
+    ## if B_ does not vanish
+    if not IsZero( B_ ) then
         return fail;
     fi;
     
-    ## CD = -CB * CA =&gt; CD * A = B
-    X := -CB * CertainColumns( CA, [ 1 .. NrRows( A ) ] );
+    T := CertainColumns( T, [ 1 .. NrRows( A ) ] );
     
     ## check assertion
-    Assert( 5, IsZero( DecideZeroRows( X * A - B, BL ) ) );
+    Assert( 5, IsZero( DecideZeroRows( B + T * A, BL ) ) );
     
-    return X;
-    
-    ## technical: -CB * CA := (-CB) * CA and COLEM should take over
-    ## since CB := -matrix
+    return -T;
     
 end );
 </pre></div>
@@ -1686,7 +1673,7 @@ InstallMethod( LeftDivide,
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B, L )	## CAUTION: Do not use lazy evaluation here!!!
-    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
+    local R, BL, ZA, AL, ZB, T, B_;
     
     R := HomalgRing( B );
     
@@ -1697,37 +1684,24 @@ InstallMethod( LeftDivide,
     
     AL := UnionOfColumnsOp( ZA, BL );
     
-    ## AL * CA = IAL
-    CA := HomalgVoidMatrix( R );
-    IAL := BasisOfColumns( AL, CA );
-    
     ## also reduce B modulo L
     ZB := DecideZeroColumns( B, BL );
     
-    ## knowing this will avoid computations
-    IsOne( IAL );
+    ## B_ = ZB + AL * T
+    T := HomalgVoidMatrix( R );
+    B_ := DecideZeroColumnsEffectively( ZB, AL, T );
     
-    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance
-    
-    ## NF = ZB + IAL * CB
-    CB := HomalgVoidMatrix( R );
-    NF := DecideZeroColumnsEffectively( ZB, IAL, CB );
-    
-    ## NF &lt;&gt; 0
-    if not IsZero( NF ) then
+    ## if B_ does not vanish
+    if not IsZero( B_ ) then
         return fail;
     fi;
     
-    ## CD = CA * -CB =&gt; A * CD = B
-    X := CertainRows( CA, [ 1 .. NrColumns( A ) ] ) * -CB;
+    T := CertainRows( T, [ 1 .. NrColumns( A ) ] );
     
     ## check assertion
-    Assert( 5, IsZero( DecideZeroColumns( A * X - B, BL ) ) );
+    Assert( 5, IsZero( DecideZeroColumns( B + A * T, BL ) ) );
     
-    return X;
-    
-    ## technical: CA * -CB := CA * (-CB) and COLEM should take over since
-    ## CB := -matrix
+    return -T;
     
 end );
 </pre></div>
