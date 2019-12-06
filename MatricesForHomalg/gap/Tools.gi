@@ -2678,6 +2678,10 @@ InstallMethod( ConvertMatrixToRow,
     
     R := HomalgRing( M );
     
+    if HasIsZero( M ) and IsZero( M ) then
+        return HomalgZeroMatrix( 1, NrRows( M ) * NrColumns( M ), R );
+    fi;
+    
     RP := homalgTable( R );
     
     if IsBound(RP!.ConvertMatrixToRow) then
@@ -2721,6 +2725,10 @@ InstallMethod( ConvertMatrixToColumn,
     fi;
     
     R := HomalgRing( M );
+    
+    if HasIsZero( M ) and IsZero( M ) then
+        return HomalgZeroMatrix( NrRows( M ) * NrColumns( M ), 1, R );
+    fi;
     
     RP := homalgTable( R );
     
