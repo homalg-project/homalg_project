@@ -5,13 +5,13 @@ PackageName := "MatricesForHomalg",
 Subtitle := "Matrices for the homalg project",
 
 Version := Maximum( [
-  "2019.11.30", ## Mohamed's version
+  "2019.12.01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2019.11.29", ## Fabian's version
 ## this line prevents merge conflicts
   "2011.12.06", ## Markus' version
 ## this line prevents merge conflicts
-  "2019.08.26", ## Max' version
+  "2019.09.01", ## Max' version
 ## this line prevents merge conflicts
   "2018.04.04", ## Sebas' version
 ## this line prevents merge conflicts
