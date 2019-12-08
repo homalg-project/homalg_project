@@ -1942,6 +1942,11 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
   function( M )
     local R, RP, t, MI, C, B, nz;
     
+    if IsZero( M ) then
+        ## redispatch to the specialized methods
+        return ReducedSyzygiesGeneratorsOfRows( M );
+    fi;
+    
     ## this is an attribute
     
     R := HomalgRing( M );
@@ -2052,6 +2057,11 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
     local R, RP, t, MI, C, B, nz;
     
     ## this is an attribute
+    
+    if IsZero( M ) then
+        ## redispatch to the specialized methods
+        return ReducedSyzygiesGeneratorsOfColumns( M );
+    fi;
     
     R := HomalgRing( M );
     
