@@ -3221,11 +3221,11 @@ InstallMethod( ViewString,
     
     str :="";
     
-    if HasIsVoidMatrix( o ) and IsVoidMatrix( o ) then
+    if IsVoidMatrix( o ) then
         Append( str, "<A void" );
-    elif HasIsInitialMatrix( o ) and IsInitialMatrix( o ) then
+    elif IsInitialMatrix( o ) then
         Append( str, "<An initial" );
-    elif HasIsInitialIdentityMatrix( o ) and IsInitialIdentityMatrix( o ) then
+    elif IsInitialIdentityMatrix( o ) then
         Append( str, "<An initial identity" );
     elif not HasEval( o ) then
         Append( str, "<An unevaluated" );

@@ -156,10 +156,7 @@ DeclareAttribute( "OperationOfFunctor",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "Genesis",
-        IsHomalgFunctor );
-
-DeclareAttribute( "IsIdentityOnObjects",
-        IsHomalgFunctor );
+        IsHomalgFunctor, "mutable" );
 
 ##  <#GAPDoc Label="ProcedureToReadjustGenerators:functor">
 ##  <ManSection>

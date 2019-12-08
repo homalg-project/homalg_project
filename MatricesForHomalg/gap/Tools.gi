@@ -397,7 +397,7 @@ InstallMethod( Eval,
     
     func_arg := EvalMatrixOperation( C );
     
-    ResetFilterObj( C, EvalMatrixOperation );
+    ResetFilterObj( C, HasEvalMatrixOperation );
     
     ## delete the component which was left over by GAP
     Unbind( C!.EvalMatrixOperation );
@@ -1667,7 +1667,7 @@ InstallMethod( GetRidOfObsoleteRows,
         if not IsEmptyMatrix( M ) then
             Eval( M );
         fi;
-        ResetFilterObj( M, EvalCertainRows );
+        ResetFilterObj( M, HasEvalCertainRows );
         Unbind( M!.EvalCertainRows );
     fi;
     
@@ -1710,7 +1710,7 @@ InstallMethod( GetRidOfObsoleteColumns,
         if not IsEmptyMatrix( M ) then
             Eval( M );
         fi;
-        ResetFilterObj( M, EvalCertainColumns );
+        ResetFilterObj( M, HasEvalCertainColumns );
         Unbind( M!.EvalCertainColumns );
     fi;
     

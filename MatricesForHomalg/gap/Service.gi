@@ -1325,7 +1325,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
         if not IsEmptyMatrix( C ) then
             Eval( C );
         fi;
-        ResetFilterObj( C, EvalCertainColumns );
+        ResetFilterObj( C, HasEvalCertainColumns );
         Unbind( C!.EvalCertainColumns );
     fi;
     
@@ -1445,7 +1445,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
         if not IsEmptyMatrix( C ) then
             Eval( C );
         fi;
-        ResetFilterObj( C, EvalCertainRows );
+        ResetFilterObj( C, HasEvalCertainRows );
         Unbind( C!.EvalCertainRows );
     fi;
     

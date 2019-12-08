@@ -49,7 +49,7 @@ DeclareOperation( "SetIsMutableMatrix",
 
 ##  <#GAPDoc Label="IsInitialMatrix">
 ##  <ManSection>
-##    <Prop Arg="A" Name="IsInitialMatrix"/>
+##    <Filt Arg="A" Name="IsInitialMatrix"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
@@ -57,12 +57,12 @@ DeclareOperation( "SetIsMutableMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsInitialMatrix",
+DeclareFilter( "IsInitialMatrix",
         IsHomalgMatrix );
 
 ##  <#GAPDoc Label="IsInitialIdentityMatrix">
 ##  <ManSection>
-##    <Prop Arg="A" Name="IsInitialIdentityMatrix"/>
+##    <Filt Arg="A" Name="IsInitialIdentityMatrix"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
@@ -70,12 +70,12 @@ DeclareProperty( "IsInitialMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsInitialIdentityMatrix",
+DeclareFilter( "IsInitialIdentityMatrix",
         IsHomalgMatrix );
 
 ##  <#GAPDoc Label="IsVoidMatrix">
 ##  <ManSection>
-##    <Prop Arg="A" Name="IsVoidMatrix"/>
+##    <Filt Arg="A" Name="IsVoidMatrix"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
@@ -83,7 +83,7 @@ DeclareProperty( "IsInitialIdentityMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsVoidMatrix",
+DeclareFilter( "IsVoidMatrix",
         IsHomalgMatrix );
 
 ##  <#GAPDoc Label="IsZero:matrix">

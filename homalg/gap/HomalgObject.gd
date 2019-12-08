@@ -273,7 +273,7 @@ DeclareProperty( "HasConstantRank",
 ####################################
 
 DeclareAttribute( "AFiniteFreeResolution",
-        IsHomalgObject );
+        IsHomalgObject, "mutable" );
 
 ##  <#GAPDoc Label="TorsionSubobject">
 ##  <ManSection>

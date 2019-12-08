@@ -353,7 +353,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                  return o;
                              else
                                  if IsHomalgExternalMatrixRep( o ) then
-                                     if not ( HasIsVoidMatrix( o ) and IsVoidMatrix( o ) )
+                                     if not IsVoidMatrix( o )
                                         or HasEval( o ) then
                                          t := homalgPointer( o ); ## now we enforce evaluation!!!
                                          Add( used_pointers, t );

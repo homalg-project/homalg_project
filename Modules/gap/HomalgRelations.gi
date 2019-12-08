@@ -152,7 +152,7 @@ InstallMethod( EvaluatedMatrixOfRelations,
     
     func_arg := EvalMatrixOfRelations( rel );
     
-    ResetFilterObj( rel, EvalMatrixOfRelations );
+    ResetFilterObj( rel, HasEvalMatrixOfRelations );
     
     ## delete the component which was left over by GAP
     Unbind( rel!.EvalMatrixOfRelations );

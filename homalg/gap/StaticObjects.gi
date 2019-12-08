@@ -558,7 +558,6 @@ InstallMethod( ShortenResolution,
     
     SetCurrentResolution( M, d );
     
-    ResetFilterObj( M, AFiniteFreeResolution );
     SetAFiniteFreeResolution( M, d );
     
     return d;
@@ -708,7 +707,7 @@ InstallMethod( IntersectWithMultiplicity,
     
     intersection := Iterated( List( [ 1 .. s ], i -> ideals[i]^mults[i] ), Intersect );
     
-    intersection!.Genesis := [ IntersectWithMultiplicity, ideals, mults ];
+    SetGenesis( intersection, [ IntersectWithMultiplicity, ideals, mults ] );
     
     return intersection;
     
