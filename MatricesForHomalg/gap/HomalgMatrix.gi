@@ -1036,6 +1036,7 @@ InstallMethod( Involution,
                  ], HomalgRing( M ) );
     
     SetItsInvolution( M, C );
+    SetItsInvolution( C, M );
     
     return C;
     
