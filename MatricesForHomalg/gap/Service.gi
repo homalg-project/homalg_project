@@ -710,12 +710,12 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     ### reducing the effective number of DecideZero calls;
     ### observed with Purity.g in ExamplesForHomalg
     ## if IsZero( A ) or IsZero( B ) then
-    ##     ## dispatch to the immediate methods
+    ##     ## redispatch to the specialized methods
     ##     return DecideZeroRows( A, B );
     ## fi;
     
     if HasIsZero( B ) and IsZero( B ) then
-        ## dispatch to the immediate methods
+        ## redispatch to the specialized methods
         return DecideZeroRows( A, B );
     fi;
     
@@ -874,12 +874,12 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     ### reducing the effective number of DecideZero calls;
     ### observed with Purity.g in ExamplesForHomalg
     ## if IsZero( A ) or IsZero( B ) then
-    ##     ## dispatch to the immediate methods
+    ##     ## redispatch to the specialized methods
     ##     return DecideZeroColumns( A, B );
     ## fi;
     
     if HasIsZero( B ) and IsZero( B ) then
-        ## dispatch to the immediate methods
+        ## redispatch to the specialized methods
         return DecideZeroColumns( A, B );
     fi;
     
@@ -2533,7 +2533,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     ### reducing the effective number of DecideZero calls;
     ### observed with Purity.g in ExamplesForHomalg
     ## if IsZero( A ) or IsZero( B ) then
-    ##     ## dispatch to the immediate methods
+    ##     ## redispatch to the specialized methods
     ##     return DecideZeroRowsEffectively( A, B, T );
     ## fi;
     
@@ -2561,7 +2561,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     ## IsSpecialSubidentityMatrix( CB );	## does not increase performance
     
     if HasIsZero( B ) and IsZero( B ) then
-        ## dispatch to the immediate methods
+        ## redispatch to the specialized methods
         return DecideZeroRowsEffectively( A, B, T );
     fi;
     
@@ -2738,7 +2738,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     ### reducing the effective number of DecideZero calls;
     ### observed with Purity.g in ExamplesForHomalg
     ## if IsZero( A ) or IsZero( B ) then
-    ##     ## dispatch to the immediate methods
+    ##     ## redispatch to the specialized methods
     ##     return DecideZeroColumnsEffectively( A, B, T );
     ## fi;
     
@@ -2766,7 +2766,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     ## IsSpecialSubidentityMatrix( BC );	## does not increase performance
     
     if HasIsZero( B ) and IsZero( B ) then
-        ## dispatch to the immediate methods
+        ## redispatch to the specialized method
         return DecideZeroColumnsEffectively( A, B, T );
     fi;
     
