@@ -1,6 +1,6 @@
 name: SCO
-version: 2019.06.01
-date: 01/06/2019
+version: 2019.09.02
+date: 02/09/2019
 description: SCO - Simplicial Cohomology of Orbifolds
 
 authors:
@@ -30,9 +30,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/SCO/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2019.06.01/SCO-2019.06.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2019.09.02/SCO-2019.09.02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2019.06.01/SCO-2019.06.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2019.09.02/SCO-2019.09.02.zip
 
 abstract: The <span class="pkgname">SCO</span> package provides functionality to compute simplicial cohomology of orbifolds
 
