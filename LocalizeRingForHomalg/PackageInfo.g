@@ -7,7 +7,7 @@ Subtitle := "A Package for Localization of Polynomial Rings",
 Version := Maximum( [ ##To prevent merge conflicts
   "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
-  "2019.06.01", ## Mohamed's version
+  "2019.09.02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2019.08.01", ## Max's version
 ## this line prevents merge conflicts
@@ -74,6 +74,11 @@ Persons := [
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-", ~.Version, "/LocalizeRingForHomalg-", ~.Version ),

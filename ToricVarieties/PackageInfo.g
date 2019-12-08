@@ -7,7 +7,7 @@ Subtitle := "A package to handle toric varieties",
 Version :=  Maximum( [
   "2018.10.12", ## Sebas' version
 ## this line prevents merge conflicts
-  "2019.07.01", ## Mohamed's version
+  "2019.09.02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2019.07.02", ## Martin's version
 ## this line prevents merge conflicts
@@ -57,6 +57,11 @@ rec(
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/ToricVarieties/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-", ~.Version, "/ToricVarieties-", ~.Version ),

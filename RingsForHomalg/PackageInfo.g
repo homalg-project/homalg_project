@@ -5,7 +5,7 @@ PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
 
 Version := Maximum( [
-  "2019.11.29", ## Mohamed's version
+  "2019.12.08", ## Mohamed's version
 ## this line prevents merge conflicts
   "2018.12.02", ## Markus L-H's version
 ## this line prevents merge conflicts
@@ -185,6 +185,11 @@ Persons := [
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/RingsForHomalg/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-", ~.Version, "/RingsForHomalg-", ~.Version ),
