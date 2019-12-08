@@ -34,8 +34,7 @@
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78AC74CB802A8A49">3.2-1 HomalgRingOfIntegers</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F4829D6808187B3">3.2-2 HomalgFieldOfRationals</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85D9DDE384304BAB"><code>3.2-3 \/</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85D9DDE384304BAB"><code>3.2-2 \/</code></a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7D171A1C797E27C9">3.3 <span class="Heading">Rings: Properties</span></a>
 </span>
@@ -221,7 +220,7 @@ DeclareCategory( "IsHomalgRingElement",
 
 <p>This section describes how to construct rings for use with <strong class="pkg">MatricesForHomalg</strong>, which exploit the <strong class="pkg">GAP4</strong>-built-in abilities to perform the necessary ring operations. By this we also mean necessary matrix operations over such rings. For the purposes of <strong class="pkg">MatricesForHomalg</strong> only the ring of integers is properly supported in <strong class="pkg">GAP4</strong>. The <strong class="pkg">GAP4</strong> extension packages <strong class="pkg">Gauss</strong> and <strong class="pkg">GaussForHomalg</strong> extend these built-in abilities to operations with sparse matrices over the ring <span class="SimpleMath">ℤ / p^n</span> for <span class="SimpleMath">p</span> prime and <span class="SimpleMath">n</span> positive.</p>
 
-<p>If a ring <span class="SimpleMath">R</span> is supported in <strong class="pkg">MatricesForHomalg</strong> any of its residue class rings <span class="SimpleMath">R/I</span> is supported as well, provided the ideal <span class="SimpleMath">I</span> of relations admits a finite set of generators as a left resp. right ideal (--&gt; <code class="func">\/</code> (<a href="chap3.html#X85D9DDE384304BAB"><span class="RefLink">3.2-3</span></a>)). This is immediate for commutative noetherian rings.</p>
+<p>If a ring <span class="SimpleMath">R</span> is supported in <strong class="pkg">MatricesForHomalg</strong> any of its residue class rings <span class="SimpleMath">R/I</span> is supported as well, provided the ideal <span class="SimpleMath">I</span> of relations admits a finite set of generators as a left resp. right ideal (--&gt; <code class="func">\/</code> (<a href="chap3.html#X85D9DDE384304BAB"><span class="RefLink">3.2-2</span></a>)). This is immediate for commutative noetherian rings.</p>
 
 <p><a id="X78AC74CB802A8A49" name="X78AC74CB802A8A49"></a></p>
 
@@ -245,7 +244,7 @@ DeclareCategory( "IsHomalgRingElement",
 <li><p>if <var class="Arg">c</var> is a prime power then the package <strong class="pkg">GaussForHomalg</strong> is loaded (if it fails to load an error is issued)</p>
 
 </li>
-<li><p>otherwise, the residue class ring constructor <code class="code">/</code> (--&gt; <code class="func">\/</code> (<a href="chap3.html#X85D9DDE384304BAB"><span class="RefLink">3.2-3</span></a>)) is invoked</p>
+<li><p>otherwise, the residue class ring constructor <code class="code">/</code> (--&gt; <code class="func">\/</code> (<a href="chap3.html#X85D9DDE384304BAB"><span class="RefLink">3.2-2</span></a>)) is invoked</p>
 
 </li>
 </ul>
@@ -257,20 +256,9 @@ DeclareCategory( "IsHomalgRingElement",
 
 <p>but note that the computations will then be considerably slower.</p>
 
-<p><a id="X7F4829D6808187B3" name="X7F4829D6808187B3"></a></p>
-
-<h5>3.2-2 HomalgFieldOfRationals</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgFieldOfRationals</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
-
-<p>The package <strong class="pkg">GaussForHomalg</strong> is loaded and the field of rationals <span class="SimpleMath">ℚ</span> is returned. If <strong class="pkg">GaussForHomalg</strong> fails to load an error is issued.</p>
-
-<p>The operation <code class="code">SetRingProperties</code> is automatically invoked to set the ring properties.</p>
-
 <p><a id="X85D9DDE384304BAB" name="X85D9DDE384304BAB"></a></p>
 
-<h5><code>3.2-3 \/</code></h5>
+<h5><code>3.2-2 \/</code></h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \/</code>( <var class="Arg">R</var>, <var class="Arg">ring_rel</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> ring</p>

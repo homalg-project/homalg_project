@@ -81,7 +81,7 @@
   
   [33X[0;0YIf a ring [22XR[122X is supported in [5XMatricesForHomalg[105X any of its residue class rings
   [22XR/I[122X  is supported as well, provided the ideal [22XI[122X of relations admits a finite
-  set  of  generators  as  a  left resp. right ideal (--> [2X\/[102X ([14X3.2-3[114X)). This is
+  set  of  generators  as  a  left resp. right ideal (--> [2X\/[102X ([14X3.2-2[114X)). This is
   immediate for commutative noetherian rings.[133X
   
   [1X3.2-1 HomalgRingOfIntegers[101X
@@ -102,7 +102,7 @@
   [30X    [33X[0;6Yif [3Xc[103X is a prime power then the package [5XGaussForHomalg[105X is loaded (if it
         fails to load an error is issued)[133X
   
-  [30X    [33X[0;6Yotherwise,  the  residue  class ring constructor [10X/[110X (--> [2X\/[102X ([14X3.2-3[114X)) is
+  [30X    [33X[0;6Yotherwise,  the  residue  class ring constructor [10X/[110X (--> [2X\/[102X ([14X3.2-2[114X)) is
         invoked[133X
   
   [33X[0;0YThe  operation  [10XSetRingProperties[110X  is  automatically invoked to set the ring
@@ -115,18 +115,7 @@
   
   [33X[0;0Ybut note that the computations will then be considerably slower.[133X
   
-  [1X3.2-2 HomalgFieldOfRationals[101X
-  
-  [33X[1;0Y[29X[2XHomalgFieldOfRationals[102X(  ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
-  
-  [33X[0;0YThe  package  [5XGaussForHomalg[105X  is  loaded  and  the  field  of rationals [22Xℚ[122X is
-  returned. If [5XGaussForHomalg[105X fails to load an error is issued.[133X
-  
-  [33X[0;0YThe  operation  [10XSetRingProperties[110X  is  automatically invoked to set the ring
-  properties.[133X
-  
-  [1X3.2-3 \/[101X
+  [1X3.2-2 \/[101X
   
   [33X[1;0Y[29X[2X\/[102X( [3XR[103X, [3Xring_rel[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X

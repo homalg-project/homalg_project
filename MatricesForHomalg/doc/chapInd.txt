@@ -8,7 +8,7 @@
       for ring elements and matrices 5.5-14 
   [2X\+[102X, for matrices 5.5-15 
   [2X\-[102X, for matrices 5.5-16 
-  [2X\/[102X, constructor for residue class rings 3.2-3 
+  [2X\/[102X, constructor for residue class rings 3.2-2 
   [2X\=[102X, for matrices 5.5-18 
   [2XAddMat[102X, homalgTable entry B.1-14 
       ResidueClassRing D.2-14 
@@ -100,7 +100,6 @@
   [2XHilbertPoincareSeries[102X 5.4-18 
   [2XHilbertPolynomial[102X 5.4-19 
   [2XHomalgDiagonalMatrix[102X, constructor for diagonal matrices 5.2-7 
-  [2XHomalgFieldOfRationals[102X, constructor for the field of rationals 3.2-2 
   [2XHomalgIdentityMatrix[102X, constructor for identity matrices 5.2-4 
   [2XHomalgInitialIdentityMatrix[102X, constructor for initial quadratic matrices with ones on the diagonal 5.2-2 
   [2XHomalgInitialMatrix[102X, constructor for initial matrices filled with zeros 5.2-1 
