@@ -209,8 +209,9 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2019.02.01" ],
-                   [ "HomalgToCAS", ">= 2019.02.01" ],
+                   [ "MatricesForHomalg", ">= 2019.09.01" ],
+                   [ "HomalgToCAS", ">= 2019.09.01" ],
+                   [ "GaussForHomalg", ">= 2019.09.01" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],

@@ -44,7 +44,6 @@ Label="constructor for residue class rings" Style="Number"/>).
 This is immediate for commutative noetherian rings.
 
 <#Include Label="HomalgRingOfIntegers">
-<#Include Label="HomalgFieldOfRationals">
 <#Include Label="ResidueClassRingConstructor">
 
 </Section>

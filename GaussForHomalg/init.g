@@ -12,3 +12,5 @@ ReadPackage( "GaussForHomalg", "gap/GaussTools.gd" );
 
 ReadPackage( "GaussForHomalg", "gap/GaussBasic.gd" );
 
+ReadPackage( "GaussForHomalg", "gap/GaussRationals.gd" );
+

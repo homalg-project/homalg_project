@@ -13,7 +13,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.07.20", ## Florian's version
 ## this line prevents merge conflicts
-  "2016.01.20", ## Sebas' version
+  "2018.09.20", ## Sebas' version
 ## this line prevents merge conflicts
   "2013.05.05", ## Sepp's version
 ## this line prevents merge conflicts
@@ -149,6 +149,7 @@ Dependencies := rec(
                    [ "MatricesForHomalg", ">=2019.01.08" ],
                    [ "ToolsForHomalg", ">=2013.04.12" ],
                    [ "homalg", ">=2019.09.01" ],
+                   [ "GaussForHomalg", ">=2019.09.01" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []

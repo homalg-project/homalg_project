@@ -90,6 +90,7 @@ Dependencies := rec(
                 [ "RingsForHomalg", ">= 2017.05.25" ],
                 [ "Modules", ">= 2019.01.07" ],
                 [ "homalg", ">= 2015.06.01" ],
+                [ "GaussForHomalg", ">=2019.09.01" ],
                 [ "GAPDoc", ">= 1.1" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []

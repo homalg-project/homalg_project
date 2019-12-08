@@ -14,6 +14,12 @@ This chapter documents the methods and functions of this package.
 <Chapter Label="methods"><Heading>&GaussForHomalg; methods and
 functions</Heading>
 
+<Section><Heading>The field of rationals</Heading>
+
+<#Include Label="HomalgFieldOfRationals">
+
+</Section>
+
 <Section><Heading>The Tools</Heading>
 
 Please note that there are more tool functions you can define,
