@@ -1,6 +1,6 @@
 name: IO_ForHomalg
-version: 2019.06.01
-date: 01/06/2019
+version: 2019.09.02
+date: 02/09/2019
 description: IO capabilities for the homalg project
 
 authors:
@@ -40,9 +40,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/IO_ForHomalg/Packag
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2019.06.01/IO_ForHomalg-2019.06.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2019.09.02/IO_ForHomalg-2019.09.02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2019.06.01/IO_ForHomalg-2019.06.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2019.09.02/IO_ForHomalg-2019.09.02.zip
 
 abstract: The <span class="pkgname">IO_ForHomalg</span> package launches the command-line-interface of an external computer algebra system and connects it to <span class="pkgname">homalg</span> using an Input/Output stream
 
