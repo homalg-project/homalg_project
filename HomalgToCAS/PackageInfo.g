@@ -4,7 +4,7 @@ PackageName := "HomalgToCAS",
 
 Subtitle := "A window to the outer world",
 
-Version := "2019.06.01",
+Version := "2019.09.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -149,7 +149,7 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                 [ "IO", ">= 2.3" ],
-                [ "MatricesForHomalg", ">= 2011.09.04" ],
+                [ "MatricesForHomalg", ">= 2019.09.01" ],
                 [ "GAPDoc", ">= 1.0" ]
                 ],
   SuggestedOtherPackages := [ ],
