@@ -5,7 +5,7 @@ PackageName := "GradedModules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
 
 Version := Maximum( [
-  "2019.06.01", ## Mohamed's version
+  "2019.09.02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
@@ -18,8 +18,6 @@ Version := Maximum( [
   "2015.12.04", ## Sebas' version
 ## this line prevents merge conflicts
   "2014.04.09", ## Max' version
-## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -125,6 +123,11 @@ Persons := [
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/GradedModules/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/GradedModules-", ~.Version, "/GradedModules-", ~.Version ),
