@@ -8,6 +8,8 @@ Version := Maximum( [
   "2019.06.02", ## Sebas' version
 ## this line prevents merge conflicts
   "2018.07.06", ## Kamal's version
+## this line prevents merge conflicts
+  "2019.09.02", ## Mohamed's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -35,6 +37,11 @@ Persons := [
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/4ti2Interface/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-", ~.Version, "/4ti2Interface-", ~.Version ),
