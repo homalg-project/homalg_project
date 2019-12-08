@@ -84,6 +84,8 @@ DeclareAttribute( "CommonNonTrivialWeightOfIndeterminates",
 ##DeclareAttribute( "WeightsOfIndeterminates",
 ##        IsHomalgRing );
 
+## for internal use only, do not document for the end user,
+## see MatrixOfWeightsOfIndeterminates in SingularTools.gi
 DeclareOperation( "MatrixOfWeightsOfIndeterminates",
         [ IsHomalgGradedRing ] );
 

@@ -387,8 +387,8 @@ InstallMethod( MatrixOfWeightsOfIndeterminates,
     
     ext_obj := homalgSendBlocking( [ "CreateListListOfIntegers(intvec(", weights, "),", m, n, ")"  ], [ "list" ], R, HOMALG_IO.Pictograms.CreateList );
     
-    ## CAUTION: ext_obj does not a pointer on a matrix in Singular
-    ## but on an intvec; use with care
+    ## CAUTION: ext_obj is not a pointer to a matrix in Singular but to an intvec;
+    ## use with care
     return HomalgMatrix( ext_obj, m, n, R );
     
 end );
