@@ -5,7 +5,7 @@ PackageName := "Modules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
 
 Version := Maximum( [
-  "2019.06.04", ## Mohamed's version
+  "2019.09.02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2014.07.02", ## Markus' version
 ## this line prevents merge conflicts
@@ -13,7 +13,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.07.20", ## Florian's version
 ## this line prevents merge conflicts
-  "2016.01.20", ## Sebas' version
+  "2018.09.20", ## Sebas' version
 ## this line prevents merge conflicts
   "2013.05.05", ## Sepp's version
 ## this line prevents merge conflicts
@@ -123,6 +123,11 @@ Persons := [
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/Modules/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Modules-", ~.Version, "/Modules-", ~.Version ),
@@ -149,6 +154,7 @@ Dependencies := rec(
                    [ "MatricesForHomalg", ">=2019.01.08" ],
                    [ "ToolsForHomalg", ">=2013.04.12" ],
                    [ "homalg", ">=2019.09.01" ],
+                   [ "GaussForHomalg", ">=2019.09.01" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
