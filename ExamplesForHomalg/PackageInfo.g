@@ -4,7 +4,7 @@ PackageName := "ExamplesForHomalg",
 
 Subtitle := "Examples for the GAP Package homalg",
 
-Version := "2019.08.01",
+Version := "2019.09.02",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -61,6 +61,11 @@ Persons := [
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-", ~.Version, "/ExamplesForHomalg-", ~.Version ),
@@ -90,6 +95,7 @@ Dependencies := rec(
                 [ "RingsForHomalg", ">= 2017.05.25" ],
                 [ "Modules", ">= 2019.01.07" ],
                 [ "homalg", ">= 2015.06.01" ],
+                [ "GaussForHomalg", ">=2019.09.01" ],
                 [ "GAPDoc", ">= 1.1" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
