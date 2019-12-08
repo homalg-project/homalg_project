@@ -8,6 +8,8 @@ Version :=  Maximum( [
   "2019.06.01", ## Sebas' version
 ## this line prevents merge conflicts
   "2019.05.01", ## Martin's version
+## this line prevents merge conflicts
+  "2019.09.02", ## Mohame's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -35,6 +37,11 @@ Persons := [
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/Convex/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Convex-", ~.Version, "/Convex-", ~.Version ),
