@@ -5,7 +5,7 @@ PackageName := "ToolsForHomalg",
 Subtitle := "Special methods and knowledge propagation tools",
 
 Version := Maximum( [
-  "2019.06.02", ## Mohamed's version
+  "2019.09.02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
@@ -69,6 +69,11 @@ Persons := [
 ],
 
 Status := "deposited",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/homalg-project/homalg_project"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/ToolsForHomalg/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-", ~.Version, "/ToolsForHomalg-", ~.Version ),
