@@ -113,3 +113,6 @@ DeclareOperation( "MultRow",
 DeclareOperation( "AddRow",
         [ IsList, IsList, IsList, IsList ] );
 
+DeclareOperation( "IsRowOfSparseMatrix",
+        [ IsSparseMatrix, IsSparseMatrix ] );
+

@@ -2,7 +2,7 @@
 ##
 ##  SparseMatrixGF2.gi          Gauss package                 Simon Goertzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B fÅ¸r Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B f√ºr Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for Gauss with sparse matrices over GF(2).
 ##
@@ -330,6 +330,32 @@ InstallOtherMethod( AddRow, #warning: this method does not have a side effect li
     return SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS( row1, row2 );
   end
 );
+
+BindGlobal( "LaTeXStringSparseMatrixGF2",
+  function(mat)
+    local   str, i, j;
+
+    str := STRINGIFY("""\begin{bmatrix}""" );
+    for i in [1 .. Nrows(mat)] do
+        for j in [1 .. Ncols(mat) - 1] do
+            if j in mat!.indices[i] then
+                Append(str, """1 & """);
+            else
+                Append(str, """. & """);
+            fi;
+        od;
+        
+        if Ncols(mat) in mat!.indices[i] then
+            Append(str, """1 \\""");
+        else
+            Append(str, """. \\""");
+        fi;
+    od;
+    Append(str, """ \end{bmatrix}""");
+    
+    return str;
+
+end );
 
 ##
 #InstallOtherMethod( AddRow, #old method, with desired side effect!
