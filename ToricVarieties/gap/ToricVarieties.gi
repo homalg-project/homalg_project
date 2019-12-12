@@ -379,6 +379,16 @@ InstallMethod( IsOrbifold,
     
 end );
 
+InstallMethod( IsSimplicial,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( variety )
+    
+    return IsOrbifold( variety );
+    
+end );
+
 ##################################
 ##
 ## Attributes

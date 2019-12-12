@@ -106,6 +106,14 @@ DeclareProperty( "HasNoTorusfactor",
 DeclareProperty( "IsOrbifold",
                  IsToricVariety );
 
+#! @Description
+#!  Checks if the toric variety <A>vari</A> is simplicial. This is a convenience method equivalent to
+#! IsOrbifold.
+#! @Returns true or false
+#! @Arguments vari
+DeclareProperty( "IsSimplicial",
+                 IsToricVariety );
+
 #################################
 ##
 #! @Section Attributes
