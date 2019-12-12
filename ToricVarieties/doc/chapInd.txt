@@ -75,6 +75,7 @@
   [2XIsProjectiveSpace[102X, for IsToricVariety 6.4-1 
   [2XIsProjectiveToricVariety[102X, for IsToricVariety 6.2-1 
   [2XIsProper[102X, for IsToricMorphism 7.3-2 
+  [2XIsSimplicial[102X, for IsToricVariety 3.3-9 
   [2XIsSmooth[102X, for IsToricVariety 3.3-4 
   [2XIsToricDivisor[102X, for IsObject 8.2-1 
   [2XIsToricMorphism[102X, for IsObject 7.2-1 

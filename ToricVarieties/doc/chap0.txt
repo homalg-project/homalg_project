@@ -6,10 +6,10 @@
                      [1X A package to handle toric varieties [101X
   
   
-                                   2019.09.02
+                                   2019.09.03
   
   
-                                2 September 2019
+                                3 September 2019
   
   
                                Sebastian Gutsche
@@ -73,6 +73,7 @@
       3.3-6 HasTorusfactor
       3.3-7 HasNoTorusfactor
       3.3-8 IsOrbifold
+      3.3-9 IsSimplicial
     3.4 [33X[0;0YAttributes[133X
       3.4-1 AffineOpenCovering
       3.4-2 CoxRing

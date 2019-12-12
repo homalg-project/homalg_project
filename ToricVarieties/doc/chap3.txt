@@ -403,6 +403,14 @@
   [33X[0;0YChecks  if  the  toric  variety [3Xvari[103X has an orbifold, which is, in the toric
   case, equivalent to the simpliciality of the fan.[133X
   
+  [1X3.3-9 IsSimplicial[101X
+  
+  [33X[1;0Y[29X[2XIsSimplicial[102X( [3Xvari[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YChecks if the toric variety [3Xvari[103X is simplicial. This is a convenience method
+  equivalent to IsOrbifold.[133X
+  
   
   [1X3.4 [33X[0;0YAttributes[133X[101X
   
