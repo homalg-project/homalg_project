@@ -59,7 +59,7 @@ DeclareAttribute( "ProjectiveEmbedding",
 #!  Checks if the given toric variety <A>vari</A> is a projective space.
 #! @Returns true or false
 #! @Arguments vari
-DeclareProperty( "IsProjectiveSpace",
+DeclareProperty( "IsEqualToProjectiveSpace",
                   IsToricVariety );
 
 #! @Description

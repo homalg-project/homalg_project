@@ -124,7 +124,7 @@ end );
 RedispatchOnCondition( ProjectiveEmbedding, true, [ IsToricVariety ], [ PolytopeOfVariety ], 0 );
 
 ## check if a toric variety is P^N
-InstallMethod( IsProjectiveSpace, 
+InstallMethod( IsEqualToProjectiveSpace,
                " for a toric variety ",
                [ IsToricVariety ],
   function( variety )
@@ -183,7 +183,7 @@ InstallMethod( IsDirectProductOfPNs,
     for i in constituents do
     
       # check if it is projective and otherwise cause an error and exit with false
-      if not IsProjectiveSpace( i ) then
+      if not IsEqualToProjectiveSpace( i ) then
       
         return false;
 
