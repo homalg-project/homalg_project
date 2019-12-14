@@ -126,9 +126,9 @@
   
   [1X6.4 [33X[0;0YProperties[133X[101X
   
-  [1X6.4-1 IsProjectiveSpace[101X
+  [1X6.4-1 IsIsomorphicToProjectiveSpace[101X
   
-  [33X[1;0Y[29X[2XIsProjectiveSpace[102X( [3Xvari[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsIsomorphicToProjectiveSpace[102X( [3Xvari[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YChecks if the given toric variety [3Xvari[103X is a projective space.[133X

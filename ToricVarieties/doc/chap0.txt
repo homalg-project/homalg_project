@@ -6,10 +6,10 @@
                      [1X A package to handle toric varieties [101X
   
   
-                                   2019.09.03
+                                   2019.12.05
   
   
-                                3 September 2019
+                                5 December 2019
   
   
                                Sebastian Gutsche
@@ -162,7 +162,7 @@
       6.3-2 AffineCone
       6.3-3 ProjectiveEmbedding
     6.4 [33X[0;0YProperties[133X
-      6.4-1 IsProjectiveSpace
+      6.4-1 IsIsomorphicToProjectiveSpace
       6.4-2 IsDirectProductOfPNs
     6.5 [33X[0;0YMethods[133X
       6.5-1 Polytope

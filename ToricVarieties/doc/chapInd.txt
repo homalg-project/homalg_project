@@ -63,6 +63,7 @@
   [2XIsClosedSubvariety[102X, for IsToricSubvariety 4.2-1 
   [2XIsComplete[102X, for IsToricVariety 3.3-5 
   [2XIsDirectProductOfPNs[102X, for IsToricVariety 6.4-2 
+  [2XIsIsomorphicToProjectiveSpace[102X, for IsToricVariety 6.4-1 
   [2XIsMorphism[102X, for IsToricMorphism 7.3-1 
   [2XIsNormalVariety[102X, for IsToricVariety 3.3-1 
   [2XIsNumericallyEffective[102X, for IsToricDivisor 8.3-7 
@@ -72,7 +73,6 @@
   [2XIsPrincipal[102X, for IsToricDivisor 8.3-2 
   [2XIsProductOf[102X, for IsToricVariety 3.4-12 
   [2XIsProjective[102X, for IsToricVariety 3.3-3 
-  [2XIsProjectiveSpace[102X, for IsToricVariety 6.4-1 
   [2XIsProjectiveToricVariety[102X, for IsToricVariety 6.2-1 
   [2XIsProper[102X, for IsToricMorphism 7.3-2 
   [2XIsSimplicial[102X, for IsToricVariety 3.3-9 
