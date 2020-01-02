@@ -564,7 +564,7 @@ InstallMethod( Indeterminates,
     
 end );
 
-##
+## Fallback method
 InstallMethod( RelativeIndeterminatesOfPolynomialRing,
         "for homalg rings",
         [ IsHomalgRing and HasCoefficientsRing ],
