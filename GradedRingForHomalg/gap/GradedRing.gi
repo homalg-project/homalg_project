@@ -582,6 +582,18 @@ InstallMethod( SetWeightsOfIndeterminates,
     
 end );
 
+InstallMethod( SetWeightsOfIndeterminates,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing and HasAmbientRing, IsList ],
+        
+  function( S, weights )
+    
+    SetWeightsOfIndeterminates( AmbientRing( S ), weights );
+    
+    WeightsOfIndeterminates( S );
+    
+end );
+
 ##
 InstallMethod( HasDegreeGroup,
         "for homalg graded rings",
@@ -741,7 +753,7 @@ InstallMethod( GradedRing,
         [ IsHomalgRing ],
         
   function( R )
-    local RP, S, A, rel, c;
+    local RP, S, rel, c;
     
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForGradedRings( R );
@@ -808,6 +820,28 @@ InstallMethod( GradedRing,
     S!.statistics.LinearSyzygiesGeneratorsOfColumns := 0;
     
     return S;
+    
+end );
+
+##
+InstallMethod( GradedRing,
+        "for homalg residue class rings",
+        [ IsHomalgResidueClassRingRep ],
+        
+  function( R )
+    local A, rel;
+    
+    if ValueOption( "pre_graded_ring" ) = true then
+        TryNextMethod( );
+    fi;
+    
+    A := AmbientRing( R );
+    
+    A := GradedRing( A );
+    
+    rel := A * RingRelations( R );
+    
+    return A / rel;
     
 end );
 
@@ -1009,7 +1043,7 @@ InstallMethod( \/,  ## this operation is declared in the file HomalgRelations.gd
     
     RR := R / ( R * ring_rel );
     
-    result := GradedRing( RR );
+    result := GradedRing( RR : pre_graded_ring := true );
     
     if HasContainsAField( S ) and ContainsAField( S ) then
         SetContainsAField( result, true );

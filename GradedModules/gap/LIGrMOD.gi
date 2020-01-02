@@ -794,7 +794,7 @@ InstallMethod( ResidueClassRing,
     ## do not do this, use the given J
     #J := GradedModule( DefiningIdeal( RR ), S );
     
-    result := GradedRing( RR );
+    result := GradedRing( RR : pre_graded_ring := true );
     
     if HasContainsAField( S ) and ContainsAField( S ) then
         SetContainsAField( result, true );
