@@ -5,7 +5,7 @@ PackageName := "GradedModules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
 
 Version := Maximum( [
-  "2020.01.01", ## Mohamed's version
+  "2020.01.02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
