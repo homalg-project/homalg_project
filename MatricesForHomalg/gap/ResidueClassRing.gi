@@ -125,6 +125,17 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( IndeterminatesOfPolynomialRing,
+        "for homalg rings",
+        [ IsHomalgRing and IsHomalgResidueClassRingRep ],
+        
+  function( R )
+    
+    return List( IndeterminatesOfPolynomialRing( AmbientRing( R ) ), r -> r / R );
+    
+end );
+
+##
 InstallMethod( RelativeIndeterminatesOfPolynomialRing,
         "for homalg rings",
         [ IsHomalgRing and IsHomalgResidueClassRingRep ],
