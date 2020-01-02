@@ -138,7 +138,7 @@ end );
 ##
 InstallMethod( RelativeIndeterminatesOfPolynomialRing,
         "for homalg rings",
-        [ IsHomalgRing and IsHomalgResidueClassRingRep ],
+        [ IsHomalgRing and IsHomalgResidueClassRingRep ], 10001,
         
   function( R )
     

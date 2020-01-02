@@ -239,7 +239,7 @@ end );
 ##
 InstallMethod( RelativeIndeterminatesOfPolynomialRing,
         "for homalg graded rings",
-        [ IsHomalgGradedRing ],
+        [ IsHomalgGradedRing ], 10001,
         
   function( R )
     
