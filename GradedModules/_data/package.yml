@@ -1,6 +1,6 @@
 name: GradedModules
-version: 2019.09.02
-date: 02/09/2019
+version: 2020.01.01
+date: 01/01/2020
 description: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
 
 authors:
@@ -39,7 +39,7 @@ needed-pkgs:
       version: ">= 2013.04.16"
       url: "https://homalg-project.github.io/homalg_project/RingsForHomalg/"
     - name: "GradedRingForHomalg"
-      version: ">= 2013.10.27"
+      version: ">= 2020.01.01"
       url: "https://homalg-project.github.io/homalg_project/GradedRingForHomalg/"
     - name: "Modules"
       version: ">= 2018.02.04"
@@ -57,9 +57,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/GradedModules/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2019.09.02/GradedModules-2019.09.02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2020.01.01/GradedModules-2020.01.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2019.09.02/GradedModules-2019.09.02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2020.01.01/GradedModules-2020.01.01.zip
 
 abstract: This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring
 

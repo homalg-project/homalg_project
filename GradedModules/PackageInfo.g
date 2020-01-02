@@ -5,7 +5,7 @@ PackageName := "GradedModules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
 
 Version := Maximum( [
-  "2019.09.02", ## Mohamed's version
+  "2020.01.01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
@@ -155,7 +155,7 @@ Dependencies := rec(
                    [ "MatricesForHomalg", ">= 2019.01.05" ],
                    [ "HomalgToCAS", ">= 2011.10.05" ],
                    [ "RingsForHomalg", ">= 2013.04.16" ],
-                   [ "GradedRingForHomalg", ">= 2013.10.27" ],
+                   [ "GradedRingForHomalg", ">= 2020.01.01" ],
                    [ "Modules", ">= 2018.02.04" ],
                    [ "homalg", ">= 2013.06.23" ],
                    [ "GAPDoc", ">= 1.0" ] ],
