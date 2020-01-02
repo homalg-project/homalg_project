@@ -80,6 +80,40 @@ BindGlobal( "TheTypeHomalgResidueClassMatrix",
 ####################################
 
 ##
+InstallMethod( Degree,
+        "for elements of homalg residue class rings",
+        [ IsHomalgResidueClassRingElementRep ],
+        
+  function( r )
+    local R, A, RP, coeffs, deg;
+    
+    if IsBound( r!.Degree ) then
+        return r!.Degree;
+    fi;
+    
+    if IsZero( r ) then
+        return -1;
+    fi;
+    
+    R := HomalgRing( r );
+    
+    A := AmbientRing( R );
+    
+    RP := homalgTable( R );
+    
+    if not IsBound( RP!.DegreeOfRingElement ) then
+        TryNextMethod( );
+    fi;
+    
+    deg := RP!.DegreeOfRingElement( r, R );
+    
+    r!.Degree := deg;
+    
+    return deg;
+    
+end );
+
+##
 InstallMethod( Indeterminates,
         "for homalg rings",
         [ IsHomalgRing and IsHomalgResidueClassRingRep ],

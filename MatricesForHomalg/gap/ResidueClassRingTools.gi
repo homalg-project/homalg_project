@@ -637,6 +637,12 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                  end,
                
+               DegreeOfRingElement :=
+                 function( r, R )
+                   
+                   return Degree( EvalRingElement( DecideZero( r ) ) );
+                   
+                 end,
         )
  );
 
