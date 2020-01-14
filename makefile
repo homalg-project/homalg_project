@@ -350,7 +350,6 @@ endif
 
 ci-test_test_suite_RingsForHomalg: ci-prepare
 ifneq ($(SINGULAR_PATH),)
-ifneq ($(SAGE_PATH),)
 ifneq ($(M2_PATH),)
 ifneq ($(MAGMA_PATH),)
 ifneq ($(MAPLE_PATH),)
@@ -358,7 +357,6 @@ ifneq ($(MAPLE_PATH),)
 	cd ../test_suite/test_suite_RingsForHomalg; \
 	exec 9>&1; \
 	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../RingsForHomalg.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
 endif
 endif
 endif
