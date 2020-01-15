@@ -59,13 +59,13 @@ S := HomalgRingOfIntegersInMaple( );
 
 Read( "convert_test.g" );
 
-## GAP <-> Sage
+## GAP <-> Sage, Sage 9.0: the interface is broken
 
-Print( "~~~~~~~~~~~~~~~~~~\n\n" );
+# Print( "~~~~~~~~~~~~~~~~~~\n\n" );
 
-S := HomalgRingOfIntegersInSage( );
+# S := HomalgRingOfIntegersInSage( );
 
-Read( "convert_test.g" );
+# Read( "convert_test.g" );
 
 ## GAP <-> MAGMA
 
