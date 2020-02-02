@@ -19,7 +19,7 @@ docclean:
 
 test: test_Convex test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToricVarieties test_Modules test_homalg
 
-build: build_PolymakeInterface build_Gauss
+build: build_Gauss
 
 ci-prepare:
 	./ci_prepare
