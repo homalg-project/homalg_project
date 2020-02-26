@@ -267,7 +267,7 @@ end );
 ##
 InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
   function( arg )
-    local nargs, HOMALG_IO_CAS, executables, options, e, s;
+    local nargs, HOMALG_IO_CAS, executables, options, env, e, x, s;
     
     nargs := Length( arg );
     
@@ -301,12 +301,27 @@ InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
         Error( "either the name of the ", HOMALG_IO_CAS.name,  " executable must exist as a component of the CAS specific record (normally called HOMALG_IO_", HOMALG_IO_CAS.name, " and which probably have been provided as the first argument), or the name must be provided as a second argument:\n", HOMALG_IO_CAS, "\n" );
     fi;
     
-    for e in executables do
+    env := Filename( DirectoriesSystemPrograms( ), "env" );
+    
+    if IsBound( HOMALG_IO_CAS.environment ) then
+        e := HOMALG_IO_CAS.environment;
+        if env = fail then
+            Info( InfoWarning, 1, "the entry HOMALG_IO_CAS.environment is set but there is no executable `env'\n" );
+        fi;
+    else
+        e := [ ];
+    fi;
+    
+    for x in executables do
         
-        s := Filename( DirectoriesSystemPrograms( ), e );
+        s := Filename( DirectoriesSystemPrograms( ), x );
         
         if s <> fail then
-            s := IO_Popen3( s, options );
+            if not env = fail then
+                s := IO_Popen3( env, Concatenation( e, [ s ], options ) );
+            else
+                s := IO_Popen3( s, options );
+            fi;
         fi;
         
         if s <> fail then
