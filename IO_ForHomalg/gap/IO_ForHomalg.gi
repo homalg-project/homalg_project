@@ -73,7 +73,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
   function( s )
     local READY, READY_LENGTH, CUT_POS_BEGIN, CUT_POS_END, SEARCH_READY_TWICE,
           handle_output, original_lines, gotsomething, l, nr, pos, bytes, len,
-          pos1, pos2, pos3, pos4, CAS, PID, COLOR;
+          pos1, pos2, pos3, pos4, CAS, PID, COLOR, ERRORS;
     
     READY := s.READY;
     READY_LENGTH := s.READY_LENGTH;
@@ -207,7 +207,12 @@ InstallGlobalFunction( CheckOutputOfCAS,
                 else
                     COLOR := "";
                 fi;
-                Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
+                if not IsEmpty( s.errors ) then
+                    ERRORS := Concatenation( "The last error was:\n", s.errors, "\n" );
+                else
+                    ERRORS := "";
+                fi;
+                Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n", ERRORS );
             fi;
         fi;
         
@@ -232,7 +237,12 @@ InstallGlobalFunction( CheckOutputOfCAS,
                 else
                     COLOR := "";
                 fi;
-                Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
+                if not IsEmpty( s.errors ) then
+                    ERRORS := Concatenation( "The last error was:\n", s.errors, "\n" );
+                else
+                    ERRORS := "";
+                fi;
+                Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n", ERRORS );
             fi;
         fi;
     od;
