@@ -1830,7 +1830,7 @@ InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
 
 ##
 InstallOtherMethod( \in,
-        "for an integer and a homalg internal ring",
+        "for an object and a homalg internal ring",
         [ IsObject, IsHomalgInternalRingRep ], 100001,
         
   function( z, R )
