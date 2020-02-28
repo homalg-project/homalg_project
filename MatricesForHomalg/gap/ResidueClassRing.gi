@@ -806,6 +806,21 @@ InstallGlobalFunction( HomalgResidueClassRingElement,
 end );
 
 ##
+InstallOtherMethod( \in,
+        "for an object and a homalg residue class ring",
+        [ IsObject, IsHomalgResidueClassRingRep ],
+        
+  function( z, R )
+    
+    if not IsHomalgResidueClassRingElementRep( z ) then
+        return false;
+    fi;
+    
+    return IsIdenticalObj( HomalgRing( z ), R );
+    
+end );
+
+##
 InstallGlobalFunction( HomalgResidueClassMatrix,
   function( M, R )
     local matrix;
