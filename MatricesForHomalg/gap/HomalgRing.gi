@@ -1835,6 +1835,10 @@ InstallOtherMethod( \in,
         
   function( z, R )
     
+    if IsBound( R!.ring ) then
+        return z in R!.ring;
+    fi;
+    
     if not IsInt( Zero( R ) ) then
         TryNextMethod( );
     fi;
