@@ -1833,25 +1833,9 @@ InstallOtherMethod( \in,
         "for an object and a homalg internal ring",
         [ IsObject, IsHomalgInternalRingRep ], 100001,
         
-  function( z, R )
+  function( r, R )
     
-    if not IsInt( Zero( R ) ) then
-        TryNextMethod( );
-    fi;
-    
-    if IsInt( z ) then
-        return true;
-    fi;
-    
-    if not ( HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) ) then
-        TryNextMethod( );
-    fi;
-    
-    if IsRat( z ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
+    return r in R!.ring;
     
 end );
 
