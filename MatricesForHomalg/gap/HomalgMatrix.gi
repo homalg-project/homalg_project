@@ -1778,7 +1778,7 @@ InstallMethod( Minors,
         return [ Zero( R ) ];
     fi;
     
-    return DuplicateFreeList( l );
+    return l;
     
 end );
 
