@@ -1673,10 +1673,14 @@ InstallMethod( FittingIdeal,
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
     
-    mor := PresentationMorphism( M );
-    
-    ## better than NrRelations( M )
-    m := NrGenerators( Source( mor ) );
+    if not ValueOption( "PresentationMorphism" ) = false then
+        mor := PresentationMorphism( M );
+        m := NrGenerators( Source( mor ) );
+        mat := MatrixOfMap( mor );
+    else
+        m := NrRelations( M );
+        mat := MatrixOfRelations( M );
+    fi;
     
     if n - i <= 0 then	## <=> i >= n
         if left then
@@ -1691,7 +1695,6 @@ InstallMethod( FittingIdeal,
             Fitt_i := ZeroRightSubmodule( R );
         fi;
     else
-        mat := MatrixOfMap( mor );
         if left then
             Fitt_i := LeftIdealOfMinors( n - i, mat );
         else
