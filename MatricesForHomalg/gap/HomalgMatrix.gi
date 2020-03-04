@@ -1772,8 +1772,6 @@ InstallMethod( Minors,
     
     l := List( l, rc -> Determinant( CertainColumns( CertainRows( M, rc[1] ), rc[2] ) ) );
     
-    l := Filtered( l, m -> not IsZero( m ) );
-    
     if l = [ ] then
         return [ Zero( R ) ];
     fi;
