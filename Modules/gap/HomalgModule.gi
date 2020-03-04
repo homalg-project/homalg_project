@@ -1633,8 +1633,10 @@ InstallMethod( ByASmallerPresentation,
             rel := RelationsOfModule( M, p );
             if not ( HasCanBeUsedToDecideZeroEffectively( rel ) and
                      CanBeUsedToDecideZeroEffectively( rel ) ) then
-                SetPositionOfTheDefaultSetOfGenerators( M, p );	## just in case
-                BasisOfModule( M );
+                SetPositionOfTheDefaultSetOfGenerators( M, p );	    ## just in case
+                if not ValueOption( "BasisOfModule" ) = false then
+                    BasisOfModule( M );
+                fi;
                 OnLessGenerators( M );
             fi;
         fi;
