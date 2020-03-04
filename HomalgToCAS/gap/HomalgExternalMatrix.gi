@@ -160,6 +160,67 @@ end );
 ####################################
 
 ##
+InstallMethod( CreateHomalgMatrixFromList,
+        "constructor for homalg matrices",
+        [ IsList, IsHomalgExternalRingRep ],
+        
+  function( L, R )
+    local M;
+    
+    if IsList( L[1] ) then
+        if not ForAll( L[1], IsHomalgExternalRingElementRep ) then
+            TryNextMethod( );
+        elif not IsIdenticalObj( HomalgRing( L[1][1] ), R ) then
+            TryNextMethod( );
+        fi;
+        M := List( L, r -> List( r, homalgPointer ) );
+        M := Concatenation( "[[", JoinStringsWithSeparator( List( M, r -> JoinStringsWithSeparator( r ) ), "],[" ), "]]" );
+    else
+        if not ForAll( L, IsHomalgExternalRingElementRep ) then
+            TryNextMethod( );
+        elif not IsIdenticalObj( HomalgRing( L[1] ), R ) then
+            TryNextMethod( );
+        fi;
+        ## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
+        M := Concatenation( "[[", JoinStringsWithSeparator( List( L, homalgPointer ), "],[" ), "]]" );
+        ## What is the use case for this? Wouldn't it be better to replace this by an error message?
+        # Error( "the number of rows and columns must be specified to construct a matrix from a list" );
+    fi;
+    
+    return CreateHomalgMatrixFromString( M, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromList,
+        "constructor for homalg matrices",
+        [ IsList, IsInt, IsInt, IsHomalgExternalRingRep ],
+        
+  function( L, r, c, R )
+    local M;
+    
+    if IsList( L[1] ) then
+        if not ForAll( L[1], IsHomalgExternalRingElementRep ) then
+            TryNextMethod( );
+        elif not IsIdenticalObj( HomalgRing( L[1][1] ), R ) then
+            TryNextMethod( );
+        fi;
+        M := List( Concatenation( L ), homalgPointer );
+        M := Concatenation( "[", JoinStringsWithSeparator( M ), "]" );
+    else
+        if not ForAll( L, IsHomalgExternalRingElementRep ) then
+            TryNextMethod( );
+        elif not IsIdenticalObj( HomalgRing( L[1] ), R ) then
+            TryNextMethod( );
+        fi;
+        M := Concatenation( "[", JoinStringsWithSeparator( List( L, homalgPointer ) ), "]" );
+    fi;
+    
+    return CreateHomalgMatrixFromString( M, r, c, R );
+    
+end );
+
+##
 InstallMethod( ConvertHomalgMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgRing ],

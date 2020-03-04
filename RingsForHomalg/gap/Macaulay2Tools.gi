@@ -40,7 +40,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                DivideByUnit :=
                  function( a, u )
                    
-                   return homalgSendBlocking( [ "(", a, ")/(", u, ")"  ], HOMALG_IO.Pictograms.DivideByUnit );
+                   return homalgSendBlocking( [ "(", a, ")*(", u, ")^-1"  ], HOMALG_IO.Pictograms.DivideByUnit );
                    
                  end,
                
