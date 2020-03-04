@@ -1,11 +1,7 @@
-#
-# Generate the manual using AutoDoc
-#
-LoadPackage( "AutoDoc", "2016.02.16" );
+if fail = LoadPackage("AutoDoc", ">= 2016.01.21") then
+    Error("AutoDoc 2016.01.21 or newer is required");
+fi;
 
-
-
-Read( "PackageInfo.g" ); 
 PrintTo( "VERSION", GAPInfo.PackageInfoCurrent.Version ); 
 
 
