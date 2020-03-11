@@ -109,7 +109,7 @@ InstallGlobalFunction( LaunchCAS,
         Error( "for security reasons LaunchCAS only accepts a string (as a first argument) which points to a HOMALG_IO_CAS record\n" );
     fi;
     
-    if IsBound( HOMALG_IO_CAS.LaunchCAS ) then
+    if IsBound( HOMALG_IO_CAS.LaunchCAS ) and IsFunction( HOMALG_IO_CAS.LaunchCAS ) then
         
         s := CallFuncList( HOMALG_IO_CAS.LaunchCAS, arg );
         
