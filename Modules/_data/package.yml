@@ -1,6 +1,6 @@
 name: Modules
-version: 2019.09.02
-date: 02/09/2019
+version: 2020.02.02
+date: 02/02/2020
 description: A homalg based package for the Abelian category of finitely presented modules over computable rings
 
 authors:
@@ -46,9 +46,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/Modules/PackageInfo
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2019.09.02/Modules-2019.09.02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.02.02/Modules-2020.02.02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2019.09.02/Modules-2019.09.02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.02.02/Modules-2020.02.02.zip
 
 abstract: The <span class="pkgname">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings
 
