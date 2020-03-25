@@ -433,6 +433,22 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               RadicalSubobject :=
+                 function( mat )
+                   local R;
+                   
+                   R := HomalgRing( mat );
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only radical of one-column matrices is supported\n" );
+                   fi;
+                   
+                   mat := EntriesOfHomalgMatrix( mat );
+                   
+                   return homalgSendBlocking( [ "Transpose(Matrix([GroebnerBasis(Radical(ideal<", R, "|", mat, ">))]))" ], HOMALG_IO.Pictograms.RadicalSubobject );
+                   
+                 end,
+               
                IsPrime :=
                  function( mat )
                    local R;
@@ -629,6 +645,20 @@ InstallValue( CommonHomalgTableForMAGMATools,
                  function( D, N )
                    
                    return homalgSendBlocking( [ "Diff(", D, N, ")" ], HOMALG_IO.Pictograms.Diff );
+                   
+                 end,
+               
+               Pullback :=
+                 function( phi, M )
+                   
+                   if not IsBound( phi!.RingMap ) then
+                       phi!.RingMap :=
+                         homalgSendBlocking( [ "hom< ", Source( phi ), " -> ", Range( phi ), " | ", ImagesOfRingMap( phi ), " >" ], Range( phi ), "break_lists", HOMALG_IO.Pictograms.define );
+                   fi;
+                   
+                   Eval( M ); ## the following line might reset Range( phi ) to HomalgRing( M ) in order to evaluate the (eventually lazy) matrix M -> error
+                   
+                   return homalgSendBlocking( [ "ChangeRing(", M, phi!.RingMap, ")" ], Range( phi ), HOMALG_IO.Pictograms.Pullback );
                    
                  end,
                
