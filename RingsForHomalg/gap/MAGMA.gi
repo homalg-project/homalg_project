@@ -104,7 +104,7 @@ InstallGlobalFunction( _MAGMA_SetRing,
         fi;
     fi;
     
-    if HasCoefficientsRing( R ) then
+    if HasCoefficientsRing( R ) and not IsIdenticalObj( R, CoefficientsRing( R ) ) then
         indets := Indeterminates( R );
         indets := List( indets, String );
         indets := JoinStringsWithSeparator( indets );
