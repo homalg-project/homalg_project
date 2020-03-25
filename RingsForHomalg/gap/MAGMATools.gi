@@ -435,11 +435,9 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                IsPrime :=
                  function( mat )
-                   local R, v, c;
+                   local R;
                    
                    R := HomalgRing( mat );
-                   
-                   v := homalgStream( R )!.variable_name;
                    
                    mat := EntriesOfHomalgMatrix( mat );
                    
