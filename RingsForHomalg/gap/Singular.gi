@@ -149,6 +149,8 @@ end );
 InstallValue( SingularMacros,
         rec(
             
+    use_liftstd := "int use_liftstd = 1;",
+    
     IsMemberOfList := "\n\
 proc IsMemberOfList (int i, list l)\n\
 {\n\
@@ -597,11 +599,19 @@ proc IndicatorMatrixOfNonZeroEntries(matrix M)\n\
 ##    <Description>
 ##    
 ##      <Listing Type="Code"><![CDATA[
-    BasisOfRowModule := "\n\
-proc BasisOfRowModule (matrix M)\n\
-{\n\
-  return(std(M));\n\
-}\n\n",
+    BasisOfRowModule := """
+proc BasisOfRowModule (matrix M)
+{
+  if (use_liftstd) {
+    matrix T;
+    return(matrix(liftstd(module(M),T,"std",0)));
+  }
+  else {
+    return(std(M));
+  }
+}
+
+""",
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -636,18 +646,30 @@ proc PartiallyReducedBasisOfColumnModule (matrix M)\n\
   return(Involution(PartiallyReducedBasisOfRowModule(Involution(M))));\n\
 }\n\n",
     
-#    ## according to the documentation B=M*T in the commutative case, but it somehow does not work :(
-#    ## and for plural to work one would need to define B=transpose(transpose(T)*transpose(M)), which is expensive!!
-#    BasisOfRowsCoeff := "\n\
-#proc BasisOfRowsCoeff (matrix M)\n\
-#{\n\
-#  matrix T;\n\
-#  matrix B = matrix(liftstd(M,T));\n\
-#  list l = transpose(transpose(T)*transpose(M)),T;\n\
-#  return(l)\n\
-#}\n\n",
+    BasisOfRowsCoeffViaLift := """
+proc BasisOfRowsCoeffViaLift (matrix M)
+{
+  matrix B = BasisOfRowModule(M);
+  option(noredSB);
+  matrix T = lift(M,B);
+  option(redSB);
+  list l = B,T;
+  return(l);
+}
 
-#never use stdlift, also because it might differ from std!!!
+""",
+
+    BasisOfRowsCoeffInteresting := """
+proc BasisOfRowsCoeffInteresting (matrix M, int limit)
+{
+  matrix T;
+  matrix B = matrix(liftstd(module(M),T,limit));
+  list l = B,T;
+  return(l);
+}
+
+""",
+
 ##  <#GAPDoc Label="BasisOfRowsCoeff:SingularMacro">
 ##  <ManSection>
 ##    <Func Arg="M, T" Name="BasisOfRowsCoeff" Label="Singular macro"/>
@@ -658,15 +680,41 @@ proc PartiallyReducedBasisOfColumnModule (matrix M)\n\
     BasisOfRowsCoeff := """
 proc BasisOfRowsCoeff (matrix M)
 {
-  matrix B = BasisOfRowModule(M);
-  option(noredSB);
-  matrix T = lift(M,B);
-  option(redSB);
+  return(RelativeBasisOfRowsCoeff(M,ncols(M)));
+}
+
+""",
+
+    RelativeBasisOfRowsCoeff := """
+proc RelativeBasisOfRowsCoeff (matrix M,int limit)
+{
+  if (use_liftstd) {
+    matrix T1;
+    module B1 = liftstd(module(M),T1,"std",limit);
+    // make sure we get the same output as when applying std
+    module B2 = std(B1);
+    matrix T2 = lift(B1,B2);
+    
+    // TODO: test this
+    matrix B = matrix(B2);
+    if (hasCommutativeVars(basering)) {
+      matrix T = T1 * T2;
+    }
+    else {
+      matrix T = transpose(transpose(T2) * transpose(T1));
+    }
+  }
+  else {
+    matrix B = BasisOfRowModule(M);
+    option(noredSB);
+    matrix T = lift(M,B);
+    option(redSB);
+  }
   list l = B,T;
   return(l);
 }
 
- """,
+""",
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -790,11 +838,24 @@ proc SyzForHomalg (matrix M)\n\
 ##    <Description>
 ##    
 ##      <Listing Type="Code"><![CDATA[
-    SyzygiesGeneratorsOfRows := "\n\
-proc SyzygiesGeneratorsOfRows (matrix M)\n\
-{\n\
-  return(SyzForHomalg(M));\n\
-}\n\n",
+    SyzygiesGeneratorsOfRows := """
+proc SyzygiesGeneratorsOfRows (matrix M)
+{
+  if (use_liftstd) {
+    matrix T;
+    module S;
+    // TODO: needed?
+    option("redTailSyz");
+    liftstd(module(M),T,S,"std");
+    option("noredTailSyz");
+    return(matrix(S));
+  }
+  else {
+    return(SyzForHomalg(M));
+  }
+}
+
+""",
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -824,11 +885,25 @@ proc SyzygiesGeneratorsOfColumns (matrix M)\n\
 ##    <Description>
 ##    
 ##      <Listing Type="Code"><![CDATA[
-    RelativeSyzygiesGeneratorsOfRows := "\n\
-proc RelativeSyzygiesGeneratorsOfRows (matrix M1, matrix M2)\n\
-{\n\
-  return(BasisOfRowModule(modulo(M1, M2)));\n\
-}\n\n",
+    RelativeSyzygiesGeneratorsOfRows := """
+proc RelativeSyzygiesGeneratorsOfRows (matrix M1, matrix M2)
+{
+  if (use_liftstd) {
+    matrix T;
+    module S;
+    // TODO: needed?
+    option("redTailSyz");
+    liftstd(module(concat(M1,M2)),T,S,"std",nrcols(M1));
+    option("noredTailSyz");
+    // TODO: additional BasisOfRowModule?
+    return(submat(matrix(S),1..ncols(M1),1..ncols(S)));
+  }
+  else {
+    return(BasisOfRowModule(modulo(M1, M2)));
+  }
+}
+
+""",
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
