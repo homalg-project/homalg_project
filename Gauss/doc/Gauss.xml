@@ -477,7 +477,7 @@ in source code should just check out the files in the
      <#Include Label="CertainRows">
      <#Include Label="CertainColumns">
      <#Include Label="UnionOfRowsOp">
-     <#Include Label="UnionOfColumnsOp">
+     <#Include Label="UnionOfColumns">
      <#Include Label="SparseDiagMat">
      <#Include Label="Nrows">
      <#Include Label="Ncols">
