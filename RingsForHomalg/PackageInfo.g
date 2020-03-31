@@ -7,7 +7,7 @@ Subtitle := "Dictionaries of external rings",
 Version := Maximum( [
   "2020.02.04", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2018.12.02", ## Markus L-H's version
+  "2020.02.05", ## Markus L-H's version
 ## this line prevents merge conflicts
   "2017.04.17", ## Markus K's version
 ## this line prevents merge conflicts
@@ -214,7 +214,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2019.09.01" ],
+                   [ "MatricesForHomalg", ">= 2020.02.05" ],
                    [ "HomalgToCAS", ">= 2019.09.01" ],
                    [ "GaussForHomalg", ">= 2019.09.01" ],
                    [ "GAPDoc", ">= 1.0" ]

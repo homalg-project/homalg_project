@@ -221,7 +221,7 @@ InstallImmediateMethod( IsZero,
     
     e := EvalUnionOfColumns( M );
     
-    if true in List( e, function( A ) return HasIsZero( A ) and not IsZero( A ); end ) then
+    if ForAny( e, function( A ) return HasIsZero( A ) and not IsZero( A ); end ) then
         return false;
     fi;
     
@@ -612,7 +612,7 @@ InstallImmediateMethod( IsRightInvertibleMatrix,
     
     e := EvalUnionOfColumns( M );
     
-    if true in List( e, function( A ) return HasIsRightInvertibleMatrix( A ) and IsRightInvertibleMatrix( A ); end ) then
+    if ForAny( e, function( A ) return HasIsRightInvertibleMatrix( A ) and IsRightInvertibleMatrix( A ); end ) then
         return true;
     fi;
     
@@ -1409,8 +1409,8 @@ InstallImmediateMethod( ColumnRankOfMatrix,
     
     e := EvalUnionOfColumns( M );
     
-    if ForAll( e, HasRowRankOfMatrix ) then
-        r := List( e, RowRankOfMatrix );
+    if ForAll( e, HasColumnRankOfMatrix ) then
+        r := List( e, ColumnRankOfMatrix );
         if Maximum( r ) = Sum( r ) then
             return Maximum( r );
         fi;
@@ -1514,6 +1514,8 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
         c := 0;
         
         p := List( e, PositionOfFirstNonZeroEntryPerRow );
+
+        p := List( p, a -> List( a, function(x) if x = 0 then return infinity; else return x; fi; end ) );
         
         result := ListWithIdenticalEntries( Length( p[1] ), infinity );
         
@@ -1712,7 +1714,7 @@ InstallMethod( IsZero,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( M )
-    local e, A, B;
+    local e;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsZero( UnionOfColumns )", "\033[0m" );
     
@@ -1993,6 +1995,8 @@ InstallMethod( PositionOfFirstNonZeroEntryPerRow,
         
   function( M )
     local e, c, p, result, i;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "PositionOfFirstNonZeroEntryPerRow( UnionOfColumns )", "\033[0m" );
     
     e := EvalUnionOfColumns( M );
     

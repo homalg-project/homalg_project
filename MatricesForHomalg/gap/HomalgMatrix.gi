@@ -1227,7 +1227,7 @@ if IsBound( __INSTALL_UNIONOFROWS_IN_MATRICES ) and __INSTALL_UNIONOFROWS_IN_MAT
     UnbindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES" );
 fi;
 
-##  <#GAPDoc Label="UnionOfColumns">
+##  <#GAPDoc Label="UnionOfColumnsPair">
 ##  <ManSection>
 ##    <Meth Arg="A, B" Name="UnionOfColumns" Label="for matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>

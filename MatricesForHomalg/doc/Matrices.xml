@@ -115,6 +115,7 @@
 <#Include Label="CertainRows">
 <#Include Label="CertainColumns">
 <#Include Label="UnionOfRows">
+<#Include Label="UnionOfColumnsPair">
 <#Include Label="UnionOfColumns">
 <#Include Label="DiagMat">
 <#Include Label="KroneckerMat">
