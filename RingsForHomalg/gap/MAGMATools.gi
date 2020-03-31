@@ -155,10 +155,10 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
-               UnionOfColumns :=
+               UnionOfColumnsPair :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "HorizontalJoin(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( [ "HorizontalJoin(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfColumnsPair );
                    
                  end,
                

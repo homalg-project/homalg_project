@@ -189,7 +189,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    ];
                  end,
                
-               UnionOfColumns :=
+               UnionOfColumnsPair :=
                  function( A, B )
                    local a, b, c;
                    

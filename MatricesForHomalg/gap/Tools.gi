@@ -711,7 +711,7 @@ end );
 ##      In case the matrix was created using
 ##      <Ref Meth="UnionOfColumns" Label="for matrices"/>
 ##      then the filter <C>HasEvalUnionOfColumns</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
-##      <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>
+##      <Ref Meth="UnionOfColumnsPair" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
@@ -774,9 +774,9 @@ InstallMethod( Eval,
     
       RP := homalgTable( R );
 
-      if IsBound(RP!.UnionOfColumns) then
+      if IsBound(RP!.UnionOfColumnsPair) then
       
-        result := RP!.UnionOfColumns( A, B );
+        result := RP!.UnionOfColumnsPair( A, B );
 
         return HomalgMatrixWithAttributes( [
                    Eval, result,
@@ -788,7 +788,7 @@ InstallMethod( Eval,
       fi;
     
       if not isHomalgInternalMatrixRep then
-        Error( "could not find a procedure called UnionOfColumns ",
+        Error( "could not find a procedure called UnionOfColumnsPair ",
                "in the homalgTable of the non-internal ring\n" );
       fi;
     
@@ -827,15 +827,15 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="UnionOfColumns:homalgTable_entry">
+##  <#GAPDoc Label="UnionOfColumnsPair:homalgTable_entry">
 ##  <ManSection>
-##    <Func Arg="A, B" Name="UnionOfColumns" Label="homalgTable entry"/>
+##    <Func Arg="A, B" Name="UnionOfColumnsPair" Label="homalgTable entry"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumns</C> is bound then
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumnsPair</C> is bound then
 ##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/> returns
-##      <M>RP</M>!.<C>UnionOfColumns</C> applied to the content of the attribute
+##      <M>RP</M>!.<C>UnionOfColumnsPair</C> applied to the content of the attribute
 ##      <C>EvalUnionOfColumns</C><M>( <A>C</A> ) = [ <A>A</A>, <A>B</A> ]</M>.
 ##    </Description>
 ##  </ManSection>

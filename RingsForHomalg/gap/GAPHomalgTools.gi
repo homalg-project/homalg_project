@@ -153,10 +153,10 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
-               UnionOfColumns :=
+               UnionOfColumnsPair :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "UnionOfColumns(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( [ "UnionOfColumns(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfColumnsPair );
                    
                  end,
                

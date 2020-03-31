@@ -97,10 +97,10 @@ InstallValue( CommonHomalgTableForSageTools,
                    
                  end,
                
-               UnionOfColumns :=
+               UnionOfColumnsPair :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "block_matrix([", A, B, "],ncols=1)" ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( [ "block_matrix([", A, B, "],ncols=1)" ], HOMALG_IO.Pictograms.UnionOfColumnsPair );
                    
                  end,
                

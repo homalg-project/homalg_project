@@ -159,13 +159,13 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
-               UnionOfColumns :=
+               UnionOfColumnsPair :=
                  function( A, B )
                    local R;
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ R, "[-1][matrix](", R, "[-1][UnionOfColumns](", A, B, "))" ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( [ R, "[-1][matrix](", R, "[-1][UnionOfColumns](", A, B, "))" ], HOMALG_IO.Pictograms.UnionOfColumnsPair );
                    
                  end,
                

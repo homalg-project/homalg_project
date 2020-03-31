@@ -333,14 +333,14 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##  </ManSection>
                ##  <#/GAPDoc>
                
-               ##  <#GAPDoc Label="UnionOfColumns:ResidueClassRing">
+               ##  <#GAPDoc Label="UnionOfColumnsPair:ResidueClassRing">
                ##  <ManSection>
-               ##    <Func Arg="" Name="UnionOfColumns" Label="ResidueClassRing"/>
+               ##    <Func Arg="" Name="UnionOfColumnsPair" Label="ResidueClassRing"/>
                ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
                ##    <Description>
-               ##    (&see; <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>)
+               ##    (&see; <Ref Meth="UnionOfColumnsPair" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
-               UnionOfColumns :=
+               UnionOfColumnsPair :=
                  function( A, B )
                    local N;
                    

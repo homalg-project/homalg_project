@@ -153,10 +153,10 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
-               UnionOfColumns :=
+               UnionOfColumnsPair :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "|", B ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( [ A, "|", B ], HOMALG_IO.Pictograms.UnionOfColumnsPair );
                    
                  end,
                
