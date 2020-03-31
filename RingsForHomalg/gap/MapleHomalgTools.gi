@@ -165,7 +165,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ R, "[-1][matrix](", R, "[-1][UnionOfColumns](", A, B, "))" ], HOMALG_IO.Pictograms.UnionOfColumnsPair );
+                   return homalgSendBlocking( [ R, "[-1][matrix](", R, "[-1][UnionOfColumns](", A, B, "))" ], HOMALG_IO.Pictograms.UnionOfColumns );
                    
                  end,
                

@@ -272,8 +272,8 @@ InstallValue( HOMALG_IO,
                 ## stack to matrices vertically:
                 UnionOfRows                             := "A_B",
                 
-                ## glue to matrices horizontally:
-                UnionOfColumnsPair                      := "A|B",
+                ## glue matrices horizontally:
+                UnionOfColumns                          := "A|B",
                 
                 ## create a block diagonal matrix:
                 DiagMat                                 := "A\\B",

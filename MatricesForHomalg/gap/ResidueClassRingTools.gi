@@ -333,24 +333,24 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##  </ManSection>
                ##  <#/GAPDoc>
                
-               ##  <#GAPDoc Label="UnionOfColumnsPair:ResidueClassRing">
+               ##  <#GAPDoc Label="UnionOfColumns:ResidueClassRing">
                ##  <ManSection>
-               ##    <Func Arg="" Name="UnionOfColumnsPair" Label="ResidueClassRing"/>
+               ##    <Func Arg="" Name="UnionOfColumns" Label="ResidueClassRing"/>
                ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
                ##    <Description>
-               ##    (&see; <Ref Meth="UnionOfColumnsPair" Label="homalgTable entry"/>)
+               ##    (&see; <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
-               UnionOfColumnsPair :=
-                 function( A, B )
+               UnionOfColumns :=
+                 function( L )
                    local N;
                    
-                   N := UnionOfColumns( Eval( A ), Eval( B ) );
+                   N := UnionOfColumns( List( L, Eval ) );
                    
-                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+                   if not ForAll( L, HasIsReducedModuloRingRelations and
                               IsReducedModuloRingRelations ) then
                        
                        ## reduce the matrix N w.r.t. the ring relations
-                       N := DecideZero( N, HomalgRing( A ) );
+                       N := DecideZero( N, HomalgRing( L[1] ) );
                    fi;
                    
                    return N;

@@ -174,10 +174,10 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               UnionOfColumnsPair :=
-                 function( A, B )
+               UnionOfColumns :=
+                 function( L )
                    
-                   return homalgSendBlocking( [ A, B ], [ "matrix" ], [ "[", NrColumns(A) + NrColumns(B), "][", NrRows(A), "]" ], HOMALG_IO.Pictograms.UnionOfColumnsPair );
+                   return homalgSendBlocking( L, [ "matrix" ], [ "[", Sum( List( L, NrColumns ) ), "][", NrRows(L[1]), "]" ], HOMALG_IO.Pictograms.UnionOfColumns );
                    
                  end,
                

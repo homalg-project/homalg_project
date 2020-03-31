@@ -711,6 +711,7 @@ end );
 ##      In case the matrix was created using
 ##      <Ref Meth="UnionOfColumns" Label="for matrices"/>
 ##      then the filter <C>HasEvalUnionOfColumns</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="UnionOfColumns" Label="homalgTable entry"/> or the <C>homalgTable</C> function
 ##      <Ref Meth="UnionOfColumnsPair" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -719,8 +720,12 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( C )
-    local e, i, ee, combine;
+    local R, RP, e, i, ee, combine;
   
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
     # Make it mutable 
     e := ShallowCopy( EvalUnionOfColumns( C ) );
     
@@ -768,12 +773,8 @@ InstallMethod( Eval,
     # to avoid a huge memory footprint
 
     combine := function( A, B, isHomalgInternalMatrixRep )
-    local R, RP, result, U; 
+    local result, U; 
     
-      R := HomalgRing( C );
-    
-      RP := homalgTable( R );
-
       if IsBound(RP!.UnionOfColumnsPair) then
       
         result := RP!.UnionOfColumnsPair( A, B );
@@ -788,7 +789,8 @@ InstallMethod( Eval,
       fi;
     
       if not isHomalgInternalMatrixRep then
-        Error( "could not find a procedure called UnionOfColumnsPair ",
+        Error( "could neither find a procedure called UnionOfColumns ",
+               "nor a procedure called UnionOfColumnsPair ",
                "in the homalgTable of the non-internal ring\n" );
       fi;
     
@@ -805,7 +807,11 @@ InstallMethod( Eval,
       return result;
     
     end;
-
+    
+    if IsBound(RP!.UnionOfColumns) then
+        return RP!.UnionOfColumns( e );
+    fi;
+    
     while Length( e ) > 1 do
 
       for i in [ 1 .. Int( Length( e ) / 2 ) ] do
@@ -827,16 +833,33 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="UnionOfColumns:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="L" Name="UnionOfColumns" Label="homalgTable entry"/>
+##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumns</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/> returns
+##      <M>RP</M>!.<C>UnionOfColumns</C> applied to the content of the attribute
+##      <C>EvalUnionOfColumns</C><M>( <A>C</A> ) = <A>L</A></M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="UnionOfColumnsPair:homalgTable_entry">
 ##  <ManSection>
 ##    <Func Arg="A, B" Name="UnionOfColumnsPair" Label="homalgTable entry"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumnsPair</C> is bound then
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumnsPair</C> is bound
+##      and the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumns</C> is not bound then
 ##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/> returns
 ##      <M>RP</M>!.<C>UnionOfColumnsPair</C> applied to the content of the attribute
-##      <C>EvalUnionOfColumns</C><M>( <A>C</A> ) = [ <A>A</A>, <A>B</A> ]</M>.
+##      <C>EvalUnionOfColumns</C><M>( <A>C</A> )</M> in the following way: a binary tree structure
+##      of the content is created in a heuristically optimal way and <M>RP</M>!.<C>UnionOfColumnsPair</C>
+##      is applied recursively.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

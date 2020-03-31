@@ -111,9 +111,9 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             return UnionOfRowsOp( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
           end,
         
-        UnionOfColumnsPair :=
-          function( A, B )
-            return UnionOfColumns( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
+        UnionOfColumns :=
+          function( L )
+            return UnionOfColumns( List( L, UnderlyingMatrixOverNonGradedRing ) );
           end,
         
         DiagMat :=

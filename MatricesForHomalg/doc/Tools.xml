@@ -34,6 +34,7 @@ entries.
 <#Include Label="CertainRows:homalgTable_entry">
 <#Include Label="CertainColumns:homalgTable_entry">
 <#Include Label="UnionOfRows:homalgTable_entry">
+<#Include Label="UnionOfColumns:homalgTable_entry">
 <#Include Label="UnionOfColumnsPair:homalgTable_entry">
 <#Include Label="DiagMat:homalgTable_entry">
 <#Include Label="KroneckerMat:homalgTable_entry">
