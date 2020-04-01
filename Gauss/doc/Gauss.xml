@@ -476,7 +476,7 @@ in source code should just check out the files in the
      <#Include Label="TransposedSparseMat">
      <#Include Label="CertainRows">
      <#Include Label="CertainColumns">
-     <#Include Label="UnionOfRowsOp">
+     <#Include Label="UnionOfRows">
      <#Include Label="UnionOfColumns">
      <#Include Label="SparseDiagMat">
      <#Include Label="Nrows">

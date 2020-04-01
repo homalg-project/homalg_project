@@ -211,9 +211,9 @@ InstallMethod( CertainColumns,
   
 ##
 InstallMethod( UnionOfRowsOp,
-        [ IsSparseMatrixGF2Rep, IsSparseMatrixGF2Rep ],
-  function( A, B )
-    return SparseMatrix( A!.nrows + B!.nrows, A!.ncols, Concatenation( A!.indices, B!.indices ), GF(2) );
+        [ IsList, IsSparseMatrixGF2Rep ],
+  function( L, M )
+    return SparseMatrix( Sum( L, x -> x!.nrows ), L[1]!.ncols, Concatenation( List( L, x -> x!.indices ) ), GF(2) );
   end
 );
   

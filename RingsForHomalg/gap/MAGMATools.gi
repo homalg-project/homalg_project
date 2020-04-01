@@ -148,7 +148,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
-               UnionOfRows :=
+               UnionOfRowsPair :=
                  function( A, B )
                    
                    return homalgSendBlocking( [ "VerticalJoin(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfRows );

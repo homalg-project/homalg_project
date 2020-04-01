@@ -177,19 +177,19 @@ InstallValue( CommonHomalgTableForGaussTools,
                  end,
 ##  <#GAPDoc Label="UnionOfRows">
 ##  <ManSection>
-##  <Func Arg="A, B" Name="UnionOfRows"/>
+##  <Func Arg="L" Name="UnionOfRows"/>
 ##  <Returns>a sparse matrix</Returns>
 ##  <Description>
 ##  This returns the sparse matrix created by concatenating the rows of
 ##  the sparse matrices stored in the <C>Eval</C> attributes of the &homalg;
-##  matrices <A>A</A> and <A>B</A>.
+##  matrices in the list <A>L</A>.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>               
                UnionOfRows :=
-                 function( A, B )
+                 function( L )
                    
-                   return UnionOfRowsOp( Eval( A ), Eval( B ) );
+                   return UnionOfRows( List( L, Eval ) );
                    
                  end,
 ##  <#GAPDoc Label="UnionOfColumns">

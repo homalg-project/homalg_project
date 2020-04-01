@@ -646,7 +646,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorPro
     
     ## the result has the parity of the second module
     if rl[2] then
-        MN := UnionOfRowsOp( matM, matN );
+        MN := UnionOfRows( matM, matN );
         F := HomalgFreeLeftModule( NrGenerators( M ) * NrGenerators( N ), R );
     else
         MN := UnionOfColumns( matM, matN );
@@ -823,7 +823,7 @@ InstallGlobalFunction( _functor_BaseChange_OnModules,		### defines: BaseChange (
     if not distinguished then
         if lift then
             if left then
-                mat := UnionOfRowsOp( mat );
+                mat := StackedRelations( mat );
             else
                 mat := AugmentedRelations( mat );
             fi;

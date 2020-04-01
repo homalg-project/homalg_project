@@ -148,9 +148,9 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                  end,
                
                UnionOfRows :=
-                 function( A, B )
+                 function( L )
                    
-                   return UnionOfRowsOp( Eval( A ), Eval( B ) );
+                   return UnionOfRows( List( L, Eval ) );
                  end,
                
                UnionOfColumns :=

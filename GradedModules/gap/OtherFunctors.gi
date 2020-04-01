@@ -550,7 +550,7 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
           extension_matrix := HomalgZeroMatrix( 0, NrGenerators( Range( phi ) ), K );
           for k in [ 1 .. l_var ] do
               c := CertainColumns( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] );
-              extension_matrix := UnionOfRowsOp( extension_matrix, c );
+              extension_matrix := UnionOfRows( extension_matrix, c );
           od;
       else
           extension_matrix := HomalgZeroMatrix( NrGenerators( Range( phi ) ), 0, K );

@@ -559,30 +559,23 @@ InstallMethod( CertainColumns,
   end
 );
 
-##  <#GAPDoc Label="UnionOfRowsOp">
-##  <ManSection >
-##  <Meth Arg="A, B" Name="UnionOfRowsOp" />
-##  <Returns>the row union of the sparse matrices <A>A</A> and <A>B</A></Returns>
+##  <#GAPDoc Label="UnionOfRows">
+##  <ManSection>
+##    <Func Arg="L" Name="UnionOfRows" Label="for a list of sparse matrices"/>
+##    <Returns>a sparse matrix</Returns>
+##    <Description>
+##      Stack the sparse matrices in the non-empty list <A>L</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( UnionOfRowsOp,
-        [ IsSparseMatrix, IsSparseMatrix ],
-  function( A, B )
-    return SparseMatrix( A!.nrows + B!.nrows, A!.ncols, Concatenation( A!.indices, B!.indices ), Concatenation( A!.entries, B!.entries ), A!.ring );
+        "of a list of sparse matrices and a sparse matrix",
+        [ IsList, IsSparseMatrix ],
+  function( L, M )
+    return SparseMatrix( Sum( L, x -> x!.nrows ), L[1]!.ncols, Concatenation( List( L, x -> x!.indices ) ), Concatenation( List( L, x -> x!.entries ) ), L[1]!.ring );
   end
 );
-
-##
-InstallMethod( UnionOfRowsOp,
-        "of a list and a sparse matrix",
-        [ IsList, IsSparseMatrix ],
-        
-  function( L, A )
-    
-    return Iterated( L, UnionOfRowsOp );
-    
-end );
 
 ##  <#GAPDoc Label="UnionOfColumns">
 ##  <ManSection>

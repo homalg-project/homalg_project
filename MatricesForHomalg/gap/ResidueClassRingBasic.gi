@@ -32,7 +32,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( M )
                    local Mrel;
                    
-                   Mrel := UnionOfRowsOp( M );
+                   Mrel := StackedRelations( M );
                    
                    Mrel := HomalgResidueClassMatrix(
                                    BasisOfRowModule( Mrel ), HomalgRing( M ) );
@@ -78,7 +78,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( M, T )
                    local Mrel, TT, bas, nz;
                    
-                   Mrel := UnionOfRowsOp( M );
+                   Mrel := StackedRelations( M );
                    
                    TT := HomalgVoidMatrix( HomalgRing( Mrel ) );
                    
@@ -146,7 +146,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( A, B )
                    local Brel;
                    
-                   Brel := UnionOfRowsOp( B );
+                   Brel := StackedRelations( B );
                    
                    Brel := BasisOfRowModule( Brel );
                    
@@ -192,7 +192,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( A, B, T )
                    local Brel, TT, red;
                    
-                   Brel := UnionOfRowsOp( B );
+                   Brel := StackedRelations( B );
                    
                    TT := HomalgVoidMatrix( HomalgRing( Brel ) );
                    
@@ -332,7 +332,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( M, M2 )
                    local M2rel, S;
                    
-                   M2rel := UnionOfRowsOp( M2 );
+                   M2rel := StackedRelations( M2 );
                    
                    S := SyzygiesGeneratorsOfRows( Eval( M ), M2rel );
                    
@@ -390,7 +390,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                  function( M )
                    local Mrel;
                    
-                   Mrel := UnionOfRowsOp( M );
+                   Mrel := StackedRelations( M );
                    
                    Mrel := HomalgResidueClassMatrix( ReducedBasisOfRowModule( Mrel ), HomalgRing( M ) );
                    

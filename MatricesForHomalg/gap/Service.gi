@@ -796,7 +796,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     zz := HomalgZeroMatrix( n, l, R );
     
-    M := UnionOfRowsOp( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
+    M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
     
     M := RowReducedEchelonForm( M );
     
@@ -960,7 +960,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     zz := HomalgZeroMatrix( l, n, R );
     
-    M := UnionOfColumns( UnionOfRowsOp( id, A ), UnionOfRowsOp( zz, B ) );
+    M := UnionOfColumns( UnionOfRows( id, A ), UnionOfRows( zz, B ) );
     
     M := ColumnReducedEchelonForm( M );
     
@@ -1300,7 +1300,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     #=====# begin of the core procedure #=====#
     
-    M := UnionOfRowsOp( M1, M2 );
+    M := UnionOfRows( M1, M2 );
     
     C := SyzygiesGeneratorsOfRows( M );
     
@@ -2662,7 +2662,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     zz := HomalgZeroMatrix( nn, l, R );
     
-    M := UnionOfRowsOp( UnionOfColumns( id, A ), UnionOfColumns( zz, CB ) );
+    M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, CB ) );
     
     TT := HomalgVoidMatrix( R );
     
@@ -2867,7 +2867,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     zz := HomalgZeroMatrix( l, nn, R );
     
-    M := UnionOfColumns( UnionOfRowsOp( id, A ), UnionOfRowsOp( zz, BC ) );
+    M := UnionOfColumns( UnionOfRows( id, A ), UnionOfRows( zz, BC ) );
     
     TT := HomalgVoidMatrix( R );
     

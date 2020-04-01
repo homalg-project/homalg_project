@@ -1152,59 +1152,55 @@ end );
 
 ##
 InstallMethod( UnionOfRowsOp,
-        "LIMAT: for two homalg matrices (check input)",
-        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
+        "LIMAT: for a list of homalg matrices and a homalg matrix (check input, drop empty matrices)",
+        [ IsList, IsHomalgMatrix ], 10001,
         
-  function( A, B )
+  function( L, M )
+    local A, R, c, filtered_L;
     
-    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
-        Error( "the two matrices are not defined over identically the same ring\n" );
+    if IsEmpty( L ) then
+        Error( "L must be nonempty" );
+    elif not ForAll( L, IsHomalgMatrix ) then
+        Error( "L must be a list of homalg matrices" );
     fi;
     
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    A := L[1];
+    R := HomalgRing( A );
+    c := NrColumns( A );
+    
+    if Length( L ) = 1 then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( [ single matrix ] )", "\033[0m" );
+        
+        return A;
+        
+    fi;
+    
+    if not ForAll( L, x -> IsIdenticalObj( HomalgRing( x ), R ) ) then
+        Error( "the matrices are not defined over identically the same ring\n" );
+    fi;
+    
+    if not ForAll( L, x -> NrColumns( x ) = c ) then
+        Error( "the matrices are not stackable, since they do not all have the same number of columns\n" );
+    fi;
+    
+    filtered_L := Filtered( L, x -> not IsEmptyMatrix( x ) );
+    
+    if Length( filtered_L ) = 0 then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( [ empty matrices ] )", "\033[0m" );
+        
+        return HomalgZeroMatrix( Sum( List( L, NrRows ) ), c, R );
+        
+    elif Length( filtered_L ) <> Length( L ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( <dropped empty matrices> )", "\033[0m" );
+        
+        return UnionOfRowsOp( filtered_L, M );
+        
     fi;
     
     TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( UnionOfRowsOp,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return A;
-    
-end );
-
-##
-InstallMethod( UnionOfRowsOp,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
-    
-    return B;
-    
-end );
-
-## without this method the above two methods will be called in the wrong context!!!
-InstallMethod( UnionOfRowsOp,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return HomalgZeroMatrix( NrRows( A ) + NrRows( B ), NrColumns( A ), HomalgRing( A ) );
     
 end );
 
@@ -2958,10 +2954,11 @@ InstallMethod( DecideZeroColumnsEffectively,
     ## M = A + B * T
     SetPreEval( T, -CertainRows( A, nz ) ); ResetFilterObj( T, IsVoidMatrix );
     
-    return UnionOfRowsOp(
-                   UnionOfRowsOp( CertainRows( A, [ 1 .. nz[1] - 1 ] ),
-                           HomalgZeroMatrix( l, c, R ) ),
-                   CertainRows( A, [ nz[l] + 1 .. r ] ) );
+    return UnionOfRows( [
+        CertainRows( A, [ 1 .. nz[1] - 1 ] ),
+        HomalgZeroMatrix( l, c, R ),
+        CertainRows( A, [ nz[l] + 1 .. r ] )
+        ] );
     
 end );
 

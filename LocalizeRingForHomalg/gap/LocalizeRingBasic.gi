@@ -249,7 +249,7 @@ RelativeSyzygiesGeneratorsOfRows :=
     
     Info( InfoLocalizeRingForHomalg, 2, "Start RelativeSyzygiesGeneratorsOfRows with ", NrRows( M ), "x", NrColumns( M ), " and ", NrRows( N ), "x", NrColumns( N ) );
     
-    CommonDenomMatrix := UnionOfRowsOp( M, N );
+    CommonDenomMatrix := UnionOfRows( M, N );
     M2 := CertainRows( CommonDenomMatrix, [ 1 .. NrRows( M ) ] );
     N2 := CertainRows( CommonDenomMatrix, [ NrRows( M ) + 1 .. NrRows( CommonDenomMatrix ) ] );
     
@@ -329,7 +329,7 @@ DecideZeroRows :=
         
         #if it is nonzero, check whether local reduction makes it zero
         if not IsZero( B2 ) then
-          A2 := UnionOfRowsOp( A1, gens * B1 );
+          A2 := UnionOfRows( A1, gens * B1 );
           A2 := BasisOfRows( A2 );
           B3 := HomalgLocalMatrix( DecideZeroRows( B1, A2 ), R );
           if IsZero( B3 ) then
@@ -337,7 +337,7 @@ DecideZeroRows :=
           fi;
         fi;
         
-        N := UnionOfRowsOp( N, B2 );
+        N := UnionOfRows( N, B2 );
         
     od;
     
@@ -432,7 +432,7 @@ DecideZeroRowsEffectively :=
         B2 := HomalgLocalMatrix( DecideZeroRowsEffectively( B1, A1, S1 ), R );
         
         if not IsZero( B2 ) then
-          A2 := UnionOfRowsOp( A1, gens * B1 );
+          A2 := UnionOfRows( A1, gens * B1 );
           SS := HomalgVoidMatrix( GlobalR );
           A2 := BasisOfRowsCoeff( A2, SS );
           S := HomalgVoidMatrix( GlobalR );
@@ -454,8 +454,8 @@ DecideZeroRowsEffectively :=
           S := HomalgLocalMatrix( S1 , one , R );
         fi;
         
-        TT := UnionOfRowsOp( TT, S );
-        N := UnionOfRowsOp( N, B2 );
+        TT := UnionOfRows( TT, S );
+        N := UnionOfRows( N, B2 );
         
         Assert( 7, S * HomalgLocalMatrix( A1, R ) + HomalgLocalMatrix( B1, R ) = B2 );
         

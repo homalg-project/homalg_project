@@ -149,7 +149,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
-               UnionOfRows :=
+               UnionOfRowsPair :=
                  function( A, B )
                    local R;
                    

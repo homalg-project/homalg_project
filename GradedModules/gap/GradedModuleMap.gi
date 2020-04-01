@@ -181,7 +181,7 @@ InstallMethod( NormalizeGradedMorphism,
     T1 := HomalgVoidMatrix( K );
     T2 := SyzygiesOfRows( m );
     m := BasisOfRowsCoeff( m, T1 );
-    Tl := UnionOfRowsOp( T1, T2 );
+    Tl := UnionOfRows( T1, T2 );
     
     T1 := HomalgVoidMatrix( K );
     T2 := SyzygiesOfColumns( m );
@@ -215,12 +215,12 @@ InstallMethod( NormalizeGradedMorphism,
     fi;
     
     if left then
-        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRowsOp( 
+        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRows( 
                 UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( N ) - rank, S ) ),
                 UnionOfColumns( HomalgZeroMatrix( NrGenerators( M ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( M ) - rank, NrGenerators( N ) - rank, S ) ) 
             ) );
     else
-        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRowsOp( 
+        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRows( 
                 UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( M ) - rank, S ) ),
                 UnionOfColumns( HomalgZeroMatrix( NrGenerators( N ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( N ) - rank, NrGenerators( M ) - rank, S ) )
             ) );
@@ -231,7 +231,7 @@ InstallMethod( NormalizeGradedMorphism,
     if left then
         complement := UnionOfColumns( HomalgZeroMatrix( k, rank, S ), HomalgIdentityMatrix( k, S ) );
     else
-        complement := UnionOfRowsOp( HomalgZeroMatrix( rank, k, S ), HomalgIdentityMatrix( k, S ) );
+        complement := UnionOfRows( HomalgZeroMatrix( rank, k, S ), HomalgIdentityMatrix( k, S ) );
     fi;
     
     complement := GradedMap( complement, "free", N );

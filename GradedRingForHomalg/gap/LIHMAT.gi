@@ -255,7 +255,7 @@ InstallMethod( NonTrivialDegreePerRow,
     
     eval := EvalUnionOfRows( C );
     
-    return Concatenation( NonTrivialDegreePerRow( eval[1], S, row_degrees ), NonTrivialDegreePerRow( eval[2], S, row_degrees ) );
+    return Concatenation( List( eval, e -> NonTrivialDegreePerRow( e, S, row_degrees ) ) );
     
 end );
 

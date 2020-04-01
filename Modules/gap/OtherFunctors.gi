@@ -40,14 +40,14 @@ InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
         zeroNM := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         iotaM := UnionOfColumns( idM, zeroMN );
         iotaN := UnionOfColumns( zeroNM, idN );
-        piM := UnionOfRowsOp( idM, zeroNM );
-        piN := UnionOfRowsOp( zeroMN, idN );
+        piM := UnionOfRows( idM, zeroNM );
+        piN := UnionOfRows( zeroMN, idN );
     else
         F := HomalgFreeRightModule( NrGenerators( M ) + NrGenerators( N ), R );
         zeroMN := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
-        iotaM := UnionOfRowsOp( idM, zeroMN );
-        iotaN := UnionOfRowsOp( zeroNM, idN );
+        iotaM := UnionOfRows( idM, zeroMN );
+        iotaN := UnionOfRows( zeroNM, idN );
         piM := UnionOfColumns( idM, zeroNM );
         piN := UnionOfColumns( zeroMN, idN );
     fi;

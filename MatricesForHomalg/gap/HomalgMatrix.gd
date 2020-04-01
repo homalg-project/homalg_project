@@ -1092,19 +1092,19 @@ DeclareOperation( "CertainRows",
 DeclareOperation( "CertainColumns",
         [ IsHomalgMatrix, IsList ] );
 
-DeclareOperation( "UnionOfRowsOp",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfRowsEagerOp",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfRowsOp",
-        [ IsList, IsHomalgMatrix ] );
-
+## UnionOfRows[Eager][Op]
 if not IsBound( UnionOfRows ) then
     DeclareGlobalFunction( "UnionOfRows" );
     BindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES", true );
 fi;
+
+DeclareOperation( "UnionOfRowsOp",
+        [ IsList, IsHomalgMatrix ] );
+
+DeclareGlobalFunction( "UnionOfRowsEager" );
+
+DeclareOperation( "UnionOfRowsEagerOp",
+        [ IsList, IsHomalgMatrix ] );
 
 ## UnionOfColumns[Eager][Op]
 if not IsBound( UnionOfColumns ) then

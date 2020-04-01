@@ -503,7 +503,7 @@ InstallMethod( PreInverse,
         sigma := RightDivide( B, A, L );
     else
         B := HomalgMatrix( B, b * d + c * c, 1, R );
-        A := UnionOfRowsOp( KroneckerMat( Ib, PI ), KroneckerMat( p, Ic ) );
+        A := UnionOfRows( KroneckerMat( Ib, PI ), KroneckerMat( p, Ic ) );
         L := DiagMat( [ KroneckerMat( M, Id ), KroneckerMat( P, Ic ) ] );
         sigma := LeftDivide( A, B, L );
     fi;
