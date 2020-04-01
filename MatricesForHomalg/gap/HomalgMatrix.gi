@@ -1227,6 +1227,73 @@ if IsBound( __INSTALL_UNIONOFROWS_IN_MATRICES ) and __INSTALL_UNIONOFROWS_IN_MAT
     UnbindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES" );
 fi;
 
+##  <#GAPDoc Label="UnionOfColumns">
+##  <ManSection>
+##    <Meth Arg="L" Name="UnionOfColumns" Label="for a list"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Augment the &homalg; matrices in the non-empty list <A>L</A>.<P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+if IsBound( __INSTALL_UNIONOFCOLS_IN_MATRICES ) and __INSTALL_UNIONOFCOLS_IN_MATRICES then
+    InstallMethod( UnionOfColumns,
+            "of a list",
+            [ IsList ],
+
+      function( L )
+        
+        if Length( L ) < 1 then
+            Error( "<arg> must have positive length" );
+        fi;
+        
+        return UnionOfColumnsOp( L, L[1] );
+        
+    end );
+    MakeReadWriteGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES" );
+    UnbindGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES" );
+fi;
+
+##
+InstallMethod( UnionOfColumnsOp,
+        "of a list of homalg matrices and a homalg matrix",
+        [ IsList, IsHomalgMatrix ],
+
+  function( L, M )
+    local R, r, rr, result;
+    
+    if Length( L ) < 1 then
+        Error( "<arg> must have positive length" );
+    elif not ForAll( L, IsHomalgMatrix ) then
+        Error( "<arg> must be a list of homalg matrices" );
+    fi;
+    
+    R := HomalgRing( L[1] );
+    if not IsEqualSet( [ R ], List( L, HomalgRing ) ) then
+        Error( "all matrices must be defined over the same ring" );
+    fi;
+    
+    r := NrRows( L[1] );
+    if not IsEqualSet( [ r ], List( L, NrRows ) ) then
+        Error( "all matrices must have the same number of rows" );
+    fi;
+    
+    result := HomalgMatrixWithAttributes( [
+         EvalUnionOfColumns, L,
+         NrRows, r,
+         NrColumns, Sum( List( L, NrColumns ) )
+         ], R );
+    
+    if IsBound( HOMALG_MATRICES.UnionOfColumnsEager ) and HOMALG_MATRICES.UnionOfColumnsEager = true then
+        Eval( result );
+    fi;
+    
+    return result;
+    
+end );
+
 ##  <#GAPDoc Label="UnionOfColumnsPair">
 ##  <ManSection>
 ##    <Meth Arg="A, B" Name="UnionOfColumns" Label="for matrices"/>
@@ -1238,122 +1305,42 @@ fi;
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-##  <#GAPDoc Label="UnionOfColumns">
-##  <ManSection>
-##    <Meth Arg="l" Name="UnionOfColumns" Label="for a list"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      Augment a non-empty list of two &homalg; matrices l.<P/>
-##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/>)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
 InstallMethod( UnionOfColumns,
-    "for two homalg matrices",
-    [ IsHomalgMatrix, IsHomalgMatrix ],
-
-    function( A, B )
-    local result;
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
     
-         result := UnionOfColumns( [ A, B ] );
-
-         if IsBound( HOMALG_MATRICES.UnionOfColumnsEager ) and HOMALG_MATRICES.UnionOfColumnsEager = true then
-             Eval( result );
-         fi;
-
-         return result;
-         
-    end );
+    return UnionOfColumns( [ A, B ] );
+    
+end );
 
 ##
-InstallMethod( UnionOfColumnsOp,
-    "for a list of homalg matrices and a homalg matrix",
-    [ IsList, IsHomalgMatrix ],
-
-    function( l, M )
-      local R, r, rr, result;
-        
-        if Length( l ) < 1 then
-            Error( "<arg> must have positive length" );
-        elif not ForAll( l, IsHomalgMatrix ) then
-            Error( "<arg> must be a list of homalg matrices" );
-        fi;
-        
-        R := HomalgRing( l[1] );
-        if not IsEqualSet( [ R ], List( l, HomalgRing ) ) then
-            Error( "all matrices must be defined over the same ring" );
-        fi;
-        
-        r := NrRows( l[1] );
-        if not IsEqualSet( [ r ], List( l, NrRows ) ) then
-            Error( "all matrices must have the same number of rows" );
-        fi;
-        
-        result := HomalgMatrixWithAttributes( [
-               EvalUnionOfColumns, l,
-               NrRows, r,
-               NrColumns, Sum( List( l, NrColumns ) )
-               ], R );
-        
-        if IsBound( HOMALG_MATRICES.UnionOfColumnsEager ) and HOMALG_MATRICES.UnionOfColumnsEager = true then
-            Eval( result );
-        fi;
-        
-        return result;
-        
-    end );
-
-if IsBound( __INSTALL_UNIONOFCOLS_IN_MATRICES ) and __INSTALL_UNIONOFCOLS_IN_MATRICES then
-    ##
-    InstallMethod( UnionOfColumns,
-        "for a list",
+InstallMethod( UnionOfColumnsEager,
+        "of a list",
         [ IsList ],
-
-        function( l )
-            
-            if Length( l ) < 1 then
-                Error( "<arg> must have positive length" );
-            fi;
-            
-            return UnionOfColumnsOp( l, l[1] );
-            
-    end );
-    MakeReadWriteGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES" );
-    UnbindGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES" );
-fi;
+        
+  function( L )
+    local C;
+    
+    C := UnionOfColumns( L );
+    
+    Eval( C );
+    
+    return C;
+    
+end );
 
 ##
 InstallMethod( UnionOfColumnsEager,
-    "of two homalg matrices",
-    [ IsHomalgMatrix, IsHomalgMatrix ],
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
     
-    function( A, B )
-    local C;
-
-        C := UnionOfColumns( A, B );
-
-        Eval( C );
-
-        return C;
-
-    end );
-
-##
-InstallMethod( UnionOfColumnsEager,
-    "of a list",
-    [ IsList ],
+    return UnionOfColumnsEager( [ A, B ] );
     
-    function( l )
-    local C;
-
-        C := UnionOfColumns( l );
-
-        Eval( C );
-
-        return C;
-
-    end );
+end );
 
 ##  <#GAPDoc Label="DiagMat">
 ##  <ManSection>

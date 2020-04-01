@@ -507,8 +507,8 @@ if IsBound( __INSTALL_UNIONOFROWS_IN_GAUSS ) and __INSTALL_UNIONOFROWS_IN_GAUSS 
     UnbindGlobal( "__INSTALL_UNIONOFROWS_IN_GAUSS" );
 fi;
 
+##
 if IsBound( __INSTALL_UNIONOFCOLS_IN_GAUSS ) and __INSTALL_UNIONOFCOLS_IN_GAUSS then
-    ##
     InstallMethod( UnionOfColumns,
         "for a list",
         [ IsList ],

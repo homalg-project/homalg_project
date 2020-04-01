@@ -1106,23 +1106,24 @@ if not IsBound( UnionOfRows ) then
     BindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES", true );
 fi;
 
-DeclareOperation( "UnionOfColumns",
-    [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfColumnsOp",
-    [ IsList, IsHomalgMatrix ] );
-
+## UnionOfColumns[Eager][Op]
 if not IsBound( UnionOfColumns ) or ApplicableMethod( UnionOfColumns, [ [ ] ] ) = fail then
     DeclareOperation( "UnionOfColumns",
-        [ IsList ] );
+            [ IsList ] );
     BindGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES", true );
 fi;
 
-DeclareOperation( "UnionOfColumnsEager",
+DeclareOperation( "UnionOfColumnsOp",
+        [ IsList, IsHomalgMatrix ] );
+
+DeclareOperation( "UnionOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "UnionOfColumnsEager",
         [ IsList ] );
+
+DeclareOperation( "UnionOfColumnsEager",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "DiagMat",
         [ IsList ] );
