@@ -720,113 +720,118 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( C )
-    local R, RP, e, i, ee, combine;
-  
+    local R, RP, e, i, combine;
+    
     R := HomalgRing( C );
     
     RP := homalgTable( R );
     
-    # Make it mutable 
+    # Make it mutable
     e := ShallowCopy( EvalUnionOfColumns( C ) );
     
-    # In case of multiple UnionOfColumns, we try to avoid
+    # In case of nested UnionOfColumns, we try to avoid
     # recursion, since the gap stack is rather small
+    # Additionally, remove empty matrices
     i := 1;
-    while i < Length( e ) do
-
-      if HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
-      
-        ee := EvalUnionOfColumns( e[i] );
-
-        e[i] := ee[1];
-
-        Add( e, ee[2], i + 1 );
+    while i <= Length( e ) do
         
-      else
-
-        i := i + 1;
-
-      fi;
-
+        if IsEmptyMatrix( e[i] ) then
+            
+            Remove ( e, i );
+            
+        elif HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
+            
+            e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfColumns( e[i] ), e{[ (i+1) .. Length( e ) ]}  );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
     od;
     
     # Combine zero matrices
     i := 1;
-    while i + 1 < Length( e ) do
-
-      if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
-      
-        e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );
-
-        Remove( e, i + 1 );
-
-      else
-
-        i := i + 1;
-
-      fi;
-
+    while i + 1 <= Length( e ) do
+        
+        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
+            
+            e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );
+            
+            Remove( e, i + 1 );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
     od;
     
+    # Use RP!.UnionOfColumns if available
+    if IsBound(RP!.UnionOfColumns) then
+        
+        return RP!.UnionOfColumns( e );
+        
+    fi;
+    
+    # Fall back to RP!.UnionOfColumnsPair or manual fallback for internal matrices
     # Combine the matrices
-    # But try to keep the sizes small (heuristically)
+    # Use a balanced binary tree to keep the sizes small (heuristically)
     # to avoid a huge memory footprint
-
-    combine := function( A, B, isHomalgInternalMatrixRep )
-    local result, U; 
     
-      if IsBound(RP!.UnionOfColumnsPair) then
-      
-        result := RP!.UnionOfColumnsPair( A, B );
-
-        return HomalgMatrixWithAttributes( [
-                   Eval, result,
-                   EvalUnionOfColumns, [ A, B ],
-                   NrRows, NrRows( A ),
-                   NrColumns, NrColumns( A ) + NrColumns( B )
-                   ], R );
-                   
-      fi;
-    
-      if not isHomalgInternalMatrixRep then
+    if not IsBound(RP!.UnionOfColumnsPair) and not IsHomalgInternalMatrixRep( C ) then
         Error( "could neither find a procedure called UnionOfColumns ",
                "nor a procedure called UnionOfColumnsPair ",
                "in the homalgTable of the non-internal ring\n" );
-      fi;
-    
-      #=====# can only work for homalg internal matrices #=====#
-    
-      U := List( Eval( A )!.matrix, ShallowCopy );
-    
-      U{ [ 1 .. NrRows( A ) ] }
-        { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
-        := Eval( B )!.matrix;
-    
-      result := homalgInternalMatrixHull( U );
-      result := HomalgMatrix( result, NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
-      return result;
-    
-    end;
-    
-    if IsBound(RP!.UnionOfColumns) then
-        return RP!.UnionOfColumns( e );
     fi;
     
+    combine := function( A, B )
+      local result, U;
+        
+        if IsBound(RP!.UnionOfColumnsPair) then
+            
+            result := RP!.UnionOfColumnsPair( A, B );
+            
+        else
+            
+            #=====# can only work for homalg internal matrices #=====#
+            
+            U := List( Eval( A )!.matrix, ShallowCopy );
+            
+            U{ [ 1 .. NrRows( A ) ] }
+              { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
+              := Eval( B )!.matrix;
+            
+            result := homalgInternalMatrixHull( U );
+            
+        fi;
+        
+        return HomalgMatrixWithAttributes( [
+                    Eval, result,
+                    EvalUnionOfColumns, [ A, B ],
+                    NrRows, NrRows( A ),
+                    NrColumns, NrColumns( A ) + NrColumns( B )
+                    ], R );
+        
+    end;
+    
     while Length( e ) > 1 do
-
-      for i in [ 1 .. Int( Length( e ) / 2 ) ] do
-
-        e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ], IsHomalgInternalMatrixRep( C ) );
-        Unbind( e[ 2 * i ] );
-
-      od;
-
-      e := Compacted( e );
-
+        
+        for i in [ 1 .. Int( Length( e ) / 2 ) ] do
+            
+            e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ] );
+            Unbind( e[ 2 * i ] );
+            
+        od;
+        
+        e := Compacted( e );
+        
     od;
-  
+    
     return Eval( e[1] );
-
+    
 end );
 ##  ]]></Listing>
 ##    </Description>
@@ -856,10 +861,8 @@ end );
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumnsPair</C> is bound
 ##      and the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumns</C> is not bound then
 ##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/> returns
-##      <M>RP</M>!.<C>UnionOfColumnsPair</C> applied to the content of the attribute
-##      <C>EvalUnionOfColumns</C><M>( <A>C</A> )</M> in the following way: a binary tree structure
-##      of the content is created in a heuristically optimal way and <M>RP</M>!.<C>UnionOfColumnsPair</C>
-##      is applied recursively.
+##      <M>RP</M>!.<C>UnionOfColumnsPair</C> applied recursively to a balanced binary tree created from
+##      the content of the attribute <C>EvalUnionOfRows</C><M>( <A>C</A> )</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
