@@ -271,7 +271,7 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     eval := EvalUnionOfColumns( C );
     
-    return Concatenation( NonTrivialDegreePerColumn( eval[1], S, col_degrees ), NonTrivialDegreePerColumn( eval[2], S, col_degrees ) );
+    return Concatenation( List( eval, e -> NonTrivialDegreePerColumn( e, S, col_degrees ) ) );
     
 end );
 

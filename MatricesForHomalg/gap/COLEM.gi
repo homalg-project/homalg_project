@@ -221,7 +221,7 @@ InstallImmediateMethod( IsZero,
     
     e := EvalUnionOfColumns( M );
     
-    if ForAny( e, function( A ) return HasIsZero( A ) and not IsZero( A ); end ) then
+    if ForAny( e, A -> HasIsZero( A ) and not IsZero( A ) ) then
         return false;
     fi;
     
@@ -612,7 +612,7 @@ InstallImmediateMethod( IsRightInvertibleMatrix,
     
     e := EvalUnionOfColumns( M );
     
-    if ForAny( e, function( A ) return HasIsRightInvertibleMatrix( A ) and IsRightInvertibleMatrix( A ); end ) then
+    if ForAny( e, A -> HasIsRightInvertibleMatrix( A ) and IsRightInvertibleMatrix( A ) ) then
         return true;
     fi;
     
@@ -1097,7 +1097,7 @@ InstallImmediateMethod( IsDiagonalMatrix,
     A := e[1];
     
     if HasIsDiagonalMatrix( A ) and IsDiagonalMatrix( A )
-       and ForAll( e{[ 2 .. Length( e ) ]}, B -> HasIsZero( B ) and IsZero( B ) ) then 
+       and ForAll( e{[ 2 .. Length( e ) ]}, B -> HasIsZero( B ) and IsZero( B ) ) then
         return true;
     fi;
     
@@ -2003,6 +2003,8 @@ InstallMethod( PositionOfFirstNonZeroEntryPerRow,
     c := 0;
         
     p := List( e, PositionOfFirstNonZeroEntryPerRow );
+
+    p := List( p, a -> List( a, function(x) if x = 0 then return infinity; else return x; fi; end ) );
         
     result := ListWithIdenticalEntries( Length( p[1] ), infinity );
         
@@ -2964,7 +2966,7 @@ InstallMethod( \*,
     
     b := EvalUnionOfColumns( B );
     
-    return UnionOfColumns( List( b, a -> A * a ) );
+    return UnionOfColumns( List( b, x -> A * x ) );
     
 end );
 
@@ -2983,12 +2985,14 @@ InstallMethod( \*,
     c := List( e, NrColumns );
     
     result := e[1] * CertainRows( B, [ 1 .. c[1] ] );
+
+    k := c[1];
     
     for i in [ 2 .. Length( c ) ] do
     
-        k := Sum( c{[ 1 .. i - 1 ]} );
-    
         result := result + e[i] * CertainRows( B, [ k + 1 .. k + c[i] ] );
+
+        k := k + c[i];
     
     od;
     

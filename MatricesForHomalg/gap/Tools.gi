@@ -2665,7 +2665,7 @@ InstallMethod( ConvertRowToMatrix,
         [ IsHomalgMatrix, IsInt, IsInt ],
         
   function( M, r, c )
-    local R, RP, ext_obj, l, mat, j;
+    local R, RP, ext_obj, l, j;
     
     if NrRows( M ) <> 1 then
         Error( "expecting a single row matrix as a first argument\n" );
@@ -2695,9 +2695,7 @@ InstallMethod( ConvertRowToMatrix,
     l := List( l, GetListOfHomalgMatrixAsString );
     l := List( l, a -> CreateHomalgMatrixFromString( a, r, 1, R ) );
     
-    mat := UnionOfColumns( mat, l );
-    
-    return mat;
+    return UnionOfColumns( l );
     
 end );
 
@@ -2738,7 +2736,7 @@ InstallMethod( ConvertMatrixToRow,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, ext_obj, r, c, l, mat, j;
+    local R, RP, ext_obj, r, c, l, j;
     
     if NrRows( M ) = 1 then
         return M;
@@ -2770,9 +2768,7 @@ InstallMethod( ConvertMatrixToRow,
     l := List( l, GetListOfHomalgMatrixAsString );
     l := List( l, a -> CreateHomalgMatrixFromString( a, 1, r, R ) );
     
-    mat := UnionOfColumns( l );
-    
-    return mat;
+    return UnionOfColumns( l );
     
 end );
 
