@@ -1246,7 +1246,7 @@ if IsBound( __INSTALL_UNIONOFCOLS_IN_MATRICES ) and __INSTALL_UNIONOFCOLS_IN_MAT
       function( L )
         
         if Length( L ) < 1 then
-            Error( "<arg> must have positive length" );
+            Error( "L must be nonempty" );
         fi;
         
         return UnionOfColumnsOp( L, L[1] );
@@ -1265,19 +1265,19 @@ InstallMethod( UnionOfColumnsOp,
     local R, r, rr, result;
     
     if Length( L ) < 1 then
-        Error( "<arg> must have positive length" );
+        Error( "L must be nonempty" );
     elif not ForAll( L, IsHomalgMatrix ) then
-        Error( "<arg> must be a list of homalg matrices" );
+        Error( "L must be a list of homalg matrices" );
     fi;
     
     R := HomalgRing( L[1] );
     if not IsEqualSet( [ R ], List( L, HomalgRing ) ) then
-        Error( "all matrices must be defined over the same ring" );
+        Error( "all matrices in L must be defined over the same ring" );
     fi;
     
     r := NrRows( L[1] );
     if not IsEqualSet( [ r ], List( L, NrRows ) ) then
-        Error( "all matrices must have the same number of rows" );
+        Error( "all matrices in L must have the same number of rows" );
     fi;
     
     result := HomalgMatrixWithAttributes( [

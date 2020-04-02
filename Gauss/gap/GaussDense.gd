@@ -49,6 +49,6 @@ fi;
 
 if not IsBound( UnionOfColumns ) or ApplicableMethod( UnionOfColumns, [ [ ] ] ) = fail then
     DeclareOperation( "UnionOfColumns",
-        [ IsList ] );
+            [ IsList ] );
     BindGlobal( "__INSTALL_UNIONOFCOLS_IN_GAUSS", true );
 fi;
