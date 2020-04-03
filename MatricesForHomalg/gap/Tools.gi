@@ -731,10 +731,15 @@ InstallMethod( Eval,
     
     # In case of nested UnionOfColumns, we try to avoid
     # recursion, since the gap stack is rather small
+    # additionally unpack PreEvals
     i := 1;
     while i <= Length( e ) do
         
-        if HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
+        if HasPreEval( e[i] ) and not HasEval( e[i] ) then
+            
+            e[i] := PreEval( e[i] );
+            
+        elif HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
             
             e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfColumns( e[i] ), e{[ (i+1) .. Length( e ) ]}  );
             
