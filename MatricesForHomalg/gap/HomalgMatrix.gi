@@ -1262,29 +1262,13 @@ InstallMethod( UnionOfColumnsOp,
         [ IsList, IsHomalgMatrix ],
 
   function( L, M )
-    local R, r, rr, result;
-    
-    if Length( L ) < 1 then
-        Error( "L must be nonempty" );
-    elif not ForAll( L, IsHomalgMatrix ) then
-        Error( "L must be a list of homalg matrices" );
-    fi;
-    
-    R := HomalgRing( L[1] );
-    if not IsEqualSet( [ R ], List( L, HomalgRing ) ) then
-        Error( "all matrices in L must be defined over the same ring" );
-    fi;
-    
-    r := NrRows( L[1] );
-    if not IsEqualSet( [ r ], List( L, NrRows ) ) then
-        Error( "all matrices in L must have the same number of rows" );
-    fi;
+    local result;
     
     result := HomalgMatrixWithAttributes( [
          EvalUnionOfColumns, L,
-         NrRows, r,
+         NrRows, NrRows( L[1] ),
          NrColumns, Sum( List( L, NrColumns ) )
-         ], R );
+         ], HomalgRing( L[1] ) );
     
     if IsBound( HOMALG_MATRICES.UnionOfColumnsEager ) and HOMALG_MATRICES.UnionOfColumnsEager = true then
         Eval( result );

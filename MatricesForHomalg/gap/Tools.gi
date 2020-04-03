@@ -731,15 +731,10 @@ InstallMethod( Eval,
     
     # In case of nested UnionOfColumns, we try to avoid
     # recursion, since the gap stack is rather small
-    # Additionally, remove empty matrices
     i := 1;
     while i <= Length( e ) do
         
-        if IsEmptyMatrix( e[i] ) then
-            
-            Remove ( e, i );
-            
-        elif HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
+        if HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
             
             e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfColumns( e[i] ), e{[ (i+1) .. Length( e ) ]}  );
             
@@ -768,6 +763,13 @@ InstallMethod( Eval,
         fi;
         
     od;
+    
+    # After combining zero matrices only a single one might be left
+    if Length( e ) = 1 then
+        
+        return e[1];
+        
+    fi;
     
     # Use RP!.UnionOfColumns if available
     if IsBound(RP!.UnionOfColumns) then

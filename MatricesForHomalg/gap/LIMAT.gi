@@ -1213,6 +1213,60 @@ end );
 #-----------------------------------
 
 ##
+InstallMethod( UnionOfColumnsOp,
+        "LIMAT: for a list of homalg matrices and a homalg matrix (check input, drop empty matrices)",
+        [ IsList, IsHomalgMatrix ], 10001,
+        
+  function( L, M )
+    local A, R, r, filtered_L;
+    
+    if IsEmpty( L ) then
+        Error( "L must be nonempty" );
+    elif not ForAll( L, IsHomalgMatrix ) then
+        Error( "L must be a list of homalg matrices" );
+    fi;
+    
+    A := L[1];
+    R := HomalgRing( A );
+    r := NrRows( A );
+    
+    if Length( L ) = 1 then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( [ single matrix ] )", "\033[0m" );
+        
+        return A;
+        
+    fi;
+    
+    if not ForAll( L, x -> IsIdenticalObj( HomalgRing( x ), R ) ) then
+        Error( "the matrices are not defined over identically the same ring\n" );
+    fi;
+    
+    if not ForAll( L, x -> NrRows( x ) = r ) then
+        Error( "the matrices are not augmentable, since they do not all have the same number of columns\n" );
+    fi;
+    
+    filtered_L := Filtered( L, x -> not IsEmptyMatrix( x ) );
+    
+    if Length( filtered_L ) = 0 then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( [ empty matrices ] )", "\033[0m" );
+        
+        return HomalgZeroMatrix( r, Sum( List( L, NrColumns ) ), R );
+        
+    elif Length( filtered_L ) <> Length( L ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( <dropped empty matrices> )", "\033[0m" );
+        
+        return UnionOfColumnsOp( filtered_L, M );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( UnionOfColumns,
         "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
