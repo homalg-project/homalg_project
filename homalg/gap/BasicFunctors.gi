@@ -296,18 +296,68 @@ InstallMethod( DefectOfExactness,
 end );
 
 ##
-InstallGlobalFunction( InternalHom,
-  function( arg )
+InstallMethod( InternalHom,
+        "for two homalg objects or morphisms",
+        [ IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ],
+        
+  function( obj_or_mor_1, obj_or_mor_2 )
     
-    return CallOperationFromCategory( "InternalHom", arg );
+    return CallOperationFromCategory( "InternalHom", [ obj_or_mor_1, obj_or_mor_2 ] );
     
 end );
 
 ##
-InstallGlobalFunction( InternalExt,
-  function( arg )
+InstallMethod( InternalHom,
+        "for a homalg object or morphism",
+        [ IsHomalgObjectOrMorphism ],
+        
+  function( obj_or_mor )
     
-    return CallOperationFromCategory( "InternalExt", arg );
+    return CallOperationFromCategory( "InternalHom", [ obj_or_mor ] );
+    
+end );
+
+##
+InstallMethod( InternalExt,
+        "for an integer and two homalg objects or morphisms",
+        [ IsInt, IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ],
+        
+  function( c, obj_or_mor_1, obj_or_mor_2 )
+    
+    return CallOperationFromCategory( "InternalExt", [ c, obj_or_mor_1, obj_or_mor_2 ] );
+    
+end );
+
+##
+InstallMethod( InternalExt,
+        "for two homalg objects or morphisms",
+        [ IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ],
+        
+  function( obj_or_mor_1, obj_or_mor_2 )
+    
+    return CallOperationFromCategory( "InternalExt", [ obj_or_mor_1, obj_or_mor_2 ] );
+    
+end );
+
+##
+InstallMethod( InternalExt,
+        "for an integer and a homalg object or morphism",
+        [ IsInt, IsHomalgObjectOrMorphism ],
+        
+  function( c, obj_or_mor )
+    
+    return CallOperationFromCategory( "InternalExt", [ c, obj_or_mor ] );
+    
+end );
+
+##
+InstallMethod( InternalExt,
+        "for a homalg object or morphism",
+        [ IsHomalgObjectOrMorphism ],
+        
+  function( obj_or_mor )
+    
+    return CallOperationFromCategory( "InternalExt", [ obj_or_mor ] );
     
 end );
 

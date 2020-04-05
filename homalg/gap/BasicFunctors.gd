@@ -145,9 +145,23 @@ DeclareOperation( "Hom",
 DeclareOperation( "Ext",
         [ IsInt, IsHomalgObject, IsHomalgObject ] );
 
-DeclareGlobalFunction( "InternalHom" );
+DeclareOperation( "InternalHom",
+        [ IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ] );
 
-DeclareGlobalFunction( "InternalExt" );
+DeclareOperation( "InternalHom",
+        [ IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "InternalExt",
+        [ IsInt, IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "InternalExt",
+        [ IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "InternalExt",
+        [ IsInt, IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "InternalExt",
+        [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "Tor",
         [ IsInt, IsHomalgObject, IsHomalgObject ] );
