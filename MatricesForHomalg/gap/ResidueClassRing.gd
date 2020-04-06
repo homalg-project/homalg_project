@@ -117,10 +117,10 @@ DeclareOperation( "UnionOfRowsOp",
 DeclareOperation( "UnionOfRowsOp",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "UnionOfColumns",
+DeclareOperation( "AugmentedRelations",
         [ IsHomalgMatrix, IsHomalgRingRelations ] );
 
-DeclareOperation( "UnionOfColumns",
+DeclareOperation( "AugmentedRelations",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZero",

@@ -1266,64 +1266,6 @@ InstallMethod( UnionOfColumnsOp,
     
 end );
 
-##
-InstallMethod( UnionOfColumns,
-        "LIMAT: for two homalg matrices (check input)",
-        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
-        
-  function( A, B )
-    
-    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
-        Error( "the two matrices are not defined over identically the same ring\n" );
-    fi;
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( UnionOfColumns,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( UnionOfColumns,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return A;
-    
-end );
-
-## without this method the above two methods will be called in the wrong context!!!
-InstallMethod( UnionOfColumns,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return HomalgZeroMatrix( NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
-    
-end );
-
 #-----------------------------------
 # DiagMat
 #-----------------------------------

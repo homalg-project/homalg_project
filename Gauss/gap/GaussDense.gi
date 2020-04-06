@@ -509,17 +509,22 @@ fi;
 
 ##
 if IsBound( __INSTALL_UNIONOFCOLS_IN_GAUSS ) and __INSTALL_UNIONOFCOLS_IN_GAUSS then
-    InstallMethod( UnionOfColumns,
-            "of a list",
-            [ IsList ],
-
-      function( L )
+    InstallGlobalFunction( UnionOfColumns,
+    function( arg )
+        local nargs;
         
-        if Length( L ) < 1 then
-            Error( "L must be nonempty" );
+        nargs := Length( arg );
+        
+        if nargs = 0  then
+            Error( "<arg> must be nonempty" );
+        elif Length( arg ) = 1 and IsList( arg[1] )  then
+            if IsEmpty( arg[1] )  then
+                Error( "<arg>[1] must be nonempty" );
+            fi;
+            arg := arg[1];
         fi;
         
-        return UnionOfColumnsOp( L, L[1] );
+        return UnionOfColumnsOp( arg, arg[1] );
         
     end );
     MakeReadWriteGlobal( "__INSTALL_UNIONOFCOLS_IN_GAUSS" );

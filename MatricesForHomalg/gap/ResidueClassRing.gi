@@ -334,7 +334,7 @@ InstallMethod( UnionOfRowsOp,
 end );
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( AugmentedRelations,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep, IsHomalgRingRelations ],
         
@@ -364,13 +364,13 @@ InstallMethod( UnionOfColumns,
 end );
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( AugmentedRelations,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep ],
         
   function( M )
     
-    return UnionOfColumns( M, RingRelations( HomalgRing( M ) ) );
+    return AugmentedRelations( M, RingRelations( HomalgRing( M ) ) );
     
 end );
 

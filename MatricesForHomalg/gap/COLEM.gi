@@ -2500,36 +2500,6 @@ InstallMethod( UnionOfRowsOp,
 end );
 
 #-----------------------------------
-# UnionOfColumns
-#-----------------------------------
-
-##
-InstallMethod( UnionOfColumns,
-        "COLEM: for homalg matrices (HasPreEval)",
-        [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( PreEval, IsHomalgMatrix )", "\033[0m" );
-    
-    return UnionOfColumns( PreEval( A ), B );
-    
-end );
-
-##
-InstallMethod( UnionOfColumns,
-        "COLEM: for homalg matrices (HasPreEval)",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
-        
-  function( A, B )
-    
-    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( IsHomalgMatrix, PreEval )", "\033[0m" );
-    
-    return UnionOfColumns( A, PreEval( B ) );
-    
-end );
-
-#-----------------------------------
 # DiagMat
 #-----------------------------------
 

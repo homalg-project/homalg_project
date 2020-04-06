@@ -825,7 +825,7 @@ InstallGlobalFunction( _functor_BaseChange_OnModules,		### defines: BaseChange (
             if left then
                 mat := UnionOfRowsOp( mat );
             else
-                mat := UnionOfColumns( mat );
+                mat := AugmentedRelations( mat );
             fi;
         else
             mat := R * mat;

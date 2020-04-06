@@ -51,9 +51,6 @@ DeclareOperation( "UnionOfRowsOp",
 DeclareOperation( "UnionOfRowsOp",
         [ IsList, IsSparseMatrix ] );
 
-DeclareOperation( "UnionOfColumns",
-        [ IsSparseMatrix, IsSparseMatrix ] );
-
 DeclareOperation( "UnionOfColumnsOp",
         [ IsList, IsSparseMatrix ] );
 

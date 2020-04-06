@@ -181,45 +181,6 @@ InstallMethod( UnionOfColumnsOp,
 end );
 
 ##
-InstallMethod( UnionOfColumns,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( UnionOfColumns,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return A;
-    
-end );
-
-## without this method the above two methods will be called in the wrong context!!!
-InstallMethod( UnionOfColumns,
-        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return HomalgZeroMatrix( NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
-    
-end );
-
-##
 InstallMethod( DiagMat,
         "LIMAT: for homalg matrices",
         [ IsHomogeneousList ], 2,

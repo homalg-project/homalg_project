@@ -47,8 +47,7 @@ if not IsBound( UnionOfRows ) then
     BindGlobal( "__INSTALL_UNIONOFROWS_IN_GAUSS", true );
 fi;
 
-if not IsBound( UnionOfColumns ) or ApplicableMethod( UnionOfColumns, [ [ ] ] ) = fail then
-    DeclareOperation( "UnionOfColumns",
-            [ IsList ] );
+if not IsBound( UnionOfColumns ) then
+    DeclareGlobalFunction( "UnionOfColumns" );
     BindGlobal( "__INSTALL_UNIONOFCOLS_IN_GAUSS", true );
 fi;
