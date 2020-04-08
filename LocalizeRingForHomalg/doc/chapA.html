@@ -195,7 +195,7 @@ DecideZeroRows :=
         
         #if it is nonzero, check whether local reduction makes it zero
         if not IsZero( B2 ) then
-          A2 := UnionOfRowsOp( A1, gens * B1 );
+          A2 := UnionOfRows( A1, gens * B1 );
           A2 := BasisOfRows( A2 );
           B3 := HomalgLocalMatrix( DecideZeroRows( B1, A2 ), R );
           if IsZero( B3 ) then
@@ -203,7 +203,7 @@ DecideZeroRows :=
           fi;
         fi;
         
-        N := UnionOfRowsOp( N, B2 );
+        N := UnionOfRows( N, B2 );
         
     od;
     

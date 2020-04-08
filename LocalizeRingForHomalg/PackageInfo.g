@@ -5,7 +5,7 @@ PackageName := "LocalizeRingForHomalg",
 Subtitle := "A Package for Localization of Polynomial Rings",
 
 Version := Maximum( [ ##To prevent merge conflicts
-  "2014.08.27", ## Markus' version
+  "2020.02.05", ## Markus' version
 ## this line prevents merge conflicts
   "2019.09.02", ## Mohamed's version
 ## this line prevents merge conflicts
@@ -102,9 +102,9 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2018.02.04" ],
+                   [ "MatricesForHomalg", ">= 2020.02.05" ],
                    [ "HomalgToCAS", ">= 2013.07.12" ],
-                   [ "Modules", ">= 2018.02.04" ],
+                   [ "Modules", ">= 2020.02.05" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],

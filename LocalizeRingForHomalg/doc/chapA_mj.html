@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <script type="text/javascript"
-  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <title>GAP (LocalizeRingForHomalg) - Appendix A: Overview of the LocalizeRingForHomalg Package Source Code</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -198,7 +198,7 @@ DecideZeroRows :=
         
         #if it is nonzero, check whether local reduction makes it zero
         if not IsZero( B2 ) then
-          A2 := UnionOfRowsOp( A1, gens * B1 );
+          A2 := UnionOfRows( A1, gens * B1 );
           A2 := BasisOfRows( A2 );
           B3 := HomalgLocalMatrix( DecideZeroRows( B1, A2 ), R );
           if IsZero( B3 ) then
@@ -206,7 +206,7 @@ DecideZeroRows :=
           fi;
         fi;
         
-        N := UnionOfRowsOp( N, B2 );
+        N := UnionOfRows( N, B2 );
         
     od;
     
