@@ -97,6 +97,12 @@
 ##  (Q[i]/(i^2+1)){e,f,g}
 ##  gap> Display( Eixyz );
 ##  <An external ring residing in the CAS Singular>
+##  gap> qring := HomalgQRingInSingular( Qxyz, "x*y" );
+##  Q[x,y,z]/( x*y )
+##  gap> Display( qring );
+##  <An external ring residing in the CAS Singular>
+##  gap> "z + x*y" / qring = "z" / qring;
+##  true
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

@@ -45,3 +45,9 @@ DeclareGlobalFunction( "RingForHomalgInSingular" );
 DeclareGlobalFunction( "HomalgFieldOfRationalsInSingular" );
 
 DeclareGlobalFunction( "HomalgRingOfIntegersInSingular" );
+
+DeclareOperation( "HomalgQRingInSingular", [ IsFreePolynomialRing, IsHomalgRingRelations ] );
+DeclareOperation( "HomalgQRingInSingular", [ IsFreePolynomialRing, IsHomalgMatrix ] );
+DeclareOperation( "HomalgQRingInSingular", [ IsFreePolynomialRing, IsList ] );
+DeclareOperation( "HomalgQRingInSingular", [ IsFreePolynomialRing, IsRingElement ] );
+DeclareOperation( "HomalgQRingInSingular", [ IsFreePolynomialRing, IsString ] );
