@@ -529,7 +529,7 @@ end );
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">UnionOfRows</code> (<a href="chap5.html#X7BC803DA871ADD55"><span class="RefLink">5.5-10</span></a>) then the filter <code class="code">HasEvalUnionOfRows</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">UnionOfRows</code> (<a href="chapB.html#X7DEB535782A3323E"><span class="RefLink">B.1-9</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">UnionOfRows</code> (<a href="chap5.html#X7ADCDAC583BE2355"><span class="RefLink">5.5-10</span></a>) then the filter <code class="code">HasEvalUnionOfRows</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">UnionOfRows</code> (<a href="chapB.html#X7DEB535782A3323E"><span class="RefLink">B.1-9</span></a>) or the <code class="code">homalgTable</code> function <code class="func">UnionOfRowsPair</code> (<a href="chapB.html#X86C345CE82AAB220"><span class="RefLink">B.1-10</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -538,33 +538,122 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfRows ],
         
   function( C )
-    local R, RP, e, A, B, U;
+    local R, RP, e, i, combine;
     
     R := HomalgRing( C );
     
     RP := homalgTable( R );
     
-    e :=  EvalUnionOfRows( C );
+    # Make it mutable
+    e := ShallowCopy( EvalUnionOfRows( C ) );
     
-    A := e[1];
-    B := e[2];
+    # In case of nested UnionOfRows, we try to avoid
+    # recursion, since the gap stack is rather small
+    # additionally unpack PreEvals
+    i := 1;
+    while i &lt;= Length( e ) do
+        
+        if HasPreEval( e[i] ) and not HasEval( e[i] ) then
+            
+            e[i] := PreEval( e[i] );
+            
+        elif HasEvalUnionOfRows( e[i] ) and not HasEval( e[i] ) then
+            
+            e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfRows( e[i] ), e{[ (i+1) .. Length( e ) ]}  );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
+    od;
     
-    if IsBound(RP!.UnionOfRows) then
-        return RP!.UnionOfRows( A, B );
+    # Combine zero matrices
+    i := 1;
+    while i + 1 &lt;= Length( e ) do
+        
+        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
+            
+            e[i] := HomalgZeroMatrix( NrRows( e[i] ) + NrRows( e[i+1] ), NrColumns( e[i] ), HomalgRing( e[i] ) );
+            
+            Remove( e, i + 1 );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
+    od;
+    
+    # After combining zero matrices only a single one might be left
+    if Length( e ) = 1 then
+        
+        return e[1];
+        
     fi;
     
-    if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfRows ",
+    # Use RP!.UnionOfRows if available
+    if IsBound(RP!.UnionOfRows) then
+        
+        return RP!.UnionOfRows( e );
+        
+    fi;
+    
+    # Fall back to RP!.UnionOfRowsPair or manual fallback for internal matrices
+    # Combine the matrices
+    # Use a balanced binary tree to keep the sizes small (heuristically)
+    # to avoid a huge memory footprint
+    
+    if not IsBound(RP!.UnionOfRowsPair) and not IsHomalgInternalMatrixRep( C ) then
+        Error( "could neither find a procedure called UnionOfRows ",
+               "nor a procedure called UnionOfRowsPair ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
-    #=====# can only work for homalg internal matrices #=====#
+    combine := function( A, B )
+      local result, U;
+        
+        if IsBound(RP!.UnionOfRowsPair) then
+            
+            result := RP!.UnionOfRowsPair( A, B );
+            
+        else
+            
+            #=====# can only work for homalg internal matrices #=====#
+            
+            U := ShallowCopy( Eval( A )!.matrix );
+            
+            U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;
+            
+            result := homalgInternalMatrixHull( U );
+            
+        fi;
+        
+        return HomalgMatrixWithAttributes( [
+                    Eval, result,
+                    EvalUnionOfRows, [ A, B ],
+                    NrRows, NrRows( A ) + NrRows( B ),
+                    NrColumns, NrColumns( A ),
+                    ], R );
+        
+    end;
     
-    U := ShallowCopy( Eval( A )!.matrix );
+    while Length( e ) &gt; 1 do
+        
+        for i in [ 1 .. Int( Length( e ) / 2 ) ] do
+            
+            e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ] );
+            Unbind( e[ 2 * i ] );
+            
+        od;
+        
+        e := Compacted( e );
+        
+    od;
     
-    U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;
-    
-    return homalgInternalMatrixHull( U );
+    return Eval( e[1] );
     
 end );
 </pre></div>
@@ -576,7 +665,7 @@ end );
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">UnionOfColumns</code> (<a href="chap5.html#X7F5B3A427A71C567"><span class="RefLink">5.5-11</span></a>) then the filter <code class="code">HasEvalUnionOfColumns</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">UnionOfColumns</code> (<a href="chapB.html#X7DF5DB55836D13A7"><span class="RefLink">B.1-10</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">UnionOfColumns</code> (<a href="chap5.html#X7F75F6D081D47478"><span class="RefLink">5.5-11</span></a>) then the filter <code class="code">HasEvalUnionOfColumns</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">UnionOfColumns</code> (<a href="chapB.html#X7DF5DB55836D13A7"><span class="RefLink">B.1-11</span></a>) or the <code class="code">homalgTable</code> function <code class="func">UnionOfColumnsPair</code> (<a href="chapB.html#X8092789C87E37020"><span class="RefLink">B.1-12</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -585,35 +674,124 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( C )
-    local R, RP, e, A, B, U;
+    local R, RP, e, i, combine;
     
     R := HomalgRing( C );
     
     RP := homalgTable( R );
     
-    e :=  EvalUnionOfColumns( C );
+    # Make it mutable
+    e := ShallowCopy( EvalUnionOfColumns( C ) );
     
-    A := e[1];
-    B := e[2];
+    # In case of nested UnionOfColumns, we try to avoid
+    # recursion, since the gap stack is rather small
+    # additionally unpack PreEvals
+    i := 1;
+    while i &lt;= Length( e ) do
+        
+        if HasPreEval( e[i] ) and not HasEval( e[i] ) then
+            
+            e[i] := PreEval( e[i] );
+            
+        elif HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
+            
+            e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfColumns( e[i] ), e{[ (i+1) .. Length( e ) ]}  );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
+    od;
     
-    if IsBound(RP!.UnionOfColumns) then
-        return RP!.UnionOfColumns( A, B );
+    # Combine zero matrices
+    i := 1;
+    while i + 1 &lt;= Length( e ) do
+        
+        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
+            
+            e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );
+            
+            Remove( e, i + 1 );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
+    od;
+    
+    # After combining zero matrices only a single one might be left
+    if Length( e ) = 1 then
+        
+        return e[1];
+        
     fi;
     
-    if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfColumns ",
+    # Use RP!.UnionOfColumns if available
+    if IsBound(RP!.UnionOfColumns) then
+        
+        return RP!.UnionOfColumns( e );
+        
+    fi;
+    
+    # Fall back to RP!.UnionOfColumnsPair or manual fallback for internal matrices
+    # Combine the matrices
+    # Use a balanced binary tree to keep the sizes small (heuristically)
+    # to avoid a huge memory footprint
+    
+    if not IsBound(RP!.UnionOfColumnsPair) and not IsHomalgInternalMatrixRep( C ) then
+        Error( "could neither find a procedure called UnionOfColumns ",
+               "nor a procedure called UnionOfColumnsPair ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
-    #=====# can only work for homalg internal matrices #=====#
+    combine := function( A, B )
+      local result, U;
+        
+        if IsBound(RP!.UnionOfColumnsPair) then
+            
+            result := RP!.UnionOfColumnsPair( A, B );
+            
+        else
+            
+            #=====# can only work for homalg internal matrices #=====#
+            
+            U := List( Eval( A )!.matrix, ShallowCopy );
+            
+            U{ [ 1 .. NrRows( A ) ] }
+              { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
+              := Eval( B )!.matrix;
+            
+            result := homalgInternalMatrixHull( U );
+            
+        fi;
+        
+        return HomalgMatrixWithAttributes( [
+                    Eval, result,
+                    EvalUnionOfColumns, [ A, B ],
+                    NrRows, NrRows( A ),
+                    NrColumns, NrColumns( A ) + NrColumns( B )
+                    ], R );
+        
+    end;
     
-    U := List( Eval( A )!.matrix, ShallowCopy );
+    while Length( e ) &gt; 1 do
+        
+        for i in [ 1 .. Int( Length( e ) / 2 ) ] do
+            
+            e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ] );
+            Unbind( e[ 2 * i ] );
+            
+        od;
+        
+        e := Compacted( e );
+        
+    od;
     
-    U{ [ 1 .. NrRows( A ) ] }
-      { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
-      := Eval( B )!.matrix;
-    
-    return homalgInternalMatrixHull( U );
+    return Eval( e[1] );
     
 end );
 </pre></div>
@@ -625,7 +803,7 @@ end );
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">DiagMat</code> (<a href="chap5.html#X7F2AD04C86F82240"><span class="RefLink">5.5-12</span></a>) then the filter <code class="code">HasEvalDiagMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">DiagMat</code> (<a href="chapB.html#X86C5B86981FA1F9A"><span class="RefLink">B.1-11</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">DiagMat</code> (<a href="chap5.html#X7F2AD04C86F82240"><span class="RefLink">5.5-12</span></a>) then the filter <code class="code">HasEvalDiagMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">DiagMat</code> (<a href="chapB.html#X86C5B86981FA1F9A"><span class="RefLink">B.1-13</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -683,7 +861,7 @@ end );
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">KroneckerMat</code> (<a href="chap5.html#X7CDA5D848468A0AA"><span class="RefLink">5.5-13</span></a>) then the filter <code class="code">HasEvalKroneckerMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">KroneckerMat</code> (<a href="chapB.html#X82202A6A7FAB7174"><span class="RefLink">B.1-12</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">KroneckerMat</code> (<a href="chap5.html#X7CDA5D848468A0AA"><span class="RefLink">5.5-13</span></a>) then the filter <code class="code">HasEvalKroneckerMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">KroneckerMat</code> (<a href="chapB.html#X82202A6A7FAB7174"><span class="RefLink">B.1-14</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -733,7 +911,7 @@ end );
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7D1A074278B415BE"><span class="RefLink">5.5-14</span></a>) then the filter <code class="code">HasEvalMulMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">MulMat</code> (<a href="chapB.html#X828F8C7785EEC3D1"><span class="RefLink">B.1-13</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7D1A074278B415BE"><span class="RefLink">5.5-14</span></a>) then the filter <code class="code">HasEvalMulMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">MulMat</code> (<a href="chapB.html#X828F8C7785EEC3D1"><span class="RefLink">B.1-15</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -807,7 +985,7 @@ end );
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\+</code> (<a href="chap5.html#X87C773DA85B21ADF"><span class="RefLink">5.5-15</span></a>) then the filter <code class="code">HasEvalAddMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">AddMat</code> (<a href="chapB.html#X7B0B12F080A90039"><span class="RefLink">B.1-14</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\+</code> (<a href="chap5.html#X87C773DA85B21ADF"><span class="RefLink">5.5-15</span></a>) then the filter <code class="code">HasEvalAddMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">AddMat</code> (<a href="chapB.html#X7B0B12F080A90039"><span class="RefLink">B.1-16</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -850,7 +1028,7 @@ end );
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\-</code> (<a href="chap5.html#X784B57617B24208C"><span class="RefLink">5.5-16</span></a>) then the filter <code class="code">HasEvalSubMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">SubMat</code> (<a href="chapB.html#X7FE11AA27AE7D2D7"><span class="RefLink">B.1-15</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\-</code> (<a href="chap5.html#X784B57617B24208C"><span class="RefLink">5.5-16</span></a>) then the filter <code class="code">HasEvalSubMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">SubMat</code> (<a href="chapB.html#X7FE11AA27AE7D2D7"><span class="RefLink">B.1-17</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -893,7 +1071,7 @@ end );
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7F5961D78754157B"><span class="RefLink">5.5-17</span></a>) then the filter <code class="code">HasEvalCompose</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">Compose</code> (<a href="chapB.html#X7D491D957E63C3A4"><span class="RefLink">B.1-16</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7F5961D78754157B"><span class="RefLink">5.5-17</span></a>) then the filter <code class="code">HasEvalCompose</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">Compose</code> (<a href="chapB.html#X7D491D957E63C3A4"><span class="RefLink">B.1-18</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>

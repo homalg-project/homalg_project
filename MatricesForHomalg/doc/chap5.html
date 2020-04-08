@@ -112,8 +112,8 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D0D35B582D9C0B0">5.5-7 TransposedMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CF5CE79796001F6">5.5-8 CertainRows</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8256AF2A840B19C4">5.5-9 CertainColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7BC803DA871ADD55">5.5-10 UnionOfRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F5B3A427A71C567">5.5-11 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ADCDAC583BE2355">5.5-10 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F75F6D081D47478">5.5-11 UnionOfColumns</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F2AD04C86F82240">5.5-12 DiagMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CDA5D848468A0AA">5.5-13 KroneckerMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D1A074278B415BE"><code>5.5-14 \*</code></a></span>
@@ -204,7 +204,7 @@ DeclareCategory( "IsHomalgMatrix",
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgInitialMatrix</code>( <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> matrix filled with zeros over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define a matrix by assigning its nonzero entries. The property <code class="func">IsInitialMatrix</code> (<a href="chap5.html#X7E6E51517822CB3F"><span class="RefLink">5.3-26</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap-4.9.2/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
+<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> matrix filled with zeros over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define a matrix by assigning its nonzero entries. The property <code class="func">IsInitialMatrix</code> (<a href="chap5.html#X7E6E51517822CB3F"><span class="RefLink">5.3-26</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap-4.11.0/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
 
 
 <div class="example"><pre>
@@ -246,7 +246,7 @@ false
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgInitialIdentityMatrix</code>( <var class="Arg">m</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">m</var></span> <strong class="pkg">homalg</strong> quadratic matrix with ones on the diagonal over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define an elementary matrix by assigning its off-diagonal nonzero entries. The property <code class="func">IsInitialIdentityMatrix</code> (<a href="chap5.html#X7EE624707ACEC26E"><span class="RefLink">5.3-27</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap-4.9.2/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
+<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">m</var></span> <strong class="pkg">homalg</strong> quadratic matrix with ones on the diagonal over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define an elementary matrix by assigning its off-diagonal nonzero entries. The property <code class="func">IsInitialIdentityMatrix</code> (<a href="chap5.html#X7EE624707ACEC26E"><span class="RefLink">5.3-27</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap-4.11.0/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
 
 
 <div class="example"><pre>
@@ -395,7 +395,7 @@ Z
   [  4,  5,  6 ] ]
 </pre></div>
 
-<p>It is nevertheless recommended to use the following form to create <strong class="pkg">homalg</strong> matrices. This form can also be used to define external matrices. Since whitespaces (--&gt; <a href="/Users/mo/software/gap/build/gap-4.9.2/doc/ref/chap4_mj.html#X7C53CEFC8641B919"><span class="RefLink">Reference: Whitespaces</span></a>) are ignored, they can be used as optical delimiters:</p>
+<p>It is nevertheless recommended to use the following form to create <strong class="pkg">homalg</strong> matrices. This form can also be used to define external matrices. Since whitespaces (--&gt; <a href="/Users/mo/software/gap/build/gap-4.11.0/doc/ref/chap4_mj.html#X7C53CEFC8641B919"><span class="RefLink">Reference: Whitespaces</span></a>) are ignored, they can be used as optical delimiters:</p>
 
 
 <div class="example"><pre>
@@ -496,7 +496,7 @@ modulo [ 4 ]
 
 <p>Check if the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> is a zero matrix, taking possible ring relations into account.</p>
 
-<p>(for the installed standard method see <code class="func">IsZeroMatrix</code> (<a href="chapB.html#X849BB912798A01EB"><span class="RefLink">B.1-17</span></a>))</p>
+<p>(for the installed standard method see <code class="func">IsZeroMatrix</code> (<a href="chapB.html#X849BB912798A01EB"><span class="RefLink">B.1-19</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -624,7 +624,7 @@ true
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
-<p>Check if the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> is an identity matrix, taking possible ring relations into account.</p>
+<p>Check if the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> is a diagonal matrix, taking possible ring relations into account.</p>
 
 <p>(for the installed standard method see <code class="func">IsDiagonalMatrix</code> (<a href="chapB.html#X7B6420E88418316B"><span class="RefLink">B.2-3</span></a>))</p>
 
@@ -776,7 +776,7 @@ true
 
 <p>The number of rows of the matrix <var class="Arg">A</var>.</p>
 
-<p>(for the installed standard method see <code class="func">NrRows</code> (<a href="chapB.html#X7AE057CF7C6B0EE0"><span class="RefLink">B.1-18</span></a>))</p>
+<p>(for the installed standard method see <code class="func">NrRows</code> (<a href="chapB.html#X7AE057CF7C6B0EE0"><span class="RefLink">B.1-20</span></a>))</p>
 
 <p><a id="X781766A47B5D41AD" name="X781766A47B5D41AD"></a></p>
 
@@ -787,7 +787,7 @@ true
 
 <p>The number of columns of the matrix <var class="Arg">A</var>.</p>
 
-<p>(for the installed standard method see <code class="func">NrColumns</code> (<a href="chapB.html#X7D8E706887116F30"><span class="RefLink">B.1-19</span></a>))</p>
+<p>(for the installed standard method see <code class="func">NrColumns</code> (<a href="chapB.html#X7D8E706887116F30"><span class="RefLink">B.1-21</span></a>))</p>
 
 <p><a id="X83045F6F82C180E1" name="X83045F6F82C180E1"></a></p>
 
@@ -800,7 +800,7 @@ true
 
 <p>You can invoke it with <code class="code">Determinant</code>( <var class="Arg">A</var> ).</p>
 
-<p>(for the installed standard method see <code class="func">Determinant</code> (<a href="chapB.html#X80A573257D7F2E1A"><span class="RefLink">B.1-20</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Determinant</code> (<a href="chapB.html#X80A573257D7F2E1A"><span class="RefLink">B.1-22</span></a>))</p>
 
 <p><a id="X828225E0857B1FDA" name="X828225E0857B1FDA"></a></p>
 
@@ -1196,25 +1196,25 @@ end );
 
 <p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC.html#X835F6F2E7D590F3D"><span class="RefLink">C.4-10</span></a>))</p>
 
-<p><a id="X7BC803DA871ADD55" name="X7BC803DA871ADD55"></a></p>
+<p><a id="X7ADCDAC583BE2355" name="X7ADCDAC583BE2355"></a></p>
 
 <h5>5.5-10 UnionOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>Stack the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
+<p>Stack the <strong class="pkg">homalg</strong> matrices in the non-empty list <var class="Arg">L</var>.</p>
 
 <p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC.html#X7F35A61C8522A1B0"><span class="RefLink">C.4-11</span></a>))</p>
 
-<p><a id="X7F5B3A427A71C567" name="X7F5B3A427A71C567"></a></p>
+<p><a id="X7F75F6D081D47478" name="X7F75F6D081D47478"></a></p>
 
 <h5>5.5-11 UnionOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>Augment the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
+<p>Augment the <strong class="pkg">homalg</strong> matrices in the non-empty list <var class="Arg">L</var>.</p>
 
 <p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC.html#X7EDE6095820F8128"><span class="RefLink">C.4-12</span></a>))</p>
 
@@ -1630,7 +1630,7 @@ InstallMethod( RightDivide,
     ## first reduce A modulo L
     ZA := DecideZeroRows( A, BL );
     
-    AL := UnionOfRowsOp( ZA, BL );
+    AL := UnionOfRows( ZA, BL );
     
     ## also reduce B modulo L
     ZB := DecideZeroRows( B, BL );
@@ -1679,7 +1679,7 @@ InstallMethod( LeftDivide,
     ## first reduce A modulo L
     ZA := DecideZeroColumns( A, BL );
     
-    AL := UnionOfColumnsOp( ZA, BL );
+    AL := UnionOfColumns( ZA, BL );
     
     ## also reduce B modulo L
     ZB := DecideZeroColumns( B, BL );

@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <script type="text/javascript"
-  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <title>GAP (MatricesForHomalg) - Appendix D: The subpackage ResidueClassRingForHomalg as a sample ring package</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -95,7 +95,7 @@ BasisOfRowModule :=
   function( M )
     local Mrel;
     
-    Mrel := UnionOfRowsOp( M );
+    Mrel := StackedRelations( M );
     
     Mrel := HomalgResidueClassMatrix(
                     BasisOfRowModule( Mrel ), HomalgRing( M ) );
@@ -118,7 +118,7 @@ BasisOfColumnModule :=
   function( M )
     local Mrel;
     
-    Mrel := UnionOfColumnsOp( M );
+    Mrel := AugmentedRelations( M );
     
     Mrel := HomalgResidueClassMatrix(
                     BasisOfColumnModule( Mrel ), HomalgRing( M ) );
@@ -141,7 +141,7 @@ DecideZeroRows :=
   function( A, B )
     local Brel;
     
-    Brel := UnionOfRowsOp( B );
+    Brel := StackedRelations( B );
     
     Brel := BasisOfRowModule( Brel );
     
@@ -164,7 +164,7 @@ DecideZeroColumns :=
   function( A, B )
     local Brel;
     
-    Brel := UnionOfColumnsOp( B );
+    Brel := AugmentedRelations( B );
     
     Brel := BasisOfColumnModule( Brel );
     
@@ -271,7 +271,7 @@ BasisOfRowsCoeff :=
   function( M, T )
     local Mrel, TT, bas, nz;
     
-    Mrel := UnionOfRowsOp( M );
+    Mrel := StackedRelations( M );
     
     TT := HomalgVoidMatrix( HomalgRing( Mrel ) );
     
@@ -305,7 +305,7 @@ BasisOfColumnsCoeff :=
   function( M, T )
     local Mrel, TT, bas, nz;
     
-    Mrel := UnionOfColumnsOp( M );
+    Mrel := AugmentedRelations( M );
     
     TT := HomalgVoidMatrix( HomalgRing( Mrel ) );
     
@@ -339,7 +339,7 @@ DecideZeroRowsEffectively :=
   function( A, B, T )
     local Brel, TT, red;
     
-    Brel := UnionOfRowsOp( B );
+    Brel := StackedRelations( B );
     
     TT := HomalgVoidMatrix( HomalgRing( Brel ) );
     
@@ -367,7 +367,7 @@ DecideZeroColumnsEffectively :=
   function( A, B, T )
     local Brel, TT, red;
     
-    Brel := UnionOfColumnsOp( B );
+    Brel := AugmentedRelations( B );
     
     TT := HomalgVoidMatrix( HomalgRing( Brel ) );
     
@@ -395,7 +395,7 @@ RelativeSyzygiesGeneratorsOfRows :=
   function( M, M2 )
     local M2rel, S;
     
-    M2rel := UnionOfRowsOp( M2 );
+    M2rel := StackedRelations( M2 );
     
     S := SyzygiesGeneratorsOfRows( Eval( M ), M2rel );
     
@@ -427,7 +427,7 @@ RelativeSyzygiesGeneratorsOfColumns :=
   function( M, M2 )
     local M2rel, S;
     
-    M2rel := UnionOfColumnsOp( M2 );
+    M2rel := AugmentedRelations( M2 );
     
     S := SyzygiesGeneratorsOfColumns( Eval( M ), M2rel );
     
@@ -646,16 +646,16 @@ CertainColumns :=
 
 <div class="example"><pre>
 UnionOfRows :=
-  function( A, B )
+  function( L )
     local N;
     
-    N := UnionOfRowsOp( Eval( A ), Eval( B ) );
+    N := UnionOfRows( List( L, Eval ) );
     
-    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+    if not ForAll( L, HasIsReducedModuloRingRelations and
                IsReducedModuloRingRelations ) then
         
         ## reduce the matrix N w.r.t. the ring relations
-        N := DecideZero( N, HomalgRing( A ) );
+        N := DecideZero( N, HomalgRing( L[1] ) );
     fi;
     
     return N;
@@ -670,21 +670,21 @@ UnionOfRows :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix over the ambient ring</p>
 
-<p>(--&gt; <code class="func">UnionOfColumns</code> (<a href="chapB_mj.html#X7DF5DB55836D13A7"><span class="RefLink">B.1-10</span></a>))</p>
+<p>(--&gt; <code class="func">UnionOfColumns</code> (<a href="chapB_mj.html#X7DF5DB55836D13A7"><span class="RefLink">B.1-11</span></a>))</p>
 
 
 <div class="example"><pre>
 UnionOfColumns :=
-  function( A, B )
+  function( L )
     local N;
     
-    N := UnionOfColumnsOp( Eval( A ), Eval( B ) );
+    N := UnionOfColumns( List( L, Eval ) );
     
-    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+    if not ForAll( L, HasIsReducedModuloRingRelations and
                IsReducedModuloRingRelations ) then
         
         ## reduce the matrix N w.r.t. the ring relations
-        N := DecideZero( N, HomalgRing( A ) );
+        N := DecideZero( N, HomalgRing( L[1] ) );
     fi;
     
     return N;
@@ -699,7 +699,7 @@ UnionOfColumns :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix over the ambient ring</p>
 
-<p>(--&gt; <code class="func">DiagMat</code> (<a href="chapB_mj.html#X86C5B86981FA1F9A"><span class="RefLink">B.1-11</span></a>))</p>
+<p>(--&gt; <code class="func">DiagMat</code> (<a href="chapB_mj.html#X86C5B86981FA1F9A"><span class="RefLink">B.1-13</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -728,7 +728,7 @@ DiagMat :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KroneckerMat</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix over the ambient ring</p>
 
-<p>(--&gt; <code class="func">KroneckerMat</code> (<a href="chapB_mj.html#X82202A6A7FAB7174"><span class="RefLink">B.1-12</span></a>))</p>
+<p>(--&gt; <code class="func">KroneckerMat</code> (<a href="chapB_mj.html#X82202A6A7FAB7174"><span class="RefLink">B.1-14</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -757,7 +757,7 @@ KroneckerMat :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MulMat</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix over the ambient ring</p>
 
-<p>(--&gt; <code class="func">MulMat</code> (<a href="chapB_mj.html#X828F8C7785EEC3D1"><span class="RefLink">B.1-13</span></a>))</p>
+<p>(--&gt; <code class="func">MulMat</code> (<a href="chapB_mj.html#X828F8C7785EEC3D1"><span class="RefLink">B.1-15</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -782,7 +782,7 @@ MulMatRight :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddMat</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix over the ambient ring</p>
 
-<p>(--&gt; <code class="func">AddMat</code> (<a href="chapB_mj.html#X7B0B12F080A90039"><span class="RefLink">B.1-14</span></a>))</p>
+<p>(--&gt; <code class="func">AddMat</code> (<a href="chapB_mj.html#X7B0B12F080A90039"><span class="RefLink">B.1-16</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -801,7 +801,7 @@ AddMat :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubMat</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix over the ambient ring</p>
 
-<p>(--&gt; <code class="func">SubMat</code> (<a href="chapB_mj.html#X7FE11AA27AE7D2D7"><span class="RefLink">B.1-15</span></a>))</p>
+<p>(--&gt; <code class="func">SubMat</code> (<a href="chapB_mj.html#X7FE11AA27AE7D2D7"><span class="RefLink">B.1-17</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -820,7 +820,7 @@ SubMat :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Compose</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix over the ambient ring</p>
 
-<p>(--&gt; <code class="func">Compose</code> (<a href="chapB_mj.html#X7D491D957E63C3A4"><span class="RefLink">B.1-16</span></a>))</p>
+<p>(--&gt; <code class="func">Compose</code> (<a href="chapB_mj.html#X7D491D957E63C3A4"><span class="RefLink">B.1-18</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -839,7 +839,7 @@ Compose :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZeroMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
-<p>(--&gt; <code class="func">IsZeroMatrix</code> (<a href="chapB_mj.html#X849BB912798A01EB"><span class="RefLink">B.1-17</span></a>))</p>
+<p>(--&gt; <code class="func">IsZeroMatrix</code> (<a href="chapB_mj.html#X849BB912798A01EB"><span class="RefLink">B.1-19</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -853,7 +853,7 @@ IsZeroMatrix := M -&gt; IsZero( DecideZero( Eval( M ), HomalgRing( M ) ) ),
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
-<p>(--&gt; <code class="func">NrRows</code> (<a href="chapB_mj.html#X7AE057CF7C6B0EE0"><span class="RefLink">B.1-18</span></a>))</p>
+<p>(--&gt; <code class="func">NrRows</code> (<a href="chapB_mj.html#X7AE057CF7C6B0EE0"><span class="RefLink">B.1-20</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -867,7 +867,7 @@ NrRows := C -&gt; NrRows( Eval( C ) ),
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
-<p>(--&gt; <code class="func">NrColumns</code> (<a href="chapB_mj.html#X7D8E706887116F30"><span class="RefLink">B.1-19</span></a>))</p>
+<p>(--&gt; <code class="func">NrColumns</code> (<a href="chapB_mj.html#X7D8E706887116F30"><span class="RefLink">B.1-21</span></a>))</p>
 
 
 <div class="example"><pre>
@@ -881,7 +881,7 @@ NrColumns := C -&gt; NrColumns( Eval( C ) ),
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Determinant</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: an element of ambient <strong class="pkg">homalg</strong> ring</p>
 
-<p>(--&gt; <code class="func">Determinant</code> (<a href="chapB_mj.html#X80A573257D7F2E1A"><span class="RefLink">B.1-20</span></a>))</p>
+<p>(--&gt; <code class="func">Determinant</code> (<a href="chapB_mj.html#X80A573257D7F2E1A"><span class="RefLink">B.1-22</span></a>))</p>
 
 
 <div class="example"><pre>

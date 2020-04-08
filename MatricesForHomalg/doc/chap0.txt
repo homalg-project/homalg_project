@@ -6,7 +6,7 @@
                         [1XMatrices for the [5Xhomalg[105X project[101X
   
   
-                               Version 2020.02.04
+                               Version 2020.02.05
   
   
                                    June 2015
@@ -349,17 +349,19 @@
       B.1-7 CertainRows
       B.1-8 CertainColumns
       B.1-9 UnionOfRows
-      B.1-10 UnionOfColumns
-      B.1-11 DiagMat
-      B.1-12 KroneckerMat
-      B.1-13 MulMat
-      B.1-14 AddMat
-      B.1-15 SubMat
-      B.1-16 Compose
-      B.1-17 IsZeroMatrix
-      B.1-18 NrRows
-      B.1-19 NrColumns
-      B.1-20 Determinant
+      B.1-10 UnionOfRowsPair
+      B.1-11 UnionOfColumns
+      B.1-12 UnionOfColumnsPair
+      B.1-13 DiagMat
+      B.1-14 KroneckerMat
+      B.1-15 MulMat
+      B.1-16 AddMat
+      B.1-17 SubMat
+      B.1-18 Compose
+      B.1-19 IsZeroMatrix
+      B.1-20 NrRows
+      B.1-21 NrColumns
+      B.1-22 Determinant
     B.2 [33X[0;0YThe Tool Operations with a Fallback Method[133X
       B.2-1 AreEqualMatrices
       B.2-2 IsIdentityMatrix

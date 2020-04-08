@@ -464,7 +464,8 @@
   
   [33X[0;0YIn  case  the  matrix was created using [2XUnionOfRows[102X ([14X5.5-10[114X) then the filter
   [10XHasEvalUnionOfRows[110X  for  [3XC[103X  is  set  to  true  and  the [10XhomalgTable[110X function
-  [2XUnionOfRows[102X ([14XB.1-9[114X) will be used to set the attribute [10XEval[110X.[133X
+  [2XUnionOfRows[102X  ([14XB.1-9[114X)  or  the  [10XhomalgTable[110X function [2XUnionOfRowsPair[102X ([14XB.1-10[114X)
+  will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -472,33 +473,122 @@
     [4X        [ IsHomalgMatrix and HasEvalUnionOfRows ],[104X
     [4X        [104X
     [4X  function( C )[104X
-    [4X    local R, RP, e, A, B, U;[104X
+    [4X    local R, RP, e, i, combine;[104X
     [4X    [104X
     [4X    R := HomalgRing( C );[104X
     [4X    [104X
     [4X    RP := homalgTable( R );[104X
     [4X    [104X
-    [4X    e :=  EvalUnionOfRows( C );[104X
+    [4X    # Make it mutable[104X
+    [4X    e := ShallowCopy( EvalUnionOfRows( C ) );[104X
     [4X    [104X
-    [4X    A := e[1];[104X
-    [4X    B := e[2];[104X
+    [4X    # In case of nested UnionOfRows, we try to avoid[104X
+    [4X    # recursion, since the gap stack is rather small[104X
+    [4X    # additionally unpack PreEvals[104X
+    [4X    i := 1;[104X
+    [4X    while i <= Length( e ) do[104X
+    [4X        [104X
+    [4X        if HasPreEval( e[i] ) and not HasEval( e[i] ) then[104X
+    [4X            [104X
+    [4X            e[i] := PreEval( e[i] );[104X
+    [4X            [104X
+    [4X        elif HasEvalUnionOfRows( e[i] ) and not HasEval( e[i] ) then[104X
+    [4X            [104X
+    [4X            e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfRows( e[i] ), e{[ (i+1) .. Length( e ) ]}  );[104X
+    [4X            [104X
+    [4X        else[104X
+    [4X            [104X
+    [4X            i := i + 1;[104X
+    [4X            [104X
+    [4X        fi;[104X
+    [4X        [104X
+    [4X    od;[104X
     [4X    [104X
-    [4X    if IsBound(RP!.UnionOfRows) then[104X
-    [4X        return RP!.UnionOfRows( A, B );[104X
+    [4X    # Combine zero matrices[104X
+    [4X    i := 1;[104X
+    [4X    while i + 1 <= Length( e ) do[104X
+    [4X        [104X
+    [4X        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then[104X
+    [4X            [104X
+    [4X            e[i] := HomalgZeroMatrix( NrRows( e[i] ) + NrRows( e[i+1] ), NrColumns( e[i] ), HomalgRing( e[i] ) );[104X
+    [4X            [104X
+    [4X            Remove( e, i + 1 );[104X
+    [4X            [104X
+    [4X        else[104X
+    [4X            [104X
+    [4X            i := i + 1;[104X
+    [4X            [104X
+    [4X        fi;[104X
+    [4X        [104X
+    [4X    od;[104X
+    [4X    [104X
+    [4X    # After combining zero matrices only a single one might be left[104X
+    [4X    if Length( e ) = 1 then[104X
+    [4X        [104X
+    [4X        return e[1];[104X
+    [4X        [104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    if not IsHomalgInternalMatrixRep( C ) then[104X
-    [4X        Error( "could not find a procedure called UnionOfRows ",[104X
+    [4X    # Use RP!.UnionOfRows if available[104X
+    [4X    if IsBound(RP!.UnionOfRows) then[104X
+    [4X        [104X
+    [4X        return RP!.UnionOfRows( e );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    # Fall back to RP!.UnionOfRowsPair or manual fallback for internal matrices[104X
+    [4X    # Combine the matrices[104X
+    [4X    # Use a balanced binary tree to keep the sizes small (heuristically)[104X
+    [4X    # to avoid a huge memory footprint[104X
+    [4X    [104X
+    [4X    if not IsBound(RP!.UnionOfRowsPair) and not IsHomalgInternalMatrixRep( C ) then[104X
+    [4X        Error( "could neither find a procedure called UnionOfRows ",[104X
+    [4X               "nor a procedure called UnionOfRowsPair ",[104X
     [4X               "in the homalgTable of the non-internal ring\n" );[104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    #=====# can only work for homalg internal matrices #=====#[104X
+    [4X    combine := function( A, B )[104X
+    [4X      local result, U;[104X
+    [4X        [104X
+    [4X        if IsBound(RP!.UnionOfRowsPair) then[104X
+    [4X            [104X
+    [4X            result := RP!.UnionOfRowsPair( A, B );[104X
+    [4X            [104X
+    [4X        else[104X
+    [4X            [104X
+    [4X            #=====# can only work for homalg internal matrices #=====#[104X
+    [4X            [104X
+    [4X            U := ShallowCopy( Eval( A )!.matrix );[104X
+    [4X            [104X
+    [4X            U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;[104X
+    [4X            [104X
+    [4X            result := homalgInternalMatrixHull( U );[104X
+    [4X            [104X
+    [4X        fi;[104X
+    [4X        [104X
+    [4X        return HomalgMatrixWithAttributes( [[104X
+    [4X                    Eval, result,[104X
+    [4X                    EvalUnionOfRows, [ A, B ],[104X
+    [4X                    NrRows, NrRows( A ) + NrRows( B ),[104X
+    [4X                    NrColumns, NrColumns( A ),[104X
+    [4X                    ], R );[104X
+    [4X        [104X
+    [4X    end;[104X
     [4X    [104X
-    [4X    U := ShallowCopy( Eval( A )!.matrix );[104X
+    [4X    while Length( e ) > 1 do[104X
+    [4X        [104X
+    [4X        for i in [ 1 .. Int( Length( e ) / 2 ) ] do[104X
+    [4X            [104X
+    [4X            e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ] );[104X
+    [4X            Unbind( e[ 2 * i ] );[104X
+    [4X            [104X
+    [4X        od;[104X
+    [4X        [104X
+    [4X        e := Compacted( e );[104X
+    [4X        [104X
+    [4X    od;[104X
     [4X    [104X
-    [4X    U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;[104X
-    [4X    [104X
-    [4X    return homalgInternalMatrixHull( U );[104X
+    [4X    return Eval( e[1] );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -510,7 +600,8 @@
   
   [33X[0;0YIn case the matrix was created using [2XUnionOfColumns[102X ([14X5.5-11[114X) then the filter
   [10XHasEvalUnionOfColumns[110X  for  [3XC[103X  is  set  to true and the [10XhomalgTable[110X function
-  [2XUnionOfColumns[102X ([14XB.1-10[114X) will be used to set the attribute [10XEval[110X.[133X
+  [2XUnionOfColumns[102X  ([14XB.1-11[114X)  or  the  [10XhomalgTable[110X  function  [2XUnionOfColumnsPair[102X
+  ([14XB.1-12[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -518,35 +609,124 @@
     [4X        [ IsHomalgMatrix and HasEvalUnionOfColumns ],[104X
     [4X        [104X
     [4X  function( C )[104X
-    [4X    local R, RP, e, A, B, U;[104X
+    [4X    local R, RP, e, i, combine;[104X
     [4X    [104X
     [4X    R := HomalgRing( C );[104X
     [4X    [104X
     [4X    RP := homalgTable( R );[104X
     [4X    [104X
-    [4X    e :=  EvalUnionOfColumns( C );[104X
+    [4X    # Make it mutable[104X
+    [4X    e := ShallowCopy( EvalUnionOfColumns( C ) );[104X
     [4X    [104X
-    [4X    A := e[1];[104X
-    [4X    B := e[2];[104X
+    [4X    # In case of nested UnionOfColumns, we try to avoid[104X
+    [4X    # recursion, since the gap stack is rather small[104X
+    [4X    # additionally unpack PreEvals[104X
+    [4X    i := 1;[104X
+    [4X    while i <= Length( e ) do[104X
+    [4X        [104X
+    [4X        if HasPreEval( e[i] ) and not HasEval( e[i] ) then[104X
+    [4X            [104X
+    [4X            e[i] := PreEval( e[i] );[104X
+    [4X            [104X
+    [4X        elif HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then[104X
+    [4X            [104X
+    [4X            e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfColumns( e[i] ), e{[ (i+1) .. Length( e ) ]}  );[104X
+    [4X            [104X
+    [4X        else[104X
+    [4X            [104X
+    [4X            i := i + 1;[104X
+    [4X            [104X
+    [4X        fi;[104X
+    [4X        [104X
+    [4X    od;[104X
     [4X    [104X
-    [4X    if IsBound(RP!.UnionOfColumns) then[104X
-    [4X        return RP!.UnionOfColumns( A, B );[104X
+    [4X    # Combine zero matrices[104X
+    [4X    i := 1;[104X
+    [4X    while i + 1 <= Length( e ) do[104X
+    [4X        [104X
+    [4X        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then[104X
+    [4X            [104X
+    [4X            e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );[104X
+    [4X            [104X
+    [4X            Remove( e, i + 1 );[104X
+    [4X            [104X
+    [4X        else[104X
+    [4X            [104X
+    [4X            i := i + 1;[104X
+    [4X            [104X
+    [4X        fi;[104X
+    [4X        [104X
+    [4X    od;[104X
+    [4X    [104X
+    [4X    # After combining zero matrices only a single one might be left[104X
+    [4X    if Length( e ) = 1 then[104X
+    [4X        [104X
+    [4X        return e[1];[104X
+    [4X        [104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    if not IsHomalgInternalMatrixRep( C ) then[104X
-    [4X        Error( "could not find a procedure called UnionOfColumns ",[104X
+    [4X    # Use RP!.UnionOfColumns if available[104X
+    [4X    if IsBound(RP!.UnionOfColumns) then[104X
+    [4X        [104X
+    [4X        return RP!.UnionOfColumns( e );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    # Fall back to RP!.UnionOfColumnsPair or manual fallback for internal matrices[104X
+    [4X    # Combine the matrices[104X
+    [4X    # Use a balanced binary tree to keep the sizes small (heuristically)[104X
+    [4X    # to avoid a huge memory footprint[104X
+    [4X    [104X
+    [4X    if not IsBound(RP!.UnionOfColumnsPair) and not IsHomalgInternalMatrixRep( C ) then[104X
+    [4X        Error( "could neither find a procedure called UnionOfColumns ",[104X
+    [4X               "nor a procedure called UnionOfColumnsPair ",[104X
     [4X               "in the homalgTable of the non-internal ring\n" );[104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    #=====# can only work for homalg internal matrices #=====#[104X
+    [4X    combine := function( A, B )[104X
+    [4X      local result, U;[104X
+    [4X        [104X
+    [4X        if IsBound(RP!.UnionOfColumnsPair) then[104X
+    [4X            [104X
+    [4X            result := RP!.UnionOfColumnsPair( A, B );[104X
+    [4X            [104X
+    [4X        else[104X
+    [4X            [104X
+    [4X            #=====# can only work for homalg internal matrices #=====#[104X
+    [4X            [104X
+    [4X            U := List( Eval( A )!.matrix, ShallowCopy );[104X
+    [4X            [104X
+    [4X            U{ [ 1 .. NrRows( A ) ] }[104X
+    [4X              { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }[104X
+    [4X              := Eval( B )!.matrix;[104X
+    [4X            [104X
+    [4X            result := homalgInternalMatrixHull( U );[104X
+    [4X            [104X
+    [4X        fi;[104X
+    [4X        [104X
+    [4X        return HomalgMatrixWithAttributes( [[104X
+    [4X                    Eval, result,[104X
+    [4X                    EvalUnionOfColumns, [ A, B ],[104X
+    [4X                    NrRows, NrRows( A ),[104X
+    [4X                    NrColumns, NrColumns( A ) + NrColumns( B )[104X
+    [4X                    ], R );[104X
+    [4X        [104X
+    [4X    end;[104X
     [4X    [104X
-    [4X    U := List( Eval( A )!.matrix, ShallowCopy );[104X
+    [4X    while Length( e ) > 1 do[104X
+    [4X        [104X
+    [4X        for i in [ 1 .. Int( Length( e ) / 2 ) ] do[104X
+    [4X            [104X
+    [4X            e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ] );[104X
+    [4X            Unbind( e[ 2 * i ] );[104X
+    [4X            [104X
+    [4X        od;[104X
+    [4X        [104X
+    [4X        e := Compacted( e );[104X
+    [4X        [104X
+    [4X    od;[104X
     [4X    [104X
-    [4X    U{ [ 1 .. NrRows( A ) ] }[104X
-    [4X      { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }[104X
-    [4X      := Eval( B )!.matrix;[104X
-    [4X    [104X
-    [4X    return homalgInternalMatrixHull( U );[104X
+    [4X    return Eval( e[1] );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -558,7 +738,7 @@
   
   [33X[0;0YIn  case  the  matrix  was  created  using  [2XDiagMat[102X ([14X5.5-12[114X) then the filter
   [10XHasEvalDiagMat[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X function [2XDiagMat[102X
-  ([14XB.1-11[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-13[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -615,7 +795,7 @@
   
   [33X[0;0YIn  case  the matrix was created using [2XKroneckerMat[102X ([14X5.5-13[114X) then the filter
   [10XHasEvalKroneckerMat[110X  for  [3XC[103X  is  set  to  true  and the [10XhomalgTable[110X function
-  [2XKroneckerMat[102X ([14XB.1-12[114X) will be used to set the attribute [10XEval[110X.[133X
+  [2XKroneckerMat[102X ([14XB.1-14[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -664,7 +844,7 @@
   
   [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-14[114X)  then  the  filter
   [10XHasEvalMulMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XMulMat[102X
-  ([14XB.1-13[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-15[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -737,7 +917,7 @@
   
   [33X[0;0YIn   case  the  matrix  was  created  using  [2X\+[102X  ([14X5.5-15[114X)  then  the  filter
   [10XHasEvalAddMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XAddMat[102X
-  ([14XB.1-14[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-16[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -779,7 +959,7 @@
   
   [33X[0;0YIn   case  the  matrix  was  created  using  [2X\-[102X  ([14X5.5-16[114X)  then  the  filter
   [10XHasEvalSubMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XSubMat[102X
-  ([14XB.1-15[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-17[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -821,7 +1001,7 @@
   
   [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-17[114X)  then  the  filter
   [10XHasEvalCompose[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X function [2XCompose[102X
-  ([14XB.1-16[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-18[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X

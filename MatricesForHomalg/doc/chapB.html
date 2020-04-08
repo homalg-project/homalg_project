@@ -34,17 +34,19 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7B6FC3267CD9EE9D">B.1-7 CertainRows</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X78EADFC67D17CF04">B.1-8 CertainColumns</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7DEB535782A3323E">B.1-9 UnionOfRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7DF5DB55836D13A7">B.1-10 UnionOfColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X86C5B86981FA1F9A">B.1-11 DiagMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X82202A6A7FAB7174">B.1-12 KroneckerMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X828F8C7785EEC3D1">B.1-13 MulMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7B0B12F080A90039">B.1-14 AddMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7FE11AA27AE7D2D7">B.1-15 SubMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7D491D957E63C3A4">B.1-16 Compose</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X849BB912798A01EB">B.1-17 IsZeroMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7AE057CF7C6B0EE0">B.1-18 NrRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7D8E706887116F30">B.1-19 NrColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X80A573257D7F2E1A">B.1-20 Determinant</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X86C345CE82AAB220">B.1-10 UnionOfRowsPair</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7DF5DB55836D13A7">B.1-11 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X8092789C87E37020">B.1-12 UnionOfColumnsPair</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X86C5B86981FA1F9A">B.1-13 DiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X82202A6A7FAB7174">B.1-14 KroneckerMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X828F8C7785EEC3D1">B.1-15 MulMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7B0B12F080A90039">B.1-16 AddMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7FE11AA27AE7D2D7">B.1-17 SubMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7D491D957E63C3A4">B.1-18 Compose</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X849BB912798A01EB">B.1-19 IsZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7AE057CF7C6B0EE0">B.1-20 NrRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7D8E706887116F30">B.1-21 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X80A573257D7F2E1A">B.1-22 Determinant</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB.html#X7912E42C81296637">B.2 <span class="Heading">The Tool Operations with a Fallback Method</span></a>
 </span>
@@ -148,23 +150,41 @@
 
 <h5>B.1-9 UnionOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">UnionOfRows</code> is bound then the method <code class="func">Eval</code> (<a href="chapC.html#X7F35A61C8522A1B0"><span class="RefLink">C.4-11</span></a>) returns <span class="SimpleMath">RP</span>!.<code class="code">UnionOfRows</code> applied to the content of the attribute <code class="code">EvalUnionOfRows</code><span class="SimpleMath">( <var class="Arg">C</var> ) = [ <var class="Arg">A</var>, <var class="Arg">B</var> ]</span>.</p>
+<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">UnionOfRows</code> is bound then the method <code class="func">Eval</code> (<a href="chapC.html#X7F35A61C8522A1B0"><span class="RefLink">C.4-11</span></a>) returns <span class="SimpleMath">RP</span>!.<code class="code">UnionOfRows</code> applied to the content of the attribute <code class="code">EvalUnionOfRows</code><span class="SimpleMath">( <var class="Arg">C</var> ) = <var class="Arg">L</var></span>.</p>
+
+<p><a id="X86C345CE82AAB220" name="X86C345CE82AAB220"></a></p>
+
+<h5>B.1-10 UnionOfRowsPair</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRowsPair</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">UnionOfRowsPair</code> is bound and the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">UnionOfRows</code> is not bound then the method <code class="func">Eval</code> (<a href="chapC.html#X7F35A61C8522A1B0"><span class="RefLink">C.4-11</span></a>) returns <span class="SimpleMath">RP</span>!.<code class="code">UnionOfRowsPair</code> applied recursively to a balanced binary tree created from the content of the attribute <code class="code">EvalUnionOfRows</code><span class="SimpleMath">( <var class="Arg">C</var> )</span>.</p>
 
 <p><a id="X7DF5DB55836D13A7" name="X7DF5DB55836D13A7"></a></p>
 
-<h5>B.1-10 UnionOfColumns</h5>
+<h5>B.1-11 UnionOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">UnionOfColumns</code> is bound then the method <code class="func">Eval</code> (<a href="chapC.html#X7EDE6095820F8128"><span class="RefLink">C.4-12</span></a>) returns <span class="SimpleMath">RP</span>!.<code class="code">UnionOfColumns</code> applied to the content of the attribute <code class="code">EvalUnionOfColumns</code><span class="SimpleMath">( <var class="Arg">C</var> ) = [ <var class="Arg">A</var>, <var class="Arg">B</var> ]</span>.</p>
+<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">UnionOfColumns</code> is bound then the method <code class="func">Eval</code> (<a href="chapC.html#X7EDE6095820F8128"><span class="RefLink">C.4-12</span></a>) returns <span class="SimpleMath">RP</span>!.<code class="code">UnionOfColumns</code> applied to the content of the attribute <code class="code">EvalUnionOfColumns</code><span class="SimpleMath">( <var class="Arg">C</var> ) = <var class="Arg">L</var></span>.</p>
+
+<p><a id="X8092789C87E37020" name="X8092789C87E37020"></a></p>
+
+<h5>B.1-12 UnionOfColumnsPair</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumnsPair</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">UnionOfColumnsPair</code> is bound and the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">UnionOfColumns</code> is not bound then the method <code class="func">Eval</code> (<a href="chapC.html#X7EDE6095820F8128"><span class="RefLink">C.4-12</span></a>) returns <span class="SimpleMath">RP</span>!.<code class="code">UnionOfColumnsPair</code> applied recursively to a balanced binary tree created from the content of the attribute <code class="code">EvalUnionOfRows</code><span class="SimpleMath">( <var class="Arg">C</var> )</span>.</p>
 
 <p><a id="X86C5B86981FA1F9A" name="X86C5B86981FA1F9A"></a></p>
 
-<h5>B.1-11 DiagMat</h5>
+<h5>B.1-13 DiagMat</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
@@ -173,7 +193,7 @@
 
 <p><a id="X82202A6A7FAB7174" name="X82202A6A7FAB7174"></a></p>
 
-<h5>B.1-12 KroneckerMat</h5>
+<h5>B.1-14 KroneckerMat</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KroneckerMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
@@ -182,7 +202,7 @@
 
 <p><a id="X828F8C7785EEC3D1" name="X828F8C7785EEC3D1"></a></p>
 
-<h5>B.1-13 MulMat</h5>
+<h5>B.1-15 MulMat</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MulMat</code>( <var class="Arg">a</var>, <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
@@ -191,7 +211,7 @@
 
 <p><a id="X7B0B12F080A90039" name="X7B0B12F080A90039"></a></p>
 
-<h5>B.1-14 AddMat</h5>
+<h5>B.1-16 AddMat</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
@@ -200,7 +220,7 @@
 
 <p><a id="X7FE11AA27AE7D2D7" name="X7FE11AA27AE7D2D7"></a></p>
 
-<h5>B.1-15 SubMat</h5>
+<h5>B.1-17 SubMat</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
@@ -209,7 +229,7 @@
 
 <p><a id="X7D491D957E63C3A4" name="X7D491D957E63C3A4"></a></p>
 
-<h5>B.1-16 Compose</h5>
+<h5>B.1-18 Compose</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Compose</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
@@ -218,7 +238,7 @@
 
 <p><a id="X849BB912798A01EB" name="X849BB912798A01EB"></a></p>
 
-<h5>B.1-17 IsZeroMatrix</h5>
+<h5>B.1-19 IsZeroMatrix</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZeroMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
@@ -257,7 +277,7 @@ end );
 
 <p><a id="X7AE057CF7C6B0EE0" name="X7AE057CF7C6B0EE0"></a></p>
 
-<h5>B.1-18 NrRows</h5>
+<h5>B.1-20 NrRows</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
@@ -295,7 +315,7 @@ end );
 
 <p><a id="X7D8E706887116F30" name="X7D8E706887116F30"></a></p>
 
-<h5>B.1-19 NrColumns</h5>
+<h5>B.1-21 NrColumns</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
@@ -333,7 +353,7 @@ end );
 
 <p><a id="X80A573257D7F2E1A" name="X80A573257D7F2E1A"></a></p>
 
-<h5>B.1-20 Determinant</h5>
+<h5>B.1-22 Determinant</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Determinant</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a ring element</p>
