@@ -313,16 +313,16 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##    (&see; <Ref Meth="UnionOfRows" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
                UnionOfRows :=
-                 function( A, B )
+                 function( L )
                    local N;
                    
-                   N := UnionOfRowsOp( Eval( A ), Eval( B ) );
+                   N := UnionOfRows( List( L, Eval ) );
                    
-                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+                   if not ForAll( L, HasIsReducedModuloRingRelations and
                               IsReducedModuloRingRelations ) then
                        
                        ## reduce the matrix N w.r.t. the ring relations
-                       N := DecideZero( N, HomalgRing( A ) );
+                       N := DecideZero( N, HomalgRing( L[1] ) );
                    fi;
                    
                    return N;
@@ -341,16 +341,16 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##    (&see; <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
                UnionOfColumns :=
-                 function( A, B )
+                 function( L )
                    local N;
                    
-                   N := UnionOfColumnsOp( Eval( A ), Eval( B ) );
+                   N := UnionOfColumns( List( L, Eval ) );
                    
-                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+                   if not ForAll( L, HasIsReducedModuloRingRelations and
                               IsReducedModuloRingRelations ) then
                        
                        ## reduce the matrix N w.r.t. the ring relations
-                       N := DecideZero( N, HomalgRing( A ) );
+                       N := DecideZero( N, HomalgRing( L[1] ) );
                    fi;
                    
                    return N;
@@ -671,7 +671,7 @@ InstallMethod( PrimaryDecompositionOp,
     rel := ListWithIdenticalEntries( NrColumns( M ), rel );
     rel := DiagMat( rel );
     
-    m := UnionOfRowsOp( Eval( M ), rel );
+    m := UnionOfRows( Eval( M ), rel );
     
     M!.PrimaryDecomposition := List( PrimaryDecompositionOp( m ), a -> List( a, b -> R * b ) );
     

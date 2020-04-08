@@ -104,7 +104,7 @@ InstallMethod( EliminateOverBaseRing,
     fi;
     
     while d > 0 do
-        M := UnionOfRowsOp( M, KroneckerMat( indets, M ) );
+        M := UnionOfRows( M, KroneckerMat( indets, M ) );
         d := d - 1;
     od;
     
@@ -168,7 +168,7 @@ InstallMethod( EliminateOverBaseRing,
     
     n := Length( monomsL );
     
-    coeffsL := UnionOfColumnsOp(
+    coeffsL := UnionOfColumns(
                        HomalgIdentityMatrix( n, B ),
                        HomalgZeroMatrix( n, m - n, B )
                        );

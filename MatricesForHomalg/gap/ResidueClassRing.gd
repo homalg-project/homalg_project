@@ -111,16 +111,16 @@ DeclareGlobalFunction( "HomalgResidueClassMatrix" );
 
 # basic operations:
 
-DeclareOperation( "UnionOfRowsOp",
+DeclareOperation( "StackedRelations",
         [ IsHomalgMatrix, IsHomalgRingRelations ] );
 
-DeclareOperation( "UnionOfRowsOp",
+DeclareOperation( "StackedRelations",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "UnionOfColumnsOp",
+DeclareOperation( "AugmentedRelations",
         [ IsHomalgMatrix, IsHomalgRingRelations ] );
 
-DeclareOperation( "UnionOfColumnsOp",
+DeclareOperation( "AugmentedRelations",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZero",

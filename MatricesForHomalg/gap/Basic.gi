@@ -546,7 +546,7 @@ InstallMethod( RightDivide,
     ## first reduce A modulo L
     ZA := DecideZeroRows( A, BL );
     
-    AL := UnionOfRowsOp( ZA, BL );
+    AL := UnionOfRows( ZA, BL );
     
     ## also reduce B modulo L
     ZB := DecideZeroRows( B, BL );
@@ -598,7 +598,7 @@ InstallMethod( LeftDivide,
     ## first reduce A modulo L
     ZA := DecideZeroColumns( A, BL );
     
-    AL := UnionOfColumnsOp( ZA, BL );
+    AL := UnionOfColumns( ZA, BL );
     
     ## also reduce B modulo L
     ZB := DecideZeroColumns( B, BL );
@@ -906,9 +906,9 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis
         if m - NrRows( B ) = 0 and n - NrColumns( B ) = 0 then
             return B;
         elif m - NrRows( B ) = 0 and n - NrColumns( B ) > 0 then
-            return UnionOfColumnsOp( B, HomalgZeroMatrix( m, n - NrColumns( B ), R ) );
+            return UnionOfColumns( B, HomalgZeroMatrix( m, n - NrColumns( B ), R ) );
         elif m - NrRows( B ) > 0 and n - NrColumns( B ) = 0 then
-            return UnionOfRowsOp( B, HomalgZeroMatrix( m - NrRows( B ), n, R ) );
+            return UnionOfRows( B, HomalgZeroMatrix( m - NrRows( B ), n, R ) );
         else
             return DiagMat( [ B, HomalgZeroMatrix( m - NrRows( B ), n - NrColumns( B ), R ) ] );
         fi;

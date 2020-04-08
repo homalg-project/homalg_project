@@ -559,55 +559,59 @@ InstallMethod( CertainColumns,
   end
 );
 
-##  <#GAPDoc Label="UnionOfRowsOp">
-##  <ManSection >
-##  <Meth Arg="A, B" Name="UnionOfRowsOp" />
-##  <Returns>the row union of the sparse matrices <A>A</A> and <A>B</A></Returns>
+##  <#GAPDoc Label="UnionOfRows">
+##  <ManSection>
+##    <Func Arg="L" Name="UnionOfRows" Label="for a list of sparse matrices"/>
+##    <Returns>a sparse matrix</Returns>
+##    <Description>
+##      Stack the sparse matrices in the non-empty list <A>L</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( UnionOfRowsOp,
-        [ IsSparseMatrix, IsSparseMatrix ],
-  function( A, B )
-    return SparseMatrix( A!.nrows + B!.nrows, A!.ncols, Concatenation( A!.indices, B!.indices ), Concatenation( A!.entries, B!.entries ), A!.ring );
+        "of a list of sparse matrices and a sparse matrix",
+        [ IsList, IsSparseMatrix ],
+  function( L, M )
+    return SparseMatrix( Sum( L, x -> x!.nrows ), L[1]!.ncols, Concatenation( List( L, x -> x!.indices ) ), Concatenation( List( L, x -> x!.entries ) ), L[1]!.ring );
   end
 );
 
-##
-InstallMethod( UnionOfRowsOp,
-        "of a list and a sparse matrix",
-        [ IsList, IsSparseMatrix ],
-        
-  function( L, A )
-    
-    return Iterated( L, UnionOfRowsOp );
-    
-end );
-
-##  <#GAPDoc Label="UnionOfColumnsOp">
-##  <ManSection >
-##  <Meth Arg="A, B" Name="UnionOfColumnsOp" />
-##  <Returns>the column union of the sparse matrices <A>A</A> and <A>B</A></Returns>
+##  <#GAPDoc Label="UnionOfColumns">
+##  <ManSection>
+##    <Func Arg="L" Name="UnionOfColumns" Label="for a list of sparse matrices"/>
+##    <Returns>a sparse matrix</Returns>
+##    <Description>
+##      Augment the sparse matrices in the non-empty list <A>L</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( UnionOfColumnsOp,
-        [ IsSparseMatrix, IsSparseMatrix ],
-  function( A, B )
-    return SparseMatrix( A!.nrows, A!.ncols + B!.ncols, List( [ 1 .. A!.nrows ], i -> Concatenation( A!.indices[i], B!.indices[i] + A!.ncols ) ), List( [ 1 .. A!.nrows ], i -> Concatenation( A!.entries[i], B!.entries[i] ) ), A!.ring );
+        "of a list of sparse matrices and a sparse matrix",
+        [ IsList, IsSparseMatrix ],
+  function( L, M )
+    local indices, c, l, i;
+    
+    indices := ShallowCopy( L[1]!.indices );
+    c := L[1]!.ncols;
+    
+    for l in L{[ 2 .. Length( L ) ]} do
+        
+        for i in [ 1 .. L[1]!.nrows ] do
+            
+            indices[i] := Concatenation( indices[i], l!.indices[i] + c );
+            
+        od;
+        
+        c := c + l!.ncols;
+        
+    od;
+    
+    return SparseMatrix( L[1]!.nrows, Sum( L, x -> x!.ncols ), indices, List( [ 1 .. L[1]!.nrows ], i -> Concatenation( List( L, x -> x!.entries[i] ) ) ), L[1]!.ring );
+    
   end
 );
-
-##
-InstallMethod( UnionOfColumnsOp,
-        "of a list and a sparse matrix",
-        [ IsList, IsSparseMatrix ],
-        
-  function( L, A )
-    
-    return Iterated( L, UnionOfColumnsOp );
-    
-end );
 
 ##  <#GAPDoc Label="SparseDiagMat">
 ##  <ManSection >

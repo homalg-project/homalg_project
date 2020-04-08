@@ -168,16 +168,19 @@ InstallValue( CommonHomalgTableForSingularTools,
                  end,
                
                UnionOfRows :=
-                 function( A, B )
+                 function( L )
+                   local f;
                    
-                   return homalgSendBlocking( [ "concat(", A, B, ")" ], [ "matrix" ], [ "[", NrColumns(A), "][", NrRows(A) + NrRows(B), "]" ], HOMALG_IO.Pictograms.UnionOfRows );
+                   f := Concatenation( [ "concat(" ], L, [ ")" ] );
+                   
+                   return homalgSendBlocking( f, [ "matrix" ], [ "[", NrColumns(L[1]), "][", Sum( List( L, NrRows ) ), "]" ], HOMALG_IO.Pictograms.UnionOfRows );
                    
                  end,
                
                UnionOfColumns :=
-                 function( A, B )
+                 function( L )
                    
-                   return homalgSendBlocking( [ A, B ], [ "matrix" ], [ "[", NrColumns(A) + NrColumns(B), "][", NrRows(A), "]" ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( L, [ "matrix" ], [ "[", Sum( List( L, NrColumns ) ), "][", NrRows(L[1]), "]" ], HOMALG_IO.Pictograms.UnionOfColumns );
                    
                  end,
                

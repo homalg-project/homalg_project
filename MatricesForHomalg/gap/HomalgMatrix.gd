@@ -249,7 +249,7 @@ fi;
 ##    <Prop Arg="A" Name="IsDiagonalMatrix"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; matrix <A>A</A> is an identity matrix, taking possible ring relations into account.<P/>
+##      Check if the &homalg; matrix <A>A</A> is a diagonal matrix, taking possible ring relations into account.<P/>
 ##      (for the installed standard method see <Ref Meth="IsDiagonalMatrix" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
@@ -1092,33 +1092,33 @@ DeclareOperation( "CertainRows",
 DeclareOperation( "CertainColumns",
         [ IsHomalgMatrix, IsList ] );
 
-DeclareOperation( "UnionOfRowsOp",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfRowsEagerOp",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfRowsOp",
-        [ IsList, IsHomalgMatrix ] );
-
+## UnionOfRows[Eager][Op]
 if not IsBound( UnionOfRows ) then
     DeclareGlobalFunction( "UnionOfRows" );
     BindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES", true );
 fi;
 
-DeclareOperation( "UnionOfColumnsOp",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfColumnsEagerOp",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "UnionOfColumnsOp",
+DeclareOperation( "UnionOfRowsOp",
         [ IsList, IsHomalgMatrix ] );
 
+DeclareGlobalFunction( "UnionOfRowsEager" );
+
+DeclareOperation( "UnionOfRowsEagerOp",
+        [ IsList, IsHomalgMatrix ] );
+
+## UnionOfColumns[Eager][Op]
 if not IsBound( UnionOfColumns ) then
     DeclareGlobalFunction( "UnionOfColumns" );
     BindGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES", true );
 fi;
+
+DeclareOperation( "UnionOfColumnsOp",
+        [ IsList, IsHomalgMatrix ] );
+
+DeclareGlobalFunction( "UnionOfColumnsEager" );
+
+DeclareOperation( "UnionOfColumnsEagerOp",
+        [ IsList, IsHomalgMatrix ] );
 
 DeclareOperation( "DiagMat",
         [ IsList ] );

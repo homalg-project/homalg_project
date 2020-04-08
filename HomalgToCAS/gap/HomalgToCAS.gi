@@ -269,10 +269,10 @@ InstallValue( HOMALG_IO,
                 ## get certain columns of a matrix:
                 CertainColumns                          := "|||",
                 
-                ## stack to matrices vertically:
+                ## stack matrices vertically:
                 UnionOfRows                             := "A_B",
                 
-                ## glue to matrices horizontally:
+                ## glue matrices horizontally:
                 UnionOfColumns                          := "A|B",
                 
                 ## create a block diagonal matrix:

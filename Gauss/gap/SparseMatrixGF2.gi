@@ -211,17 +211,35 @@ InstallMethod( CertainColumns,
   
 ##
 InstallMethod( UnionOfRowsOp,
-        [ IsSparseMatrixGF2Rep, IsSparseMatrixGF2Rep ],
-  function( A, B )
-    return SparseMatrix( A!.nrows + B!.nrows, A!.ncols, Concatenation( A!.indices, B!.indices ), GF(2) );
+        [ IsList, IsSparseMatrixGF2Rep ],
+  function( L, M )
+    return SparseMatrix( Sum( L, x -> x!.nrows ), L[1]!.ncols, Concatenation( List( L, x -> x!.indices ) ), GF(2) );
   end
 );
   
 ##
 InstallMethod( UnionOfColumnsOp,
-        [ IsSparseMatrixGF2Rep, IsSparseMatrixGF2Rep ],
-  function( A, B )
-    return SparseMatrix( A!.nrows, A!.ncols + B!.ncols, List( [ 1 .. A!.nrows ], i -> Concatenation( A!.indices[i], B!.indices[i] + A!.ncols ) ) );
+        [ IsList, IsSparseMatrixGF2Rep ],
+  function( L, M )
+    local indices, c, l, i;
+    
+    indices := ShallowCopy( L[1]!.indices );
+    c := L[1]!.ncols;
+    
+    for l in L{[ 2 .. Length( L ) ]} do
+        
+        for i in [ 1 .. L[1]!.nrows ] do
+            
+            indices[i] := Concatenation( indices[i], l!.indices[i] + c );
+            
+        od;
+        
+        c := c + l!.ncols;
+        
+    od;
+    
+    return SparseMatrix( L[1]!.nrows, Sum( L, x -> x!.ncols ), indices, GF(2) );
+    
   end
 );
 

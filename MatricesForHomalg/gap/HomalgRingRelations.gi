@@ -252,7 +252,7 @@ InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
   function( mat1, rel2 )
     local rel;
     
-    rel := UnionOfColumnsOp( mat1, MatrixOfRelations( rel2 ) );
+    rel := UnionOfColumns( mat1, MatrixOfRelations( rel2 ) );
     
     rel := HomalgRingRelationsAsGeneratorsOfRightIdeal( rel );
     
@@ -295,7 +295,7 @@ InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
   function( mat1, rel2 )
     local rel;
     
-    rel := UnionOfRowsOp( mat1, MatrixOfRelations( rel2 ) );
+    rel := UnionOfRows( mat1, MatrixOfRelations( rel2 ) );
     
     rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( rel );
     

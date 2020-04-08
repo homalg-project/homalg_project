@@ -645,9 +645,10 @@ end );
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      In case the matrix was created using
-##      <Ref Meth="UnionOfRows" Label="for matrices"/>
+##      <Ref Func="UnionOfRows" Label="for a list of homalg matrices"/>
 ##      then the filter <C>HasEvalUnionOfRows</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
-##      <Ref Meth="UnionOfRows" Label="homalgTable entry"/>
+##      <Ref Meth="UnionOfRows" Label="homalgTable entry"/> or the <C>homalgTable</C> function
+##      <Ref Meth="UnionOfRowsPair" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
@@ -655,33 +656,122 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfRows ],
         
   function( C )
-    local R, RP, e, A, B, U;
+    local R, RP, e, i, combine;
     
     R := HomalgRing( C );
     
     RP := homalgTable( R );
     
-    e :=  EvalUnionOfRows( C );
+    # Make it mutable
+    e := ShallowCopy( EvalUnionOfRows( C ) );
     
-    A := e[1];
-    B := e[2];
+    # In case of nested UnionOfRows, we try to avoid
+    # recursion, since the gap stack is rather small
+    # additionally unpack PreEvals
+    i := 1;
+    while i <= Length( e ) do
+        
+        if HasPreEval( e[i] ) and not HasEval( e[i] ) then
+            
+            e[i] := PreEval( e[i] );
+            
+        elif HasEvalUnionOfRows( e[i] ) and not HasEval( e[i] ) then
+            
+            e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfRows( e[i] ), e{[ (i+1) .. Length( e ) ]}  );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
+    od;
     
-    if IsBound(RP!.UnionOfRows) then
-        return RP!.UnionOfRows( A, B );
+    # Combine zero matrices
+    i := 1;
+    while i + 1 <= Length( e ) do
+        
+        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
+            
+            e[i] := HomalgZeroMatrix( NrRows( e[i] ) + NrRows( e[i+1] ), NrColumns( e[i] ), HomalgRing( e[i] ) );
+            
+            Remove( e, i + 1 );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
+    od;
+    
+    # After combining zero matrices only a single one might be left
+    if Length( e ) = 1 then
+        
+        return e[1];
+        
     fi;
     
-    if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfRows ",
+    # Use RP!.UnionOfRows if available
+    if IsBound(RP!.UnionOfRows) then
+        
+        return RP!.UnionOfRows( e );
+        
+    fi;
+    
+    # Fall back to RP!.UnionOfRowsPair or manual fallback for internal matrices
+    # Combine the matrices
+    # Use a balanced binary tree to keep the sizes small (heuristically)
+    # to avoid a huge memory footprint
+    
+    if not IsBound(RP!.UnionOfRowsPair) and not IsHomalgInternalMatrixRep( C ) then
+        Error( "could neither find a procedure called UnionOfRows ",
+               "nor a procedure called UnionOfRowsPair ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
-    #=====# can only work for homalg internal matrices #=====#
+    combine := function( A, B )
+      local result, U;
+        
+        if IsBound(RP!.UnionOfRowsPair) then
+            
+            result := RP!.UnionOfRowsPair( A, B );
+            
+        else
+            
+            #=====# can only work for homalg internal matrices #=====#
+            
+            U := ShallowCopy( Eval( A )!.matrix );
+            
+            U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;
+            
+            result := homalgInternalMatrixHull( U );
+            
+        fi;
+        
+        return HomalgMatrixWithAttributes( [
+                    Eval, result,
+                    EvalUnionOfRows, [ A, B ],
+                    NrRows, NrRows( A ) + NrRows( B ),
+                    NrColumns, NrColumns( A ),
+                    ], R );
+        
+    end;
     
-    U := ShallowCopy( Eval( A )!.matrix );
+    while Length( e ) > 1 do
+        
+        for i in [ 1 .. Int( Length( e ) / 2 ) ] do
+            
+            e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ] );
+            Unbind( e[ 2 * i ] );
+            
+        od;
+        
+        e := Compacted( e );
+        
+    od;
     
-    U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;
-    
-    return homalgInternalMatrixHull( U );
+    return Eval( e[1] );
     
 end );
 ##  ]]></Listing>
@@ -691,14 +781,29 @@ end );
 
 ##  <#GAPDoc Label="UnionOfRows:homalgTable_entry">
 ##  <ManSection>
-##    <Func Arg="A, B" Name="UnionOfRows" Label="homalgTable entry"/>
+##    <Func Arg="L" Name="UnionOfRows" Label="homalgTable entry"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfRows</C> is bound then
 ##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfRows"/> returns
 ##      <M>RP</M>!.<C>UnionOfRows</C> applied to the content of the attribute
-##      <C>EvalUnionOfRows</C><M>( <A>C</A> ) = [ <A>A</A>, <A>B</A> ]</M>.
+##      <C>EvalUnionOfRows</C><M>( <A>C</A> ) = <A>L</A></M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="UnionOfRowsPair:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="A, B" Name="UnionOfRowsPair" Label="homalgTable entry"/>
+##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfRowsPair</C> is bound
+##      and the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfRows</C> is not bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfRows"/> returns
+##      <M>RP</M>!.<C>UnionOfRowsPair</C> applied recursively to a balanced binary tree created from
+##      the content of the attribute <C>EvalUnionOfRows</C><M>( <A>C</A> )</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -709,9 +814,10 @@ end );
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      In case the matrix was created using
-##      <Ref Meth="UnionOfColumns" Label="for matrices"/>
+##      <Ref Func="UnionOfColumns" Label="for a list of homalg matrices"/>
 ##      then the filter <C>HasEvalUnionOfColumns</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
-##      <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>
+##      <Ref Meth="UnionOfColumns" Label="homalgTable entry"/> or the <C>homalgTable</C> function
+##      <Ref Meth="UnionOfColumnsPair" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
@@ -719,35 +825,124 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( C )
-    local R, RP, e, A, B, U;
+    local R, RP, e, i, combine;
     
     R := HomalgRing( C );
     
     RP := homalgTable( R );
     
-    e :=  EvalUnionOfColumns( C );
+    # Make it mutable
+    e := ShallowCopy( EvalUnionOfColumns( C ) );
     
-    A := e[1];
-    B := e[2];
+    # In case of nested UnionOfColumns, we try to avoid
+    # recursion, since the gap stack is rather small
+    # additionally unpack PreEvals
+    i := 1;
+    while i <= Length( e ) do
+        
+        if HasPreEval( e[i] ) and not HasEval( e[i] ) then
+            
+            e[i] := PreEval( e[i] );
+            
+        elif HasEvalUnionOfColumns( e[i] ) and not HasEval( e[i] ) then
+            
+            e := Concatenation( e{[ 1 .. (i-1) ]}, EvalUnionOfColumns( e[i] ), e{[ (i+1) .. Length( e ) ]}  );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
+    od;
     
-    if IsBound(RP!.UnionOfColumns) then
-        return RP!.UnionOfColumns( A, B );
+    # Combine zero matrices
+    i := 1;
+    while i + 1 <= Length( e ) do
+        
+        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
+            
+            e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );
+            
+            Remove( e, i + 1 );
+            
+        else
+            
+            i := i + 1;
+            
+        fi;
+        
+    od;
+    
+    # After combining zero matrices only a single one might be left
+    if Length( e ) = 1 then
+        
+        return e[1];
+        
     fi;
     
-    if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfColumns ",
+    # Use RP!.UnionOfColumns if available
+    if IsBound(RP!.UnionOfColumns) then
+        
+        return RP!.UnionOfColumns( e );
+        
+    fi;
+    
+    # Fall back to RP!.UnionOfColumnsPair or manual fallback for internal matrices
+    # Combine the matrices
+    # Use a balanced binary tree to keep the sizes small (heuristically)
+    # to avoid a huge memory footprint
+    
+    if not IsBound(RP!.UnionOfColumnsPair) and not IsHomalgInternalMatrixRep( C ) then
+        Error( "could neither find a procedure called UnionOfColumns ",
+               "nor a procedure called UnionOfColumnsPair ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
-    #=====# can only work for homalg internal matrices #=====#
+    combine := function( A, B )
+      local result, U;
+        
+        if IsBound(RP!.UnionOfColumnsPair) then
+            
+            result := RP!.UnionOfColumnsPair( A, B );
+            
+        else
+            
+            #=====# can only work for homalg internal matrices #=====#
+            
+            U := List( Eval( A )!.matrix, ShallowCopy );
+            
+            U{ [ 1 .. NrRows( A ) ] }
+              { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
+              := Eval( B )!.matrix;
+            
+            result := homalgInternalMatrixHull( U );
+            
+        fi;
+        
+        return HomalgMatrixWithAttributes( [
+                    Eval, result,
+                    EvalUnionOfColumns, [ A, B ],
+                    NrRows, NrRows( A ),
+                    NrColumns, NrColumns( A ) + NrColumns( B )
+                    ], R );
+        
+    end;
     
-    U := List( Eval( A )!.matrix, ShallowCopy );
+    while Length( e ) > 1 do
+        
+        for i in [ 1 .. Int( Length( e ) / 2 ) ] do
+            
+            e[ 2 * i - 1 ] := combine( e[ 2 * i - 1 ], e[ 2 * i ] );
+            Unbind( e[ 2 * i ] );
+            
+        od;
+        
+        e := Compacted( e );
+        
+    od;
     
-    U{ [ 1 .. NrRows( A ) ] }
-      { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
-      := Eval( B )!.matrix;
-    
-    return homalgInternalMatrixHull( U );
+    return Eval( e[1] );
     
 end );
 ##  ]]></Listing>
@@ -757,14 +952,29 @@ end );
 
 ##  <#GAPDoc Label="UnionOfColumns:homalgTable_entry">
 ##  <ManSection>
-##    <Func Arg="A, B" Name="UnionOfColumns" Label="homalgTable entry"/>
+##    <Func Arg="L" Name="UnionOfColumns" Label="homalgTable entry"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumns</C> is bound then
 ##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/> returns
 ##      <M>RP</M>!.<C>UnionOfColumns</C> applied to the content of the attribute
-##      <C>EvalUnionOfColumns</C><M>( <A>C</A> ) = [ <A>A</A>, <A>B</A> ]</M>.
+##      <C>EvalUnionOfColumns</C><M>( <A>C</A> ) = <A>L</A></M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="UnionOfColumnsPair:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="A, B" Name="UnionOfColumnsPair" Label="homalgTable entry"/>
+##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumnsPair</C> is bound
+##      and the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumns</C> is not bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/> returns
+##      <M>RP</M>!.<C>UnionOfColumnsPair</C> applied recursively to a balanced binary tree created from
+##      the content of the attribute <C>EvalUnionOfRows</C><M>( <A>C</A> )</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -2593,7 +2803,7 @@ InstallMethod( ConvertRowToMatrix,
         [ IsHomalgMatrix, IsInt, IsInt ],
         
   function( M, r, c )
-    local R, RP, ext_obj, l, mat, j;
+    local R, RP, ext_obj, l, j;
     
     if NrRows( M ) <> 1 then
         Error( "expecting a single row matrix as a first argument\n" );
@@ -2623,13 +2833,7 @@ InstallMethod( ConvertRowToMatrix,
     l := List( l, GetListOfHomalgMatrixAsString );
     l := List( l, a -> CreateHomalgMatrixFromString( a, r, 1, R ) );
     
-    mat := HomalgZeroMatrix( r, 0, R );
-    
-    for j in [ 1 .. c ] do
-        mat := UnionOfColumnsOp( mat, l[j] );
-    od;
-    
-    return mat;
+    return UnionOfColumns( l );
     
 end );
 
@@ -2670,7 +2874,7 @@ InstallMethod( ConvertMatrixToRow,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, ext_obj, r, c, l, mat, j;
+    local R, RP, ext_obj, r, c, l, j;
     
     if NrRows( M ) = 1 then
         return M;
@@ -2702,13 +2906,7 @@ InstallMethod( ConvertMatrixToRow,
     l := List( l, GetListOfHomalgMatrixAsString );
     l := List( l, a -> CreateHomalgMatrixFromString( a, 1, r, R ) );
     
-    mat := HomalgZeroMatrix( 1, 0, R );
-    
-    for j in [ 1 .. c ] do
-        mat := UnionOfColumnsOp( mat, l[j] );
-    od;
-    
-    return mat;
+    return UnionOfColumns( l );
     
 end );
 
@@ -3814,12 +4012,12 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         IdV := HomalgIdentityMatrix( c, R );
         
         u := CertainColumns( IdU, [ 1 .. i - 1 ] );
-        u := UnionOfColumnsOp( u, deleted_columns[pos] );
-        u := UnionOfColumnsOp( u, CertainColumns( IdU, [ i .. r ] ) );
+        u := UnionOfColumns( u, deleted_columns[pos] );
+        u := UnionOfColumns( u, CertainColumns( IdU, [ i .. r ] ) );
         
         v := CertainRows( IdV, [ 1 .. j - 1 ] );
-        v := UnionOfRowsOp( v, deleted_rows[pos] );
-        v := UnionOfRowsOp( v, CertainRows( IdV, [ j .. c ] ) );
+        v := UnionOfRows( v, deleted_rows[pos] );
+        v := UnionOfRows( v, CertainRows( IdV, [ j .. c ] ) );
         
         U := u * U;
         V := V * v;
@@ -4452,7 +4650,7 @@ InstallMethod( GeneralLinearCombination,
     
     for i in [ 1 .. bound ] do
         
-        mat := UnionOfRowsOp( mat, MonomialMatrixWeighted( i, R, weights ) );
+        mat := UnionOfRows( mat, MonomialMatrixWeighted( i, R, weights ) );
         
     od;
     
