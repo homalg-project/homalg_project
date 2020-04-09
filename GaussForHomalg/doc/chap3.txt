@@ -81,21 +81,21 @@
   
   [1X3.2-8 UnionOfRows[101X
   
-  [33X[1;0Y[29X[2XUnionOfRows[102X( [3XA[103X, [3XB[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XUnionOfRows[102X( [3XL[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya sparse matrix[133X
   
   [33X[0;0YThis  returns  the  sparse  matrix  created by concatenating the rows of the
-  sparse  matrices  stored in the [10XEval[110X attributes of the [5Xhomalg[105X matrices [3XA[103X and
-  [3XB[103X.[133X
+  sparse  matrices stored in the [10XEval[110X attributes of the [5Xhomalg[105X matrices in the
+  list [3XL[103X.[133X
   
   [1X3.2-9 UnionOfColumns[101X
   
-  [33X[1;0Y[29X[2XUnionOfColumns[102X( [3XA[103X, [3XB[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XUnionOfColumns[102X( [3XL[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya sparse matrix[133X
   
   [33X[0;0YThis  returns  the sparse matrix created by concatenating the columns of the
-  sparse  matrices  stored in the [10XEval[110X attributes of the [5Xhomalg[105X matrices [3XA[103X and
-  [3XB[103X.[133X
+  sparse  matrices stored in the [10XEval[110X attributes of the [5Xhomalg[105X matrices in the
+  list [3XL[103X.[133X
   
   [1X3.2-10 DiagMat[101X
   
