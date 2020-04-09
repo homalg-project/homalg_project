@@ -37,6 +37,13 @@ InstallMethod( SetMyEval, "to circumvent the Eval(M)!.matrix problem",
   end
 );
 
+##
+InstallMethod( UnionOfRowsOp, "for dense GAP matrices",
+        [ IsList, IsList ],
+  function( L, M )
+    return Concatenation( L );
+  end
+);
 
 ####################################
 #
