@@ -4103,6 +4103,17 @@ end );
 
 ##
 InstallMethod( Random,
+        "for a homalg internal ring",
+        [ IsHomalgRing and IsHomalgInternalRingRep ],
+        
+  function( R )
+    
+    return Random( R!.ring );
+    
+end );
+
+##
+InstallMethod( Random,
         "for a homalg ring",
         [ IsHomalgRing and IsRationalsForHomalg ],
         
