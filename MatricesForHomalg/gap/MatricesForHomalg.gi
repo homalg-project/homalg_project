@@ -60,6 +60,8 @@ InstallValue( HOMALG_MATRICES,
             
             RandomSource := GlobalMersenneTwister,
             
+            Eager := false,
+            
             UnionOfRowsEager := false,
             
             UnionOfColumnsEager := false,
