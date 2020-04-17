@@ -305,7 +305,7 @@
     [4X[28X-------------------------------------------------------------------[128X[104X
     [4X[28XEuler:  100  35   2 -10 -10  -5   0   2   0  -5 -10 -10   2  35 100[128X[104X
     [4X[25Xgap>[125X [27XM;[127X[104X
-    [4X[28X<A graded reflexive non-projective rank 2 left module presented by 94 \[128X[104X
+    [4X[28X<A graded reflexive non-projective rank 2 left module presented by 99 \[128X[104X
     [4X[28Xrelations for 19 generators>[128X[104X
     [4X[25Xgap>[125X [27XP := ElementOfGrothendieckGroup( M );[127X[104X
     [4X[28X( 2*O_{P^4} - 1*O_{P^3} - 4*O_{P^2} - 2*O_{P^1} ) -> P^4[128X[104X
