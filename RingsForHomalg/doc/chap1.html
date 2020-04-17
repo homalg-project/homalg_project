@@ -188,6 +188,12 @@ Q(s){e,f,g}
 (Q[i]/(i^2+1)){e,f,g}
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Eixyz );</span>
 &lt;An external ring residing in the CAS Singular&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">qring := HomalgQRingInSingular( Qxyz, "x*y" );</span>
+Q[x,y,z]/( x*y )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( qring );</span>
+&lt;An external ring residing in the CAS Singular&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">"z + x*y" / qring = "z" / qring;</span>
+true
 </pre></div>
 
 <p><a id="X839147CF813312D6" name="X839147CF813312D6"></a></p>
