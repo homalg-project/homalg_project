@@ -3,7 +3,7 @@
 ##  <Heading>ResidueClass</Heading>
 ##  We want to show, how localization can work together with residue class rings.
 ##  <Example><![CDATA[
-##  gap> LoadPackage( "RingsForHomalg" );;
+##  gap> LoadPackage( "RingsForHomalg", ">= 2020.04.17" );;
 ##  gap> Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";
 ##  Q[x,y]
 ##  gap> wmat := HomalgMatrix(
@@ -77,8 +77,8 @@
 ##  at homology degree: 1
 ##  Q[x,y]/( x^3+x^2-2*y^2 )_< |[ x ]|, |[ y ]| >^(1 x 2)
 ##  -------------------------
-##  0,  x*y^2-y^3,
-##  y^2,y^4-2*y^3+2*y^2
+##  x*y^2+y^2,2*y^2,         
+##  y^2,      y^4-2*y^3+2*y^2
 ##  
 ##  modulo [ x^3+x^2-2*y^2 ]
 ##  / |[ 1 ]|
@@ -120,8 +120,8 @@
 ##  at homology degree: 1
 ##  Q[x,y]_< x, y >/( (x^3+x^2-2*y^2)/1 )^(1 x 2)
 ##  -------------------------
-##  y^2,    x^2,
-##  y^3+y^2,2*y^2
+##  y^3+y^2,2*y^2,   
+##  0,      x*y^2-y^3
 ##  / 1
 ##  
 ##  modulo [ (x^3+x^2-2*y^2)/1 ]
@@ -134,7 +134,7 @@
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>
-LoadPackage( "RingsForHomalg" );;
+LoadPackage( "RingsForHomalg", ">= 2020.04.17" );;
 Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";;
 wmat := HomalgMatrix(
           "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",

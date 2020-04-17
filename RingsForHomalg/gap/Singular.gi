@@ -1212,17 +1212,17 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         r := CallFuncList( HomalgRingOfIntegersInSingular, Concatenation( [ c ], arg ) );
         
         if IsZero( c ) then
-            R := [ "(integer,", JoinStringsWithSeparator( param ), "),dummy_variable,dp" ];
+            R := [ "(integer,", JoinStringsWithSeparator( param ), "),dummy_variable,(dp,c)" ];
         else
-            R := [ "(", String( c ), ",", JoinStringsWithSeparator( param ), "),dummy_variable,dp" ];
+            R := [ "(", String( c ), ",", JoinStringsWithSeparator( param ), "),dummy_variable,(dp,c)" ];
         fi;
         
     else
         
         if IsZero( c ) then
-            R := [ "(integer)", ",dummy_variable,dp" ];
+            R := [ "(integer)", ",dummy_variable,(dp,c)" ];
         else
-            R := [ String( c ), ",dummy_variable,dp" ];
+            R := [ String( c ), ",dummy_variable,(dp,c)" ];
         fi;
         
     fi;
@@ -1325,11 +1325,11 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
         
         Q := CallFuncList( HomalgFieldOfRationalsInSingular, arg );
         
-        R := [ "(0,", JoinStringsWithSeparator( param ), "),dummy_variable,dp" ];
+        R := [ "(0,", JoinStringsWithSeparator( param ), "),dummy_variable,(dp,c)" ];
         
     else
         
-        R := "0,dummy_variable,dp";
+        R := "0,dummy_variable,(dp,c)";
         
     fi;
     
@@ -1425,18 +1425,18 @@ InstallMethod( PolynomialRing,
         
         ## lex order
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", Concatenation( var_fibr, var_base ), "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", Concatenation( var_fibr, var_base ), "),(lp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( var_fibr, var_base ), "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( var_fibr, var_base ), "),(lp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
         
     elif IsRecord( order ) and IsBound( order.weights ) then
         
         ## weighted degrevlex order
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),wp(", order.weights, ")" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),(wp(", order.weights, "),c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),wp(", order.weights, ")" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),(wp(", order.weights, "),c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
         
     elif order = "product" or order = "block" then
@@ -1448,18 +1448,18 @@ InstallMethod( PolynomialRing,
         weights := Concatenation( Concatenation( List( [ 1 .. Length( var_base ) ], a -> "0," ) ), Concatenation( List( [ 1 .. Length( var_fibr ) ], a -> "1," ) ) );
         weights := weights{[ 1 .. Length( weights ) - 1 ]}; # remove trailing comma
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_base, var_fibr, "),(a(", weights, "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_base, var_fibr, "),(a(", weights, "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_base, var_fibr, "),(a(", weights, "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_base, var_fibr, "),(a(", weights, "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
         
     else
         
         ## degrevlex order
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
         
     fi;
@@ -1618,15 +1618,15 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
         if base <> "" then
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, der, "),(dp(", Length( base ), "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, der, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
     else
         if base <> "" then
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, der, "),(dp(", Length( base ), "),dp)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, der, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),dp" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
         fi;
     fi;
     
@@ -1784,9 +1784,9 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## add the Weyl-structure
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),wp(", weights, ")" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     else
-        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),wp(", weights, ")" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     fi;
     
     ## as we are not yet done we cannot call CreateHomalgExternalRing
@@ -1941,7 +1941,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     ## create the new ring in 2 steps: create a polynomial ring with anti commuting and commuting variables and then
     ## add the exterior structure
-    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( comm, anti ), "),dp" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( comm, anti ), "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     
     ## as we are not yet done we cannot call CreateHomalgExternalRing
     ## to create a HomalgRing, and only then would homalgSendBlocking call stream.setring,

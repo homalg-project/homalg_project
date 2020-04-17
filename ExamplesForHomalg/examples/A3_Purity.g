@@ -36,19 +36,20 @@
 ##  <A non-pure grade 1 left module presented by 8 relations for 2 generators>>
 ##  gap> II_E := SpectralSequence( filt );
 ##  <A stable homological spectral sequence with sheets at levels 
-##  [ 0 .. 2 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x
+##  [ 0 .. 2 ] each consisting of left modules at bidegrees [ -4 .. 0 ]x
 ##  [ 0 .. 3 ]>
 ##  gap> Display( II_E );
 ##  The associated transposed spectral sequence:
 ##  
 ##  a homological spectral sequence at bidegrees
-##  [ [ 0 .. 3 ], [ -3 .. 0 ] ]
+##  [ [ 0 .. 3 ], [ -4 .. 0 ] ]
 ##  ---------
 ##  Level 0:
 ##  
 ##   * * * *
 ##   . * * *
 ##   . . * *
+##   . . . *
 ##   . . . *
 ##  ---------
 ##  Level 1:
@@ -57,10 +58,12 @@
 ##   . . . .
 ##   . . . .
 ##   . . . .
+##   . . . .
 ##  ---------
 ##  Level 2:
 ##  
 ##   s . . .
+##   . . . .
 ##   . . . .
 ##   . . . .
 ##   . . . .
@@ -68,28 +71,28 @@
 ##  Now the spectral sequence of the bicomplex:
 ##  
 ##  a homological spectral sequence at bidegrees
-##  [ [ -3 .. 0 ], [ 0 .. 3 ] ]
+##  [ [ -4 .. 0 ], [ 0 .. 3 ] ]
 ##  ---------
 ##  Level 0:
 ##  
-##   * * * *
-##   . * * *
-##   . . * *
-##   . . . *
+##   * * * * *
+##   . . * * *
+##   . . . * *
+##   . . . . *
 ##  ---------
 ##  Level 1:
 ##  
-##   * * * *
-##   . * * *
-##   . . * *
-##   . . . .
+##   * * * * *
+##   . . * * *
+##   . . . * *
+##   . . . . .
 ##  ---------
 ##  Level 2:
 ##  
-##   s . . .
-##   . s . .
-##   . . s .
-##   . . . .
+##   . s . . .
+##   . . s . .
+##   . . . s .
+##   . . . . .
 ##  gap> m := IsomorphismOfFiltration( filt );
 ##  <A non-zero isomorphism of left modules>
 ##  gap> IsIdenticalObj( Range( m ), N );
@@ -97,12 +100,12 @@
 ##  gap> Source( m );
 ##  <A left module presented by 6 relations for 3 generators (locked)>
 ##  gap> Display( last );
-##  Dx,1/3,-1/9*x,
-##  0, Dy, 1/6,   
-##  0, Dx, -1/2,  
-##  0, 0,  Dz,    
-##  0, 0,  Dy,    
-##  0, 0,  Dx     
+##  Dx,1/3,1/216*x,
+##  0, Dy, -1/144, 
+##  0, Dx, 1/48,   
+##  0, 0,  Dz,     
+##  0, 0,  Dy,     
+##  0, 0,  Dx      
 ##  
 ##  Cokernel of the map
 ##  
@@ -126,9 +129,9 @@
 ##  
 ##  Q[x,y,z]<Dx,Dy,Dz>/< Dz, Dy, Dx >
 ##  gap> Display( m );
-##  1,                1,     
-##  3*Dz+3,           3*Dz,  
-##  -6*Dz^2+6*Dx-6*Dz,-6*Dz^2
+##  1,                     1,      
+##  3*Dz+3,                3*Dz,   
+##  144*Dz^2-144*Dx+144*Dz,144*Dz^2
 ##  
 ##  the map is currently represented by the above 3 x 2 matrix
 ##  ]]></Example>

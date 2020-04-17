@@ -102,21 +102,21 @@
 ##  
 ##  -3:	<A non-zero cyclic torsion left module presented by yet unknown relations \
 ##  for a cyclic generator>
-##    -2:	<A non-zero left module presented by 17 relations for 7 generators>
+##    -2:	<A non-zero left module presented by 15 relations for 6 generators>
 ##    -1:	<A non-zero left module presented by 29 relations for 13 generators>
 ##     0:	<A non-zero left module presented by 13 relations for 10 generators>
 ##  of
-##  <A left module presented by yet unknown relations for 24 generators>>
+##  <A left module presented by yet unknown relations for 31 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -3 .. 0 ] and graded parts:
 ##  
 ##  -3:	<A non-zero cyclic torsion left module presented by 3 relations for a cycl\
 ##  ic generator>
-##    -2:	<A non-zero left module presented by 12 relations for 4 generators>
-##    -1:	<A non-zero left module presented by 21 relations for 8 generators>
+##    -2:	<A non-zero left module presented by 11 relations for 4 generators>
+##    -1:	<A non-zero left module presented by 22 relations for 8 generators>
 ##     0:	<A non-zero left module presented by 11 relations for 10 generators>
 ##  of
-##  <A non-zero left module presented by 23 relations for 12 generators>>
+##  <A non-zero left module presented by 24 relations for 12 generators>>
 ##  gap> m := IsomorphismOfFiltration( filt );
 ##  <A non-zero isomorphism of left modules>
 ##  ]]></Example>

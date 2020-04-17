@@ -47,7 +47,7 @@
 ##  -------------------------------------------------------------------
 ##  Euler:  100  35   2 -10 -10  -5   0   2   0  -5 -10 -10   2  35 100
 ##  gap> M;
-##  <A graded reflexive non-projective rank 2 left module presented by 94 \
+##  <A graded reflexive non-projective rank 2 left module presented by 99 \
 ##  relations for 19 generators>
 ##  gap> P := ElementOfGrothendieckGroup( M );
 ##  ( 2*O_{P^4} - 1*O_{P^3} - 4*O_{P^2} - 2*O_{P^1} ) -> P^4
