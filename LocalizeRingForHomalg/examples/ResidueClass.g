@@ -3,7 +3,7 @@
 ##  <Heading>ResidueClass</Heading>
 ##  We want to show, how localization can work together with residue class rings.
 ##  <Example><![CDATA[
-##  gap> LoadPackage( "RingsForHomalg" );;
+##  gap> LoadPackage( "RingsForHomalg", ">= 2020.04.17" );;
 ##  gap> Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";
 ##  Q[x,y]
 ##  gap> wmat := HomalgMatrix(
@@ -134,7 +134,7 @@
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>
-LoadPackage( "RingsForHomalg" );;
+LoadPackage( "RingsForHomalg", ">= 2020.04.17" );;
 Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";;
 wmat := HomalgMatrix(
           "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",

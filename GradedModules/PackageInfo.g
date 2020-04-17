@@ -18,6 +18,8 @@ Version := Maximum( [
   "2015.12.04", ## Sebas' version
 ## this line prevents merge conflicts
   "2014.04.09", ## Max' version
+## this line prevents merge conflicts
+  "2020.04.17", ## Fabian's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -154,7 +156,7 @@ Dependencies := rec(
                    [ "ToolsForHomalg", ">= 2014.12.08" ],
                    [ "MatricesForHomalg", ">= 2020.02.05" ],
                    [ "HomalgToCAS", ">= 2011.10.05" ],
-                   [ "RingsForHomalg", ">= 2013.04.16" ],
+                   [ "RingsForHomalg", ">= 2020.04.17" ],
                    [ "GradedRingForHomalg", ">= 2020.02.05" ],
                    [ "Modules", ">= 2020.02.05" ],
                    [ "homalg", ">= 2013.06.23" ],
