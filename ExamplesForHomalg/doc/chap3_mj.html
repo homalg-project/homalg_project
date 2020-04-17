@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <script type="text/javascript"
-  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <title>GAP (ExamplesForHomalg) - Chapter 3: Examples</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -159,13 +159,13 @@ Level 4:
 0:	&lt;A non-zero left module presented by yet unknown relations for 23 generator\
 s&gt;
   -1:	&lt;A non-zero left module presented by 37 relations for 22 generators&gt;
-  -2:	&lt;A non-zero left module presented by 31 relations for 10 generators&gt;
-  -3:	&lt;A non-zero left module presented by 32 relations for 5 generators&gt;
+  -2:	&lt;A non-zero left module presented by 32 relations for 10 generators&gt;
+  -3:	&lt;A non-zero left module presented by 33 relations for 5 generators&gt;
 of
-&lt;A non-zero left module presented by 111 relations for 37 generators&gt;&gt;
+&lt;A non-zero left module presented by 117 relations for 37 generators&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
 &lt;An ascending filtration with degrees [ -3 .. 0 ] and graded parts:
-   0:	&lt;A non-zero left module presented by 25 relations for 16 generators&gt;
+   0:	&lt;A non-zero left module presented by 26 relations for 16 generators&gt;
   -1:	&lt;A non-zero left module presented by 30 relations for 14 generators&gt;
   -2:	&lt;A non-zero left module presented by 18 relations for 7 generators&gt;
   -3:	&lt;A non-zero left module presented by 12 relations for 4 generators&gt;
@@ -292,18 +292,18 @@ true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source( m );</span>
 &lt;A left module presented by 12 relations for 9 generators (locked)&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
-0,  0,   x, -y,0,1, 0,    0,  0,
-x*y,-y*z,-z,0, 0,0, 0,    0,  0,
-x^2,-x*z,0, -z,1,0, 0,    0,  0,
-0,  0,   0, 0, y,-z,0,    0,  0,
-0,  0,   0, 0, x,0, -z,   0,  -1,
-0,  0,   0, 0, 0,x, -y,   -1, 0,
-0,  0,   0, 0, 0,-y,x^2-1,0,  0,
-0,  0,   0, 0, 0,0, 0,    z,  0,
-0,  0,   0, 0, 0,0, 0,    y-1,0,
-0,  0,   0, 0, 0,0, 0,    0,  z,
-0,  0,   0, 0, 0,0, 0,    0,  y,
-0,  0,   0, 0, 0,0, 0,    0,  x
+0,  0,x, -y,0,1, 0,    0,  0, 
+x*y,0,-z,0, 0,0, 0,    0,  0, 
+x^2,0,0, -z,1,0, 0,    0,  0, 
+0,  0,0, 0, y,-z,0,    0,  0, 
+0,  0,0, 0, 0,x, -y,   -1, 0, 
+0,  0,0, 0, x,0, -z,   0,  -1,
+0,  0,0, 0, 0,-y,x^2-1,0,  0, 
+0,  0,0, 0, 0,0, 0,    z,  0, 
+0,  0,0, 0, 0,0, 0,    y-1,0, 
+0,  0,0, 0, 0,0, 0,    0,  z, 
+0,  0,0, 0, 0,0, 0,    0,  y, 
+0,  0,0, 0, 0,0, 0,    0,  x  
 
 Cokernel of the map
 
@@ -313,9 +313,9 @@ currently represented by the above matrix
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( filt );</span>
 Degree 0:
 
-0,  0,   x, -y,
-x*y,-y*z,-z,0, 
-x^2,-x*z,0, -z 
+0,  0,x, -y,
+x*y,0,-z,0, 
+x^2,0,0, -z 
 
 Cokernel of the map
 
@@ -326,8 +326,8 @@ currently represented by the above matrix
 Degree -1:
 
 y,-z,0,   
-x,0, -z,  
 0,x, -y,  
+x,0, -z,  
 0,-y,x^2-1
 
 Cokernel of the map
@@ -344,15 +344,15 @@ Degree -3:
 
 Q[x,y,z]/&lt; z, y, x &gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
-1,   0,     0,  0,   0,
-0,   -1,    0,  0,   0,
-0,   0,     -1, 0,   0,
-0,   0,     0,  -1,  0,
--x^2,-x*z,  0,  -z,  0,
-0,   0,     x,  -y,  0,
+1,   0,     0,  0,   0, 
+0,   1,     0,  0,   0, 
+0,   -y,    -1, 0,   0, 
+0,   -x,    0,  -1,  0, 
+-x^2,-x*z,  0,  -z,  0, 
+0,   0,     x,  -y,  0, 
 0,   0,     0,  0,   -1,
-0,   0,     x^2,-x*y,y,
--x^3,-x^2*z,0,  -x*z,z
+0,   0,     x^2,-x*y,y, 
+-x^3,-x^2*z,0,  -x*z,z  
 
 the map is currently represented by the above 9 x 5 matrix
 </pre></div>
@@ -398,19 +398,20 @@ of
 &lt;A non-pure grade 1 left module presented by 8 relations for 2 generators&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := SpectralSequence( filt );</span>
 &lt;A stable homological spectral sequence with sheets at levels 
-[ 0 .. 2 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x
+[ 0 .. 2 ] each consisting of left modules at bidegrees [ -4 .. 0 ]x
 [ 0 .. 3 ]&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E );</span>
 The associated transposed spectral sequence:
 
 a homological spectral sequence at bidegrees
-[ [ 0 .. 3 ], [ -3 .. 0 ] ]
+[ [ 0 .. 3 ], [ -4 .. 0 ] ]
 ---------
 Level 0:
 
  * * * *
  . * * *
  . . * *
+ . . . *
  . . . *
 ---------
 Level 1:
@@ -419,10 +420,12 @@ Level 1:
  . . . .
  . . . .
  . . . .
+ . . . .
 ---------
 Level 2:
 
  s . . .
+ . . . .
  . . . .
  . . . .
  . . . .
@@ -430,28 +433,28 @@ Level 2:
 Now the spectral sequence of the bicomplex:
 
 a homological spectral sequence at bidegrees
-[ [ -3 .. 0 ], [ 0 .. 3 ] ]
+[ [ -4 .. 0 ], [ 0 .. 3 ] ]
 ---------
 Level 0:
 
- * * * *
- . * * *
- . . * *
- . . . *
+ * * * * *
+ . . * * *
+ . . . * *
+ . . . . *
 ---------
 Level 1:
 
- * * * *
- . * * *
- . . * *
- . . . .
+ * * * * *
+ . . * * *
+ . . . * *
+ . . . . .
 ---------
 Level 2:
 
- s . . .
- . s . .
- . . s .
- . . . .
+ . s . . .
+ . . s . .
+ . . . s .
+ . . . . .
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := IsomorphismOfFiltration( filt );</span>
 &lt;A non-zero isomorphism of left modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( Range( m ), N );</span>
@@ -459,12 +462,12 @@ true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source( m );</span>
 &lt;A left module presented by 6 relations for 3 generators (locked)&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
-Dx,1/3,-1/9*x,
-0, Dy, 1/6,   
-0, Dx, -1/2,  
-0, 0,  Dz,    
-0, 0,  Dy,    
-0, 0,  Dx     
+Dx,1/3,1/216*x,
+0, Dy, -1/144, 
+0, Dx, 1/48,   
+0, 0,  Dz,     
+0, 0,  Dy,     
+0, 0,  Dx      
 
 Cokernel of the map
 
@@ -488,9 +491,9 @@ Degree -3:
 
 Q[x,y,z]&lt;Dx,Dy,Dz&gt;/&lt; Dz, Dy, Dx &gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
-1,                1,     
-3*Dz+3,           3*Dz,  
--6*Dz^2+6*Dx-6*Dz,-6*Dz^2
+1,                     1,      
+3*Dz+3,                3*Dz,   
+144*Dz^2-144*Dx+144*Dz,144*Dz^2
 
 the map is currently represented by the above 3 x 2 matrix
 </pre></div>
@@ -595,20 +598,20 @@ Level 4:
 -3:	&lt;A non-zero cyclic torsion left module presented by yet unknown relations \
 for a cyclic generator&gt;
   -2:	&lt;A non-zero left module presented by 17 relations for 6 generators&gt;
-  -1:	&lt;A non-zero left module presented by 23 relations for 10 generators&gt;
+  -1:	&lt;A non-zero left module presented by 28 relations for 12 generators&gt;
    0:	&lt;A non-zero left module presented by 13 relations for 10 generators&gt;
 of
-&lt;A left module presented by yet unknown relations for 41 generators&gt;&gt;
+&lt;A left module presented by yet unknown relations for 49 generators&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
 &lt;A descending filtration with degrees [ -3 .. 0 ] and graded parts:
 
 -3:	&lt;A non-zero cyclic torsion left module presented by 3 relations for a cycl\
 ic generator&gt;
   -2:	&lt;A non-zero left module presented by 12 relations for 4 generators&gt;
-  -1:	&lt;A non-zero left module presented by 18 relations for 8 generators&gt;
+  -1:	&lt;A non-zero left module presented by 21 relations for 8 generators&gt;
    0:	&lt;A non-zero left module presented by 11 relations for 10 generators&gt;
 of
-&lt;A non-zero left module presented by 21 relations for 12 generators&gt;&gt;
+&lt;A non-zero left module presented by 27 relations for 14 generators&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := IsomorphismOfFiltration( filt );</span>
 &lt;A non-zero isomorphism of left modules&gt;
 </pre></div>
@@ -720,21 +723,21 @@ Level 4:
 
 -3:	&lt;A non-zero cyclic torsion left module presented by yet unknown relations \
 for a cyclic generator&gt;
-  -2:	&lt;A non-zero left module presented by 17 relations for 7 generators&gt;
+  -2:	&lt;A non-zero left module presented by 15 relations for 6 generators&gt;
   -1:	&lt;A non-zero left module presented by 29 relations for 13 generators&gt;
    0:	&lt;A non-zero left module presented by 13 relations for 10 generators&gt;
 of
-&lt;A left module presented by yet unknown relations for 24 generators&gt;&gt;
+&lt;A left module presented by yet unknown relations for 31 generators&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
 &lt;A descending filtration with degrees [ -3 .. 0 ] and graded parts:
 
 -3:	&lt;A non-zero cyclic torsion left module presented by 3 relations for a cycl\
 ic generator&gt;
-  -2:	&lt;A non-zero left module presented by 12 relations for 4 generators&gt;
-  -1:	&lt;A non-zero left module presented by 21 relations for 8 generators&gt;
+  -2:	&lt;A non-zero left module presented by 11 relations for 4 generators&gt;
+  -1:	&lt;A non-zero left module presented by 22 relations for 8 generators&gt;
    0:	&lt;A non-zero left module presented by 11 relations for 10 generators&gt;
 of
-&lt;A non-zero left module presented by 23 relations for 12 generators&gt;&gt;
+&lt;A non-zero left module presented by 24 relations for 12 generators&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := IsomorphismOfFiltration( filt );</span>
 &lt;A non-zero isomorphism of left modules&gt;
 </pre></div>
