@@ -2025,6 +2025,160 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 end );
 
 ##
+InstallMethod( HomalgQRingInSingular,
+        "for a homalg ring in Singular and ring relations",
+        [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsHomalgRingRelations ],
+        
+  function( R, ring_rel )
+    local r, stream, ideal, ext_obj, S, RP;
+    
+    r := CoefficientsRing( R );
+    
+    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+        Error( "Singular qrings are currently only supported over fields" );
+    fi;
+    
+    stream := homalgStream( R );
+    
+    ideal := EntriesOfHomalgMatrix( EvaluatedMatrixOfRingRelations( ring_rel ) );
+    
+    ext_obj := homalgSendBlocking( [ "std(ideal(", ideal, "))" ], [ "qring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+    ## this must precede CreateHomalgExternalRing as otherwise
+    ## the definition of 0,1,-1 would precede "minpoly=";
+    ## causing an error in the new Singular
+    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+    fi;
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    ## for the view methods:
+    ## <A Singular q ring>
+    ## <A matrix over a Singular q ring>
+    S!.description := " Singular q";
+    
+    SetAmbientRing( S, R );
+    
+    SetRingRelations( S, ring_rel );
+    
+    homalgSendBlocking( "option(redTail);option(redSB);", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    RP := homalgTable( S );
+    
+    # taken from ResidueClassRingForHomalg.gi
+    RP!.RingName :=
+      function( R )
+        local ring_rel, entries, name;
+        
+        ring_rel := MatrixOfRelations( R );
+        
+        if IsBound( ring_rel!.BasisOfRowModule ) then
+            ring_rel := ring_rel!.BasisOfRowModule;
+        elif IsBound( ring_rel!.BasisOfColumnModule ) then
+            ring_rel := ring_rel!.BasisOfColumnModule;
+        fi;
+        
+        if not IsBound( ring_rel!.StringOfEntriesForRingName ) then
+            
+            entries := EntriesOfHomalgMatrix( ring_rel );
+            
+            if entries = [ ] then
+                entries := "0";
+            elif IsHomalgInternalRingRep( AmbientRing( R ) ) then
+                entries := JoinStringsWithSeparator( List( entries, String ), ", " );
+            else
+                entries := JoinStringsWithSeparator( List( entries, Name ), ", " );
+            fi;
+            
+            name := RingName( AmbientRing( R ) );
+            
+            ring_rel!.StringOfEntries := String( Concatenation( "[ ", entries, " ]" ) );
+            ring_rel!.StringOfEntriesForRingName := String( Concatenation( name, "/( ", entries, " )" ) );
+            
+        fi;
+        
+        return ring_rel!.StringOfEntriesForRingName;
+        
+    end;
+
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+    end;
+    
+    homalgStream( S ).setinvol( S );
+    
+    RP!.IsZero := r -> homalgSendBlocking( [ "reduce(", r, ",std(0))==0" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1";
+    
+    RP!.IsOne := r -> homalgSendBlocking( [ "reduce(", r, ",std(0))==1" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "1";
+    
+    RP!.AreEqualMatrices :=
+      function( A, B )
+        
+        return homalgSendBlocking( [ "matrix(reduce(", A, ",std(0))) == matrix(reduce(", B, ",std(0)))" ] , "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "1";
+        
+    end;
+    
+    return S;
+    
+end );
+
+##
+InstallOtherMethod( HomalgQRingInSingular,
+        [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsHomalgMatrix ],
+        
+  function( R, ring_rel )
+    
+    if NrRows( ring_rel ) = 0 or NrColumns( ring_rel ) = 0  then
+        return R;
+    elif NrColumns( ring_rel ) = 1 then
+        return HomalgQRingInSingular( R, HomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel ) );
+    elif NrRows( ring_rel ) = 1 then
+        return HomalgQRingInSingular( R, HomalgRingRelationsAsGeneratorsOfRightIdeal( ring_rel ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( HomalgQRingInSingular,
+        [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsList ],
+        
+  function( R, ring_rel )
+    
+    if ForAll( ring_rel, IsString ) then
+        return HomalgQRingInSingular( R, List( ring_rel, s -> HomalgRingElement( s, R ) ) );
+    elif not ForAll( ring_rel, IsRingElement ) then
+        TryNextMethod( );
+    fi;
+    
+    return HomalgQRingInSingular( R, HomalgMatrix( ring_rel, Length( ring_rel ), 1, R ) );
+    
+end );
+
+##
+InstallMethod( HomalgQRingInSingular,
+        [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsRingElement ],
+        
+  function( R, ring_rel )
+    
+    return HomalgQRingInSingular( R, [ ring_rel ] );
+    
+end );
+
+##
+InstallMethod( HomalgQRingInSingular,
+        [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsString ],
+        
+  function( R, ring_rel )
+    
+    return HomalgQRingInSingular( R, HomalgRingElement( ring_rel, R ) );
+    
+end );
+
+##
 InstallMethod( AddRationalParameters,
         "for Singular rings",
         [ IsHomalgExternalRingInSingularRep and IsFieldForHomalg, IsList ],
