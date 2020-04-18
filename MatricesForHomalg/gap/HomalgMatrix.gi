@@ -1121,6 +1121,24 @@ InstallMethod( CertainRows,
     
 end );
 
+##
+InstallOtherMethod( \[\],
+        "for a homalg matrix and a positive integer",
+        [ IsHomalgMatrix, IsInt ],
+        
+  function( M, r )
+    
+    return CertainRows( M, [ r ] );
+    
+end );
+
+##
+InstallOtherMethod( \{\},
+        "for a homalg matrix and a positive integer",
+        [ IsHomalgMatrix, IsList ],
+        
+  CertainRows );
+
 ##  <#GAPDoc Label="CertainColumns">
 ##  <ManSection>
 ##    <Meth Arg="M, plist" Name="CertainColumns" Label="for matrices"/>
