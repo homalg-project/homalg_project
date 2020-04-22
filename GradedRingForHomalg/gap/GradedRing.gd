@@ -138,7 +138,10 @@ DeclareOperation( "HasDegreeGroup",
         
 DeclareOperation( "SetDegreeGroup",
         [ IsHomalgGradedRing, IsHomalgModule ] );
-        
+
+DeclareOperation( "MonomialsOfDegree",
+        [ IsHomalgGradedRing, IsHomalgModuleElement ] );
+
 # constructor methods:
 
 DeclareGlobalFunction( "GradedRingElement" );

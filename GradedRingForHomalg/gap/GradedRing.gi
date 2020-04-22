@@ -1138,6 +1138,140 @@ InstallMethod( RingOfDerivations,
     
 end );
 
+##
+InstallMethod( MonomialsOfDegree,
+          "for graded rings and module elements",
+          [ IsHomalgGradedRing, IsHomalgModuleElement ],
+          
+  function( S, degree )
+    local A, weights, matrix, indeterminates, n, equations, polyhedron, solutions;
+    
+    if not ( HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) ) and
+          not ( HasIsExteriorRing( S ) and IsExteriorRing( S ) ) then
+          
+      TryNextMethod( );
+      
+    fi;
+    
+    A := DegreeGroup( S );
+    
+    if not degree in A then
+        Error( "The given degree doesn't belong to the degree group of the ring!\n" );
+    fi;
+    
+    if not IsFree( A ) then
+        TryNextMethod( );
+    fi;
+    
+    if not IsPackageMarkedForLoading( "NConvex", ">= 2020.01.01" ) then
+        TryNextMethod( );
+    fi;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    matrix := List( weights, w -> MatrixOfMap( UnderlyingMorphism( w ) ) );
+    
+    matrix := TransposedMatrix( UnionOfRows( matrix ) );
+    
+    matrix := EntriesOfHomalgMatrixAsListList( matrix );
+    
+    # To make sure there is finite number of monomials
+    if not ( ForAll( matrix, r -> ForAll( r, i -> i >= 0 ) ) or ForAll( matrix, r -> ForAll( r, i -> i <= 0 ) ) ) then
+        TryNextMethod( );
+    fi;
+    
+    indeterminates := Indeterminates( S );
+    
+    n := Length( indeterminates );
+    
+    degree := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( degree ) ) );
+    
+    degree := List( degree, HomalgElementToInteger );
+    
+    equations := ListN( degree, matrix, { c, d } -> Concatenation( [ -c ], d ) );
+    
+    equations := Concatenation( equations, -equations );
+    
+    equations := Concatenation( equations, IdentityMat( n + 1 ){ [ 2 .. n + 1 ] } );
+    
+    polyhedron := ValueGlobal( "PolyhedronByInequalities" )( equations );
+    
+    solutions := ValueGlobal( "LatticePointsGenerators" )( polyhedron )[ 1 ];
+    
+    solutions := List( solutions, sol -> Product( ListN( indeterminates, sol, \^ )  ) );
+    
+    if HasIsExteriorRing( S ) and IsExteriorRing( S ) then
+      
+      solutions := Filtered( solutions, sol -> not IsZero( sol ) );
+      
+    fi;
+    
+    return solutions;
+    
+end );
+
+##
+InstallMethod( MonomialsOfDegree,
+          "for graded rings and module elements",
+          [ IsHomalgGradedRing, IsHomalgModuleElement ],
+          
+  function( S, degree )
+    local A, weights, matrix, indeterminates, solutions;
+    
+    if not ( HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) ) and
+          not ( HasIsExteriorRing( S ) and IsExteriorRing( S ) ) then
+          
+      TryNextMethod( );
+      
+    fi;
+    
+    A := DegreeGroup( S );
+    
+    if not degree in A then
+        Error( "The given degree doesn't belong to the degree group of the ring!\n" );
+    fi;
+    
+    if not IsFree( A ) then
+        TryNextMethod( );
+    fi;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    matrix := List( weights, w -> MatrixOfMap( UnderlyingMorphism( w ) ) );
+    
+    matrix := TransposedMatrix( UnionOfRows( matrix ) );
+    
+    matrix := EntriesOfHomalgMatrixAsListList( matrix );
+    
+    # To make sure there is finite number of monomials
+    if not ( ForAll( matrix, r -> ForAll( r, i -> i >= 0 ) ) or ForAll( matrix, r -> ForAll( r, i -> i <= 0 ) ) ) then
+        TryNextMethod( );
+    fi;
+    
+    if not IsPackageMarkedForLoading( "4ti2Interface", ">= 2019.09.03" ) then
+        TryNextMethod( );
+    fi;
+    
+    degree := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( degree ) ) );
+    
+    degree := List( degree, HomalgElementToInteger );
+    
+    indeterminates := Indeterminates( S );
+    
+    solutions := ValueGlobal( "4ti2Interface_zsolve_equalities_and_inequalities_in_positive_orthant" )( matrix, degree, [], [] )[ 1 ];
+    
+    solutions := List( solutions, sol -> Product( ListN( indeterminates, sol, \^ )  ) );
+    
+    if HasIsExteriorRing( S ) and IsExteriorRing( S ) then
+      
+      solutions := Filtered( solutions, sol -> not IsZero( sol ) );
+      
+    fi;
+    
+    return  solutions;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
