@@ -161,7 +161,7 @@ BasisOfColumnsCoeff :=
 ##    <Func Arg="A, B" Name="DecideZeroRows" Label="in the homalg table for Singular"/>
 ##    <Returns></Returns>
 ##    <Description>
-##      This is the entry of the &homalg; table, which calls the corresponding macro <Ref Func="DecideZeroRows" Label="Singular macro"/> inside the computer algebra system.
+##      This is the entry of the &homalg; table, which calls the corresponding macro <Ref Func="DecideZeroRows" Label="Singular macro"/> inside the computer algebra system. The rows of <A>B</A> must form a basis (see <Ref Func="BasisOfRowModule" Label="in the homalg table for Singular"/>).
 ##      <Listing Type="Code"><![CDATA[
 DecideZeroRows :=
   function( A, B )
@@ -192,7 +192,7 @@ DecideZeroRows :=
 ##    <Func Arg="A, B" Name="DecideZeroColumns" Label="in the homalg table for Singular"/>
 ##    <Returns></Returns>
 ##    <Description>
-##      This is the entry of the &homalg; table, which calls the corresponding macro <Ref Func="DecideZeroColumns" Label="Singular macro"/> inside the computer algebra system.
+##      This is the entry of the &homalg; table, which calls the corresponding macro <Ref Func="DecideZeroColumns" Label="Singular macro"/> inside the computer algebra system. The columns of <A>B</A> must form a basis (see <Ref Func="BasisOfColumnModule" Label="in the homalg table for Singular"/>).
 ##      <Listing Type="Code"><![CDATA[
 DecideZeroColumns :=
   function( A, B )
@@ -223,7 +223,7 @@ DecideZeroColumns :=
 ##    <Func Arg="A, B, T" Name="DecideZeroRowsEffectively" Label="in the homalg table for Singular"/>
 ##    <Returns></Returns>
 ##    <Description>
-##      This is the entry of the &homalg; table, which calls the corresponding macro <Ref Func="DecideZeroRowsEffectively" Label="Singular macro"/> inside the computer algebra system.
+##      This is the entry of the &homalg; table, which calls the corresponding macro <Ref Func="DecideZeroRowsEffectively" Label="Singular macro"/> inside the computer algebra system. The rows of <A>B</A> must form a basis (see <Ref Func="BasisOfRowModule" Label="in the homalg table for Singular"/>).
 ##      <Listing Type="Code"><![CDATA[
 DecideZeroRowsEffectively :=
   function( A, B, T )
@@ -260,7 +260,7 @@ DecideZeroRowsEffectively :=
 ##    <Func Arg="A, B, T" Name="DecideZeroColumnsEffectively" Label="in the homalg table for Singular"/>
 ##    <Returns></Returns>
 ##    <Description>
-##      This is the entry of the &homalg; table, which calls the corresponding macro <Ref Func="DecideZeroColumnsEffectively" Label="Singular macro"/> inside the computer algebra system.
+##      This is the entry of the &homalg; table, which calls the corresponding macro <Ref Func="DecideZeroColumnsEffectively" Label="Singular macro"/> inside the computer algebra system. The columns of <A>B</A> must form a basis (see <Ref Func="BasisOfColumnModule" Label="in the homalg table for Singular"/>).
 ##      <Listing Type="Code"><![CDATA[
 DecideZeroColumnsEffectively :=
   function( A, B, T )
