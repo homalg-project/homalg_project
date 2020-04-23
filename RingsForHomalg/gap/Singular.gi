@@ -2125,7 +2125,7 @@ InstallMethod( HomalgQRingInSingular,
 end );
 
 ##
-InstallOtherMethod( HomalgQRingInSingular,
+InstallMethod( HomalgQRingInSingular,
         [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsHomalgMatrix ],
         
   function( R, ring_rel )
