@@ -142,7 +142,7 @@ end );
 InstallGlobalFunction( 4ti2Interface_groebner_matrix,
                        
   function( arg )
-    local matrix, dir, filename, exec, filestream;
+    local matrix, dir, filename, exec, precision, filestream;
     
     if Length( arg ) < 1 then
         
@@ -176,10 +176,20 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
     else
         Error( "4ti2 can not be found" );
     fi;
-
-
-
-    filestream := IO_Popen2( exec, [ filename ]);
+    
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -197,15 +207,15 @@ end );
 InstallGlobalFunction( 4ti2Interface_groebner_basis,
                        
   function( arg )
-    local matrix, dir, filename, exec, filestream;
-    
-    dir := DirectoryTemporary();
+    local matrix, dir, filename, exec, precision, filestream;
     
     if Length( arg ) < 1 then
         
         Error( "too few arguments" );
         
     fi;
+    
+    dir := DirectoryTemporary();
     
     matrix := arg[ 1 ];
     
@@ -230,9 +240,20 @@ InstallGlobalFunction( 4ti2Interface_groebner_basis,
     else
         Error( "4ti2 can not be found" );
     fi;
-
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -250,7 +271,7 @@ end );
 InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
                        
   function( matrix )
-    local dir, filename, rel_list, sign_list, exec, filestream;
+    local dir, filename, rel_list, sign_list, exec, precision, filestream;
     
     if matrix = [ ] then
         
@@ -279,9 +300,20 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
     else
         Error( "4ti2 can not be found" );
     fi;
-
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -299,7 +331,7 @@ end );
 InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
                        
   function( matrix )
-    local dir, filename, rel_list, sign_list, exec, filestream;
+    local dir, filename, rel_list, sign_list, exec, precision, filestream;
     
     if matrix = [ ] then
         
@@ -325,8 +357,19 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
         Error( "4ti2 can not be found" );
     fi;
 
+    precision := ValueOption( "precision" );
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -344,7 +387,7 @@ end );
 InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
                        
   function( matrix )
-    local dir, filename, rel_list, sign_list, exec, filestream;
+    local dir, filename, rel_list, sign_list, exec, precision, filestream;
     
     if matrix = [ ] then
         
@@ -369,9 +412,20 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
     else
         Error( "4ti2 can not be found" );
     fi;
-
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -390,7 +444,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
                        
   function( eqs, ineqs )
     local concat_list, dir, filename, rel_list, sign_list,
-          return_matrix, exec, filestream;
+          return_matrix, exec, precision, filestream;
     
     if eqs = [ ] and ineqs = [ ] then
         
@@ -421,9 +475,20 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
     else
         Error( "4ti2 can not be found" );
     fi;
-
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -442,7 +507,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
                        
   function( eqs, ineqs )
     local concat_list, dir, filename, rel_list, sign_list,
-          exec, filestream, return_matrix;
+          exec, precision, filestream, return_matrix;
     
     if eqs = [ ] and ineqs = [ ] then
         
@@ -473,9 +538,20 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
     else
         Error( "4ti2 can not be found" );
     fi;
-
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -537,18 +613,6 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
         
     fi;
     
-    precision := ValueOption( "precision" );
-    
-    if IsInt( precision ) then
-        
-        precision := String( precision );
-        
-    elif precision = fail then
-        
-        precision := "32";
-        
-    fi;
-
     dir := DirectoryTemporary();
     
     filename := Filename( dir, "gap_4ti2_zsolve" );
@@ -574,9 +638,20 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     else
         Error( "4ti2 can not be found" );
     fi;
-
     
-    filestream := IO_Popen3( exec, [ Concatenation( "-p=", precision ), filename ] );
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -642,7 +717,7 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities,
   function( arg )
     local eqs, signs,
           dir, filename,
-          return_matrix, exec, filestream;
+          return_matrix, exec, precision, filestream;
     
     if Length( arg ) < 1 then
         
@@ -685,9 +760,20 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities,
     else
         Error( "4ti2 can not be found" );
     fi;
-
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
@@ -706,7 +792,7 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
                        
   function( eqs )
     local dir, filename,
-          return_matrix, exec, filestream;
+          return_matrix, exec, precision, filestream;
     
     dir := DirectoryTemporary();
     
@@ -721,9 +807,20 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
     else
         Error( "4ti2 can not be found" );
     fi;
-
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "arb";
+        
+    fi;
+    
+    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
