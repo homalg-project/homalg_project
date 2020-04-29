@@ -104,6 +104,9 @@ DeclareOperation( "Coefficients",
 DeclareOperation( "Coefficients",
         [ IsHomalgRingElement ] );
 
+DeclareOperation( "CoefficientsWithGivenMonomials",
+        [ IsHomalgRingElement, IsList ] );
+
 DeclareOperation( "CoefficientsOfUnivariatePolynomial",
         [ IsHomalgRingElement, IsHomalgRingElement ] );
 
