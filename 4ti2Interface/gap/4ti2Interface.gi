@@ -548,7 +548,7 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
         precision := "32";
         
     fi;
-    
+
     dir := DirectoryTemporary();
     
     filename := Filename( dir, "gap_4ti2_zsolve" );

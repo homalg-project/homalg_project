@@ -69,9 +69,3 @@ IsPrincipal( D );
 ## and
 
 IsCartier( D );
-
-## Maybe we take a last look at the sheaf
-
-BasisOfGlobalSectionsOfDivisorSheaf( D );
-
-## We already know that we wont get any ample divisors
