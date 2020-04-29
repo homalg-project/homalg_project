@@ -219,7 +219,7 @@ InstallGlobalFunction( 4ti2Interface_groebner_basis,
             arg[ 2 ] := [ arg[ 2 ] ];
         fi;
         
-        4ti2Interface_Write_Matrix_To_File( [ arg[ 2 ] ], Concatenation( filename, ".cost" ) );
+        4ti2Interface_Write_Matrix_To_File( arg[ 2 ], Concatenation( filename, ".cost" ) );
         
     fi;
     
