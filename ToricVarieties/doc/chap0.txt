@@ -6,10 +6,10 @@
                      [1X A package to handle toric varieties [101X
   
   
-                                   2019.12.05
+                                   2019.12.06
   
   
-                                5 December 2019
+                                6 December 2019
   
   
                                Sebastian Gutsche
