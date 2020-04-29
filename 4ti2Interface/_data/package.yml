@@ -1,6 +1,6 @@
 name: 4ti2Interface
-version: 2019.09.03
-date: 03/09/2019
+version: 2020.04.01
+date: 01/04/2020
 description: A link to 4ti2
 
 authors:
@@ -29,9 +29,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/4ti2Interface/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2019.09.03/4ti2Interface-2019.09.03.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.04.01/4ti2Interface-2020.04.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2019.09.03/4ti2Interface-2019.09.03.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.04.01/4ti2Interface-2020.04.01.zip
 
 abstract: The <span class="pkgname">4ti2Interface</span> package provides an interface to 4ti2
 
