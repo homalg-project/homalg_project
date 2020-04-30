@@ -1,5 +1,6 @@
 Read( "../examples/homalg.g" );
 Read( "../examples/singular_C_vs_c.g" );
+Read( "../examples/Coefficients.g" );
 
 files := [
           "gap_ZZ.g",

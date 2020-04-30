@@ -48,6 +48,7 @@ entries.
 <#Include Label="NrRows:homalgTable_entry">
 <#Include Label="NrColumns:homalgTable_entry">
 <#Include Label="Determinant:homalgTable_entry">
+<#Include Label="CoefficientsWithGivenMonomials:homalgTable_entry">
 
 </Section>
 

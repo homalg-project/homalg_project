@@ -839,6 +839,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               CoefficientsWithGivenMonomials :=
+                 function( r, generating_system )
+                   
+                   return homalgSendBlocking( Concatenation( [ "coeffs(poly(", r, "), ideal(" ], generating_system, [ " ))" ] ), [ "matrix" ], HOMALG_IO.Pictograms.Coefficients );
+                   
+                 end,
+               
                IndicatorMatrixOfNonZeroEntries :=
                  function( mat )
                    local l;
