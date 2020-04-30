@@ -6,7 +6,7 @@
                         [1XMatrices for the [5Xhomalg[105X project[101X
   
   
-                               Version 2020.04.19
+                               Version 2020.04.21
   
   
                                    June 2015
@@ -362,6 +362,7 @@
       B.1-20 NrRows
       B.1-21 NrColumns
       B.1-22 Determinant
+      B.1-23 CoefficientsWithGivenMonomials
     B.2 [33X[0;0YThe Tool Operations with a Fallback Method[133X
       B.2-1 AreEqualMatrices
       B.2-2 IsIdentityMatrix

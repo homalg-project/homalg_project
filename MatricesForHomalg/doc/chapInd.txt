@@ -41,6 +41,7 @@
   [2XCoefficientsOfNumeratorOfHilbertPoincareSeries[102X 5.4-15 
   [2XCoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[102X 5.4-14 
   [2XCoefficientsRing[102X 3.4-20 
+  [2XCoefficientsWithGivenMonomials[102X, homalgTable entry B.1-23 
   [2XColumnRankOfMatrix[102X 5.4-11 
   [2XCompose[102X, homalgTable entry B.1-18 
       ResidueClassRing D.2-16 
