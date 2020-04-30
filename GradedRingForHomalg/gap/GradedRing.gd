@@ -139,8 +139,10 @@ DeclareOperation( "HasDegreeGroup",
 DeclareOperation( "SetDegreeGroup",
         [ IsHomalgGradedRing, IsHomalgModule ] );
 
-DeclareOperation( "MonomialsOfDegree",
-        [ IsHomalgGradedRing, IsHomalgModuleElement ] );
+DeclareProperty( "CanComputeMonomialsWithGivenDegreeForRing", IsHomalgGradedRing );
+
+KeyDependentOperation( "MonomialsWithGivenDegree",
+        IsHomalgGradedRing, IsHomalgModuleElement, ReturnTrue );
 
 # constructor methods:
 

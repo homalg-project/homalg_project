@@ -9,7 +9,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2020.02.05", ## Markus' version
 ## this line prevents merge conflicts
-  "2020.04.15", ## Kamal's version
+  "2020.04.16", ## Kamal's version
 ## this line prevents merge conflicts
   "2019.08.01", ## Max's version
 ## this line prevents merge conflicts
@@ -164,7 +164,9 @@ Dependencies := rec(
                    [ "Modules", ">= 2018.02.04" ],
                    [ "homalg", ">=2011.08.16" ],
                    [ "GAPDoc", ">= 1.0" ] ],
-  SuggestedOtherPackages := [ ],
+  SuggestedOtherPackages := [
+                   [  "NConvex", "2020.03.02" ],
+                   [  "4ti2Interface", "2019.09.03" ] ],
   ExternalConditions := []
                       
 ),

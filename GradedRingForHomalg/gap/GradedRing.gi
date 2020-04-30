@@ -1139,33 +1139,98 @@ InstallMethod( RingOfDerivations,
 end );
 
 ##
-InstallMethod( MonomialsOfDegree,
-          "for graded rings and module elements",
-          [ IsHomalgGradedRing, IsHomalgModuleElement ],
+InstallMethod( CanComputeMonomialsWithGivenDegreeForRing,
+          [ IsHomalgGradedRing ],
           
-  function( S, degree )
-    local A, weights, matrix, indeterminates, n, equations, polyhedron, solutions;
+  function( S )
+    local weights, n, matrix, zero, equations, polyhedron, lattice_points;
     
     if not ( HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) ) and
           not ( HasIsExteriorRing( S ) and IsExteriorRing( S ) ) then
           
-      TryNextMethod( );
+        return false;
+        
+    fi;
+    
+    if not IsFree( DegreeGroup( S ) ) then
+        
+        return false;
+        
+    fi;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    n := Length( weights );
+    
+    matrix := List( weights, w -> MatrixOfMap( UnderlyingMorphism( w ) ) );
+    
+    matrix := TransposedMatrix( UnionOfRows( matrix ) );
+    
+    matrix := EntriesOfHomalgMatrixAsListList( matrix );
+    
+    zero := Degree( One( S ) );
+    
+    zero := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( zero ) ) );
+    
+    zero := List( zero, HomalgElementToInteger );
+    
+    if IsPackageMarkedForLoading( "NConvex", ">= 2020.01.01" ) then
+      
+      equations := ListN( zero, matrix, { c, d } -> Concatenation( [ -c ], d ) );
+      
+      equations := Concatenation( equations, -equations );
+      
+      equations := Concatenation( equations, IdentityMat( n + 1 ){ [ 2 .. n + 1 ] } );
+      
+      polyhedron := ValueGlobal( "PolyhedronByInequalities" )( equations );
+      
+      lattice_points := ValueGlobal( "LatticePointsGenerators" )( polyhedron );
+      
+    elif IsPackageMarkedForLoading( "4ti2Interface", ">= 2019.09.01" ) then
+      
+      lattice_points := ValueGlobal( "4ti2Interface_zsolve_equalities_and_inequalities_in_positive_orthant" )( matrix, zero, [], [] );
+      
+    else
+      
+      return false;
       
     fi;
     
-    A := DegreeGroup( S );
-    
-    if not degree in A then
-        Error( "The given degree doesn't belong to the degree group of the ring!\n" );
+    if IsEmpty( lattice_points[ 2 ] ) and IsEmpty( lattice_points[ 3 ] ) then
+      
+      return true;
+      
+    else
+      
+      return false;
+      
     fi;
     
-    if not IsFree( A ) then
+end );
+
+##
+InstallMethod( MonomialsWithGivenDegreeOp,
+          "for graded rings and module elements",
+          [ IsHomalgGradedRing, IsHomalgModuleElement ],
+          
+  function( S, degree )
+    local indeterminates, weights, n, matrix, equations, polyhedron, solutions;
+    
+    if not degree in DegreeGroup( S ) then
+        Error( "The given degree doesn't belong to the degree group of the ring" );
+    fi;
+    
+    if not CanComputeMonomialsWithGivenDegreeForRing( S ) then
         TryNextMethod( );
     fi;
     
     if not IsPackageMarkedForLoading( "NConvex", ">= 2020.01.01" ) then
         TryNextMethod( );
     fi;
+    
+    indeterminates := Indeterminates( S );
+    
+    n := Length( indeterminates );
     
     weights := WeightsOfIndeterminates( S );
     
@@ -1174,15 +1239,6 @@ InstallMethod( MonomialsOfDegree,
     matrix := TransposedMatrix( UnionOfRows( matrix ) );
     
     matrix := EntriesOfHomalgMatrixAsListList( matrix );
-    
-    # To make sure there is finite number of monomials
-    if not ( ForAll( matrix, r -> ForAll( r, i -> i >= 0 ) ) or ForAll( matrix, r -> ForAll( r, i -> i <= 0 ) ) ) then
-        TryNextMethod( );
-    fi;
-    
-    indeterminates := Indeterminates( S );
-    
-    n := Length( indeterminates );
     
     degree := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( degree ) ) );
     
@@ -1202,38 +1258,37 @@ InstallMethod( MonomialsOfDegree,
     
     if HasIsExteriorRing( S ) and IsExteriorRing( S ) then
       
-      solutions := Filtered( solutions, sol -> not IsZero( sol ) );
+      return Filtered( solutions, sol -> not IsZero( sol ) );
+      
+    else
+      
+      return solutions;
       
     fi;
-    
-    return solutions;
     
 end );
 
 ##
-InstallMethod( MonomialsOfDegree,
+InstallMethod( MonomialsWithGivenDegreeOp,
           "for graded rings and module elements",
           [ IsHomalgGradedRing, IsHomalgModuleElement ],
           
   function( S, degree )
-    local A, weights, matrix, indeterminates, solutions;
+    local indeterminates, weights, matrix, solutions;
     
-    if not ( HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) ) and
-          not ( HasIsExteriorRing( S ) and IsExteriorRing( S ) ) then
-          
-      TryNextMethod( );
-      
+    if not degree in DegreeGroup( S ) then
+        Error( "The given degree doesn't belong to the degree group of the ring" );
     fi;
-    
-    A := DegreeGroup( S );
-    
-    if not degree in A then
-        Error( "The given degree doesn't belong to the degree group of the ring!\n" );
-    fi;
-    
-    if not IsFree( A ) then
+     
+    if not CanComputeMonomialsWithGivenDegreeForRing( S ) then
         TryNextMethod( );
     fi;
+    
+    if not IsPackageMarkedForLoading( "4ti2Interface", ">= 2019.09.03" ) then
+        TryNextMethod( );
+    fi;
+    
+    indeterminates := Indeterminates( S );
     
     weights := WeightsOfIndeterminates( S );
     
@@ -1242,15 +1297,6 @@ InstallMethod( MonomialsOfDegree,
     matrix := TransposedMatrix( UnionOfRows( matrix ) );
     
     matrix := EntriesOfHomalgMatrixAsListList( matrix );
-    
-    # To make sure there is finite number of monomials
-    if not ( ForAll( matrix, r -> ForAll( r, i -> i >= 0 ) ) or ForAll( matrix, r -> ForAll( r, i -> i <= 0 ) ) ) then
-        TryNextMethod( );
-    fi;
-    
-    if not IsPackageMarkedForLoading( "4ti2Interface", ">= 2019.09.03" ) then
-        TryNextMethod( );
-    fi;
     
     degree := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( degree ) ) );
     
@@ -1264,11 +1310,13 @@ InstallMethod( MonomialsOfDegree,
     
     if HasIsExteriorRing( S ) and IsExteriorRing( S ) then
       
-      solutions := Filtered( solutions, sol -> not IsZero( sol ) );
+      return Filtered( solutions, sol -> not IsZero( sol ) );
+      
+    else
+      
+      return  solutions;
       
     fi;
-    
-    return  solutions;
     
 end );
 
