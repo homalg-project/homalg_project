@@ -55,6 +55,7 @@ the attribute <C>Eval</C>.
 <#Include Label="Eval:HasEvalAddMat">
 <#Include Label="Eval:HasEvalSubMat">
 <#Include Label="Eval:HasEvalCompose">
+<#Include Label="Eval:HasEvalCoefficientsWithGivenMonomials">
 
 </Section>
 

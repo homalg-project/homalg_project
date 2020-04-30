@@ -490,6 +490,9 @@ DeclareAttribute( "EvalDiagMat",
 DeclareAttribute( "EvalKroneckerMat",
         IsHomalgMatrix );
 
+DeclareAttribute( "EvalCoefficientsWithGivenMonomials",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalMulMat",
         IsHomalgMatrix );
 
@@ -1248,6 +1251,18 @@ DeclareOperation( "ClearDenominatorsRowWise",
 
 DeclareOperation( "RandomMatrix",
         [ IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "CoefficientsWithGivenMonomials",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "CoefficientsWithGivenMonomials",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "CoefficientsWithGivenMonomials",
+        [ IsHomalgRingElement, IsHomalgMatrix ] );
+
+DeclareOperation( "CoefficientsWithGivenMonomials",
+        [ IsHomalgRingElement, IsList ] );
 
 ####################################
 #

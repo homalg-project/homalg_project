@@ -862,9 +862,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                  end,
                
                CoefficientsWithGivenMonomials :=
-                 function( r, generating_system )
+                 function( M, monomials )
                    
-                   return homalgSendBlocking( Concatenation( [ "coeffs(poly(", r, "), ideal(" ], generating_system, [ " ))" ] ), [ "matrix" ], "Coefficients" );
+                   return homalgSendBlocking( [ "coeffs(", M, ", ", monomials, ")" ], [ "matrix" ], "Coefficients" );
                    
                  end,
                

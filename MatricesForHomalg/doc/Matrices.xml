@@ -171,6 +171,8 @@
 <#Include Label="SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix">
 <#Include Label="SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix">
 
+<#Include Label="CoefficientsWithGivenMonomials">
+
 </Section>
 
 <!-- ############################################################ -->

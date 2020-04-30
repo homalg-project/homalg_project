@@ -3385,6 +3385,78 @@ InstallGlobalFunction( ListToListList,
     
 end );
 
+##  <#GAPDoc Label="CoefficientsWithGivenMonomials">
+##  <ManSection>
+##    <Meth Arg="M, monomials" Name="CoefficientsWithGivenMonomials" Label="for two homalg matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <C>R := HomalgRing(</C><A>M</A><C>)</C>. <C>monomials</C> must be a &homalg; matrix with the same number
+##      of columns as <C>M</C> consisting of monomials of <C>R</C>.
+##      This method computes a &homalg; matrix <C>coeffs</C> (with entries in the coefficients ring of <C>R</C>,
+##      yet still considered as elements of <C>R</C>) such that <C>M = coeffs * monomials</C>.
+##      If no such matrix exists, the behavior is undefined.
+##      If the first argument is a &homalg; ring element, it is viewed as a &homalg; matrix with a single entry.
+##      If the second argument is a list of monomials, it is viewed as a column matrix with the list elements as entries.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( CoefficientsWithGivenMonomials,
+        "for two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M, monomials )
+    local R;
+    
+    if NrColumns( monomials ) <> NrColumns( M ) then
+        
+        Error( "the given matrices must have the same number of columns" );
+        
+    fi;
+    
+    R := HomalgRing( M );
+    
+    return HomalgMatrixWithAttributes( [
+                EvalCoefficientsWithGivenMonomials, [ M, monomials ],
+                NrRows, NrRows( M ),
+                NrColumns, NrRows( monomials )
+                ], R );
+    
+end );
+
+##
+InstallMethod( CoefficientsWithGivenMonomials,
+        "for a homalg column matrix and a list of monomials",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( M, monomials )
+    
+    return CoefficientsWithGivenMonomials( M, HomalgMatrix( monomials, Length( monomials ), 1, HomalgRing( M ) ) );
+    
+end );
+
+##
+InstallMethod( CoefficientsWithGivenMonomials,
+        "for a homalg ring element and a homalg column matrix",
+        [ IsHomalgRingElement, IsHomalgMatrix ],
+        
+  function( poly, monomials )
+    
+    return CoefficientsWithGivenMonomials( HomalgMatrix( [ poly ], 1, 1, HomalgRing( poly ) ), monomials );
+    
+end );
+
+##
+InstallMethod( CoefficientsWithGivenMonomials,
+        "for a homalg ring element and a list of monomials",
+        [ IsHomalgRingElement, IsList ],
+        
+  function( poly, monomials )
+    
+    return CoefficientsWithGivenMonomials( HomalgMatrix( [ poly ], 1, 1, HomalgRing( poly ) ), monomials );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
