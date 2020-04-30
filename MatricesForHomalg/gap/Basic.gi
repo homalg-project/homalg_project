@@ -201,6 +201,13 @@ InstallMethod( SyzygiesOfRows,
   SyzygiesGeneratorsOfRows );
 
 ##
+InstallMethod( SyzygiesOfRows,
+        "for a list of two homalg matrices",
+        [ IsList ],
+        
+  L -> CallFuncList( SyzygiesGeneratorsOfRows, L ) );
+
+##
 InstallMethod( LazySyzygiesOfRows,
         "for two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -266,6 +273,13 @@ InstallMethod( SyzygiesOfColumns,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   SyzygiesGeneratorsOfColumns );
+
+##
+InstallMethod( SyzygiesOfColumns,
+        "for a list of two homalg matrices",
+        [ IsList ],
+        
+  L -> CallFuncList( SyzygiesGeneratorsOfColumns, L ) );
 
 ##
 InstallMethod( LazySyzygiesOfColumns,
