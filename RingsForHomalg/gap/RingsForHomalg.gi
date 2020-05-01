@@ -19,7 +19,7 @@
 ##
 InstallValue( HOMALG_RINGS,
         rec(
-            RingOfIntegersDefaultCAS := "Maple",
+            RingOfIntegersDefaultCAS := "Singular",
             FieldOfRationalsDefaultCAS := "Singular",
            )
 );
