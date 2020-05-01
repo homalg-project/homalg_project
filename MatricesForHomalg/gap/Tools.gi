@@ -505,6 +505,36 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+
+
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalCoercedMatrix)",
+        [ IsHomalgMatrix and HasEvalCoercedMatrix ],
+        
+  function( C )
+    local R, RP, M;
+    
+    #Display("coercening is evaluated");
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    M := EvalCoercedMatrix( C );
+    
+    if IsBound(RP!.CopyMatrix) then
+
+        Eval(M);
+
+        return RP!.CopyMatrix( M, R );
+        
+    fi;
+    
+    Error( "could not find a procedure called CopyMatrix ",
+           "in the homalgTable of the ring\n" );
+    
+end );
+
 ##  <#GAPDoc Label="TransposedMatrix:homalgTable_entry">
 ##  <ManSection>
 ##    <Func Arg="M" Name="TransposedMatrix" Label="homalgTable entry"/>
@@ -666,7 +696,7 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfRows ],
         
   function( C )
-    local R, RP, e, i, combine;
+    local R, RP, e, i, combine, underlying_union_of_rows;
     
     R := HomalgRing( C );
     
@@ -674,7 +704,7 @@ InstallMethod( Eval,
     
     # Make it mutable
     e := ShallowCopy( EvalUnionOfRows( C ) );
-    
+
     # In case of nested UnionOfRows, we try to avoid
     # recursion, since the gap stack is rather small
     # additionally unpack PreEvals
@@ -719,6 +749,16 @@ InstallMethod( Eval,
     if Length( e ) = 1 then
         
         return e[1];
+        
+    fi;
+    
+    if ForAll( e, x -> HasEvalCoercedMatrix( x ) and HomalgRing( EvalCoercedMatrix( x ) ) = HomalgRing( EvalCoercedMatrix( e[1] ) ) ) then
+        
+        Display("now optimize union of rows");
+        
+        underlying_union_of_rows := UnionOfRows( List( e, x -> EvalCoercedMatrix( x ) ) );
+        
+        return Eval( CoercedMatrix( underlying_union_of_rows, R ) );
         
     fi;
     
@@ -835,7 +875,7 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( C )
-    local R, RP, e, i, combine;
+    local R, RP, e, i, combine, underlying_union_of_columns;
     
     R := HomalgRing( C );
     
@@ -888,6 +928,16 @@ InstallMethod( Eval,
     if Length( e ) = 1 then
         
         return e[1];
+        
+    fi;
+    
+    if ForAll( e, x -> HasEvalCoercedMatrix( x ) and HomalgRing( EvalCoercedMatrix( x ) ) = HomalgRing( EvalCoercedMatrix( e[1] ) ) ) then
+        
+        Display("now optimize columns");
+        
+        underlying_union_of_columns := UnionOfColumns( List( e, x -> EvalCoercedMatrix( x ) ) );
+        
+        return Eval( CoercedMatrix( underlying_union_of_columns, R ) );
         
     fi;
     

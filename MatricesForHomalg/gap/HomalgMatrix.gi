@@ -1205,7 +1205,17 @@ InstallMethod( UnionOfRowsOp,
         [ IsList, IsHomalgMatrix ],
 
   function( L, M )
-    local result;
+    local result, underlying_union_of_rows;
+
+    if ForAll( L, x -> HasEvalCoercedMatrix( x ) and HomalgRing( EvalCoercedMatrix( x ) ) = HomalgRing( EvalCoercedMatrix( L[1] ) ) ) then
+        
+        #Display("now optimize union of rows");
+        
+        underlying_union_of_rows := UnionOfRows( List( L, x -> EvalCoercedMatrix( x ) ) );
+        
+        return CoercedMatrix( underlying_union_of_rows, HomalgRing(L[1]) );
+        
+    fi;
     
     result := HomalgMatrixWithAttributes( [
          EvalUnionOfRows, L,
@@ -1301,7 +1311,17 @@ InstallMethod( UnionOfColumnsOp,
         [ IsList, IsHomalgMatrix ],
 
   function( L, M )
-    local result;
+    local result, underlying_union_of_columns;
+    
+    if ForAll( L, x -> HasEvalCoercedMatrix( x ) and HomalgRing( EvalCoercedMatrix( x ) ) = HomalgRing( EvalCoercedMatrix( L[1] ) ) ) then
+        
+        #Display("now optimize union of columns");
+        
+        underlying_union_of_columns := UnionOfColumns( List( L, x -> EvalCoercedMatrix( x ) ) );
+        
+        return CoercedMatrix( underlying_union_of_columns, HomalgRing(L[1]) );
+        
+    fi;
     
     result := HomalgMatrixWithAttributes( [
          EvalUnionOfColumns, L,
@@ -3400,6 +3420,25 @@ InstallMethod( \*,
     
     return R * M;
     
+end );
+
+##
+InstallMethod( CoercedMatrix,
+        "for a homalg matrix and a ring",
+        [ IsHomalgMatrix, IsHomalgRing ],
+
+  function( M, new_ring )
+    local C;
+
+    # TODO: Copy properties?
+    C := HomalgMatrixWithAttributes( [
+                 EvalCoercedMatrix, M,
+                 NrRows, NrRows( M ),
+                 NrColumns, NrColumns( M ),
+                 ], new_ring );
+
+    return C;
+
 end );
 
 ##
