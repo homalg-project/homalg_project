@@ -139,7 +139,7 @@ InstallMethod( CoordinateRing,
 end );
 
 
-##This method requires the ToricIdeals package
+##
 InstallMethod( CoordinateRing,
               " for affine convex varieties",
               [ IsToricVariety and IsAffine and HasConeOfVariety, IsList ],
@@ -193,15 +193,14 @@ InstallMethod( CoordinateRing,
     
     if IsPackageMarkedForLoading( "4ti2Interface", ">=2013.03.19" ) and Length( relations ) > 0 then
         
-        relations := 4ti2Interface_groebner_basis( relations );
-    
-    elif IsPackageMarkedForLoading( "ToricIdeals", ">=2011.01.01" ) and Length( relations ) > 0 then
-        
-        relations := GensetForToricIdeal( relations );
+        relations := ValueGlobal( "4ti2Interface_groebner_basis" )( relations );
         
     else
         
-        relations := GeneratingSetOfToricIdealGivenByHilbertBasis( relations );
+        ## Buggy for relations := [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 1, -1 ] ];
+        ## relations := GeneratingSetOfToricIdealGivenByHilbertBasis( relations );
+        
+        relations := ExponentsOfGeneratorsOfToricIdeal( TransposedMat( relations ) );
         
     fi;
     

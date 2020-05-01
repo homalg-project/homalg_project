@@ -7,7 +7,7 @@ Subtitle := "A package to handle toric varieties",
 Version :=  Maximum( [
   "2018.10.12", ## Sebas' version
 ## this line prevents merge conflicts
-  "2019.12.06", ## Mohamed's version
+  "2020.04.25", ## Mohamed's version
 ## this line prevents merge conflicts
   "2019.07.02", ## Martin's version
 ## this line prevents merge conflicts
@@ -88,15 +88,15 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [ [ "NConvex", ">= 2017.01.01" ],
-                           #[ "Convex", ">= 2015.11.06" ],
-                           [ "GradedRingForHomalg", ">=2015.12.04" ],
+                           [ "GradedRingForHomalg", ">=2020.04.25" ],
                            [ "Modules", ">=2016.01.20" ],
                            [ "GradedModules", ">=2015.12.04" ],
                            [ "ToolsForHomalg", ">=2016.02.17" ],
                            [ "AutoDoc", ">=2016.02.16" ] ],
-  SuggestedOtherPackages := [ [ "TopcomInterface", ">=2019.06.15" ] ],
+  SuggestedOtherPackages := [ [ "4ti2Interface", ">=2020.04.25" ],
+                              [ "TopcomInterface", ">=2019.06.15" ], ],
   ExternalConditions := []
-                      
+  
 ),
 
 AvailabilityTest := function()

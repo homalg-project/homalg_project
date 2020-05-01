@@ -37,8 +37,7 @@ DeclareCategory( "IsAffineToricVariety",
 #############################
 
 #! @Description
-#!  Returns the coordinate ring of the affine toric variety <A>vari</A>. The computation is mainly 
-#!  done in ToricIdeals package.
+#!  Returns the coordinate ring of the affine toric variety <A>vari</A>.
 #! @Returns a ring
 #! @Arguments vari
 DeclareAttribute( "CoordinateRing",
@@ -93,12 +92,3 @@ DeclareOperation( "Cone",
 #############################
 
 #! The constructors are the same as for toric varieties. Calling them with a cone will result in an affine variety.
-
-## This is a fallback to not cause errors if ToricIdeals is not loaded
-
-if not IsPackageMarkedForLoading( "ToricIdeals", ">=2011.01.01" ) then
-    
-    DeclareOperation( "GensetForToricIdeal",
-                      [ IsMatrix ] );
-    
-fi;

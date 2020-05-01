@@ -10,7 +10,6 @@ AutoDoc(rec(
         folder := ".",
         commands := [
             "LoadPackage( \"IO_ForHomalg\" );",
-            "LoadPackage( \"GaussForHomalg\" );",
             "LoadPackage( \"ToricVarieties\" );",
             "HOMALG_IO.show_banners := false;",
             "HOMALG_IO.suppress_PID := true;",
