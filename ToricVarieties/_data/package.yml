@@ -1,6 +1,6 @@
 name: ToricVarieties
-version: 2019.12.06
-date: 06/12/2019
+version: 2020.04.25
+date: 25/04/2020
 description: A package to handle toric varieties
 
 authors:
@@ -22,7 +22,7 @@ needed-pkgs:
       version: ">= 2017.01.01"
       url: "https://homalg-project.github.io/NConvex"
     - name: "GradedRingForHomalg"
-      version: ">=2015.12.04"
+      version: ">=2020.04.25"
       url: "https://homalg-project.github.io/homalg_project/GradedRingForHomalg/"
     - name: "Modules"
       version: ">=2016.01.20"
@@ -38,6 +38,9 @@ needed-pkgs:
       url: "https://gap-packages.github.io/AutoDoc"
 
 suggested-pkgs:
+    - name: "4ti2Interface"
+      version: ">=2020.04.25"
+      url: "https://homalg-project.github.io/homalg_project/4ti2Interface/"
     - name: "TopcomInterface"
       version: ">=2019.06.15"
       url: "https://github.com/HereAround/TopcomInterface"
@@ -48,9 +51,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/ToricVarieties/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2019.12.06/ToricVarieties-2019.12.06.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2020.04.25/ToricVarieties-2020.04.25.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2019.12.06/ToricVarieties-2019.12.06.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2020.04.25/ToricVarieties-2020.04.25.zip
 
 abstract: ToricVarieties provides data structures to handle toric varieties by their commutative algebra structure and by their combinatorics. For combinatorics, it uses the Convex package. Its goal is to provide a suitable framework to work with toric varieties.
 

@@ -50,8 +50,7 @@
   [33X[1;0Y[29X[2XCoordinateRing[102X( [3Xvari[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya ring[133X
   
-  [33X[0;0YReturns   the  coordinate  ring  of  the  affine  toric  variety  [3Xvari[103X.  The
-  computation is mainly done in ToricIdeals package.[133X
+  [33X[0;0YReturns the coordinate ring of the affine toric variety [3Xvari[103X.[133X
   
   [1X5.3-2 ListOfVariablesOfCoordinateRing[101X
   
