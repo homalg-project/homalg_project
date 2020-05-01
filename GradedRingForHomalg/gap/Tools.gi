@@ -741,3 +741,25 @@ InstallMethod( PolynomialsWithoutRelativeIndeterminates,
     return B * M;
     
 end );
+
+##
+InstallMethod( Coefficients,
+        "for a graded ring element",
+        [ IsHomalgGradedRingElement ],
+
+  function( r )
+    local S, coeffs, monoms;
+    
+    S := HomalgRing( r );
+    
+    coeffs := Coefficients( EvalRingElement( r ) );
+    
+    monoms := List( coeffs!.monomials, a -> a / S );
+    
+    coeffs := S * coeffs;
+    
+    coeffs!.monomials := monoms;
+    
+    return coeffs;
+    
+end );
