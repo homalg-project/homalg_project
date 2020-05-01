@@ -90,15 +90,27 @@
 
 
 <div class="example"><pre>
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "4ti2Interface" );</span>
-true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cone := [ [ 7, -1 ], [ 0, 1 ] ];</span>
 [ [ 7, -1 ], [ 0, 1 ] ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">basis := 4ti2Interface_hilbert_inequalities( cone );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sort( basis );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">basis;</span>
+[ [ 1, 0 ], [ 1, 1 ], [ 1, 2 ], [ 1, 3 ],
+  [ 1, 4 ], [ 1, 5 ], [ 1, 6 ], [ 1, 7 ] ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">groebner := 4ti2Interface_groebner_matrix( basis );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
-0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sort( groebner );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">groebner;</span>
+[ [ -1, 0, 0, 1, 1, 0, 0, -1 ], [ -1, 0, 0, 2, 0, 0, -1, 0 ],
+  [ -1, 0, 1, 0, 0, 1, 0, -1 ], [ -1, 0, 1, 0, 1, 0, -1, 0 ],
+  [ -1, 0, 1, 1, 0, -1, 0, 0 ], [ -1, 0, 2, 0, -1, 0, 0, 0 ],
+  [ -1, 1, 0, 0, 0, 0, 1, -1 ], [ -1, 1, 0, 0, 0, 1, -1, 0 ],
+  [ -1, 1, 0, 0, 1, -1, 0, 0 ], [ -1, 1, 0, 1, -1, 0, 0, 0 ],
+  [ -1, 1, 1, -1, 0, 0, 0, 0 ], [ -1, 2, -1, 0, 0, 0, 0, 0 ],
+  [ 0, -1, 0, 0, 2, 0, 0, -1 ], [ 0, -1, 0, 1, 0, 1, 0, -1 ],
+  [ 0, -1, 1, 0, 0, 0, 1, -1 ], [ 0, 0, -1, 0, 1, 1, 0, -1 ],
+  [ 0, 0, -1, 1, 0, 0, 1, -1 ], [ 0, 0, 0, -1, 0, 2, 0, -1 ],
+  [ 0, 0, 0, -1, 1, 0, 1, -1 ], [ 0, 0, 0, 0, -1, 1, 1, -1 ],
+  [ 0, 0, 0, 0, 0, -1, 2, -1 ] ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( groebner );</span>
 21
 </pre></div>
@@ -146,16 +158,11 @@ true
 
 
 <div class="example"><pre>
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "4ti2Interface" );</span>
-true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := [ 23,25,37,49 ];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := [ 23, 25, 37, 49 ];</span>
 [ 23, 25, 37, 49 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">equation := [ Concatenation( gens, -gens ) ];</span>
 [ [ 23, 25, 37, 49, -23, -25, -37, -49 ] ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">basis := 4ti2Interface_hilbert_equalities_in_positive_orthant( equation );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
-12
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( basis );</span>
 436
 </pre></div>
@@ -168,14 +175,9 @@ true
 
 
 <div class="example"><pre>
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "4ti2Interface" );</span>
-true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inequalities := [ [1,2,3,4],[0,1,0,7],[3,1,0,2],[0,0,1,0] ];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inequalities := [ [1,2,3,4], [0,1,0,7], [3,1,0,2], [0,0,1,0] ];</span>
 [ [ 1, 2, 3, 4 ], [ 0, 1, 0, 7 ], [ 3, 1, 0, 2 ], [ 0, 0, 1, 0 ] ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">basis := 4ti2Interface_hilbert_inequalities( inequalities );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
-0
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( basis );</span>
 29
 </pre></div>
