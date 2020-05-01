@@ -4,11 +4,9 @@
 # exclude patterns (uncomment them if you want to use them):
 # *.[oa]
 *~
-bin
-change.log
-VERSION
-public_html
-public_html.version
+/bin
+/maketest.g
+
 doc/*.pdf
 doc/*.html
 doc/*.txt
@@ -29,11 +27,6 @@ doc/*.toc
 doc/*.out
 doc/manual.lab
 *.DS_Store
-doc/4ti2Interface.xml
-doc/title.xml
-doc/_AutoDocMainFile.xml
-doc/_Chapter_4ti2_functions.xml
-doc/_Chapter_Installation.xml
-doc/_Chapter_Introduction.xml
-doc/_Chapter_Tool_functions.xml
-doc/_Chunks.xml
+doc/*.xml
+
+/tst/4ti2interface*.tst

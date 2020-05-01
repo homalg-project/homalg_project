@@ -62,7 +62,8 @@ DeclareGlobalFunction( "4ti2Interface_groebner_matrix" );
 #! @Returns A list of vectors
 DeclareGlobalFunction( "4ti2Interface_groebner_basis" );
 
-#! <#Include Label="Groebner1">
+#! @Subsection Defining ideal of toric variety
+#! @InsertChunk Groebner1
 
 #! @Section Hilbert
 
@@ -101,9 +102,11 @@ DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_and_inequalities" );
 #! @Group for equalities and inequalities
 DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_and_inequalities_in_positive_orthant" );
 
-#! <#Include Label="HilbertBasis">
+#! @Subsection Generators of semigroup
+#! @InsertChunk HilbertBasis
 
-#! <#Include Label="HilbertBasis2">
+#! @Subsection Hilbert basis of dual cone
+#! @InsertChunk HilbertBasis2
 
 #! @Section ZSolve
 

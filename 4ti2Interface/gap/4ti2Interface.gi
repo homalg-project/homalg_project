@@ -309,7 +309,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
         
     elif precision = fail then
         
-        precision := "arb";
+        precision := "gmp";
         
     fi;
     
@@ -365,7 +365,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
         
     elif precision = fail then
         
-        precision := "arb";
+        precision := "gmp";
         
     fi;
 
@@ -421,7 +421,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
         
     elif precision = fail then
         
-        precision := "arb";
+        precision := "gmp";
         
     fi;
     
@@ -484,7 +484,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
         
     elif precision = fail then
         
-        precision := "arb";
+        precision := "gmp";
         
     fi;
     
@@ -547,7 +547,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
         
     elif precision = fail then
         
-        precision := "arb";
+        precision := "gmp";
         
     fi;
     
@@ -647,7 +647,7 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
         
     elif precision = fail then
         
-        precision := "arb";
+        precision := "gmp";
         
     fi;
     
@@ -769,7 +769,7 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities,
         
     elif precision = fail then
         
-        precision := "arb";
+        precision := "gmp";
         
     fi;
     
@@ -816,7 +816,7 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
         
     elif precision = fail then
         
-        precision := "arb";
+        precision := "gmp";
         
     fi;
     
