@@ -1,6 +1,6 @@
 name: RingsForHomalg
-version: 2020.04.21
-date: 21/04/2020
+version: 2020.04.25
+date: 25/04/2020
 description: Dictionaries of external rings
 
 authors:
@@ -49,9 +49,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/RingsForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.04.21/RingsForHomalg-2020.04.21.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.04.25/RingsForHomalg-2020.04.25.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.04.21/RingsForHomalg-2020.04.21.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.04.25/RingsForHomalg-2020.04.25.zip
 
 abstract: The <span class="pkgname">RingsForHomalg</span> package provides small dictionaries for  <span class="pkgname">homalg</span> to speak (as much as needed of) the languages  of Singular, Macaulay2, MAGMA, Sage, and Maple
 
