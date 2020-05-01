@@ -9,7 +9,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2018.07.06", ## Kamal's version
 ## this line prevents merge conflicts
-  "2020.04.20", ## Mohamed's version
+  "2020.04.25", ## Mohamed's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -71,8 +71,30 @@ Dependencies := rec(
 ),
 
 AvailabilityTest := function()
-    return true;
-  end,
+  local 4ti2_binaries, bool;
+    
+    4ti2_binaries := [ "groebner",
+                       "hilbert",
+                       "zsolve",
+                       "graver" ];
+    
+    bool :=
+      ForAll( 4ti2_binaries,
+              name ->
+              ( not ValueGlobal( "IO_FindExecutable" )( name ) = fail ) or
+              ( not ValueGlobal( "IO_FindExecutable" )( Concatenation( "4ti2-", name ) ) = fail ) );
+    
+    if not bool then
+        LogPackageLoadingMessage( PACKAGE_WARNING,
+                [ "At least one of the 4ti2 binaries",
+                  JoinStringsWithSeparator( 4ti2_binaries, ", " ),
+                  "is not installed on your system.",
+                  "4ti2 can be downloaded from https://4ti2.github.io/" ] );
+    fi;
+    
+    return bool;
+    
+end,
 
 Autoload := false,
 
