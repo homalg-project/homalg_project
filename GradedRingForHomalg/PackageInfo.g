@@ -5,7 +5,7 @@ PackageName := "GradedRingForHomalg",
 Subtitle := "Endow Commutative Rings with an Abelian Grading",
 
 Version := Maximum( [
-  "2020.01.02", ## Mohamed's version
+  "2020.04.25", ## Mohamed's version
 ## this line prevents merge conflicts
   "2020.02.05", ## Markus' version
 ## this line prevents merge conflicts
@@ -160,7 +160,7 @@ Dependencies := rec(
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2020.02.05" ],
                    [ "HomalgToCAS", ">= 2018.12.11" ],
-                   [ "RingsForHomalg", ">= 2018.12.11" ],
+                   [ "RingsForHomalg", ">= 2020.04.25" ],
                    [ "Modules", ">= 2018.02.04" ],
                    [ "homalg", ">=2011.08.16" ],
                    [ "GAPDoc", ">= 1.0" ] ],
