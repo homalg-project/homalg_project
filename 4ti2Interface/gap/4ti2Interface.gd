@@ -34,6 +34,8 @@
 
 #! These are wrappers of some use cases of 4ti2s groebner command.
 
+DeclareGlobalFunction( "4ti2Interface_groebner" );
+
 #! @Description
 #!  This launches the 4ti2 groebner command with the
 #!  argument as matrix input. The output will be the

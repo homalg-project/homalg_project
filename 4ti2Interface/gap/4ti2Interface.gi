@@ -139,8 +139,7 @@ InstallGlobalFunction( 4ti2Interface_Write_Matrix_To_File,
 end );
 
 ##
-InstallGlobalFunction( 4ti2Interface_groebner_matrix,
-                       
+InstallGlobalFunction( 4ti2Interface_groebner,
   function( arg )
     local matrix, dir, filename, exec, precision, filestream;
     
@@ -156,8 +155,12 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
     
     filename := Filename( dir, "gap_4ti2_temp_matrix" );
     
-    ## 4ti2 works with right kernel.
-    4ti2Interface_Write_Matrix_To_File( TransposedMat( matrix ), Concatenation( filename, ".mat" ) );
+    if IsIdenticalObj( ValueOption( "transposed" ), true ) then
+        ## 4ti2 works with right kernel.
+        4ti2Interface_Write_Matrix_To_File( TransposedMat( matrix ), Concatenation( filename, ".mat" ) );
+    else
+        4ti2Interface_Write_Matrix_To_File( matrix, Concatenation( filename, ".mat" ) );
+    fi;
     
     if Length( arg ) > 1 then
         
@@ -204,66 +207,18 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
 end );
 
 ##
-InstallGlobalFunction( 4ti2Interface_groebner_basis,
-                       
+InstallGlobalFunction( 4ti2Interface_groebner_matrix,
   function( arg )
-    local matrix, dir, filename, exec, precision, filestream;
     
-    if Length( arg ) < 1 then
-        
-        Error( "too few arguments" );
-        
-    fi;
+    return CallFuncList( 4ti2Interface_groebner, arg : transposed := true );
     
-    dir := DirectoryTemporary();
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_groebner_basis,
+  function( arg )
     
-    matrix := arg[ 1 ];
-    
-    filename := Filename( dir, "gap_4ti2_temp_lattice" );
-    
-    4ti2Interface_Write_Matrix_To_File( matrix, Concatenation( filename, ".lat" ) );
-    
-    if Length( arg ) > 1 then
-        
-        if not IsMatrix( arg[ 2 ] ) then
-            arg[ 2 ] := [ arg[ 2 ] ];
-        fi;
-        
-        4ti2Interface_Write_Matrix_To_File( arg[ 2 ], Concatenation( filename, ".cost" ) );
-        
-    fi;
-    
-    if IO_FindExecutable( "groebner" ) <> fail then
-        exec := IO_FindExecutable( "groebner" );
-    elif IO_FindExecutable( "4ti2-groebner" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-groebner" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
-    
-    precision := ValueOption( "precision" );
-    
-    if IsInt( precision ) then
-        
-        precision := String( precision );
-        
-    elif precision = fail then
-        
-        precision := "arb";
-        
-    fi;
-    
-    filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
-    
-    while IO_ReadLine( filestream.stdout ) <> "" do od;
-    
-    IO_Close( filestream.stdin );
-    
-    IO_Close( filestream.stdout );
-    
-    matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gro" ) );
-    
-    return matrix;
+    return CallFuncList( 4ti2Interface_groebner, arg : transposed := false );
     
 end );
 
