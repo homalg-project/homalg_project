@@ -31,6 +31,7 @@
 <#Include Label="HomalgMatrix">
 <#Include Label="HomalgDiagonalMatrix">
 <#Include Label="\*:MatrixBaseChange">
+<#Include Label="CoercedMatrix">
 
 </Section>
 
