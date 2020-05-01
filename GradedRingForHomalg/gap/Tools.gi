@@ -763,3 +763,90 @@ InstallMethod( Coefficients,
     return coeffs;
     
 end );
+    
+##
+InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
+        "for a list",
+        [ IsList ],
+        
+  function( generators_of_semigroup )
+    local indet_string, relations, s, R, indeterminates,
+          i, left_side, right_side, j, I, J;
+    
+    if generators_of_semigroup = [ ] then
+        return [ ];
+    fi;
+    
+    generators_of_semigroup := HomalgMatrix( generators_of_semigroup, HOMALG_MATRICES.ZZ );
+    
+    relations := SyzygiesOfRows( generators_of_semigroup );
+    
+    if NrRows( relations ) = 0 then
+        return [ ];
+    fi;
+    
+    relations := EntriesOfHomalgMatrixAsListList( relations );
+    
+    if not IsBound( HOMALG_GRADED_RING.GF2 ) then
+        HOMALG_GRADED_RING.GF2 := GradedRing( HomalgRingOfIntegersInDefaultCAS( 2 ) );
+    fi;
+    
+    s := NrRows( generators_of_semigroup );
+    
+    R := HOMALG_GRADED_RING.GF2 * Concatenation( "t1..", String( s ) );
+    
+    R := GradedRing( R );
+    
+    SetWeightsOfIndeterminates( R, IdentityMat( s ) );
+    
+    indeterminates := Indeterminates( R );
+    
+    for i in [ 1 .. Length( relations ) ] do
+        
+        left_side := One( R );
+        right_side := One( R );
+        
+        for j in [ 1 .. Length( indeterminates ) ] do
+            
+            if relations[ i ][ j ] > 0 then
+                left_side := left_side * indeterminates[ j ]^relations[ i ][ j ];
+            elif relations[ i ][ j ] < 0 then
+                right_side := right_side * indeterminates[ j ]^( - relations[ i ][ j ] );
+            fi;
+            
+        od;
+        
+        relations[ i ] := left_side - right_side;
+        
+    od;
+    
+    I := LeftSubmodule( relations );
+    J := LeftSubmodule( Product( indeterminates ) );
+    
+    I := Saturate( I, J );
+    
+    OnBasisOfPresentation( I );
+
+    I := MatrixOfSubobjectGenerators( I );
+    
+    if NrRows( I ) = 0 then
+        return [ ];
+    fi;
+    
+    I := EntriesOfHomalgMatrix( I );
+    
+    I := List( I, r -> Coefficients( r )!.monomials );
+    
+    I := List( I, b -> Degree( b[1] ) - Degree( b[2] ) );
+
+    I := List( I, UnderlyingMorphism );
+    
+    I := List( I, MatrixOfMap );
+    
+    I := List( I, EntriesOfHomalgMatrix );
+    
+    Sort( I );
+    
+    return I;
+    
+end );

@@ -44,3 +44,6 @@ DeclareOperation( "LinearSyzygiesGeneratorsOfRows",
 
 DeclareOperation( "LinearSyzygiesGeneratorsOfColumns",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "ExponentsOfGeneratorsOfToricIdeal",
+        [ IsList ] );
