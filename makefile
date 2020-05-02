@@ -95,6 +95,9 @@ test_4ti2Interface:
 test_ExamplesForHomalg:
 	$(MAKE) -C ExamplesForHomalg test
 
+test_Gauss:
+	$(MAKE) -C Gauss test
+
 test_GaussForHomalg:
 	$(MAKE) -C GaussForHomalg test
 
