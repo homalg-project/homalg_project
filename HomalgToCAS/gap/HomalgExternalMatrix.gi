@@ -167,6 +167,12 @@ InstallMethod( CreateHomalgMatrixFromList,
   function( L, R )
     local M;
     
+    if IsEmpty( L ) then
+        return HomalgZeroMatrix( 0, 0, R );
+    elif ForAll( L, IsList and IsEmpty ) then
+        return HomalgZeroMatrix( Length( L ), 0, R );
+    fi;
+    
     if IsList( L[1] ) then
         if not ForAll( L[1], IsHomalgExternalRingElementRep ) then
             TryNextMethod( );
@@ -198,6 +204,10 @@ InstallMethod( CreateHomalgMatrixFromList,
         
   function( L, r, c, R )
     local M;
+    
+    if r * c = 0 then
+        return HomalgZeroMatrix( r, c, R );
+    fi;
     
     if IsList( L[1] ) then
         if not ForAll( L[1], IsHomalgExternalRingElementRep ) then
