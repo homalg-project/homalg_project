@@ -6,7 +6,7 @@
                 [1XEndow Commutative Rings with an Abelian Grading[101X
   
   
-                               Version 2020.04.25
+                               Version 2020.04.30
   
   
                                  September 2015
@@ -22,7 +22,7 @@
   
             [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
             latest version is available [12Xonline[112X at:[133X
-            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/~markus/GradedRingForHomalg/chap0.html[107X[133X
+            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/GradedRingForHomalg/doc/chap0.html[107X[133X
             [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
             documentation subfolder of the package.[133X
   
