@@ -1,6 +1,6 @@
 name: Modules
-version: 2020.02.05
-date: 05/02/2020
+version: 2020.04.30
+date: 30/04/2020
 description: A homalg based package for the Abelian category of finitely presented modules over computable rings
 
 authors:
@@ -13,7 +13,7 @@ authors:
     - name: Sebastian Gutsche
       url: https://sebasguts.github.io
     - name: Markus Lange-Hegermann
-      url: https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html
+      url: https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/
     - name: Vinay Wagh
       url: http://www.iitg.ernet.in/vinay.wagh/
 
@@ -46,9 +46,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/Modules/PackageInfo
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.02.05/Modules-2020.02.05.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.04.30/Modules-2020.04.30.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.02.05/Modules-2020.02.05.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.04.30/Modules-2020.04.30.zip
 
 abstract: The <span class="pkgname">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings
 

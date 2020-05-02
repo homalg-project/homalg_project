@@ -1,6 +1,6 @@
 name: HomalgToCAS
-version: 2020.02.26
-date: 26/02/2020
+version: 2020.04.30
+date: 30/04/2020
 description: A window to the outer world
 
 authors:
@@ -38,9 +38,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/HomalgToCAS/Package
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2020.02.26/HomalgToCAS-2020.02.26.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2020.04.30/HomalgToCAS-2020.04.30.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2020.02.26/HomalgToCAS-2020.02.26.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2020.04.30/HomalgToCAS-2020.04.30.zip
 
 abstract: The <span class="pkgname">HomalgToCAS</span> package provides the first layer of abstraction  needed for <span class="pkgname">homalg</span> to access external computer algebra systems
 

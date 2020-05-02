@@ -1,6 +1,6 @@
 name: GradedModules
-version: 2020.04.17
-date: 17/04/2020
+version: 2020.04.30
+date: 30/04/2020
 description: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
 
 authors:
@@ -11,7 +11,7 @@ authors:
     - name: Sebastian Jambor
       url: http://wwwb.math.rwth-aachen.de/~sebastian/
     - name: Markus Lange-Hegermann
-      url: https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html
+      url: https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/
     - name: Arne Lorenz
       url: http://wwwb.math.rwth-aachen.de/~arne/
     - name: Oleksandr Motsak
@@ -57,9 +57,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/GradedModules/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2020.04.17/GradedModules-2020.04.17.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2020.04.30/GradedModules-2020.04.30.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2020.04.17/GradedModules-2020.04.17.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2020.04.30/GradedModules-2020.04.30.zip
 
 abstract: This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring
 

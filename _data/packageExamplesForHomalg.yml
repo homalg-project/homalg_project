@@ -1,6 +1,6 @@
 name: ExamplesForHomalg
-version: 2020.04.26
-date: 26/04/2020
+version: 2020.04.30
+date: 30/04/2020
 description: Examples for the GAP Package homalg
 
 authors:
@@ -9,7 +9,7 @@ authors:
     - name: Simon Görtzen
       url: https://www.linkedin.com/in/simongoertzen/
     - name: Markus Lange-Hegermann
-      url: https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html
+      url: https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/
 
 maintainers:
     - name: Mohamed Barakat
@@ -46,9 +46,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/ExamplesForHomalg/P
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2020.04.26/ExamplesForHomalg-2020.04.26.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2020.04.30/ExamplesForHomalg-2020.04.30.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2020.04.26/ExamplesForHomalg-2020.04.26.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2020.04.30/ExamplesForHomalg-2020.04.30.zip
 
 abstract: The <span class="pkgname">ExamplesForHomalg</span> package provides example scripts for the <span class="pkgname">homalg</span> package that can be used with several computer algebra systems
 
