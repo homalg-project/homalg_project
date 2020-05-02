@@ -10,7 +10,7 @@
   computing  a reduced row echelon form (RREF) of a matrix, there is no way to
   "Gauss upwards". While this is not neccessary for things like Rank or Kernel
   computations, this was one in a number of missing features important for the
-  development of the [5XGAP[105X package [5Xhomalg[105X by M. Barakat [Bar09].[133X
+  development of the [5XGAP[105X package [5Xhomalg[105X by M. Barakat [Bar20].[133X
   
   [33X[0;0YParallel  to  this  development  I  worked  on  [5XSCO[105X  [Gör08b], a package for
   creating simplicial sets and computing the cohomology of orbifolds, based on

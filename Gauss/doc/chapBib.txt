@@ -2,8 +2,8 @@
   
   [1XReferences[101X
   
-  [[20XBar09[120X]   [16XBarakat,   M.[116X,   [17XThe   homalg   package   --   GAP4[117X   (2007-2009),
-  ((http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package)).
+  [[20XBar20[120X]   [16XBarakat,   M.[116X,   [17XThe   homalg   package   --   GAP4[117X   (2007-2020),
+  ((https://homalg-project.github.io/homalg_project/homalg/)).
   
   [[20XBGKLH08[120X]  [16XBarakat,  M., Görtzen, S., Kirschmer, M. and Lange-Hegermann, M.[116X,
   [17XGAP              Package             RingsForHomalg[117X             (2007-2008),
