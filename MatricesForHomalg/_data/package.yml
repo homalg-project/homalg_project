@@ -1,13 +1,13 @@
 name: MatricesForHomalg
-version: 2020.04.22
-date: 22/04/2020
+version: 2020.04.30
+date: 30/04/2020
 description: Matrices for the homalg project
 
 authors:
     - name: Mohamed Barakat
       url: https://mohamed-barakat.github.io
     - name: Markus Lange-Hegermann
-      url: https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html
+      url: https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/
     - name: Martin Leuner
       url: http://wwwb.math.rwth-aachen.de/Mitarbeiter/leuner.php
     - name: Vinay Wagh
@@ -36,9 +36,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/MatricesForHomalg/P
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2020.04.22/MatricesForHomalg-2020.04.22.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2020.04.30/MatricesForHomalg-2020.04.30.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2020.04.22/MatricesForHomalg-2020.04.22.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2020.04.30/MatricesForHomalg-2020.04.30.zip
 
 abstract: The <span class="pkgname">MatricesForHomalg</span> package provides lazy evaluated matrices with clever operations for the homalg project
 

@@ -5,7 +5,7 @@ PackageName := "MatricesForHomalg",
 Subtitle := "Matrices for the homalg project",
 
 Version := Maximum( [
-  "2020.04.22", ## Mohamed's version
+  "2020.04.30", ## Mohamed's version
 ## this line prevents merge conflicts
   "2020.04.21", ## Fabian's version
 ## this line prevents merge conflicts
@@ -52,7 +52,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "markus.lange-hegermann@hs-owl.de",
-    WWWHome       := "https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html",
+    WWWHome       := "https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/",
     PostalAddress := Concatenation( [
                        "Markus Lange-Hegermann\n",
                        "Hochschule Ostwestfalen-Lippe\n",
