@@ -1,6 +1,6 @@
 name: RingsForHomalg
-version: 2020.04.26
-date: 26/04/2020
+version: 2020.04.30
+date: 30/04/2020
 description: Dictionaries of external rings
 
 authors:
@@ -11,7 +11,7 @@ authors:
     - name: Markus Kirschmer
       url: http://www.math.rwth-aachen.de/~Markus.Kirschmer/
     - name: Markus Lange-Hegermann
-      url: https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html
+      url: https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/
     - name: Oleksandr Motsak
       url: http://www.mathematik.uni-kl.de/~motsak/
     - name: Daniel Robertz
@@ -49,9 +49,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/RingsForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.04.26/RingsForHomalg-2020.04.26.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.04.30/RingsForHomalg-2020.04.30.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.04.26/RingsForHomalg-2020.04.26.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.04.30/RingsForHomalg-2020.04.30.zip
 
 abstract: The <span class="pkgname">RingsForHomalg</span> package provides small dictionaries for  <span class="pkgname">homalg</span> to speak (as much as needed of) the languages  of Singular, Macaulay2, MAGMA, Sage, and Maple
 
