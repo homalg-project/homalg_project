@@ -6,7 +6,7 @@
                          [1X[5XGauss[105X Functionality for [5Xhomalg[105X[101X
   
   
-                               Version 2020.02.05
+                               Version 2020.04.30
   
   
                                  September 2013
@@ -47,7 +47,7 @@
   [33X[0;0YMany  thanks  to  Mohamed Barakat and the Lehrstuhl B für Mathematik at RWTH
   Aachen  University  in  general  for  their support. It should be noted that
   [5XGaussForHomalg[105X  is  dependant  on  the  [5XGAP[105X  [5XMatricesForHomalg[105X package by M.
-  Barakat et al. [Bar09], as well as the [5XGauss[105X package by myself [Gör08]. This
+  Barakat et al. [Bar20], as well as the [5XGauss[105X package by myself [Gör08]. This
   should  be  clear  as  [5XGaussForHomalg[105X  presents  a  link  between  these two
   packages.  This manual was created with the help of the [5XGAPDoc[105X package by M.
   Neunhöffer and F. Lübeck [LN08].[133X

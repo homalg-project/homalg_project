@@ -5,7 +5,7 @@
         ──────────────────┼────────────────────────────────────────────────────  
         [11XGaussForHomalg.gi[111X │ Methods for matrix entry manipulation                 
         [11XGaussTools.gi[111X     │ Tools for matrix operations                           
-        [11XGaussBasic.gi[111X     │ The "Basic" Operations (--> [BR08] and [Bar09])       
+        [11XGaussBasic.gi[111X     │ The "Basic" Operations (--> [BR08] and [Bar20])       
         [11XGaussFQI.gi[111X       │ [5Xhomalg[105X Table for finite quotients of ℤ: [22Xℤ / ⟨ p^n ⟩[122X   
         [11XGaussRationals.gi[111X │ [5Xhomalg[105X Table for the rationals ℚ                      
   
