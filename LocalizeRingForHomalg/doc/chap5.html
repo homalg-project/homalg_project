@@ -185,7 +185,7 @@ true
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "RingsForHomalg" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "RingsForHomalg", "&gt;= 2020.04.17" );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";</span>
 Q[x,y]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">wmat := HomalgMatrix(</span>
@@ -265,8 +265,8 @@ the map is currently represented by the above 0 x 2 matrix
 at homology degree: 1
 Q[x,y]/( x^3+x^2-2*y^2 )_&lt; |[ x ]|, |[ y ]| &gt;^(1 x 2)
 -------------------------
-0,  x*y^2-y^3,
-y^2,y^4-2*y^3+2*y^2
+x*y^2+y^2,2*y^2,         
+y^2,      y^4-2*y^3+2*y^2
 
 modulo [ x^3+x^2-2*y^2 ]
 / |[ 1 ]|
@@ -311,8 +311,8 @@ the map is currently represented by the above 0 x 2 matrix
 at homology degree: 1
 Q[x,y]_&lt; x, y &gt;/( (x^3+x^2-2*y^2)/1 )^(1 x 2)
 -------------------------
-y^2,    x^2,
-y^3+y^2,2*y^2
+y^3+y^2,2*y^2,   
+0,      x*y^2-y^3
 / 1
 
 modulo [ (x^3+x^2-2*y^2)/1 ]

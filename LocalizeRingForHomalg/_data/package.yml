@@ -1,13 +1,13 @@
 name: LocalizeRingForHomalg
-version: 2020.02.05
-date: 05/02/2020
+version: 2020.04.30
+date: 30/04/2020
 description: A Package for Localization of Polynomial Rings
 
 authors:
     - name: Mohamed Barakat
       url: https://mohamed-barakat.github.io
     - name: Markus Lange-Hegermann
-      url: https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html
+      url: https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/
     - name: Vinay Wagh
       url: http://www.iitg.ernet.in/vinay.wagh/
 
@@ -37,9 +37,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/LocalizeRingForHoma
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2020.02.05/LocalizeRingForHomalg-2020.02.05.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2020.04.30/LocalizeRingForHomalg-2020.04.30.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2020.02.05/LocalizeRingForHomalg-2020.02.05.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2020.04.30/LocalizeRingForHomalg-2020.04.30.zip
 
 abstract: This package is part of the homalg-project and allows localization of a (computable) commutative ring at a (finitely generated) maximal ideal.
 
