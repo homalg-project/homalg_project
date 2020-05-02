@@ -5,7 +5,7 @@ PackageName := "homalg",
 Subtitle := "A homological algebra meta-package for computable Abelian categories",
 
 Version := Maximum( [
-  "2020.02.20", ## Mohamed's version
+  "2020.04.30", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.09.17", ## Markus' version
 ## this line prevents merge conflicts
@@ -58,7 +58,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "markus.lange-hegermann@hs-owl.de",
-    WWWHome       := "https://www.hs-owl.de/fb5/fachbereich/fachgebiete/md/team/prof-dr-markus-lange-hegermann.html",
+    WWWHome       := "https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/",
     PostalAddress := Concatenation( [
                        "Markus Lange-Hegermann\n",
                        "Hochschule Ostwestfalen-Lippe\n",

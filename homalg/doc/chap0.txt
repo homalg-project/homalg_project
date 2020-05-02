@@ -6,7 +6,7 @@
       [1XA homological algebra meta-package for computable Abelian categories[101X
   
   
-                               Version 2020.02.20
+                               Version 2020.04.30
   
   
                                  September 2015
@@ -21,11 +21,11 @@
             [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
             [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
             latest version is available [12Xonline[112X at:[133X
-            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/chap0.html[107X[133X
+            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/homalg/doc/chap0.html[107X[133X
             [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
             documentation  subfolder of the package. This package is
             part of the [5Xhomalg[105X-project:[133X
-            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package[107X[133X
+            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/[107X[133X
   
   
   
@@ -40,7 +40,7 @@
   
   Markus Lange-Hegermann
       Email:    [7Xmailto:markus.lange.hegermann@rwth-aachen.de[107X
-      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~markus[107X
+      Homepage: [7Xhttps://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/[107X
       Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
                 52056 Aachen, Germany[133X
   
@@ -58,20 +58,17 @@
   [1XAcknowledgements[101X
   [33X[0;0YMax  Neunhöffer  not  only  taught  me  the  philosophy  of  object-oriented
   programming in [5XGAP4[105X, but also to what extent this philosophy is still unique
-  among programming languages (--> [14XB.2[114X). The slides (in German) to his talk in
-  our    seminar    on    30.10.2006    can   be   found   on   his   homepage
-  ([7Xhttp://www-groups.mcs.st-and.ac.uk/~neunhoef/Publications/talks.html[107X).[133X
-  
-  [33X[0;0YHe, Frank Lübeck, and Thomas Breuer patiently answered trillions of specific
-  questions, even those I was too lazy to look up in the excellent programming
-  tutorial.  Without  their  continuous and tireless help and advice, not only
-  this  package  but  the  [5Xhomalg[105X project as a whole would have remained on my
-  todo list.[133X
+  among  programming  languages (--> [14XB.2[114X). He, Frank Lübeck, and Thomas Breuer
+  patiently  answered  trillions  of  specific questions, even those I was too
+  lazy  to  look  up  in  the  excellent  programming  tutorial. Without their
+  continuous  and  tireless  help  and  advice,  not only this package but the
+  [5Xhomalg[105X project as a whole would have remained on my todo list.[133X
   
   [33X[0;0YA  lot  of ideas that make up this package and the whole [5Xhomalg[105X project came
   out   of   intensive  discussions  with  Daniel  Robertz  during  our  early
   collaboration,  where  we  developed  our  philosophy  of a meta package for
-  homological algebra and implemented it in [5XMaple[105X.[133X
+  homological  algebra  and implemented it in [5XMaple[105X. This [5XMaple[105X package [5Xhomalg[105X
+  is now part of the GAP package [5XRingsForHomalg[105X.[133X
   
   [33X[0;0YIn  the  fall  of  2007  I began collaborating with Simon Görtzen to further
   pursue  and  extend  these  ideas preparing the transition to [5XGAP4[105X. With his
@@ -107,7 +104,10 @@
   project  (-->  Appendix  [14XE[114X).  Without their contributions the package [5Xhomalg[105X
   would have remained a core without a body:[133X
   
-  [30X    [33X[0;6YThomas Bächler ([7Xhttp://wwwb.math.rwth-aachen.de/~thomas/[107X)[133X
+  [30X    [33X[0;6YThomas                                                         Bächler
+        (
+        https://www.researchgate.net/scientific-contributions/50557632_Thomas_Baechler
+        )[133X
   
   [30X    [33X[0;6YBarbara Bremer[133X
   
@@ -115,17 +115,18 @@
   
   [30X    [33X[0;6YAnna Fabiańska[133X
   
-  [30X    [33X[0;6YSimon Görtzen ([7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X)[133X
+  [30X    [33X[0;6YSimon Görtzen ([7Xhttps://www.linkedin.com/in/simongoertzen/[107X)[133X
   
   [30X    [33X[0;6YMarkus Kirschmer ([7Xhttp://www.math.rwth-aachen.de/~Markus.Kirschmer/[107X)[133X
   
-  [30X    [33X[0;6YMarkus Lange-Hegermann ([7Xhttp://wwwb.math.rwth-aachen.de/~markus/[107X)[133X
+  [30X    [33X[0;6YMarkus                                                 Lange-Hegermann
+        ([7Xhttps://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/[107X)[133X
   
   [30X    [33X[0;6YFrank Lübeck ([7Xhttp://www.math.rwth-aachen.de/~Frank.Luebeck/[107X)[133X
   
-  [30X    [33X[0;6YMax Neunhöffer ([7Xhttp://www-groups.mcs.st-and.ac.uk/~neunhoef/[107X)[133X
+  [30X    [33X[0;6YMax Neunhöffer ([7Xhttps://www.arangodb.com/speakers/max-neunhoeffer/[107X)[133X
   
-  [30X    [33X[0;6YDaniel Robertz ([7Xhttp://wwwb.math.rwth-aachen.de/~daniel/[107X)[133X
+  [30X    [33X[0;6YDaniel Robertz ([7Xhttps://www.plymouth.ac.uk/staff/daniel-robertz[107X)[133X
   
   [33X[0;0YI  would  also like to thank Alban Quadrat for supporting the [5Xhomalg[105X project
   and  for all the wonderful discussions we had. At several places in the code
