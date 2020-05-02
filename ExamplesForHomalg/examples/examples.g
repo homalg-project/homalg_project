@@ -128,8 +128,8 @@ elif mode = 1 then
     HOMALG_RINGS.RingOfIntegersDefaultCAS := old_RingOfIntegers;
     HOMALG_RINGS.FieldOfRationalsDefaultCAS := old_FieldOfRationals;
     
-    Print( "\033[01mgap> Display( R );\033[m\n" );
-    Display( R );
+    Print( "\033[01mgap> R;\033[m\n" );
+    Display( StringView( R ) );
     
     HOMALG_RINGS.NamesOfDefinedRings := "R";
     
@@ -137,10 +137,10 @@ elif mode = 1 then
     variables := Filtered( ReadLine( input ), c->c <> '\n' );
     
     if variables <> "" then
-        Print( "\n\033[01mgap> S := R * \"", variables, "\";\033[m     #alternatively: 'gap> S := PolynomialRing( R, \"", variables, "\" );'\n" );
+        Print( "\n\033[01mgap> S := R[\"", variables, "\"];\033[m     #alternatively: 'gap> S := PolynomialRing( R, \"", variables, "\" );'\n" );
         S :=  R * variables;
-        Print( "\033[01mgap> Display( S );\033[m\n" );
-        Display( S );
+        Print( "\033[01mgap> S;\033[m\n" );
+        Display( StringView( S ) );
         
         Append( HOMALG_RINGS.NamesOfDefinedRings, ", S" );
         
@@ -150,17 +150,17 @@ elif mode = 1 then
         if diff_variables <> "" then
             Print( "\n\033[01mgap> T := RingOfDerivations( S, \"", diff_variables, "\" );\033[m\n" );
             T := RingOfDerivations( S, diff_variables );
-            Print( "\033[01mgap> Display( T );\033[m\n" );
-            Display( T );
+            Print( "\033[01mgap> T;\033[m\n" );
+            Display( StringView( T ) );;
             
             Append( HOMALG_RINGS.NamesOfDefinedRings, ", T" );
         fi;
     fi;
     
     if Length( HOMALG_RINGS.NamesOfDefinedRings ) = 1 then
-        Print( "\nThe ring \033[01m", HOMALG_RINGS.NamesOfDefinedRings, "\033[m has been created. Use Display( ", HOMALG_RINGS.NamesOfDefinedRings, " ) to view.\n" );
+        Print( "\nThe ring \033[01m", HOMALG_RINGS.NamesOfDefinedRings, "\033[m has been created..\n" );
     else
-        Print( "\nThe rings \033[01m", HOMALG_RINGS.NamesOfDefinedRings, "\033[m have been created. Use Display( . ) to view each.\n" );
+        Print( "\nThe rings \033[01m", HOMALG_RINGS.NamesOfDefinedRings, "\033[m have been created.\n" );
     fi;
     
 fi;

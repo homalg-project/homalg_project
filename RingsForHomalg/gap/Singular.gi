@@ -1189,7 +1189,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
-        Error( "the support for the ring Z/", c, "Z (", c, " non-prime) in Singular is not stable yet!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
+        return HomalgRingOfIntegersInSingular( ) / c;
     fi;
     
     ## we create GF(p)[dummy_variable] and feed only expressions without
