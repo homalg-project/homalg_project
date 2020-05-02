@@ -6,7 +6,7 @@ PackageName := "PolymakeInterface",
 Subtitle := "A package to provide algorithms for fans and cones of polymake to other packages",
 
 Version :=  Maximum( [
-  "2019.09.02", ## Sebas' version
+  "2020.04.30", ## Sebas' version
 ## this line prevents merge conflicts
 ] ),
 
