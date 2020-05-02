@@ -419,10 +419,10 @@
     [4X  ## get certain columns of a matrix:[104X
     [4X  CertainColumns                          := "|||",[104X
     [4X  [104X
-    [4X  ## stack to matrices vertically:[104X
+    [4X  ## stack matrices vertically:[104X
     [4X  UnionOfRows                             := "A_B",[104X
     [4X  [104X
-    [4X  ## glue to matrices horizontally:[104X
+    [4X  ## glue matrices horizontally:[104X
     [4X  UnionOfColumns                          := "A|B",[104X
     [4X  [104X
     [4X  ## create a block diagonal matrix:[104X
