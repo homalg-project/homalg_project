@@ -6,7 +6,7 @@
                           [1XTools for the [5Xhomalg[105X project[101X
   
   
-                               Version 2019.09.02
+                               Version 2020.04.30
   
   
                                  December 2014
@@ -23,7 +23,7 @@
             [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
             [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
             latest version is available [12Xonline[112X at:[133X
-            [33X[0;10Y[7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToolsForHomalg/chap0.html[107X[133X
+            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/ToolsForHomalg/doc/chap0.html[107X[133X
             [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
             documentation  subfolder of the package. This package is
             part of the [5Xhomalg[105X-project:[133X
