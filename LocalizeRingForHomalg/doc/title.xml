@@ -13,7 +13,7 @@
   <Subtitle>Localize Commutative &homalg; Rings at Maximal Ideals</Subtitle>
   <TitleComment>
     This manual is best viewed as an <B>HTML</B> document. The latest version is available <B>online</B> at: <Br/><Br/>
-      <URL>http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg/chap0.html</URL> <Br/><Br/>
+      <URL>https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg/doc/chap0.html</URL> <Br/><Br/>
     An <B>offline</B> version should be included in the documentation subfolder of the package.
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>

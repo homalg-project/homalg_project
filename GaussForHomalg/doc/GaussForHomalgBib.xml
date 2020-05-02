@@ -21,15 +21,15 @@
       applications (<C>EACA 2006</C>), Sevilla (Spain)</C></booktitle>
   <year>2006</year>
   <pages>29--32</pages>
-  <note><URL>http://homalg.math.rwth-aachen.de/maple/homalg_eaca06.pdf</URL></note>
+  <note><URL>https://www.algebra.mathematik.uni-siegen.de/barakat/eaca/homalg_eaca06.pdf</URL></note>
 </inproceedings></entry>
 <entry id="homalg-package"><manual>
   <author>
     <name><first>Mohamed</first><last>Barakat</last></name>
   </author>  
   <title>The homalg package -- GAP4</title>
-  <year>2007-2009</year>
-  <note><URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</URL></note>
+  <year>2007-2020</year>
+  <note><URL>https://homalg-project.github.io/homalg_project/homalg/</URL></note>
 </manual></entry>
 <entry id="BR"><article>
   <author>
