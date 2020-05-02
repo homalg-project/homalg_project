@@ -6,7 +6,7 @@
                           [1XA window to the outer world[101X
   
   
-                               Version 2020.04.25
+                               Version 2020.04.30
   
   
                                  September 2015
@@ -27,7 +27,7 @@
             [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
             [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
             latest version is available [12Xonline[112X at:[133X
-            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/~barakat/homalg-project/HomalgToCAS/chap0.html[107X[133X
+            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/HomalgToCAS/doc/chap0.html[107X[133X
             [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
             documentation subfolder of the package.[133X
             [33X[0;10YThis package is part of the [5Xhomalg[105X-project:[133X
