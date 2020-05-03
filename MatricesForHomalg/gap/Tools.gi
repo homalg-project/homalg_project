@@ -3437,6 +3437,22 @@ InstallMethod( Coefficients,
     
 end );
 
+##
+InstallMethod( DecomposeInMonomials,
+        "for a homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( poly )
+    local coeffs, monoms;
+    
+    coeffs := Coefficients( poly );
+    monoms := coeffs!.monomials;
+    coeffs := EntriesOfHomalgMatrix( coeffs );
+    
+    return ListN( coeffs, monoms, {a,b} -> [ a, b ] );
+    
+end );
+
 ##  <#GAPDoc Label="CoefficientsWithGivenMonomials:homalgTable_entry">
 ##  <ManSection>
 ##    <Func Arg="poly, monomials" Name="CoefficientsWithGivenMonomials" Label="homalgTable entry"/>

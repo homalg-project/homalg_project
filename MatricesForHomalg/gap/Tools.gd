@@ -116,6 +116,9 @@ DeclareOperation( "CoefficientsOfUnivariatePolynomial",
 DeclareOperation( "CoefficientOfUnivariatePolynomial",
         [ IsHomalgRingElement, IsInt ] );
 
+DeclareOperation( "DecomposeInMonomials",
+        [ IsHomalgRingElement ] );
+
 DeclareOperation( "LeadingCoefficient",
         [ IsHomalgRingElement, IsHomalgRingElement ] );
 
