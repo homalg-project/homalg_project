@@ -454,6 +454,30 @@ InstallMethod( DecideZero,
     
 end );
 
+##
+InstallMethod( Coefficients,
+        "for a homalg residue class ring element",
+        [ IsHomalgResidueClassRingElementRep ],
+        
+  function( poly )
+    local R, coeffs, monoms;
+    
+    R := HomalgRing( poly );
+    
+    poly := EvalRingElement( poly );
+    
+    coeffs := Coefficients( poly );
+    
+    monoms := List( coeffs!.monomials, a -> a / R );
+    
+    coeffs := R * coeffs;
+    
+    coeffs!.monomials := monoms;
+    
+    return coeffs;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
