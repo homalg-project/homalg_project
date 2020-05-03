@@ -763,7 +763,7 @@ InstallMethod( Coefficients,
     return coeffs;
     
 end );
-    
+
 ##
 InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
         "for a list",
@@ -771,7 +771,7 @@ InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
         
   function( generators_of_semigroup )
     local indet_string, relations, s, R, indeterminates,
-          i, left_side, right_side, j, I, J;
+          i, left_side, right_side, j, I, J, degree;
     
     if generators_of_semigroup = [ ] then
         return [ ];
@@ -787,17 +787,13 @@ InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
     
     relations := EntriesOfHomalgMatrixAsListList( relations );
     
-    if not IsBound( HOMALG_GRADED_RING.GF2 ) then
-        HOMALG_GRADED_RING.GF2 := GradedRing( HomalgRingOfIntegersInDefaultCAS( 2 ) );
+    if not IsBound( HOMALG_RINGS.DefaultCAS_GF2 ) then
+        HOMALG_RINGS.DefaultCAS_GF2 := HomalgRingOfIntegersInDefaultCAS( 2 );
     fi;
     
     s := NrRows( generators_of_semigroup );
     
-    R := HOMALG_GRADED_RING.GF2 * Concatenation( "t1..", String( s ) );
-    
-    R := GradedRing( R );
-    
-    SetWeightsOfIndeterminates( R, IdentityMat( s ) );
+    R := HOMALG_RINGS.DefaultCAS_GF2 * Concatenation( "t1..", String( s ) );
     
     indeterminates := Indeterminates( R );
     
@@ -826,7 +822,7 @@ InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
     I := Saturate( I, J );
     
     OnBasisOfPresentation( I );
-
+    
     I := MatrixOfSubobjectGenerators( I );
     
     if NrRows( I ) = 0 then
@@ -837,13 +833,9 @@ InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
     
     I := List( I, r -> Coefficients( r )!.monomials );
     
-    I := List( I, b -> Degree( b[1] ) - Degree( b[2] ) );
-
-    I := List( I, UnderlyingMorphism );
+    degree := DegreeOfRingElementFunction( R, IdentityMat( s ) );
     
-    I := List( I, MatrixOfMap );
-    
-    I := List( I, EntriesOfHomalgMatrix );
+    I := List( I, b -> degree( b[1] ) - degree( b[2] ) );
     
     Sort( I );
     
