@@ -9,7 +9,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2018.07.06", ## Kamal's version
 ## this line prevents merge conflicts
-  "2020.04.26", ## Mohamed's version
+  "2020.05.04", ## Mohamed's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -66,6 +66,7 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [ [ "io", ">=4.2" ] ],
   SuggestedOtherPackages := [ [ "AutoDoc", ">=2013.08.22" ]  ],
+  OtherPackagesLoadedInAdvance := [ [ "io", ">=4.2" ] ],
   ExternalConditions := []
                       
 ),
