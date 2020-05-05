@@ -27,6 +27,7 @@
 #!  Copy it in your GAP pkg-directory.
 #!  After this, the package can be loaded via LoadPackage( "4ti2Interface" );
 
+DeclareGlobalVariable( "4ti2Interface_BINARIES" );
 
 #! @Chapter 4ti2 functions
 

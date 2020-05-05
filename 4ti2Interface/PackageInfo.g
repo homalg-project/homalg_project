@@ -9,7 +9,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2018.07.06", ## Kamal's version
 ## this line prevents merge conflicts
-  "2020.05.04", ## Mohamed's version
+  "2020.05.05", ## Mohamed's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -66,9 +66,7 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [ [ "io", ">=4.2" ] ],
   SuggestedOtherPackages := [ [ "AutoDoc", ">=2013.08.22" ]  ],
-  OtherPackagesLoadedInAdvance := [ [ "io", ">=4.2" ] ],
-  ExternalConditions := []
-                      
+  ExternalConditions := [ [ "4ti2", "https://4ti2.github.io/" ] ],
 ),
 
 AvailabilityTest := function()
@@ -82,8 +80,8 @@ AvailabilityTest := function()
     bool :=
       ForAll( 4ti2_binaries,
               name ->
-              ( not ValueGlobal( "IO_FindExecutable" )( name ) = fail ) or
-              ( not ValueGlobal( "IO_FindExecutable" )( Concatenation( "4ti2-", name ) ) = fail ) );
+              ( not Filename(DirectoriesSystemPrograms(), name ) = fail ) or
+              ( not Filename(DirectoriesSystemPrograms(), Concatenation( "4ti2-", name ) ) = fail ) );
     
     if not bool then
         LogPackageLoadingMessage( PACKAGE_WARNING,

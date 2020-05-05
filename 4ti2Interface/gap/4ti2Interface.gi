@@ -8,6 +8,26 @@
 ##
 #############################################################################
 
+InstallValue( 4ti2Interface_BINARIES,
+        rec(
+            required_binaries := [ "groebner", "hilbert", "zsolve", "graver" ],
+            ) );
+
+for name in 4ti2Interface_BINARIES.required_binaries do
+    path := Filename( DirectoriesSystemPrograms(), name );
+    if IsStringRep( path ) then
+        4ti2Interface_BINARIES.(name) := path;
+        continue;
+    fi;
+    path := Filename( DirectoriesSystemPrograms(), Concatenation( "4ti2-", name ) );
+    if IsStringRep( path ) then
+        4ti2Interface_BINARIES.(name) := path;
+        continue;
+    fi;
+    ## the AvailabilityTest in the PackageInfo will prevent this error from being raised
+    Error( "4ti2 cannot be found on your system\n" );
+od;
+
 ##
 InstallGlobalFunction( 4ti2Interface_Cut_Vector,
                        
@@ -171,14 +191,8 @@ InstallGlobalFunction( 4ti2Interface_groebner,
         4ti2Interface_Write_Matrix_To_File( arg[ 2 ], Concatenation( filename, ".cost" ) );
         
     fi;
-    
-    if IO_FindExecutable( "groebner" ) <> fail then
-        exec := IO_FindExecutable( "groebner" );
-    elif IO_FindExecutable( "4ti2-groebner" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-groebner" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
+
+    exec := 4ti2Interface_BINARIES.groebner;
     
     precision := ValueOption( "precision" );
     
@@ -247,14 +261,8 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
     sign_list := [ List( matrix[ 1 ], i -> 0 ) ];
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
-    
-    if IO_FindExecutable( "hilbert" ) <> fail then
-        exec := IO_FindExecutable( "hilbert" );
-    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-hilbert" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
+
+    exec := 4ti2Interface_BINARIES.hilbert;
     
     precision := ValueOption( "precision" );
     
@@ -303,15 +311,9 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
     rel_list := [ List( matrix, i -> ">" ) ];
     
     4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
-    
-    if IO_FindExecutable( "hilbert" ) <> fail then
-        exec := IO_FindExecutable( "hilbert" );
-    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-hilbert" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
 
+    exec := 4ti2Interface_BINARIES.hilbert;
+    
     precision := ValueOption( "precision" );
     
     if IsInt( precision ) then
@@ -360,13 +362,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
     
     4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
     
-    if IO_FindExecutable( "hilbert" ) <> fail then
-        exec := IO_FindExecutable( "hilbert" );
-    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-hilbert" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
+    exec := 4ti2Interface_BINARIES.hilbert;
     
     precision := ValueOption( "precision" );
     
@@ -422,14 +418,8 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
     sign_list := [ List( concat_list[ 1 ] , i -> 0 ) ];
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
-    
-    if IO_FindExecutable( "hilbert" ) <> fail then
-        exec := IO_FindExecutable( "hilbert" );
-    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-hilbert" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
+
+    exec := 4ti2Interface_BINARIES.hilbert;
     
     precision := ValueOption( "precision" );
     
@@ -486,13 +476,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
     
-    if IO_FindExecutable( "hilbert" ) <> fail then
-        exec := IO_FindExecutable( "hilbert" );
-    elif IO_FindExecutable( "4ti2-hilbert" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-hilbert" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
+    exec := 4ti2Interface_BINARIES.hilbert;
     
     precision := ValueOption( "precision" );
     
@@ -585,14 +569,8 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     concat_rhs := [ Concatenation( eqs_rhs, ineqs_rhs ) ];
     
     4ti2Interface_Write_Matrix_To_File( concat_rhs, Concatenation( filename, ".rhs" ) );
-    
-    if IO_FindExecutable( "zsolve" ) <> fail then
-        exec := IO_FindExecutable( "zsolve" );
-    elif IO_FindExecutable( "4ti2-zsolve" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-zsolve" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
+
+    exec := 4ti2Interface_BINARIES.zsolve;
     
     precision := ValueOption( "precision" );
     
@@ -708,13 +686,7 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities,
     
     4ti2Interface_Write_Matrix_To_File( signs, Concatenation( filename, ".sign" ) );
     
-    if IO_FindExecutable( "graver" ) <> fail then
-        exec := IO_FindExecutable( "graver" );
-    elif IO_FindExecutable( "4ti2-graver" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-graver" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
+    exec := 4ti2Interface_BINARIES.graver;
     
     precision := ValueOption( "precision" );
     
@@ -755,13 +727,7 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
     
     4ti2Interface_Write_Matrix_To_File( eqs, Concatenation( filename, ".mat" ) );
 
-    if IO_FindExecutable( "graver" ) <> fail then
-        exec := IO_FindExecutable( "graver" );
-    elif IO_FindExecutable( "4ti2-graver" ) <> fail then
-        exec := IO_FindExecutable( "4ti2-graver" );
-    else
-        Error( "4ti2 can not be found" );
-    fi;
+    exec := 4ti2Interface_BINARIES.graver;
     
     precision := ValueOption( "precision" );
     
