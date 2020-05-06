@@ -23,3 +23,29 @@ InstallOtherMethod( \[\],
     return R[indets];
     
 end );
+
+##
+InstallOtherMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsJuliaObject ], 1001,
+        
+  function( M, rows )
+    
+    rows := JuliaToGAP( IsList, rows );
+    
+    return CertainRows( M, rows );
+    
+end );
+
+##
+InstallOtherMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsJuliaObject ], 1001,
+        
+  function( M, cols )
+    
+    cols := JuliaToGAP( IsList, cols );
+    
+    return CertainColumns( M, cols );
+    
+end );
