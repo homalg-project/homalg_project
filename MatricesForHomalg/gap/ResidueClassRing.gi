@@ -160,7 +160,7 @@ InstallMethod( BaseRing,
         TryNextMethod( );
     fi;
     
-    return BaseRing( A ) / Eliminate( DefiningIdeal( R ) );
+    return BaseRing( A ) / Eliminate( MatrixOfRelations( R ) );
     
 end );
 
