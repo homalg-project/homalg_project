@@ -625,7 +625,8 @@ InstallMethod( ExportRationalParameters,
     params := RationalParameters( R );
     
     for x in params do
-        x_name := String( x );
+        x_name := ShallowCopy( String( x ) );
+        RemoveCharacters( x_name, "()" );
         if IsBoundGlobal( x_name ) then
             if not IsHomalgRingElement( ValueGlobal( x_name ) ) then
                 Error( "the name ", x_name, " is not bound to a homalg ring element\n" );
