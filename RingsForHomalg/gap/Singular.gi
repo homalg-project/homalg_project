@@ -1324,8 +1324,12 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
         fi;
         
         Q := CallFuncList( HomalgFieldOfRationalsInSingular, arg );
-        
-        R := [ "(0,", JoinStringsWithSeparator( param ), "),dummy_variable,(dp,c)" ];
+
+        if param = [ ] then
+            R := "0,dummy_variable,(dp,c)";
+        else
+            R := [ "(0,", JoinStringsWithSeparator( param ), "),dummy_variable,(dp,c)" ];
+        fi;
         
     else
         
@@ -1357,7 +1361,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     
     R := CallFuncList( RingForHomalgInSingular, R );
     
-    if IsBound( param ) then
+    if IsBound( param ) and not IsEmpty( param ) then
         
         param := List( param, function( a ) local r; r := HomalgExternalRingElement( a, R ); SetName( r, a ); return r; end );
         
