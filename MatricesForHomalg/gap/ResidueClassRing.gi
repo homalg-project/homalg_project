@@ -569,7 +569,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         [ IsHomalgRing, IsHomalgRingRelations ],
         
   function( R, ring_rel )
-    local A, RP, S, mat, rel, left, rel_old, mat_old, left_old, c;
+    local A, RP, S, mat, rel, left, rel_old, mat_old, left_old, c, param, paramS;
     
     if IsHomalgResidueClassRingRep( R ) then
         A := AmbientRing( R );
@@ -678,6 +678,13 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         if IsInt( c ) then
             SetRingProperties( S, c );
         fi;
+    fi;
+    
+    if HasRationalParameters( R ) then
+        param := RationalParameters( R );
+        paramS := List( param, a -> a / S );
+        Perform( [ 1 .. Length( param ) ], function( i ) SetName( paramS[i], Name( param[i] ) ); end );
+        SetRationalParameters( S, paramS );
     fi;
     
     return S;

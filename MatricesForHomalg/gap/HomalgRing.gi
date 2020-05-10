@@ -660,8 +660,8 @@ InstallMethod( ExportVariables,
   function( R )
     
     return Concatenation(
-                   ExportIndeterminates( R ),
-                   ExportRationalParameters( R ) );
+                   ExportRationalParameters( R ),
+                   ExportIndeterminates( R ) );
     
 end );
 
