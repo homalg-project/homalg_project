@@ -1693,7 +1693,8 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     RP!.Compose :=
       function( A, B )
         
-        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
+        # fix the broken design of Plural
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
         
     end;
     
@@ -1842,7 +1843,8 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     RP!.Compose :=
       function( A, B )
         
-        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
+        # fix the broken design of Plural
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
         
     end;
     
@@ -2001,7 +2003,8 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     RP!.Compose :=
       function( A, B )
         
-        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # see RingOfDerivations
+        # fix the broken design of SCA
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
         
     end;
     
