@@ -217,7 +217,7 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2020.06.27" ],
-                   [ "HomalgToCAS", ">= 2020.06.27" ],
+                   [ "HomalgToCAS", ">= 2020.06.28" ],
                    [ "GaussForHomalg", ">= 2020.06.27" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],

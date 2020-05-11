@@ -18,6 +18,20 @@
 InstallValue( CommonHomalgTableForSingularTools,
         
         rec(
+               TurnOnRedSB :=
+                 function( R )
+                   
+                   homalgSendBlocking( [ "option(redSB)" ] , "need_command", R, "option" );
+                   
+                 end,
+               
+               TurnOffRedSB :=
+                 function( R )
+                   
+                   homalgSendBlocking( [ "option(noredSB)" ] , "need_command", R, "option" );
+                   
+                 end,
+               
                Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ "0" ], [ "number" ], R, "Zero" ), "Singular", IsZero ),
                
                One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "1" ], [ "number" ], R, "One" ), "Singular", IsOne ),

@@ -67,6 +67,9 @@ InstallValue( HOMALG_IO,
                 ## memory usage:
                 memory                                  := "mem",
                 
+                ## set option:
+                option                                  := "opt",
+                
                 ## unknown:
                 unknown                                 := "???",
                 
