@@ -26,6 +26,8 @@ DeclareGlobalFunction( "_PrepareInputForRingOfDerivations" );
 
 DeclareGlobalFunction( "_PrepareInputForExteriorRing" );
 
+DeclareGlobalFunction( "_PrepareInputForPseudoDoubleShiftAlgebra" );
+
 # constructor methods:
 
 DeclareGlobalFunction( "HomalgRingOfIntegersInDefaultCAS" );

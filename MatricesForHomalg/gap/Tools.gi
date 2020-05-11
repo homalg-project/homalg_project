@@ -3425,6 +3425,10 @@ InstallMethod( Coefficients,
         indets := RelativeIndeterminateAntiCommutingVariablesOfExteriorRing( R );
     elif HasIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
         indets := IndeterminateAntiCommutingVariablesOfExteriorRing( R );
+    elif HasIndeterminateShiftsOfPseudoDoubleShiftAlgebra( R ) then
+        indets := IndeterminateShiftsOfPseudoDoubleShiftAlgebra( R );
+    elif HasIndeterminateShiftsOfDoubleShiftAlgebra( R ) then
+        indets := IndeterminateShiftsOfDoubleShiftAlgebra( R );
     else
         TryNextMethod( );
     fi;

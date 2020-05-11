@@ -2032,6 +2032,261 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 end );
 
 ##
+InstallMethod( PseudoDoubleShiftAlgebra,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep, IsList ],
+        
+  function( R, indets )
+    local ar, r, var, shift, param, base, stream, display_color, ext_obj,
+          b, n, steps, d, P, RP, Ds, D_s, S, B, T, Y;
+    
+    ar := _PrepareInputForPseudoDoubleShiftAlgebra( R, indets );
+    
+    r := ar[1];
+    var := ar[2];
+    shift := ar[3];
+    param := ar[4];
+    base := ar[5];
+    
+    stream := homalgStream( R );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false )
+         and not ( IsBound( stream.show_banner_PLURAL ) and stream.show_banner_PLURAL = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        Print( "================================================================\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+                     SINGULAR::PLURAL\n\
+The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
+     by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
+FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
+================================================================\n" );
+        
+        stream.show_banner_PLURAL := false;
+        
+    fi;
+    
+    ## create the new ring in 2 steps: expand polynomial ring with shifts and then
+    ## add the shift-structure
+    ## todo: this creates a block ordering with a new "dp"-block
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        if base <> "" then
+            #ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        else
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, shift, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        fi;
+    else
+        if base <> "" then
+            #ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+        else
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+        fi;
+    fi;
+    
+    ## as we are not yet done we cannot call CreateHomalgExternalRing
+    ## to create a HomalgRing, and only then would homalgSendBlocking call stream.setring,
+    ## so till then we have to prevent the garbage collector from stepping in
+    stream.DeletePeriod_save := stream.DeletePeriod;
+    stream.DeletePeriod := false;
+    
+    b := Length( base );
+    n := b + Length( var ) + Length( shift );
+    
+    homalgSendBlocking( [ "matrix @d[", n, "][", n, "]" ], "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
+    
+    n := Length( shift ) / 2;
+    
+    steps := ValueOption( "steps" );
+    
+    if IsRat( steps ) then
+        steps := ListWithIdenticalEntries( n, steps );
+    elif not ( IsList( steps ) and Length( steps ) = n and ForAll( steps, IsRat ) ) then
+        steps := ListWithIdenticalEntries( n, 1 );
+    fi;
+    
+    if IsIdenticalObj( ValueOption( "pairs" ), true ) then
+        d := Concatenation(
+                     List( [ 1 .. n ],
+                           i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i - 1 ) ), "] = (", String( steps[i] ), ") * ", shift[2 * i - 1] ) ),
+                     List( [ 1 .. n ],
+                           i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i ) ), "] = -(", String( steps[i] ), ") * ", shift[2 * i] ) ) );
+    else
+        d := Concatenation(
+                     List( [ 1 .. n ],
+                           i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( i ) ), "] = (", String( steps[i] ), ") * ", shift[i] ) ),
+                     List( [ 1 .. n ],
+                           i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( n + i ) ), "] = -(", String( steps[i] ), ") * ", shift[n + i] ) ) );
+    fi;
+    
+    homalgSendBlocking( JoinStringsWithSeparator( d, "; " ), "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
+    
+    ext_obj := homalgSendBlocking( [ "nc_algebra(1,@d)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+    ## this must precede CreateHomalgExternalRing as otherwise
+    ## the definition of 0,1,-1 would precede "minpoly=";
+    ## causing an error in the new Singular
+    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+    fi;
+    
+    P := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    ## now it is safe to call the garbage collector
+    stream.DeletePeriod := stream.DeletePeriod_save;
+    Unbind( stream.DeletePeriod_save );
+    
+    var := List( var , a -> HomalgExternalRingElement( a, P ) );
+    
+    Perform( var, Name );
+    
+    shift := List( shift , a -> HomalgExternalRingElement( a, P ) );
+    
+    Perform( shift, Name );
+    
+    SetIsPseudoDoubleShiftAlgebra( P, true );
+    
+    SetBaseRing( P, R );
+    
+    SetRingProperties( P, R, shift );
+    
+    RP := homalgTable( P );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( Concatenation(
+                [ "\nproc Involution (matrix M)\n{\n" ],
+                [ "  map F = ", R, ", " ],
+                [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( R ), a -> [ ", -" , String( a ) ] ) ) ],
+                Concatenation( List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( R ), String ) ),
+                [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
+                ), "need_command", HOMALG_IO.Pictograms.define );
+    end;
+    
+    homalgStream( P ).setinvol( P );
+    
+    RP!.Compose :=
+      function( A, B )
+        
+        # fix the broken design of Plural
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
+        
+    end;
+    
+    ## there exists a bug in Plural (3-0-4,3-1-0) that occurs with nres(M,2)[2];
+    if homalgSendBlocking( "\n\
+// start: check the nres-isHomog-bug in Plural:\n\
+ring homalg_Weyl_1 = 0,(x,y,z,Dx,Dy,Dz),dp;\n\
+def homalg_Weyl_2 = Weyl();\n\
+setring homalg_Weyl_2;\n\
+option(redTail);short=0;\n\
+matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
+matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
+ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_Weyl_2; kill homalg_Weyl_1;\n\
+// end: check the nres-isHomog-bug in Plural."
+    , "need_output", P, HOMALG_IO.Pictograms.initialize ) = "1" then;
+    
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
+    fi;
+    
+    _Singular_SetRing( P );
+    
+    ## there seems to exists a bug in Plural that occurs with mres(M,1)[1];
+    Unbind( RP!.ReducedBasisOfRowModule );
+    Unbind( RP!.ReducedBasisOfColumnModule );
+    
+    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+        Unbind( RP!.IsUnit );
+        Unbind( RP!.GetColumnIndependentUnitPositions );
+        Unbind( RP!.GetRowIndependentUnitPositions );
+        Unbind( RP!.GetUnitPosition );
+    fi;
+    
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
+        RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
+        RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
+        RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        RP!.RadicalSubobject := RP!.RadicalSubobject_Z;
+        RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
+        Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
+        Unbind( RP!.MaximalDegreePart );
+    fi;
+    
+    shift := List( shift, String );
+    
+    if IsIdenticalObj( ValueOption( "pairs" ), true ) then
+        Ds := shift{List( [ 1 .. n ], i -> 2 * i - 1 )};
+        D_s := shift{List( [ 1 .. n ], i -> 2 * i )};
+    else
+        Ds := shift{[ 1 .. n ]};
+        D_s := shift{[ n + 1 .. 2 * n ]};
+    fi;
+    
+    ## the "commutative" double-shift algebra
+    S := R * shift;
+    
+    ## does not reduce elements instantaneously
+    ## S := HomalgQRingInSingular( AmbientRing( S ), RingRelations( S ) );
+    
+    P!.CommutativeDoubleShiftAlgebra := S / ListN( Ds, D_s, {d, d_} -> ( d / S ) * ( d_ / S ) - 1 );
+
+    ## the Laurent algebra
+    B := BaseRing( R );
+    
+    T := B * shift;
+    
+    P!.LaurentAlgebra := T / ListN( Ds, D_s, {d, d_} -> ( d / T ) * ( d_ / T ) - 1 );
+    
+    ## the double-shift algebra
+    Y := P / ListN( Ds, D_s, {d, d_} -> ( d / P ) * ( d_ / P ) - 1 );
+    
+    Y!.CommutativeDoubleShiftAlgebra := P!.CommutativeDoubleShiftAlgebra;
+    Y!.LaurentAlgebra := P!.LaurentAlgebra;
+    
+    SetBaseRing( Y, BaseRing( P ) );
+    
+    SetIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
+            List( IndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+    
+    SetRelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
+            List( RelativeIndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+    
+    SetIndeterminateShiftsOfDoubleShiftAlgebra( Y,
+            List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+    
+    P!.DoubleShiftAlgebra := Y;
+    
+    return P;
+    
+end );
+
+##
+InstallMethod( DoubleShiftAlgebra,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep, IsList ],
+        
+  function( R, indets )
+    local P;
+    
+    P := PseudoDoubleShiftAlgebra( R, indets );
+    
+    return P!.DoubleShiftAlgebra;
+    
+end );
+
+##
 InstallMethod( HomalgQRingInSingular,
         "for a homalg ring in Singular and ring relations",
         [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsHomalgRingRelations ],
