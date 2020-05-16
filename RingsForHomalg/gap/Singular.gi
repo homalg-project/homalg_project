@@ -1622,9 +1622,9 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
         if base <> "" then
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, der, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, der, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
         else
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
         fi;
     else
         if base <> "" then
@@ -1789,7 +1789,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## add the Weyl-structure
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     else
         ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     fi;
@@ -2079,10 +2079,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
         if base <> "" then
-            #ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            #ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
         else
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, shift, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
         fi;
     else
         if base <> "" then
