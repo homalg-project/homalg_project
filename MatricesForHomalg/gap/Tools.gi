@@ -3429,6 +3429,8 @@ InstallMethod( Coefficients,
         indets := IndeterminateShiftsOfPseudoDoubleShiftAlgebra( R );
     elif HasIndeterminateShiftsOfDoubleShiftAlgebra( R ) then
         indets := IndeterminateShiftsOfDoubleShiftAlgebra( R );
+    elif HasIndeterminateShiftsOfBiasedDoubleShiftAlgebra( R ) then
+        indets := IndeterminateShiftsOfBiasedDoubleShiftAlgebra( R );
     else
         TryNextMethod( );
     fi;

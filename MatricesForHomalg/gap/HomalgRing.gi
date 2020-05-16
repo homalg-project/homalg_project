@@ -114,6 +114,13 @@ InstallValue( CommonHomalgTableForRings,
                     
                     brackets := [ "<", ">" ];
                     
+                ## the biased double-shift algebra:
+                elif HasIndeterminateShiftsOfBiasedDoubleShiftAlgebra( R ) then
+                    
+                    var := IndeterminateShiftsOfBiasedDoubleShiftAlgebra( R );
+                    
+                    brackets := [ "<", ">" ];
+                    
                 ## the (free) polynomial ring (relative version):
                 elif HasBaseRing( R ) and HasRelativeIndeterminatesOfPolynomialRing( R ) and
                   not IsIdenticalObj( R, BaseRing( R ) ) then
@@ -575,6 +582,21 @@ InstallMethod( Indeterminates,
       Concatenation(
               IndeterminateCoordinatesOfDoubleShiftAlgebra( R ),
               IndeterminateShiftsOfDoubleShiftAlgebra( R )
+              );
+    
+end );
+
+##
+InstallMethod( Indeterminates,
+        "for homalg rings",
+        [ IsHomalgRing and HasIndeterminateCoordinatesOfBiasedDoubleShiftAlgebra ],
+        
+  function( R )
+    
+    return
+      Concatenation(
+              IndeterminateCoordinatesOfBiasedDoubleShiftAlgebra( R ),
+              IndeterminateShiftsOfBiasedDoubleShiftAlgebra( R )
               );
     
 end );
@@ -1362,6 +1384,75 @@ InstallMethod( SetRingProperties,
     fi;
     
     SetIndeterminateShiftsOfPseudoDoubleShiftAlgebra( S, shift );
+    
+    if d > 0 then
+        SetIsLeftArtinian( S, false );
+        SetIsRightArtinian( S, false );
+    fi;
+    
+    SetIsLeftNoetherian( S, true );
+    SetIsRightNoetherian( S, true );
+    
+    if HasIsIntegralDomain( r ) and IsIntegralDomain( r ) then
+        SetIsIntegralDomain( S, true );
+    fi;
+    
+    if d > 0 then
+        SetIsLeftPrincipalIdealRing( S, false );
+        SetIsRightPrincipalIdealRing( S, false );
+        SetIsPrincipalIdealRing( S, false );
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "for homalg rings",
+        [ IsHomalgRing and IsBiasedDoubleShiftAlgebra, IsHomalgRing and IsFreePolynomialRing, IsList ],
+        
+  function( S, R, shift )
+    local r, b, param, paramS, var, d;
+    
+    r := CoefficientsRing( R );
+    
+    if HasBaseRing( R ) then
+        b := BaseRing( R );
+    else
+        b := r;
+    fi;
+    
+    var := IndeterminatesOfPolynomialRing( R );
+    var := List( var, a -> a / S );
+    
+    d := Length( var );
+    
+    if d > 0 then
+        SetIsFinite( S, false );
+    fi;
+    
+    SetCoefficientsRing( S, r );
+    
+    if HasRationalParameters( r ) then
+        param := RationalParameters( r );
+        paramS := List( param, a -> a / S );
+        Perform( [ 1 .. Length( param ) ], function( i ) SetName( paramS[i], Name( param[i] ) ); end );
+        SetRationalParameters( S, paramS );
+    fi;
+    
+    SetCharacteristic( S, Characteristic( R ) );
+    
+    SetIsCommutative( S, shift = [ ] );
+    
+    SetIndeterminateCoordinatesOfBiasedDoubleShiftAlgebra( S, var );
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        SetRelativeIndeterminateCoordinatesOfBiasedDoubleShiftAlgebra(
+                S, RelativeIndeterminatesOfPolynomialRing( R ) );
+    fi;
+    
+    SetIndeterminateShiftsOfBiasedDoubleShiftAlgebra( S, shift );
     
     if d > 0 then
         SetIsLeftArtinian( S, false );

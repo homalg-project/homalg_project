@@ -333,6 +333,19 @@ DeclareProperty( "IsPseudoDoubleShiftAlgebra",
 DeclareProperty( "IsDoubleShiftAlgebra",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IsBiasedDoubleShiftAlgebra">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsBiasedDoubleShiftAlgebra"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsBiasedDoubleShiftAlgebra",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IsGlobalDimensionFinite">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsGlobalDimensionFinite"/>
@@ -1302,6 +1315,45 @@ DeclareAttribute( "RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra",
 DeclareAttribute( "IndeterminateShiftsOfDoubleShiftAlgebra",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IndeterminateCoordinatesOfBiasedDoubleShiftAlgebra">
+##  <ManSection>
+##    <Attr Arg="R" Name="IndeterminateCoordinatesOfBiasedDoubleShiftAlgebra"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>
+##      The list of indeterminate coordinates of the &homalg; biased double-shift algebra <A>R</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "IndeterminateCoordinatesOfBiasedDoubleShiftAlgebra",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="RelativeIndeterminateCoordinatesOfBiasedDoubleShiftAlgebra">
+##  <ManSection>
+##    <Attr Arg="R" Name="RelativeIndeterminateCoordinatesOfBiasedDoubleShiftAlgebra"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>
+##      The list of relative indeterminate coordinates of the &homalg; biased double-shift algebra <A>R</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "RelativeIndeterminateCoordinatesOfBiasedDoubleShiftAlgebra",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="IndeterminateShiftsOfBiasedDoubleShiftAlgebra">
+##  <ManSection>
+##    <Attr Arg="R" Name="IndeterminateShiftsOfBiasedDoubleShiftAlgebra"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>
+##      The list of indeterminate shifts of the &homalg; biased double-shift algebra <A>R</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "IndeterminateShiftsOfBiasedDoubleShiftAlgebra",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="CoefficientsRing">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="CoefficientsRing"/>
@@ -1558,6 +1610,9 @@ DeclareOperation( "PseudoDoubleShiftAlgebra",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "DoubleShiftAlgebra",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "BiasedDoubleShiftAlgebra",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "UnivariatePolynomial",
