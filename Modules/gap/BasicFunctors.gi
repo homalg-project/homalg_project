@@ -273,7 +273,7 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             
             mat_old := MatrixOfMap( mor, s, t );
             
-            return ConvertMatrixToColumn( mat_old );
+            return ConvertTransposedMatrixToColumn( mat_old );
         end;
         
         proc_to_readjust_generators :=
@@ -286,7 +286,7 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             r := CallFuncList( NrGenerators, M_with_s );
             c := CallFuncList( NrGenerators, N_with_t );
             
-            mat_old := ConvertColumnToMatrix( gen, r, c );
+            mat_old := ConvertColumnToTransposedMatrix( gen, r, c );
             
             ## the matrix of the morphism will be displayed
             ## w.r.t. the CURRENT generators of source and target
@@ -324,7 +324,7 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             
             mat_old := MatrixOfMap( mor, s, t );
             
-            return ConvertMatrixToRow( mat_old );
+            return ConvertTransposedMatrixToRow( mat_old );
         end;
         
         proc_to_readjust_generators :=
@@ -337,7 +337,7 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             c := CallFuncList( NrGenerators, M_with_s );
             r := CallFuncList( NrGenerators, N_with_t );
             
-            mat_old := ConvertRowToMatrix( gen, r, c );
+            mat_old := ConvertRowToTransposedMatrix( gen, r, c );
             
             ## the matrix of the morphism will be displayed
             ## w.r.t. the CURRENT generators of source and target

@@ -2798,7 +2798,7 @@ InstallMethod( GetCleanRowsPositions,
 end );
 
 ##
-InstallMethod( ConvertRowToMatrix,
+InstallMethod( ConvertRowToTransposedMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsInt, IsInt ],
         
@@ -2817,8 +2817,8 @@ InstallMethod( ConvertRowToMatrix,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.ConvertRowToMatrix) then
-        ext_obj := RP!.ConvertRowToMatrix( M, r, c );
+    if IsBound(RP!.ConvertRowToTransposedMatrix) then
+        ext_obj := RP!.ConvertRowToTransposedMatrix( M, r, c );
         return HomalgMatrix( ext_obj, r, c, R );
     fi;
     
@@ -2838,7 +2838,7 @@ InstallMethod( ConvertRowToMatrix,
 end );
 
 ##
-InstallMethod( ConvertColumnToMatrix,
+InstallMethod( ConvertColumnToTransposedMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsInt, IsInt ],
         
@@ -2857,8 +2857,8 @@ InstallMethod( ConvertColumnToMatrix,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.ConvertColumnToMatrix) then
-        ext_obj := RP!.ConvertColumnToMatrix( M, r, c );
+    if IsBound(RP!.ConvertColumnToTransposedMatrix) then
+        ext_obj := RP!.ConvertColumnToTransposedMatrix( M, r, c );
         return HomalgMatrix( ext_obj, r, c, R );
     fi;
     
@@ -2869,7 +2869,7 @@ InstallMethod( ConvertColumnToMatrix,
 end );
 
 ##
-InstallMethod( ConvertMatrixToRow,
+InstallMethod( ConvertTransposedMatrixToRow,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -2888,8 +2888,8 @@ InstallMethod( ConvertMatrixToRow,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.ConvertMatrixToRow) then
-        ext_obj := RP!.ConvertMatrixToRow( M );
+    if IsBound(RP!.ConvertTransposedMatrixToRow) then
+        ext_obj := RP!.ConvertTransposedMatrixToRow( M );
         return HomalgMatrix( ext_obj, 1, NrRows( M ) * NrColumns( M ), R );
     fi;
     
@@ -2911,7 +2911,7 @@ InstallMethod( ConvertMatrixToRow,
 end );
 
 ##
-InstallMethod( ConvertMatrixToColumn,
+InstallMethod( ConvertTransposedMatrixToColumn,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -2930,8 +2930,8 @@ InstallMethod( ConvertMatrixToColumn,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.ConvertMatrixToColumn) then
-        ext_obj := RP!.ConvertMatrixToColumn( M );
+    if IsBound(RP!.ConvertTransposedMatrixToColumn) then
+        ext_obj := RP!.ConvertTransposedMatrixToColumn( M );
         return HomalgMatrix( ext_obj, NrColumns( M ) * NrRows( M ), 1, R );
     fi;
     

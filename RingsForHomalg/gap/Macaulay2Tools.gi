@@ -412,7 +412,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
-               ConvertRowToMatrix :=
+               ConvertRowToTransposedMatrix :=
                  function( M, r, c )
                    local R;
                    
@@ -422,7 +422,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
-               ConvertColumnToMatrix :=
+               ConvertColumnToTransposedMatrix :=
                  function( M, r, c )
                    local R;
                    
@@ -432,7 +432,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
-               ConvertMatrixToRow :=
+               ConvertTransposedMatrixToRow :=
                  function( M )
                    local R;
                    
@@ -442,7 +442,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
-               ConvertMatrixToColumn :=
+               ConvertTransposedMatrixToColumn :=
                  function( M )
                    local R;
                    

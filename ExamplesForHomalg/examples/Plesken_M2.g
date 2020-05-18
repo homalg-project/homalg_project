@@ -9,7 +9,7 @@ a, b, \
 c, d  \
 ]", 2, 2, R );
 
-M := ConvertMatrixToColumn( A^2 );
+M := ConvertTransposedMatrixToColumn( A^2 );
 
 M := LeftPresentation( M );
 

@@ -8,11 +8,11 @@ wmat := HomalgMatrix( " \
 Display( wmat );
 r := NrRows( wmat );
 c := NrColumns( wmat );
-kmat := ConvertMatrixToRow( wmat );
+kmat := ConvertTransposedMatrixToRow( wmat );
 Display( kmat );
-hmat := ConvertRowToMatrix( kmat, r, c );
+hmat := ConvertRowToTransposedMatrix( kmat, r, c );
 Display( hmat );
-kmat := ConvertMatrixToColumn( wmat );
+kmat := ConvertTransposedMatrixToColumn( wmat );
 Display( kmat );
-hmat := ConvertColumnToMatrix( kmat, r, c );
+hmat := ConvertColumnToTransposedMatrix( kmat, r, c );
 Display( hmat );

@@ -392,31 +392,31 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
-               ConvertRowToMatrix :=
+               ConvertRowToTransposedMatrix :=
                  function( M, r, c )
                    
-                   return homalgSendBlocking( [ "ConvertRowToMatrix(", M, r, c, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
+                   return homalgSendBlocking( [ "ConvertRowToTransposedMatrix(", M, r, c, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
                    
                  end,
                
-               ConvertColumnToMatrix :=
+               ConvertColumnToTransposedMatrix :=
                  function( M, r, c )
                    
-                   return homalgSendBlocking( [ "ConvertColumnToMatrix(", M, r, c, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
+                   return homalgSendBlocking( [ "ConvertColumnToTransposedMatrix(", M, r, c, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
                    
                  end,
                
-               ConvertMatrixToRow :=
+               ConvertTransposedMatrixToRow :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "ConvertMatrixToRow(", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
+                   return homalgSendBlocking( [ "ConvertTransposedMatrixToRow(", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
                    
                  end,
                
-               ConvertMatrixToColumn :=
+               ConvertTransposedMatrixToColumn :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "ConvertMatrixToColumn(", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToColumn );
+                   return homalgSendBlocking( [ "ConvertTransposedMatrixToColumn(", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToColumn );
                    
                  end,
                

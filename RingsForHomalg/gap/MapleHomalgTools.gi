@@ -342,22 +342,24 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
-               ConvertRowToMatrix :=
+               ConvertRowToTransposedMatrix :=
                  function( M, r, c )
                    local R;
                    
                    R := HomalgRing( M );
-                   
+
+                   ## `homalg/ConvertRowToMatrix` is correct
                    return homalgSendBlocking( [ "`homalg/ConvertRowToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
                    
                  end,
                
-               ConvertColumnToMatrix :=
+               ConvertColumnToTransposedMatrix :=
                  function( M, r, c )
                    local R;
                    
                    R := HomalgRing( M );
-                   
+
+                   ## `homalg/ConvertColumnToMatrix` is correct
                    return homalgSendBlocking( [ "`homalg/ConvertColumnToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
                    
                  end,

@@ -1068,16 +1068,16 @@ DeclareOperation( "CopyColumnToIdentityMatrix",
 DeclareOperation( "SetColumnToZero",
         [ IsHomalgMatrix, IsInt, IsInt ] );
 
-DeclareOperation( "ConvertRowToMatrix",
+DeclareOperation( "ConvertRowToTransposedMatrix",
         [ IsHomalgMatrix, IsInt, IsInt ] );
 
-DeclareOperation( "ConvertColumnToMatrix",
+DeclareOperation( "ConvertColumnToTransposedMatrix",
         [ IsHomalgMatrix, IsInt, IsInt ] );
 
-DeclareOperation( "ConvertMatrixToRow",
+DeclareOperation( "ConvertTransposedMatrixToRow",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "ConvertMatrixToColumn",
+DeclareOperation( "ConvertTransposedMatrixToColumn",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "Involution",
