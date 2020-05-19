@@ -2882,7 +2882,7 @@ InstallMethod( ConvertTransposedMatrixToRow,
     
     R := HomalgRing( M );
     
-    if HasIsZero( M ) and IsZero( M ) then
+    if IsZero( M ) then
         return HomalgZeroMatrix( 1, NrRows( M ) * NrColumns( M ), R );
     fi;
     
@@ -2924,7 +2924,7 @@ InstallMethod( ConvertTransposedMatrixToColumn,
     
     R := HomalgRing( M );
     
-    if HasIsZero( M ) and IsZero( M ) then
+    if IsZero( M ) then
         return HomalgZeroMatrix( NrRows( M ) * NrColumns( M ), 1, R );
     fi;
     
