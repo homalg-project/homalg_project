@@ -62,7 +62,7 @@ InstallGlobalFunction( 4ti2Interface_Read_Matrix_From_File,
     
     if not IsExistingFile( filename ) then
         
-        return [ ];
+        Error( "this file ", filename, " does not exist, it should have been created by 4ti2\n" );
         
     fi;
     
@@ -161,7 +161,7 @@ end );
 ##
 InstallGlobalFunction( 4ti2Interface_groebner,
   function( arg )
-    local matrix, dir, filename, exec, precision, filestream;
+    local matrix, dir, filename, exec, precision, filestream, err;
     
     if Length( arg ) < 1 then
         
@@ -208,11 +208,19 @@ InstallGlobalFunction( 4ti2Interface_groebner,
     
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
+    fi;
     
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gro" ) );
     
@@ -240,7 +248,7 @@ end );
 InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
                        
   function( matrix )
-    local dir, filename, rel_list, sign_list, exec, precision, filestream;
+    local dir, filename, rel_list, sign_list, exec, precision, filestream, err;
     
     if matrix = [ ] then
         
@@ -278,11 +286,19 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
     
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
+    fi;
     
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
@@ -294,7 +310,7 @@ end );
 InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
                        
   function( matrix )
-    local dir, filename, rel_list, sign_list, exec, precision, filestream;
+    local dir, filename, rel_list, sign_list, exec, precision, filestream, err;
     
     if matrix = [ ] then
         
@@ -328,11 +344,19 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
 
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
+    fi;
     
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
@@ -344,7 +368,7 @@ end );
 InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
                        
   function( matrix )
-    local dir, filename, rel_list, sign_list, exec, precision, filestream;
+    local dir, filename, rel_list, sign_list, exec, precision, filestream, err;
     
     if matrix = [ ] then
         
@@ -378,11 +402,19 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
     
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
+    fi;
     
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
@@ -395,7 +427,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
                        
   function( eqs, ineqs )
     local concat_list, dir, filename, rel_list, sign_list,
-          return_matrix, exec, precision, filestream;
+          exec, precision, filestream, err, return_matrix;
     
     if eqs = [ ] and ineqs = [ ] then
         
@@ -435,11 +467,19 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
     
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
+    fi;
     
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
@@ -452,7 +492,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
                        
   function( eqs, ineqs )
     local concat_list, dir, filename, rel_list, sign_list,
-          exec, precision, filestream, return_matrix;
+          exec, precision, filestream, err, return_matrix;
     
     if eqs = [ ] and ineqs = [ ] then
         
@@ -492,11 +532,19 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
     
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
+    fi;
     
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
@@ -510,7 +558,7 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
   function( arg )
     local eqs, eqs_rhs, ineqs, ineqs_rhs, signs,
           concat_list, dir, filename, rel_list, concat_rhs,
-          return_matrix, exec, filestream, precision, std_err_out;
+          exec, precision, filestream, err, return_matrix;
     
     if Length( arg ) < 4 then
         
@@ -586,9 +634,9 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
-    while IO_ReadLine( filestream.stdout ) <> "" do od;
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
     
-    std_err_out := Concatenation( IO_ReadLines( filestream.stderr ) );
+    while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
@@ -596,10 +644,8 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     
     IO_Close( filestream.stderr );
     
-    if std_err_out <> "" then
-        
-        Error( Concatenation( "4ti2 Error:\n", std_err_out, "If you continue, your results might be wrong" ) );
-        
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
     fi;
     
     return_matrix := [ 1, 2, 3 ];
@@ -648,9 +694,8 @@ end );
 InstallGlobalFunction( 4ti2Interface_graver_equalities,
                        
   function( arg )
-    local eqs, signs,
-          dir, filename,
-          return_matrix, exec, precision, filestream;
+    local eqs, signs, dir, filename,
+          exec, precision, filestream, err, return_matrix;
     
     if Length( arg ) < 1 then
         
@@ -702,11 +747,19 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities,
     
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
+    fi;
     
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gra" ) );
     
@@ -718,8 +771,7 @@ end );
 InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
                        
   function( eqs )
-    local dir, filename,
-          return_matrix, exec, precision, filestream;
+    local dir, filename, exec, precision, filestream, err, return_matrix;
     
     dir := DirectoryTemporary();
     
@@ -743,11 +795,19 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
     
     filestream := IO_Popen3( exec, [ Concatenation( "--precision=", precision ), filename ] );
     
+    err := Concatenation( IO_ReadLines( filestream.stderr ) );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if not IsEmpty( err ) then
+        Error( err, "\n" );
+    fi;
     
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gra" ) );
     
