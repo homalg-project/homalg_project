@@ -3220,15 +3220,8 @@ end );
 ##
 InstallGlobalFunction( ListToListList,
   function( L, r, c )
-    local M, i;
     
-    M := [ ];
-    
-    for i in [ 1 .. r ] do
-        Append( M, [ L{[ (i-1)*c+1 .. i*c ]} ] );
-    od;
-    
-    return M;
+    return List( [ 1 .. r ], i -> L{[ (i-1)*c+1 .. i*c ]} );
     
 end );
 
