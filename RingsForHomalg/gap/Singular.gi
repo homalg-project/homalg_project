@@ -273,7 +273,35 @@ proc ZeroColumns (matrix n)\n\
   }\n\
   return(string(l));\n\
 }\n\n",
-    
+
+    ConvertMatrixToRow := "\n\
+proc ConvertMatrixToRow (matrix m)\n\
+{\n\
+  int r = ncols(m);\n\
+  int c = nrows(m);\n\
+  matrix row[c][1] = m[1];\n\
+  matrix tmp;\n\
+  for (int i=2;i<=r;i++)\n\
+  {\n\
+    matrix tmp[i*c][1]=row,m[i];\n\
+    row = tmp;\n\
+  }\n\
+  return(row);\n\
+}\n\n",
+
+    ConvertRowToMatrix := "\n\
+proc ConvertRowToMatrix (matrix row, int r, int c)\n\
+{\n\
+  matrix m[c][1] = submat(row,1..c,1..1);\n\
+  matrix tmp;\n\
+  for (int j=2;j<=nrows(row)/c;j++)\n\
+  {\n\
+    matrix tmp[c][j]=concat(m,submat(row,(j-1)*c+1..j*c,1..1));\n\
+    m = tmp;\n\
+  }\n\
+  return(m);\n\
+}\n\n",
+
     GetColumnIndependentUnitPositions := "\n\
 proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
 {\n\

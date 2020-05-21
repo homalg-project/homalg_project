@@ -513,6 +513,20 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               ConvertMatrixToRow :=
+                 function( M )
+                   
+                   return homalgSendBlocking( [ "ConvertMatrixToRow(", M, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
+                   
+                 end,
+               
+               ConvertRowToMatrix :=
+                 function( M, r, c )
+                   
+                   return homalgSendBlocking( [ "ConvertRowToMatrix(", M, r, c, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
+                   
+                 end,
+               
                ## determined by CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
                AffineDimension :=
                  function( mat )
