@@ -1,7 +1,7 @@
 ##
 InstallGlobalFunction( lib4ti2_prepare_gap_input,
  function( arg )
-
+    
     arg := arg[1];
     
     return
@@ -19,10 +19,10 @@ InstallGlobalFunction( lib4ti2_prepare_gap_input,
                                  return List( b, c -> JuliaToGAP( IsList, c ) );
                              fi;
                              return b;
-                         end );  end );
+                         end );
+                     end );
     
 end );
-                 
 
 ##
 InstallGlobalFunction( lib4ti2_groebner,
