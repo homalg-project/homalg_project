@@ -1,0 +1,60 @@
+##
+InstallMethod( \*,
+        "COLEM: for two homalg matrices (HasEvalUnionOfColumns)",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsHomalgMatrix ], 15001,
+        
+  function( A, B )
+    local e, c, result, i, k;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfColumns * IsHomalgMatrix", "\033[0m" );
+    
+    e := EvalUnionOfColumns( A );
+    
+    c := List( e, NrColumns );
+    
+    result := e[1] * CertainRows( B, [ 1 .. c[1] ] );
+
+    k := c[1];
+    
+    for i in [ 2 .. Length( c ) ] do
+    
+        result := result + e[i] * CertainRows( B, [ k + 1 .. k + c[i] ] );
+
+        k := k + c[i];
+    
+    od;
+    
+    return result;
+    
+end );
+
+##
+InstallMethod( \*,
+        "COLEM: for two homalg matrices (HasEvalUnionOfRows)",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfRows ], 15001,
+        
+  function( A, B )
+    local e, r, result, i, k;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfRows", "\033[0m" );
+    
+    e := EvalUnionOfRows( B );
+    
+    r := List( e, NrRows );
+    
+    result := CertainColumns( A, [ 1 .. r[1] ] ) * e[1];
+
+    k := r[1];
+    
+    for i in [ 2 .. Length( r ) ] do
+    
+        result := result + CertainColumns( A, [ k + 1 .. k + r[i] ] ) * e[i];
+
+        k := k + r[i];
+    
+    od;
+    
+    return result;
+    
+end );
+
