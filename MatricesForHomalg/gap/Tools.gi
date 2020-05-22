@@ -545,6 +545,11 @@ InstallMethod( Eval,
     M := e[1];
     plist := e[2];
     
+    ResetFilterObj( C, HasEvalCertainRows );
+    
+    ## delete the component which was left over by GAP
+    Unbind( C!.EvalCertainRows );
+    
     if IsBound(RP!.CertainRows) then
         return RP!.CertainRows( M, plist );
     fi;
@@ -604,6 +609,11 @@ InstallMethod( Eval,
     
     M := e[1];
     plist := e[2];
+    
+    ResetFilterObj( C, HasEvalCertainColumns );
+    
+    ## delete the component which was left over by GAP
+    Unbind( C!.EvalCertainColumns );
     
     if IsBound(RP!.CertainColumns) then
         return RP!.CertainColumns( M, plist );
@@ -1239,6 +1249,11 @@ InstallMethod( Eval,
     A := e[1];
     B := e[2];
     
+    ResetFilterObj( C, HasEvalAddMat );
+    
+    ## delete the component which was left over by GAP
+    Unbind( C!.EvalAddMat );
+    
     if IsBound(RP!.AddMat) then
         return RP!.AddMat( A, B );
     fi;
@@ -1299,6 +1314,11 @@ InstallMethod( Eval,
     A := e[1];
     B := e[2];
     
+    ResetFilterObj( C, HasEvalSubMat );
+    
+    ## delete the component which was left over by GAP
+    Unbind( C!.EvalSubMat );
+    
     if IsBound(RP!.SubMat) then
         return RP!.SubMat( A, B );
     fi;
@@ -1358,6 +1378,11 @@ InstallMethod( Eval,
     
     A := e[1];
     B := e[2];
+    
+    ResetFilterObj( C, HasEvalCompose );
+    
+    ## delete the component which was left over by GAP
+    Unbind( C!.EvalCompose );
     
     if IsBound(RP!.Compose) then
         return RP!.Compose( A, B );
@@ -2954,6 +2979,11 @@ InstallMethod( Eval,
     RP := homalgTable( R );
     
     e :=  PreEval( C );
+    
+    ResetFilterObj( C, HasPreEval );
+    
+    ## delete the component which was left over by GAP
+    Unbind( C!.PreEval );
     
     if IsBound(RP!.PreEval) then
         return RP!.PreEval( e );

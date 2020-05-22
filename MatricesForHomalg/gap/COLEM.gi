@@ -2897,6 +2897,10 @@ InstallMethod( \*,
   function( A, B )
     local a;
     
+    if HasEval( A ) then
+        TryNextMethod( );
+    fi;
+    
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfRows * IsHomalgMatrix", "\033[0m" );
     
     a := EvalUnionOfRows( A );
@@ -2912,6 +2916,10 @@ InstallMethod( \*,
         
   function( A, B )
     local b;
+    
+    if HasEval( B ) then
+        TryNextMethod( );
+    fi;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfColumns", "\033[0m" );
     
