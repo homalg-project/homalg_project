@@ -2848,8 +2848,7 @@ InstallMethod( ConvertRowToMatrix,
         ext_obj := RP!.ConvertRowToMatrix( M, r, c );
         return HomalgMatrix( ext_obj, r, c, R );
     elif IsBound(RP!.ConvertRowToTransposedMatrix) then
-        ext_obj := RP!.ConvertRowToTransposedMatrix( M, c, r );
-        return TransposedMatrix( HomalgMatrix( ext_obj, c, r, R ) );
+        return TransposedMatrix( ConvertRowToTransposedMatrix( M, c, r ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
@@ -2889,8 +2888,7 @@ InstallMethod( ConvertColumnToMatrix,
         ext_obj := RP!.ConvertColumnToMatrix( M, r, c );
         return HomalgMatrix( ext_obj, r, c, R );
     elif IsBound(RP!.ConvertColumnToTransposedMatrix) then
-        ext_obj := RP!.ConvertColumnToTransposedMatrix( M, c, r );
-        return TransposedMatrix( HomalgMatrix( ext_obj, c, r, R ) );
+        return TransposedMatrix( ConvertColumnToTransposedMatrix( M, c, r ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
@@ -2932,8 +2930,7 @@ InstallMethod( ConvertMatrixToRow,
         ext_obj := RP!.ConvertMatrixToRow( M );
         return HomalgMatrix( ext_obj, 1, r * c, R );
     elif IsBound(RP!.ConvertTransposedMatrixToRow) then
-        ext_obj := RP!.ConvertTransposedMatrixToRow( TransposedMatrix( M ) );
-        return HomalgMatrix( ext_obj, 1, r * c, R );
+        return ConvertTransposedMatrixToRow( TransposedMatrix( M ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
@@ -2974,8 +2971,7 @@ InstallMethod( ConvertMatrixToColumn,
         ext_obj := RP!.ConvertMatrixToColumn( M );
         return HomalgMatrix( ext_obj, r * c, 1, R );
     elif IsBound(RP!.ConvertTransposedMatrixToColumn) then
-        ext_obj := RP!.ConvertTransposedMatrixToColumn( TransposedMatrix( M ) );
-        return HomalgMatrix( ext_obj, r * c, 1, R );
+        return ConvertTransposedMatrixToColumn( TransposedMatrix( M ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
