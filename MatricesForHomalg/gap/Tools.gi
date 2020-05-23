@@ -2849,6 +2849,8 @@ InstallMethod( ConvertRowToMatrix,
         return HomalgMatrix( ext_obj, r, c, R );
     elif IsBound(RP!.ConvertRowToTransposedMatrix) then
         return TransposedMatrix( ConvertRowToTransposedMatrix( M, c, r ) );
+    elif IsBound(RP!.ConvertColumnToMatrix) then
+        return TransposedMatrix( ConvertColumnToMatrix( TransposedMatrix( M ), c, r ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
@@ -2889,6 +2891,8 @@ InstallMethod( ConvertColumnToMatrix,
         return HomalgMatrix( ext_obj, r, c, R );
     elif IsBound(RP!.ConvertColumnToTransposedMatrix) then
         return TransposedMatrix( ConvertColumnToTransposedMatrix( M, c, r ) );
+    elif IsBound(RP!.ConvertRowToMatrix) then
+        return TransposedMatrix( ConvertRowToMatrix( TransposedMatrix( M ), c, r ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
@@ -2931,6 +2935,8 @@ InstallMethod( ConvertMatrixToRow,
         return HomalgMatrix( ext_obj, 1, r * c, R );
     elif IsBound(RP!.ConvertTransposedMatrixToRow) then
         return ConvertTransposedMatrixToRow( TransposedMatrix( M ) );
+    elif IsBound(RP!.ConvertMatrixToColumn) then
+        return TransposedMatrix( ConvertMatrixToColumn( TransposedMatrix( M ) ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
@@ -2972,6 +2978,8 @@ InstallMethod( ConvertMatrixToColumn,
         return HomalgMatrix( ext_obj, r * c, 1, R );
     elif IsBound(RP!.ConvertTransposedMatrixToColumn) then
         return ConvertTransposedMatrixToColumn( TransposedMatrix( M ) );
+    elif IsBound(RP!.ConvertMatrixToRow) then
+        return TransposedMatrix( ConvertMatrixToRow( TransposedMatrix( M ) ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
