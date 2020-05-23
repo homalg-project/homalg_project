@@ -42,5 +42,5 @@ ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingBasic.gd" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingTools.gd" );
 
 if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ) then
-    ReadPackage( "MatricesForHomalg", "gap/Julia.gd");
+    ReadPackage( "MatricesForHomalg", "gap/Julia.gd" );
 fi;

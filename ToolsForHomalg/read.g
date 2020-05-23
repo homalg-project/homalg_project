@@ -37,5 +37,5 @@ if IsBound( MakeThreadLocal ) then
 fi;
 
 if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ) then
-    ReadPackage( "ToolsForHomalg", "gap/Julia.gi");
+    ReadPackage( "ToolsForHomalg", "gap/Julia.gi" );
 fi;
