@@ -2536,6 +2536,27 @@ InstallMethod( DiagMat,
     
 end );
 
+##
+InstallMethod( DiagMat,
+        "COLEM: for homalg matrices",
+        [ IsHomogeneousList ], 1,
+        
+  function( l )
+    
+    if PositionProperty( l, m -> HasEvalDiagMat( m ) and not HasEval( m ) ) = fail then
+        TryNextMethod( );
+    fi;
+    
+    l := List( l, function( m ) if HasEvalDiagMat( m ) and not HasEval( m ) then return EvalDiagMat( m ); fi; return [ m ]; end  );
+    
+    l := Concatenation( l );
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "DiagMat( [ ..., DiagMat, ... ] )", "\033[0m" );
+    
+    return DiagMat( l );
+    
+end );
+
 #-----------------------------------
 # AddMat
 #-----------------------------------
