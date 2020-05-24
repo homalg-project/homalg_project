@@ -398,6 +398,11 @@
     [4X    M := e[1];[104X
     [4X    plist := e[2];[104X
     [4X    [104X
+    [4X    ResetFilterObj( C, HasEvalCertainRows );[104X
+    [4X    [104X
+    [4X    ## delete the component which was left over by GAP[104X
+    [4X    Unbind( C!.EvalCertainRows );[104X
+    [4X    [104X
     [4X    if IsBound(RP!.CertainRows) then[104X
     [4X        return RP!.CertainRows( M, plist );[104X
     [4X    fi;[104X
@@ -439,6 +444,11 @@
     [4X    [104X
     [4X    M := e[1];[104X
     [4X    plist := e[2];[104X
+    [4X    [104X
+    [4X    ResetFilterObj( C, HasEvalCertainColumns );[104X
+    [4X    [104X
+    [4X    ## delete the component which was left over by GAP[104X
+    [4X    Unbind( C!.EvalCertainColumns );[104X
     [4X    [104X
     [4X    if IsBound(RP!.CertainColumns) then[104X
     [4X        return RP!.CertainColumns( M, plist );[104X
@@ -936,6 +946,11 @@
     [4X    A := e[1];[104X
     [4X    B := e[2];[104X
     [4X    [104X
+    [4X    ResetFilterObj( C, HasEvalAddMat );[104X
+    [4X    [104X
+    [4X    ## delete the component which was left over by GAP[104X
+    [4X    Unbind( C!.EvalAddMat );[104X
+    [4X    [104X
     [4X    if IsBound(RP!.AddMat) then[104X
     [4X        return RP!.AddMat( A, B );[104X
     [4X    fi;[104X
@@ -978,6 +993,11 @@
     [4X    A := e[1];[104X
     [4X    B := e[2];[104X
     [4X    [104X
+    [4X    ResetFilterObj( C, HasEvalSubMat );[104X
+    [4X    [104X
+    [4X    ## delete the component which was left over by GAP[104X
+    [4X    Unbind( C!.EvalSubMat );[104X
+    [4X    [104X
     [4X    if IsBound(RP!.SubMat) then[104X
     [4X        return RP!.SubMat( A, B );[104X
     [4X    fi;[104X
@@ -1019,6 +1039,11 @@
     [4X    [104X
     [4X    A := e[1];[104X
     [4X    B := e[2];[104X
+    [4X    [104X
+    [4X    ResetFilterObj( C, HasEvalCompose );[104X
+    [4X    [104X
+    [4X    ## delete the component which was left over by GAP[104X
+    [4X    Unbind( C!.EvalCompose );[104X
     [4X    [104X
     [4X    if IsBound(RP!.Compose) then[104X
     [4X        return RP!.Compose( A, B );[104X
