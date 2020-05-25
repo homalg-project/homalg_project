@@ -1,5 +1,7 @@
 Print( "S := " );
 
+Display( StringView( S ) );
+
 Display( S );
 
 convert_commands := [
@@ -9,17 +11,17 @@ convert_commands := [
                      "ConvertHomalgMatrixViaFile"
                      ];
 
-for c in convert_commands do
+for convert in convert_commands do
     
-    Print( "\n## ", c, ":\n" );
+    Print( "\n## ", convert, ":\n" );
     
-    c := ValueGlobal( c );
+    convert := ValueGlobal( convert );
     
     ## a copy of the original imat
     omat := ShallowCopy( imat );
     
     ## omat converted
-    cmat := c( omat, S );
+    cmat := convert( omat, S );
     
     Print( "\n" );
     Display( cmat );
@@ -27,7 +29,7 @@ for c in convert_commands do
     Print( "\n## and back:\n" );
     
     ## and back
-    bmat := c( cmat, R );
+    bmat := convert( cmat, R );
     
     Print( "\n" );
     Display( bmat );
