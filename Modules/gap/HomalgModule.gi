@@ -1669,7 +1669,7 @@ InstallMethod( ElementaryDivisors,
     
     RP := homalgTable( R );
     
-    if IsBound( RP!.ElementaryDivisors ) and HasRankOfObject( M ) then
+    if IsBound( RP!.ElementaryDivisors ) then
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
         if IsString( e ) then
             e := StringToElementStringList( e );

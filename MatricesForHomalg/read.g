@@ -46,6 +46,7 @@ ReadPackage( "MatricesForHomalg", "gap/LIMAT.gi" );
 # ReadPackage( "MatricesForHomalg", "gap/LIMATEmp.gi" );
 
 ## specific GAP4 internal rings
+ReadPackage( "MatricesForHomalg", "gap/Euclidean.gi" );
 ReadPackage( "MatricesForHomalg", "gap/Integers.gi" );
 #ReadPackage( "MatricesForHomalg", "gap/EDIM.gi" );
 ReadPackage( "MatricesForHomalg", "gap/UnivariatePolynomials.gi" );

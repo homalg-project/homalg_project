@@ -35,6 +35,9 @@ ReadPackage( "MatricesForHomalg", "gap/LIMAP.gd" );
 ReadPackage( "MatricesForHomalg", "gap/COLEM.gd" );
 ReadPackage( "MatricesForHomalg", "gap/LIMAT.gd" );
 
+## specific GAP4 internal rings
+ReadPackage( "MatricesForHomalg", "gap/Euclidean.gd" );
+
 ## the subpackage ResidueClassRingForHomalg
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingForHomalg.gd" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRing.gd" );
