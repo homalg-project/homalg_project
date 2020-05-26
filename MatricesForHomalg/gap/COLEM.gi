@@ -2912,6 +2912,82 @@ end );
 
 ##
 InstallMethod( \*,
+        "COLEM: for two homalg matrices (HasEvalUnionOfColumns)",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsHomalgMatrix ], 15001,
+        
+  function( A, B )
+    local e, pos, l, c, result, i, k;
+    
+    e := EvalUnionOfColumns( A );
+    
+    pos := PositionsProperty( e, mat -> not ( HasIsZero( mat ) and IsZero( mat ) ) );
+    
+    l := Length( pos );
+    
+    if l > 2 or ( l = 2 and ForAll( e{pos}, mat -> not ( HasIsOne( mat ) and IsOne( mat ) ) ) ) then
+        TryNextMethod( );
+    fi;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfColumns( IsZero .. mat, IsOne .. IsZero ) * IsHomalgMatrix", "\033[0m" );
+    
+    c := List( e, NrColumns );
+    
+    result := e[1] * CertainRows( B, [ 1 .. c[1] ] );
+
+    k := c[1];
+    
+    for i in [ 2 .. Length( c ) ] do
+        
+        result := result + e[i] * CertainRows( B, [ k + 1 .. k + c[i] ] );
+        
+        k := k + c[i];
+        
+    od;
+    
+    return result;
+    
+end );
+
+##
+InstallMethod( \*,
+        "COLEM: for two homalg matrices (HasEvalUnionOfRows)",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfRows ], 15001,
+        
+  function( A, B )
+    local e, pos, l, r, result, i, k;
+    
+    e := EvalUnionOfRows( B );
+    
+    pos := PositionsProperty( e, mat -> not ( HasIsZero( mat ) and IsZero( mat ) ) );
+    
+    l := Length( pos );
+    
+    if l > 2 or ( l = 2 and ForAll( e{pos}, mat -> not ( HasIsOne( mat ) and IsOne( mat ) ) ) ) then
+        TryNextMethod( );
+    fi;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfRows( IsZero .. mat, IsOne .. IsZero )", "\033[0m" );
+    
+    r := List( e, NrRows );
+    
+    result := CertainColumns( A, [ 1 .. r[1] ] ) * e[1];
+
+    k := r[1];
+    
+    for i in [ 2 .. Length( r ) ] do
+        
+        result := result + CertainColumns( A, [ k + 1 .. k + r[i] ] ) * e[i];
+        
+        k := k + r[i];
+        
+    od;
+    
+    return result;
+    
+end );
+
+##
+InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalUnionOfRows)",
         [ IsHomalgMatrix and HasEvalUnionOfRows, IsHomalgMatrix ], 15001,
         
