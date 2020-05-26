@@ -523,7 +523,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                ConvertRowToMatrix :=
                  function( M, r, c )
                    
-                   return homalgSendBlocking( [ "ConvertRowToMatrix(", M, r, c, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
+                   return homalgSendBlocking( [ "ConvertRowToMatrix(", M, r, c, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
                    
                  end,
                
