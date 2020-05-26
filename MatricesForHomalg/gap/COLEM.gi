@@ -2752,6 +2752,22 @@ InstallMethod( \*,
     
 end );
 
+##
+InstallMethod( \*,
+        "COLEM: for homalg matrices with ring elements (HasEvalMulMat)",
+        [ IsRingElement, IsHomalgMatrix and HasEvalMulMat ],
+        
+  function( a, A )
+    local e;
+    
+    e := EvalMulMat( A );
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "a * ( b * IsHomalgMatrix )", "\033[0m" );
+    
+    return ( a * e[1] ) * e[2];
+    
+end );
+
 #-----------------------------------
 # AdditiveInverseMutable
 #-----------------------------------
@@ -2907,6 +2923,54 @@ InstallMethod( \*,
     Info( InfoCOLEM, 3, COLEM.color, "colem: IsHomalgMatrix * PreEval", "\033[0m" );
     
     return A * PreEval( B );
+    
+end );
+
+##
+InstallMethod( \*,
+        "COLEM: for homalg matrices (HasEvalMulMat)",
+        [ IsHomalgMatrix and HasEvalMulMat, IsHomalgMatrix ], 15001,
+        
+  function( A, B )
+    local e, c, R;
+    
+    e := EvalMulMat( A );
+    
+    c := e[1];
+    
+    R := HomalgRing( A );
+    
+    if not ( IsRat( c ) or ( HasIsCommutative( R ) and IsCommutative( R ) ) ) then
+        TryNextMethod( );
+    fi;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "( c * IsHomalgMatrix ) * IsHomalgMatrix", "\033[0m" );
+    
+    return c * ( e[2] * B );
+    
+end );
+
+##
+InstallMethod( \*,
+        "COLEM: for homalg matrices (HasEvalMulMat)",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalMulMat ], 15001,
+        
+  function( A, B )
+    local e, c, R;
+    
+    e := EvalMulMat( B );
+    
+    c := e[1];
+    
+    R := HomalgRing( A );
+    
+    if not ( IsRat( c ) or ( HasIsCommutative( R ) and IsCommutative( R ) ) ) then
+        TryNextMethod( );
+    fi;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * ( c * IsHomalgMatrix )", "\033[0m" );
+    
+    return c * ( A * e[2] );
     
 end );
 
