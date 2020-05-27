@@ -316,6 +316,11 @@ SetColumnToZero:= procedure( ~M, i, j )\n\
   end for;\n\
 end procedure;\n\n",
     
+    ConvertRowToMatrix := "\n\
+ConvertRowToMatrix:= function( M, r, c, R )\n\
+  return Matrix(R,r,c,[ M[1][i] : i in [ 1 .. r * c ] ]);\n\
+end function;\n\n",
+    
     GetCleanRowsPositions := "\n\
 GetCleanRowsPositions:= function( M, clean_columns )\n\
   clean_rows := [ ];\n\

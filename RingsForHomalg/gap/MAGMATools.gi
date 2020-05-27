@@ -389,6 +389,13 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               ConvertRowToMatrix :=
+                 function( M, r, c )
+                   
+                   return homalgSendBlocking( [ "ConvertRowToMatrix(", M, r, c, HomalgRing( M ), ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
+                   
+                 end,
+               
                GetCleanRowsPositions :=
                  function( M, clean_columns )
                    local list_string;
