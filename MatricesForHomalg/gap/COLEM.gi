@@ -2218,7 +2218,8 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A;
     
-    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainRows of a bigger matrix
+    if not HasEval( M ) ## otherwise we would take CertainRows of a bigger matrix
+       and COLEM.level >= COLEM.single_operations then
         
         Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( CertainRows )", "\033[0m" );
         
@@ -2240,7 +2241,8 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainRows of a bigger matrix
+    if not HasEval( M ) ## otherwise we would take CertainRows of a bigger matrix
+       and COLEM.level >= COLEM.single_operations then
         
         A := EvalCertainColumns( M );
         
@@ -2362,7 +2364,8 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A;
     
-    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainColumns of a bigger matrix
+    if not HasEval( M ) ## otherwise we would take CertainColumns of a bigger matrix
+       and COLEM.level >= COLEM.single_operations then
         
         Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( CertainColumns )", "\033[0m" );
         
@@ -2384,7 +2387,8 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainColumns of a bigger matrix
+    if not HasEval( M ) ## otherwise we would take CertainColumns of a bigger matrix
+       and COLEM.level >= COLEM.single_operations then
         
         A := EvalCertainRows( M );
         
