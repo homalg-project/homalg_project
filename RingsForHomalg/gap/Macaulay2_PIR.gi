@@ -39,7 +39,7 @@ InstallMethod( CreateHomalgTable,
                XElementaryDivisors :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output", HOMALG_IO.Pictograms.ElementaryDivisors );
+                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output", "ElementaryDivisors" );
                    
                  end,
                
@@ -72,10 +72,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ N, U, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonFormC );
+                       homalgSendBlocking( [ N, U, " := EchelonForm(", M, ")" ], "need_command", "ReducedEchelonFormC" );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
+                       homalgSendBlocking( [ N, " := EchelonForm(", M, ")" ], "need_command", "ReducedEchelonForm" );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );

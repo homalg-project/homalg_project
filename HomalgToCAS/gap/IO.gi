@@ -150,7 +150,6 @@ InstallGlobalFunction( LaunchCAS,
     s.StatisticsObject :=
       NewStatisticsObject(
               rec(
-                  LookupTable := "HOMALG_IO.Pictograms",
                   summary := rec(
                        HomalgExternalCallCounter := 0,
                        HomalgExternalVariableCounter := 0,
@@ -224,7 +223,7 @@ InstallGlobalFunction( InitializeMacros,
             if IsFunction( macros.(component) ) then
                 macros.(component)( stream );
             else
-                homalgSendBlocking( macros.(component), "need_command", stream, HOMALG_IO.Pictograms.initialize );
+                homalgSendBlocking( macros.(component), "need_command", stream, "initialize" );
             fi;
         fi;
     od;
@@ -232,9 +231,9 @@ InstallGlobalFunction( InitializeMacros,
     for component in names do
         if not component[1] in [ '_', '!' ] then
             if component[1] = '$' then
-                homalgSendBlocking( macros.(component), "need_command", stream, HOMALG_IO.Pictograms.initialize );
+                homalgSendBlocking( macros.(component), "need_command", stream, "initialize" );
             else
-                homalgSendBlocking( macros.(component), "need_command", stream, HOMALG_IO.Pictograms.define );
+                homalgSendBlocking( macros.(component), "need_command", stream, "define" );
                 Add( macros_names, component );
             fi;
         fi;

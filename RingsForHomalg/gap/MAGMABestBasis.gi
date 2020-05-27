@@ -56,10 +56,10 @@ InstallValue( CommonHomalgTableForMAGMABestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       homalgSendBlocking( [ S, U, V, " := ", "SmithForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ S, U, V, " := ", "SmithForm(", M, ")" ], "need_command", "BestBasis" );
                    else
                        ## compute S only:
-                       homalgSendBlocking( [ S, " := ", "SmithForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ S, " := ", "SmithForm(", M, ")" ], "need_command", "BestBasis" );
                    fi;
                    
                    return S;

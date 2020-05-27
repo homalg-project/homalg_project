@@ -57,10 +57,10 @@ InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       homalgSendBlocking( [ S, " := ", R, "[-1][BestBasis](", M, R, "[1],", U, V, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ S, " := ", R, "[-1][BestBasis](", M, R, "[1],", U, V, ")" ], "need_command", "BestBasis" );
                    else
                        ## compute S only:
-                       homalgSendBlocking( [ S, " := ", R, "[-1][BestBasis](", M, R, "[1])" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ S, " := ", R, "[-1][BestBasis](", M, R, "[1])" ], "need_command", "BestBasis" );
                    fi;
                    
                    return S;

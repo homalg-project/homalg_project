@@ -42,7 +42,7 @@ InstallMethod( CreateHomalgTable,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output", HOMALG_IO.Pictograms.ElementaryDivisors );
+                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output", "ElementaryDivisors" );
                    
                  end,
                
@@ -75,10 +75,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ U, ":=HomalgVoidMatrix(", R, ");;", N, ":=RowReducedEchelonForm(", M, U, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonFormC );
+                       homalgSendBlocking( [ U, ":=HomalgVoidMatrix(", R, ");;", N, ":=RowReducedEchelonForm(", M, U, ")" ], "need_command", "ReducedEchelonFormC" );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, ":=RowReducedEchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
+                       homalgSendBlocking( [ N, ":=RowReducedEchelonForm(", M, ")" ], "need_command", "ReducedEchelonForm" );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );
@@ -89,7 +89,7 @@ InstallMethod( CreateHomalgTable,
                
           );
     
-    if homalgSendBlocking( [ "IsBound(homalgTable(", ext_ring_obj, ")!.BestBasis)" ], "need_output", HOMALG_IO.Pictograms.initialize ) = "true" then
+    if homalgSendBlocking( [ "IsBound(homalgTable(", ext_ring_obj, ")!.BestBasis)" ], "need_output", "initialize" ) = "true" then
         for component in NamesOfComponents( RP_BestBasis ) do
             RP.(component) := RP_BestBasis.(component);
         od;

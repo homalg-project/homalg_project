@@ -524,7 +524,7 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( homalgSendBlocking( [ o ], "need_display", HOMALG_IO.Pictograms.Display ) );
+    Print( homalgSendBlocking( [ o ], "need_display", "Display" ) );
     
 end );
 

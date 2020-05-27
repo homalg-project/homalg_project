@@ -39,11 +39,11 @@ InstallMethod( CreateHomalgTable,
                    
                    v := homalgStream( R )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "l:=PolZeroSets()" ], R, "need_command", HOMALG_IO.Pictograms.Inequalities );
+                   homalgSendBlocking( [ v, "l:=PolZeroSets()" ], R, "need_command", "Inequalities" );
                    
-                   l := Int( homalgSendBlocking( [ "nops(", v, "l)" ], R, "need_output", HOMALG_IO.Pictograms.Inequalities ) );
+                   l := Int( homalgSendBlocking( [ "nops(", v, "l)" ], R, "need_output", "Inequalities" ) );
                    
-                   l := List( [ 1 .. l ], i -> homalgSendBlocking( [ v, "l[", i, "]" ], R, HOMALG_IO.Pictograms.Inequalities ) );
+                   l := List( [ 1 .. l ], i -> homalgSendBlocking( [ v, "l[", i, "]" ], R, "Inequalities" ) );
                    
                    return List( l, a -> HomalgExternalRingElement( a, R ) );
                    

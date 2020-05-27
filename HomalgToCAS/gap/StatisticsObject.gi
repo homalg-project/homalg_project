@@ -73,6 +73,8 @@ InstallGlobalFunction( NewStatisticsObject,
         fi;
     fi;
     
+    statistics.statistics := rec( );
+    
     if not IsBound( statistics.Sort ) then
         ## sort by value
         statistics.SortByValue := function( a, b ) return a[2] < b[2] or ( a[2] = b[2] and a[1] < b[1] ); end;
@@ -122,31 +124,23 @@ InstallMethod( Display,
         [ IsStatisticsObjectForStreamsRep ],
         
   function( o )
-    local LookupTable, statistics, components, p, r;
+    local statistics, statistics_list, components, p, r;
     
-    LookupTable := SplitString( o!.LookupTable, '.' );
+    statistics := o!.statistics;
     
-    if Length( LookupTable ) > 1 then
-        LookupTable := ValueGlobal( LookupTable[1] ).(LookupTable[2]);
-    else
-        LookupTable := ValueGlobal( LookupTable[1] );
-    fi;
+    statistics_list := [ ];
     
-    statistics := [ ];
-    
-    components := NamesOfComponents( LookupTable );
+    components := NamesOfComponents( statistics );
     
     for p in components do
-        if p <> "LookupTable" and IsBound( o!.(LookupTable.(p)) ) then
-            Add( statistics, [ p, o!.(LookupTable.(p)) ] );
-        fi;
+        Add( statistics_list, [ p, statistics.(p) ] );
     od;
     
-    Sort( statistics, o!.Sort );
+    Sort( statistics_list, o!.Sort );
     
     r := rec( );
     
-    for p in statistics do
+    for p in statistics_list do
         r.(p[1]) := p[2];
     od;
     

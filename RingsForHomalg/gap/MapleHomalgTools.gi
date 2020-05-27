@@ -18,21 +18,21 @@
 InstallValue( CommonHomalgTableForMapleHomalgTools,
         
         rec(
-               Zero := HomalgExternalRingElement( function( R ) homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
-                                                                return homalgSendBlocking( [ R, "[-1][Zero]()" ], HOMALG_IO.Pictograms.Zero ); end, "Maple", IsZero ),
+               Zero := HomalgExternalRingElement( function( R ) homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", "initialize" );
+                                                                return homalgSendBlocking( [ R, "[-1][Zero]()" ], "Zero" ); end, "Maple", IsZero ),
                
-               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "[-1][One]" ], HOMALG_IO.Pictograms.One ), "Maple", IsOne ),
+               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "[-1][One]" ], "One" ), "Maple", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "[-1][Minus](", Zero( R ), One( R ), R, "[1])" ], HOMALG_IO.Pictograms.MinusOne ), "Maple", IsMinusOne ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "[-1][Minus](", Zero( R ), One( R ), R, "[1])" ], "MinusOne" ), "Maple", IsMinusOne ),
                
                ## ring elements in Maple do not know their ring,
                ## this is a source of bugs: 1+1=2<>0 in char 2;
                ## so avoid using ring arithmetics in Maple
-               RingElement := R -> r -> homalgSendBlocking( [ r ], R, HOMALG_IO.Pictograms.define ),
+               RingElement := R -> r -> homalgSendBlocking( [ r ], R, "define" ),
                
-               IsZero := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  Zero( r ), " )" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
+               IsZero := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  Zero( r ), " )" ] , "need_output", "IsZero" ) = "true",
                
-               IsOne := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  One( r ), " )" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "true",
+               IsOne := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  One( r ), " )" ] , "need_output", "IsOne" ) = "true",
                
                Minus :=
                  function( a, b )
@@ -40,7 +40,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( a );
                    
-                   return homalgSendBlocking( [ R, "[-1][Minus](", a, ",", b, ",", R, "[1])" ], HOMALG_IO.Pictograms.Minus ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ R, "[-1][Minus](", a, ",", b, ",", R, "[1])" ], "Minus" ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                
@@ -50,21 +50,21 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( a );
                    
-                   return homalgSendBlocking( [ R, "[-1][DivideByUnit](", a, ",", u, ",", R, "[1])" ], HOMALG_IO.Pictograms.DivideByUnit ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ R, "[-1][DivideByUnit](", a, ",", u, ",", R, "[1])" ], "DivideByUnit" ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                
                IsUnit :=
                  function( R, r )
                    
-                   return homalgSendBlocking( [ "evalb( `homalg/InverseElement`(", r, R, ") <> FAIL )" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "true";
+                   return homalgSendBlocking( [ "evalb( `homalg/InverseElement`(", r, R, ") <> FAIL )" ], "need_output", "IsUnit" ) = "true";
                    
                  end,
                
                Gcd :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "gcd(", a, ",", b, ")" ], HOMALG_IO.Pictograms.Gcd ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ "gcd(", a, ",", b, ")" ], "Gcd" ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                
@@ -72,20 +72,20 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                  function( a, b )
                    local a_g, b_g;
                    
-                   homalgSendBlocking( [ "g := gcd(", a, ",", b, ")" ], "need_command", HOMALG_IO.Pictograms.Gcd ); ## do not delete "," in case a and b are passed as strings
-                   a_g := homalgSendBlocking( [ "normal((", a, ") / g)" ], HOMALG_IO.Pictograms.CancelGcd );
-                   b_g := homalgSendBlocking( [ "normal((", b, ") / g)" ], HOMALG_IO.Pictograms.CancelGcd );
+                   homalgSendBlocking( [ "g := gcd(", a, ",", b, ")" ], "need_command", "Gcd" ); ## do not delete "," in case a and b are passed as strings
+                   a_g := homalgSendBlocking( [ "normal((", a, ") / g)" ], "CancelGcd" );
+                   b_g := homalgSendBlocking( [ "normal((", b, ") / g)" ], "CancelGcd" );
                    
                    return [ a_g, b_g ];
                    
                  end,
                
-               ShallowCopy := C -> homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ),
+               ShallowCopy := C -> homalgSendBlocking( [ "copy( ", C, " )" ], "CopyMatrix" ),
                
                CopyMatrix :=
                  function( C, R )
                    
-                   return homalgSendBlocking( [ R, "[-1][matrix](copy( ", C, " ))" ], HOMALG_IO.Pictograms.CopyMatrix );
+                   return homalgSendBlocking( [ R, "[-1][matrix](copy( ", C, " ))" ], "CopyMatrix" );
                    
                  end,
                
@@ -95,7 +95,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "`homalg/ZeroMap`(", NrRows( C ), NrColumns( C ), R, ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
+                   return homalgSendBlocking( [ "`homalg/ZeroMap`(", NrRows( C ), NrColumns( C ), R, ")" ], "ZeroMatrix" );
                    
                  end,
                
@@ -105,7 +105,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "`homalg/IdentityMap`(", NrRows( C ), R, ")" ], HOMALG_IO.Pictograms.IdentityMatrix );
+                   return homalgSendBlocking( [ "`homalg/IdentityMap`(", NrRows( C ), R, ")" ], "IdentityMatrix" );
                    
                  end,
                
@@ -115,7 +115,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "linalg[iszero](`homalg/SubMat`(", A, B, R, "))" ] , HOMALG_IO.Pictograms.AreEqualMatrices, "need_output" ) = "true";
+                   return homalgSendBlocking( [ "linalg[iszero](`homalg/SubMat`(", A, B, R, "))" ], "need_output" , "AreEqualMatrices" ) = "true";
                    
                  end,
                
@@ -125,7 +125,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "`homalg/Involution`(", M, R, ")" ], HOMALG_IO.Pictograms.Involution );
+                   return homalgSendBlocking( [ "`homalg/Involution`(", M, R, ")" ], "Involution" );
                    
                  end,
                
@@ -135,7 +135,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ R, "[-1][CertainRows](", M, plist, ")" ], HOMALG_IO.Pictograms.CertainRows );
+                   return homalgSendBlocking( [ R, "[-1][CertainRows](", M, plist, ")" ], "CertainRows" );
                    
                  end,
                
@@ -145,7 +145,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ R, "[-1][CertainColumns](", M, plist, ")" ], HOMALG_IO.Pictograms.CertainColumns );
+                   return homalgSendBlocking( [ R, "[-1][CertainColumns](", M, plist, ")" ], "CertainColumns" );
                    
                  end,
                
@@ -155,7 +155,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ R, "[-1][matrix](", R, "[-1][UnionOfRows](", A, B, "))" ], HOMALG_IO.Pictograms.UnionOfRows );
+                   return homalgSendBlocking( [ R, "[-1][matrix](", R, "[-1][UnionOfRows](", A, B, "))" ], "UnionOfRows" );
                    
                  end,
                
@@ -165,7 +165,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ R, "[-1][matrix](", R, "[-1][UnionOfColumns](", A, B, "))" ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( [ R, "[-1][matrix](", R, "[-1][UnionOfColumns](", A, B, "))" ], "UnionOfColumns" );
                    
                  end,
                
@@ -177,7 +177,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    f := Concatenation( [ "`homalg/DiagMat`(" ], e, [ R, "[-1])" ] );
                    
-                   return homalgSendBlocking( f, HOMALG_IO.Pictograms.DiagMat );
+                   return homalgSendBlocking( f, "DiagMat" );
                    
                  end,
                
@@ -187,7 +187,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "`homalg/KroneckerMat`(", A, B, R, ")" ], HOMALG_IO.Pictograms.KroneckerMat );
+                   return homalgSendBlocking( [ "`homalg/KroneckerMat`(", A, B, R, ")" ], "KroneckerMat" );
                    
                  end,
                
@@ -197,7 +197,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "`homalg/MulMat`(", a, A, R, ")" ], HOMALG_IO.Pictograms.MulMat );
+                   return homalgSendBlocking( [ "`homalg/MulMat`(", a, A, R, ")" ], "MulMat" );
                    
                  end,
                
@@ -207,7 +207,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "`homalg/AddMat`(", A, B, R, ")" ], HOMALG_IO.Pictograms.AddMat );
+                   return homalgSendBlocking( [ "`homalg/AddMat`(", A, B, R, ")" ], "AddMat" );
                    
                  end,
                
@@ -217,7 +217,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "`homalg/SubMat`(", A, B, R, ")" ], HOMALG_IO.Pictograms.SubMat );
+                   return homalgSendBlocking( [ "`homalg/SubMat`(", A, B, R, ")" ], "SubMat" );
                    
                  end,
                
@@ -227,7 +227,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "`homalg/Compose`(", A, B, R, ")" ], HOMALG_IO.Pictograms.Compose );
+                   return homalgSendBlocking( [ "`homalg/Compose`(", A, B, R, ")" ], "Compose" );
                    
                  end,
                
@@ -237,7 +237,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfRows](", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
+                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfRows](", C, ")" ], "need_output", "NrRows" ) );
                    
                  end,
                
@@ -247,14 +247,14 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfGenerators](", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfGenerators](", C, ")" ], "need_output", "NrColumns" ) );
                    
                  end,
                
                Determinant :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "linalg[det](", C, ")" ], HOMALG_IO.Pictograms.Determinant );
+                   return homalgSendBlocking( [ "linalg[det](", C, ")" ], "Determinant" );
                    
                  end,
                
@@ -264,7 +264,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "linalg[iszero](`homalg/ReduceRingElements`(", M, R, "))" ], HOMALG_IO.Pictograms.IsZeroMatrix, "need_output" ) = "true";
+                   return homalgSendBlocking( [ "linalg[iszero](`homalg/ReduceRingElements`(", M, R, "))" ], "need_output", "IsZeroMatrix" ) = "true";
                    
                  end,
                
@@ -274,7 +274,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   list_string := homalgSendBlocking( [ "`homalg/ZeroRows`(", C, R, ")" ], HOMALG_IO.Pictograms.ZeroRows, "need_output" );
+                   list_string := homalgSendBlocking( [ "`homalg/ZeroRows`(", C, R, ")" ], "need_output", "ZeroRows" );
                    return StringToIntList( list_string );
                    
                  end,
@@ -285,7 +285,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   list_string := homalgSendBlocking( [ "`homalg/ZeroColumns`(", C, R, ")" ], HOMALG_IO.Pictograms.ZeroColumns, "need_output" );
+                   list_string := homalgSendBlocking( [ "`homalg/ZeroColumns`(", C, R, ")" ], "need_output", "ZeroColumns" );
                    return StringToIntList( list_string );
                    
                  end,
@@ -296,7 +296,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetColumnIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetColumnIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", "GetColumnIndependentUnitPositions" ) );
                    
                  end,
                
@@ -306,7 +306,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetRowIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
+                   return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetRowIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", "GetRowIndependentUnitPositions" ) );
                    
                  end,
                
@@ -316,7 +316,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   list_string := homalgSendBlocking( [ "`homalg/GetUnitPosition`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                   list_string := homalgSendBlocking( [ "`homalg/GetUnitPosition`(", M, pos_list, R, ")" ], "need_output", "GetUnitPosition" );
                    
                    if list_string = "" then
                        return fail;
@@ -332,7 +332,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   list_string := homalgSendBlocking( [ "`homalg/GetCleanRowsPositions`(", M, clean_columns, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
+                   list_string := homalgSendBlocking( [ "`homalg/GetCleanRowsPositions`(", M, clean_columns, R, ")" ], "need_output", "GetCleanRowsPositions" );
                    
                    if list_string = "" then
                        return [ ];
@@ -349,7 +349,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    R := HomalgRing( M );
 
                    ## `homalg/ConvertRowToMatrix` is correct
-                   return homalgSendBlocking( [ "`homalg/ConvertRowToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
+                   return homalgSendBlocking( [ "`homalg/ConvertRowToMatrix`(", M, r, c, R, ")" ], "ConvertRowToMatrix" );
                    
                  end,
                
@@ -360,7 +360,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    R := HomalgRing( M );
 
                    ## `homalg/ConvertColumnToMatrix` is correct
-                   return homalgSendBlocking( [ "`homalg/ConvertColumnToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
+                   return homalgSendBlocking( [ "`homalg/ConvertColumnToMatrix`(", M, r, c, R, ")" ], "ConvertColumnToMatrix" );
                    
                  end,
                 
@@ -374,7 +374,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    s := "'homalg_variable_for_HP'";
                    
-                   hilb := homalgSendBlocking( [ "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries(", mat, R, "[1],", s, ",", n, ")"  ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+                   hilb := homalgSendBlocking( [ "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries(", mat, R, "[1],", s, ",", n, ")"  ], "need_output", "HilbertPoincareSeries" );
                    
                    return StringToIntList( hilb );
                    
@@ -403,7 +403,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    denom := JoinStringsWithSeparator( denom, "*" );
                    
-                   hilb := homalgSendBlocking( [ "CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries(", mat, ",[", var_string, "],", s, ",", denom, ")"  ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+                   hilb := homalgSendBlocking( [ "CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries(", mat, ",[", var_string, "],", s, ",", denom, ")"  ], "need_output", "HilbertPoincareSeries" );
                    
                    return StringToIntList( hilb );
                    
@@ -412,7 +412,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                Eliminate :=
                  function( rel, indets, R )
                    
-                   return homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],Eliminate(", rel, indets, R, "[1])))" ], HOMALG_IO.Pictograms.Eliminate );
+                   return homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],Eliminate(", rel, indets, R, "[1])))" ], "Eliminate" );
                    
                  end,
                
@@ -424,9 +424,9 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    v := homalgStream( R )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "m := coeffs(sort(collect(", poly, ",", var, ",'distributed')),", var, ",'", v, "t')" ], "need_command", HOMALG_IO.Pictograms.Coefficients );
-                   vars := homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],MyReverse([", v, "t])))"  ], R, HOMALG_IO.Pictograms.Coefficients );
-                   coeffs := homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],MyReverse([", v, "m])))" ], R, HOMALG_IO.Pictograms.Coefficients );
+                   homalgSendBlocking( [ v, "m := coeffs(sort(collect(", poly, ",", var, ",'distributed')),", var, ",'", v, "t')" ], "need_command", "Coefficients" );
+                   vars := homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],MyReverse([", v, "t])))"  ], R, "Coefficients" );
+                   coeffs := homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],MyReverse([", v, "m])))" ], R, "Coefficients" );
                    
                    return [ vars, coeffs ];
                    
@@ -440,7 +440,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                        return Degree( r / R!.AssociatedPolynomialRing );
                    fi;
                    
-                   deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", "DegreeOfRingElement" ) );
                    
                    if deg <> fail then
                        return deg;
@@ -456,14 +456,14 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( r );
                    
-                   return homalgSendBlocking( [ R, "[-1][matrix]([CoefficientsOfPolynomial(", r, var, ")])" ], HOMALG_IO.Pictograms.Coefficients );
+                   return homalgSendBlocking( [ R, "[-1][matrix]([CoefficientsOfPolynomial(", r, var, ")])" ], "Coefficients" );
                    
                  end,
                
                MonomialMatrix :=
                  function( i, vars, R )
                    
-                   return homalgSendBlocking( [ "`homalg/MonomialMatrix`(", i, vars, R, ")" ], HOMALG_IO.Pictograms.MonomialMatrix );
+                   return homalgSendBlocking( [ "`homalg/MonomialMatrix`(", i, vars, R, ")" ], "MonomialMatrix" );
                    
                  end,
                
@@ -475,10 +475,10 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    v := homalgStream( R )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "p:=simplify(", p, ")" ], "need_command", HOMALG_IO.Pictograms.Numerator );
+                   homalgSendBlocking( [ v, "p:=simplify(", p, ")" ], "need_command", "Numerator" );
                    
-                   numer := homalgSendBlocking( [ "numer(", v, "p)" ], R, HOMALG_IO.Pictograms.Numerator );
-                   denom := homalgSendBlocking( [ "denom(", v, "p)" ], R, HOMALG_IO.Pictograms.Numerator );
+                   numer := homalgSendBlocking( [ "numer(", v, "p)" ], R, "Numerator" );
+                   denom := homalgSendBlocking( [ "denom(", v, "p)" ], R, "Numerator" );
                    
                    numer := HomalgExternalRingElement( numer, R );
                    denom := HomalgExternalRingElement( denom, R );

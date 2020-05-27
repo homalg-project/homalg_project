@@ -40,7 +40,7 @@ BasisOfRowModule :=
     homalgSendBlocking( 
       [ "matrix ", N, " = BasisOfRowModule(", M, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.BasisOfModule
+      "BasisOfModule"
     );
     
     return N;
@@ -71,7 +71,7 @@ BasisOfColumnModule :=
     homalgSendBlocking(
       [ "matrix ", N, " = BasisOfColumnModule(", M, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.BasisOfModule
+      "BasisOfModule"
     );
     
     return N;
@@ -108,7 +108,7 @@ BasisOfRowsCoeff :=
         "matrix ", T, " = ", v, "l[2]"
       ],
       "need_command",
-      HOMALG_IO.Pictograms.BasisCoeff
+      "BasisCoeff"
     );
     
     return N;
@@ -145,7 +145,7 @@ BasisOfColumnsCoeff :=
         "matrix ", T, " = ", v, "l[2]"
       ],
       "need_command",
-      HOMALG_IO.Pictograms.BasisCoeff
+      "BasisCoeff"
     );
     
     return N;
@@ -176,7 +176,7 @@ DecideZeroRows :=
     homalgSendBlocking( 
       [ "matrix ", N, " = DecideZeroRows(", A, B, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.DecideZero
+      "DecideZero"
     );
     
     return N;
@@ -207,7 +207,7 @@ DecideZeroColumns :=
     homalgSendBlocking(
       [ "matrix ", N, " = DecideZeroColumns(", A, B, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.DecideZero
+      "DecideZero"
     );
     
     return N;
@@ -244,7 +244,7 @@ DecideZeroRowsEffectively :=
         "matrix ", T, " = ", v, "l[2]"
       ],
       "need_command",
-      HOMALG_IO.Pictograms.DecideZeroEffectively
+      "DecideZeroEffectively"
     );
     
     return N;
@@ -281,7 +281,7 @@ DecideZeroColumnsEffectively :=
         "matrix ", T, " = ", v, "l[2]"
       ],
       "need_command",
-      HOMALG_IO.Pictograms.DecideZeroEffectively
+      "DecideZeroEffectively"
     );
     
     return N;
@@ -312,7 +312,7 @@ SyzygiesGeneratorsOfRows :=
     homalgSendBlocking(
       [ "matrix ", N, " = SyzygiesGeneratorsOfRows(", M, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.SyzygiesGenerators
+      "SyzygiesGenerators"
     );
     
     return N;
@@ -343,7 +343,7 @@ SyzygiesGeneratorsOfColumns :=
     homalgSendBlocking(
       [ "matrix ", N, " = SyzygiesGeneratorsOfColumns(", M, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.SyzygiesGenerators
+      "SyzygiesGenerators"
     );
     
     return N;
@@ -374,7 +374,7 @@ RelativeSyzygiesGeneratorsOfRows :=
     homalgSendBlocking(
       [ "matrix ", N, " = RelativeSyzygiesGeneratorsOfRows(", M, M2, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.SyzygiesGenerators
+      "SyzygiesGenerators"
     );
     
     return N;
@@ -405,7 +405,7 @@ RelativeSyzygiesGeneratorsOfColumns :=
     homalgSendBlocking(
       [ "matrix ", N, " = RelativeSyzygiesGeneratorsOfColumns(", M, M2, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.SyzygiesGenerators
+      "SyzygiesGenerators"
     );
     
     return N;
@@ -423,7 +423,7 @@ X_PartiallyReducedBasisOfRowModule :=
     
     N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
     
-    homalgSendBlocking( [ "matrix ", N, " = PartiallyReducedBasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+    homalgSendBlocking( [ "matrix ", N, " = PartiallyReducedBasisOfRowModule(", M, ")" ], "need_command", "ReducedBasisOfModule" );
     
     return N;
     
@@ -436,7 +436,7 @@ X_PartiallyReducedBasisOfColumnModule :=
     
     N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
     
-    homalgSendBlocking( [ "matrix ", N, " = PartiallyReducedBasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+    homalgSendBlocking( [ "matrix ", N, " = PartiallyReducedBasisOfColumnModule(", M, ")" ], "need_command", "ReducedBasisOfModule" );
     
     return N;
     
@@ -462,7 +462,7 @@ ReducedSyzygiesGeneratorsOfRows :=
     homalgSendBlocking(
       [ "matrix ", N, " = ReducedSyzygiesGeneratorsOfRows(", M, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.SyzygiesGenerators
+      "SyzygiesGenerators"
     );
     
     return N;
@@ -493,7 +493,7 @@ ReducedSyzygiesGeneratorsOfColumns :=
     homalgSendBlocking(
       [ "matrix ", N, " = ReducedSyzygiesGeneratorsOfColumns(", M, ")" ],
       "need_command",
-      HOMALG_IO.Pictograms.SyzygiesGenerators
+      "SyzygiesGenerators"
     );
     
     return N;

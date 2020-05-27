@@ -57,10 +57,10 @@ InstallValue( CommonHomalgTableForGAPHomalgBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       homalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", V, " := HomalgVoidMatrix(", R, ");; ", S, " := BestBasis(", M, U, V, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", V, " := HomalgVoidMatrix(", R, ");; ", S, " := BestBasis(", M, U, V, ")" ], "need_command", "BestBasis" );
                    else
                        ## compute S only:
-                       homalgSendBlocking( [ S, " := BestBasis(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ S, " := BestBasis(", M, ")" ], "need_command", "BestBasis" );
                    fi;
                    
                    return S;

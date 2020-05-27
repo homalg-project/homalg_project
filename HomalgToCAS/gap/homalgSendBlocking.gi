@@ -148,7 +148,7 @@ InstallGlobalFunction( homalgFlush,
             ## set the argument to be the active ring
             if var <> [ ] and IsHomalgExternalRingRep( R ) and
                not IsIdenticalObj( R, stream.active_ring ) then
-                homalgSendBlocking( "\"we've just reset the ring for garbage collection\"", "need_command", R, HOMALG_IO.Pictograms.initialize );
+                homalgSendBlocking( "\"we've just reset the ring for garbage collection\"", "need_command", R, "initialize" );
             fi;
             
             ## free the entries corresponding to external objects about to be deleted
@@ -489,9 +489,7 @@ InstallGlobalFunction( homalgSendBlocking,
                     ext_obj := homalgExternalObject( "", stream.name, stream );
                 fi;
             fi;
-        elif not IsBound( pictogram ) and IsStringRep( ar ) and Length( ar ) <= 5 then
-            pictogram := ar;
-        elif not IsBound( option ) and IsStringRep( ar ) and Length( ar ) > 5 and ar <> "break_lists" then ## the first occurrence of an option decides
+        elif not IsBound( option ) and IsStringRep( ar ) and Length( ar ) > 5 and ar <> "break_lists" and LowercaseString( ar ){[1 .. 5]} = "need_" then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
             elif PositionSublist( LowercaseString( ar ), "display" ) <> fail then
@@ -508,6 +506,8 @@ InstallGlobalFunction( homalgSendBlocking,
             Add( properties, ar );
         elif not IsBound( break_lists ) and ar = "break_lists" then
             break_lists := ar;
+        elif not IsBound( pictogram ) and IsStringRep( ar ) then
+            pictogram := ar;
         else
             Error( "this argument should be in { IsList, IsStringRep, IsFilter, IsRecord, IshomalgExternalObjectRep, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
         fi;
@@ -638,6 +638,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     statistics := stream.StatisticsObject;
     statistics_summary := statistics!.summary;
+    statistics := statistics!.statistics;
     
     if not IsBound( option ) then
         
@@ -735,10 +736,16 @@ InstallGlobalFunction( homalgSendBlocking,
     io_info_level := InfoLevel( InfoHomalgToCAS );
     
     if not IsBound( pictogram ) then
-        pictogram := HOMALG_IO.Pictograms.unknown;
-        picto := pictogram;
+        pictogram := "unknown";
+        picto := HOMALG_IO.Pictograms.unknown;
     elif io_info_level >= 3 then
         picto := pictogram;
+        if IsBound( HOMALG_IO.Pictograms.(pictogram) ) then
+            pictogram := HOMALG_IO.Pictograms.(pictogram);
+        else
+            pictogram := HOMALG_IO.Pictograms.unknown;
+        fi;
+        
         ## add colors to the pictograms
         if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and
            IsBound( HOMALG_MATRICES.color_BOE ) then
@@ -905,7 +912,7 @@ InstallGlobalFunction( homalgDisplay,
         L := [ arg[1] ];
     fi;
     
-    ar := Concatenation( [ L ], arg{[ 2 .. Length( arg ) ]}, [ "need_display", HOMALG_IO.Pictograms.Display ] );
+    ar := Concatenation( [ L ], arg{[ 2 .. Length( arg ) ]}, [ "need_display", "Display" ] );
     
     Print( CallFuncList( homalgSendBlocking, ar ) );
     

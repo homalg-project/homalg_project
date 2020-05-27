@@ -65,10 +65,10 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       homalgSendBlocking( [ S, U, V, "=", M, ".smith_form()" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ S, U, V, "=", M, ".smith_form()" ], "need_command", "BestBasis" );
                    else
                        ## compute S only:
-                       homalgSendBlocking( [ S, " = BestBasis_S_only(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ S, " = BestBasis_S_only(", M, ")" ], "need_command", "BestBasis" );
                    fi;
                    
                    return S;

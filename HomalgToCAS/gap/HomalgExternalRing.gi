@@ -281,7 +281,7 @@ InstallMethod( homalgSetName,
         
   function( r, name, R )
     
-    SetName( r, homalgSendBlocking( [ r ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) );
+    SetName( r, homalgSendBlocking( [ r ], "need_output", "homalgSetName" ) );
     
 end );
 
@@ -454,7 +454,7 @@ InstallGlobalFunction( CreateHomalgExternalRing,
                 if IsBound( stream.init_string ) then
                     
                     ## send the init string
-                    homalgSendBlocking( stream.init_string, "need_command", stream, HOMALG_IO.Pictograms.initialize );
+                    homalgSendBlocking( stream.init_string, "need_command", stream, "initialize" );
                 fi;
                 
                 ## initialize the macros
@@ -480,7 +480,7 @@ InstallGlobalFunction( CreateHomalgExternalRing,
             r := r{[ 1 .. nar - 1 ]};
         fi;
         
-        Append( r, [ stream, HOMALG_IO.Pictograms.CreateHomalgRing ] );
+        Append( r, [ stream, "CreateHomalgRing" ] );
         
         r := CallFuncList( homalgSendBlocking, r );
         

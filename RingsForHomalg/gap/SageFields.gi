@@ -78,10 +78,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ N, U, "=RowReducedEchelonForm_NU_Fields(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonFormC );
+                       homalgSendBlocking( [ N, U, "=RowReducedEchelonForm_NU_Fields(", M, ")" ], "need_command", "ReducedEchelonFormC" );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, "=RowReducedEchelonForm_Fields(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
+                       homalgSendBlocking( [ N, "=RowReducedEchelonForm_Fields(", M, ")" ], "need_command", "ReducedEchelonForm" );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );

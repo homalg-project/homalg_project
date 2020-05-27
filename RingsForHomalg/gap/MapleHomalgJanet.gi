@@ -40,7 +40,7 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               RingName := R -> Concatenation( "B(", homalgSendBlocking( [ "op(", R, "[1])" ], HOMALG_IO.Pictograms.variables, "need_output" ), ")" ),
+               RingName := R -> Concatenation( "B(", homalgSendBlocking( [ "op(", R, "[1])" ], "need_output", "variables" ), ")" ),
                
                AreEqualMatrices :=
                  function( A, B )
@@ -48,7 +48,7 @@ InstallMethod( CreateHomalgTable,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "`homalg/AreEqualMatrices`(", A, B, R, ")" ] , HOMALG_IO.Pictograms.AreEqualMatrices, "need_output" ) = "true";
+                   return homalgSendBlocking( [ "`homalg/AreEqualMatrices`(", A, B, R, ")" ], "need_output", "AreEqualMatrices" ) = "true";
                    
                  end,
                
@@ -58,7 +58,7 @@ InstallMethod( CreateHomalgTable,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "`homalg/IsZeroMatrix`(", M, R, ")" ], HOMALG_IO.Pictograms.IsZeroMatrix, "need_output" ) = "true";
+                   return homalgSendBlocking( [ "`homalg/IsZeroMatrix`(", M, R, ")" ], "need_output", "IsZeroMatrix" ) = "true";
                    
                  end,
                

@@ -26,7 +26,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := BasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   homalgSendBlocking( [ N, " := BasisOfRowModule(", M, ")" ], "need_command", "BasisOfModule" );
                    
                    return N;
                    
@@ -38,7 +38,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := BasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   homalgSendBlocking( [ N, " := BasisOfColumnModule(", M, ")" ], "need_command", "BasisOfModule" );
                    
                    return N;
                    
@@ -52,7 +52,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := BasisOfRowsCoeff(", M, T, ")" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := BasisOfRowsCoeff(", M, T, ")" ], "need_command", "BasisCoeff" );
                    
                    return N;
                    
@@ -66,7 +66,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := BasisOfColumnsCoeff(", M, T, ")" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := BasisOfColumnsCoeff(", M, T, ")" ], "need_command", "BasisCoeff" );
                    
                    return N;
                    
@@ -78,7 +78,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
                    
-                   homalgSendBlocking( [ N, " := DecideZeroRows(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   homalgSendBlocking( [ N, " := DecideZeroRows(", A, B, ")" ], "need_command", "DecideZero" );
                    
                    return N;
                    
@@ -90,7 +90,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
                    
-                   homalgSendBlocking( [ N, " := DecideZeroColumns(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   homalgSendBlocking( [ N, " := DecideZeroColumns(", A, B, ")" ], "need_command", "DecideZero" );
                    
                    return N;
                    
@@ -104,7 +104,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := DecideZeroRowsEffectively(", A, B, T, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := DecideZeroRowsEffectively(", A, B, T, ")" ], "need_command", "DecideZeroEffectively" );
                    
                    return N;
                    
@@ -118,7 +118,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := DecideZeroColumnsEffectively(", A, B, T, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := DecideZeroColumnsEffectively(", A, B, T, ")" ], "need_command", "DecideZeroEffectively" );
                    
                    return N;
                    
@@ -130,7 +130,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfRows(", M, ")" ], "need_command", "SyzygiesGenerators" );
                    
                    return N;
                    
@@ -142,7 +142,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", "SyzygiesGenerators" );
                    
                    return N;
                    
@@ -154,7 +154,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfRows(", M, M2, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfRows(", M, M2, ")" ], "need_command", "SyzygiesGenerators" );
                    
                    return N;
                    
@@ -166,7 +166,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfColumns(", M, M2, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfColumns(", M, M2, ")" ], "need_command", "SyzygiesGenerators" );
                    
                    return N;
                    
@@ -178,7 +178,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := ReducedBasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+                   homalgSendBlocking( [ N, " := ReducedBasisOfRowModule(", M, ")" ], "need_command", "ReducedBasisOfModule" );
                    
                    return N;
                    
@@ -190,7 +190,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := ReducedBasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+                   homalgSendBlocking( [ N, " := ReducedBasisOfColumnModule(", M, ")" ], "need_command", "ReducedBasisOfModule" );
                    
                    return N;
                    
@@ -202,7 +202,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := ReducedSyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedSyzygiesGenerators );
+                   homalgSendBlocking( [ N, " := ReducedSyzygiesGeneratorsOfRows(", M, ")" ], "need_command", "ReducedSyzygiesGenerators" );
                    
                    return N;
                    
@@ -214,7 +214,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
-                   homalgSendBlocking( [ N, " := ReducedSyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedSyzygiesGenerators );
+                   homalgSendBlocking( [ N, " := ReducedSyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", "ReducedSyzygiesGenerators" );
                    
                    return N;
                    

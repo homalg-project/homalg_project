@@ -35,12 +35,12 @@ InstallValue( HOMALG_IO_Macaulay2,
             remove_enter := true,       	## a Macaulay2 specific
             only_warning := "--warning",	## a Macaulay2 specific
             define := "=",
-            garbage_collector := function( stream ) homalgSendBlocking( [ "collectGarbage()" ], "need_command", stream, HOMALG_IO.Pictograms.garbage_collector ); end,
+            garbage_collector := function( stream ) homalgSendBlocking( [ "collectGarbage()" ], "need_command", stream, "garbage_collector" ); end,
             prompt := "\033[01mM2>\033[0m ",
             output_prompt := "\033[1;30;43m<M2\033[0m ",
             banner := function( s ) Remove( s.errors, Length( s.errors ) ); Print( s.errors ); end,
             InitializeCASMacros := InitializeMacaulay2Macros,
-            time := function( stream, t ) return Int( homalgSendBlocking( [ "floor( cpuTime() * 1000 )" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
+            time := function( stream, t ) return Int( homalgSendBlocking( [ "floor( cpuTime() * 1000 )" ], "need_output", stream, "time" ) ) - t; end,
            )
 );
             
@@ -97,7 +97,7 @@ InstallGlobalFunction( _Macaulay2_SetRing,
     ## we first set the new active ring to avoid infinite loops:
     stream.active_ring := R;
     
-    homalgSendBlocking( [ "use ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( [ "use ", R ], "need_command", "initialize" );
     
 end );
 
@@ -355,7 +355,7 @@ InstallGlobalFunction( RingForHomalgInMacaulay2,
     
     RP!.SetInvolution :=
       function( R )
-        homalgSendBlocking( "\nInvolution = transpose;\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( "\nInvolution = transpose;\n\n", "need_command", R, "define" );
     end;
     
     RP!.SetInvolution( R );
@@ -466,9 +466,9 @@ InstallMethod( PolynomialRing,
     
     ## create the new ring
     if HasIndeterminatesOfPolynomialRing( R ) then
-        ext_obj := homalgSendBlocking( [ "(coefficientRing ", R, ")[", var, "]" ], TheTypeHomalgExternalRingObjectInMacaulay2, properties, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "(coefficientRing ", R, ")[", var, "]" ], TheTypeHomalgExternalRingObjectInMacaulay2, properties, "CreateHomalgRing" );
     else
-        ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], TheTypeHomalgExternalRingObjectInMacaulay2, properties, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], TheTypeHomalgExternalRingObjectInMacaulay2, properties, "CreateHomalgRing" );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
@@ -491,7 +491,7 @@ InstallMethod( PolynomialRing,
     
     RP!.SetInvolution :=
       function( R )
-        homalgSendBlocking( "\nInvolution = transpose;\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( "\nInvolution = transpose;\n\n", "need_command", R, "define" );
     end;
     
     RP!.SetInvolution( S );
@@ -516,13 +516,13 @@ InstallMethod( RingOfDerivations,
     
     stream := homalgStream( R );
     
-    homalgSendBlocking( "needs \"Dmodules.m2\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "needs \"Dmodules.m2\"", "need_command", stream, "initialize" );
     
     ## create the new ring
     if HasIndeterminatesOfPolynomialRing( R ) then
-        ext_obj := homalgSendBlocking( Concatenation( [ "(coefficientRing ", R, ")[", var, der, ",WeylAlgebra => {" ], [ JoinStringsWithSeparator( ListN( var, der, function(i, j) return Concatenation( i, "=>", j ); end ) ) ], [ "}]" ] ), TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( Concatenation( [ "(coefficientRing ", R, ")[", var, der, ",WeylAlgebra => {" ], [ JoinStringsWithSeparator( ListN( var, der, function(i, j) return Concatenation( i, "=>", j ); end ) ) ], [ "}]" ] ), TheTypeHomalgExternalRingObjectInMacaulay2, "CreateHomalgRing" );
     else
-        ext_obj := homalgSendBlocking( Concatenation( [ R, "[", var, der, ",WeylAlgebra => {" ], [ JoinStringsWithSeparator( ListN( var, der, function(i, j) return Concatenation( i, "=>", j ); end ) ) ], [ "}]" ] ), TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( Concatenation( [ R, "[", var, der, ",WeylAlgebra => {" ], [ JoinStringsWithSeparator( ListN( var, der, function(i, j) return Concatenation( i, "=>", j ); end ) ) ], [ "}]" ] ), TheTypeHomalgExternalRingObjectInMacaulay2, "CreateHomalgRing" );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
@@ -541,7 +541,7 @@ InstallMethod( RingOfDerivations,
     
     RP!.SetInvolution :=
       function( R )
-        homalgSendBlocking( [ "\nInvolution = M -> ( local R,T; R = ring M; T = Dtransposition M; transpose map(R^(numgens target T), R^(numgens source T), T) )\n\n" ], "need_command", R, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "\nInvolution = M -> ( local R,T; R = ring M; T = Dtransposition M; transpose map(R^(numgens target T), R^(numgens source T), T) )\n\n" ], "need_command", R, "define" );
     # forget degrees!
     end;
     
@@ -568,9 +568,9 @@ InstallMethod( ExteriorRing,
     ## create the new ring
     if HasIndeterminatesOfPolynomialRing( Base ) then
         # create the new ring in one go in order to ensure standard grading
-        ext_obj := homalgSendBlocking( [ Coeff, "[", comm, anti, ",SkewCommutative => {", [ Length( comm )..( Length( comm ) + Length( anti ) - 1 ) ], "}]" ], TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ Coeff, "[", comm, anti, ",SkewCommutative => {", [ Length( comm )..( Length( comm ) + Length( anti ) - 1 ) ], "}]" ], TheTypeHomalgExternalRingObjectInMacaulay2, "CreateHomalgRing" );
     else
-        ext_obj := homalgSendBlocking( [ Coeff, "[", anti, ",SkewCommutative => true]" ], TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ Coeff, "[", anti, ",SkewCommutative => true]" ], TheTypeHomalgExternalRingObjectInMacaulay2, "CreateHomalgRing" );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
@@ -593,7 +593,7 @@ InstallMethod( ExteriorRing,
     
     RP!.SetInvolution :=
       function( R )
-        homalgSendBlocking( [ "\nInvolution = M -> ( local R; R = ring M; transpose map(R^(numgens target M), R^(numgens source M), apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a)))) )\n\n" ], "need_command", R, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "\nInvolution = M -> ( local R; R = ring M; transpose map(R^(numgens target M), R^(numgens source M), apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a)))) )\n\n" ], "need_command", R, "define" );
     end;
     
     RP!.SetInvolution( S );
@@ -601,7 +601,7 @@ InstallMethod( ExteriorRing,
     RP!.Compose :=
       function( A, B )
         
-        return homalgSendBlocking( [ "Involution( Involution(", B, ") * Involution(", A, ") )" ], HOMALG_IO.Pictograms.Compose );
+        return homalgSendBlocking( [ "Involution( Involution(", B, ") * Involution(", A, ") )" ], "Compose" );
         
     end;
     
@@ -616,7 +616,7 @@ InstallMethod( SetMatElm,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, " = ", M, "_{0..(", c, "-2)} | map(target ", M, ", ", R, "^1, apply(toList(1..(numgens target ", M, ")), entries ", M, "_(", c, "-1), (k,l)->if k == ", r, " then {", s, "} else {l})) | ", M, "_{", c, "..(numgens source ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.SetMatElm );
+    homalgSendBlocking( [ M, " = ", M, "_{0..(", c, "-2)} | map(target ", M, ", ", R, "^1, apply(toList(1..(numgens target ", M, ")), entries ", M, "_(", c, "-1), (k,l)->if k == ", r, " then {", s, "} else {l})) | ", M, "_{", c, "..(numgens source ", M, ")-1}" ], "need_command", "SetMatElm" );
     
 end );
 
@@ -646,7 +646,7 @@ InstallMethod( CreateHomalgMatrixFromString,
     
     S := ShallowCopy( s );
     RemoveCharacters(S, "[]");
-    ext_obj := homalgSendBlocking( [ "map(", R, "^", r, R, "^", c, ", pack(", c, ", {", S, "}))" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "map(", R, "^", r, R, "^", c, ", pack(", c, ", {", S, "}))" ], "HomalgMatrix" );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -659,7 +659,7 @@ InstallMethod( MatElmAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], "need_output", HOMALG_IO.Pictograms.MatElm );
+    return homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], "need_output", "MatElm" );
     
 end );
 
@@ -671,7 +671,7 @@ InstallMethod( MatElm,
   function( M, r, c, R )
     local Mrc;
     
-    Mrc := homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], HOMALG_IO.Pictograms.MatElm );
+    Mrc := homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], "MatElm" );
     
     return HomalgExternalRingElement( Mrc, R );
     
@@ -684,7 +684,7 @@ InstallMethod( homalgSetName,
         
   function( r, name, R )
     
-    SetName( r, homalgSendBlocking( [ "toString(", r, ")" ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) );
+    SetName( r, homalgSendBlocking( [ "toString(", r, ")" ], "need_output", "homalgSetName" ) );
     
 end );
 
@@ -716,7 +716,7 @@ InstallMethod( SaveHomalgMatrixToFile,
           "homalgsavefile << close;"
         ];
 
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
+        homalgSendBlocking( command, "need_command", "SaveHomalgMatrixToFile" );
 
     fi;
     
@@ -746,7 +746,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
                      ", toList(apply(",
                      "value replace(\"[\\\\]\", \"\", get \"", filename, "\"), toList)));" ];
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
+        homalgSendBlocking( command, "need_command", "LoadHomalgMatrixFromFile" );
         
     fi;
     
@@ -766,7 +766,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInMacaulay2Rep( HomalgRing( o ) ) then
         
-        Print( "        ", homalgSendBlocking( [ o ], "need_display", HOMALG_IO.Pictograms.Display ) );
+        Print( "        ", homalgSendBlocking( [ o ], "need_display", "Display" ) );
         
     else
         

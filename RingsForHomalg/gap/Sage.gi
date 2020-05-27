@@ -30,7 +30,7 @@ InstallValue( HOMALG_IO_Sage,
 	    check_output := true,	## a Sage specific
             only_warning := "WARNING:",	## a Sage specific
             define := "=",
-            delete := function( var, stream ) homalgSendBlocking( [ "del ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
+            delete := function( var, stream ) homalgSendBlocking( [ "del ", var ], "need_command", stream, "delete" ); end,
             multiple_delete := _Sage_multiple_delete,
             prompt := "\033[01msage:\033[0m ",
             output_prompt := "\033[1;34;43m<sage\033[0m ",
@@ -86,7 +86,7 @@ InstallGlobalFunction( _Sage_multiple_delete,
     
     str := [ "del ", var_list ];
     
-    homalgSendBlocking( str, "need_command", "break_lists", stream, HOMALG_IO.Pictograms.multiple_delete );
+    homalgSendBlocking( str, "need_command", "break_lists", stream, "multiple_delete" );
     
 end );
 
@@ -252,7 +252,7 @@ InstallMethod( PolynomialRing,
     properties := ar[4];
     
     ## create the new ring
-    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists", "CreateHomalgRing" );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSage );
     
@@ -281,7 +281,7 @@ InstallMethod( SetMatElm,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r-1, c-1, "]=", s ], "need_command", HOMALG_IO.Pictograms.SetMatElm );
+    homalgSendBlocking( [ M, "[", r-1, c-1, "]=", s ], "need_command", "SetMatElm" );
     
 end );
 
@@ -292,7 +292,7 @@ InstallMethod( AddToMatElm,
         
   function( M, r, c, a, R )
     
-    homalgSendBlocking( [ M, "[", r-1, c-1, "]=", a, "+", M, "[", r-1, c-1, "]" ], "need_command", HOMALG_IO.Pictograms.AddToMatElm );
+    homalgSendBlocking( [ M, "[", r-1, c-1, "]=", a, "+", M, "[", r-1, c-1, "]" ], "need_command", "AddToMatElm" );
     
 end );
 
@@ -304,7 +304,7 @@ InstallMethod( CreateHomalgMatrixFromString,
   function( S, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "matrix(", R, ",", S, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "matrix(", R, ",", S, ")" ], "HomalgMatrix" );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -317,7 +317,7 @@ InstallMethod( CreateHomalgMatrixFromString,
  function( S, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "matrix(", R, r, c, ",", S, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "matrix(", R, r, c, ",", S, ")" ], "HomalgMatrix" );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -333,9 +333,9 @@ InstallMethod( CreateHomalgMatrixFromSparseString,
     
     M := HomalgInitialMatrix( r, c, R );
     
-    s := homalgSendBlocking( S, R, HOMALG_IO.Pictograms.sparse );
+    s := homalgSendBlocking( S, R, "sparse" );
     
-    homalgSendBlocking( [ "FillMatrix(", M, ",",  s, ")" ], "need_command", HOMALG_IO.Pictograms.HomalgMatrix );
+    homalgSendBlocking( [ "FillMatrix(", M, ",",  s, ")" ], "need_command", "HomalgMatrix" );
     
     return M;
     
@@ -348,7 +348,7 @@ InstallMethod( MatElmAsString,
 
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output", HOMALG_IO.Pictograms.MatElm );
+    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output", "MatElm" );
     
 end );
 
@@ -360,7 +360,7 @@ InstallMethod( MatElm,
   function( M, r, c, R )
     local Mrc;
     
-    Mrc := homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], HOMALG_IO.Pictograms.MatElm );
+    Mrc := homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "MatElm" );
     
     return HomalgExternalRingElement( Mrc, R );
     
@@ -373,7 +373,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ M, ".list()" ], "need_output", HOMALG_IO.Pictograms.GetListOfHomalgMatrixAsString );
+    return homalgSendBlocking( [ M, ".list()" ], "need_output", "GetListOfHomalgMatrixAsString" );
     
 end );
 
@@ -384,7 +384,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output", "GetListListOfHomalgMatrixAsString" );
     
 end );
 
@@ -395,7 +395,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M , R )
     
-    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
+    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output", "GetSparseListOfHomalgMatrixAsString" );
     
 end );
 
@@ -418,7 +418,7 @@ InstallMethod( SaveHomalgMatrixToFile,
                      "_fs.write(str( [", M, "[x].list() for x in range(", NrRows( M ), ")] )); ",
                      "_fs.close()" ];
                 
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
+        homalgSendBlocking( command, "need_command", "SaveHomalgMatrixToFile" );
                 
     fi;
     
@@ -449,7 +449,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
                      "_fs.close(); ",
                      M, "= matrix(", R, ",eval(_str))" ];
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
+        homalgSendBlocking( command, "need_command", "LoadHomalgMatrixFromFile" );
         
     fi;
     

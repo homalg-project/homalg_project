@@ -40,7 +40,7 @@ InstallValue( HOMALG_IO_Singular,
             setring_post := [ "short=0;", "option(redTail);" ],	## a Singular specific
             setinvol := _Singular_SetInvolution,## a Singular specific
             define := "=",
-            delete := function( var, stream ) homalgSendBlocking( [ "kill ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
+            delete := function( var, stream ) homalgSendBlocking( [ "kill ", var ], "need_command", stream, "delete" ); end,
             multiple_delete := _Singular_multiple_delete,
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
@@ -48,8 +48,8 @@ InstallValue( HOMALG_IO_Singular,
             ## matrix.lib loads: LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"random.lib\";
             init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"primdec.lib\";LIB \"primdecint.lib\";LIB \"involut.lib\";LIB \"finvar.lib\";",
             InitializeCASMacros := InitializeSingularMacros,
-            time := function( stream, t ) return Int( homalgSendBlocking( [ "timer" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
-            memory_usage := function( stream, o ) return Int( homalgSendBlocking( [ "memory(", o, ")" ], "need_output", stream, HOMALG_IO.Pictograms.memory ) ); end,
+            time := function( stream, t ) return Int( homalgSendBlocking( [ "timer" ], "need_output", stream, "time" ) ) - t; end,
+            memory_usage := function( stream, o ) return Int( homalgSendBlocking( [ "memory(", o, ")" ], "need_output", stream, "memory" ) ); end,
            )
 );
 
@@ -106,10 +106,10 @@ InstallGlobalFunction( _Singular_SetRing,
     ## we first set the new active ring to avoid infinite loops:
     stream.active_ring := R;
     
-    homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( [ "setring ", R ], "need_command", "initialize" );
     
     if IsBound( HOMALG_IO_Singular.setring_post ) then
-        homalgSendBlocking( HOMALG_IO_Singular.setring_post, "need_command", stream, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( HOMALG_IO_Singular.setring_post, "need_command", stream, "initialize" );
     fi;
     
     ## never use imapall here
@@ -140,7 +140,7 @@ InstallGlobalFunction( _Singular_multiple_delete,
       str := Concatenation( str, "kill ", String ( var ) , ";" );
     od;
     
-    homalgSendBlocking( str, "need_command", stream, HOMALG_IO.Pictograms.multiple_delete );
+    homalgSendBlocking( str, "need_command", stream, "multiple_delete" );
     
 end );
 
@@ -1119,7 +1119,7 @@ InstallGlobalFunction( InitializeSingularMacros,
     
     v := stream.variable_name;
     
-    homalgSendBlocking( [ "int ", v, "i; int ", v, "j; int ", v, "k; list ", v, "l; string ", v, "s;\n\n" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( [ "int ", v, "i; int ", v, "j; int ", v, "k; list ", v, "l; string ", v, "s;\n\n" ], "need_command", stream, "initialize" );
     
     return InitializeMacros( SingularMacros, stream );
     
@@ -1170,7 +1170,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     RP!.SetInvolution :=
       function( R )
-        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, "define" );
     end;
     
     RP!.NumeratorAndDenominatorOfPolynomial := RP!.NumeratorAndDenominatorOfRational;
@@ -1268,12 +1268,12 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
              [ function( R )
                  local name;
                  
-                 name := homalgSendBlocking( [ minimal_polynomial ], "need_output", R, HOMALG_IO.Pictograms.homalgSetName );
+                 name := homalgSendBlocking( [ minimal_polynomial ], "need_output", R, "homalgSetName" );
                  if name[1] = '(' and name[Length( name )] = ')' then
                      name := name{[ 2 .. Length( name ) - 1 ]};
                  fi;
                  R!.MinimalPolynomialOfPrimitiveElement := name;
-                 homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, HOMALG_IO.Pictograms.define );
+                 homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, "define" );
                end ] );
     fi;
     
@@ -1378,12 +1378,12 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
              [ function( R )
                  local name;
                  
-                 name := homalgSendBlocking( [ minimal_polynomial ], "need_output", R, HOMALG_IO.Pictograms.homalgSetName );
+                 name := homalgSendBlocking( [ minimal_polynomial ], "need_output", R, "homalgSetName" );
                  if name[1] = '(' and name[Length( name )] = ')' then
                      name := name{[ 2 .. Length( name ) - 1 ]};
                  fi;
                  R!.MinimalPolynomialOfPrimitiveElement := name;
-                 homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, HOMALG_IO.Pictograms.define );
+                 homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, "define" );
                end ] );
     fi;
     
@@ -1457,18 +1457,18 @@ InstallMethod( PolynomialRing,
         
         ## lex order
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", Concatenation( var_fibr, var_base ), "),(lp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", Concatenation( var_fibr, var_base ), "),(lp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, "CreateHomalgRing" );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( var_fibr, var_base ), "),(lp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( var_fibr, var_base ), "),(lp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, "CreateHomalgRing" );
         fi;
         
     elif IsRecord( order ) and IsBound( order.weights ) then
         
         ## weighted degrevlex order
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),(wp(", order.weights, "),c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),(wp(", order.weights, "),c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, "CreateHomalgRing" );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),(wp(", order.weights, "),c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),(wp(", order.weights, "),c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, "CreateHomalgRing" );
         fi;
         
     elif order = "product" or order = "block" then
@@ -1480,18 +1480,18 @@ InstallMethod( PolynomialRing,
         weights := Concatenation( Concatenation( List( [ 1 .. Length( var_base ) ], a -> "0," ) ), Concatenation( List( [ 1 .. Length( var_fibr ) ], a -> "1," ) ) );
         weights := weights{[ 1 .. Length( weights ) - 1 ]}; # remove trailing comma
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_base, var_fibr, "),(a(", weights, "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_base, var_fibr, "),(a(", weights, "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, "CreateHomalgRing" );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_base, var_fibr, "),(a(", weights, "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_base, var_fibr, "),(a(", weights, "),dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, "CreateHomalgRing" );
         fi;
         
     else
         
         ## degrevlex order
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, "CreateHomalgRing" );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),(dp,c)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, "CreateHomalgRing" );
         fi;
         
     fi;
@@ -1500,7 +1500,7 @@ InstallMethod( PolynomialRing,
     ## the definition of 0,1,-1 would precede "minpoly=";
     ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, "define" );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
@@ -1553,7 +1553,7 @@ InstallMethod( PolynomialRing,
     
     RP!.SetInvolution :=
       function( R )
-        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, "define" );
     end;
     
     homalgStream( S ).setinvol( S );
@@ -1650,15 +1650,15 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
         if base <> "" then
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, der, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, der, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
         else
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(dp,c)" ], [ "ring" ], R, "initialize" );
         fi;
     else
         if base <> "" then
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, der, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, der, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),(dp,c)" ], [ "ring" ], R, "initialize" );
         fi;
     fi;
     
@@ -1671,20 +1671,20 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     if base <> "" then
         b := Length( base );
         n := b + Length( var ) + Length( der );
-        homalgSendBlocking( [ "matrix @M[", n, "][", n, "]" ], "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( [ "matrix @M[", n, "][", n, "]" ], "need_command", ext_obj, "initialize" );
         n := Length( der );
         b := List( [ 1 .. Length( der ) ], i -> Concatenation( "@M[", String( b + i ), ",", String( b + n + i ), "] = 1;" ) );
-        homalgSendBlocking( Concatenation( b ), "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
-        ext_obj := homalgSendBlocking( [ "nc_algebra(1,@M)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+        homalgSendBlocking( Concatenation( b ), "need_command", ext_obj, "initialize" );
+        ext_obj := homalgSendBlocking( [ "nc_algebra(1,@M)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, "CreateHomalgRing" );
     else
-        ext_obj := homalgSendBlocking( [ "Weyl()" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "Weyl()" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, "CreateHomalgRing" );
     fi;
     
     ## this must precede CreateHomalgExternalRing as otherwise
     ## the definition of 0,1,-1 would precede "minpoly=";
     ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, "define" );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
@@ -1713,7 +1713,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                 [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfRingOfDerivations( R ), String ) ) ],
                 Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , String( a ) ] ) ),
                 [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
-                ), "need_command", HOMALG_IO.Pictograms.define );
+                ), "need_command", "define" );
     end;
     
     homalgStream( S ).setinvol( S );
@@ -1722,7 +1722,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
       function( A, B )
         
         # fix the broken design of Plural
-        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], "Compose" );
         
     end;
     
@@ -1737,7 +1737,7 @@ matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
 matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
 ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_Weyl_2; kill homalg_Weyl_1;\n\
 // end: check the nres-isHomog-bug in Plural."
-    , "need_output", S, HOMALG_IO.Pictograms.initialize ) = "1" then;
+    , "need_output", S, "initialize" ) = "1" then;
     
         Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
         Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
@@ -1817,9 +1817,9 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## add the Weyl-structure
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], R, "initialize" );
     else
-        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),(wp(", weights, "),c)" ], [ "ring" ], R, "initialize" );
     fi;
     
     ## as we are not yet done we cannot call CreateHomalgExternalRing
@@ -1828,13 +1828,13 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     stream.DeletePeriod_save := stream.DeletePeriod;
     stream.DeletePeriod := false;
     
-    ext_obj := homalgSendBlocking( [ "Weyl();" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "Weyl();" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, "CreateHomalgRing" );
     
     ## this must precede CreateHomalgExternalRing as otherwise
     ## the definition of 0,1,-1 would precede "minpoly=";
     ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, "define" );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
@@ -1863,7 +1863,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                 [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfRingOfDerivations( R ), String ) ) ],
                 Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , String( a ) ] ) ),
                 [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
-                ), "need_command", HOMALG_IO.Pictograms.define );
+                ), "need_command", "define" );
     end;
     
     homalgStream( S ).setinvol( S );
@@ -1872,7 +1872,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
       function( A, B )
         
         # fix the broken design of Plural
-        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], "Compose" );
         
     end;
     
@@ -1887,7 +1887,7 @@ matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
 matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
 ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_Weyl_2; kill homalg_Weyl_1;\n\
 // end: check the nres-isHomog-bug in Plural."
-    , "need_output", S, HOMALG_IO.Pictograms.initialize ) = "1" then;
+    , "need_output", S, "initialize" ) = "1" then;
     
         Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
         Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
@@ -1975,7 +1975,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     ## create the new ring in 2 steps: create a polynomial ring with anti commuting and commuting variables and then
     ## add the exterior structure
-    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( comm, anti ), "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( comm, anti ), "),(dp,c)" ], [ "ring" ], R, "initialize" );
     
     ## as we are not yet done we cannot call CreateHomalgExternalRing
     ## to create a HomalgRing, and only then would homalgSendBlocking call stream.setring,
@@ -1983,13 +1983,13 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     stream.DeletePeriod_save := stream.DeletePeriod;
     stream.DeletePeriod := false;
     
-    ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, "CreateHomalgRing" );
     
     ## this must precede CreateHomalgExternalRing as otherwise
     ## the definition of 0,1,-1 would precede "minpoly=";
     ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, "define" );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
@@ -2012,7 +2012,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     SetRingProperties( S, R, anti );
     
-    homalgSendBlocking( "option(redTail);option(redSB);", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "option(redTail);option(redSB);", "need_command", stream, "initialize" );
     
     RP := homalgTable( S );
     
@@ -2023,7 +2023,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                 [ "  map F = ", R ],
                 Concatenation( List( IndeterminatesOfExteriorRing( R ), a -> [ ", ", String( a ) ] ) ),
                 [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
-                ), "need_command", HOMALG_IO.Pictograms.define );
+                ), "need_command", "define" );
     end;
     
     homalgStream( S ).setinvol( S );
@@ -2032,7 +2032,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
       function( A, B )
         
         # fix the broken design of SCA
-        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], "Compose" );
         
     end;
     
@@ -2107,17 +2107,17 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
         if base <> "" then
-            #ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            #ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
         else
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
         fi;
     else
         if base <> "" then
-            #ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            #ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
         fi;
     fi;
     
@@ -2130,7 +2130,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     b := Length( base );
     n := b + Length( var ) + Length( shift );
     
-    homalgSendBlocking( [ "matrix @d[", n, "][", n, "]" ], "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( [ "matrix @d[", n, "][", n, "]" ], "need_command", ext_obj, "initialize" );
     
     n := Length( shift ) / 2;
     
@@ -2156,15 +2156,15 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                            i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( n + i ) ), "] = -(", String( steps[i] ), ") * ", shift[n + i] ) ) );
     fi;
     
-    homalgSendBlocking( JoinStringsWithSeparator( d, "; " ), "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( JoinStringsWithSeparator( d, "; " ), "need_command", ext_obj, "initialize" );
     
-    ext_obj := homalgSendBlocking( [ "nc_algebra(1,@d)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "nc_algebra(1,@d)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, "CreateHomalgRing" );
     
     ## this must precede CreateHomalgExternalRing as otherwise
     ## the definition of 0,1,-1 would precede "minpoly=";
     ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, "define" );
     fi;
     
     P := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
@@ -2197,7 +2197,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                 [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( R ), a -> [ ", -" , String( a ) ] ) ) ],
                 Concatenation( List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( R ), String ) ),
                 [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
-                ), "need_command", HOMALG_IO.Pictograms.define );
+                ), "need_command", "define" );
     end;
     
     homalgStream( P ).setinvol( P );
@@ -2206,7 +2206,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
       function( A, B )
         
         # fix the broken design of Plural
-        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], "Compose" );
         
     end;
     
@@ -2221,7 +2221,7 @@ matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
 matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
 ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_Weyl_2; kill homalg_Weyl_1;\n\
 // end: check the nres-isHomog-bug in Plural."
-    , "need_output", P, HOMALG_IO.Pictograms.initialize ) = "1" then;
+    , "need_output", P, "initialize" ) = "1" then;
     
         Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
         Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
@@ -2332,13 +2332,13 @@ InstallMethod( HomalgQRingInSingular,
     
     ideal := EntriesOfHomalgMatrix( EvaluatedMatrixOfRingRelations( ring_rel ) );
     
-    ext_obj := homalgSendBlocking( [ "std(ideal(", ideal, "))" ], [ "qring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "std(ideal(", ideal, "))" ], [ "qring" ], TheTypeHomalgExternalRingObjectInSingular, R, "CreateHomalgRing" );
     
     ## this must precede CreateHomalgExternalRing as otherwise
     ## the definition of 0,1,-1 would precede "minpoly=";
     ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, "define" );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
@@ -2352,7 +2352,7 @@ InstallMethod( HomalgQRingInSingular,
     
     SetRingRelations( S, ring_rel );
     
-    homalgSendBlocking( "option(redTail);option(redSB);", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "option(redTail);option(redSB);", "need_command", stream, "initialize" );
     
     RP := homalgTable( S );
     
@@ -2394,19 +2394,19 @@ InstallMethod( HomalgQRingInSingular,
 
     RP!.SetInvolution :=
       function( R )
-        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, "define" );
     end;
     
     homalgStream( S ).setinvol( S );
     
-    RP!.IsZero := r -> homalgSendBlocking( [ "reduce(", r, ",std(0))==0" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1";
+    RP!.IsZero := r -> homalgSendBlocking( [ "reduce(", r, ",std(0))==0" ] , "need_output", "IsZero" ) = "1";
     
-    RP!.IsOne := r -> homalgSendBlocking( [ "reduce(", r, ",std(0))==1" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "1";
+    RP!.IsOne := r -> homalgSendBlocking( [ "reduce(", r, ",std(0))==1" ] , "need_output", "IsOne" ) = "1";
     
     RP!.AreEqualMatrices :=
       function( A, B )
         
-        return homalgSendBlocking( [ "matrix(reduce(", A, ",std(0))) == matrix(reduce(", B, ",std(0)))" ] , "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "1";
+        return homalgSendBlocking( [ "matrix(reduce(", A, ",std(0))) == matrix(reduce(", B, ",std(0)))" ] , "need_output", "AreEqualMatrices" ) = "1";
         
     end;
     
@@ -2554,7 +2554,7 @@ InstallMethod( SetMatElm,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", c, r, "]=", s ], "need_command", HOMALG_IO.Pictograms.SetMatElm );
+    homalgSendBlocking( [ M, "[", c, r, "]=", s ], "need_command", "SetMatElm" );
     
 end );
 
@@ -2565,7 +2565,7 @@ InstallMethod( AddToMatElm,
         
   function( M, r, c, a, R )
     
-    homalgSendBlocking( [ M, "[", c, r, "]=", a, "+", M, "[", c, r, "]" ], "need_command", HOMALG_IO.Pictograms.AddToMatElm );
+    homalgSendBlocking( [ M, "[", c, r, "]=", a, "+", M, "[", c, r, "]" ], "need_command", "AddToMatElm" );
     
 end );
 
@@ -2597,10 +2597,10 @@ InstallMethod( CreateHomalgMatrixFromString,
     
     RemoveCharacters( str, "[]" );
     
-    ext_obj := homalgSendBlocking( [ str ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ str ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, "HomalgMatrix" );
     
     if not ( r = 1 and c = 1 ) then
-        homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix );
+        homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", "TransposedMatrix" );
     fi;
     
     return HomalgMatrix( ext_obj, r, c, R );
@@ -2614,7 +2614,7 @@ InstallMethod( MatElmAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", c, r, "]" ], "need_output", HOMALG_IO.Pictograms.MatElm );
+    return homalgSendBlocking( [ M, "[", c, r, "]" ], "need_output", "MatElm" );
     
 end );
 
@@ -2626,7 +2626,7 @@ InstallMethod( MatElm,
   function( M, r, c, R )
     local Mrc;
     
-    Mrc := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], HOMALG_IO.Pictograms.MatElm );
+    Mrc := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], "MatElm" );
     
     return HomalgExternalRingElement( Mrc, R );
     
@@ -2645,7 +2645,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "\"[\"+string(transpose(", M, "))+\"]\"" ], "need_output", HOMALG_IO.Pictograms.GetListOfHomalgMatrixAsString );
+    return homalgSendBlocking( [ "\"[\"+string(transpose(", M, "))+\"]\"" ], "need_output", "GetListOfHomalgMatrixAsString" );
     #remark: matrices are saved transposed in singular
     
 end );
@@ -2670,9 +2670,9 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
                 v, "s=", v, "s+\"]\"; kill ", v, "m"
                 ];
     
-    homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    homalgSendBlocking( command, "need_command", "GetListListOfHomalgMatrixAsString" );
     
-    return homalgSendBlocking( [ v, "s; ", v, "s=\"\"" ], "need_output", R, HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    return homalgSendBlocking( [ v, "s; ", v, "s=\"\"" ], "need_output", R, "GetListListOfHomalgMatrixAsString" );
     
 end );
 
@@ -2684,7 +2684,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
   function( M, R )
     local s;
     
-    s := homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString(", M, ")" ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
+    s := homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString(", M, ")" ], "need_output", "GetSparseListOfHomalgMatrixAsString" );
     
     s := SplitString( s, "," );
     
@@ -2726,7 +2726,7 @@ InstallMethod( SaveHomalgMatrixToFile,
                     "kill ", v, "m; ", v, "s=\"\""
                     ];
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
+        homalgSendBlocking( command, "need_command", "SaveHomalgMatrixToFile" );
         
     fi;
     
@@ -2791,7 +2791,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
                     v, "s=\"\""
                     ];
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
+        homalgSendBlocking( command, "need_command", "LoadHomalgMatrixFromFile" );
         
     fi;
     
@@ -2821,7 +2821,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInSingularRep( HomalgRing( o ) ) then
         
-        Print( homalgSendBlocking( [ "print(transpose(", o, "))" ], "need_display", HOMALG_IO.Pictograms.Display ) );
+        Print( homalgSendBlocking( [ "print(transpose(", o, "))" ], "need_display", "Display" ) );
         
     else
         
