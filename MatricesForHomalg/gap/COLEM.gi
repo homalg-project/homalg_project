@@ -2314,9 +2314,10 @@ InstallMethod( CertainRows,
   function( M, plist )
     local  AB;
     
-    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( Compose )", "\033[0m" );
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then
+        
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( Compose )", "\033[0m" );
         
         AB := EvalCompose( M );
         
@@ -2461,6 +2462,7 @@ InstallMethod( CertainColumns,
     local AB;
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then
+        
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( Compose )", "\033[0m" );
         
         AB := EvalCompose( M );
