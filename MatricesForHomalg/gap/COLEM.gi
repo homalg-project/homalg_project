@@ -2241,8 +2241,12 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, plistA;
     
+    ## this rule CertainRows( CertainColumns( M, [ ... ] ), [ i ] ) = CertainColumns( CertainRows( M, [ i ] ), [ ... ] )
+    ## might be potentially expensive once we end up computing the rhs for the entire range of rows of M
+    ## instead of computing CertainColumns( M, [ ... ] ) once and for all
+    
     if not HasEval( M ) ## otherwise we would take CertainRows of a bigger matrix
-       and COLEM.level >= COLEM.single_operations then
+       and COLEM.level >= 2 * COLEM.single_operations then ## this line disables this method by default
         
         A := EvalCertainColumns( M );
         
@@ -2391,8 +2395,12 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, plistA;
     
+    ## this rule CertainColumns( CertainRows( M, [ ... ] ), [ i ] ) = CertainRows( CertainColumns( M, [ i ] ), [ ... ] )
+    ## might be potentially expensive once we end up computing the rhs for the entire range of rows of M
+    ## instead of computing CertainRows( M, [ ... ] ) once and for all
+    
     if not HasEval( M ) ## otherwise we would take CertainColumns of a bigger matrix
-       and COLEM.level >= COLEM.single_operations then
+       and COLEM.level >= 2 * COLEM.single_operations then ## this line disables this method by default
         
         A := EvalCertainRows( M );
         
