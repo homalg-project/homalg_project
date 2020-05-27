@@ -2823,172 +2823,144 @@ InstallMethod( GetCleanRowsPositions,
 end );
 
 ##
-InstallMethod( ConvertRowToMatrix,
+InstallMethod( Eval,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt ],
+        [ IsHomalgMatrix and HasEvalConvertRowToMatrix ],
         
-  function( M, r, c )
-    local R, RP, ext_obj, l, j;
+  function( C )
+    local e, M, r, c, R, RP;
     
-    if NrRows( M ) <> 1 then
-        Error( "expecting a single row matrix as a first argument\n" );
-    fi;
+    e := EvalConvertRowToMatrix( C );
+    M := e[1];
+    r := e[2];
+    c := e[3];
     
     R := HomalgRing( M );
-    
-    if r = 1 then
-        return M;
-    elif r * c = 0 or IsZero( M ) then
-        return HomalgZeroMatrix( r, c, R );
-    fi;
     
     RP := homalgTable( R );
     
     if IsBound(RP!.ConvertRowToMatrix) then
-        ext_obj := RP!.ConvertRowToMatrix( M, r, c );
-        return HomalgMatrix( ext_obj, r, c, R );
+        return RP!.ConvertRowToMatrix( M, r, c );
     elif IsBound(RP!.ConvertRowToTransposedMatrix) then
-        return TransposedMatrix( ConvertRowToTransposedMatrix( M, c, r ) );
+        return Eval( TransposedMatrix( ConvertRowToTransposedMatrix( M, c, r ) ) );
     elif IsBound(RP!.ConvertColumnToMatrix) then
-        return TransposedMatrix( ConvertColumnToMatrix( TransposedMatrix( M ), c, r ) );
+        return Eval( TransposedMatrix( ConvertColumnToMatrix( TransposedMatrix( M ), c, r ) ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
-        return HomalgMatrix( ListToListList( Eval( M )!.matrix[1], r, c ), r, c, R );
+        return Eval( HomalgMatrix( ListToListList( Eval( M )!.matrix[1], r, c ), r, c, R ) );
     fi;
     
     #=====# the fallback method #=====#
         
-    return UnionOfRows(
-              List( [ 0 .. r - 1 ], i -> CertainColumns( M, [ 1 + i*c .. c + i*c ] ) ) );
+    return Eval( UnionOfRows(
+                   List( [ 0 .. r - 1 ], i -> CertainColumns( M, [ 1 + i*c .. c + i*c ] ) ) ) );
     
 end );
 
 ##
-InstallMethod( ConvertColumnToMatrix,
+InstallMethod( Eval,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt ],
+        [ IsHomalgMatrix and HasEvalConvertColumnToMatrix ],
         
-  function( M, r, c )
-    local R, RP, ext_obj;
+  function( C )
+    local e, M, r, c, R, RP;
     
-    if NrColumns( M ) <> 1 then
-        Error( "expecting a single column matrix as a first argument\n" );
-    fi;
+    e := EvalConvertColumnToMatrix( C );
+    M := e[1];
+    r := e[2];
+    c := e[3];
     
     R := HomalgRing( M );
-    
-    if c = 1 then
-        return M;
-    elif r * c = 0 or IsZero( M ) then
-        return HomalgZeroMatrix( r, c, R );
-    fi;
     
     RP := homalgTable( R );
     
     if IsBound(RP!.ConvertColumnToMatrix) then
-        ext_obj := RP!.ConvertColumnToMatrix( M, r, c );
-        return HomalgMatrix( ext_obj, r, c, R );
+        return RP!.ConvertColumnToMatrix( M, r, c );
     elif IsBound(RP!.ConvertColumnToTransposedMatrix) then
-        return TransposedMatrix( ConvertColumnToTransposedMatrix( M, c, r ) );
+        return Eval( TransposedMatrix( ConvertColumnToTransposedMatrix( M, c, r ) ) );
     elif IsBound(RP!.ConvertRowToMatrix) then
-        return TransposedMatrix( ConvertRowToMatrix( TransposedMatrix( M ), c, r ) );
+        return Eval( TransposedMatrix( ConvertRowToMatrix( TransposedMatrix( M ), c, r ) ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
-        return HomalgMatrix( TransposedMat( ListToListList( Flat( Eval( M )!.matrix ), c, r ) ), r, c, R );
+        return Eval( HomalgMatrix( TransposedMat( ListToListList( Flat( Eval( M )!.matrix ), c, r ) ), r, c, R ) );
     fi;
     
     #=====# the fallback method #=====#
     
-    return UnionOfColumns(
-              List( [ 0 .. c - 1 ], i -> CertainRows( M, [ 1 + i*r .. r + i*r ] ) ) );
+    return Eval( UnionOfColumns(
+                   List( [ 0 .. c - 1 ], i -> CertainRows( M, [ 1 + i*r .. r + i*r ] ) ) ) );
     
 end );
 
 ##
-InstallMethod( ConvertMatrixToRow,
+InstallMethod( Eval,
         "for homalg matrices",
-        [ IsHomalgMatrix ],
+        [ IsHomalgMatrix and HasEvalConvertMatrixToRow ],
         
-  function( M )
-    local r, c, R, RP, ext_obj, l, j;
+  function( C )
+    local M, r, c, R, RP;
+    
+    M := EvalConvertMatrixToRow( C );
     
     r := NrRows( M );
-    
-    if r = 1 then
-        return M;
-    fi;
-    
     c := NrColumns( M );
     
     R := HomalgRing( M );
-    
-    if r = 0 or IsZero( M ) then
-        return HomalgZeroMatrix( 1, r * c, R );
-    fi;
     
     RP := homalgTable( R );
     
     if IsBound(RP!.ConvertMatrixToRow) then
-        ext_obj := RP!.ConvertMatrixToRow( M );
-        return HomalgMatrix( ext_obj, 1, r * c, R );
+        return RP!.ConvertMatrixToRow( M );
     elif IsBound(RP!.ConvertTransposedMatrixToRow) then
-        return ConvertTransposedMatrixToRow( TransposedMatrix( M ) );
+        return Eval( ConvertTransposedMatrixToRow( TransposedMatrix( M ) ) );
     elif IsBound(RP!.ConvertMatrixToColumn) then
-        return TransposedMatrix( ConvertMatrixToColumn( TransposedMatrix( M ) ) );
+        return Eval( TransposedMatrix( ConvertMatrixToColumn( TransposedMatrix( M ) ) ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
-        return HomalgMatrix( Concatenation( Eval( M )!.matrix ), 1, r * c, R );
+        return Eval( HomalgMatrix( Concatenation( Eval( M )!.matrix ), 1, r * c, R ) );
     fi;
     
     #=====# the fallback method #=====#
     
-    return UnionOfColumns( List( [ 1 .. r ], i -> CertainRows( M, [ i ] ) ) );
+    return Eval( UnionOfColumns( List( [ 1 .. r ], i -> CertainRows( M, [ i ] ) ) ) );
     
 end );
 
 ##
-InstallMethod( ConvertMatrixToColumn,
+InstallMethod( Eval,
         "for homalg matrices",
-        [ IsHomalgMatrix ],
+        [ IsHomalgMatrix and HasEvalConvertMatrixToColumn ],
         
-  function( M )
-    local c, r, R, RP, ext_obj;
+  function( C )
+    local M, r, c, R, RP;
     
-    c := NrColumns( M );
-    
-    if c = 1 then
-        return M;
-    fi;
+    M := EvalConvertMatrixToColumn( C );
     
     r := NrRows( M );
+    c := NrColumns( M );
     
     R := HomalgRing( M );
-    
-    if c = 0 or IsZero( M ) then
-        return HomalgZeroMatrix( r * c, 1, R );
-    fi;
     
     RP := homalgTable( R );
     
     if IsBound(RP!.ConvertMatrixToColumn) then
-        ext_obj := RP!.ConvertMatrixToColumn( M );
-        return HomalgMatrix( ext_obj, r * c, 1, R );
+        return RP!.ConvertMatrixToColumn( M );
     elif IsBound(RP!.ConvertTransposedMatrixToColumn) then
-        return ConvertTransposedMatrixToColumn( TransposedMatrix( M ) );
+        return Eval( ConvertTransposedMatrixToColumn( TransposedMatrix( M ) ) );
     elif IsBound(RP!.ConvertMatrixToRow) then
-        return TransposedMatrix( ConvertMatrixToRow( TransposedMatrix( M ) ) );
+        return Eval( TransposedMatrix( ConvertMatrixToRow( TransposedMatrix( M ) ) ) );
     fi;
     
     if IsHomalgInternalMatrixRep( M ) and IsInternalMatrixHull( Eval( M ) ) then
-        return HomalgMatrix( Concatenation( TransposedMat( Eval( M )!.matrix ) ), r * c, 1, R );
+        return Eval( HomalgMatrix( Concatenation( TransposedMat( Eval( M )!.matrix ) ), r * c, 1, R ) );
     fi;
     
     #=====# the fallback method #=====#
     
-    return UnionOfRows( List( [ 1 .. c ], j -> CertainColumns( M, [ j ] ) ) );
+    return Eval( UnionOfRows( List( [ 1 .. c ], j -> CertainColumns( M, [ j ] ) ) ) );
     
 end );
 

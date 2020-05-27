@@ -1357,6 +1357,166 @@ InstallMethod( UnionOfColumnsEagerOp,
     
 end );
 
+##  <#GAPDoc Label="ConvertRowToMatrix">
+##  <ManSection>
+##    <Meth Arg="M, r, c" Name="ConvertRowToMatrix" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Fold the row <A>M</A> to an <A>r</A>x<A>c</A>-matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( ConvertRowToMatrix,
+        "for a homalg matrix and two integers",
+        [ IsHomalgMatrix, IsInt, IsInt ],
+        
+  function( M, r, c )
+    local R, C;
+    
+    if NrRows( M ) <> 1 then
+        Error( "expecting a single row matrix as a first argument\n" );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if r = 1 then
+        return M;
+    elif r * c = 0 or ( HasIsZero( M ) and IsZero( M ) ) then
+        return HomalgZeroMatrix( r, c, R );
+    fi;
+    
+    C := HomalgMatrixWithAttributes( [
+                 EvalConvertRowToMatrix, [ M, r, c ],
+                 NrRows, r,
+                 NrColumns, c,
+                 ], R );
+    
+    return C;
+    
+end );
+
+##  <#GAPDoc Label="ConvertColumnToMatrix">
+##  <ManSection>
+##    <Meth Arg="M, r, c" Name="ConvertColumnToMatrix" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Fold the column <A>M</A> to an <A>r</A>x<A>c</A>-matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( ConvertColumnToMatrix,
+        "for a homalg matrix and two integers",
+        [ IsHomalgMatrix, IsInt, IsInt ],
+        
+  function( M, r, c )
+    local R, C;
+    
+    if NrColumns( M ) <> 1 then
+        Error( "expecting a single column matrix as a first argument\n" );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if c = 1 then
+        return M;
+    elif r * c = 0 or ( HasIsZero( M ) and IsZero( M ) ) then
+        return HomalgZeroMatrix( r, c, R );
+    fi;
+    
+    C := HomalgMatrixWithAttributes( [
+                 EvalConvertColumnToMatrix, [ M, r, c ],
+                 NrRows, r,
+                 NrColumns, c,
+                 ], R );
+    
+    return C;
+    
+end );
+
+##  <#GAPDoc Label="ConvertMatrixToRow">
+##  <ManSection>
+##    <Meth Arg="M" Name="ConvertMatrixToRow" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Unfold the matrix <A>M</A> row-wise into a row.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( ConvertMatrixToRow,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local r, c, R, C;
+    
+    r := NrRows( M );
+    
+    if r = 1 then
+        return M;
+    fi;
+    
+    c := NrColumns( M );
+    
+    R := HomalgRing( M );
+    
+    if r = 0 or ( HasIsZero( M ) and IsZero( M ) ) then
+        return HomalgZeroMatrix( 1, r * c, R );
+    fi;
+    
+    C := HomalgMatrixWithAttributes( [
+                 EvalConvertMatrixToRow, M,
+                 NrRows, 1,
+                 NrColumns, r * c,
+                 ], R );
+    
+    return C;
+    
+end );
+
+##  <#GAPDoc Label="ConvertMatrixToColumn">
+##  <ManSection>
+##    <Meth Arg="M" Name="ConvertMatrixToColumn" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Unfold the matrix <A>M</A> column-wise into a column.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( ConvertMatrixToColumn,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local c, r, R, C;
+    
+    c := NrColumns( M );
+    
+    if c = 1 then
+        return M;
+    fi;
+    
+    r := NrRows( M );
+    
+    R := HomalgRing( M );
+    
+    if c = 0 or ( HasIsZero( M ) and IsZero( M ) ) then
+        return HomalgZeroMatrix( r * c, 1, R );
+    fi;
+    
+    C := HomalgMatrixWithAttributes( [
+                 EvalConvertMatrixToColumn, M,
+                 NrRows, r * c,
+                 NrColumns, 1,
+                 ], R );
+    
+    return C;
+    
+end );
+
 ##  <#GAPDoc Label="DiagMat">
 ##  <ManSection>
 ##    <Meth Arg="list" Name="DiagMat" Label="for matrices"/>

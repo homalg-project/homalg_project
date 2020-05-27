@@ -472,6 +472,18 @@ DeclareAttribute( "EvalUnionOfRows",
 DeclareAttribute( "EvalUnionOfColumns",
         IsHomalgMatrix );
 
+DeclareAttribute( "EvalConvertRowToMatrix",
+        IsHomalgMatrix );
+
+DeclareAttribute( "EvalConvertColumnToMatrix",
+        IsHomalgMatrix );
+
+DeclareAttribute( "EvalConvertMatrixToRow",
+        IsHomalgMatrix );
+
+DeclareAttribute( "EvalConvertMatrixToColumn",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalDiagMat",
         IsHomalgMatrix );
 
