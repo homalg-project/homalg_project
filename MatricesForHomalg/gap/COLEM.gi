@@ -2995,7 +2995,7 @@ InstallMethod( \*,
     
 end );
 
-##
+## this rule speeds up the computation of BasisOfExternalHom in FunctorCategories considerably
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalUnionOfColumns)",
         [ IsHomalgMatrix and HasEvalUnionOfColumns, IsHomalgMatrix ], 15001,
@@ -3018,7 +3018,7 @@ InstallMethod( \*,
     c := List( e, NrColumns );
     
     result := e[1] * CertainRows( B, [ 1 .. c[1] ] );
-
+    
     k := c[1];
     
     for i in [ 2 .. Length( c ) ] do
@@ -3033,7 +3033,7 @@ InstallMethod( \*,
     
 end );
 
-##
+## this rule speeds up the computation of BasisOfExternalHom in FunctorCategories considerably
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalUnionOfRows)",
         [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfRows ], 15001,
@@ -3056,7 +3056,7 @@ InstallMethod( \*,
     r := List( e, NrRows );
     
     result := CertainColumns( A, [ 1 .. r[1] ] ) * e[1];
-
+    
     k := r[1];
     
     for i in [ 2 .. Length( r ) ] do
