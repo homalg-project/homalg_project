@@ -2312,8 +2312,11 @@ InstallMethod( CertainRows,
         [ IsHomalgMatrix and HasEvalCompose, IsList ],
         
   function( M, plist )
-    local  AB;
+    local AB;
     
+    ## this rule CertainRows( A * B, [ i ] ) = CertainRows( A, [ i ] ) * B
+    ## might be potentially expensive once we end up computing the rhs of
+    ## for the entire range of rows of A
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then
         
@@ -2460,6 +2463,10 @@ InstallMethod( CertainColumns,
         
   function( M, plist )
     local AB;
+    
+    ## this rule CertainColumns( A * B, [ i ] ) = A CertainColumns( B, [ i ] )
+    ## might be potentially expensive once we end up computing the rhs of
+    ## for the entire range of columns of B
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then
         
