@@ -1677,6 +1677,29 @@ InstallGlobalFunction( GetTimeOfDay,
 end );
 
 ##
+InstallGlobalFunction( CallFuncListWithTime,
+  function( func, arguments )
+    local output, t0, t1;
+    
+    if not IsList( arguments ) then
+      
+      return CallFuncListWithTime( func, [ arguments ] );
+      
+    fi;
+    
+    t0 := NanosecondsSinceEpoch( );
+    
+    output := CallFuncList( func, arguments );
+    
+    t1 := NanosecondsSinceEpoch( );
+    
+    Print( Float( ( t1 - t0 ) / 10^9 ), " Secs.\n" );
+    
+    return output;
+    
+end );
+
+##
 InstallGlobalFunction( DotToSVG,
   function( dotstr )
     
