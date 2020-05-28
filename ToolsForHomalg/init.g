@@ -28,3 +28,7 @@ ReadPackage( "ToolsForHomalg", "gap/GenericView.gd" );
 ReadPackage( "ToolsForHomalg", "gap/CachingObjects.gd" );
 
 ReadPackage( "ToolsForHomalg", "gap/CachingObjects.gi" );
+
+if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ) then
+    ReadPackage( "ToolsForHomalg", "gap/Julia.gd" );
+fi;
