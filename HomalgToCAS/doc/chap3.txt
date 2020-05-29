@@ -128,10 +128,16 @@
     [4Xio_info_level := InfoLevel( InfoHomalgToCAS );[104X
     [4X[104X
     [4Xif not IsBound( pictogram ) then[104X
-    [4X    pictogram := HOMALG_IO.Pictograms.unknown;[104X
-    [4X    picto := pictogram;[104X
+    [4X    pictogram := "unknown";[104X
+    [4X    picto := HOMALG_IO.Pictograms.unknown;[104X
     [4Xelif io_info_level >= 3 then[104X
     [4X    picto := pictogram;[104X
+    [4X    if IsBound( HOMALG_IO.Pictograms.(pictogram) ) then[104X
+    [4X        pictogram := HOMALG_IO.Pictograms.(pictogram);[104X
+    [4X    else[104X
+    [4X        pictogram := HOMALG_IO.Pictograms.unknown;[104X
+    [4X    fi;[104X
+    [4X    [104X
     [4X    ## add colors to the pictograms[104X
     [4X    if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and[104X
     [4X       IsBound( HOMALG_MATRICES.color_BOE ) then[104X

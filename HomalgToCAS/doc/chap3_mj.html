@@ -225,10 +225,16 @@ end );
 io_info_level := InfoLevel( InfoHomalgToCAS );
 
 if not IsBound( pictogram ) then
-    pictogram := HOMALG_IO.Pictograms.unknown;
-    picto := pictogram;
+    pictogram := "unknown";
+    picto := HOMALG_IO.Pictograms.unknown;
 elif io_info_level &gt;= 3 then
     picto := pictogram;
+    if IsBound( HOMALG_IO.Pictograms.(pictogram) ) then
+        pictogram := HOMALG_IO.Pictograms.(pictogram);
+    else
+        pictogram := HOMALG_IO.Pictograms.unknown;
+    fi;
+    
     ## add colors to the pictograms
     if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and
        IsBound( HOMALG_MATRICES.color_BOE ) then
