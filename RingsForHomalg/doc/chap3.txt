@@ -28,7 +28,7 @@
     [4X    homalgSendBlocking( [104X
     [4X      [ "matrix ", N, " = BasisOfRowModule(", M, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.BasisOfModule[104X
+    [4X      "BasisOfModule"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -69,7 +69,7 @@
     [4X    homalgSendBlocking([104X
     [4X      [ "matrix ", N, " = BasisOfColumnModule(", M, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.BasisOfModule[104X
+    [4X      "BasisOfModule"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -110,7 +110,7 @@
     [4X    homalgSendBlocking( [104X
     [4X      [ "matrix ", N, " = DecideZeroRows(", A, B, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.DecideZero[104X
+    [4X      "DecideZero"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -152,7 +152,7 @@
     [4X    homalgSendBlocking([104X
     [4X      [ "matrix ", N, " = DecideZeroColumns(", A, B, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.DecideZero[104X
+    [4X      "DecideZero"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -193,7 +193,7 @@
     [4X    homalgSendBlocking([104X
     [4X      [ "matrix ", N, " = SyzygiesGeneratorsOfRows(", M, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.SyzygiesGenerators[104X
+    [4X      "SyzygiesGenerators"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -234,7 +234,7 @@
     [4X    homalgSendBlocking([104X
     [4X      [ "matrix ", N, " = SyzygiesGeneratorsOfColumns(", M, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.SyzygiesGenerators[104X
+    [4X      "SyzygiesGenerators"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -281,7 +281,7 @@
     [4X        "matrix ", T, " = ", v, "l[2]"[104X
     [4X      ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.BasisCoeff[104X
+    [4X      "BasisCoeff"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -331,7 +331,7 @@
     [4X        "matrix ", T, " = ", v, "l[2]"[104X
     [4X      ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.BasisCoeff[104X
+    [4X      "BasisCoeff"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -382,7 +382,7 @@
     [4X        "matrix ", T, " = ", v, "l[2]"[104X
     [4X      ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.DecideZeroEffectively[104X
+    [4X      "DecideZeroEffectively"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -433,7 +433,7 @@
     [4X        "matrix ", T, " = ", v, "l[2]"[104X
     [4X      ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.DecideZeroEffectively[104X
+    [4X      "DecideZeroEffectively"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -479,7 +479,7 @@
     [4X    homalgSendBlocking([104X
     [4X      [ "matrix ", N, " = RelativeSyzygiesGeneratorsOfRows(", M, M2, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.SyzygiesGenerators[104X
+    [4X      "SyzygiesGenerators"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -521,7 +521,7 @@
     [4X    homalgSendBlocking([104X
     [4X      [ "matrix ", N, " = RelativeSyzygiesGeneratorsOfColumns(", M, M2, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.SyzygiesGenerators[104X
+    [4X      "SyzygiesGenerators"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -562,7 +562,7 @@
     [4X    homalgSendBlocking([104X
     [4X      [ "matrix ", N, " = ReducedSyzygiesGeneratorsOfRows(", M, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.SyzygiesGenerators[104X
+    [4X      "SyzygiesGenerators"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
@@ -609,7 +609,7 @@
     [4X    homalgSendBlocking([104X
     [4X      [ "matrix ", N, " = ReducedSyzygiesGeneratorsOfColumns(", M, ")" ],[104X
     [4X      "need_command",[104X
-    [4X      HOMALG_IO.Pictograms.SyzygiesGenerators[104X
+    [4X      "SyzygiesGenerators"[104X
     [4X    );[104X
     [4X    [104X
     [4X    return N;[104X
