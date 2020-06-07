@@ -2065,8 +2065,8 @@ InstallMethod( PseudoDoubleShiftAlgebra,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local ar, r, var, shift, param, base, stream, display_color, ext_obj,
-          b, n, steps, d, P, RP, Ds, D_s, S, B, T, Y;
+    local ar, r, var, shift, param, base, stream, display_color, switch, ext_obj,
+          b, n, steps, pairs, d, P, RP, Ds, D_s, S, B, T, Y;
     
     ar := _PrepareInputForPseudoDoubleShiftAlgebra( R, indets );
     
@@ -2102,23 +2102,48 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         
     fi;
     
+    switch := ValueOption( "switch" );
+    
     ## create the new ring in 2 steps: expand polynomial ring with shifts and then
     ## add the shift-structure
     ## todo: this creates a block ordering with a new "dp"-block
-    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-        if base <> "" then
-            #ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+    
+    if IsIdenticalObj( switch, true ) then
+        
+        if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+            if base <> "" then
+                #ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, shift, var, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
+                ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, shift, var, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            else
+                ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", shift, var, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            fi;
         else
-            ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            if base <> "" then
+                #ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, shift, var, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
+                ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, shift, var, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            else
+                ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", shift, var, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            fi;
         fi;
+        
     else
-        if base <> "" then
-            #ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+        
+        if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+            if base <> "" then
+                #ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
+                ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            else
+                ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            fi;
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            if base <> "" then
+                #ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp(", Length( base ), "),dp,c)" ], [ "ring" ], R, "initialize" );
+                ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", base, var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            else
+                ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, shift, "),(dp,c)" ], [ "ring" ], R, "initialize" );
+            fi;
         fi;
+        
     fi;
     
     ## as we are not yet done we cannot call CreateHomalgExternalRing
@@ -2142,18 +2167,40 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         steps := ListWithIdenticalEntries( n, 1 );
     fi;
     
-    if IsIdenticalObj( ValueOption( "pairs" ), true ) then
-        d := Concatenation(
-                     List( [ 1 .. n ],
-                           i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i - 1 ) ), "] = (", String( steps[i] ), ") * ", shift[2 * i - 1] ) ),
-                     List( [ 1 .. n ],
-                           i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i ) ), "] = -(", String( steps[i] ), ") * ", shift[2 * i] ) ) );
+    pairs := ValueOption( "pairs" );
+    
+    if IsIdenticalObj( switch, true ) then
+        
+        if IsIdenticalObj( pairs, true ) then
+            d := Concatenation(
+                         List( [ 1 .. n ],
+                               i -> Concatenation( "@d[", String( b + ( 2 * i - 1 ) ), ",", String( b + 2 * n + i ), "] = -(", String( steps[i] ), ") * ", shift[2 * i - 1] ) ),
+                         List( [ 1 .. n ],
+                               i -> Concatenation( "@d[", String( b + ( 2 * i ) ), ",", String( b + 2 * n + i ), "] = (", String( steps[i] ), ") * ", shift[2 * i] ) ) );
+        else
+            d := Concatenation(
+                         List( [ 1 .. n ],
+                               i -> Concatenation( "@d[", String( b + ( i ) ), ",", String( b + 2 * n + i ), "] = -(", String( steps[i] ), ") * ", shift[i] ) ),
+                         List( [ 1 .. n ],
+                               i -> Concatenation( "@d[", String( b + ( n + i ) ), ",", String( b + 2 * n + i ), "] = (", String( steps[i] ), ") * ", shift[n + i] ) ) );
+        fi;
+        
     else
-        d := Concatenation(
-                     List( [ 1 .. n ],
-                           i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( i ) ), "] = (", String( steps[i] ), ") * ", shift[i] ) ),
-                     List( [ 1 .. n ],
-                           i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( n + i ) ), "] = -(", String( steps[i] ), ") * ", shift[n + i] ) ) );
+        
+        if IsIdenticalObj( pairs, true ) then
+            d := Concatenation(
+                         List( [ 1 .. n ],
+                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i - 1 ) ), "] = (", String( steps[i] ), ") * ", shift[2 * i - 1] ) ),
+                         List( [ 1 .. n ],
+                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i ) ), "] = -(", String( steps[i] ), ") * ", shift[2 * i] ) ) );
+        else
+            d := Concatenation(
+                         List( [ 1 .. n ],
+                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( i ) ), "] = (", String( steps[i] ), ") * ", shift[i] ) ),
+                         List( [ 1 .. n ],
+                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( n + i ) ), "] = -(", String( steps[i] ), ") * ", shift[n + i] ) ) );
+        fi;
+        
     fi;
     
     homalgSendBlocking( JoinStringsWithSeparator( d, "; " ), "need_command", ext_obj, "initialize" );
@@ -2254,7 +2301,7 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
     
     shift := List( shift, String );
     
-    if IsIdenticalObj( ValueOption( "pairs" ), true ) then
+    if IsIdenticalObj( pairs, true ) then
         Ds := shift{List( [ 1 .. n ], i -> 2 * i - 1 )};
         D_s := shift{List( [ 1 .. n ], i -> 2 * i )};
     else
@@ -2295,6 +2342,10 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
             List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
     
     P!.DoubleShiftAlgebra := Y;
+    
+    if not IsIdenticalObj( switch, true ) then
+        P!.SwitchedPseudoDoubleShiftAlgebra := PseudoDoubleShiftAlgebra( R, indets : switch := true );
+    fi;
     
     return P;
     
