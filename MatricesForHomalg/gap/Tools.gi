@@ -3573,7 +3573,7 @@ end );
 ##
 InstallMethod( Coefficients,
         "for a homalg ring element and a string",
-        [ IsHomalgRingElement, IsString ],
+        [ IsHomalgRingElement, IsString and IsStringRep ],
         
   function( poly, var_name )
     
@@ -3609,6 +3609,8 @@ InstallMethod( Coefficients,
         indets := IndeterminateShiftsOfDoubleShiftAlgebra( R );
     elif HasIndeterminateShiftsOfBiasedDoubleShiftAlgebra( R ) then
         indets := IndeterminateShiftsOfBiasedDoubleShiftAlgebra( R );
+    elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+        indets := [ ];
     else
         TryNextMethod( );
     fi;
