@@ -42,8 +42,6 @@ InstallValue( LIRNG,
                                      "IsLeftGlobalDimensionFinite",
                                      "IsRightGlobalDimensionFinite",
                                      "HasInvariantBasisProperty",
-                                     "HasLeftInvariantBasisProperty",
-                                     "HasRightInvariantBasisProperty",
                                      "IsLocal",
                                      "IsSemiLocalRing",
                                      "IsIntegralDomain",
@@ -276,7 +274,7 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "implies", IsIntegrallyClosedDomain ],	## easy, wikipedia
           
           ## IsCommutative
-          [ IsCommutative,
+          [ IsCommutative, "and", IsNonZeroRing,
             "implies", HasInvariantBasisProperty ],	## [Lam06, p. 26]
           
           [ IsCommutative,
@@ -325,11 +323,11 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "imply", IsDedekindDomain ],		## trivial
           
           ## Is/Left/Right/Noetherian
-          [ IsLeftNoetherian,
-            "implies", HasLeftInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
+          [ IsLeftNoetherian, "and", IsNonZeroRing,
+            "implies", HasInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
           
-          [ IsRightNoetherian,
-            "implies", HasRightInvariantBasisProperty ],## [Lam06, bottom of p. 26]
+          [ IsRightNoetherian, "and", IsNonZeroRing,
+            "implies", HasInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
           
           [ IsLeftNoetherian, "and", IsIntegralDomain,
             "implies", IsLeftOreDomain ],		## easy ...
@@ -378,7 +376,6 @@ InstallValue( LogicalImplicationsForHomalgRings,
 
 AddLeftRightLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings,
         [
-         [ "Has", "InvariantBasisProperty" ],
          [ "Is", "Hermite" ],
          [ "Is", "Hereditary" ],
          [ "Is", "OreDomain" ],
@@ -427,6 +424,36 @@ InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );
 # immediate methods for properties:
 #
 ####################################
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgRing and HasIsNonZeroRing, 0,
+        
+  function( R )
+    
+    return not IsNonZeroRing( R );
+    
+end );
+
+##
+InstallImmediateMethod( IsNonZeroRing,
+        IsHomalgRing and HasIsZero, 0,
+        
+  function( R )
+    
+    return not IsZero( R );
+    
+end );
+
+##
+InstallImmediateMethod( HasInvariantBasisProperty,
+        IsHomalgRing and IsZero, 0,
+        
+  function( R )
+    
+    return false;
+    
+end );
 
 ##
 InstallImmediateMethod( IsZero,
@@ -880,6 +907,28 @@ InstallMethod( IsZero,
   function( R )
     
     return IsZero( One( R ) );
+    
+end );
+
+##
+InstallMethod( IsNonZeroRing,
+        "LIRNG: for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return not IsZero( R );
+    
+end );
+
+##
+InstallMethod( HasInvariantBasisProperty,
+        "LIRNG: for homalg rings",
+        [ IsHomalgRing and IsCommutative ],
+        
+  function( R )
+    
+    return IsNonZeroRing( R );
     
 end );
 

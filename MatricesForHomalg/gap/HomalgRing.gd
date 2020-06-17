@@ -91,12 +91,25 @@ DeclareCategory( "IsHomalgRingElement",
 ##    <Prop Arg="R" Name="IsZero" Label="for rings"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the ring <A>R</A> is a zero, i.e., if <C>One</C><M>(</M><A>R</A><M>)=</M><C>Zero</C><M>(</M><A>R</A><M>)</M>.
+##      Check if the ring <A>R</A> is the zero ring, i.e., if <C>One</C><M>(</M><A>R</A><M>)=</M><C>Zero</C><M>(</M><A>R</A><M>)</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsZero",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="IsNonZeroRing">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsNonZeroRing" Label="for rings"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the ring <A>R</A> is not the zero ring, i.e., if <C>One</C><M>(</M><A>R</A><M>)</M> is different from <C>Zero</C><M>(</M><A>R</A><M>)</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsNonZeroRing",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="ContainsAField">
@@ -396,32 +409,6 @@ DeclareProperty( "IsRightGlobalDimensionFinite",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "HasInvariantBasisProperty",
-        IsHomalgRing );
-
-##  <#GAPDoc Label="HasLeftInvariantBasisProperty">
-##  <ManSection>
-##    <Prop Arg="R" Name="HasLeftInvariantBasisProperty"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      <A>R</A> is a ring for &homalg;.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "HasLeftInvariantBasisProperty",
-        IsHomalgRing );
-
-##  <#GAPDoc Label="HasRightInvariantBasisProperty">
-##  <ManSection>
-##    <Prop Arg="R" Name="HasRightInvariantBasisProperty"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      <A>R</A> is a ring for &homalg;.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "HasRightInvariantBasisProperty",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="IsLocal">

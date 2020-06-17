@@ -80,6 +80,7 @@ objects: If the value you set is mathematically wrong &homalg; will
 probably draw wrong conclusions and might return wrong results.
 
 <#Include Label="IsZero:rings">
+<#Include Label="IsNonZeroRing">
 <#Include Label="ContainsAField">
 <#Include Label="IsRationalsForHomalg">
 <#Include Label="IsFieldForHomalg">
@@ -99,8 +100,6 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsLeftGlobalDimensionFinite">
 <#Include Label="IsRightGlobalDimensionFinite">
 <#Include Label="HasInvariantBasisProperty">
-<#Include Label="HasLeftInvariantBasisProperty">
-<#Include Label="HasRightInvariantBasisProperty">
 <#Include Label="IsLocal">
 <#Include Label="IsSemiLocalRing">
 <#Include Label="IsIntegralDomain">
