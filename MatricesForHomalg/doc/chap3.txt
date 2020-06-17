@@ -190,422 +190,416 @@
   [33X[1;0Y[29X[2XIsZero[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
-  [33X[0;0YCheck if the ring [3XR[103X is a zero, i.e., if [10XOne[110X[22X([122X[3XR[103X[22X)=[122X[10XZero[110X[22X([122X[3XR[103X[22X)[122X.[133X
+  [33X[0;0YCheck if the ring [3XR[103X is the zero ring, i.e., if [10XOne[110X[22X([122X[3XR[103X[22X)=[122X[10XZero[110X[22X([122X[3XR[103X[22X)[122X.[133X
   
-  [1X3.3-2 ContainsAField[101X
+  [1X3.3-2 IsNonZeroRing[101X
+  
+  [33X[1;0Y[29X[2XIsNonZeroRing[102X( [3XR[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if the ring [3XR[103X is not the zero ring, i.e., if [10XOne[110X[22X([122X[3XR[103X[22X)[122X is different from
+  [10XZero[110X[22X([122X[3XR[103X[22X)[122X.[133X
+  
+  [1X3.3-3 ContainsAField[101X
   
   [33X[1;0Y[29X[2XContainsAField[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-3 IsRationalsForHomalg[101X
+  [1X3.3-4 IsRationalsForHomalg[101X
   
   [33X[1;0Y[29X[2XIsRationalsForHomalg[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-4 IsFieldForHomalg[101X
+  [1X3.3-5 IsFieldForHomalg[101X
   
   [33X[1;0Y[29X[2XIsFieldForHomalg[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-5 IsDivisionRingForHomalg[101X
+  [1X3.3-6 IsDivisionRingForHomalg[101X
   
   [33X[1;0Y[29X[2XIsDivisionRingForHomalg[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-6 IsIntegersForHomalg[101X
+  [1X3.3-7 IsIntegersForHomalg[101X
   
   [33X[1;0Y[29X[2XIsIntegersForHomalg[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-7 IsResidueClassRingOfTheIntegers[101X
+  [1X3.3-8 IsResidueClassRingOfTheIntegers[101X
   
   [33X[1;0Y[29X[2XIsResidueClassRingOfTheIntegers[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-8 IsBezoutRing[101X
+  [1X3.3-9 IsBezoutRing[101X
   
   [33X[1;0Y[29X[2XIsBezoutRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-9 IsIntegrallyClosedDomain[101X
+  [1X3.3-10 IsIntegrallyClosedDomain[101X
   
   [33X[1;0Y[29X[2XIsIntegrallyClosedDomain[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-10 IsUniqueFactorizationDomain[101X
+  [1X3.3-11 IsUniqueFactorizationDomain[101X
   
   [33X[1;0Y[29X[2XIsUniqueFactorizationDomain[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-11 IsKaplanskyHermite[101X
+  [1X3.3-12 IsKaplanskyHermite[101X
   
   [33X[1;0Y[29X[2XIsKaplanskyHermite[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-12 IsDedekindDomain[101X
+  [1X3.3-13 IsDedekindDomain[101X
   
   [33X[1;0Y[29X[2XIsDedekindDomain[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-13 IsDiscreteValuationRing[101X
+  [1X3.3-14 IsDiscreteValuationRing[101X
   
   [33X[1;0Y[29X[2XIsDiscreteValuationRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-14 IsFreePolynomialRing[101X
+  [1X3.3-15 IsFreePolynomialRing[101X
   
   [33X[1;0Y[29X[2XIsFreePolynomialRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-15 IsWeylRing[101X
+  [1X3.3-16 IsWeylRing[101X
   
   [33X[1;0Y[29X[2XIsWeylRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-16 IsLocalizedWeylRing[101X
+  [1X3.3-17 IsLocalizedWeylRing[101X
   
   [33X[1;0Y[29X[2XIsLocalizedWeylRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-17 IsGlobalDimensionFinite[101X
+  [1X3.3-18 IsGlobalDimensionFinite[101X
   
   [33X[1;0Y[29X[2XIsGlobalDimensionFinite[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-18 IsLeftGlobalDimensionFinite[101X
+  [1X3.3-19 IsLeftGlobalDimensionFinite[101X
   
   [33X[1;0Y[29X[2XIsLeftGlobalDimensionFinite[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-19 IsRightGlobalDimensionFinite[101X
+  [1X3.3-20 IsRightGlobalDimensionFinite[101X
   
   [33X[1;0Y[29X[2XIsRightGlobalDimensionFinite[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-20 HasInvariantBasisProperty[101X
+  [1X3.3-21 HasInvariantBasisProperty[101X
   
   [33X[1;0Y[29X[2XHasInvariantBasisProperty[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-21 HasLeftInvariantBasisProperty[101X
-  
-  [33X[1;0Y[29X[2XHasLeftInvariantBasisProperty[102X( [3XR[103X ) [32X property[133X
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
-  
-  [1X3.3-22 HasRightInvariantBasisProperty[101X
-  
-  [33X[1;0Y[29X[2XHasRightInvariantBasisProperty[102X( [3XR[103X ) [32X property[133X
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
-  
-  [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
-  
-  [1X3.3-23 IsLocal[101X
+  [1X3.3-22 IsLocal[101X
   
   [33X[1;0Y[29X[2XIsLocal[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-24 IsSemiLocalRing[101X
+  [1X3.3-23 IsSemiLocalRing[101X
   
   [33X[1;0Y[29X[2XIsSemiLocalRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-25 IsIntegralDomain[101X
+  [1X3.3-24 IsIntegralDomain[101X
   
   [33X[1;0Y[29X[2XIsIntegralDomain[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-26 IsHereditary[101X
+  [1X3.3-25 IsHereditary[101X
   
   [33X[1;0Y[29X[2XIsHereditary[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-27 IsLeftHereditary[101X
+  [1X3.3-26 IsLeftHereditary[101X
   
   [33X[1;0Y[29X[2XIsLeftHereditary[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-28 IsRightHereditary[101X
+  [1X3.3-27 IsRightHereditary[101X
   
   [33X[1;0Y[29X[2XIsRightHereditary[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-29 IsHermite[101X
+  [1X3.3-28 IsHermite[101X
   
   [33X[1;0Y[29X[2XIsHermite[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-30 IsLeftHermite[101X
+  [1X3.3-29 IsLeftHermite[101X
   
   [33X[1;0Y[29X[2XIsLeftHermite[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-31 IsRightHermite[101X
+  [1X3.3-30 IsRightHermite[101X
   
   [33X[1;0Y[29X[2XIsRightHermite[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-32 IsNoetherian[101X
+  [1X3.3-31 IsNoetherian[101X
   
   [33X[1;0Y[29X[2XIsNoetherian[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-33 IsLeftNoetherian[101X
+  [1X3.3-32 IsLeftNoetherian[101X
   
   [33X[1;0Y[29X[2XIsLeftNoetherian[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-34 IsRightNoetherian[101X
+  [1X3.3-33 IsRightNoetherian[101X
   
   [33X[1;0Y[29X[2XIsRightNoetherian[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-35 IsCohenMacaulay[101X
+  [1X3.3-34 IsCohenMacaulay[101X
   
   [33X[1;0Y[29X[2XIsCohenMacaulay[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-36 IsGorenstein[101X
+  [1X3.3-35 IsGorenstein[101X
   
   [33X[1;0Y[29X[2XIsGorenstein[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-37 IsKoszul[101X
+  [1X3.3-36 IsKoszul[101X
   
   [33X[1;0Y[29X[2XIsKoszul[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-38 IsArtinian[101X
+  [1X3.3-37 IsArtinian[101X
   
   [33X[1;0Y[29X[2XIsArtinian[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-39 IsLeftArtinian[101X
+  [1X3.3-38 IsLeftArtinian[101X
   
   [33X[1;0Y[29X[2XIsLeftArtinian[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-40 IsRightArtinian[101X
+  [1X3.3-39 IsRightArtinian[101X
   
   [33X[1;0Y[29X[2XIsRightArtinian[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-41 IsOreDomain[101X
+  [1X3.3-40 IsOreDomain[101X
   
   [33X[1;0Y[29X[2XIsOreDomain[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-42 IsLeftOreDomain[101X
+  [1X3.3-41 IsLeftOreDomain[101X
   
   [33X[1;0Y[29X[2XIsLeftOreDomain[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-43 IsRightOreDomain[101X
+  [1X3.3-42 IsRightOreDomain[101X
   
   [33X[1;0Y[29X[2XIsRightOreDomain[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-44 IsPrincipalIdealRing[101X
+  [1X3.3-43 IsPrincipalIdealRing[101X
   
   [33X[1;0Y[29X[2XIsPrincipalIdealRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-45 IsLeftPrincipalIdealRing[101X
+  [1X3.3-44 IsLeftPrincipalIdealRing[101X
   
   [33X[1;0Y[29X[2XIsLeftPrincipalIdealRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-46 IsRightPrincipalIdealRing[101X
+  [1X3.3-45 IsRightPrincipalIdealRing[101X
   
   [33X[1;0Y[29X[2XIsRightPrincipalIdealRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-47 IsRegular[101X
+  [1X3.3-46 IsRegular[101X
   
   [33X[1;0Y[29X[2XIsRegular[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-48 IsFiniteFreePresentationRing[101X
+  [1X3.3-47 IsFiniteFreePresentationRing[101X
   
   [33X[1;0Y[29X[2XIsFiniteFreePresentationRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-49 IsLeftFiniteFreePresentationRing[101X
+  [1X3.3-48 IsLeftFiniteFreePresentationRing[101X
   
   [33X[1;0Y[29X[2XIsLeftFiniteFreePresentationRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-50 IsRightFiniteFreePresentationRing[101X
+  [1X3.3-49 IsRightFiniteFreePresentationRing[101X
   
   [33X[1;0Y[29X[2XIsRightFiniteFreePresentationRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-51 IsSimpleRing[101X
+  [1X3.3-50 IsSimpleRing[101X
   
   [33X[1;0Y[29X[2XIsSimpleRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-52 IsSemiSimpleRing[101X
+  [1X3.3-51 IsSemiSimpleRing[101X
   
   [33X[1;0Y[29X[2XIsSemiSimpleRing[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-53 IsSuperCommutative[101X
+  [1X3.3-52 IsSuperCommutative[101X
   
   [33X[1;0Y[29X[2XIsSuperCommutative[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-54 BasisAlgorithmRespectsPrincipalIdeals[101X
+  [1X3.3-53 BasisAlgorithmRespectsPrincipalIdeals[101X
   
   [33X[1;0Y[29X[2XBasisAlgorithmRespectsPrincipalIdeals[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-55 AreUnitsCentral[101X
+  [1X3.3-54 AreUnitsCentral[101X
   
   [33X[1;0Y[29X[2XAreUnitsCentral[102X( [3XR[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0Y[3XR[103X is a ring for [5Xhomalg[105X.[133X
   
-  [1X3.3-56 IsMinusOne[101X
+  [1X3.3-55 IsMinusOne[101X
   
   [33X[1;0Y[29X[2XIsMinusOne[102X( [3Xr[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the ring element [3Xr[103X is the additive inverse of one.[133X
   
-  [1X3.3-57 IsMonic[101X
+  [1X3.3-56 IsMonic[101X
   
   [33X[1;0Y[29X[2XIsMonic[102X( [3Xr[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X ring element [3Xr[103X is monic.[133X
   
-  [1X3.3-58 IsMonicUptoUnit[101X
+  [1X3.3-57 IsMonicUptoUnit[101X
   
   [33X[1;0Y[29X[2XIsMonicUptoUnit[102X( [3Xr[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if leading coefficient of the [5Xhomalg[105X ring element [3Xr[103X is a unit.[133X
   
-  [1X3.3-59 IsLeftRegular[101X
+  [1X3.3-58 IsLeftRegular[101X
   
   [33X[1;0Y[29X[2XIsLeftRegular[102X( [3Xr[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X ring element [3Xr[103X is left regular.[133X
   
-  [1X3.3-60 IsRightRegular[101X
+  [1X3.3-59 IsRightRegular[101X
   
   [33X[1;0Y[29X[2XIsRightRegular[102X( [3Xr[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [5Xhomalg[105X ring element [3Xr[103X is right regular.[133X
   
-  [1X3.3-61 IsRegular[101X
+  [1X3.3-60 IsRegular[101X
   
   [33X[1;0Y[29X[2XIsRegular[102X( [3Xr[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
