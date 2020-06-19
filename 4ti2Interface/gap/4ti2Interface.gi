@@ -654,7 +654,15 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     
     return_matrix[ 2 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zhom" ) );
     
-    return_matrix[ 3 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zfree" ) );
+    if ForAll( signs[ 1 ], s -> s = 1 ) then
+      
+      return_matrix[ 3 ] := [ ];
+      
+    else
+      
+      return_matrix[ 3 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zfree" ) );
+      
+    fi;
     
     return return_matrix;
     
