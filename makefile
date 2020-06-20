@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 # DIRS=$$(ls -d */)
-DIRS=4ti2Interface Gauss ExamplesForHomalg GaussForHomalg GradedModules HomalgToCAS GradedRingForHomalg IO_ForHomalg LocalizeRingForHomalg MatricesForHomalg RingsForHomalg SCO ToolsForHomalg ToricVarieties Modules homalg
+DIRS=4ti2Interface Gauss ExamplesForHomalg GaussForHomalg GradedModules HomalgToCAS GradedRingForHomalg IO_ForHomalg LocalizeRingForHomalg MatricesForHomalg RingsForHomalg SCO ToolsForHomalg Modules homalg
 ECHO=echo
 MAKE=make
 SINGULAR_PATH=$(shell command -v Singular)
@@ -11,12 +11,12 @@ MAPLE_PATH=$(shell command -v maple)
 
 all: doc test
 
-doc: doc_4ti2Interface doc_Gauss doc_ExamplesForHomalg doc_GaussForHomalg doc_GradedModules doc_HomalgToCAS doc_GradedRingForHomalg doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_RingsForHomalg doc_SCO doc_ToolsForHomalg doc_ToricVarieties doc_Modules doc_homalg
+doc: doc_4ti2Interface doc_Gauss doc_ExamplesForHomalg doc_GaussForHomalg doc_GradedModules doc_HomalgToCAS doc_GradedRingForHomalg doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_RingsForHomalg doc_SCO doc_ToolsForHomalg doc_Modules doc_homalg
 
 docclean:
 	-for d in $(DIRS); do $(MAKE) -C $$d docclean; done
 
-test: test_4ti2Interface test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_ToricVarieties test_Modules test_homalg
+test: test_4ti2Interface test_Gauss test_ExamplesForHomalg test_GaussForHomalg test_GradedModules test_HomalgToCAS test_GradedRingForHomalg test_IO_ForHomalg test_LocalizeRingForHomalg test_MatricesForHomalg test_RingsForHomalg test_SCO test_Modules test_homalg
 
 build: build_Gauss
 
@@ -72,9 +72,6 @@ doc_SCO:
 doc_ToolsForHomalg:
 	$(MAKE) -C ToolsForHomalg doc
 
-doc_ToricVarieties:
-	$(MAKE) -C ToricVarieties doc
-
 doc_Modules:
 	$(MAKE) -C Modules doc
 
@@ -124,9 +121,6 @@ test_RingsForHomalg:
 
 test_SCO:
 	$(MAKE) -C SCO test
-
-test_ToricVarieties:
-	$(MAKE) -C ToricVarieties test
 
 test_Modules:
 	$(MAKE) -C Modules test
@@ -180,9 +174,6 @@ endif
 
 ci-test_SCO:
 	$(MAKE) -C SCO ci-test
-
-ci-test_ToricVarieties:
-	$(MAKE) -C ToricVarieties ci-test
 
 ci-test_Modules:
 	$(MAKE) -C Modules ci-test

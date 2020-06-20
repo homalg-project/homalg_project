@@ -14,7 +14,7 @@ behind the package.
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Section Label="WhyToricVarieties">
+<Section Label="WhyConvex">
 <Heading>What is the goal of the &Convex; package?</Heading>
 &Convex; provides structures and algorithms for convex geometry. It can handle convex, fans and polytopes. Not only the structures are provided, but also a collection of
 algorithms to handle those objects. Basically, it provides convex geometry to &GAP;.
