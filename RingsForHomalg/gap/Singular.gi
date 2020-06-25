@@ -2174,15 +2174,15 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         if IsIdenticalObj( pairs, true ) then
             d := Concatenation(
                          List( [ 1 .. n ],
-                               i -> Concatenation( "@d[", String( b + ( 2 * i - 1 ) ), ",", String( b + 2 * n + i ), "] = -(", String( steps[i] ), ") * ", shift[2 * i - 1] ) ),
+                               i -> Concatenation( "@d[", String( b + ( 2 * i - 1 ) ), ",", String( b + 2 * n + i ), "] = (", String( steps[i] ), ") * ", shift[2 * i - 1] ) ),
                          List( [ 1 .. n ],
-                               i -> Concatenation( "@d[", String( b + ( 2 * i ) ), ",", String( b + 2 * n + i ), "] = (", String( steps[i] ), ") * ", shift[2 * i] ) ) );
+                               i -> Concatenation( "@d[", String( b + ( 2 * i ) ), ",", String( b + 2 * n + i ), "] = -(", String( steps[i] ), ") * ", shift[2 * i] ) ) );
         else
             d := Concatenation(
                          List( [ 1 .. n ],
-                               i -> Concatenation( "@d[", String( b + ( i ) ), ",", String( b + 2 * n + i ), "] = -(", String( steps[i] ), ") * ", shift[i] ) ),
+                               i -> Concatenation( "@d[", String( b + ( i ) ), ",", String( b + 2 * n + i ), "] = (", String( steps[i] ), ") * ", shift[i] ) ),
                          List( [ 1 .. n ],
-                               i -> Concatenation( "@d[", String( b + ( n + i ) ), ",", String( b + 2 * n + i ), "] = (", String( steps[i] ), ") * ", shift[n + i] ) ) );
+                               i -> Concatenation( "@d[", String( b + ( n + i ) ), ",", String( b + 2 * n + i ), "] = -(", String( steps[i] ), ") * ", shift[n + i] ) ) );
         fi;
         
     else
@@ -2190,15 +2190,15 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         if IsIdenticalObj( pairs, true ) then
             d := Concatenation(
                          List( [ 1 .. n ],
-                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i - 1 ) ), "] = (", String( steps[i] ), ") * ", shift[2 * i - 1] ) ),
+                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i - 1 ) ), "] = -(", String( steps[i] ), ") * ", shift[2 * i - 1] ) ),
                          List( [ 1 .. n ],
-                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i ) ), "] = -(", String( steps[i] ), ") * ", shift[2 * i] ) ) );
+                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( 2 * i ) ), "] = (", String( steps[i] ), ") * ", shift[2 * i] ) ) );
         else
             d := Concatenation(
                          List( [ 1 .. n ],
-                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( i ) ), "] = (", String( steps[i] ), ") * ", shift[i] ) ),
+                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( i ) ), "] = -(", String( steps[i] ), ") * ", shift[i] ) ),
                          List( [ 1 .. n ],
-                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( n + i ) ), "] = -(", String( steps[i] ), ") * ", shift[n + i] ) ) );
+                               i -> Concatenation( "@d[", String( b + i ), ",", String( b + n + ( n + i ) ), "] = (", String( steps[i] ), ") * ", shift[n + i] ) ) );
         fi;
         
     fi;
