@@ -118,6 +118,7 @@
 <#Include Label="UnionOfColumns">
 <#Include Label="DiagMat">
 <#Include Label="KroneckerMat">
+<#Include Label="DualKroneckerMat">
 <#Include Label="MulMat">
 <#Include Label="AddMat">
 <#Include Label="SubMat">

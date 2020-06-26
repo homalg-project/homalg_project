@@ -417,6 +417,34 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##  </ManSection>
                ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="DualKroneckerMat:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="DualKroneckerMat" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="DualKroneckerMat" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
+               DualKroneckerMat :=
+                 function( A, B )
+                   local N;
+                   
+                   N := DualKroneckerMat( Eval( A ), Eval( B ) );
+                   
+                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+                              IsReducedModuloRingRelations ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
+                       N := DecideZero( N, HomalgRing( A ) );
+                   fi;
+                   
+                   return N;
+                   
+                 end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
+               
                ##  <#GAPDoc Label="MulMat:ResidueClassRing">
                ##  <ManSection>
                ##    <Func Arg="" Name="MulMat" Label="ResidueClassRing"/>

@@ -1108,6 +1108,29 @@ proc MaximalDegreePart (poly p, weights)\n\
   return(p - jet(p,d-1,weights));\n\
 }\n\n",
 
+      DualKroneckerMat := """
+proc DualKroneckerMat(matrix A, matrix B)
+{
+  if(isCommutative())
+  {
+    return(tensor(B,A));
+  }
+  else
+  {
+    def old_ring = basering;
+    def op_ring = opposite(old_ring);
+    setring op_ring;
+    matrix A = oppose(old_ring, A);
+    matrix B = oppose(old_ring, B);
+    matrix result = tensor(B,A);
+    setring old_ring;
+    matrix result = oppose(op_ring, result);
+    return(result);
+  }
+}
+
+ """,
+
     )
 
 );
@@ -1504,6 +1527,8 @@ InstallMethod( PolynomialRing,
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    S!.order := order;
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     

@@ -1399,7 +1399,7 @@ InstallMethod( KroneckerMat,
     R := HomalgRing( A );
     
     if ( HasNrRows( B ) and NrRows( B ) = 1 )
-       or ( HasNrRows( B ) and NrRows( B ) = 1 ) then
+       or ( HasNrColumns( B ) and NrColumns( B ) = 1 ) then
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "KroneckerMat( IsHomalgMatrix, (1) )", "\033[0m" );
         
@@ -1422,6 +1422,94 @@ InstallMethod( KroneckerMat,
     R := HomalgRing( A );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "KroneckerMat( IsHomalgMatrix, IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
+    
+end );
+
+#-----------------------------------
+# DualKroneckerMat
+#-----------------------------------
+
+##
+InstallMethod( DualKroneckerMat,
+        "LIMAT: for homalg matrices (check input)",
+        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
+        
+  function( A, B )
+    
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DualKroneckerMat,
+        "LIMAT: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix and IsOne, IsHomalgMatrix ],
+        
+  function( A, B )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    if ( HasNrRows( A ) and NrRows( A ) = 1 )
+       or ( HasNrColumns( A ) and NrColumns( A ) = 1 ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( (1), IsHomalgMatrix )", "\033[0m" );
+        
+        return B;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DualKroneckerMat,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001,	## FIXME: this must be ranked higher than the "DualKroneckerMat( IsOne, IsHomalgMatrix )", why?
+        
+  function( A, B )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( IsZero(Matrix), IsHomalgMatrix )", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
+    
+end );
+
+##
+InstallMethod( DualKroneckerMat,
+        "LIMAT: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsOne ],
+        
+  function( A, B )
+    local R;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( IsHomalgMatrix, IsOne(Matrix) )", "\033[0m" );
+    
+    return DiagMat( ListWithIdenticalEntries( NrRows( B ), A ) );
+    
+end );
+
+##
+InstallMethod( DualKroneckerMat,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
+        
+  function( A, B )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( IsHomalgMatrix, IsZero(Matrix) )", "\033[0m" );
     
     return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
     

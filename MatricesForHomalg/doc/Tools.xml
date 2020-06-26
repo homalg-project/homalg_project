@@ -39,6 +39,7 @@ entries.
 <#Include Label="UnionOfColumnsPair:homalgTable_entry">
 <#Include Label="DiagMat:homalgTable_entry">
 <#Include Label="KroneckerMat:homalgTable_entry">
+<#Include Label="DualKroneckerMat:homalgTable_entry">
 <#Include Label="MulMat:homalgTable_entry">
 <#Include Label="AddMat:homalgTable_entry">
 <#Include Label="SubMat:homalgTable_entry">

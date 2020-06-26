@@ -88,6 +88,7 @@
         <Item>UnionOfColumns</Item>
         <Item>DiagMat</Item>
         <Item>KroneckerMat</Item>
+        <Item>DualKroneckerMat</Item>
         <Item>MulMat</Item>
         <Item>AddMat</Item>
         <Item>SubMat</Item>

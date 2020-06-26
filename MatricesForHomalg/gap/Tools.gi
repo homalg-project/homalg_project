@@ -1131,6 +1131,80 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="Eval:HasEvalDualKroneckerMat">
+##  <ManSection>
+##    <Meth Arg="C" Name="Eval" Label="for matrices created with DualKroneckerMat"/>
+##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
+##    <Description>
+##      In case the matrix was created using
+##      <Ref Meth="DualKroneckerMat" Label="for matrices"/>
+##      then the filter <C>HasEvalDualKroneckerMat</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="DualKroneckerMat" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalDualKroneckerMat)",
+        [ IsHomalgMatrix and HasEvalDualKroneckerMat ],
+        
+  function( C )
+    local R, RP, A, B;
+    
+    R := HomalgRing( C );
+    
+    if ( HasIsCommutative( R ) and not IsCommutative( R ) ) and
+       ( HasIsSuperCommutative( R ) and not IsSuperCommutative( R ) ) then
+        Info( InfoWarning, 1, "\033[01m\033[5;31;47m",
+              "the dual Kronecker product is only defined for (super) commutative rings!",
+              "\033[0m" );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    A :=  EvalDualKroneckerMat( C )[1];
+    B :=  EvalDualKroneckerMat( C )[2];
+    
+    # work around errors in Singular when taking the opposite ring of a ring with ordering lp
+    # https://github.com/Singular/Singular/issues/1011
+    if IsBound(RP!.DualKroneckerMat) and not ( IsBound( R!.ring ) and IsBound( R!.ring!.cas ) and R!.ring!.cas = "Singular" and IsBound( R!.order ) and IsString( R!.order ) and StartsWith( R!.order, "lex" ) ) then
+        
+        return RP!.DualKroneckerMat( A, B );
+        
+    fi;
+    
+    if HasIsCommutative( R ) and IsCommutative( R ) then
+        
+        return Eval( KroneckerMat( B, A ) );
+        
+    else
+        
+        return Eval(
+            TransposedMatrix( Involution(
+                KroneckerMat( TransposedMatrix( Involution( B ) ), TransposedMatrix( Involution( A ) ) )
+            ) )
+        );
+        
+    fi;
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="DualKroneckerMat:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="A, B" Name="DualKroneckerMat" Label="homalgTable entry"/>
+##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>DualKroneckerMat</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with DualKroneckerMat"/> returns
+##      <M>RP</M>!.<C>DualKroneckerMat</C> applied to the content of the attribute
+##      <C>EvalDualKroneckerMat</C><M>( <A>C</A> ) = [ <A>A</A>, <A>B</A> ]</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="Eval:HasEvalMulMat">
 ##  <ManSection>
 ##    <Meth Arg="C" Name="Eval" Label="for matrices created with MulMat"/>

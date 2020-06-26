@@ -95,6 +95,9 @@ DeclareOperation( "IsSparseDiagonalMatrix",
 DeclareOperation( "SparseKroneckerProduct",
         [ IsSparseMatrix, IsSparseMatrix ] );
 
+DeclareOperation( "SparseDualKroneckerProduct",
+        [ IsSparseMatrix, IsSparseMatrix ] );
+
 DeclareOperation( "SparseZeroRows",
         [ IsSparseMatrix ] );
 

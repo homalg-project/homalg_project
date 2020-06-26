@@ -171,6 +171,12 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                    return KroneckerMat( Eval( A ), Eval( B ) );
                  end,
                
+               DualKroneckerMat :=
+                 function( A, B )
+                   
+                   return DualKroneckerMat( Eval( A ), Eval( B ) );
+                 end,
+               
                MulMat :=
                  function( a, A )
                    

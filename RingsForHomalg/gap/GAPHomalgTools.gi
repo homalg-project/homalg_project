@@ -183,6 +183,13 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
+               DualKroneckerMat :=
+                 function( A, B )
+                   
+                   return homalgSendBlocking( [ "DualKroneckerMat(", A, B, ")" ], "DualKroneckerMat" );
+                   
+                 end,
+               
                MulMat :=
                  function( a, A )
                    

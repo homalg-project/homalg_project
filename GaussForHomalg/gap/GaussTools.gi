@@ -242,6 +242,22 @@ InstallValue( CommonHomalgTableForGaussTools,
                    return SparseKroneckerProduct( Eval( A ), Eval( B ) );
                    
                  end,
+##  <#GAPDoc Label="DualKroneckerMat">
+##  <ManSection>
+##  <Func Arg="A, B" Name="DualKroneckerMat"/>
+##  <Returns>a sparse matrix</Returns>
+##  <Description>
+##  This returns the sparse dual Kronecker matrix of the matrices stored in the
+##  <C>Eval</C> attributes of the &homalg; matrices <A>A</A> and <A>B</A>.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+               DualKroneckerMat :=
+                 function( A, B )
+                   
+                   return SparseDualKroneckerProduct( Eval( A ), Eval( B ) );
+                   
+                 end,
 ##  <#GAPDoc Label="Compose">
 ##  <ManSection>
 ##  <Func Arg="A, B" Name="Compose"/>

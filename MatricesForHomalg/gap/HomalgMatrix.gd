@@ -490,6 +490,9 @@ DeclareAttribute( "EvalDiagMat",
 DeclareAttribute( "EvalKroneckerMat",
         IsHomalgMatrix );
 
+DeclareAttribute( "EvalDualKroneckerMat",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalCoefficientsWithGivenMonomials",
         IsHomalgMatrix );
 
@@ -1151,6 +1154,9 @@ DeclareOperation( "DiagMat",
         [ IsList ] );
 
 DeclareOperation( "KroneckerMat",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "DualKroneckerMat",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "*",						## this must remain, since an element in IsInternalMatrixHull

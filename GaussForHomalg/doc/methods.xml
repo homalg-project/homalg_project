@@ -40,6 +40,7 @@ specifically designed for &GaussForHomalg;.
 <#Include Label="UnionOfColumns">
 <#Include Label="DiagMat">
 <#Include Label="KroneckerMat">
+<#Include Label="DualKroneckerMat">
 <#Include Label="Compose">
 <#Include Label="NrRows">
 <#Include Label="NrColumns">

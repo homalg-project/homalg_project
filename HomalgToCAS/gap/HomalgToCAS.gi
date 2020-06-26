@@ -281,6 +281,9 @@ InstallValue( HOMALG_IO,
                 ## the Kronecker (tensor) product of two matrices:
                 KroneckerMat                            := "AoB",
                 
+                ## the dual Kronecker product of two matrices:
+                DualKroneckerMat                        := "A#B",
+                
                 ## multiply a ring element with a matrix:
                 MulMat                                  := "a*A",
                 

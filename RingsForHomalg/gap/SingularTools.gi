@@ -209,6 +209,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               DualKroneckerMat :=
+                 function( A, B )
+                   
+                   return homalgSendBlocking( [ "DualKroneckerMat(", A, B, ")" ], [ "matrix" ], [ "[", NrColumns( A ) * NrColumns( B ), "][", NrRows( A ) * NrRows( B ), "]" ], "DualKroneckerMat" );
+                   
+                 end,
+               
                MulMat :=
                  function( a, A )
                    

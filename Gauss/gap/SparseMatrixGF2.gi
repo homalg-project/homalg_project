@@ -342,6 +342,31 @@ InstallMethod( SparseKroneckerProduct,
 );
 
 ##
+InstallMethod( SparseDualKroneckerProduct,
+        [ IsSparseMatrixGF2Rep, IsSparseMatrixGF2Rep ],
+        function( B, A )
+    local indices, i1, i2, rowindex, j1, j2, prod;
+    
+    indices := [];
+    
+    for i1 in [ 1 .. A!.nrows ] do
+        for i2 in [ 1 .. B!.nrows ] do
+            rowindex := ( i1 - 1 ) * B!.nrows + i2;
+            indices[ rowindex ] := [];
+            for j1 in [ 1 .. Length( A!.indices[i1] ) ] do
+                for j2 in [ 1.. Length( B!.indices[i2] ) ] do
+                    Add( indices[ rowindex ], ( A!.indices[i1][j1] - 1 ) * B!.ncols + B!.indices[i2][j2] );
+                od;
+            od;
+        od;
+    od;
+    
+    return SparseMatrix( A!.nrows * B!.nrows, A!.ncols * B!.ncols, indices, A!.ring );
+    
+  end
+);
+
+##
 InstallOtherMethod( AddRow, #warning: this method does not have a side effect like the other AddRow!
         [ IsList, IsList ],
   function( row1, row2 )

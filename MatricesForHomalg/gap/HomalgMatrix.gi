@@ -1574,6 +1574,31 @@ InstallMethod( KroneckerMat,
     
 end );
 
+##  <#GAPDoc Label="DualKroneckerMat">
+##  <ManSection>
+##    <Meth Arg="A, B" Name="DualKroneckerMat" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The dual Kronecker product of the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with DualKroneckerMat"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( DualKroneckerMat,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    return HomalgMatrixWithAttributes( [
+                   EvalDualKroneckerMat, [ A, B ],
+                   NrRows, NrRows( A ) * NrRows( B ),
+                   NrColumns, NrColumns( A ) * NrColumns ( B )
+                   ], HomalgRing( A ) );
+    
+end );
+
 ##
 InstallMethod( \*,
         "for internal matrix hulls",

@@ -848,11 +848,42 @@ InstallMethod( SparseKroneckerProduct,
     for i1 in [ 1 .. A!.nrows ] do
         for i2 in [ 1 .. B!.nrows ] do
             rowindex := ( i1 - 1 ) * B!.nrows + i2;
-	    indices[ rowindex ] := [];
+            indices[ rowindex ] := [];
             entries[ rowindex ] := [];
             for j1 in [ 1 .. Length( A!.indices[i1] ) ] do
                 for j2 in [ 1.. Length( B!.indices[i2] ) ] do
                     prod := A!.entries[i1][j1] * B!.entries[i2][j2];
+                    if not IsZero( prod ) then
+                        Add( indices[ rowindex ], ( A!.indices[i1][j1] - 1 ) * B!.ncols + B!.indices[i2][j2] );
+                        Add( entries[ rowindex ], prod );
+                    fi;
+                od;
+            od;
+        od;
+    od;
+    
+    return SparseMatrix( A!.nrows * B!.nrows, A!.ncols * B!.ncols, indices, entries, A!.ring );
+    
+  end
+);
+
+##
+InstallMethod( SparseDualKroneckerProduct,
+        [ IsSparseMatrix, IsSparseMatrix ],
+        function( B, A )
+    local indices, entries, i1, i2, rowindex, j1, j2, prod;
+    
+    indices := [];
+    entries := [];
+    
+    for i1 in [ 1 .. A!.nrows ] do
+        for i2 in [ 1 .. B!.nrows ] do
+            rowindex := ( i1 - 1 ) * B!.nrows + i2;
+            indices[ rowindex ] := [];
+            entries[ rowindex ] := [];
+            for j1 in [ 1 .. Length( A!.indices[i1] ) ] do
+                for j2 in [ 1.. Length( B!.indices[i2] ) ] do
+                    prod := B!.entries[i2][j2] * A!.entries[i1][j1];
                     if not IsZero( prod ) then
                         Add( indices[ rowindex ], ( A!.indices[i1][j1] - 1 ) * B!.ncols + B!.indices[i2][j2] );
                         Add( entries[ rowindex ], prod );

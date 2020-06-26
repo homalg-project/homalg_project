@@ -49,6 +49,7 @@ fallback method.
 <#Include Label="UnionOfColumns:ResidueClassRing">
 <#Include Label="DiagMat:ResidueClassRing">
 <#Include Label="KroneckerMat:ResidueClassRing">
+<#Include Label="DualKroneckerMat:ResidueClassRing">
 <#Include Label="MulMat:ResidueClassRing">
 <#Include Label="AddMat:ResidueClassRing">
 <#Include Label="SubMat:ResidueClassRing">

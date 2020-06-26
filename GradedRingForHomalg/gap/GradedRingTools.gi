@@ -126,6 +126,11 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             return KroneckerMat( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
           end,
         
+        DualKroneckerMat :=
+          function( A, B )
+            return DualKroneckerMat( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
+          end,
+        
         MulMat :=
           function( a, A )
             return UnderlyingNonGradedRingElement( a ) * UnderlyingMatrixOverNonGradedRing( A );

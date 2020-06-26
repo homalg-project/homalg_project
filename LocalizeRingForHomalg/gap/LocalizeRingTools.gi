@@ -250,6 +250,19 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    ];
                  end,
                
+               DualKroneckerMat :=
+                 function( A, B )
+                   local a, b;
+                   
+                   a := Eval( A );
+                   b := Eval( B );
+                   
+                   return [
+                     DualKroneckerMat( a[1], b[1] ),
+                     a[2] * b[2]
+                   ];
+                 end,
+               
                MulMat :=
                  function( a, A )
                    local e, c;

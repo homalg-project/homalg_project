@@ -251,6 +251,38 @@ InstallMethod( KroneckerMat,
 end );
 
 ##
+InstallMethod( DualKroneckerMat,
+        "LIMAT: for homalg matrices (IsEmptyMatrix)",
+        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ], 1001,  ## FIXME: this must be ranked higher than the "DualKroneckerMat( IsOne, IsHomalgMatrix )", why?
+        
+  function( A, B )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( IsZero(Matrix), IsHomalgMatrix )", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
+    
+end );
+
+##
+InstallMethod( DualKroneckerMat,
+        "LIMAT: for homalg matrices (IsEmptyMatrix)",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
+        
+  function( A, B )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( IsHomalgMatrix, IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
+    
+end );
+
+##
 InstallMethod( \*,
         "LIMAT: for homalg matrices (IsEmptyMatrix)",
         [ IsRingElement, IsHomalgMatrix and IsEmptyMatrix ], 10001,

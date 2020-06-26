@@ -17,7 +17,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2013.07.16", ## Vinay's version
 ## this line prevents merge conflicts
-  "2020.06.26", ## Fabian's version
+  "2020.06.27", ## Fabian's version
 ## this line prevents merge conflicts
 "2015.11.06", ## Homepage update version, to be removed
 ] ),
@@ -216,9 +216,9 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2020.06.26" ],
-                   [ "HomalgToCAS", ">= 2020.05.19" ],
-                   [ "GaussForHomalg", ">= 2019.09.01" ],
+                   [ "MatricesForHomalg", ">= 2020.06.27" ],
+                   [ "HomalgToCAS", ">= 2020.06.27" ],
+                   [ "GaussForHomalg", ">= 2020.06.27" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],
