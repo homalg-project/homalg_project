@@ -1,6 +1,6 @@
 name: LocalizeRingForHomalg
-version: 2020.04.30
-date: 30/04/2020
+version: 2020.06.27
+date: 27/06/2020
 description: A Package for Localization of Polynomial Rings
 
 authors:
@@ -19,10 +19,10 @@ GAP: ">=4.7"
 
 needed-pkgs:
     - name: "MatricesForHomalg"
-      version: ">= 2020.02.05"
+      version: ">= 2020.06.27"
       url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg/"
     - name: "HomalgToCAS"
-      version: ">= 2013.07.12"
+      version: ">= 2020.06.27"
       url: "https://homalg-project.github.io/homalg_project/HomalgToCAS/"
     - name: "Modules"
       version: ">= 2020.02.05"
@@ -37,9 +37,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/LocalizeRingForHoma
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2020.04.30/LocalizeRingForHomalg-2020.04.30.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2020.06.27/LocalizeRingForHomalg-2020.06.27.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2020.04.30/LocalizeRingForHomalg-2020.04.30.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2020.06.27/LocalizeRingForHomalg-2020.06.27.zip
 
 abstract: This package is part of the homalg-project and allows localization of a (computable) commutative ring at a (finitely generated) maximal ideal.
 
