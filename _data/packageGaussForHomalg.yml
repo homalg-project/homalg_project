@@ -1,6 +1,6 @@
 name: GaussForHomalg
-version: 2020.04.30
-date: 30/04/2020
+version: 2020.06.27
+date: 27/06/2020
 description: Gauss functionality for the homalg project
 
 authors:
@@ -15,10 +15,10 @@ GAP: ">=4.7"
 
 needed-pkgs:
     - name: "Gauss"
-      version: ">= 2020.02.05"
+      version: ">= 2020.06.27"
       url: "https://homalg-project.github.io/homalg_project/Gauss/"
     - name: "MatricesForHomalg"
-      version: ">= 2020.02.05"
+      version: ">= 2020.06.27"
       url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg/"
     - name: "GAPDoc"
       version: ">= 1.0"
@@ -30,9 +30,9 @@ packageinfo: https://homalg-project.github.io/homalg_project/GaussForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.04.30/GaussForHomalg-2020.04.30.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.06.27/GaussForHomalg-2020.06.27.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.04.30/GaussForHomalg-2020.04.30.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.06.27/GaussForHomalg-2020.06.27.zip
 
 abstract: The <span class="pkgname">GaussForHomalg</span> package provides Gauss functionality for <span class="pkgname">homalg</span> using the package <span class="pkgname">Gauss</span>
 
