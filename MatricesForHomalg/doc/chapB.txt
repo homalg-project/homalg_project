@@ -150,47 +150,57 @@
   [22XRP[122X!.[10XKroneckerMat[110X applied to the content of the attribute [10XEvalKroneckerMat[110X[22X( [3XC[103X
   ) = [ [3XA[103X, [3XB[103X ][122X.[133X
   
-  [1XB.1-15 MulMat[101X
+  [1XB.1-15 DualKroneckerMat[101X
+  
+  [33X[1;0Y[29X[2XDualKroneckerMat[102X( [3XA[103X, [3XB[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
+  
+  [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
+  component  [22XRP[122X!.[10XDualKroneckerMat[110X  is  bound  then  the  method  [2XEval[102X ([14XC.4-15[114X)
+  returns  [22XRP[122X!.[10XDualKroneckerMat[110X  applied  to  the  content  of  the  attribute
+  [10XEvalDualKroneckerMat[110X[22X( [3XC[103X ) = [ [3XA[103X, [3XB[103X ][122X.[133X
+  
+  [1XB.1-16 MulMat[101X
   
   [33X[1;0Y[29X[2XMulMat[102X( [3Xa[103X, [3XA[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XMulMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-15[114X)  returns
+  component  [22XRP[122X!.[10XMulMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-16[114X)  returns
   [22XRP[122X!.[10XMulMat[110X  applied to the content of the attribute [10XEvalMulMat[110X[22X( [3XC[103X ) = [ [3Xa[103X, [3XA[103X
   ][122X.[133X
   
-  [1XB.1-16 AddMat[101X
+  [1XB.1-17 AddMat[101X
   
   [33X[1;0Y[29X[2XAddMat[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XAddMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-16[114X)  returns
+  component  [22XRP[122X!.[10XAddMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-17[114X)  returns
   [22XRP[122X!.[10XAddMat[110X  applied to the content of the attribute [10XEvalAddMat[110X[22X( [3XC[103X ) = [ [3XA[103X, [3XB[103X
   ][122X.[133X
   
-  [1XB.1-17 SubMat[101X
+  [1XB.1-18 SubMat[101X
   
   [33X[1;0Y[29X[2XSubMat[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XSubMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-17[114X)  returns
+  component  [22XRP[122X!.[10XSubMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-18[114X)  returns
   [22XRP[122X!.[10XSubMat[110X  applied to the content of the attribute [10XEvalSubMat[110X[22X( [3XC[103X ) = [ [3XA[103X, [3XB[103X
   ][122X.[133X
   
-  [1XB.1-18 Compose[101X
+  [1XB.1-19 Compose[101X
   
   [33X[1;0Y[29X[2XCompose[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XCompose[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-18[114X) returns
+  component  [22XRP[122X!.[10XCompose[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-19[114X) returns
   [22XRP[122X!.[10XCompose[110X  applied to the content of the attribute [10XEvalCompose[110X[22X( [3XC[103X ) = [ [3XA[103X,
   [3XB[103X ][122X.[133X
   
-  [1XB.1-19 IsZeroMatrix[101X
+  [1XB.1-20 IsZeroMatrix[101X
   
   [33X[1;0Y[29X[2XIsZeroMatrix[102X( [3XM[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
@@ -228,7 +238,7 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XB.1-20 NrRows[101X
+  [1XB.1-21 NrRows[101X
   
   [33X[1;0Y[29X[2XNrRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
@@ -265,7 +275,7 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XB.1-21 NrColumns[101X
+  [1XB.1-22 NrColumns[101X
   
   [33X[1;0Y[29X[2XNrColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
@@ -302,7 +312,7 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XB.1-22 Determinant[101X
+  [1XB.1-23 Determinant[101X
   
   [33X[1;0Y[29X[2XDeterminant[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya ring element[133X
@@ -360,76 +370,15 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XB.1-23 CoefficientsWithGivenMonomials[101X
+  [1XB.1-24 CoefficientsWithGivenMonomials[101X
   
-  [33X[1;0Y[29X[2XCoefficientsWithGivenMonomials[102X( [3Xpoly[103X, [3Xmonomials[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix of size [10X1 x Length( [110X[3Xmonomials[103X[10X )[110X[133X
+  [33X[1;0Y[29X[2XCoefficientsWithGivenMonomials[102X( [3XM[103X, [3Xmonomials[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YLet  [10XR  :=  HomalgRing([110X[3Xpoly[103X[10X)[110X.  This  method  computes [10XM[110X (with entries in the
-  coefficients  ring  of  [10XR[110X,  yet still considered as elements of [10XR[110X) such that
-  [10Xpoly = M * HomalgMatrix( monomials, Length( monomials ), 1, R )[110X.[133X
-  
-  [4X[32X  Code  [32X[104X
-    [4XInstallMethod( CoefficientsWithGivenMonomials,[104X
-    [4X        "for a ring element and a list of monomials able to generate the ring element",[104X
-    [4X        [ IsHomalgRingElement, IsList ],[104X
-    [4X        [104X
-    [4X  function( poly, monomials )[104X
-    [4X    local R, coeffs, RP, eval, sparse_coeffs_with_monomials, sparse_coeffs, sparse_monomials, coeff, monomial, pos, i;[104X
-    [4X    [104X
-    [4X    R := HomalgRing( poly );[104X
-    [4X    [104X
-    [4X    if IsZero( poly ) then[104X
-    [4X        coeffs := HomalgZeroMatrix( 1, Length( monomials ), R );[104X
-    [4X        return coeffs;[104X
-    [4X    fi;[104X
-    [4X    [104X
-    [4X    RP := homalgTable( R );[104X
-    [4X    [104X
-    [4X    if IsBound( RP!.CoefficientsWithGivenMonomials ) then[104X
-    [4X        [104X
-    [4X        eval := RP!.CoefficientsWithGivenMonomials( poly, monomials );[104X
-    [4X        [104X
-    [4X        coeffs := HomalgMatrixWithAttributes( [[104X
-    [4X                Eval, eval,[104X
-    [4X                NrRows, 1,[104X
-    [4X                NrColumns, Length( monomials ),[104X
-    [4X            ], R );[104X
-    [4X        [104X
-    [4X        return coeffs;[104X
-    [4X        [104X
-    [4X    fi;[104X
-    [4X    [104X
-    [4X    if not ( IsBound( RP!.Coefficients ) or IsHomalgInternalRingRep( R ) ) then[104X
-    [4X        Error( "could neither find a procedure called CoefficientsWithGivenMonomials ",[104X
-    [4X               "nor a procedure called Coefficients in the homalgTable of the non-internal ring\n" );[104X
-    [4X    fi;[104X
-    [4X    [104X
-    [4X    sparse_coeffs_with_monomials := Coefficients( poly );[104X
-    [4X    sparse_coeffs := EntriesOfHomalgMatrix( sparse_coeffs_with_monomials );[104X
-    [4X    sparse_monomials := sparse_coeffs_with_monomials!.monomials;[104X
-    [4X    [104X
-    [4X    coeffs := ListWithIdenticalEntries( Length( monomials ), Zero( R ) );[104X
-    [4X    [104X
-    [4X    for i in [ 1 .. Length( sparse_coeffs ) ] do[104X
-    [4X        [104X
-    [4X        coeff := sparse_coeffs[i];[104X
-    [4X        monomial := sparse_monomials[i];[104X
-    [4X        [104X
-    [4X        pos := Position( monomials, monomial );[104X
-    [4X        [104X
-    [4X        if pos = fail then[104X
-    [4X            Error( "the polynomial is not generated by the given monomials\n" );[104X
-    [4X        fi;[104X
-    [4X        [104X
-    [4X        coeffs[pos] := coeff;[104X
-    [4X        [104X
-    [4X    od;[104X
-    [4X    [104X
-    [4X    return HomalgMatrix( coeffs, 1, Length( monomials ), R );[104X
-    [4X    [104X
-    [4Xend );[104X
-  [4X[32X[104X
+  [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
+  component  [22XRP[122X!.[10XCoefficientsWithGivenMonomials[110X  is bound then the method [2XEval[102X
+  ([14XC.4-20[114X)  returns  [22XRP[122X!.[10XCoefficientsWithGivenMonomials[110X applied to the content
+  of the attribute [10XEvalCoefficientsWithGivenMonomials[110X[22X( [3XC[103X ) = [ [3XM[103X, [3Xmonomials[103X ][122X.[133X
   
   
   [1XB.2 [33X[0;0YThe Tool Operations with a Fallback Method[133X[101X
@@ -445,7 +394,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM1[103X )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XAreEqualMatrices[110X  is  bound  then the standard method for the
-  operation [2X\=[102X ([14X5.5-18[114X) shown below returns [22XRP[122X!.[10XAreEqualMatrices[110X[22X( [3XM1[103X, [3XM2[103X )[122X.[133X
+  operation [2X\=[102X ([14X5.5-19[114X) shown below returns [22XRP[122X!.[10XAreEqualMatrices[110X[22X( [3XM1[103X, [3XM2[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( \=,[104X
@@ -669,7 +618,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XGetColumnIndependentUnitPositions[110X  is bound then the standard
-  method  of  the  operation  [2XGetColumnIndependentUnitPositions[102X ([14X5.5-19[114X) shown
+  method  of  the  operation  [2XGetColumnIndependentUnitPositions[102X ([14X5.5-20[114X) shown
   below returns [22XRP[122X!.[10XGetColumnIndependentUnitPositions[110X[22X( [3XM[103X, [3Xposlist[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X
@@ -739,7 +688,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XGetRowIndependentUnitPositions[110X  is  bound  then  the standard
-  method  of the operation [2XGetRowIndependentUnitPositions[102X ([14X5.5-20[114X) shown below
+  method  of the operation [2XGetRowIndependentUnitPositions[102X ([14X5.5-21[114X) shown below
   returns [22XRP[122X!.[10XGetRowIndependentUnitPositions[110X[22X( [3XM[103X, [3Xposlist[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X
@@ -809,7 +758,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XGetUnitPosition[110X  is  bound  then  the  standard method of the
-  operation  [2XGetUnitPosition[102X ([14X5.5-21[114X) shown below returns [22XRP[122X!.[10XGetUnitPosition[110X[22X(
+  operation  [2XGetUnitPosition[102X ([14X5.5-22[114X) shown below returns [22XRP[122X!.[10XGetUnitPosition[110X[22X(
   [3XM[103X, [3Xposlist[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X

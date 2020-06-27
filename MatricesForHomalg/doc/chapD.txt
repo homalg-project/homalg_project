@@ -600,12 +600,38 @@
     [4X  end,[104X
   [4X[32X[104X
   
-  [1XD.2-13 MulMat[101X
+  [1XD.2-13 DualKroneckerMat[101X
+  
+  [33X[1;0Y[29X[2XDualKroneckerMat[102X(  ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XDualKroneckerMat[102X ([14XB.1-15[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDualKroneckerMat :=[104X
+    [4X  function( A, B )[104X
+    [4X    local N;[104X
+    [4X    [104X
+    [4X    N := DualKroneckerMat( Eval( A ), Eval( B ) );[104X
+    [4X    [104X
+    [4X    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and[104X
+    [4X               IsReducedModuloRingRelations ) then[104X
+    [4X        [104X
+    [4X        ## reduce the matrix N w.r.t. the ring relations[104X
+    [4X        N := DecideZero( N, HomalgRing( A ) );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return N;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-14 MulMat[101X
   
   [33X[1;0Y[29X[2XMulMat[102X(  ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
   
-  [33X[0;0Y(--> [2XMulMat[102X ([14XB.1-15[114X))[133X
+  [33X[0;0Y(--> [2XMulMat[102X ([14XB.1-16[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XMulMat :=[104X
@@ -622,12 +648,12 @@
     [4X  end,[104X
   [4X[32X[104X
   
-  [1XD.2-14 AddMat[101X
+  [1XD.2-15 AddMat[101X
   
   [33X[1;0Y[29X[2XAddMat[102X(  ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
   
-  [33X[0;0Y(--> [2XAddMat[102X ([14XB.1-16[114X))[133X
+  [33X[0;0Y(--> [2XAddMat[102X ([14XB.1-17[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XAddMat :=[104X
@@ -638,12 +664,12 @@
     [4X  end,[104X
   [4X[32X[104X
   
-  [1XD.2-15 SubMat[101X
+  [1XD.2-16 SubMat[101X
   
   [33X[1;0Y[29X[2XSubMat[102X(  ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
   
-  [33X[0;0Y(--> [2XSubMat[102X ([14XB.1-17[114X))[133X
+  [33X[0;0Y(--> [2XSubMat[102X ([14XB.1-18[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XSubMat :=[104X
@@ -654,12 +680,12 @@
     [4X  end,[104X
   [4X[32X[104X
   
-  [1XD.2-16 Compose[101X
+  [1XD.2-17 Compose[101X
   
   [33X[1;0Y[29X[2XCompose[102X(  ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
   
-  [33X[0;0Y(--> [2XCompose[102X ([14XB.1-18[114X))[133X
+  [33X[0;0Y(--> [2XCompose[102X ([14XB.1-19[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XCompose :=[104X
@@ -670,45 +696,45 @@
     [4X  end,[104X
   [4X[32X[104X
   
-  [1XD.2-17 IsZeroMatrix[101X
+  [1XD.2-18 IsZeroMatrix[101X
   
   [33X[1;0Y[29X[2XIsZeroMatrix[102X( [3XM[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
-  [33X[0;0Y(--> [2XIsZeroMatrix[102X ([14XB.1-19[114X))[133X
+  [33X[0;0Y(--> [2XIsZeroMatrix[102X ([14XB.1-20[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XIsZeroMatrix := M -> IsZero( DecideZero( Eval( M ), HomalgRing( M ) ) ),[104X
   [4X[32X[104X
   
-  [1XD.2-18 NrRows[101X
+  [1XD.2-19 NrRows[101X
   
   [33X[1;0Y[29X[2XNrRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
-  [33X[0;0Y(--> [2XNrRows[102X ([14XB.1-20[114X))[133X
+  [33X[0;0Y(--> [2XNrRows[102X ([14XB.1-21[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XNrRows := C -> NrRows( Eval( C ) ),[104X
   [4X[32X[104X
   
-  [1XD.2-19 NrColumns[101X
+  [1XD.2-20 NrColumns[101X
   
   [33X[1;0Y[29X[2XNrColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
-  [33X[0;0Y(--> [2XNrColumns[102X ([14XB.1-21[114X))[133X
+  [33X[0;0Y(--> [2XNrColumns[102X ([14XB.1-22[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XNrColumns := C -> NrColumns( Eval( C ) ),[104X
   [4X[32X[104X
   
-  [1XD.2-20 Determinant[101X
+  [1XD.2-21 Determinant[101X
   
   [33X[1;0Y[29X[2XDeterminant[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Yan element of ambient [5Xhomalg[105X ring[133X
   
-  [33X[0;0Y(--> [2XDeterminant[102X ([14XB.1-22[114X))[133X
+  [33X[0;0Y(--> [2XDeterminant[102X ([14XB.1-23[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XDeterminant := C -> DecideZero( Determinant( Eval( C ) ), HomalgRing( C ) ),[104X

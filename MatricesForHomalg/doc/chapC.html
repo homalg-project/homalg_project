@@ -48,10 +48,12 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7EDE6095820F8128">C.4-12 Eval</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7FD68F43831046B6">C.4-13 Eval</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X84F45FB4854A079C">C.4-14 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7B68797C7EA79B10">C.4-15 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X85971C16868BD83C">C.4-16 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X86F848318791595C">C.4-17 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F7682FC86F602C2">C.4-18 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X78ADE5C879583E7B">C.4-15 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7B68797C7EA79B10">C.4-16 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X85971C16868BD83C">C.4-17 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X86F848318791595C">C.4-18 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F7682FC86F602C2">C.4-19 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X848FE4F07BAF89DB">C.4-20 Eval</a></span>
 </div></div>
 </div>
 
@@ -914,14 +916,71 @@ InstallMethod( Eval,
 end );
 </pre></div>
 
-<p><a id="X7B68797C7EA79B10" name="X7B68797C7EA79B10"></a></p>
+<p><a id="X78ADE5C879583E7B" name="X78ADE5C879583E7B"></a></p>
 
 <h5>C.4-15 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7D1A074278B415BE"><span class="RefLink">5.5-14</span></a>) then the filter <code class="code">HasEvalMulMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">MulMat</code> (<a href="chapB.html#X828F8C7785EEC3D1"><span class="RefLink">B.1-15</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">DualKroneckerMat</code> (<a href="chap5.html#X7ECF744B7DE82BED"><span class="RefLink">5.5-14</span></a>) then the filter <code class="code">HasEvalDualKroneckerMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">DualKroneckerMat</code> (<a href="chapB.html#X87E0747D7FEEAC76"><span class="RefLink">B.1-15</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalDualKroneckerMat)",
+        [ IsHomalgMatrix and HasEvalDualKroneckerMat ],
+        
+  function( C )
+    local R, RP, A, B;
+    
+    R := HomalgRing( C );
+    
+    if ( HasIsCommutative( R ) and not IsCommutative( R ) ) and
+       ( HasIsSuperCommutative( R ) and not IsSuperCommutative( R ) ) then
+        Info( InfoWarning, 1, "\033[01m\033[5;31;47m",
+              "the dual Kronecker product is only defined for (super) commutative rings!",
+              "\033[0m" );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    A :=  EvalDualKroneckerMat( C )[1];
+    B :=  EvalDualKroneckerMat( C )[2];
+    
+    # work around errors in Singular when taking the opposite ring of a ring with ordering lp
+    # https://github.com/Singular/Singular/issues/1011
+    if IsBound(RP!.DualKroneckerMat) and not ( IsBound( R!.ring ) and IsBound( R!.ring!.cas ) and R!.ring!.cas = "Singular" and IsBound( R!.order ) and IsString( R!.order ) and StartsWith( R!.order, "lex" ) ) then
+        
+        return RP!.DualKroneckerMat( A, B );
+        
+    fi;
+    
+    if HasIsCommutative( R ) and IsCommutative( R ) then
+        
+        return Eval( KroneckerMat( B, A ) );
+        
+    else
+        
+        return Eval(
+            TransposedMatrix( Involution(
+                KroneckerMat( TransposedMatrix( Involution( B ) ), TransposedMatrix( Involution( A ) ) )
+            ) )
+        );
+        
+    fi;
+    
+end );
+</pre></div>
+
+<p><a id="X7B68797C7EA79B10" name="X7B68797C7EA79B10"></a></p>
+
+<h5>C.4-16 Eval</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7D1A074278B415BE"><span class="RefLink">5.5-15</span></a>) then the filter <code class="code">HasEvalMulMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">MulMat</code> (<a href="chapB.html#X828F8C7785EEC3D1"><span class="RefLink">B.1-16</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -990,12 +1049,12 @@ end );
 
 <p><a id="X85971C16868BD83C" name="X85971C16868BD83C"></a></p>
 
-<h5>C.4-16 Eval</h5>
+<h5>C.4-17 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\+</code> (<a href="chap5.html#X87C773DA85B21ADF"><span class="RefLink">5.5-15</span></a>) then the filter <code class="code">HasEvalAddMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">AddMat</code> (<a href="chapB.html#X7B0B12F080A90039"><span class="RefLink">B.1-16</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\+</code> (<a href="chap5.html#X87C773DA85B21ADF"><span class="RefLink">5.5-16</span></a>) then the filter <code class="code">HasEvalAddMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">AddMat</code> (<a href="chapB.html#X7B0B12F080A90039"><span class="RefLink">B.1-17</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -1038,12 +1097,12 @@ end );
 
 <p><a id="X86F848318791595C" name="X86F848318791595C"></a></p>
 
-<h5>C.4-17 Eval</h5>
+<h5>C.4-18 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\-</code> (<a href="chap5.html#X784B57617B24208C"><span class="RefLink">5.5-16</span></a>) then the filter <code class="code">HasEvalSubMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">SubMat</code> (<a href="chapB.html#X7FE11AA27AE7D2D7"><span class="RefLink">B.1-17</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\-</code> (<a href="chap5.html#X784B57617B24208C"><span class="RefLink">5.5-17</span></a>) then the filter <code class="code">HasEvalSubMat</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">SubMat</code> (<a href="chapB.html#X7FE11AA27AE7D2D7"><span class="RefLink">B.1-18</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -1086,12 +1145,12 @@ end );
 
 <p><a id="X7F7682FC86F602C2" name="X7F7682FC86F602C2"></a></p>
 
-<h5>C.4-18 Eval</h5>
+<h5>C.4-19 Eval</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
 
-<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7F5961D78754157B"><span class="RefLink">5.5-17</span></a>) then the filter <code class="code">HasEvalCompose</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">Compose</code> (<a href="chapB.html#X7D491D957E63C3A4"><span class="RefLink">B.1-18</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+<p>In case the matrix was created using <code class="func">\*</code> (<a href="chap5.html#X7F5961D78754157B"><span class="RefLink">5.5-18</span></a>) then the filter <code class="code">HasEvalCompose</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">Compose</code> (<a href="chapB.html#X7D491D957E63C3A4"><span class="RefLink">B.1-19</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
 
 
 <div class="example"><pre>
@@ -1128,6 +1187,45 @@ InstallMethod( Eval,
     #=====# can only work for homalg internal matrices #=====#
     
     return Eval( A ) * Eval( B );
+    
+end );
+</pre></div>
+
+<p><a id="X848FE4F07BAF89DB" name="X848FE4F07BAF89DB"></a></p>
+
+<h5>C.4-20 Eval</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eval</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>In case the matrix was created using <code class="func">CoefficientsWithGivenMonomials</code> (<a href="chap5.html#X7EEFD7887E96714F"><span class="RefLink">5.5-56</span></a>) then the filter <code class="code">HasEvalCoefficientsWithGivenMonomials</code> for <var class="Arg">C</var> is set to true and the <code class="code">homalgTable</code> function <code class="func">CoefficientsWithGivenMonomials</code> (<a href="chapB.html#X8450E904787CBD35"><span class="RefLink">B.1-24</span></a>) will be used to set the attribute <code class="code">Eval</code>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalCoefficientsWithGivenMonomials)",
+        [ IsHomalgMatrix and HasEvalCoefficientsWithGivenMonomials ],
+        
+  function( C )
+    local R, RP, pair, M, monomials;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+
+    pair := EvalCoefficientsWithGivenMonomials( C );
+
+    M := pair[1];
+    monomials := pair[2];
+    
+    if IsBound( RP!.CoefficientsWithGivenMonomials ) then
+        
+        return RP!.CoefficientsWithGivenMonomials( M, monomials );
+        
+    fi;
+
+    Error( "could not find a procedure called CoefficientsWithGivenMonomials ",
+            "in the homalgTable of the ring\n" );
     
 end );
 </pre></div>

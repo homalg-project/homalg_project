@@ -852,9 +852,65 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-14[114X)  then  the  filter
+  [33X[0;0YIn  case  the  matrix  was  created using [2XDualKroneckerMat[102X ([14X5.5-14[114X) then the
+  filter  [10XHasEvalDualKroneckerMat[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X
+  function [2XDualKroneckerMat[102X ([14XB.1-15[114X) will be used to set the attribute [10XEval[110X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( Eval,[104X
+    [4X        "for homalg matrices (HasEvalDualKroneckerMat)",[104X
+    [4X        [ IsHomalgMatrix and HasEvalDualKroneckerMat ],[104X
+    [4X        [104X
+    [4X  function( C )[104X
+    [4X    local R, RP, A, B;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( C );[104X
+    [4X    [104X
+    [4X    if ( HasIsCommutative( R ) and not IsCommutative( R ) ) and[104X
+    [4X       ( HasIsSuperCommutative( R ) and not IsSuperCommutative( R ) ) then[104X
+    [4X        Info( InfoWarning, 1, "\033[01m\033[5;31;47m",[104X
+    [4X              "the dual Kronecker product is only defined for (super) commutative rings!",[104X
+    [4X              "\033[0m" );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    RP := homalgTable( R );[104X
+    [4X    [104X
+    [4X    A :=  EvalDualKroneckerMat( C )[1];[104X
+    [4X    B :=  EvalDualKroneckerMat( C )[2];[104X
+    [4X    [104X
+    [4X    # work around errors in Singular when taking the opposite ring of a ring with ordering lp[104X
+    [4X    # https://github.com/Singular/Singular/issues/1011[104X
+    [4X    if IsBound(RP!.DualKroneckerMat) and not ( IsBound( R!.ring ) and IsBound( R!.ring!.cas ) and R!.ring!.cas = "Singular" and IsBound( R!.order ) and IsString( R!.order ) and StartsWith( R!.order, "lex" ) ) then[104X
+    [4X        [104X
+    [4X        return RP!.DualKroneckerMat( A, B );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    if HasIsCommutative( R ) and IsCommutative( R ) then[104X
+    [4X        [104X
+    [4X        return Eval( KroneckerMat( B, A ) );[104X
+    [4X        [104X
+    [4X    else[104X
+    [4X        [104X
+    [4X        return Eval([104X
+    [4X            TransposedMatrix( Involution([104X
+    [4X                KroneckerMat( TransposedMatrix( Involution( B ) ), TransposedMatrix( Involution( A ) ) )[104X
+    [4X            ) )[104X
+    [4X        );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [1XC.4-16 Eval[101X
+  
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
+  
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-15[114X)  then  the  filter
   [10XHasEvalMulMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XMulMat[102X
-  ([14XB.1-15[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-16[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -920,14 +976,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-16 Eval[101X
+  [1XC.4-17 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\+[102X  ([14X5.5-15[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\+[102X  ([14X5.5-16[114X)  then  the  filter
   [10XHasEvalAddMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XAddMat[102X
-  ([14XB.1-16[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-17[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -967,14 +1023,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-17 Eval[101X
+  [1XC.4-18 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\-[102X  ([14X5.5-16[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\-[102X  ([14X5.5-17[114X)  then  the  filter
   [10XHasEvalSubMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XSubMat[102X
-  ([14XB.1-17[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-18[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -1014,14 +1070,14 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XC.4-18 Eval[101X
+  [1XC.4-19 Eval[101X
   
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-17[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-18[114X)  then  the  filter
   [10XHasEvalCompose[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X function [2XCompose[102X
-  ([14XB.1-18[114X) will be used to set the attribute [10XEval[110X.[133X
+  ([14XB.1-19[114X) will be used to set the attribute [10XEval[110X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
@@ -1057,6 +1113,45 @@
     [4X    #=====# can only work for homalg internal matrices #=====#[104X
     [4X    [104X
     [4X    return Eval( A ) * Eval( B );[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [1XC.4-20 Eval[101X
+  
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
+  
+  [33X[0;0YIn case the matrix was created using [2XCoefficientsWithGivenMonomials[102X ([14X5.5-56[114X)
+  then  the  filter [10XHasEvalCoefficientsWithGivenMonomials[110X for [3XC[103X is set to true
+  and the [10XhomalgTable[110X function [2XCoefficientsWithGivenMonomials[102X ([14XB.1-24[114X) will be
+  used to set the attribute [10XEval[110X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( Eval,[104X
+    [4X        "for homalg matrices (HasEvalCoefficientsWithGivenMonomials)",[104X
+    [4X        [ IsHomalgMatrix and HasEvalCoefficientsWithGivenMonomials ],[104X
+    [4X        [104X
+    [4X  function( C )[104X
+    [4X    local R, RP, pair, M, monomials;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( C );[104X
+    [4X    [104X
+    [4X    RP := homalgTable( R );[104X
+    [4X[104X
+    [4X    pair := EvalCoefficientsWithGivenMonomials( C );[104X
+    [4X[104X
+    [4X    M := pair[1];[104X
+    [4X    monomials := pair[2];[104X
+    [4X    [104X
+    [4X    if IsBound( RP!.CoefficientsWithGivenMonomials ) then[104X
+    [4X        [104X
+    [4X        return RP!.CoefficientsWithGivenMonomials( M, monomials );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X[104X
+    [4X    Error( "could not find a procedure called CoefficientsWithGivenMonomials ",[104X
+    [4X            "in the homalgTable of the ring\n" );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X

@@ -6,7 +6,7 @@
                         [1XMatrices for the [5Xhomalg[105X project[101X
   
   
-                               Version 2020.05.21
+                               Version 2020.06.27
   
   
                                    June 2015
@@ -279,47 +279,49 @@
       5.5-11 UnionOfColumns
       5.5-12 DiagMat
       5.5-13 KroneckerMat
-      5.5-14 \*
-      5.5-15 \+
-      5.5-16 \-
-      5.5-17 \*
-      5.5-18 \=
-      5.5-19 GetColumnIndependentUnitPositions
-      5.5-20 GetRowIndependentUnitPositions
-      5.5-21 GetUnitPosition
-      5.5-22 Eliminate
-      5.5-23 BasisOfRowModule
-      5.5-24 BasisOfColumnModule
-      5.5-25 DecideZeroRows
-      5.5-26 DecideZeroColumns
-      5.5-27 SyzygiesGeneratorsOfRows
-      5.5-28 SyzygiesGeneratorsOfColumns
-      5.5-29 SyzygiesGeneratorsOfRows
-      5.5-30 SyzygiesGeneratorsOfColumns
-      5.5-31 ReducedBasisOfRowModule
-      5.5-32 ReducedBasisOfColumnModule
-      5.5-33 ReducedSyzygiesGeneratorsOfRows
-      5.5-34 ReducedSyzygiesGeneratorsOfColumns
-      5.5-35 BasisOfRowsCoeff
-      5.5-36 BasisOfColumnsCoeff
-      5.5-37 DecideZeroRowsEffectively
-      5.5-38 DecideZeroColumnsEffectively
-      5.5-39 BasisOfRows
-      5.5-40 BasisOfColumns
-      5.5-41 DecideZero
-      5.5-42 SyzygiesOfRows
-      5.5-43 SyzygiesOfColumns
-      5.5-44 ReducedSyzygiesOfRows
-      5.5-45 ReducedSyzygiesOfColumns
-      5.5-46 RightDivide
-      5.5-47 LeftDivide
-      5.5-48 RightDivide
-      5.5-49 LeftDivide
-      5.5-50 GenerateSameRowModule
-      5.5-51 GenerateSameColumnModule
-      5.5-52 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices
-      5.5-53 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix
-      5.5-54 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix
+      5.5-14 DualKroneckerMat
+      5.5-15 \*
+      5.5-16 \+
+      5.5-17 \-
+      5.5-18 \*
+      5.5-19 \=
+      5.5-20 GetColumnIndependentUnitPositions
+      5.5-21 GetRowIndependentUnitPositions
+      5.5-22 GetUnitPosition
+      5.5-23 Eliminate
+      5.5-24 BasisOfRowModule
+      5.5-25 BasisOfColumnModule
+      5.5-26 DecideZeroRows
+      5.5-27 DecideZeroColumns
+      5.5-28 SyzygiesGeneratorsOfRows
+      5.5-29 SyzygiesGeneratorsOfColumns
+      5.5-30 SyzygiesGeneratorsOfRows
+      5.5-31 SyzygiesGeneratorsOfColumns
+      5.5-32 ReducedBasisOfRowModule
+      5.5-33 ReducedBasisOfColumnModule
+      5.5-34 ReducedSyzygiesGeneratorsOfRows
+      5.5-35 ReducedSyzygiesGeneratorsOfColumns
+      5.5-36 BasisOfRowsCoeff
+      5.5-37 BasisOfColumnsCoeff
+      5.5-38 DecideZeroRowsEffectively
+      5.5-39 DecideZeroColumnsEffectively
+      5.5-40 BasisOfRows
+      5.5-41 BasisOfColumns
+      5.5-42 DecideZero
+      5.5-43 SyzygiesOfRows
+      5.5-44 SyzygiesOfColumns
+      5.5-45 ReducedSyzygiesOfRows
+      5.5-46 ReducedSyzygiesOfColumns
+      5.5-47 RightDivide
+      5.5-48 LeftDivide
+      5.5-49 RightDivide
+      5.5-50 LeftDivide
+      5.5-51 GenerateSameRowModule
+      5.5-52 GenerateSameColumnModule
+      5.5-53 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices
+      5.5-54 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix
+      5.5-55 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix
+      5.5-56 CoefficientsWithGivenMonomials
   6 [33X[0;0YRing Relations[133X
     6.1 [33X[0;0YRing Relations: Categories and Representations[133X
       6.1-1 IsHomalgRingRelations
@@ -353,15 +355,16 @@
       B.1-12 UnionOfColumnsPair
       B.1-13 DiagMat
       B.1-14 KroneckerMat
-      B.1-15 MulMat
-      B.1-16 AddMat
-      B.1-17 SubMat
-      B.1-18 Compose
-      B.1-19 IsZeroMatrix
-      B.1-20 NrRows
-      B.1-21 NrColumns
-      B.1-22 Determinant
-      B.1-23 CoefficientsWithGivenMonomials
+      B.1-15 DualKroneckerMat
+      B.1-16 MulMat
+      B.1-17 AddMat
+      B.1-18 SubMat
+      B.1-19 Compose
+      B.1-20 IsZeroMatrix
+      B.1-21 NrRows
+      B.1-22 NrColumns
+      B.1-23 Determinant
+      B.1-24 CoefficientsWithGivenMonomials
     B.2 [33X[0;0YThe Tool Operations with a Fallback Method[133X
       B.2-1 AreEqualMatrices
       B.2-2 IsIdentityMatrix
@@ -396,6 +399,8 @@
       C.4-16 Eval
       C.4-17 Eval
       C.4-18 Eval
+      C.4-19 Eval
+      C.4-20 Eval
   D [33X[0;0YThe subpackage [5XResidueClassRingForHomalg[105X as a sample ring package[133X
     D.1 [33X[0;0YThe Mandatory Basic Operations[133X
       D.1-1 BasisOfRowModule
@@ -423,14 +428,15 @@
       D.2-10 UnionOfColumns
       D.2-11 DiagMat
       D.2-12 KroneckerMat
-      D.2-13 MulMat
-      D.2-14 AddMat
-      D.2-15 SubMat
-      D.2-16 Compose
-      D.2-17 IsZeroMatrix
-      D.2-18 NrRows
-      D.2-19 NrColumns
-      D.2-20 Determinant
+      D.2-13 DualKroneckerMat
+      D.2-14 MulMat
+      D.2-15 AddMat
+      D.2-16 SubMat
+      D.2-17 Compose
+      D.2-18 IsZeroMatrix
+      D.2-19 NrRows
+      D.2-20 NrColumns
+      D.2-21 Determinant
     D.3 [33X[0;0YSome of the Recommended Tool Operations[133X
       D.3-1 AreEqualMatrices
       D.3-2 IsOne
