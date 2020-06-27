@@ -6,7 +6,7 @@
                          [1X[5XGauss[105X Functionality for [5Xhomalg[105X[101X
   
   
-                               Version 2020.04.30
+                               Version 2020.06.27
   
   
                                  September 2013
@@ -77,13 +77,14 @@
       3.2-9 UnionOfColumns
       3.2-10 DiagMat
       3.2-11 KroneckerMat
-      3.2-12 Compose
-      3.2-13 NrRows
-      3.2-14 NrColumns
-      3.2-15 IsZeroMatrix
-      3.2-16 IsDiagonalMatrix
-      3.2-17 ZeroRows
-      3.2-18 ZeroColumns
+      3.2-12 DualKroneckerMat
+      3.2-13 Compose
+      3.2-14 NrRows
+      3.2-15 NrColumns
+      3.2-16 IsZeroMatrix
+      3.2-17 IsDiagonalMatrix
+      3.2-18 ZeroRows
+      3.2-19 ZeroColumns
     3.3 [33X[0;0YThe Basic Functions and [5Xhomalg[105X table creation[133X
       3.3-1 RowReducedEchelonForm
       3.3-2 CreateHomalgTable

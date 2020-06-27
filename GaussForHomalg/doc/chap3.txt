@@ -113,7 +113,15 @@
   [33X[0;0YThis  returns the sparse Kronecker matrix of the matrices stored in the [10XEval[110X
   attributes of the [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
   
-  [1X3.2-12 Compose[101X
+  [1X3.2-12 DualKroneckerMat[101X
+  
+  [33X[1;0Y[29X[2XDualKroneckerMat[102X( [3XA[103X, [3XB[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya sparse matrix[133X
+  
+  [33X[0;0YThis  returns the sparse dual Kronecker matrix of the matrices stored in the
+  [10XEval[110X attributes of the [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
+  
+  [1X3.2-13 Compose[101X
   
   [33X[1;0Y[29X[2XCompose[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya sparse matrix[133X
@@ -121,7 +129,7 @@
   [33X[0;0YThis  returns  the  matrix product of the sparse matrices stored in the [10XEval[110X
   attributes of the [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
   
-  [1X3.2-13 NrRows[101X
+  [1X3.2-14 NrRows[101X
   
   [33X[1;0Y[29X[2XNrRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Yan integer[133X
@@ -129,7 +137,7 @@
   [33X[0;0YThis  returns  the  number  of  rows of the sparse matrix stored in the [10XEval[110X
   attribute of the [5Xhomalg[105X matrix [3XC[103X.[133X
   
-  [1X3.2-14 NrColumns[101X
+  [1X3.2-15 NrColumns[101X
   
   [33X[1;0Y[29X[2XNrColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Yan integer[133X
@@ -137,7 +145,7 @@
   [33X[0;0YThis  returns  the number of columns of the sparse matrix stored in the [10XEval[110X
   attribute of the [5Xhomalg[105X matrix [3XC[103X.[133X
   
-  [1X3.2-15 IsZeroMatrix[101X
+  [1X3.2-16 IsZeroMatrix[101X
   
   [33X[1;0Y[29X[2XIsZeroMatrix[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[12Xtrue[112X or [12Xfalse[112X[133X
@@ -145,7 +153,7 @@
   [33X[0;0YThis  returns  [12Xtrue[112X if the sparse matrix stored in the [10XEval[110X attribute of the
   [5Xhomalg[105X matrix [3XC[103X is a zero matrix, and [12Xfalse[112X otherwise.[133X
   
-  [1X3.2-16 IsDiagonalMatrix[101X
+  [1X3.2-17 IsDiagonalMatrix[101X
   
   [33X[1;0Y[29X[2XIsDiagonalMatrix[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[12Xtrue[112X or [12Xfalse[112X[133X
@@ -153,7 +161,7 @@
   [33X[0;0YThis  returns  [12Xtrue[112X if the sparse matrix stored in the [10XEval[110X attribute of the
   [5Xhomalg[105X matrix [3XC[103X is a diagonal matrix, and [12Xfalse[112X otherwise.[133X
   
-  [1X3.2-17 ZeroRows[101X
+  [1X3.2-18 ZeroRows[101X
   
   [33X[1;0Y[29X[2XZeroRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list[133X
@@ -161,7 +169,7 @@
   [33X[0;0YThis  returns  the list of zero rows of the sparse matrix stored in the [10XEval[110X
   attribute of the [5Xhomalg[105X matrix [3XC[103X.[133X
   
-  [1X3.2-18 ZeroColumns[101X
+  [1X3.2-19 ZeroColumns[101X
   
   [33X[1;0Y[29X[2XZeroColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list[133X

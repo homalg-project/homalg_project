@@ -46,13 +46,14 @@ functions</span></a>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81630C648148E324">3.2-9 UnionOfColumns</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X792C1E46800C874C">3.2-10 DiagMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A1A3AE878C2AA3B">3.2-11 KroneckerMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X798C13F97F955B72">3.2-12 Compose</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AAEA5B1875BEE2D">3.2-13 NrRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X781766A47B5D41AD">3.2-14 NrColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AEBD5187EE3DAA4">3.2-15 IsZeroMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EEC8E768178696E">3.2-16 IsDiagonalMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X828225E0857B1FDA">3.2-17 ZeroRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X870D761F7AB96D12">3.2-18 ZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CBC76A27A8EF473">3.2-12 DualKroneckerMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X798C13F97F955B72">3.2-13 Compose</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AAEA5B1875BEE2D">3.2-14 NrRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X781766A47B5D41AD">3.2-15 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AEBD5187EE3DAA4">3.2-16 IsZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EEC8E768178696E">3.2-17 IsDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X828225E0857B1FDA">3.2-18 ZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X870D761F7AB96D12">3.2-19 ZeroColumns</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X87BA6DDD812E02F4">3.3 <span class="Heading">The Basic Functions and <strong class="pkg">homalg</strong> table creation</span></a>
 </span>
@@ -190,9 +191,18 @@ functions</span></h3>
 
 <p>This returns the sparse Kronecker matrix of the matrices stored in the <code class="code">Eval</code> attributes of the <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
 
+<p><a id="X7CBC76A27A8EF473" name="X7CBC76A27A8EF473"></a></p>
+
+<h5>3.2-12 DualKroneckerMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DualKroneckerMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a sparse matrix</p>
+
+<p>This returns the sparse dual Kronecker matrix of the matrices stored in the <code class="code">Eval</code> attributes of the <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
+
 <p><a id="X798C13F97F955B72" name="X798C13F97F955B72"></a></p>
 
-<h5>3.2-12 Compose</h5>
+<h5>3.2-13 Compose</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Compose</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
@@ -201,7 +211,7 @@ functions</span></h3>
 
 <p><a id="X7AAEA5B1875BEE2D" name="X7AAEA5B1875BEE2D"></a></p>
 
-<h5>3.2-13 NrRows</h5>
+<h5>3.2-14 NrRows</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: an integer</p>
@@ -210,7 +220,7 @@ functions</span></h3>
 
 <p><a id="X781766A47B5D41AD" name="X781766A47B5D41AD"></a></p>
 
-<h5>3.2-14 NrColumns</h5>
+<h5>3.2-15 NrColumns</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: an integer</p>
@@ -219,7 +229,7 @@ functions</span></h3>
 
 <p><a id="X7AEBD5187EE3DAA4" name="X7AEBD5187EE3DAA4"></a></p>
 
-<h5>3.2-15 IsZeroMatrix</h5>
+<h5>3.2-16 IsZeroMatrix</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZeroMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: <strong class="button">true</strong> or <strong class="button">false</strong></p>
@@ -228,7 +238,7 @@ functions</span></h3>
 
 <p><a id="X7EEC8E768178696E" name="X7EEC8E768178696E"></a></p>
 
-<h5>3.2-16 IsDiagonalMatrix</h5>
+<h5>3.2-17 IsDiagonalMatrix</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: <strong class="button">true</strong> or <strong class="button">false</strong></p>
@@ -237,7 +247,7 @@ functions</span></h3>
 
 <p><a id="X828225E0857B1FDA" name="X828225E0857B1FDA"></a></p>
 
-<h5>3.2-17 ZeroRows</h5>
+<h5>3.2-18 ZeroRows</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a list</p>
@@ -246,7 +256,7 @@ functions</span></h3>
 
 <p><a id="X870D761F7AB96D12" name="X870D761F7AB96D12"></a></p>
 
-<h5>3.2-18 ZeroColumns</h5>
+<h5>3.2-19 ZeroColumns</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a list</p>
