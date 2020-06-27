@@ -106,6 +106,8 @@
   
   [30X    [33X[0;6YKroneckerMat[133X
   
+  [30X    [33X[0;6YDualKroneckerMat[133X
+  
   [30X    [33X[0;6YMulMat[133X
   
   [30X    [33X[0;6YAddMat[133X
