@@ -296,14 +296,18 @@
   [33X[1;0Y[29X[2XBasisOfRowsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
-    [4X    BasisOfRowsCoeff := "\n\[104X
-    [4Xproc BasisOfRowsCoeff (matrix M)\n\[104X
-    [4X{\n\[104X
-    [4X  matrix B = BasisOfRowModule(M);\n\[104X
-    [4X  matrix T = lift(M,B);\n\[104X
-    [4X  list l = B,T;\n\[104X
-    [4X  return(l)\n\[104X
-    [4X}\n\n",[104X
+    [4X    BasisOfRowsCoeff := """[104X
+    [4Xproc BasisOfRowsCoeff (matrix M)[104X
+    [4X{[104X
+    [4X  matrix B = BasisOfRowModule(M);[104X
+    [4X  option(noredSB);[104X
+    [4X  matrix T = lift(M,B);[104X
+    [4X  option(redSB);[104X
+    [4X  list l = B,T;[104X
+    [4X  return(l);[104X
+    [4X}[104X
+    [4X[104X
+    [4X """,[104X
   [4X[32X[104X
   
   [1X3.1-15 BasisOfColumnsCoeff[101X

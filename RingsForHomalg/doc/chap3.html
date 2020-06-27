@@ -372,14 +372,18 @@ BasisOfRowsCoeff :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 
 <div class="example"><pre>
-    BasisOfRowsCoeff := "\n\
-proc BasisOfRowsCoeff (matrix M)\n\
-{\n\
-  matrix B = BasisOfRowModule(M);\n\
-  matrix T = lift(M,B);\n\
-  list l = B,T;\n\
-  return(l)\n\
-}\n\n",
+    BasisOfRowsCoeff := """
+proc BasisOfRowsCoeff (matrix M)
+{
+  matrix B = BasisOfRowModule(M);
+  option(noredSB);
+  matrix T = lift(M,B);
+  option(redSB);
+  list l = B,T;
+  return(l);
+}
+
+ """,
 </pre></div>
 
 <p><a id="X796A404D7A059D47" name="X796A404D7A059D47"></a></p>
