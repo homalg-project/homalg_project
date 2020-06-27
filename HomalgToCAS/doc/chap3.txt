@@ -437,6 +437,9 @@
     [4X  ## the Kronecker (tensor) product of two matrices:[104X
     [4X  KroneckerMat                            := "AoB",[104X
     [4X  [104X
+    [4X  ## the dual Kronecker product of two matrices:[104X
+    [4X  DualKroneckerMat                        := "A#B",[104X
+    [4X  [104X
     [4X  ## multiply a ring element with a matrix:[104X
     [4X  MulMat                                  := "a*A",[104X
     [4X  [104X
