@@ -654,14 +654,18 @@ proc PartiallyReducedBasisOfColumnModule (matrix M)\n\
 ##    <Description>
 ##    
 ##      <Listing Type="Code"><![CDATA[
-    BasisOfRowsCoeff := "\n\
-proc BasisOfRowsCoeff (matrix M)\n\
-{\n\
-  matrix B = BasisOfRowModule(M);\n\
-  matrix T = lift(M,B);\n\
-  list l = B,T;\n\
-  return(l)\n\
-}\n\n",
+    BasisOfRowsCoeff := """
+proc BasisOfRowsCoeff (matrix M)
+{
+  matrix B = BasisOfRowModule(M);
+  option(noredSB);
+  matrix T = lift(M,B);
+  option(redSB);
+  list l = B,T;
+  return(l);
+}
+
+ """,
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
