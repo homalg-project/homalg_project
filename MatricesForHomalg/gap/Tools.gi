@@ -4451,6 +4451,10 @@ InstallMethod( Random,
         
   function( R )
     
+    if IsHomalgInternalRingRep( R ) then
+        TryNextMethod( );
+    fi;
+    
     return Random( R, 0 );
     
 end );
@@ -4461,6 +4465,10 @@ InstallMethod( Random,
         [ IsHomalgRing and IsIntegersForHomalg ],
         
   function( R )
+    
+    if IsHomalgInternalRingRep( R ) then
+        TryNextMethod( );
+    fi;
     
     return Random( R, 0 );
     
