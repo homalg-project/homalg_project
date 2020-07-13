@@ -22,6 +22,7 @@ tests = [
 	'Sheaves',
 	'SimplicialObjects',
 	'SystemTheory',
+	'ToricVarieties',
 	'VirtualCAS',
 	'test_suite_D-Modules',
 	'test_suite_ExamplesForHomalg_GAP',
