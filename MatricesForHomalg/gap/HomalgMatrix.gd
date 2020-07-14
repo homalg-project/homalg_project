@@ -574,8 +574,10 @@ DeclareSynonymAttr( "NrColumns", NrCols );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+if not IsBound( DeterminantMatrix ) then
 DeclareAttribute( "DeterminantMat",
         IsHomalgMatrix );
+fi;
 
 ##  <#GAPDoc Label="RowRankOfMatrix">
 ##  <ManSection>
