@@ -7,7 +7,7 @@ Subtitle := "A link to 4ti2",
 Version := Maximum( [
   "2019.06.02", ## Sebas' version
 ## this line prevents merge conflicts
-  "2020.06.19", ## Kamal's version
+  "2020.07.19", ## Kamal's version
 ## this line prevents merge conflicts
   "2020.05.11", ## Mohamed's version
 ] ),

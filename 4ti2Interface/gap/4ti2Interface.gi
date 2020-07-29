@@ -617,7 +617,7 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     concat_rhs := [ Concatenation( eqs_rhs, ineqs_rhs ) ];
     
     4ti2Interface_Write_Matrix_To_File( concat_rhs, Concatenation( filename, ".rhs" ) );
-
+    
     exec := 4ti2Interface_BINARIES.zsolve;
     
     precision := ValueOption( "precision" );
@@ -654,13 +654,13 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     
     return_matrix[ 2 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zhom" ) );
     
-    if ForAll( signs[ 1 ], s -> s = 1 ) then
+    if IsExistingFile( Concatenation( filename, ".zfree" ) ) then
       
-      return_matrix[ 3 ] := [ ];
+      return_matrix[ 3 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zfree" ) );
       
     else
       
-      return_matrix[ 3 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zfree" ) );
+      return_matrix[ 3 ] := [ ];
       
     fi;
     
