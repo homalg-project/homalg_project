@@ -12,8 +12,7 @@ jobs:
       - run: |
           sudo apt update
           sudo apt dist-upgrade -y
-          sudo apt install -y texlive-latex-extra texlive-science curl time python-pathlib
-          sudo apt install -y 4ti2
+          sudo apt install -y texlive-latex-extra texlive-science time python-pathlib
           echo "SetInfoLevel(InfoPackageLoading, 3);" > ~/.gap/gaprc
           TERM=dumb make -j 4 --output-sync ci-test
           bash <(curl -s https://codecov.io/bash)
