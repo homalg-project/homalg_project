@@ -1113,6 +1113,9 @@ InstallMethod( CertainRows,
         
   function( M, plist )
     
+    plist := ShallowCopy( plist );
+    ConvertToRangeRep( plist );
+    
     return HomalgMatrixWithAttributes( [
                    EvalCertainRows, [ M, plist ],
                    NrRows, Length( plist ),
@@ -1156,6 +1159,9 @@ InstallMethod( CertainColumns,
         [ IsHomalgMatrix, IsList ],
         
   function( M, plist )
+    
+    plist := ShallowCopy( plist );
+    ConvertToRangeRep( plist );
     
     return HomalgMatrixWithAttributes( [
                    EvalCertainColumns, [ M, plist ],
