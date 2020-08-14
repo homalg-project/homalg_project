@@ -156,8 +156,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                CertainRows :=
                  function( M, plist )
                    
-                   if Length( plist ) > 1 and IsRangeRep( plist ) then
-                       return homalgSendBlocking( [ "submat(", M, ",1..", NrColumns( M ), ",", Minimum( plist ) , "..", Maximum( plist ), ")" ], [ "matrix" ], "CertainRows" );
+                   if Length( plist ) > 1 and IsRangeRep( plist ) and Length( plist ) = AbsInt( plist[Length( plist )] - plist[1] ) + 1 then
+                       return homalgSendBlocking( [ "submat(", M, ",1..", NrColumns( M ), ",", plist[1] , "..", plist[Length( plist )], ")" ], [ "matrix" ], "CertainRows" );
                    fi;
                    
                    return homalgSendBlocking( [ "submat(", M, ",1..", NrColumns( M ), ",intvec(", plist, "))" ], [ "matrix" ], "CertainRows" );
@@ -167,8 +167,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                CertainColumns :=
                  function( M, plist )
                    
-                   if Length( plist ) > 1 and IsRangeRep( plist ) then
-                       return homalgSendBlocking( [ "submat(", M, ",", Minimum( plist ) , "..", Maximum( plist ), ",1..", NrRows( M ), ")" ], [ "matrix" ], "CertainColumns" );
+                   if Length( plist ) > 1 and IsRangeRep( plist ) and Length( plist ) = AbsInt( plist[Length( plist )] - plist[1] ) + 1 then
+                       return homalgSendBlocking( [ "submat(", M, ",", plist[1] , "..", plist[Length( plist )], ",1..", NrRows( M ), ")" ], [ "matrix" ], "CertainColumns" );
                    fi;
                    
                    return homalgSendBlocking( [ "submat(", M, ",intvec(", plist, "),1..", NrRows( M ), ")" ], [ "matrix" ], "CertainColumns" );
