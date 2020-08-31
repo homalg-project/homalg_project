@@ -20,7 +20,7 @@ The [other packages](https://homalg-project.github.io/homalg_project/) of the ho
 [docs-stable-url]: https://homalg-project.github.io/homalg_project/
 
 [tests-img]: https://github.com/homalg-project/homalg_project/workflows/Tests/badge.svg
-[tests-url]: https://github.com/homalg-project/homalg_project/
+[tests-url]: https://github.com/homalg-project/homalg_project/actions?query=workflow%3ATests
 
 [codecov-img]: https://codecov.io/gh/homalg-project/homalg_project/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/homalg-project/homalg_project
