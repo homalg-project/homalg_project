@@ -5,7 +5,7 @@ PackageName := "ToolsForHomalg",
 Subtitle := "Special methods and knowledge propagation tools",
 
 Version := Maximum( [
-  "2020.05.12", ## Mohamed's version
+  "2020.08.01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts

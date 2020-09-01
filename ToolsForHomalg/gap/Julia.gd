@@ -3,3 +3,5 @@ DeclareOperation( "ConvertJuliaToGAP",
 
 DeclareOperation( "VisualizeInJulia",
         [ IsString ] );
+
+DeclareGlobalFunction( "IsRunningInJupyter" );

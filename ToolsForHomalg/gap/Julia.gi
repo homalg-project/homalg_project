@@ -72,3 +72,11 @@ InstallMethod( VisualizeInJulia,
             GAPToJulia( DotToSVG( str ) ) );
     
 end );
+
+##
+InstallGlobalFunction( IsRunningInJupyter,
+  function( )
+    
+    return JuliaEvalString( "isdefined(Main, :IJulia) && Main.IJulia.inited" );
+    
+end );
