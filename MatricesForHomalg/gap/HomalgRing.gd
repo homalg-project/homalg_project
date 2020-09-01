@@ -1717,3 +1717,6 @@ DeclareOperation( "UnusedVariableName",
 
 DeclareOperation( "Inequalities",
         [ IsHomalgRing ] );
+
+DeclareOperation( "LaTeXString",
+        [ IsHomalgRingElement ] );

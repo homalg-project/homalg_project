@@ -3789,6 +3789,45 @@ InstallMethod( String,
   ViewString );
 
 ##
+InstallMethod( LaTeXString,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( m )
+    local r, c, l, i, j;
+
+    r := NrRows( m );
+    c := NrColumns( m );
+    
+    if IsEmptyMatrix( m ) then
+        return Concatenation( "()_{", String( r ), " \times ", String( c ), "}" );
+    fi;
+    
+    m := EntriesOfHomalgMatrixAsListList( m );
+    
+    l := "\\begin{pmatrix} \n";
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
+            Append( l, " " );
+            Append( l, LaTeXString( m[i][j] ) );
+            if j < c then
+                Append( l, " &" );
+            fi;
+        od;
+        if i < r then
+            Append( l, " \\\\" );
+        fi;
+        Append( l, " \n" );
+    od;
+    
+    Append( l, "\\end{pmatrix}" );
+
+    return l;
+    
+end );
+
+##
 InstallMethod( Display,
         "for internal matrix hulls",
         [ IsInternalMatrixHull ],
