@@ -3794,8 +3794,8 @@ InstallMethod( LaTeXString,
         [ IsHomalgMatrix ],
         
   function( m )
-    local r, c, l, i, j;
-
+    local r, c, l, i, j, e;
+    
     r := NrRows( m );
     c := NrColumns( m );
     
@@ -3805,12 +3805,19 @@ InstallMethod( LaTeXString,
     
     m := EntriesOfHomalgMatrixAsListList( m );
     
-    l := "\\begin{pmatrix} \n";
+    l := "\\left( \\begin{array}";
+    
+    Append( l, Concatenation( "{", ListWithIdenticalEntries( c, 'r' ), "}\n" ) );
     
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
             Append( l, " " );
-            Append( l, LaTeXString( m[i][j] ) );
+            e := m[i][j];
+            if IsZero( e ) then
+                Append( l, "\\cdot" );
+            else
+                Append( l, LaTeXString( m[i][j] ) );
+            fi;
             if j < c then
                 Append( l, " &" );
             fi;
@@ -3821,8 +3828,8 @@ InstallMethod( LaTeXString,
         Append( l, " \n" );
     od;
     
-    Append( l, "\\end{pmatrix}" );
-
+    Append( l, "\\end{array} \\right)" );
+    
     return l;
     
 end );
