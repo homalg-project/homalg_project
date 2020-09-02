@@ -2865,12 +2865,47 @@ InstallMethod( ViewObj,
     
 end );
 
-## fall-back method
+## fallback method
 InstallMethod( LaTeXString,
         "for homalg ring elements",
         [ IsHomalgRingElement ],
         
-  Name );
+  String );
+
+## fallback method
+InstallOtherMethod( LaTeXString,
+        "for homalg ring elements",
+        [ IsRingElement ],
+        
+  String );
+
+##
+InstallOtherMethod( LaTeXString,
+        "for homalg ring elements",
+        [ IsRat ],
+        
+  function( r )
+    local n, d, s, l;
+    
+    n := NumeratorRat( r );
+    d := DenominatorRat( r );
+    
+    if IsOne( d ) then
+        return String( n );
+    fi;
+    
+    s := SignInt( n );
+    n := AbsInt( n );
+    
+    l := Concatenation( "\\frac{", String( n ), "}{", String( d ), "}" );
+    
+    if s = -1 then
+        l := Concatenation( "-", l );
+    fi;
+    
+    return l;
+    
+end );
 
 ##
 InstallMethod( Display,
