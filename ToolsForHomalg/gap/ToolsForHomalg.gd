@@ -469,3 +469,7 @@ DeclareGlobalFunction( "ReplacedFileForHomalg" );
 DeclareGlobalFunction( "EvalReplacedFileForHomalg" );
 
 DeclareGlobalFunction( "WriteReplacedFileForHomalg" );
+
+##
+DeclareOperation( "IsShowable",
+        [ IsString, IsObject ] );

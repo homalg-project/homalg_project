@@ -2276,6 +2276,20 @@ end );
 #
 ####################################
 
+## fallback method
+InstallMethod( IsShowable,
+        [ IsString, IsObject ],
+
+  function ( mime, obj )
+    
+    if mime in [ "text/plain" ] then
+        return true;
+    fi;
+    
+    return false;
+    
+end );
+
 ##
 InstallMethod( ViewObj,
         "for pointer containers of objects",
