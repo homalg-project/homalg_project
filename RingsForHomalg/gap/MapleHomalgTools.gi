@@ -80,6 +80,18 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               LaTeXString :=
+                 function( poly )
+                    local l;
+                    
+                    l := homalgSendBlocking( [ "latex(", poly, ")" ], "need_display", "homalgLaTeX" );
+                    
+                    RemoveCharacters( l, "$" );
+                    
+                    return Chomp( l );
+                    
+                end,
+               
                ShallowCopy := C -> homalgSendBlocking( [ "copy( ", C, " )" ], "CopyMatrix" ),
                
                CopyMatrix :=

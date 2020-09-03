@@ -109,6 +109,18 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               LaTeXString :=
+                 function( poly )
+                    local l;
+                    
+                    l := homalgSendBlocking( [ "texpoly( \"\", ", poly, ")" ], "need_display", "homalgLaTeX" );
+                    
+                    RemoveCharacters( l, "$" );
+
+                    return Chomp( l );
+                    
+                end,
+               
                ShallowCopy := C -> homalgSendBlocking( [ C ], [ "matrix" ], "CopyMatrix" ),
                
                CopyMatrix :=

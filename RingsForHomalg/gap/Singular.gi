@@ -46,7 +46,7 @@ InstallValue( HOMALG_IO_Singular,
             output_prompt := "\033[1;30;43m<singular\033[0m ",
             display_color := "\033[0;30;47m",
             ## matrix.lib loads: LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"random.lib\";
-            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"primdec.lib\";LIB \"primdecint.lib\";LIB \"involut.lib\";LIB \"finvar.lib\";",
+            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"primdec.lib\";LIB \"primdecint.lib\";LIB \"involut.lib\";LIB \"finvar.lib\";LIB \"latex.lib\";",
             InitializeCASMacros := InitializeSingularMacros,
             time := function( stream, t ) return Int( homalgSendBlocking( [ "timer" ], "need_output", stream, "time" ) ) - t; end,
             memory_usage := function( stream, o ) return Int( homalgSendBlocking( [ "memory(", o, ")" ], "need_output", stream, "memory" ) ); end,
