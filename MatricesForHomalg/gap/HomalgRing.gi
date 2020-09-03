@@ -2866,13 +2866,6 @@ InstallMethod( ViewObj,
 end );
 
 ## fallback method
-InstallMethod( LaTeXString,
-        "for homalg ring elements",
-        [ IsHomalgRingElement ],
-        
-  String );
-
-## fallback method
 InstallOtherMethod( LaTeXString,
         "for homalg ring elements",
         [ IsRingElement ],
@@ -2904,6 +2897,30 @@ InstallOtherMethod( LaTeXString,
     fi;
     
     return l;
+    
+end );
+
+##
+InstallMethod( LaTeXString,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, RP, both, monomials, coeffs;
+    
+    R := HomalgRing( r );
+    
+    if IsZero( r ) then
+        return "0";
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.LaTeXString) then
+        return RP!.LaTeXString( r );
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
