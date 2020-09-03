@@ -88,7 +88,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                     
                     RemoveCharacters( l, "$" );
                     
-                    return Chomp( l );
+                    return l;
                     
                 end,
                

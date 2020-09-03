@@ -116,8 +116,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                     l := homalgSendBlocking( [ "texpoly( \"\", ", poly, ")" ], "need_display", "homalgLaTeX" );
                     
                     RemoveCharacters( l, "$" );
-
-                    return Chomp( l );
+                    
+                    return l;
                     
                 end,
                
