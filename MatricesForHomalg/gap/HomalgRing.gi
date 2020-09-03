@@ -2906,7 +2906,7 @@ InstallMethod( LaTeXString,
         [ IsHomalgRingElement ],
         
   function( r )
-    local R, RP, both, monomials, coeffs;
+    local R, RP, l;
     
     R := HomalgRing( r );
     
@@ -2917,7 +2917,9 @@ InstallMethod( LaTeXString,
     RP := homalgTable( R );
     
     if IsBound(RP!.LaTeXString) then
-        return RP!.LaTeXString( r );
+        l := RP!.LaTeXString( r );
+        RemoveCharacters( l, "\n" );
+        return l;
     fi;
     
     TryNextMethod( );
