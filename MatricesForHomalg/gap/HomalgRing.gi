@@ -2866,14 +2866,14 @@ InstallMethod( ViewObj,
 end );
 
 ## fallback method
-InstallOtherMethod( LaTeXString,
+InstallOtherMethod( LaTeXStringOp,
         "for homalg ring elements",
         [ IsRingElement ],
         
   String );
 
 ##
-InstallOtherMethod( LaTeXString,
+InstallOtherMethod( LaTeXStringOp,
         "for homalg ring elements",
         [ IsRat ],
         
@@ -2901,7 +2901,7 @@ InstallOtherMethod( LaTeXString,
 end );
 
 ##
-InstallMethod( LaTeXString,
+InstallMethod( LaTeXStringOp,
         "for homalg ring elements",
         [ IsHomalgRingElement ],
         

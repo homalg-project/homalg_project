@@ -1272,7 +1272,7 @@ DeclareOperation( "CoefficientsWithGivenMonomials",
 DeclareOperation( "CoefficientsWithGivenMonomials",
         [ IsHomalgRingElement, IsList ] );
 
-DeclareOperation( "LaTeXString",
+DeclareOperation( "LaTeXStringOp",
         [ IsHomalgMatrix ] );
 
 ####################################

@@ -1718,5 +1718,5 @@ DeclareOperation( "UnusedVariableName",
 DeclareOperation( "Inequalities",
         [ IsHomalgRing ] );
 
-DeclareOperation( "LaTeXString",
+DeclareOperation( "LaTeXStringOp",
         [ IsHomalgRingElement ] );
