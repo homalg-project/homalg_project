@@ -3800,7 +3800,7 @@ InstallMethod( LaTeXStringOp,
     c := NrColumns( m );
     
     if IsEmptyMatrix( m ) then
-        return Concatenation( "()_{", String( r ), " \times ", String( c ), "}" );
+        return Concatenation( "()_{", String( r ), " \\times ", String( c ), "}" );
     fi;
     
     m := EntriesOfHomalgMatrixAsListList( m );
