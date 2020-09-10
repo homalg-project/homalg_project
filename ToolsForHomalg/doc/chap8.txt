@@ -277,6 +277,14 @@
   [33X[0;0YReturn  the sublist of maximal objects in [3XL[103X w.r.t. the partial order defined
   by the binary function [3Xf[103X.[133X
   
+  [1X8.1-44 MakeShowable[101X
+  
+  [33X[1;0Y[29X[2XMakeShowable[102X( [3Xmime_types[103X, [3Xfilter[103X ) [32X function[133X
+  
+  [33X[0;0YInstalls  a  method for [10XIsShowable[110X such that [10XIsShowable( mime_type, object )[110X
+  returns  [10Xtrue[110X  for  any  [10Xmime_type[110X  in the list [3Xmime_types[103X and [10Xobject[110X in the
+  filter [3Xfilter[103X.[133X
+  
   
   [1X8.2 [33X[0;0YExamplefunctions[133X[101X
   

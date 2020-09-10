@@ -84,6 +84,7 @@
   [2XListOfSuccessors[102X, for IsTree 9.1-3 
   [2XLogicalImplicationsForOneHomalgObject[102X 8.1-3 
   [2XLogicalImplicationsForTwoHomalgBasicObjects[102X 8.1-4 
+  [2XMakeShowable[102X 8.1-44 
   [2XMatchPropertiesAndAttributes[102X 8.1-8 
   [2XMaximalObjects[102X, for IsList, IsFunction 8.1-43 
   [2XMemoryToString[102X 8.1-37 
