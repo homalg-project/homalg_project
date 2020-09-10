@@ -473,3 +473,10 @@ DeclareGlobalFunction( "WriteReplacedFileForHomalg" );
 ##
 DeclareOperation( "IsShowable",
         [ IsString, IsObject ] );
+
+#! @Description
+#!  Installs a method for `IsShowable` such that
+#!  `IsShowable( mime_type, object )` returns `true` for any
+#!  `mime_type` in the list <A>mime_types</A> and `object` in the filter <A>filter</A>.
+#! @Arguments mime_types, filter
+DeclareGlobalFunction( "MakeShowable" );

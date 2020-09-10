@@ -2291,6 +2291,36 @@ InstallMethod( IsShowable,
 end );
 
 ##
+InstallGlobalFunction( "MakeShowable", function( mime_types, filter )
+    
+    if not IsList( mime_types ) then
+        
+        Error( "the first argument must be a list\n" );
+        
+    fi;
+    
+    if not IsFilter( filter ) then
+        
+        Error( "the second argument must be a filter\n" );
+        
+    fi;
+    
+    InstallMethod( IsShowable,
+            [ IsString, filter ],
+            
+      function ( mime, e )
+        
+        if not mime in mime_types then
+            TryNextMethod();
+        fi;
+        
+        return true;
+        
+    end );
+    
+end );
+
+##
 InstallMethod( ViewObj,
         "for pointer containers of objects",
         [ IsContainerForPointersOnObjectsRep ],
