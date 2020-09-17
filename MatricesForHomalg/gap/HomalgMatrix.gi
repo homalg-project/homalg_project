@@ -817,6 +817,34 @@ InstallMethod( EntriesOfHomalgMatrixAsListList,
 end );
 
 ##
+InstallMethod( EntriesOfHomalgMatrixAsListList,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsHomalgInternalMatrixRep ],
+        
+  function( M )
+    local mat;
+    
+    if IsEmptyMatrix( M ) then
+        TryNextMethod( );
+    fi;
+    
+    mat := Eval( M );
+    
+    if not IshomalgInternalMatrixHullRep( mat ) then
+        TryNextMethod( );
+    fi;
+    
+    mat := mat!.matrix;
+    
+    if not IsList( mat ) then
+        TryNextMethod( );
+    fi;
+    
+    return mat;
+    
+end );
+
+##
 InstallMethod( EntriesOfHomalgMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix ],
