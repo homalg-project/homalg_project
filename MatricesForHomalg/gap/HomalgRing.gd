@@ -1720,3 +1720,6 @@ DeclareOperation( "Inequalities",
 
 DeclareOperation( "LaTeXStringOp",
         [ IsHomalgRingElement ] );
+
+DeclareOperation( "LaTeXStringOp",
+        [ IsHomalgRing ] );

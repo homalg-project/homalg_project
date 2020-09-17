@@ -2926,6 +2926,20 @@ InstallMethod( LaTeXStringOp,
     
 end );
 
+## fallback method
+InstallMethod( LaTeXStringOp,
+        "for homalg ring",
+        [ IsHomalgRing ],
+        
+  x -> "R" );
+
+##
+InstallMethod( LaTeXStringOp,
+        "for homalg ring of integers",
+        [ IsHomalgRing and IsIntegersForHomalg ],
+    x -> "\\mathbb{Z}"
+);
+
 ##
 InstallMethod( Display,
         "for homalg ring elements",
