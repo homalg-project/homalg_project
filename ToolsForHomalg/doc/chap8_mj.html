@@ -71,7 +71,8 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X810CE8C27E769247">8.1-41 IdenticalPosition</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7C03CAC285CC3734">8.1-42 PositionsOfMaximalObjects</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7B9807D581A928C0">8.1-43 MaximalObjects</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X85DB89C57A37721C">8.1-44 MakeShowable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7F5EB34C835F5EA5">8.1-44 CollectEntries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X85DB89C57A37721C">8.1-45 MakeShowable</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X8581825F7E412802">8.2 <span class="Heading">Examplefunctions</span></a>
 </span>
@@ -392,9 +393,18 @@
 
 <p>Return the sublist of maximal objects in <var class="Arg">L</var> w.r.t. the partial order defined by the binary function <var class="Arg">f</var>.</p>
 
+<p><a id="X7F5EB34C835F5EA5" name="X7F5EB34C835F5EA5"></a></p>
+
+<h5>8.1-44 CollectEntries</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollectEntries</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>returns a new list that contains for each element <var class="Arg">elm</var> of the list <var class="Arg">list</var> a list of length two, the first element of this is <var class="Arg">elm</var> itself and the second element is the number of times <var class="Arg">elm</var> appears in list until the next different element. The default comparing function is <code class="code">\=</code>, which can be changed by passing an optional value to <var class="Arg">ComparingFunction</var>.</p>
+
 <p><a id="X85DB89C57A37721C" name="X85DB89C57A37721C"></a></p>
 
-<h5>8.1-44 MakeShowable</h5>
+<h5>8.1-45 MakeShowable</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeShowable</code>( <var class="Arg">mime_types</var>, <var class="Arg">filter</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Installs a method for <code class="code">IsShowable</code> such that <code class="code">IsShowable( mime_type, object )</code> returns <code class="code">true</code> for any <code class="code">mime_type</code> in the list <var class="Arg">mime_types</var> and <code class="code">object</code> in the filter <var class="Arg">filter</var>.</p>

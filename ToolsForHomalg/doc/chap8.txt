@@ -277,7 +277,18 @@
   [33X[0;0YReturn  the sublist of maximal objects in [3XL[103X w.r.t. the partial order defined
   by the binary function [3Xf[103X.[133X
   
-  [1X8.1-44 MakeShowable[101X
+  [1X8.1-44 CollectEntries[101X
+  
+  [33X[1;0Y[29X[2XCollectEntries[102X( [3Xlist[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0Yreturns  a  new  list  that contains for each element [3Xelm[103X of the list [3Xlist[103X a
+  list  of  length two, the first element of this is [3Xelm[103X itself and the second
+  element  is the number of times [3Xelm[103X appears in list until the next different
+  element.  The  default  comparing  function  is  [10X\=[110X, which can be changed by
+  passing an optional value to [3XComparingFunction[103X.[133X
+  
+  [1X8.1-45 MakeShowable[101X
   
   [33X[1;0Y[29X[2XMakeShowable[102X( [3Xmime_types[103X, [3Xfilter[103X ) [32X function[133X
   
