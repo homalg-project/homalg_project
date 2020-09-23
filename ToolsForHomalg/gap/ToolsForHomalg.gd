@@ -460,6 +460,15 @@ DeclareGlobalFunction( "GetTimeOfDay" );
 
 DeclareGlobalFunction( "CallFuncListWithTime" );
 
+#! @Description
+#!  returns  a new list that contains for each element <A>elm</A> of the list <A>list</A> a list of length two,
+#!  the first element of this is <A>elm</A> itself and the second element is the number of times <A>elm</A>
+#!  appears in list until the next different element. The default comparing function is <C>\=</C>, which can be
+#!  changed by passing an optional value to <A>ComparingFunction</A>.
+#! @Arguments list
+#! @Returns a list
+DeclareGlobalFunction( "CollectEntries" );
+
 DeclareGlobalFunction( "DotToSVG" );
 
 DeclareGlobalFunction( "ReplacedStringForHomalg" );

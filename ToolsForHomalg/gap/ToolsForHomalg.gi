@@ -1700,6 +1700,33 @@ InstallGlobalFunction( CallFuncListWithTime,
 end );
 
 ##
+InstallGlobalFunction( CollectEntries,
+  function( list )
+    local comparing_func, o, n;
+    
+    comparing_func := ValueOption( "ComparingFunction" );
+    
+    if comparing_func = fail or not IsFunction( comparing_func ) then
+        comparing_func := \=;
+    fi;
+    
+    if IsEmpty( list ) then
+        return [ ];
+    fi;
+    
+    o := list[ 1 ];
+    
+    n := PositionProperty( list, x -> not comparing_func( o, x ) );
+    
+    if n = fail then
+        return [ [ o, Length( list ) ] ];
+    else
+        return Concatenation( [ [ o, n - 1 ] ], CollectEntries( list{ [ n .. Length( list ) ] } ) );
+    fi;
+    
+end );
+
+##
 InstallGlobalFunction( DotToSVG,
   function( dotstr )
     
