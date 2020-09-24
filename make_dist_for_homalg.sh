@@ -12,6 +12,8 @@ for i in ${packages}; do
   cp gh-pages/${i}/_data/package.yml gh-pages/_data/package${i}.yml
 done
 
+cp -auv images/homalg-project.pdf gh-pages/images/
+
 echo "Please push website now"
 
 exit 0
