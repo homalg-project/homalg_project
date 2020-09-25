@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 packages="4ti2Interface ExamplesForHomalg GaussForHomalg GradedModules homalg IO_ForHomalg MatricesForHomalg SCO Gauss GradedRingForHomalg HomalgToCAS LocalizeRingForHomalg Modules RingsForHomalg ToolsForHomalg"
 
