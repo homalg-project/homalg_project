@@ -489,3 +489,10 @@ DeclareOperation( "IsShowable",
 #!  `mime_type` in the list <A>mime_types</A> and `object` in the filter <A>filter</A>.
 #! @Arguments mime_types, filter
 DeclareGlobalFunction( "MakeShowable" );
+
+#! @Description
+#!  Installs a method for `IsShowable` such that
+#!  `IsShowable( "text/latex", object )` and `IsShowable( "application/x-latex", object )` return `true`
+#!  for an `object` in the filter <A>filter</A>.
+#! @Arguments filter
+DeclareGlobalFunction( "MakeShowableWithLaTeX" );

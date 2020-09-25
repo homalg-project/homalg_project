@@ -2348,6 +2348,13 @@ InstallGlobalFunction( "MakeShowable", function( mime_types, filter )
 end );
 
 ##
+InstallGlobalFunction( "MakeShowableWithLaTeX", function( filter )
+    
+    MakeShowable( [ "text/latex", "application/x-latex" ], filter );
+    
+end );
+
+##
 InstallMethod( ViewObj,
         "for pointer containers of objects",
         [ IsContainerForPointersOnObjectsRep ],
