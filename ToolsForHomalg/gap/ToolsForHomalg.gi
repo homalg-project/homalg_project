@@ -2297,6 +2297,30 @@ InstallMethod( _ElmPObj_ForHomalg,
     
 end );
 
+##
+InstallGlobalFunction( FillWithCharacterAfterDecimalNumber,
+  function( decimal_number, c, n )
+    
+    if decimal_number = 0 then
+        decimal_number := 1;
+    elif decimal_number < 0 then
+        decimal_number := -10 * decimal_number;
+    fi;
+    
+    n := n - Int( Log10( Float( decimal_number ) ) ) - 1;
+    
+    if n < 0 then
+        n := 0;
+    fi;
+    
+    c := ListWithIdenticalEntries( n, c );
+    
+    ConvertToStringRep( c );
+    
+    return c;
+    
+end );
+    
 ####################################
 #
 # View, Print, and Display methods:

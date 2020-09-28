@@ -496,3 +496,5 @@ DeclareGlobalFunction( "MakeShowable" );
 #!  for an `object` in the filter <A>filter</A>.
 #! @Arguments filter
 DeclareGlobalFunction( "MakeShowableWithLaTeX" );
+
+DeclareGlobalFunction( "FillWithCharacterAfterDecimalNumber" );
