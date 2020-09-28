@@ -6,7 +6,7 @@
                           [1XTools for the [5Xhomalg[105X project[101X
   
   
-                               Version 2020.09.02
+                               Version 2020.09.06
   
   
                                  December 2014
@@ -202,6 +202,7 @@
       8.1-43 MaximalObjects
       8.1-44 CollectEntries
       8.1-45 MakeShowable
+      8.1-46 MakeShowableWithLaTeX
     8.2 [33X[0;0YExamplefunctions[133X
       8.2-1 ExamplesForHomalg
       8.2-2 ExamplesForHomalg
