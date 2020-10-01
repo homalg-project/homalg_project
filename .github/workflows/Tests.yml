@@ -29,5 +29,8 @@ jobs:
           sudo apt dist-upgrade -y
           sudo apt install -y texlive-latex-extra texlive-science time python-pathlib
           git clone --depth 1 https://github.com/gap-packages/AutoDoc.git
+          # set SOURCE_DATE_EPOCH for reproducible PDFs
+          export SOURCE_DATE_EPOCH=0
           TERM=dumb make -C homalg_project -j $(nproc) --output-sync ci-test
+          cp ./homalg_project/.codecov.yml ./
           curl -s https://codecov.io/bash | bash
