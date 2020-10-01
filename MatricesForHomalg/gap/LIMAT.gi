@@ -1239,7 +1239,7 @@ InstallMethod( UnionOfColumnsOp,
     fi;
     
     if not ForAll( L, x -> NrRows( x ) = r ) then
-        Error( "the matrices are not augmentable, since they do not all have the same number of columns\n" );
+        Error( "the matrices are not augmentable, since they do not all have the same number of rows\n" );
     fi;
     
     filtered_L := Filtered( L, x -> not IsEmptyMatrix( x ) );
