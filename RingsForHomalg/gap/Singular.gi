@@ -2490,6 +2490,9 @@ InstallMethod( HomalgQRingInSingular,
         
     end;
     
+    # taken from ResidueClassRingForHomalg.gi
+    SetIndeterminatesOfPolynomialRing( S, List( IndeterminatesOfPolynomialRing( R ), r -> r / S ) );
+    
     return S;
     
 end );
