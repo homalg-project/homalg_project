@@ -70,8 +70,8 @@ This [slideshow](images/homalg-project.pdf) visualizes the interdependency of mo
 [docs-ToolsForHomalg-img]: https://img.shields.io/badge/ToolsForHomalg-HTML-blue.svg
 [docs-ToolsForHomalg-url]: https://homalg-project.github.io/homalg_project/ToolsForHomalg/doc/chap0_mj.html
 
-[tests-img]: https://github.com/homalg-project/homalg_project/workflows/Tests/badge.svg
-[tests-url]: https://github.com/homalg-project/homalg_project/actions?query=workflow%3ATests
+[tests-img]: https://github.com/homalg-project/homalg_project/workflows/Tests/badge.svg?branch=master
+[tests-url]: https://github.com/homalg-project/homalg_project/actions?query=workflow%3ATests+branch%3Amaster
 
 [codecov-img]: https://codecov.io/gh/homalg-project/homalg_project/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/homalg-project/homalg_project
