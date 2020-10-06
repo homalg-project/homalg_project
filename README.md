@@ -13,9 +13,9 @@ Although the central part of the source code is the formalization of abstract no
 
 A big part of the project is already distributed with [GAP](https://www.gap-system.org/). The yet undeposited packages and the tested development versions of all packages can be downloaded from the project GitHub homepage.
 
-The core part of the project is the [homalg package](https://homalg-project.github.io/homalg_project/homalg/). It provides an abstract structure and algorithms for abelian categories.
+The core part of the project is the [homalg package](https://homalg-project.github.io/homalg_project/homalg/). It provides an abstract structure and algorithms for abelian categories up to spectral sequences of multigraded complexes.
 
-The [other packages](https://homalg-project.github.io/homalg_project/) of the homalg project implement data structures and algorithms for several mathematical objects, like modules over graded rings or toric varieties.
+The [other packages](https://homalg-project.github.io/homalg_project/) of the homalg project implement data structures and algorithms for several mathematical objects, like modules over graded rings.
 
 This [slideshow](images/homalg-project.pdf) visualizes the interdependency of most of the packages in this repository:
 
