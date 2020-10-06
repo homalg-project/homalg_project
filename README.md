@@ -1,9 +1,10 @@
 <!-- BEGIN HEADER -->
 # homalg project – The packages of the homalg project
 
-| **Documentation**         | **Build Status**                                            |
-|:-------------------------:|:-----------------------------------------------------------:|
-| [![][docs-homalg-img]][docs-homalg-url]<br> [![][docs-4ti2Interface-img]][docs-4ti2Interface-url]<br> [![][docs-ExamplesForHomalg-img]][docs-ExamplesForHomalg-url]<br> [![][docs-Gauss-img]][docs-Gauss-url]<br> [![][docs-GaussForHomalg-img]][docs-GaussForHomalg-url]<br> [![][docs-GradedModules-img]][docs-GradedModules-url]<br> [![][docs-GradedRingForHomalg-img]][docs-GradedRingForHomalg-url]<br> [![][docs-HomalgToCAS-img]][docs-HomalgToCAS-url]<br> [![][docs-IO_ForHomalg-img]][docs-IO_ForHomalg-url]<br> [![][docs-LocalizeRingForHomalg-img]][docs-LocalizeRingForHomalg-url]<br> [![][docs-MatricesForHomalg-img]][docs-MatricesForHomalg-url]<br> [![][docs-Modules-img]][docs-Modules-url]<br> [![][docs-RingsForHomalg-img]][docs-RingsForHomalg-url]<br> [![][docs-SCO-img]][docs-SCO-url]<br> [![][docs-ToolsForHomalg-img]][docs-ToolsForHomalg-url] | [![][tests-img]][tests-url] [![][codecov-img]][codecov-url] |
+| Build Status | Code Coverage |
+| ------------ | ------------- |
+| [![Build Status][tests-img]][tests-url] | [![Code Coverage][codecov-img]][codecov-url] |
+
 <!-- END HEADER -->
 
 The homalg project is a multi-author multi-package open source software project for constructive homological algebra.
@@ -25,49 +26,68 @@ This [slideshow](images/homalg-project.pdf) visualizes the interdependency of mo
 </center>
 
 <!-- BEGIN FOOTER -->
-[docs-homalg-img]: https://img.shields.io/badge/homalg-HTML-blue.svg
+## Packages of [homalg_project](/../../):
+| Name | Documentation |
+| ---- | ------------- |
+| [homalg](homalg) | [![HTML stable documentation][docs-homalg-img]][docs-homalg-url] |
+| [4ti2Interface](4ti2Interface) | [![HTML stable documentation][docs-4ti2Interface-img]][docs-4ti2Interface-url] |
+| [ExamplesForHomalg](ExamplesForHomalg) | [![HTML stable documentation][docs-ExamplesForHomalg-img]][docs-ExamplesForHomalg-url] |
+| [Gauss](Gauss) | [![HTML stable documentation][docs-Gauss-img]][docs-Gauss-url] |
+| [GaussForHomalg](GaussForHomalg) | [![HTML stable documentation][docs-GaussForHomalg-img]][docs-GaussForHomalg-url] |
+| [GradedModules](GradedModules) | [![HTML stable documentation][docs-GradedModules-img]][docs-GradedModules-url] |
+| [GradedRingForHomalg](GradedRingForHomalg) | [![HTML stable documentation][docs-GradedRingForHomalg-img]][docs-GradedRingForHomalg-url] |
+| [HomalgToCAS](HomalgToCAS) | [![HTML stable documentation][docs-HomalgToCAS-img]][docs-HomalgToCAS-url] |
+| [IO_ForHomalg](IO_ForHomalg) | [![HTML stable documentation][docs-IO_ForHomalg-img]][docs-IO_ForHomalg-url] |
+| [LocalizeRingForHomalg](LocalizeRingForHomalg) | [![HTML stable documentation][docs-LocalizeRingForHomalg-img]][docs-LocalizeRingForHomalg-url] |
+| [MatricesForHomalg](MatricesForHomalg) | [![HTML stable documentation][docs-MatricesForHomalg-img]][docs-MatricesForHomalg-url] |
+| [Modules](Modules) | [![HTML stable documentation][docs-Modules-img]][docs-Modules-url] |
+| [RingsForHomalg](RingsForHomalg) | [![HTML stable documentation][docs-RingsForHomalg-img]][docs-RingsForHomalg-url] |
+| [SCO](SCO) | [![HTML stable documentation][docs-SCO-img]][docs-SCO-url] |
+| [ToolsForHomalg](ToolsForHomalg) | [![HTML stable documentation][docs-ToolsForHomalg-img]][docs-ToolsForHomalg-url] |
+
+[docs-homalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-homalg-url]: https://homalg-project.github.io/homalg_project/homalg/doc/chap0_mj.html
 
-[docs-4ti2Interface-img]: https://img.shields.io/badge/4ti2Interface-HTML-blue.svg
+[docs-4ti2Interface-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-4ti2Interface-url]: https://homalg-project.github.io/homalg_project/4ti2Interface/doc/chap0_mj.html
 
-[docs-ExamplesForHomalg-img]: https://img.shields.io/badge/ExamplesForHomalg-HTML-blue.svg
+[docs-ExamplesForHomalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-ExamplesForHomalg-url]: https://homalg-project.github.io/homalg_project/ExamplesForHomalg/doc/chap0_mj.html
 
-[docs-Gauss-img]: https://img.shields.io/badge/Gauss-HTML-blue.svg
+[docs-Gauss-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-Gauss-url]: https://homalg-project.github.io/homalg_project/Gauss/doc/chap0_mj.html
 
-[docs-GaussForHomalg-img]: https://img.shields.io/badge/GaussForHomalg-HTML-blue.svg
+[docs-GaussForHomalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-GaussForHomalg-url]: https://homalg-project.github.io/homalg_project/GaussForHomalg/doc/chap0_mj.html
 
-[docs-GradedModules-img]: https://img.shields.io/badge/GradedModules-HTML-blue.svg
+[docs-GradedModules-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-GradedModules-url]: https://homalg-project.github.io/homalg_project/GradedModules/doc/chap0_mj.html
 
-[docs-GradedRingForHomalg-img]: https://img.shields.io/badge/GradedRingForHomalg-HTML-blue.svg
+[docs-GradedRingForHomalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-GradedRingForHomalg-url]: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/doc/chap0_mj.html
 
-[docs-HomalgToCAS-img]: https://img.shields.io/badge/HomalgToCAS-HTML-blue.svg
+[docs-HomalgToCAS-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-HomalgToCAS-url]: https://homalg-project.github.io/homalg_project/HomalgToCAS/doc/chap0_mj.html
 
-[docs-IO_ForHomalg-img]: https://img.shields.io/badge/IO_ForHomalg-HTML-blue.svg
+[docs-IO_ForHomalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-IO_ForHomalg-url]: https://homalg-project.github.io/homalg_project/IO_ForHomalg/doc/chap0_mj.html
 
-[docs-LocalizeRingForHomalg-img]: https://img.shields.io/badge/LocalizeRingForHomalg-HTML-blue.svg
+[docs-LocalizeRingForHomalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-LocalizeRingForHomalg-url]: https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg/doc/chap0_mj.html
 
-[docs-MatricesForHomalg-img]: https://img.shields.io/badge/MatricesForHomalg-HTML-blue.svg
+[docs-MatricesForHomalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-MatricesForHomalg-url]: https://homalg-project.github.io/homalg_project/MatricesForHomalg/doc/chap0_mj.html
 
-[docs-Modules-img]: https://img.shields.io/badge/Modules-HTML-blue.svg
+[docs-Modules-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-Modules-url]: https://homalg-project.github.io/homalg_project/Modules/doc/chap0_mj.html
 
-[docs-RingsForHomalg-img]: https://img.shields.io/badge/RingsForHomalg-HTML-blue.svg
+[docs-RingsForHomalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-RingsForHomalg-url]: https://homalg-project.github.io/homalg_project/RingsForHomalg/doc/chap0_mj.html
 
-[docs-SCO-img]: https://img.shields.io/badge/SCO-HTML-blue.svg
+[docs-SCO-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-SCO-url]: https://homalg-project.github.io/homalg_project/SCO/doc/chap0_mj.html
 
-[docs-ToolsForHomalg-img]: https://img.shields.io/badge/ToolsForHomalg-HTML-blue.svg
+[docs-ToolsForHomalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-ToolsForHomalg-url]: https://homalg-project.github.io/homalg_project/ToolsForHomalg/doc/chap0_mj.html
 
 [tests-img]: https://github.com/homalg-project/homalg_project/workflows/Tests/badge.svg?branch=master
