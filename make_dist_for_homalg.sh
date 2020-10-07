@@ -5,7 +5,7 @@ packages="4ti2Interface ExamplesForHomalg GaussForHomalg GradedModules homalg IO
 base_dir="$PWD"
 
 for i in ${packages}; do
-  ./release-gap-package --srcdir ${base_dir}/${i} --webdir ${base_dir}/gh-pages/${i} --update-file ${base_dir}/gh-pages/update.g
+  ./release-gap-package --no-push --srcdir ${base_dir}/${i} --webdir ${base_dir}/gh-pages/${i} --update-file ${base_dir}/gh-pages/update.g
 done
 
 for i in ${packages}; do

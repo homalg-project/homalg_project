@@ -1,8 +1,11 @@
-#!/bin/sh -e
+#!/bin/sh
 #
 # ReleaseTools - a set of shells script for making GAP package releases
 #
-# Copyright (c) 2013-2016 Max Horn
+# Please always use the latest version of this tool, available from
+# <https://github.com/gap-system/ReleaseTools>.
+#
+# Copyright (c) 2013-2020 Max Horn <max@quendi.de>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,7 +22,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
 
+set -e
 
+######################################################################
+#
+# Usage information
+#
 help() {
 cat <<EOF
 Usage: $0 [OPTIONS]
@@ -32,51 +40,76 @@ from the PackageInfo.g file, and performs the releases process.
 
 Actions
   -h,  --help                      display this help text and exit
-  -p,  --push                      also peform the final push, completing the release
+  -p,  --push                      perform the final push, completing the release [Default]
+  -P,  --no-push                   do not perform the final push
+  -f,  --force                     if a release with the same name already exists: overwrite it
+
+Paths
+  --srcdir <path>                  path of directory containing PackageInfo.g [Default: current directory]
+  --tmpdir <path>                  path of temporary directory [Default: tmp subdirectory of srcdir]
+  --webdir <path>                  path of web directory [Default: gh-pages subdirectory of srcdir]
+  --update-file <file>             path of the update.g file [Default: update.g in webdir]
 
 Custom settings
-  -t,  --tag <tag>                 git tag for the release [Default: vVERSION, e.g. v1.2.3]
-  -r,  --repository <repository>   set GitHub repository (as `USERNAME/PKGNAME`)
   --token <oauth>                  GitHub access token
-  -f, --force                      if a release with the same name already exists: overwrite it
 
 Notes:
-* The package name and version and the list of archive formats
-  are byextracted from PackageInfo.g.
-* The repository name is extracted from TODO
+* The package name and version, the list of archive formats, and the GitHub repository
+  are extracted from PackageInfo.g.
 * To learn how to create a GitHub access token, please consult
   https://help.github.com/articles/creating-an-access-token-for-command-line-use/
 * Without the --push option, all steps are performed, except for the final push
   of the gh-pages changes. These changes are what make the release visible
   to the GAP package distribution system.
-  Please consult the README for an explanation.
+* Please consult the README for more information.
 EOF
     exit 0
 }
 
-# Little helper for defining variables from heredoc
-# This use the bash extension '-d' to the read command,
-# also supported by zsh. If this is an issue 
-define() {
-    IFS='\n' read -r -d '' $1 || true
-}
+######################################################################
+#
+# Various little helper functions
 
+
+# print notices in green
 notice() {
-    printf "\033[32m%s\033[0m\n" "$*"
+    printf '\033[32m%s\033[0m\n' "$*"
 }
 
+# print warnings in yellow
 warning() {
-    printf "\033[33mWARNING: %s\033[0m\n" "$*"
+    printf '\033[33mWARNING: %s\033[0m\n' "$*"
 }
 
+# print error in red and exit
 error() {
-    printf "\033[31mERROR: %s\033[0m\n" "$*"
+    printf '\033[31mERROR: %s\033[0m\n' "$*"
     exit 1
 }
 
-if ! command -v curl >/dev/null 2>&1 ; then
-    error "the 'curl' command was not found, please install it"
-fi
+# check for uncommitted changes
+verify_git_clean() {
+    git update-index --refresh || error "uncommitted changes detected"
+    git diff-index --quiet HEAD -- || error "uncommitted changes detected"
+}
+
+# execute GAP commands from a heredoc, and export its output in the shell
+# variable `gap_output`; abort if GAP reported any errors
+run_gap() {
+  # Invoke GAP. The final call to 'tr' removes newlines and is a workaround
+  # for people whose gap script is broken (by not honoring -A, thus loading
+  # Browse, which inserts that extra character). I am looking at you,
+  # Sebastian!
+  gap_output=$( \
+    (echo 'OnBreak:=function() Print("FATAL ERROR"); FORCE_QUIT_GAP(1); end;;' ; cat - ; echo ; echo "FORCE_QUIT_GAP(0);") \
+    | $GAP -A -q -b 2>&1 \
+    | tr -d '\r' )
+  mkdir -p "$TMP_DIR"
+  echo "$gap_output" > "$TMP_DIR/gap-error.log"
+  if echo "$gap_output" | grep -q '\(Error\|FATAL ERROR\|Syntax \)' ; then
+    error "there was an error running GAP, see $TMP_DIR/gap-error.log"
+  fi
+}
 
 # helper function for parsing GitHub's JSON output. Right now,
 # we only extract the value of a single key at a time. This means
@@ -86,111 +119,165 @@ json_get_key() {
     echo "$response" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.get("'"$1"'",""))'
 }
 
+# On Mac OS X, tar stores extended attributes in ._FOO files inside archives.
+# Setting COPYFILE_DISABLE prevents that. See <http://superuser.com/a/260264>
+export COPYFILE_DISABLE=1
+
+
 ######################################################################
 #
 # Command line processing
 #
 SRC_DIR="$PWD"
-TMP_DIR="$PWD/tmp/"
-WEB_DIR="$SRC_DIR/gh-pages"
-UPDATE_FILE="update.g"
+TMP_DIR="$PWD/tmp"
+PackageInfoURL=
+README_URL=
 
-# undocumented feature: instead of using "--token <foo>",
-# one can also set the environment variable TOKEN=foo
-# and similar for REPO, TAG
-
-PUSH=no
+PUSH=yes
 FORCE=no
-while true; do
-  case "$1" in
+ONLY_TARBALL=no
+while [ x"$1" != x ]; do
+  option="$1" ; shift
+  case "$option" in
     -h | --help ) help ;;
-    --srcdir ) SRC_DIR="$2"; WEB_DIR="$SRC_DIR/gh-pages"; shift 2 ;;
-    --webdir ) WEB_DIR="$2"; shift 2 ;;
-    --tmpdir ) TMP_DIR="$2"; shift 2 ;;
-    #-v | --version ) VERSION="$2"; shift 2 ;;
-    #-r | --repository ) REPO="$2"; shift 2 ;;
-    -t | --tag ) TAG="$2"; shift 2 ;;
-    -r | --repository ) REPO="$2"; shift 2 ;;
-    --token ) TOKEN="$2"; shift 2 ;;
-    -p | --push ) PUSH=yes; shift ;;
-    --no-push ) PUSH=no; shift ;;
-    --upload ) UPLOAD=yes; shift ;;
-    --no-upload ) UPLOAD=no; shift ;;
-    -f | --force ) FORCE=yes; shift ;;
-    --no-force ) FORCE=no; shift ;;
-    --update-file ) UPDATE_FILE=$2; shift 2;;
-    -- ) shift; break ;;
-    * ) break ;;
+
+    --srcdir ) SRC_DIR="$1"; shift ;;
+    --webdir ) WEB_DIR="$1"; shift ;;
+    --tmpdir ) TMP_DIR="$1"; shift ;;
+    --update-file ) UPDATE_FILE="$1"; shift ;;
+
+    --srcdir=*) SRC_DIR=${option#--srcdir=}; shift ;;
+    --webdir=*) WEB_DIR=${option#--webdir=}; shift ;;
+    --tmpdir=*) TMP_DIR=${option#--tmpdir=}; shift ;;
+    --update-file=*) UPDATE_FILE=${option#--update-file=}; shift ;;
+
+    --token ) TOKEN="$1"; shift ;;
+
+    -p | --push ) PUSH=yes ;;
+    -P | --no-push ) PUSH=no ;;
+
+    -f | --force ) FORCE=yes ;;
+    --no-force ) FORCE=no ;;
+
+    --only-tarball ) ONLY_TARBALL=yes ;;
+
+    -- ) break ;;
+    * ) error "unknown option '$option'" ;;
   esac
 done
 
-cd ${SRC_DIR} 
 
 ######################################################################
 #
-# Determine package name and version, and other meta data
+# Some initial sanity checks
 #
+
+cd "$SRC_DIR"
 
 if [ ! -f PackageInfo.g ] ; then
     error "unable to read PackageInfo.g file, use --help for instructions"
 fi
 
-notice "Extracting information from PackageInfo.g..."
-eval $(gap -A -q -b <<EOF | sed "s|^\r||"
-Read("PackageInfo.g");
-Print("PKG=\"",GAPInfo.PackageInfoCurrent.PackageName,"\"\n");
-Print("VERSION=\"",GAPInfo.PackageInfoCurrent.Version,"\"\n");
-Print("ARCHIVE_FORMATS=\"",GAPInfo.PackageInfoCurrent.ArchiveFormats,"\"\n");
-tmp := SplitString(GAPInfo.PackageInfoCurrent.ArchiveURL, "/");;
-if Length(tmp) = 9 and tmp{[1,2,3,6,7]} = ["https:","","github.com","releases","download"] then
-    Print("REPO=\"",Concatenation(tmp[4],"/",tmp[5]),"\"\n");
-    Print("GAP_TAG=\"",tmp[8],"\"\n");
-    len := Length(tmp[9]) - Length(GAPInfo.PackageInfoCurrent.Version);
-    if len > 0 then
-        Print("BASENAME=\"",tmp[9]{[1..len]},"\"\n");
-    fi;
-fi;
-QUIT;
-EOF
-)
+# Check for webdir presence
+if [ "x$WEB_DIR" = x ] ; then
+    WEB_DIR="$SRC_DIR/gh-pages"
+fi
+if [ ! -d "$WEB_DIR" ] ; then
+    error "could not find 'webdir' with clone of your gh-pages branch"
+fi
 
-notice "Package $PKG $VERSION"
+# Check for presence of update.g file
+if [ "x$UPDATE_FILE" = x ] ; then
+    UPDATE_FILE="$WEB_DIR/update.g"
+fi
+if [ ! -f "$UPDATE_FILE" ] ; then
+    error "could not find update.g file"
+fi
+
+# Check whether GAP is usable
+GAP=${GAP:-gap}
+command -v "$GAP" >/dev/null 2>&1 ||
+    error "could not find GAP (perhaps set the GAP environment variable?)"
+
+command -v curl >/dev/null 2>&1 ||
+    error "the 'curl' command was not found, please install it"
+
+command -v git >/dev/null 2>&1 ||
+    error "the 'git' command was not found, please install it"
+
+command -v python >/dev/null 2>&1 ||
+    error "the 'python' command was not found, please install it"
+
+verify_git_clean
 
 
 ######################################################################
 #
-# Determine the tag
-# TODO: verify TAG is valid? also verify that it refers
-# to the currently checked out revision?
+# Determine package name and version, and other meta data
 #
-if [ x"$TAG" = "x" ] ; then
-    if [ x"$GAP_TAG" = "x" ] ; then
-        TAG=v$VERSION
-    else
-        TAG=$GAP_TAG
-    fi
-fi
-if [ "$TAG" != "$GAP_TAG" ] ; then
-    error "given tag $TAG does not match tag $GAP_TAG found in PackageInfo.g"
-fi
-if ! git show-ref -q $TAG ; then
-    notice "Creating git tag $TAG"
-    git tag $TAG
+notice "Extracting information from PackageInfo.g..."
+run_gap <<EOF
+Read("PackageInfo.g");
+Print("PKG=\"",GAPInfo.PackageInfoCurrent.PackageName,"\"\n");
+Print("VERSION=\"",GAPInfo.PackageInfoCurrent.Version,"\"\n");
+tmp:=GAPInfo.PackageInfoCurrent.Date;; # either YYYY-MM-DD or DD/MM/YYYY format
+Print("DATE=\"",tmp,"\"\n");
+Print("PackageInfoURL=\"",GAPInfo.PackageInfoCurrent.PackageInfoURL,"\"\n");
+Print("README_URL=\"",GAPInfo.PackageInfoCurrent.README_URL,"\"\n");
+# extract archive formats; these can be comma or space separated, we want
+# to output them space separated
+tmp := GAPInfo.PackageInfoCurrent.ArchiveFormats;;
+tmp := JoinStringsWithSeparator(SplitString(tmp, ", "), " ");;
+Print("ARCHIVE_FORMATS=\"",tmp,"\"\n");
+tmp := SplitString(GAPInfo.PackageInfoCurrent.ArchiveURL, "/");;
+if Length(tmp) = 9 and tmp{[1,2,3,6,7]} = ["https:","","github.com","releases","download"] then
+    Print("REPO=\"",Concatenation(tmp[4],"/",tmp[5]),"\"\n");
+    Print("TAG=\"",tmp[8],"\"\n");
+    len := Length(tmp[9]) - Length(GAPInfo.PackageInfoCurrent.Version);
+    if len > 0 then
+        Print("BASENAME=\"",tmp[9]{[1..len]},"\"\n");
+    fi;
 else
-    notice "Using git tag $TAG"
+    tmp := GAPInfo.PackageInfoCurrent.ArchiveURL;
+    Print("GAP_ERROR=\"The ArchiveURL has unexpected value '",tmp,"'\"\n");
 fi;
+EOF
 
-HEAD_REF=`git rev-parse --verify HEAD`
-TAG_REF=`git rev-parse --verify $TAG`
-
-if [ $TAG_REF != $HEAD_REF ] ; then
-    notice "tag $TAG is not the HEAD commit -- release of package $PKG"
-    exit 0
+# evaluate the output of GAP, which should be valid shell script code
+eval "$gap_output"
+if [ x"$GAP_ERROR" != "x" ] ; then
+    error "$GAP_ERROR"
 fi
 
-if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-    error "uncommitted changes detected"
+notice "Package $PKG $VERSION"
+case "$VERSION" in
+  *dev) error "Must not use 'dev' versions for package releases" ;;
+esac
+
+######################################################################
+#
+# Run makedoc.g (if present), as that also can uncover mistakes (e.g.
+# for projects which generate doc/title.xml from PackageInfo.g, it is
+# easy to forget that when making the release commit).
+#
+if [ -f makedoc.g ] ; then
+    notice "Building GAP package documentation (using makedoc.g)"
+    run_gap <<GAPInput
+if not IsPackageMarkedForLoading("$PKG", "") then
+  SetPackagePath("$PKG", ".");
+fi;
+Read("makedoc.g");
+GAPInput
+elif [ -f doc/make_doc ] ; then
+    notice "Building GAP package documentation (using doc/make_doc)"
+    cd doc && ./make_doc && cd ..
+else
+    warning "Could not build manual (no makedoc.g and no doc/make_doc found)"
 fi
+
+# check if building the manual modified any files
+verify_git_clean
+
 
 ######################################################################
 #
@@ -203,69 +290,68 @@ fi
 BASENAME="$BASENAME$VERSION"
 notice "Using archive basename $BASENAME"
 
-######################################################################
-#
-# Determine the GitHub repository and derive API urls from it
-#
-if [ x"$REPO" = "x" ] ; then
-    error "could not guess GitHub repository"
-fi
-notice "Using GitHub repository $REPO"
-
-API_URL=https://api.github.com/repos/$REPO/releases
-UPLOAD_URL=https://uploads.github.com/repos/$REPO/releases
 
 ######################################################################
 #
 # Fetch GitHub oauth token, used to authenticate the following commands.
-# See https://TODO.github.documentation
+# See https://help.github.com/articles/git-automation-with-oauth-tokens/
 #
-if [ x$TOKEN = x ] ; then
-    TOKEN=`git config --get github.token || echo`
+if [ "x$TOKEN" = x ] ; then
+    TOKEN=$(git config --get github.token || echo)
 fi
-if [ x$TOKEN = x -a -r ~/.github_shell_token ] ; then
-    TOKEN=`cat ~/.github_shell_token`
+if [ "x$TOKEN" = x ] && [ -r ~/.github_shell_token ] ; then
+    TOKEN=$(cat ~/.github_shell_token)
 fi
-if [ x$TOKEN = x ] ; then
-    error "could not determine GitHub access token"
+if [ "x$TOKEN" = x ] ; then
+    error "could not determine GitHub access token, please consult the README"
+fi
+
+
+######################################################################
+#
+# Determine GitHub repository and username, and the current branch
+#
+notice "Using GitHub repository $REPO"
+
+GITHUB_USER=$(dirname "$REPO")
+notice "Using GitHub username $GITHUB_USER"
+
+BRANCH=$(git symbolic-ref -q --short HEAD)
+notice "Using branch $BRANCH"
+
+
+######################################################################
+#
+# Derive API urls
+#
+API_URL=https://api.github.com/repos/$REPO/releases
+UPLOAD_URL=https://uploads.github.com/repos/$REPO/releases
+
+
+######################################################################
+#
+# Determine the tag, and validate it
+#
+verify_git_clean
+
+if git show-ref -q "$TAG" ; then
+    notice "Using git tag $TAG (derived from ArchiveURL in in PackageInfo.g)"
+else
+    notice "Creating git tag $TAG"
+    git tag "$TAG"
+fi;
+
+HEAD_REF=$(git rev-parse --verify HEAD)
+TAG_REF=$(git rev-parse --verify "$TAG^{}")
+
+if [ "x$TAG_REF" != "x$HEAD_REF" ] ; then
+    notice "tag $TAG is not the HEAD commit -- skipping release of package $PKG"
+    exit 0
 fi
 
 
 echo ""
 
-
-######################################################################
-#
-# Verify there are no uncommitted changes. Also, run makedoc.g (if
-# present), as that also can uncover mistakes (e.g. for projects which
-# generate doc/title.xml from PackageInfo.g, it is easy to forget that
-# when making the release commit).
-#
-if [ -e makedoc.g ] ; then
-    notice "Building GAP package documentation (using makedoc.g)"
-    gap -A -q <<GAPInput
-SetPackagePath("$PKG", ".");
-Read("makedoc.g");
-GAPInput
-elif [ -e doc/make_doc ] ; then
-    notice "Building GAP package documentation (using doc/make_doc)"
-    cd doc && ./make_doc && cd ..
-fi
-
-if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-    error "uncommitted changes detected"
-fi
-
-# Make sure the tag is on the server
-# TODO: what about user's who prefer SSH over https for writing?
-# We could grep the output of "git remote" for "github.com/$REPO"
-# to determine the name of a suitable remote... Hmmm
-notice "Pushing your tag to GitHub"
-if [ x$FORCE = xyes ] ; then
-    git push --force git@github.com:$REPO $TAG
-else
-    git push git@github.com:$REPO $TAG
-fi
 
 ######################################################################
 #
@@ -274,17 +360,35 @@ fi
 
 # Clean any remains of previous export attempts
 mkdir -p "$TMP_DIR"
-rm -rf "$TMP_DIR"/$BASENAME*
+rm -rf "${TMP_DIR:?}/$BASENAME"*
+
+# Set umask to ensure the file permissions in the release
+# archives are sane.
+umask 0022
 
 notice "Exporting repository content for tag '$TAG'"
-git archive --prefix=$BASENAME/ $TAG . | tar xf - -C "$TMP_DIR/"
+git archive --prefix="$BASENAME/" "$TAG" . | tar xf - -C "$TMP_DIR"
 
 
 # Build the package documentation, run autoconf, etc.
 cd "$TMP_DIR/$BASENAME"
 
 notice "Removing unnecessary files"
+rm -rf .github .circleci
 rm -f .git* .hg* .cvs*
+rm -f .appveyor.yml .codecov.yml .travis.yml
+
+# execute .release script, if present
+if [ -f .release ] ; then
+    # the .release script can perform additional preparation, e.g.:
+    # * add files for distribution which are not part of the repository;
+    # * remove further files not intended for distribution (e.g. scripts/ directory);
+    # * build the package manual in a custom way;
+    # * perform additional sanity checks;
+    # * ...
+    . ./.release
+    rm -f .release
+fi
 
 if [ -x autogen.sh ] ; then
     notice "Generating build system files"
@@ -292,19 +396,31 @@ if [ -x autogen.sh ] ; then
     rm -rf autom4te.cache
 fi
 
-if [ -e makedoc.g ] ; then
+if [ -f makedoc.g ] ; then
     notice "Building GAP package documentation for archives (using makedoc.g)"
-    gap -A -q <<GAPInput
-SetPackagePath("$PKG", ".");
+    run_gap <<GAPInput
+if not IsPackageMarkedForLoading("$PKG", "") then
+  SetPackagePath("$PKG", ".");
+fi;
+PushOptions(rec(relativePath:="../../.."));
 Read("makedoc.g");
 GAPInput
-    rm -f doc/*.{aux,bbl,blg,brf,idx,ilg,ind,lab,log,out,pnr,tex,toc,tst}
-elif [ -e doc/make_doc ] ; then
+    rm -f doc/*.lab doc/*.tex
+    rm -f doc/*.aux doc/*.bbl doc/*.blg doc/*.brf doc/*.idx doc/*.ilg doc/*.ind doc/*.log doc/*.out doc/*.pnr doc/*.tst
+elif [ -f doc/make_doc ] ; then
     notice "Copying GAP package documentation for archives (using doc/make_doc)"
-    cp "$SRC_DIR/doc"/* doc/
-    cp -r "$SRC_DIR/htm/" .
-    rm -f doc/*.{aux,bbl,blg,brf,idx,ilg,ind,log,out,pnr,toc,tst}
+    cp -r "$SRC_DIR/doc" .
+    cp -r "$SRC_DIR/htm" .
+    rm -f doc/*.aux doc/*.bbl doc/*.blg doc/*.brf doc/*.idx doc/*.ilg doc/*.ind doc/*.log doc/*.out doc/*.pnr doc/*.tst
 fi
+
+# make sure every file is readable
+chmod -R a+r .
+
+# basic sanity check
+fgrep -q -r '<a href="/' */*.htm* &&
+    error "HTML manual contains absolute paths"
+
 
 ######################################################################
 #
@@ -312,11 +428,76 @@ fi
 #
 echo ""
 notice "Validating PackageInfo.g..."
-gap -A -q <<GAPInput
+run_gap <<GAPInput || error "validation failed"
 if not ValidatePackageInfo("PackageInfo.g") then
-    QUIT_GAP(1);
+    FORCE_QUIT_GAP(1);
 fi;
 GAPInput
+
+
+######################################################################
+#
+# Verify README_URL refers to an existing file
+#
+README_NAME=$(basename "$README_URL")
+[ -f "$README_NAME" ] ||
+    error "No file named '$README_NAME' exists; is your README_URL valid?"
+
+
+######################################################################
+#
+# Create all archive files requested by ARCHIVE_FORMATS
+#
+cd "$TMP_DIR"
+echo ""
+for EXT in $ARCHIVE_FORMATS ; do
+    ARCHIVENAME=$BASENAME$EXT
+    FULLNAME="$TMP_DIR/$ARCHIVENAME"
+    notice "Creating $ARCHIVENAME ..."
+    case $EXT in
+    .tar.gz)  tar cf - "$BASENAME" | gzip -9c > "$ARCHIVENAME" ;;
+    .tar.bz2) tar cf - "$BASENAME" | bzip2 -9c > "$ARCHIVENAME" ;;
+    .zip)     zip -r9 --quiet "$ARCHIVENAME" "$BASENAME" ;;
+    *)
+        warning "unsupported archive format $EXT"
+        continue
+        ;;
+    esac
+    if [ ! -f "$FULLNAME" ] ; then
+        error "failed creating $FULLNAME"
+    fi
+done
+
+
+######################################################################
+#
+# Abort early if user requested only creation of tarballs
+#
+if [ "x$ONLY_TARBALL" = xyes ] ; then
+    exit 0
+fi
+
+######################################################################
+#
+# Push commits to GitHub
+#
+
+cd "$SRC_DIR"
+
+# construct GitHub URL for pushing
+REMOTE="https://$GITHUB_USER:$TOKEN@github.com/$REPO"
+
+# Make sure the branch is on the server
+notice "Pushing your branch to GitHub"
+git push "$REMOTE" "$BRANCH"
+
+# Make sure the tag is on the server
+notice "Pushing your tag to GitHub"
+if [ "x$FORCE" = xyes ] ; then
+    git push --force "$REMOTE" "$TAG"
+else
+    git push "$REMOTE" "$TAG"
+fi
 
 
 ######################################################################
@@ -324,29 +505,30 @@ GAPInput
 # Create the GitHub release
 #
 
-# crude helper function
-function jsonval {
-    temp=`echo $response | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w id`
-    echo ${temp##*|}
-}
-
 # check if release already exists
 response=$(curl -s -S -X GET "$API_URL/tags/$TAG" -H "Authorization: token $TOKEN")
-# echo ${response}
-if echo "${response}" | fgrep -q "Not Found" ; then
-    notice "Release does not exist"
-else
-    if [ x$FORCE = xyes ] ; then
+MESSAGE=$(json_get_key message)
+RELEASE_ID=$(json_get_key id)
+
+if [ "$MESSAGE" = "Not Found" ] ; then
+    MESSAGE=  # release does not yet exist -> that's how we like it
+elif [ x"$RELEASE_ID" != x ] ; then
+    # release already exists -> error out or delete it
+    if [ "x$FORCE" = xyes ] ; then
         notice "Deleting existing release $TAG from GitHub"
-        RELEASE_ID=$(jsonval | sed "s/id:/\n/g" | sed -n 2p | sed "s| ||g")
-        response=$(curl -s -S -X DELETE "$API_URL/$RELEASE_ID" -H "Authorization: token $TOKEN")
+        response=$(curl --fail -s -S -X DELETE "$API_URL/$RELEASE_ID" -H "Authorization: token $TOKEN")
+        MESSAGE=
     else
         error "release $TAG already exists on GitHub, aborting (use --force to override this)"
     fi
 fi
 
+if [ x"$MESSAGE" != x ] ; then
+    error "accessing GitHub failed: $MESSAGE"
+fi
+
 # Create the release by sending suitable JSON
-define DATA <<EOF
+DATA=$(cat <<EOF
 {
   "tag_name": "$TAG",
   "name": "$PKG-$VERSION",
@@ -355,8 +537,11 @@ define DATA <<EOF
   "prerelease": false
 }
 EOF
+)
+
+notice "Creating new release $TAG on GitHub"
 response=$(curl -s -S -H "Content-Type: application/json" \
-    -X POST --data "$DATA" "$API_URL" -H "Authorization: token $TOKEN")
+ -X POST --data "$DATA" "$API_URL" -H "Authorization: token $TOKEN")
 
 MESSAGE=$(json_get_key message)
 if [ x"$MESSAGE" != x ] ; then
@@ -367,44 +552,26 @@ if [ x"$RELEASE_ID" = x ] ; then
     error "creating release on GitHub failed: no release id"
 fi
 
-# TODO: error handling?
-
 
 ######################################################################
 #
-# Create and upload all requested archive files (as per ARCHIVE_FORMATS)
+# Upload all archive files requested by ARCHIVE_FORMATS
 #
 cd "$TMP_DIR"
 echo ""
 for EXT in $ARCHIVE_FORMATS ; do
     ARCHIVENAME=$BASENAME$EXT
     FULLNAME="$TMP_DIR/$ARCHIVENAME"
-    notice "Creating $ARCHIVENAME ..."
     case $EXT in
-    .tar.gz)
-        tar c $BASENAME | gzip -9c > $ARCHIVENAME
-        MIMETYPE="application/x-gzip"
-        ;;
-    .tar.bz2)
-        tar c $BASENAME | bzip2 -9c > $ARCHIVENAME
-        MIMETYPE="application/x-bzip2"
-        ;;
-    .zip)
-        zip -r9 --quiet $ARCHIVENAME $BASENAME
-        MIMETYPE="application/zip"
-        ;;
-    *)
-        warning "unsupported archive format $EXT"
-        continue
-        ;;
+    .tar.gz)  MIMETYPE="application/x-gzip" ;;
+    .tar.bz2) MIMETYPE="application/x-bzip2" ;;
+    .zip)     MIMETYPE="application/zip" ;;
+    *)        continue ;;
     esac
-    if [ ! -f $FULLNAME ] ; then
+    if [ ! -f "$FULLNAME" ] ; then
         error "failed creating $FULLNAME"
     fi
     notice "Uploading $ARCHIVENAME with mime type $MIMETYPE"
-    
-    #echo "curl --fail --progress-bar -o \"$TMP_DIR/upload.log\" -X POST \"$UPLOAD_URL/$RELEASE_ID/assets?name=$ARCHIVENAME\" -H \"Accept: application/vnd.github.v3+json\" -H \"Authorization: token $TOKEN\" -H \"Content-Type: $MIMETYPE\" --data-binary @\"$FULLNAME\""
-    
     response=$(curl --fail --progress-bar -o "$TMP_DIR/upload.log" \
         -X POST "$UPLOAD_URL/$RELEASE_ID/assets?name=$ARCHIVENAME" \
         -H "Accept: application/vnd.github.v3+json" \
@@ -419,36 +586,46 @@ done
 # Update the website
 #
 notice "Updating website"
-cd
-if [ ! -d "$WEB_DIR" ] ; then
-    git clone -b gh-pages git@github.com:$REPO "$WEB_DIR"
-fi
-
 cd "$WEB_DIR"
 git pull --ff-only
 
-cp "$TMP_DIR/$BASENAME/README"* .
+cp "$TMP_DIR/$BASENAME/$README_NAME" .
 cp "$TMP_DIR/$BASENAME/PackageInfo.g" .
 rm -rf doc/ htm/
-if [ -e "$TMP_DIR/$BASENAME/doc/chap0.html" ] ; then
+if [ -f "$TMP_DIR/$BASENAME/doc/chap0.html" ] ; then
     mkdir -p doc/
-    cp "$TMP_DIR/$BASENAME/doc"/*.{css,html,js,txt} doc/
+    for ext in css html js txt ; do
+        cp "$TMP_DIR/$BASENAME/doc"/*.$ext doc/
+    done
 fi
-if [ -d "$TMP_DIR/$BASENAME/htm/" ] ; then
-    cp -r "$TMP_DIR/$BASENAME/htm/" .
+if [ -d "$TMP_DIR/$BASENAME/htm" ] ; then
+    cp -r "$TMP_DIR/$BASENAME/htm" .
 fi
 
-gap -A -b $UPDATE_FILE
+# adjust links to the GAP manuals
+# Note that we cannot use sed's `-i` option for in-place editing, as
+# that is a non-portable extension of POSIX, which works differently in
+# BSD and GNU make.
+for f in ./*/*.htm* ; do
+  sed 's;href="../../../doc/;href="https://www.gap-system.org/Manuals/doc/;g' "$f" > "$f.bak"
+  mv "$f.bak" "$f"
+done
+
+run_gap <<GAPInput
+Read("$UPDATE_FILE");
+GAPInput
 
 git add -A .
 git commit -m "Update website for $PKG $VERSION"
 
-if [ x$PUSH = xyes ] ; then
+if [ "x$PUSH" = xyes ] ; then
     notice "Pushing website changes"
     git push
     notice "Done"
+    notice "Your PackageInfo.g is now at $PackageInfoURL"
 else
-    notice "To complete your release, run 'git push' in your gh-pages directory"
+    warning "To complete your release, run 'git push' in your gh-pages directory"
+    notice "Afterwards, your PackageInfo.g will be at $PackageInfoURL"
 fi
 
 exit 0
