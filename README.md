@@ -27,23 +27,23 @@ This [slideshow](images/homalg-project.pdf) visualizes the interdependency of mo
 
 <!-- BEGIN FOOTER -->
 ## Packages of [homalg_project](/../../):
-| Name | Documentation |
-| ---- | ------------- |
-| [homalg](homalg) | [![HTML stable documentation][docs-homalg-img]][docs-homalg-url] |
-| [4ti2Interface](4ti2Interface) | [![HTML stable documentation][docs-4ti2Interface-img]][docs-4ti2Interface-url] |
-| [ExamplesForHomalg](ExamplesForHomalg) | [![HTML stable documentation][docs-ExamplesForHomalg-img]][docs-ExamplesForHomalg-url] |
-| [Gauss](Gauss) | [![HTML stable documentation][docs-Gauss-img]][docs-Gauss-url] |
-| [GaussForHomalg](GaussForHomalg) | [![HTML stable documentation][docs-GaussForHomalg-img]][docs-GaussForHomalg-url] |
-| [GradedModules](GradedModules) | [![HTML stable documentation][docs-GradedModules-img]][docs-GradedModules-url] |
-| [GradedRingForHomalg](GradedRingForHomalg) | [![HTML stable documentation][docs-GradedRingForHomalg-img]][docs-GradedRingForHomalg-url] |
-| [HomalgToCAS](HomalgToCAS) | [![HTML stable documentation][docs-HomalgToCAS-img]][docs-HomalgToCAS-url] |
-| [IO_ForHomalg](IO_ForHomalg) | [![HTML stable documentation][docs-IO_ForHomalg-img]][docs-IO_ForHomalg-url] |
-| [LocalizeRingForHomalg](LocalizeRingForHomalg) | [![HTML stable documentation][docs-LocalizeRingForHomalg-img]][docs-LocalizeRingForHomalg-url] |
-| [MatricesForHomalg](MatricesForHomalg) | [![HTML stable documentation][docs-MatricesForHomalg-img]][docs-MatricesForHomalg-url] |
-| [Modules](Modules) | [![HTML stable documentation][docs-Modules-img]][docs-Modules-url] |
-| [RingsForHomalg](RingsForHomalg) | [![HTML stable documentation][docs-RingsForHomalg-img]][docs-RingsForHomalg-url] |
-| [SCO](SCO) | [![HTML stable documentation][docs-SCO-img]][docs-SCO-url] |
-| [ToolsForHomalg](ToolsForHomalg) | [![HTML stable documentation][docs-ToolsForHomalg-img]][docs-ToolsForHomalg-url] |
+| Name | Description | Documentation |
+| ---- | ----------- | ------------- |
+| [homalg](homalg) | A homological algebra meta-package for computable Abelian categories | [![HTML stable documentation][docs-homalg-img]][docs-homalg-url] |
+| [4ti2Interface](4ti2Interface) | A link to 4ti2 | [![HTML stable documentation][docs-4ti2Interface-img]][docs-4ti2Interface-url] |
+| [ExamplesForHomalg](ExamplesForHomalg) | Examples for the GAP Package homalg | [![HTML stable documentation][docs-ExamplesForHomalg-img]][docs-ExamplesForHomalg-url] |
+| [Gauss](Gauss) | Extended Gauss functionality for GAP | [![HTML stable documentation][docs-Gauss-img]][docs-Gauss-url] |
+| [GaussForHomalg](GaussForHomalg) | Gauss functionality for the homalg project | [![HTML stable documentation][docs-GaussForHomalg-img]][docs-GaussForHomalg-url] |
+| [GradedModules](GradedModules) | A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings | [![HTML stable documentation][docs-GradedModules-img]][docs-GradedModules-url] |
+| [GradedRingForHomalg](GradedRingForHomalg) | Endow Commutative Rings with an Abelian Grading | [![HTML stable documentation][docs-GradedRingForHomalg-img]][docs-GradedRingForHomalg-url] |
+| [HomalgToCAS](HomalgToCAS) | A window to the outer world | [![HTML stable documentation][docs-HomalgToCAS-img]][docs-HomalgToCAS-url] |
+| [IO_ForHomalg](IO_ForHomalg) | IO capabilities for the homalg project | [![HTML stable documentation][docs-IO_ForHomalg-img]][docs-IO_ForHomalg-url] |
+| [LocalizeRingForHomalg](LocalizeRingForHomalg) | A Package for Localization of Polynomial Rings | [![HTML stable documentation][docs-LocalizeRingForHomalg-img]][docs-LocalizeRingForHomalg-url] |
+| [MatricesForHomalg](MatricesForHomalg) | Matrices for the homalg project | [![HTML stable documentation][docs-MatricesForHomalg-img]][docs-MatricesForHomalg-url] |
+| [Modules](Modules) | A homalg based package for the Abelian category of finitely presented modules over computable rings | [![HTML stable documentation][docs-Modules-img]][docs-Modules-url] |
+| [RingsForHomalg](RingsForHomalg) | Dictionaries of external rings | [![HTML stable documentation][docs-RingsForHomalg-img]][docs-RingsForHomalg-url] |
+| [SCO](SCO) | SCO - Simplicial Cohomology of Orbifolds | [![HTML stable documentation][docs-SCO-img]][docs-SCO-url] |
+| [ToolsForHomalg](ToolsForHomalg) | Special methods and knowledge propagation tools | [![HTML stable documentation][docs-ToolsForHomalg-img]][docs-ToolsForHomalg-url] |
 
 [docs-homalg-img]: https://img.shields.io/badge/HTML-stable-blue.svg
 [docs-homalg-url]: https://homalg-project.github.io/homalg_project/homalg/doc/chap0_mj.html
