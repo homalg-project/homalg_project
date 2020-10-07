@@ -21,7 +21,7 @@ The [other packages](https://homalg-project.github.io/homalg_project/) of the ho
 This [slideshow](images/homalg-project.pdf) visualizes the interdependency of most of the packages in this repository:
 
 <center>
-<a href="https://homalg-project.github.io/homalg_project/images/homalg-project.pdf" target="_blank"><img src="images/thumb.png" border="0" alt="the
+<a href="https://homalg-project.github.io/docs/homalg_project/homalg_project.pdf" target="_blank"><img src="images/thumb.png" border="0" alt="the
  homalg slideshow" title="the homalg slideshow" /></a>
 </center>
 
