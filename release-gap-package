@@ -452,8 +452,8 @@ fi
 chmod -R a+r .
 
 # basic sanity check
-fgrep -q -r '<a href="/' */*.htm* &&
-    error "HTML manual contains absolute paths"
+#fgrep -q -r '<a href="/' */*.htm* &&
+#    error "HTML manual contains absolute paths"
 
 
 ######################################################################
