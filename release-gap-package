@@ -627,7 +627,7 @@ run_gap <<GAPInput
 Read("$UPDATE_FILE");
 GAPInput
 
-git add -A .
+git add -A
 git commit -m "Update website for $PKG $VERSION"
 
 if [ "x$PUSH" = xyes ] ; then
