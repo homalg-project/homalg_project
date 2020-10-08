@@ -11,7 +11,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2018.05.22", ## Sebas' version
 ## this line prevents merge conflicts
-  "2020.09.01", ## Fabian's version
+  "2020.10.01", ## Fabian's version
 ## this line prevents merge conflicts
   "2020.09.02", ## Kamal's version
 ## this line prevents merge conflicts
@@ -74,17 +74,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/ToolsForHomalg/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-", ~.Version, "/ToolsForHomalg-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/ToolsForHomalg",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/ToolsForHomalg/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/ToolsForHomalg/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-", ~.Version, "/ToolsForHomalg-", ~.Version ),
+# END URLS
 
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML := 
   "The <span class=\"pkgname\">ToolsForHomalg</span> package provides GAP extensions for the homalg project",
@@ -126,5 +129,3 @@ Autoload := false,
 Keywords := [  ]
 
 ));
-
-
