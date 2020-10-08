@@ -11,8 +11,6 @@ MAPLE_PATH=$(shell command -v maple)
 
 all: doc test
 
-doc: doc_4ti2Interface doc_Gauss doc_ExamplesForHomalg doc_GaussForHomalg doc_GradedModules doc_HomalgToCAS doc_GradedRingForHomalg doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_RingsForHomalg doc_SCO doc_ToolsForHomalg doc_Modules doc_homalg
-
 docclean:
 	-for d in $(DIRS); do $(MAKE) -C $$d docclean; done
 
@@ -31,52 +29,6 @@ ci-test_test_suite: ci-test_test_suite_D-Modules ci-test_test_suite_ExamplesForH
 
 ci-test: ci-test_LoadSheaves ci-test_LoadAllPackages ci-test_homalg_packages ci-test_additional_packages ci-test_test_suite
 	cd .. && homalg_project/gather_performance_data.py
-
-############################################
-doc_4ti2Interface:
-	$(MAKE) -C 4ti2Interface doc
-
-doc_Gauss:
-	$(MAKE) -C Gauss doc
-
-doc_ExamplesForHomalg:
-	$(MAKE) -C ExamplesForHomalg doc
-
-doc_GaussForHomalg:
-	$(MAKE) -C GaussForHomalg doc
-
-doc_GradedModules:
-	$(MAKE) -C GradedModules doc
-
-doc_HomalgToCAS:
-	$(MAKE) -C HomalgToCAS doc
-
-doc_GradedRingForHomalg:
-	$(MAKE) -C GradedRingForHomalg doc
-
-doc_IO_ForHomalg:
-	$(MAKE) -C IO_ForHomalg doc
-
-doc_LocalizeRingForHomalg:
-	$(MAKE) -C LocalizeRingForHomalg doc
-
-doc_MatricesForHomalg:
-	$(MAKE) -C MatricesForHomalg doc
-
-doc_RingsForHomalg:
-	$(MAKE) -C RingsForHomalg doc
-
-doc_SCO:
-	$(MAKE) -C SCO doc
-
-doc_ToolsForHomalg:
-	$(MAKE) -C ToolsForHomalg doc
-
-doc_Modules:
-	$(MAKE) -C Modules doc
-
-doc_homalg:
-	$(MAKE) -C homalg doc
 
 ############################################
 build_Gauss:
