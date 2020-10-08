@@ -7,7 +7,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2020.09.05", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2020.09.30", ## Fabian's version
+  "2020.10.01", ## Fabian's version
 ## this line prevents merge conflicts
   "2020.02.05", ## Markus' version
 ## this line prevents merge conflicts
@@ -98,17 +98,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/MatricesForHomalg/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-", ~.Version, "/MatricesForHomalg-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/MatricesForHomalg",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/MatricesForHomalg/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/MatricesForHomalg/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-", ~.Version, "/MatricesForHomalg-", ~.Version ),
+# END URLS
 
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML := 
   "The <span class=\"pkgname\">MatricesForHomalg</span> package provides lazy evaluated matrices with clever operations for the homalg project",
@@ -144,5 +147,3 @@ Autoload := false,
 Keywords := [ "rings", "ring elements", "matrices", "lazy evaluated matrices", "clever operations for matrices", "submodule membership problem", "syzygies" ]
 
 ));
-
-
