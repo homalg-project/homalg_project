@@ -10,6 +10,8 @@ Version := Maximum( [
   "2020.07.19", ## Kamal's version
 ## this line prevents merge conflicts
   "2020.05.11", ## Mohamed's version
+## this line prevents merge conflicts
+  "2020.10.01", ## Fabian's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -37,17 +39,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/4ti2Interface/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-", ~.Version, "/4ti2Interface-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/4ti2Interface",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/4ti2Interface/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/4ti2Interface/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-", ~.Version, "/4ti2Interface-", ~.Version ),
+# END URLS
 
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML := 
   "The <span class=\"pkgname\">4ti2Interface</span> package provides an interface to 4ti2",
@@ -101,4 +106,3 @@ Autoload := false,
 Keywords := [  ]
 
 ));
-

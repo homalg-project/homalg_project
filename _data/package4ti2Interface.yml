@@ -1,6 +1,6 @@
 name: 4ti2Interface
-version: 2020.07.19
-date: 19/07/2020
+version: 2020.10.01
+date: 01/10/2020
 description: A link to 4ti2
 
 authors:
@@ -23,15 +23,15 @@ suggested-pkgs:
       version: ">=2013.08.22"
       url: "https://gap-packages.github.io/AutoDoc"
 
-www: https://homalg-project.github.io/homalg_project/4ti2Interface/
-readme: https://homalg-project.github.io/homalg_project/4ti2Interface/README
+www: https://homalg-project.github.io/homalg_project/4ti2Interface
+readme: https://homalg-project.github.io/homalg_project/4ti2Interface/README.md
 packageinfo: https://homalg-project.github.io/homalg_project/4ti2Interface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.07.19/4ti2Interface-2020.07.19.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.10.01/4ti2Interface-2020.10.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.07.19/4ti2Interface-2020.07.19.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.10.01/4ti2Interface-2020.10.01.zip
 
 abstract: The <span class="pkgname">4ti2Interface</span> package provides an interface to 4ti2
 
