@@ -71,12 +71,20 @@ Persons := [
 ],
 
 Status := "deposited",
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/homalg/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/homalg-", ~.Version, "/homalg-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/homalg",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/homalg/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/homalg/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/homalg-", ~.Version, "/homalg-", ~.Version ),
+# END URLS
+
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML := 
   "A homological algebra meta-package for computable Abelian categories",

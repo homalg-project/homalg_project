@@ -76,17 +76,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-", ~.Version, "/LocalizeRingForHomalg-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-", ~.Version, "/LocalizeRingForHomalg-", ~.Version ),
+# END URLS
 
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML := "This package is part of the homalg-project and allows localization of a (computable) commutative ring at a (finitely generated) maximal ideal.",
 
@@ -125,5 +128,3 @@ Autoload := false,
 Keywords := [ "homological algebra", "local ring", "submodule membership problem", "syzygies", "Mora" ]
 
 ));
-
-

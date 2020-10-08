@@ -61,17 +61,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-", ~.Version, "/ExamplesForHomalg-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-", ~.Version, "/ExamplesForHomalg-", ~.Version ),
+# END URLS
 
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML := 
 "The <span class=\"pkgname\">ExamplesForHomalg</span> package provides example scripts for the\
@@ -112,5 +115,3 @@ Autoload := false,
 Keywords := [ "examples", "homalg" ]
 
 ));
-
-

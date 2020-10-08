@@ -60,7 +60,7 @@ IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/PolymakeInterface/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/PolymakeInterface-", ~.Version, "/PolymakeInterface-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
+README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
   
@@ -141,5 +141,3 @@ of the GNU Public License Version 2 or (at your option) any later version.
 ),
 
 ));
-
-

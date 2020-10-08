@@ -45,7 +45,7 @@ IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome := "https://homalg-project.github.io/homalg_project/Convex/",
 ArchiveFormats := ".tar.gz .zip",
 ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Convex-", ~.Version, "/Convex-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
+README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
 
@@ -104,5 +104,3 @@ Autoload := false,
 Keywords := [ "Fan", "Cone", "Polytope", "Convex geometry" ]
 
 ));
-
-

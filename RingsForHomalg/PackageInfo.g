@@ -187,16 +187,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/RingsForHomalg/",
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/RingsForHomalg",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/RingsForHomalg/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/RingsForHomalg/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-", ~.Version, "/RingsForHomalg-", ~.Version ),
+# END URLS
+
 ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-", ~.Version, "/RingsForHomalg-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
 AbstractHTML := 
 "The <span class=\"pkgname\">RingsForHomalg</span> package provides small dictionaries for \

@@ -123,17 +123,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/Modules/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Modules-", ~.Version, "/Modules-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/Modules",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/Modules/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/Modules/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Modules-", ~.Version, "/Modules-", ~.Version ),
+# END URLS
 
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML := 
   "The <span class=\"pkgname\">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings",
