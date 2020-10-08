@@ -4,7 +4,7 @@ PackageName := "SCO",
 
 Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 
-Version := "2019.09.02",
+Version := "2020.10.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -45,17 +45,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/SCO/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/SCO-", ~.Version, "/SCO-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/SCO",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/SCO/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/SCO/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/SCO-", ~.Version, "/SCO-", ~.Version ),
+# END URLS
 
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML := 
 "The <span class=\"pkgname\">SCO</span> package provides functionality to compute simplicial cohomology of orbifolds",
@@ -89,5 +92,3 @@ Autoload := false,
 Keywords := ["homology", "cohomology", "orbifold", "groupoid", "simplicial", "triangulation" ]
 
 ));
-
-

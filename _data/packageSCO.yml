@@ -1,6 +1,6 @@
 name: SCO
-version: 2019.09.02
-date: 02/09/2019
+version: 2020.10.01
+date: 01/10/2020
 description: SCO - Simplicial Cohomology of Orbifolds
 
 authors:
@@ -16,23 +16,23 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "MatricesForHomalg"
       version: ">= 2011.08.10"
-      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg"
     - name: "Modules"
       version: ">= 2011.06.29"
-      url: "https://homalg-project.github.io/homalg_project/Modules/"
+      url: "https://homalg-project.github.io/homalg_project/Modules"
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/SCO/
-readme: https://homalg-project.github.io/homalg_project/SCO/README
+www: https://homalg-project.github.io/homalg_project/SCO
+readme: https://homalg-project.github.io/homalg_project/SCO/README.md
 packageinfo: https://homalg-project.github.io/homalg_project/SCO/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2019.09.02/SCO-2019.09.02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2020.10.01/SCO-2020.10.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2019.09.02/SCO-2019.09.02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2020.10.01/SCO-2020.10.01.zip
 
 abstract: The <span class="pkgname">SCO</span> package provides functionality to compute simplicial cohomology of orbifolds
 
