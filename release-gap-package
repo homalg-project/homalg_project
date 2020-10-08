@@ -136,6 +136,7 @@ README_URL=
 PUSH=yes
 FORCE=no
 ONLY_TARBALL=no
+SKIP_EXISTING_RELEASE=no
 while [ x"$1" != x ]; do
   option="$1" ; shift
   case "$option" in
@@ -160,6 +161,8 @@ while [ x"$1" != x ]; do
     --no-force ) FORCE=no ;;
 
     --only-tarball ) ONLY_TARBALL=yes ;;
+
+    --skip-existing-release ) SKIP_EXISTING_RELEASE=yes ;;
 
     -- ) break ;;
     * ) error "unknown option '$option'" ;;
@@ -330,7 +333,7 @@ UPLOAD_URL=https://uploads.github.com/repos/$REPO/releases
 
 ######################################################################
 #
-# Determine the tag, and validate it
+# Determine the tag
 #
 verify_git_clean
 
@@ -341,12 +344,43 @@ else
     git tag "$TAG"
 fi;
 
+######################################################################
+#
+# Check if a GitHub release for this tag already exists
+#
+response=$(curl -s -S -X GET "$API_URL/tags/$TAG" -H "Authorization: token $TOKEN")
+MESSAGE=$(json_get_key message)
+RELEASE_ID=$(json_get_key id)
+
+if [ "$MESSAGE" = "Not Found" ] ; then
+    MESSAGE=  # release does not yet exist -> that's how we like it
+elif [ x"$RELEASE_ID" != x ] ; then
+    # release already exists -> skip, error out or delete it
+    if [ "x$SKIP_EXISTING_RELEASE" = xyes ] ; then
+        notice "release $TAG already exists on GitHub, skipping release"
+        exit 0
+    elif [ "x$FORCE" = xyes ] ; then
+        notice "Deleting existing release $TAG from GitHub"
+        response=$(curl --fail -s -S -X DELETE "$API_URL/$RELEASE_ID" -H "Authorization: token $TOKEN")
+        MESSAGE=
+    else
+        error "release $TAG already exists on GitHub, aborting (use --force to override this)"
+    fi
+fi
+
+if [ x"$MESSAGE" != x ] ; then
+    error "accessing GitHub failed: $MESSAGE"
+fi
+
+######################################################################
+#
+# Validate the tag
+#
 HEAD_REF=$(git rev-parse --verify HEAD)
 TAG_REF=$(git rev-parse --verify "$TAG^{}")
 
 if [ "x$TAG_REF" != "x$HEAD_REF" ] ; then
-    notice "tag $TAG is not the HEAD commit -- skipping release of package $PKG"
-    exit 0
+    error "tag $TAG is not the HEAD commit -- did you tag the right commit?"
 fi
 
 
@@ -505,28 +539,6 @@ fi
 # Create the GitHub release
 #
 
-# check if release already exists
-response=$(curl -s -S -X GET "$API_URL/tags/$TAG" -H "Authorization: token $TOKEN")
-MESSAGE=$(json_get_key message)
-RELEASE_ID=$(json_get_key id)
-
-if [ "$MESSAGE" = "Not Found" ] ; then
-    MESSAGE=  # release does not yet exist -> that's how we like it
-elif [ x"$RELEASE_ID" != x ] ; then
-    # release already exists -> error out or delete it
-    if [ "x$FORCE" = xyes ] ; then
-        notice "Deleting existing release $TAG from GitHub"
-        response=$(curl --fail -s -S -X DELETE "$API_URL/$RELEASE_ID" -H "Authorization: token $TOKEN")
-        MESSAGE=
-    else
-        error "release $TAG already exists on GitHub, aborting (use --force to override this)"
-    fi
-fi
-
-if [ x"$MESSAGE" != x ] ; then
-    error "accessing GitHub failed: $MESSAGE"
-fi
-
 # Create the release by sending suitable JSON
 DATA=$(cat <<EOF
 {
@@ -620,7 +632,7 @@ git commit -m "Update website for $PKG $VERSION"
 
 if [ "x$PUSH" = xyes ] ; then
     notice "Pushing website changes"
-    git push
+    git push "$REMOTE"
     notice "Done"
     notice "Your PackageInfo.g is now at $PackageInfoURL"
 else

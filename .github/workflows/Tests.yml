@@ -34,3 +34,14 @@ jobs:
           TERM=dumb make -C homalg_project -j $(nproc) --output-sync ci-test
           cp ./homalg_project/.codecov.yml ./
           curl -s https://codecov.io/bash | bash
+          git config --global user.name "Bot"
+          git config --global user.email "empty"
+          cd homalg_project
+          CUR_SHA=$(git rev-parse --verify HEAD)
+          git worktree add gh-pages/ gh-pages || (echo "There was an error. Make sure there is a branch named 'gh-pages'. See https://github.com/homalg-project/PackageJanitor#error-there-was-an-error-make-sure-there-is-a-branch-named-gh-pages"; exit 1)
+          if [ "${{ matrix.image }}" = "gapsystem/gap-docker" ] && [ "$CUR_SHA" = "$(git rev-parse origin/master)" ] && [ $(dirname "$GITHUB_REPOSITORY") = "homalg-project" ]; then \
+            git checkout master; \
+            ./make_dist.sh --token "${{ secrets.GITHUB_TOKEN }}"; \
+          else \
+            echo "Not making a release."; \
+          fi
