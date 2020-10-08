@@ -6,7 +6,7 @@
                 [1XEndow Commutative Rings with an Abelian Grading[101X
   
   
-                               Version 2020.06.27
+                               Version 2020.10.01
   
   
                                  September 2015

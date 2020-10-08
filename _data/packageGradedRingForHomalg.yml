@@ -1,6 +1,6 @@
 name: GradedRingForHomalg
-version: 2020.06.27
-date: 27/06/2020
+version: 2020.10.01
+date: 01/10/2020
 description: Endow Commutative Rings with an Abelian Grading
 
 authors:
@@ -28,19 +28,19 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "MatricesForHomalg"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg"
     - name: "HomalgToCAS"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS/"
+      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS"
     - name: "RingsForHomalg"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/RingsForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/RingsForHomalg"
     - name: "Modules"
       version: ">= 2018.02.04"
-      url: "https://homalg-project.github.io/homalg_project/Modules/"
+      url: "https://homalg-project.github.io/homalg_project/Modules"
     - name: "homalg"
       version: ">=2011.08.16"
-      url: "https://homalg-project.github.io/homalg_project/homalg/"
+      url: "https://homalg-project.github.io/homalg_project/homalg"
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
@@ -51,17 +51,17 @@ suggested-pkgs:
       url: "https://homalg-project.github.io/NConvex"
     - name: "4ti2Interface"
       version: "2019.09.03"
-      url: "https://homalg-project.github.io/homalg_project/4ti2Interface/"
+      url: "https://homalg-project.github.io/homalg_project/4ti2Interface"
 
-www: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/
-readme: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/README
+www: https://homalg-project.github.io/homalg_project/GradedRingForHomalg
+readme: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/README.md
 packageinfo: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.06.27/GradedRingForHomalg-2020.06.27.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.10.01/GradedRingForHomalg-2020.10.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.06.27/GradedRingForHomalg-2020.06.27.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.10.01/GradedRingForHomalg-2020.10.01.zip
 
 abstract: This package is part of the homalg-project and manages graded rings.
 
