@@ -4,7 +4,7 @@ PackageName := "HomalgToCAS",
 
 Subtitle := "A window to the outer world",
 
-Version := "2020.06.27",
+Version := "2020.10.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -126,16 +126,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/HomalgToCAS/",
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/HomalgToCAS",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/HomalgToCAS/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/HomalgToCAS/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-", ~.Version, "/HomalgToCAS-", ~.Version ),
+# END URLS
+
 ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-", ~.Version, "/HomalgToCAS-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
 AbstractHTML := "The <span class=\"pkgname\">HomalgToCAS</span> package provides the first layer of abstraction \
  needed for <span class=\"pkgname\">homalg</span> to access external computer algebra systems",
@@ -172,5 +176,3 @@ Autoload := false,
 Keywords := [ "homalgExternalObject", "CreateHomalgExternalRing", "HomalgExternalRingElement", "IsHomalgExternalMatrixRep", "LaunchCAS", "TerminateCAS", "homalgSendBlocking" ]
 
 ));
-
-
