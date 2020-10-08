@@ -4,7 +4,7 @@ PackageName := "IO_ForHomalg",
 
 Subtitle := "IO capabilities for the homalg project",
 
-Version := "2020.04.30",
+Version := "2020.10.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -95,16 +95,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/IO_ForHomalg/",
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/IO_ForHomalg",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/IO_ForHomalg/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/IO_ForHomalg/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-", ~.Version, "/IO_ForHomalg-", ~.Version ),
+# END URLS
+
 ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-", ~.Version, "/IO_ForHomalg-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
 AbstractHTML := 
 "The <span class=\"pkgname\">IO_ForHomalg</span> package launches the command-line-interface of an external computer algebra system\

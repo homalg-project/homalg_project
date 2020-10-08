@@ -1,6 +1,6 @@
 name: IO_ForHomalg
-version: 2020.04.30
-date: 30/04/2020
+version: 2020.10.01
+date: 01/10/2020
 description: IO capabilities for the homalg project
 
 authors:
@@ -27,22 +27,22 @@ needed-pkgs:
       url: "https://gap-packages.github.io/io"
     - name: "HomalgToCAS"
       version: ">= 2009.06.18"
-      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS/"
+      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS"
 
 suggested-pkgs:
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/IO_ForHomalg/
-readme: https://homalg-project.github.io/homalg_project/IO_ForHomalg/README
+www: https://homalg-project.github.io/homalg_project/IO_ForHomalg
+readme: https://homalg-project.github.io/homalg_project/IO_ForHomalg/README.md
 packageinfo: https://homalg-project.github.io/homalg_project/IO_ForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2020.04.30/IO_ForHomalg-2020.04.30.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2020.10.01/IO_ForHomalg-2020.10.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2020.04.30/IO_ForHomalg-2020.04.30.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2020.10.01/IO_ForHomalg-2020.10.01.zip
 
 abstract: The <span class="pkgname">IO_ForHomalg</span> package launches the command-line-interface of an external computer algebra system and connects it to <span class="pkgname">homalg</span> using an Input/Output stream
 
