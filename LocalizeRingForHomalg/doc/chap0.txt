@@ -6,7 +6,7 @@
               [1XLocalize Commutative [5Xhomalg[105X Rings at Maximal Ideals[101X
   
   
-                               Version 2020.06.27
+                               Version 2020.10.01
   
   
                                  September 2015
