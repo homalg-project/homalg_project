@@ -1,6 +1,6 @@
 name: Modules
-version: 2020.05.15
-date: 15/05/2020
+version: 2020.10.01
+date: 01/10/2020
 description: A homalg based package for the Abelian category of finitely presented modules over computable rings
 
 authors:
@@ -26,29 +26,29 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "MatricesForHomalg"
       version: ">=2020.05.09"
-      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg"
     - name: "ToolsForHomalg"
       version: ">=2013.04.12"
-      url: "https://homalg-project.github.io/homalg_project/ToolsForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/ToolsForHomalg"
     - name: "homalg"
       version: ">=2019.09.01"
-      url: "https://homalg-project.github.io/homalg_project/homalg/"
+      url: "https://homalg-project.github.io/homalg_project/homalg"
     - name: "GaussForHomalg"
       version: ">=2019.09.01"
-      url: "https://homalg-project.github.io/homalg_project/GaussForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/GaussForHomalg"
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/Modules/
-readme: https://homalg-project.github.io/homalg_project/Modules/README
+www: https://homalg-project.github.io/homalg_project/Modules
+readme: https://homalg-project.github.io/homalg_project/Modules/README.md
 packageinfo: https://homalg-project.github.io/homalg_project/Modules/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.05.15/Modules-2020.05.15.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.10.01/Modules-2020.10.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.05.15/Modules-2020.05.15.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.10.01/Modules-2020.10.01.zip
 
 abstract: The <span class="pkgname">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings
 
