@@ -37,6 +37,7 @@ sudo ln -s /Library/Frameworks/Maple.framework/Versions/13/bin/maple /usr/local/
 
 [codecov-img]: https://codecov.io/gh/homalg-project/homalg_project/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/homalg-project/homalg_project
+<!-- END FOOTER -->
 
 [Singular]: https://www.singular.uni-kl.de/
 
@@ -47,5 +48,3 @@ sudo ln -s /Library/Frameworks/Maple.framework/Versions/13/bin/maple /usr/local/
 [Maple]: https://maplesoft.com/products/Maple/
 
 [Sage]: https://www.sagemath.org/
-
-<!-- END FOOTER -->
