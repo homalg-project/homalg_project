@@ -1,6 +1,6 @@
 name: RingsForHomalg
-version: 2020.09.10
-date: 10/09/2020
+version: 2020.10.02
+date: 02/10/2020
 description: Dictionaries of external rings
 
 authors:
@@ -32,26 +32,26 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "MatricesForHomalg"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg"
     - name: "HomalgToCAS"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS/"
+      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS"
     - name: "GaussForHomalg"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/GaussForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/GaussForHomalg"
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/RingsForHomalg/
-readme: https://homalg-project.github.io/homalg_project/RingsForHomalg/README
+www: https://homalg-project.github.io/homalg_project/RingsForHomalg
+readme: https://homalg-project.github.io/homalg_project/RingsForHomalg/README.md
 packageinfo: https://homalg-project.github.io/homalg_project/RingsForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.09.10/RingsForHomalg-2020.09.10.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.10.02/RingsForHomalg-2020.10.02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.09.10/RingsForHomalg-2020.09.10.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.10.02/RingsForHomalg-2020.10.02.zip
 
 abstract: The <span class="pkgname">RingsForHomalg</span> package provides small dictionaries for  <span class="pkgname">homalg</span> to speak (as much as needed of) the languages  of Singular, Macaulay2, MAGMA, Sage, and Maple
 
