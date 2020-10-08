@@ -19,7 +19,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2014.04.09", ## Max' version
 ## this line prevents merge conflicts
-  "2020.04.17", ## Fabian's version
+  "2020.10.01", ## Fabian's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -125,17 +125,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/GradedModules/",
-ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/GradedModules-", ~.Version, "/GradedModules-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/GradedModules",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/GradedModules/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/GradedModules/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/GradedModules-", ~.Version, "/GradedModules-", ~.Version ),
+# END URLS
 
+ArchiveFormats := ".tar.gz .zip",
 
 AbstractHTML :=
   "This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring",
@@ -176,5 +179,3 @@ Autoload := false,
 Keywords := ["modules", "graded modules", "graduation", "multi-graded modules", "Tate resolution"]
 
 ));
-
-
