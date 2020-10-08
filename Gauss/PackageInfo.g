@@ -4,7 +4,7 @@ PackageName := "Gauss",
 
 Subtitle := "Extended Gauss functionality for GAP",
 
-Version := "2020.06.27",
+Version := "2020.10.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -61,16 +61,20 @@ Persons := [
 ],
 
 Status := "deposited",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/homalg-project/homalg_project"
+
+# BEGIN URLS
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://homalg-project.github.io/homalg_project/Gauss/",
+PackageWWWHome  := "https://homalg-project.github.io/homalg_project/Gauss",
+PackageInfoURL  := "https://homalg-project.github.io/homalg_project/Gauss/PackageInfo.g",
+README_URL      := "https://homalg-project.github.io/homalg_project/Gauss/README.md",
+ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Gauss-", ~.Version, "/Gauss-", ~.Version ),
+# END URLS
+
 ArchiveFormats := ".tar.gz .zip",
-ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Gauss-", ~.Version, "/Gauss-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
 AbstractHTML := 
 "The <span class=\"pkgname\">Gauss</span> package provideds extended Gauss functionality for <span class=\"pkgname\">GAP</span>",
@@ -107,4 +111,3 @@ Autoload := false,
 Keywords := ["Gauss", "RREF", "sparse" ]
 
 ));
-

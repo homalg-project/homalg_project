@@ -1,6 +1,6 @@
 name: Gauss
-version: 2020.06.27
-date: 27/06/2020
+version: 2020.10.01
+date: 01/10/2020
 description: Extended Gauss functionality for GAP
 
 authors:
@@ -20,15 +20,15 @@ suggested-pkgs:
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/Gauss/
-readme: https://homalg-project.github.io/homalg_project/Gauss/README
+www: https://homalg-project.github.io/homalg_project/Gauss
+readme: https://homalg-project.github.io/homalg_project/Gauss/README.md
 packageinfo: https://homalg-project.github.io/homalg_project/Gauss/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2020.06.27/Gauss-2020.06.27.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2020.10.01/Gauss-2020.10.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2020.06.27/Gauss-2020.06.27.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2020.10.01/Gauss-2020.10.01.zip
 
 abstract: The <span class="pkgname">Gauss</span> package provideds extended Gauss functionality for <span class="pkgname">GAP</span>
 
