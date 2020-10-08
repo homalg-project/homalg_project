@@ -1,6 +1,6 @@
 name: GaussForHomalg
-version: 2020.06.27
-date: 27/06/2020
+version: 2020.10.01
+date: 01/10/2020
 description: Gauss functionality for the homalg project
 
 authors:
@@ -16,23 +16,23 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "Gauss"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/Gauss/"
+      url: "https://homalg-project.github.io/homalg_project/Gauss"
     - name: "MatricesForHomalg"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg/"
+      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg"
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/GaussForHomalg/
-readme: https://homalg-project.github.io/homalg_project/GaussForHomalg/README
+www: https://homalg-project.github.io/homalg_project/GaussForHomalg
+readme: https://homalg-project.github.io/homalg_project/GaussForHomalg/README.md
 packageinfo: https://homalg-project.github.io/homalg_project/GaussForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.06.27/GaussForHomalg-2020.06.27.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.10.01/GaussForHomalg-2020.10.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.06.27/GaussForHomalg-2020.06.27.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.10.01/GaussForHomalg-2020.10.01.zip
 
 abstract: The <span class="pkgname">GaussForHomalg</span> package provides Gauss functionality for <span class="pkgname">homalg</span> using the package <span class="pkgname">Gauss</span>
 
