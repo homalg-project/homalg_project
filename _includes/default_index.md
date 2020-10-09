@@ -4,7 +4,7 @@
 
 The current version of this package is version {{site.data[page.package].version}}.
 For more information, please refer to [the package manual]({{site.data[page.package].doc-html}}).
-There is also a [README](README) file.
+There is also a [README](README.md) file.
 
 ## Dependencies
 
