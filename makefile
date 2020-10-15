@@ -180,8 +180,7 @@ ci-test_SystemTheory: ci-prepare
 	$(MAKE) -C ../SystemTheory ci-test || true
 
 ci-test_ToricVarieties: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../ToricVarieties_project/ToricVarieties ci-test || true
+	$(MAKE) -C ../ToricVarieties_project/ToricVarieties ci-test
 
 ci-test_VirtualCAS: ci-prepare
 	$(MAKE) -C ../VirtualCAS ci-test
