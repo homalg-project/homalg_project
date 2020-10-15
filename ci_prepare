@@ -8,10 +8,12 @@ test_suite
 AbelianSystems
 alcove
 alexander
+CddInterface
 CAP_project
 Conley
 D-Modules
 k-Points
+NConvex
 Orbifolds
 Sheaves
 SimplicialObjects
@@ -25,6 +27,10 @@ for PACKAGE in $PACKAGES_TO_CLONE; do
 		git clone "https://github.com/homalg-project/$PACKAGE.git"
 	fi
 done
+
+cd CddInterface
+./install.sh $GAP_HOME
+cd ..
 
 cp test_suite/init_homalg_project_test_suite.sample test_suite/init_homalg_project_test_suite
 sed -i "s|~/software/pkg|$PWD|g" test_suite/init_homalg_project_test_suite
