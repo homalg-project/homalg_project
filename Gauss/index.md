@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageGauss
+package_name: Gauss
 ---
-
-{% include default_index.md %}

@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageLocalizeRingForHomalg
+package_name: LocalizeRingForHomalg
 ---
-
-{% include default_index.md %}

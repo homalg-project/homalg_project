@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageMatricesForHomalg
+package_name: MatricesForHomalg
 ---
-
-{% include default_index.md %}

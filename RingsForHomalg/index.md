@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageRingsForHomalg
+package_name: RingsForHomalg
 ---
-
-{% include default_index.md %}

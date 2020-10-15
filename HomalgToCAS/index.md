@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageHomalgToCAS
+package_name: HomalgToCAS
 ---
-
-{% include default_index.md %}

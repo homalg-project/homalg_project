@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageModules
+package_name: Modules
 ---
-
-{% include default_index.md %}

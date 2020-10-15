@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageSCO
+package_name: SCO
 ---
-
-{% include default_index.md %}

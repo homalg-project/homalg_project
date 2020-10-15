@@ -1,6 +1,4 @@
 ---
 layout: package
-package: package4ti2Interface
+package_name: 4ti2Interface
 ---
-
-{% include default_index.md %}

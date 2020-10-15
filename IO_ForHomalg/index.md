@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageIO_ForHomalg
+package_name: IO_ForHomalg
 ---
-
-{% include default_index.md %}

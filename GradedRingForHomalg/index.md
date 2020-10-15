@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageGradedRingForHomalg
+package_name: GradedRingForHomalg
 ---
-
-{% include default_index.md %}
