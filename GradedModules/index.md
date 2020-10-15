@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageGradedModules
+package_name: GradedModules
 ---
-
-{% include default_index.md %}

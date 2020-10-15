@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageGaussForHomalg
+package_name: GaussForHomalg
 ---
-
-{% include default_index.md %}

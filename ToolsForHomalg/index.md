@@ -1,6 +1,4 @@
 ---
 layout: package
-package: packageToolsForHomalg
+package_name: ToolsForHomalg
 ---
-
-{% include default_index.md %}

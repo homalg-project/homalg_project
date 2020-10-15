@@ -3,7 +3,5 @@ highlighter:      rouge
 
 baseurl:          /homalg_project
 
-exclude: [ "index_default.template" ]
-
 plugins:
   - jekyll-redirect-from
