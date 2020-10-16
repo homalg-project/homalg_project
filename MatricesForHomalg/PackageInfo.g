@@ -5,29 +5,28 @@ PackageName := "MatricesForHomalg",
 Subtitle := "Matrices for the homalg project",
 
 Version := Maximum( [
-  "2020.09.05", ## Mohamed's version
+  "2020.09-05", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2020.10.02", ## Fabian's version
+  "2020.10-03", ## Fabian's version
 ## this line prevents merge conflicts
-  "2020.02.05", ## Markus' version
+  "2020.02-05", ## Markus' version
 ## this line prevents merge conflicts
-  "2019.09.01", ## Max' version
+  "2019.09-01", ## Max' version
 ## this line prevents merge conflicts
-  "2019.12.03", ## Sebas' version
+  "2019.12-03", ## Sebas' version
 ## this line prevents merge conflicts
-  "2017.07.01", ## Vinay's version
+  "2017.07-01", ## Vinay's version
 ## this line prevents merge conflicts
-  "2013.08.26", ## Martin's version
+  "2013.08-26", ## Martin's version
 ## this line prevents merge conflicts
-  "2019.06.04", ## Florian's version
+  "2019.06-04", ## Florian's version
 ## this line prevents merge conflicts
-  "2020.09.06", ## Sepp's version
+  "2020.09-06", ## Sepp's version
 ## this line prevents merge conflicts
-  "2019.12.06", ## Kamal's version
+  "2019.12-06", ## Kamal's version
 ] ),
 
-Date := ~.Version{[ 1 .. 10 ]},
-Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
+Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
 License := "GPL-2.0-or-later",
 

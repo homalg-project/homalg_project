@@ -5,25 +5,23 @@ PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
 
 Version := Maximum( [
-  "2020.10.03", ## Mohamed's version
+  "2020.10-03", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2020.02.05", ## Markus L-H's version
+  "2020.02-05", ## Markus L-H's version
 ## this line prevents merge conflicts
-  "2017.04.17", ## Markus K's version
+  "2017.04-17", ## Markus K's version
 ## this line prevents merge conflicts
-  "2011.12.13", ## Andreas's version
+  "2011.12-13", ## Andreas's version
 ## this line prevents merge conflicts
-  "2019.09.01", ## Sebas' version
+  "2019.09-01", ## Sebas' version
 ## this line prevents merge conflicts
-  "2013.07.16", ## Vinay's version
+  "2013.07-16", ## Vinay's version
 ## this line prevents merge conflicts
-  "2020.10.02", ## Fabian's version
+  "2020.10-04", ## Fabian's version
 ## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
 ] ),
 
-Date := ~.Version{[ 1 .. 10 ]},
-Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
+Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
 License := "GPL-2.0-or-later",
 

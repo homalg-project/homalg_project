@@ -5,25 +5,24 @@ PackageName := "GradedModules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
 
 Version := Maximum( [
-  "2020.04.30", ## Mohamed's version
+  "2020.04-30", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2020.02.05", ## Markus' version
+  "2020.02-05", ## Markus' version
 ## this line prevents merge conflicts
-  "2019.08.01", ## Max's version
+  "2019.08-01", ## Max's version
 ## this line prevents merge conflicts
-  "2011.05.05", ## Sebastian's version
+  "2011.05-05", ## Sebastian's version
 ## this line prevents merge conflicts
-  "2014.07.25", ## Sepp's version
+  "2014.07-25", ## Sepp's version
 ## this line prevents merge conflicts
-  "2015.12.04", ## Sebas' version
+  "2015.12-04", ## Sebas' version
 ## this line prevents merge conflicts
-  "2014.04.09", ## Max' version
+  "2014.04-09", ## Max' version
 ## this line prevents merge conflicts
-  "2020.10.01", ## Fabian's version
+  "2020.10-02", ## Fabian's version
 ] ),
 
-Date := ~.Version{[ 1 .. 10 ]},
-Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
+Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
 License := "GPL-2.0-or-later",
 

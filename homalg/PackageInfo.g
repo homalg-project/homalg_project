@@ -5,19 +5,18 @@ PackageName := "homalg",
 Subtitle := "A homological algebra meta-package for computable Abelian categories",
 
 Version := Maximum( [
-  "2020.04.30", ## Mohamed's version
+  "2020.04-30", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2012.09.17", ## Markus' version
+  "2012.09-17", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.03.29", ## Sebas' version
+  "2012.03-29", ## Sebas' version
 ## this line prevents merge conflicts
-  "2019.09.01", ## Max' version
+  "2019.09-01", ## Max' version
 ## this line prevents merge conflicts
-  "2020.10.01", ## Fabian's version
+  "2020.10-02", ## Fabian's version
 ] ),
 
-Date := ~.Version{[ 1 .. 10 ]},
-Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
+Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
 License := "GPL-2.0-or-later",
 

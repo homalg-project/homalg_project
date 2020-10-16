@@ -5,25 +5,24 @@ PackageName := "Modules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
 
 Version := Maximum( [
-  "2020.05.15", ## Mohamed's version
+  "2020.05-15", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2020.02.05", ## Markus' version
+  "2020.02-05", ## Markus' version
 ## this line prevents merge conflicts
-  "2019.09.01", ## Max's version
+  "2019.09-01", ## Max's version
 ## this line prevents merge conflicts
-  "2011.07.20", ## Florian's version
+  "2011.07-20", ## Florian's version
 ## this line prevents merge conflicts
-  "2018.09.20", ## Sebas' version
+  "2018.09-20", ## Sebas' version
 ## this line prevents merge conflicts
-  "2013.05.05", ## Sepp's version
+  "2013.05-05", ## Sepp's version
 ## this line prevents merge conflicts
-  "2017.06.19", ## Vinay's version
+  "2017.06-19", ## Vinay's version
 ## this line prevents merge conflicts
-  "2020.10.01", ## Fabian's version
+  "2020.10-02", ## Fabian's version
 ] ),
 
-Date := ~.Version{[ 1 .. 10 ]},
-Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
+Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
 License := "GPL-2.0-or-later",
 
