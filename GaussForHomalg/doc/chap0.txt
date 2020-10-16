@@ -6,7 +6,7 @@
                          [1X[5XGauss[105X Functionality for [5Xhomalg[105X[101X
   
   
-                               Version 2020.10.01
+                               Version 2020.10-02
   
   
                                  September 2013
