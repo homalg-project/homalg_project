@@ -1,7 +1,9 @@
 name: GradedRingForHomalg
-version: 2020.10.01
-date: 01/10/2020
-description: Endow Commutative Rings with an Abelian Grading
+version: "2020.10-02"
+license: "GPL-2.0-or-later"
+date: 2020-10-16
+description: |
+    Endow Commutative Rings with an Abelian Grading
 
 authors:
     - name: Mohamed Barakat
@@ -54,17 +56,51 @@ suggested-pkgs:
       url: "https://homalg-project.github.io/homalg_project/4ti2Interface"
 
 www: https://homalg-project.github.io/homalg_project/GradedRingForHomalg
-readme: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/README.md
+readme: README.md
 packageinfo: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.10.01/GradedRingForHomalg-2020.10.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.10-02/GradedRingForHomalg-2020.10-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.10.01/GradedRingForHomalg-2020.10.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.10-02/GradedRingForHomalg-2020.10-02.zip
 
-abstract: This package is part of the homalg-project and manages graded rings.
+pdf: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2020.10-02/GradedRingForHomalg-2020.10-02.pdf
+
+abstract: |
+    This package is part of the homalg-project and manages graded rings.
 
 status: deposited
 doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
+keywords: |
+    homological algebra, graded ring.
+citeas: |
+    <p class='BibEntry'>
+    [<span class='BibKey'>BGKJLR20</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S., Kirschmer, M., Jambor, S., Lange-Hegermann, M. and Robertz, D.</b>,
+     <i class='BibTitle'>GradedRingForHomalg, Endow Commutative Rings with an Abelian Grading,
+             Version 2020.10-02</i>
+     (<span class='BibYear'>2020</span>)<br />
+    (<span class='BibNote'>GAP package</span>),
+    <span class='BibHowpublished'><a href="https://homalg-project.github.io/homalg_project/GradedRingForHomalg">https://homalg-project.github.io/homalg_project/GradedRingForHomalg</a></span>.
+    </p>
+    
+
+bibtex: |
+    @misc{ GradedRingForHomalg2020.10-02,
+      author =           {Barakat,  M.  and  Gutsche,  S.  and Kirschmer, M. and
+                          Jambor, S. and Lange-Hegermann, M. and Robertz, D.},
+      title =            {{GradedRingForHomalg}, Endow Commutative Rings with an
+                          Abelian Grading, {V}ersion 2020.10-02},
+      month =            {Oct},
+      year =             {2020},
+      note =             {GAP package},
+      howpublished =     {\href
+                          {https://homalg-project.github.io/homalg_project/GradedRingForHomalg}
+                          {\texttt{https://homalg-project.github.io/}\discretionary
+                          {}{}{}\texttt{homalg{\textunderscore}project/}\discretionary
+                          {}{}{}\texttt{GradedRingForHomalg}}},
+      keywords =         {homological algebra; graded ring},
+      printedkey =       {BGKJLR20}
+    }
+
