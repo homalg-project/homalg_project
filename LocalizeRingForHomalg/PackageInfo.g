@@ -5,21 +5,20 @@ PackageName := "LocalizeRingForHomalg",
 Subtitle := "A Package for Localization of Polynomial Rings",
 
 Version := Maximum( [ ##To prevent merge conflicts
-  "2020.04.30", ## Markus' version
+  "2020.04-30", ## Markus' version
 ## this line prevents merge conflicts
-  "2019.09.02", ## Mohamed's version
+  "2019.09-02", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2019.08.01", ## Max's version
+  "2019.08-01", ## Max's version
 ## this line prevents merge conflicts
-  "2013.07.15", ## Vinay's version
+  "2013.07-15", ## Vinay's version
 ## this line prevents merge conflicts
-  "2013.11.11", ## Sebas' version
+  "2013.11-11", ## Sebas' version
 ## this line prevents merge conflicts
-  "2020.10.01", ## Fabian's version
+  "2020.10-02", ## Fabian's version
 ] ),
 
-Date := ~.Version{[ 1 .. 10 ]},
-Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
+Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
 License := "GPL-2.0-or-later",
 
