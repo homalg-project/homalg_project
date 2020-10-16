@@ -5,21 +5,20 @@ PackageName := "ToolsForHomalg",
 Subtitle := "Special methods and knowledge propagation tools",
 
 Version := Maximum( [
-  "2020.09.06", ## Mohamed's version
+  "2020.09-06", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2011.09.12", ## Markus' version
+  "2011.09-12", ## Markus' version
 ## this line prevents merge conflicts
-  "2018.05.22", ## Sebas' version
+  "2018.05-22", ## Sebas' version
 ## this line prevents merge conflicts
-  "2020.10.01", ## Fabian's version
+  "2020.10-02", ## Fabian's version
 ## this line prevents merge conflicts
-  "2020.09.02", ## Kamal's version
+  "2020.09-02", ## Kamal's version
 ## this line prevents merge conflicts
 
 ] ),
 
-Date := ~.Version{[ 1 .. 10 ]},
-Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
+Date := "16/10/2020",
 
 License := "GPL-2.0-or-later",
 

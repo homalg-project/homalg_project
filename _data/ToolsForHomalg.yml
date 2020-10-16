@@ -1,7 +1,9 @@
 name: ToolsForHomalg
-version: 2020.10.01
-date: 01/10/2020
-description: Special methods and knowledge propagation tools
+version: "2020.10-02"
+license: "GPL-2.0-or-later"
+date: 2020-10-16
+description: |
+    Special methods and knowledge propagation tools
 
 authors:
     - name: Mohamed Barakat
@@ -33,17 +35,48 @@ needed-pkgs:
       url: "https://gap-packages.github.io/io"
 
 www: https://homalg-project.github.io/homalg_project/ToolsForHomalg
-readme: https://homalg-project.github.io/homalg_project/ToolsForHomalg/README.md
+readme: README.md
 packageinfo: https://homalg-project.github.io/homalg_project/ToolsForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2020.10.01/ToolsForHomalg-2020.10.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2020.10-02/ToolsForHomalg-2020.10-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2020.10.01/ToolsForHomalg-2020.10.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2020.10-02/ToolsForHomalg-2020.10-02.zip
 
-abstract: The <span class="pkgname">ToolsForHomalg</span> package provides GAP extensions for the homalg project
+pdf: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2020.10-02/ToolsForHomalg-2020.10-02.pdf
+
+abstract: |
+    The <span class="pkgname">ToolsForHomalg</span> package provides GAP extensions for the homalg project
 
 status: deposited
 doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
+citeas: |
+    <p class='BibEntry'>
+    [<span class='BibKey'>BGL20</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S. and Lange-Hegermann, M.</b>,
+     <i class='BibTitle'>ToolsForHomalg, Special methods and knowledge propagation tools,
+             Version 2020.10-02</i>
+     (<span class='BibYear'>2020</span>)<br />
+    (<span class='BibNote'>GAP package</span>),
+    <span class='BibHowpublished'><a href="https://homalg-project.github.io/homalg_project/ToolsForHomalg">https://homalg-project.github.io/homalg_project/ToolsForHomalg</a></span>.
+    </p>
+    
+
+bibtex: |
+    @misc{ ToolsForHomalg2020.10-02,
+      author =           {Barakat, M. and Gutsche, S. and Lange-Hegermann, M.},
+      title =            {{ToolsForHomalg},   Special   methods   and  knowledge
+                          propagation tools, {V}ersion 2020.10-02},
+      month =            {Oct},
+      year =             {2020},
+      note =             {GAP package},
+      howpublished =     {\href
+                          {https://homalg-project.github.io/homalg_project/ToolsForHomalg}
+                          {\texttt{https://homalg-project.github.io/}\discretionary
+                          {}{}{}\texttt{homalg{\textunderscore}project/}\discretionary
+                          {}{}{}\texttt{ToolsForHomalg}}},
+      keywords =         {},
+      printedkey =       {BGL20}
+    }
+
