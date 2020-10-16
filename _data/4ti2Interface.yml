@@ -1,7 +1,9 @@
 name: 4ti2Interface
-version: 2020.10.01
-date: 01/10/2020
-description: A link to 4ti2
+version: "2020.10-02"
+license: "GPL-2.0-or-later"
+date: 2020-10-16
+description: |
+    A link to 4ti2
 
 authors:
     - name: Sebastian Gutsche
@@ -24,17 +26,47 @@ suggested-pkgs:
       url: "https://gap-packages.github.io/AutoDoc"
 
 www: https://homalg-project.github.io/homalg_project/4ti2Interface
-readme: https://homalg-project.github.io/homalg_project/4ti2Interface/README.md
+readme: README.md
 packageinfo: https://homalg-project.github.io/homalg_project/4ti2Interface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.10.01/4ti2Interface-2020.10.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.10-02/4ti2Interface-2020.10-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.10.01/4ti2Interface-2020.10.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.10-02/4ti2Interface-2020.10-02.zip
 
-abstract: The <span class="pkgname">4ti2Interface</span> package provides an interface to 4ti2
+pdf: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2020.10-02/4ti2Interface-2020.10-02.pdf
+
+abstract: |
+    The <span class="pkgname">4ti2Interface</span> package provides an interface to 4ti2
 
 status: deposited
 doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
+citeas: |
+    <p class='BibEntry'>
+    [<span class='BibKey'>Gut20</span>]   <b class='BibAuthor'>Gutsche, S.</b>,
+     <i class='BibTitle'>4ti2Interface, A link to 4ti2,
+             Version 2020.10-02</i>
+     (<span class='BibYear'>2020</span>)<br />
+    (<span class='BibNote'>GAP package</span>),
+    <span class='BibHowpublished'><a href="https://homalg-project.github.io/homalg_project/4ti2Interface">https://homalg-project.github.io/homalg_project/4ti2Interface</a></span>.
+    </p>
+    
+
+bibtex: |
+    @misc{ 4ti2Interface2020.10-02,
+      author =           {Gutsche, S.},
+      title =            {{4ti2Interface}, A link to 4ti2, {V}ersion 2020.10-02},
+      month =            {Oct},
+      year =             {2020},
+      note =             {GAP package},
+      howpublished =     {\href
+                          {https://homalg-project.github.io/homalg_project/4ti2Interface}
+                          {\texttt{https://homalg-project.github.io/}\discretionary
+                          {}{}{}\texttt{homalg{\textunderscore}project/}\discretionary
+                          {}{}{}\texttt{4ti2Interface}}},
+      keywords =         {},
+      printedkey =       {Gut20}
+    }
+
