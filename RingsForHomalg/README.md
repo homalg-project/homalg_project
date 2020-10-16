@@ -1,9 +1,11 @@
 <!-- BEGIN HEADER -->
-# RingsForHomalg – Dictionaries of external rings
+# RingsForHomalg
 
-| Documentation | Build Status of [homalg_project](/../../) | Code Coverage of [homalg_project](/../../) |
-| ------------- | ------------ | ------------- |
-| [![HTML stable documentation][docs-img]][docs-url] | [![Build Status][tests-img]][tests-url] | [![Code Coverage][codecov-img]][codecov-url] |
+### Dictionaries of external rings
+
+| Documentation | Latest Release | Build Status of [homalg_project](/../../) | Code Coverage of [homalg_project](/../../) |
+| ------------- | -------------- | ------------ | ------------- |
+| [![HTML stable documentation][html-img]][html-url] [![PDF stable documentation][pdf-img]][pdf-url] | [![version][version-img]][version-url] [![date][date-img]][date-url] | [![Build Status][tests-img]][tests-url] | [![Code Coverage][codecov-img]][codecov-url] |
 
 <!-- END HEADER -->
 This package gives access to certain classes of rings and matrices from the computer algebra systems
@@ -29,8 +31,17 @@ And starting from version 10 something like:
 sudo ln -s /Library/Frameworks/Maple.framework/Versions/13/bin/maple /usr/local/bin/maple13
 ```
 <!-- BEGIN FOOTER -->
-[docs-img]: https://img.shields.io/badge/HTML-stable-blue.svg
-[docs-url]: https://homalg-project.github.io/homalg_project/RingsForHomalg/doc/chap0_mj.html
+[html-img]: https://img.shields.io/badge/HTML-stable-blue.svg
+[html-url]: https://homalg-project.github.io/homalg_project/RingsForHomalg/doc/chap0_mj.html
+
+[pdf-img]: https://img.shields.io/badge/PDF-stable-blue.svg
+[pdf-url]: https://homalg-project.github.io/homalg_project/RingsForHomalg/download_pdf.html
+
+[version-img]: https://img.shields.io/endpoint?url=https://homalg-project.github.io/homalg_project/RingsForHomalg/badge_version.json
+[version-url]: https://homalg-project.github.io/homalg_project/RingsForHomalg/view_release.html
+
+[date-img]: https://img.shields.io/endpoint?url=https://homalg-project.github.io/homalg_project/RingsForHomalg/badge_date.json
+[date-url]: https://homalg-project.github.io/homalg_project/RingsForHomalg/view_release.html
 
 [tests-img]: https://github.com/homalg-project/homalg_project/workflows/Tests/badge.svg?branch=master
 [tests-url]: https://github.com/homalg-project/homalg_project/actions?query=workflow%3ATests+branch%3Amaster
