@@ -481,8 +481,6 @@ InstallMethod( GetObject,
         
     fi;
     
-    cache!.value_list_position := cache!.value_list_position - 1;
-    
     CACHINGOBJECT_MISS( cache );
     
     return [ ];
@@ -504,12 +502,6 @@ InstallMethod( GetObject,
         return [ list[ pos ] ];
         
     fi;
-    
-#     Remove( cache!.keys_value_list, key_pos );
-#     
-#     Remove( cache!.value, pos );
-    
-    cache!.value_list_position := cache!.value_list_position - 1;
     
     CACHINGOBJECT_MISS( cache );
     
