@@ -2941,6 +2941,23 @@ InstallMethod( LaTeXStringOp,
 );
 
 ##
+InstallMethod( LaTeXStringOp,
+        "for homalg fields",
+        [ IsHomalgRing and IsFieldForHomalg ],
+        
+  function( k )
+    
+    if HasIsRationalsForHomalg( k ) and IsRationalsForHomalg( k ) then
+        return "\\mathbb{Q}";
+    elif HasCharacteristic( k ) and IsPrime( Characteristic( k ) ) then
+        return Concatenation( "\\mathbb{F}_{", String( Characteristic( k ) ), "}" );
+    else
+        TryNextMethod( );
+    fi;
+    
+end );
+
+##
 InstallMethod( Display,
         "for homalg ring elements",
         [ IsHomalgRingElement ],
