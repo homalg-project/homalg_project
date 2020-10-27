@@ -2363,9 +2363,12 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
     
     SetIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
             List( IndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
-    
-    SetRelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
-            List( RelativeIndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+
+    if HasRelativeIndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ) then
+        
+        SetRelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
+                List( RelativeIndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+    fi;
     
     SetIndeterminateShiftsOfDoubleShiftAlgebra( Y,
             List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
