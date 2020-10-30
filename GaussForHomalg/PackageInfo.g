@@ -51,7 +51,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/GaussForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/GaussForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/GaussForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/GaussForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-", ~.Version, "/GaussForHomalg-", ~.Version ),

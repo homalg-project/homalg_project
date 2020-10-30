@@ -192,7 +192,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/RingsForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/RingsForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/RingsForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/RingsForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-", ~.Version, "/RingsForHomalg-", ~.Version ),
