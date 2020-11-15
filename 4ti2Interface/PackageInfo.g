@@ -45,7 +45,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/4ti2Interface",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/4ti2Interface",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/4ti2Interface/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/4ti2Interface/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-", ~.Version, "/4ti2Interface-", ~.Version ),

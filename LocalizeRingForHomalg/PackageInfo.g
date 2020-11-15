@@ -80,7 +80,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/LocalizeRingForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/LocalizeRingForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-", ~.Version, "/LocalizeRingForHomalg-", ~.Version ),

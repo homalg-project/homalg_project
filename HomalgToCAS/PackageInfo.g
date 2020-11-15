@@ -132,7 +132,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/HomalgToCAS",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/HomalgToCAS",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/HomalgToCAS/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/HomalgToCAS/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-", ~.Version, "/HomalgToCAS-", ~.Version ),
