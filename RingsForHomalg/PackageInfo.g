@@ -5,7 +5,7 @@ PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
 
 Version := Maximum( [
-  "2020.10-05", ## Mohamed's version
+  "2020.11-01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2020.02-05", ## Markus L-H's version
 ## this line prevents merge conflicts
@@ -21,7 +21,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
 ] ),
 
-Date := "27/10/2020",
+Date := "27/11/2020",
 
 License := "GPL-2.0-or-later",
 
@@ -192,7 +192,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/RingsForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/RingsForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/RingsForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/RingsForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-", ~.Version, "/RingsForHomalg-", ~.Version ),

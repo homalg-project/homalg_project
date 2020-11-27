@@ -1,7 +1,7 @@
 name: RingsForHomalg
-version: "2020.10-05"
+version: "2020.11-01"
 license: "GPL-2.0-or-later"
-date: 2020-10-27
+date: 2020-11-27
 description: |
     Dictionaries of external rings
 
@@ -38,28 +38,28 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "MatricesForHomalg"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg"
+      url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
     - name: "HomalgToCAS"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/HomalgToCAS"
+      url: "https://homalg-project.github.io/pkg/HomalgToCAS"
     - name: "GaussForHomalg"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/GaussForHomalg"
+      url: "https://homalg-project.github.io/pkg/GaussForHomalg"
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/RingsForHomalg
+www: https://homalg-project.github.io/pkg/RingsForHomalg
 readme: README.md
 packageinfo: https://homalg-project.github.io/homalg_project/RingsForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.10-05/RingsForHomalg-2020.10-05.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.11-01/RingsForHomalg-2020.11-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.10-05/RingsForHomalg-2020.10-05.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.11-01/RingsForHomalg-2020.11-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.10-05/RingsForHomalg-2020.10-05.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2020.11-01/RingsForHomalg-2020.11-01.pdf
 
 abstract: |
     The <span class="pkgname">RingsForHomalg</span> package provides small dictionaries for  <span class="pkgname">homalg</span> to speak (as much as needed of) the languages  of Singular, Macaulay2, MAGMA, Sage, and Maple
@@ -73,27 +73,27 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BGKLMRSSW20</span>]   <b class='BibAuthor'>Barakat, M., Görtzen, S., Kirschmer, M., Lange-Hegermann, M., Motsak, O., Robertz, D., Schönemann, H., Steenpaß, A. and Wagh, V.</b>,
      <i class='BibTitle'>RingsForHomalg, Dictionaries of external rings,
-             Version 2020.10-05</i>
+             Version 2020.11-01</i>
      (<span class='BibYear'>2020</span>)<br />
     (<span class='BibNote'>GAP package</span>),
-    <span class='BibHowpublished'><a href="https://homalg-project.github.io/homalg_project/RingsForHomalg">https://homalg-project.github.io/homalg_project/RingsForHomalg</a></span>.
+    <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/RingsForHomalg">https://homalg-project.github.io/pkg/RingsForHomalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ RingsForHomalg2020.10-05,
+    @misc{ RingsForHomalg2020.11-01,
       author =           {Barakat,  M. and G{\"o}rtzen, S. and Kirschmer, M. and
                           Lange-Hegermann, M. and Motsak, O. and Robertz, D. and
                           Sch{\"o}nemann, H. and Steenpa{\ss}, A. and Wagh, V.},
       title =            {{RingsForHomalg},   Dictionaries  of  external  rings,
-                          {V}ersion 2020.10-05},
-      month =            {Oct},
+                          {V}ersion 2020.11-01},
+      month =            {Nov},
       year =             {2020},
       note =             {GAP package},
       howpublished =     {\href
-                          {https://homalg-project.github.io/homalg_project/RingsForHomalg}
+                          {https://homalg-project.github.io/pkg/RingsForHomalg}
                           {\texttt{https://homalg-project.github.io/}\discretionary
-                          {}{}{}\texttt{homalg{\textunderscore}project/}\discretionary
+                          {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{RingsForHomalg}}},
       keywords =         {rings; ideal membership problem; syzygies; homalgTable},
       printedkey =       {BGKLMRSSW20}
