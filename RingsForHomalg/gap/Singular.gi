@@ -2270,8 +2270,8 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         homalgSendBlocking( Concatenation(
                 [ "\nproc Involution (matrix M)\n{\n" ],
                 [ "  map F = ", R, ", " ],
-                [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( R ), a -> [ ", -" , String( a ) ] ) ) ],
-                Concatenation( List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( R ), String ) ),
+                Concatenation( List( IndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( R ), a -> [ "-" , String( a ), ", " ] ) ),
+                [ JoinStringsWithSeparator( List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( R ), String ), ", " ) ],
                 [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
                 ), "need_command", "define" );
     end;
