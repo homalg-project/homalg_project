@@ -2493,6 +2493,57 @@ InstallMethod( HomalgQRingInSingular,
         
     end;
     
+    Unbind( RP!.IsUnit );
+    Unbind( RP!.IsUnit_Z );
+    Unbind( RP!.IsZeroMatrix );
+    Unbind( RP!.IsIdentityMatrix );
+    Unbind( RP!.IsDiagonalMatrix );
+    Unbind( RP!.ZeroRows );
+    Unbind( RP!.ZeroColumns );
+    Unbind( RP!.GetColumnIndependentUnitPositions );
+    Unbind( RP!.GetColumnIndependentUnitPositions_Z );
+    Unbind( RP!.GetRowIndependentUnitPositions );
+    Unbind( RP!.GetRowIndependentUnitPositions_Z );
+    Unbind( RP!.GetUnitPosition );
+    Unbind( RP!.GetUnitPosition_Z );
+    Unbind( RP!.PositionOfFirstNonZeroEntryPerRow );
+    Unbind( RP!.PositionOfFirstNonZeroEntryPerColumn );
+    Unbind( RP!.GetCleanRowsPositions );
+    Unbind( RP!.AffineDimension );
+    Unbind( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries );
+    Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
+    Unbind( RP!.MaxDimensionalRadicalSubobject );
+    Unbind( RP!.RadicalSubobject );
+    Unbind( RP!.RadicalSubobject_Z );
+    Unbind( RP!.RadicalDecomposition );
+    Unbind( RP!.RadicalDecomposition_Z );
+    Unbind( RP!.MaxDimensionalSubobject );
+    Unbind( RP!.EquiDimensionalDecomposition );
+    Unbind( RP!.PrimaryDecomposition );
+    Unbind( RP!.PrimaryDecomposition_Z );
+    Unbind( RP!.Eliminate );
+    Unbind( RP!.Coefficients );
+    Unbind( RP!.CoefficientsWithGivenMonomials );
+    Unbind( RP!.IndicatorMatrixOfNonZeroEntries );
+    Unbind( RP!.DegreeOfRingElement );
+    Unbind( RP!.CoefficientsOfUnivariatePolynomial );
+    Unbind( RP!.LeadingModule );
+    Unbind( RP!.MaximalDegreePart );
+    Unbind( RP!.MonomialMatrix );
+    Unbind( RP!.MatrixOfSymbols );
+    Unbind( RP!.MatrixOfSymbols_workaround );
+    Unbind( RP!.Diff );
+    Unbind( RP!.Pullback );
+    Unbind( RP!.RandomPol );
+    Unbind( RP!.Evaluate );
+    Unbind( RP!.EvaluateMatrix );
+    Unbind( RP!.NumeratorAndDenominatorOfPolynomial );
+    Unbind( RP!.NumeratorAndDenominatorOfRational );
+    Unbind( RP!.Inequalities );
+    Unbind( RP!.MaximalIndependentSet );
+    Unbind( RP!.PolynomialExponents );
+    Unbind( RP!.PolynomialCoefficients );
+    
     # taken from ResidueClassRingForHomalg.gi
     SetIndeterminatesOfPolynomialRing( S, List( IndeterminatesOfPolynomialRing( R ), r -> r / S ) );
     
