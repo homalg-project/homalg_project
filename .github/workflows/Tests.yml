@@ -28,7 +28,7 @@ jobs:
           cd /home/gap/.gap/pkg/
           sudo apt update
           sudo apt dist-upgrade -y
-          sudo apt install -y texlive-latex-extra texlive-science time python-pathlib
+          sudo apt install -y texlive-latex-extra texlive-science time python-pathlib install-info --allow-downgrades macaulay2-common=1.16 macaulay2=1.16
           git clone --depth 1 https://github.com/gap-packages/AutoDoc.git
           # set SOURCE_DATE_EPOCH for reproducible PDFs
           export SOURCE_DATE_EPOCH=0
