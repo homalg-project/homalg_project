@@ -67,6 +67,9 @@ InstallValue( HOMALG_IO,
                 ## memory usage:
                 memory                                  := "mem",
                 
+                ## version:
+                version                                 := "ver",
+                
                 ## unknown:
                 unknown                                 := "???",
                 

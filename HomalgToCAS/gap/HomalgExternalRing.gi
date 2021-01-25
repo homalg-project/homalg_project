@@ -457,6 +457,12 @@ InstallGlobalFunction( CreateHomalgExternalRing,
                     homalgSendBlocking( stream.init_string, "need_command", stream, "initialize" );
                 fi;
                 
+                if IsBound( stream.version_getter ) then
+                    
+                    stream.version := stream.version_getter( stream );
+                    
+                fi;
+                
                 ## initialize the macros
                 if IsBound( stream.InitializeCASMacros ) then
                     stream.InitializeCASMacros( stream );

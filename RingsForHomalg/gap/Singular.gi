@@ -50,6 +50,7 @@ InstallValue( HOMALG_IO_Singular,
             InitializeCASMacros := InitializeSingularMacros,
             time := function( stream, t ) return Int( homalgSendBlocking( [ "timer" ], "need_output", stream, "time" ) ) - t; end,
             memory_usage := function( stream, o ) return Int( homalgSendBlocking( [ "memory(", o, ")" ], "need_output", stream, "memory" ) ); end,
+            version_getter := function( stream ) return Int( homalgSendBlocking( [ "system(\"version\")" ], "need_output", stream, "version" ) ); end,
            )
 );
 
