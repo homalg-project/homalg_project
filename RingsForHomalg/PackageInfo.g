@@ -17,11 +17,11 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2013.07-16", ## Vinay's version
 ## this line prevents merge conflicts
-  "2020.10-04", ## Fabian's version
+  "2021.01-01", ## Fabian's version
 ## this line prevents merge conflicts
 ] ),
 
-Date := "27/11/2020",
+Date := "25/01/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -219,7 +219,7 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2020.06.27" ],
-                   [ "HomalgToCAS", ">= 2020.06.27" ],
+                   [ "HomalgToCAS", ">= 2021.01-01" ],
                    [ "GaussForHomalg", ">= 2020.06.27" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
