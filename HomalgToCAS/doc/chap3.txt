@@ -223,6 +223,9 @@
     [4X  ## memory usage:[104X
     [4X  memory                                  := "mem",[104X
     [4X  [104X
+    [4X  ## version:[104X
+    [4X  version                                 := "ver",[104X
+    [4X  [104X
     [4X  ## unknown:[104X
     [4X  unknown                                 := "???",[104X
     [4X  [104X
