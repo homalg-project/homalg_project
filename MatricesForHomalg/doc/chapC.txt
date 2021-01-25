@@ -880,7 +880,14 @@
     [4X    [104X
     [4X    # work around errors in Singular when taking the opposite ring of a ring with ordering lp[104X
     [4X    # https://github.com/Singular/Singular/issues/1011[104X
-    [4X    if IsBound(RP!.DualKroneckerMat) and not ( IsBound( R!.ring ) and IsBound( R!.ring!.cas ) and R!.ring!.cas = "Singular" and IsBound( R!.order ) and IsString( R!.order ) and StartsWith( R!.order, "lex" ) ) then[104X
+    [4X    # fixed in version 4.2.0[104X
+    [4X    if IsBound(RP!.DualKroneckerMat) and not ([104X
+    [4X        IsBound( R!.ring ) and[104X
+    [4X        IsBound( R!.ring!.stream ) and[104X
+    [4X        IsBound( R!.ring!.stream.cas ) and R!.ring!.stream.cas = "singular" and[104X
+    [4X        ( not IsBound( R!.ring!.stream.version ) or R!.ring!.stream.version < 4200 ) and[104X
+    [4X        IsBound( R!.order ) and IsString( R!.order ) and StartsWith( R!.order, "lex" )[104X
+    [4X    ) then[104X
     [4X        [104X
     [4X        return RP!.DualKroneckerMat( A, B );[104X
     [4X        [104X

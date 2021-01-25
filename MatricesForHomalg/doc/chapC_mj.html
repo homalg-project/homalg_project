@@ -953,7 +953,14 @@ InstallMethod( Eval,
     
     # work around errors in Singular when taking the opposite ring of a ring with ordering lp
     # https://github.com/Singular/Singular/issues/1011
-    if IsBound(RP!.DualKroneckerMat) and not ( IsBound( R!.ring ) and IsBound( R!.ring!.cas ) and R!.ring!.cas = "Singular" and IsBound( R!.order ) and IsString( R!.order ) and StartsWith( R!.order, "lex" ) ) then
+    # fixed in version 4.2.0
+    if IsBound(RP!.DualKroneckerMat) and not (
+        IsBound( R!.ring ) and
+        IsBound( R!.ring!.stream ) and
+        IsBound( R!.ring!.stream.cas ) and R!.ring!.stream.cas = "singular" and
+        ( not IsBound( R!.ring!.stream.version ) or R!.ring!.stream.version &lt; 4200 ) and
+        IsBound( R!.order ) and IsString( R!.order ) and StartsWith( R!.order, "lex" )
+    ) then
         
         return RP!.DualKroneckerMat( A, B );
         

@@ -7,7 +7,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2020.09-05", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2020.10-03", ## Fabian's version
+  "2021.01-01", ## Fabian's version
 ## this line prevents merge conflicts
   "2020.02-05", ## Markus' version
 ## this line prevents merge conflicts
@@ -26,7 +26,7 @@ Version := Maximum( [
   "2020.10-04", ## Kamal's version
 ] ),
 
-Date := "24/10/2020",
+Date := "25/01/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -104,7 +104,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/MatricesForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/MatricesForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/MatricesForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/MatricesForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-", ~.Version, "/MatricesForHomalg-", ~.Version ),
