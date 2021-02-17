@@ -2483,6 +2483,32 @@ InstallMethod( KoszulDualRing,
     
 end );
 
+## this is a technical method which should not be called by the user
+## as its mathematical assumptions are not checked here:
+## the relations must only involve the base ring
+InstallMethod( KoszulDualRing,
+        "for homalg rings",
+        [ IsHomalgRing and HasAmbientRing ],
+        
+  function( S )
+    local A, E;
+    
+    A := KoszulDualRing( AmbientRing( S ) );
+    
+    E := A / MatrixOfRelations( S );
+
+    SetIsExteriorRing( E, true );
+    
+    SetIndeterminatesOfExteriorRing( E,
+            List( IndeterminatesOfExteriorRing( A ), e -> e / E ) );
+
+    SetIndeterminateAntiCommutingVariablesOfExteriorRing( E,
+            List( IndeterminateAntiCommutingVariablesOfExteriorRing( A ), e -> e / E ) );
+    
+    return E;
+    
+end );
+
 ##
 InstallGlobalFunction( HomalgRingElement,
   function( arg )
