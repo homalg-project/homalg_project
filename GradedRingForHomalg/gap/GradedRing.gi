@@ -973,7 +973,11 @@ InstallGlobalFunction( GradedRingElement,
         if IsHomalgGradedRing( arg[2] ) then
           S := arg[2];
           ar := [ el, S ];
-          properties := KnownTruePropertiesOfObject( el );	## FIXME: a huge potential for problems
+          if IsHomalgRingElement( el ) then
+              properties := KnownTruePropertiesOfObject( el );	    ## FIXME: a huge potential for problems
+          else
+              properties := [ ];
+          fi;
           Add( ar, List( properties, ValueGlobal ) );  ## at least an empty list is inserted; avoids infinite loops
           return CallFuncList( GradedRingElement, ar );
         else
