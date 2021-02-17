@@ -1,5 +1,5 @@
 <!-- BEGIN HEADER -->
-# GradedRingForHomalg
+# GradedRingForHomalg&ensp;<sup><sup>[![View code][code-img]][code-url]</sup></sup>
 
 ### Endow Commutative Rings with an Abelian Grading
 
@@ -9,16 +9,16 @@
 
 <!-- END HEADER -->
 <!-- BEGIN FOOTER -->
-[html-img]: https://img.shields.io/badge/HTML-stable-blue.svg
+[html-img]: https://img.shields.io/badge/🔗%20HTML-stable-blue.svg
 [html-url]: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/doc/chap0_mj.html
 
-[pdf-img]: https://img.shields.io/badge/PDF-stable-blue.svg
+[pdf-img]: https://img.shields.io/badge/🔗%20PDF-stable-blue.svg
 [pdf-url]: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/download_pdf.html
 
-[version-img]: https://img.shields.io/endpoint?url=https://homalg-project.github.io/homalg_project/GradedRingForHomalg/badge_version.json
+[version-img]: https://img.shields.io/endpoint?url=https://homalg-project.github.io/homalg_project/GradedRingForHomalg/badge_version.json&label=🔗%20version&color=yellow
 [version-url]: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/view_release.html
 
-[date-img]: https://img.shields.io/endpoint?url=https://homalg-project.github.io/homalg_project/GradedRingForHomalg/badge_date.json
+[date-img]: https://img.shields.io/endpoint?url=https://homalg-project.github.io/homalg_project/GradedRingForHomalg/badge_date.json&label=🔗%20released%20on&color=yellow
 [date-url]: https://homalg-project.github.io/homalg_project/GradedRingForHomalg/view_release.html
 
 [tests-img]: https://github.com/homalg-project/homalg_project/workflows/Tests/badge.svg?branch=master
@@ -26,4 +26,7 @@
 
 [codecov-img]: https://codecov.io/gh/homalg-project/homalg_project/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/homalg-project/homalg_project
+
+[code-img]: https://img.shields.io/badge/-View%20code-blue?logo=github
+[code-url]: https://github.com/homalg-project/homalg_project/tree/master/GradedRingForHomalg#top
 <!-- END FOOTER -->

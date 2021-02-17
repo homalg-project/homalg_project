@@ -5,7 +5,7 @@ PackageName := "GradedRingForHomalg",
 Subtitle := "Endow Commutative Rings with an Abelian Grading",
 
 Version := Maximum( [
-  "2020.05-01", ## Mohamed's version
+  "2021.02-02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2020.02-05", ## Markus' version
 ## this line prevents merge conflicts
@@ -26,7 +26,7 @@ Version := Maximum( [
   "2020.10-02", ## Fabian's version
 ] ),
 
-Date := "16/10/2020",
+Date := "17/02/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -136,7 +136,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/GradedRingForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/GradedRingForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/GradedRingForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/GradedRingForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-", ~.Version, "/GradedRingForHomalg-", ~.Version ),
