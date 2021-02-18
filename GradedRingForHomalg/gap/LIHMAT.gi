@@ -1,16 +1,9 @@
-#############################################################################
-##
-##  LIHMAT.gdi                 LIHMAT subpackage           Mohamed Barakat
-##                                                    Markus Lange-Hegermann
-##
-##         LIHMAT = Logical Implications for homalg Homogeneous MATrices
-##
-##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
-##           Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Implementations for the LIHMAT subpackage.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Implementations
+#
+# LIHMAT = Logical Implications for homalg Homogeneous MATrices
 
 ####################################
 #
@@ -162,9 +155,9 @@ InstallMethod( NonTrivialDegreePerRow,
         return col_degrees;
     elif IsEmptyMatrix( C ) then
         S := HomalgRing( C );
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] );	## this is not a mistake
+        return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] ); ## this is not a mistake
     fi;
     
     degs := NonTrivialDegreePerRow( C );
@@ -219,9 +212,9 @@ InstallMethod( NonTrivialDegreePerColumn,
         return row_degrees;
     elif IsEmptyMatrix( C ) then
         S := HomalgRing( C );
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] );	## this is not a mistake
+        return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] ); ## this is not a mistake
     fi;
     
     degs := NonTrivialDegreePerColumn( C );

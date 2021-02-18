@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  init.g    GradedRingForHomalg package                  Mohamed Barakat
-##                                                    Markus Lange-Hegermann
-##
-##  Copyright 2010
-##
-##  Reading the declaration part of the GradedRingForHomalg package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Reading the declaration part of the package.
+#
 
 ## init
 ReadPackage( "GradedRingForHomalg", "gap/GradedRingForHomalg.gd" );

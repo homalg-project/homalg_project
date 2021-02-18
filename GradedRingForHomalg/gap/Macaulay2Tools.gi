@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  Macaulay2Tools.gd                            GradedRingForHomalg package
-##
-##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
-##                       Daniel Robertz, RWTH Aachen University
-##
-##  Implementations for the rings provided by Macaulay2.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Implementations
+#
 
 ####################################
 #
@@ -124,11 +119,11 @@ InstallValue( GradedRingTableForMacaulay2Tools,
         rec(
                WeightedDegreeOfRingElement :=
                  function( r, weights, R )
-	           
+                   
                    return Int( homalgSendBlocking( [ "Deg(", r, ", {", weights, "},", R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                  end,
-	       
+               
                MultiWeightedDegreeOfRingElement :=
                  function( r, weights, R )
                    

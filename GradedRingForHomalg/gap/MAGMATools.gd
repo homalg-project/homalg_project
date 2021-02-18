@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  MAGMATools.gd                                GradedRingForHomalg package
-##
-##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Kirschmer, RWTH-Aachen University
-##
-##  Declarations for the rings provided by MAGMA.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Declarations
+#
 
 ####################################
 #

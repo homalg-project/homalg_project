@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  MatrixOverGradedRing.gi                      GradedRingForHomalg package
-##
-##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Implementations for matrices over graded rings.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Implementations
+#
 
 ####################################
 #
@@ -106,7 +101,7 @@ InstallMethod( UnderlyingNonGradedRing,
 end );
 
 ##
-InstallMethod( BlindlyCopyMatrixPropertiesToMatrixOverGradedRing,	## under construction
+InstallMethod( BlindlyCopyMatrixPropertiesToMatrixOverGradedRing, ## under construction
         "for matrices over graded rings",
         [ IsHomalgMatrix, IsHomalgMatrixOverGradedRingRep ],
         
@@ -527,7 +522,7 @@ InstallMethod( NonTrivialDegreePerRow,
     if IsOne( C ) then
         return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     fi;
     
     ## CASHING ## 
@@ -571,9 +566,9 @@ InstallMethod( NonTrivialDegreePerRow,
     if IsOne( C ) then
         return col_degrees;
     elif IsEmptyMatrix( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] );	## this is not a mistake
+        return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] ); ## this is not a mistake
     fi;
     
     degs := NonTrivialDegreePerRow( C, S );
@@ -606,7 +601,7 @@ InstallMethod( NonTrivialDegreePerColumn,
     if IsOne( C ) then
         return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     fi;
     
     if IsBound( C!.NonTrivialDegreePerColumn ) then
@@ -649,9 +644,9 @@ InstallMethod( NonTrivialDegreePerColumn,
     if IsOne( C ) then
         return row_degrees;
     elif IsEmptyMatrix( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] );	## this is not a mistake
+        return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] ); ## this is not a mistake
     fi;
     
     degs := NonTrivialDegreePerColumn( C, S );

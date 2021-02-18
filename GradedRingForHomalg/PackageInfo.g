@@ -1,3 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
 SetPackageInfo( rec(
 
 PackageName := "GradedRingForHomalg",
@@ -152,7 +160,7 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "A homalg based Package for Graded Rings",
+  LongTitle := "Endow Commutative Rings with an Abelian Grading",
   Autoload  := false
 ),
 

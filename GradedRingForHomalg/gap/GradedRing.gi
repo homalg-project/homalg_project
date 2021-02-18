@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  GradedRing.gi                                GradedRingForHomalg package
-##
-##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
-##           Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Implementations of procedures for graded rings.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Implementations
+#
 
 ####################################
 #
@@ -974,11 +969,11 @@ InstallGlobalFunction( GradedRingElement,
           S := arg[2];
           ar := [ el, S ];
           if IsHomalgRingElement( el ) then
-              properties := KnownTruePropertiesOfObject( el );	    ## FIXME: a huge potential for problems
+              properties := KnownTruePropertiesOfObject( el ); ## FIXME: a huge potential for problems
           else
               properties := [ ];
           fi;
-          Add( ar, List( properties, ValueGlobal ) );  ## at least an empty list is inserted; avoids infinite loops
+          Add( ar, List( properties, ValueGlobal ) ); ## at least an empty list is inserted; avoids infinite loops
           return CallFuncList( GradedRingElement, ar );
         else
           Error( "Expected a ring element and a ring" );

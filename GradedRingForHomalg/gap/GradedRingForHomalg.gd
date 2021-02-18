@@ -1,14 +1,8 @@
-#############################################################################
-##
-##  GradedRingForHomalg.gd  GradedRingForHomalg package      Mohamed Barakat
-##                                                    Markus Lange-Hegermann
-##
-##  Copyright 2010
-##
-##  Declaration stuff for GradedRingForHomalg.
-##
-#############################################################################
-
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Declarations
+#
 
 # our info class:
 DeclareInfoClass( "InfoGradedRingForHomalg" );

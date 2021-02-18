@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  Tools.gi                                     GradedRingForHomalg package
-##
-##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Implementations for tools for matrices over graded rings.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Implementations
+#
 
 ####################################
 #
@@ -255,7 +250,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
                 local e;
                 e := RP!.NonTrivialDegreePerRowWithColPosition( C );
                 SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
-                return weight * e[1];	## e might be immutable
+                return weight * e[1]; ## e might be immutable
             end;
             
         fi;
@@ -274,7 +269,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
                 local e;
                 e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
                 SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
-                return weight * e[1];	## e might be immutable
+                return weight * e[1]; ## e might be immutable
             end;
             
         fi;
@@ -364,7 +359,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
                 local e;
                 e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
                 SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
-                return weight * e[1];	## e might be immutable
+                return weight * e[1]; ## e might be immutable
             end;
             
         fi;
@@ -383,7 +378,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
                 local e;
                 e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
                 SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
-                return weight * e[1];	## e might be immutable
+                return weight * e[1]; ## e might be immutable
             end;
             
         fi;
@@ -476,7 +471,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
+            C := HomalgZeroMatrix( 0, NrRows( M ), R ); ## most of the computer algebra systems cannot handle degenerated matrices
             
         else
             
@@ -498,7 +493,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
+            C := HomalgZeroMatrix( 0, NrRows( M ), R ); ## most of the computer algebra systems cannot handle degenerated matrices
             
         else
             

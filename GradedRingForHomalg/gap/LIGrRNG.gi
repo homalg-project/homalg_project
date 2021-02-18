@@ -1,16 +1,9 @@
-#############################################################################
-##
-##  LIGrRNG.gi                  LIGrRNG subpackage           Mohamed Barakat
-##                                                    Markus Lange-Hegermann
-##
-##         LIGrRNG = Logical Implications for homalg GRaded RiNGs
-##
-##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
-##           Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Implementations for the LIGrRNG subpackage.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Implementations
+#
+# LIGrRNG = Logical Implications for homalg GRaded RiNGs
 
 ####################################
 #
@@ -122,7 +115,7 @@ InstallImmediateMethod( IsMinusOne,
   function( r )
     local one;
     
-    one := One( r );	## One( r ) is not a mistake
+    one := One( r ); ## One( r ) is not a mistake
     
     if HasDegreeOfRingElement( one ) and
        DegreeOfRingElement( r ) <> DegreeOfRingElement( one ) then

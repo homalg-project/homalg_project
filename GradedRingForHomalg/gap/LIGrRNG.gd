@@ -1,16 +1,9 @@
-#############################################################################
-##
-##  LIGrRNG.gd                  LIGrRNG subpackage           Mohamed Barakat
-##                                                    Markus Lange-Hegermann
-##
-##         LIGrRNG = Logical Implications for homalg GRaded RiNGs
-##
-##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
-##           Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Declarations for the LIGrRNG subpackage.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedRingForHomalg: Endow Commutative Rings with an Abelian Grading
+#
+# Declarations
+#
+# LIGrRNG = Logical Implications for homalg GRaded RiNGs
 
 # our info class:
 DeclareInfoClass( "InfoLIGRNG" );
