@@ -148,7 +148,7 @@ InstallGlobalFunction( HelperToInstallMethodsForGradedRingElementsAttributes,
         
         InstallMethod( GRADEDRING_prop,
                 "for homalg graded rings",
-                [ IsHomalgGradedRingRep and Tester( GRADEDRING_prop ) ],
+                [ IsHomalgGradedRingRep ],
                 
           function( S )
             local indets;
