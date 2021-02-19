@@ -675,7 +675,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         
         l := NrGenerators( gen );
         
-        if IsFieldForHomalg( k_graded ) then
+        if HasIsFieldForHomalg( k_graded ) and IsFieldForHomalg( k_graded ) then
         
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
                 rel := HomalgZeroMatrix( 0, l, k );
