@@ -556,6 +556,10 @@ InstallGlobalFunction( homalgTime,
     
     t := arg[2];
     
+    if t = 0 and IsBound( stream.start_time ) then
+        t := stream.start_time;
+    fi;
+    
     if not IsInt( t ) then
         Error( "the second argument must be an integer\n" );
     fi;

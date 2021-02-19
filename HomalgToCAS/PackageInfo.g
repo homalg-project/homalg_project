@@ -4,7 +4,7 @@ PackageName := "HomalgToCAS",
 
 Subtitle := "A window to the outer world",
 
-Version := "2021.01-02",
+Version := "2021.10-01",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
