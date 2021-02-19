@@ -75,7 +75,11 @@ InstallGlobalFunction( CheckOutputOfCAS,
           handle_output, original_lines, gotsomething, l, nr, pos, bytes, len,
           pos1, pos2, pos3, pos4, CAS, PID, COLOR, ERRORS;
     
-    READY := s.READY;
+    if not IsBound( s.READY_printed ) then
+        s.READY_printed := s.READY;
+    fi;
+    
+    READY := s.READY_printed;
     READY_LENGTH := s.READY_LENGTH;
     CUT_POS_BEGIN := s.CUT_POS_BEGIN;
     CUT_POS_END := s.CUT_POS_END;
