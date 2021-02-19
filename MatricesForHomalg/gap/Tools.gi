@@ -1005,7 +1005,7 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and HasEvalDiagMat ],
         
   function( C )
-    local R, RP, e, z, m, n, diag, mat;
+    local R, RP, e, l, z, m, n, diag, mat;
     
     R := HomalgRing( C );
     
@@ -1017,9 +1017,22 @@ InstallMethod( Eval,
         return RP!.DiagMat( e );
     fi;
     
+    l := Length( e );
+    
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called DiagMat ",
-               "in the homalgTable of the non-internal ring\n" );
+        return UnionOfRows(
+                       List( [ 1 .. l ],
+                             i -> UnionOfColumns(
+                                     List( [ 1 .. l ],
+                                           function( j )
+                                             if i = j then
+                                                 return e[i];
+                                             fi;
+                                             return HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[j] ), R );
+                                           end )
+                                     )
+                             )
+                       );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
