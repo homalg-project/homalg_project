@@ -541,7 +541,7 @@ InstallGlobalFunction( homalgTime,
         return homalgTime( st, 0 );
     fi;
     
-    ## we now know thar nargs > 1
+    ## we now know that nargs > 1
     
     object := arg[1];
     
