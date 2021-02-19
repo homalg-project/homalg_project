@@ -756,7 +756,7 @@
     [4X        [ IsHomalgMatrix and HasEvalDiagMat ],[104X
     [4X        [104X
     [4X  function( C )[104X
-    [4X    local R, RP, e, z, m, n, diag, mat;[104X
+    [4X    local R, RP, e, l, z, m, n, diag, mat;[104X
     [4X    [104X
     [4X    R := HomalgRing( C );[104X
     [4X    [104X
@@ -768,9 +768,22 @@
     [4X        return RP!.DiagMat( e );[104X
     [4X    fi;[104X
     [4X    [104X
+    [4X    l := Length( e );[104X
+    [4X    [104X
     [4X    if not IsHomalgInternalMatrixRep( C ) then[104X
-    [4X        Error( "could not find a procedure called DiagMat ",[104X
-    [4X               "in the homalgTable of the non-internal ring\n" );[104X
+    [4X        return UnionOfRows([104X
+    [4X                       List( [ 1 .. l ],[104X
+    [4X                             i -> UnionOfColumns([104X
+    [4X                                     List( [ 1 .. l ],[104X
+    [4X                                           function( j )[104X
+    [4X                                             if i = j then[104X
+    [4X                                                 return e[i];[104X
+    [4X                                             fi;[104X
+    [4X                                             return HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[j] ), R );[104X
+    [4X                                           end )[104X
+    [4X                                     )[104X
+    [4X                             )[104X
+    [4X                       );[104X
     [4X    fi;[104X
     [4X    [104X
     [4X    #=====# can only work for homalg internal matrices #=====#[104X
