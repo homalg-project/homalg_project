@@ -4,9 +4,9 @@ PackageName := "HomalgToCAS",
 
 Subtitle := "A window to the outer world",
 
-Version := "2021.01-01",
+Version := "2021.01-02",
 
-Date := "25/01/2021",
+Date := "19/02/2021",
 
 License := "GPL-2.0-or-later",
 
