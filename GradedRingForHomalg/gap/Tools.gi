@@ -38,18 +38,28 @@ InstallMethod( DegreeOfRingElementFunction,
             
             return r -> weight * RP!.DegreeOfRingElement( r, R );
             
+        elif weight = 0 then
+            
+            return
+              function( r )
+                if r = 0 then
+                    return HOMALG_TOOLS.minus_infinity;
+                fi;
+                
+                return 0;
+            end;
+            
         fi;
         
     elif Length( set_weights ) = 2 and 0 in set_weights and
-      ForAll( set_weights, a -> a in Rationals ) then
+      ForAll( set_weights, a -> a in Rationals ) and
+      IsBound(RP!.WeightedDegreeOfRingElement) then
         
         weight := Filtered( set_weights, a -> a <> 0 )[1];
         
         weights := List( weights, a -> AbsInt( SignInt( a ) ) );
         
-        if IsBound(RP!.WeightedDegreeOfRingElement) then
-            return r -> weight * RP!.WeightedDegreeOfRingElement( r, weights, R );
-        fi;
+        return r -> weight * RP!.WeightedDegreeOfRingElement( r, weights, R );
         
     elif weights = [ ] then
         
@@ -135,24 +145,22 @@ InstallMethod( DegreesOfEntriesFunction,
             return C -> RP!.DegreesOfEntries( C );
         fi;
         
-    elif Length( set_weights ) = 1 and set_weights[1] in Rationals then
+    elif Length( set_weights ) = 1 and set_weights[1] in Rationals
+      and IsBound(RP!.DegreesOfEntries) then
         
         weight := set_weights[1];
         
-        if IsBound(RP!.DegreesOfEntries) then
-            return C -> weight * RP!.DegreesOfEntries( C );
-        fi;
+        return C -> weight * RP!.DegreesOfEntries( C );
         
     elif Length( set_weights ) = 2 and 0 in set_weights and
-      ForAll( set_weights, a -> a in Rationals ) then
+      ForAll( set_weights, a -> a in Rationals ) and
+      IsBound(RP!.WeightedDegreesOfEntries) then
         
         weight := Filtered( set_weights, a -> a <> 0 )[1];
         
         weights := List( weights, a -> AbsInt( SignInt( a ) ) );
         
-        if IsBound(RP!.WeightedDegreesOfEntries) then
-            return C -> weight * RP!.WeightedDegreesOfEntries( C, weights );
-        fi;
+        return C -> weight * RP!.WeightedDegreesOfEntries( C, weights );
         
     else
         
@@ -238,41 +246,35 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
     RP := homalgTable( R );
     
     set_weights := Set( weights );
-    
-    if Length( set_weights ) = 1 and set_weights[1] in Rationals then
+
+    if Length( set_weights ) = 1 and set_weights[1] in Rationals and
+       IsBound( RP!.NonTrivialDegreePerRowWithColPosition ) then
         
         weight := set_weights[1];
         
-        if IsBound( RP!.NonTrivialDegreePerRowWithColPosition ) then
-            
-            return
-              function( C )
-                local e;
-                e := RP!.NonTrivialDegreePerRowWithColPosition( C );
-                SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
-                return weight * e[1]; ## e might be immutable
-            end;
-            
-        fi;
+        return
+          function( C )
+            local e;
+            e := RP!.NonTrivialDegreePerRowWithColPosition( C );
+            SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
+            return weight * e[1]; ## e might be immutable
+        end;
         
     elif Length( set_weights ) = 2 and 0 in set_weights and
-      ForAll( set_weights, a -> a in Rationals ) then
+      ForAll( set_weights, a -> a in Rationals ) and
+      IsBound( RP!.NonTrivialWeightedDegreePerRowWithColPosition ) then
         
         weight := Filtered( set_weights, a -> a <> 0 )[1];
         
         weights := List( weights, a -> AbsInt( SignInt( a ) ) );
         
-        if IsBound( RP!.NonTrivialWeightedDegreePerRowWithColPosition ) then
-            
-            return
-              function( C )
-                local e;
-                e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
-                SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
-                return weight * e[1]; ## e might be immutable
-            end;
-            
-        fi;
+        return
+          function( C )
+            local e;
+            e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
+            SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
+            return weight * e[1]; ## e might be immutable
+        end;
         
     elif weights = [ ] then
         
@@ -348,41 +350,35 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
     
     set_weights := Set( weights );
     
-    if Length( set_weights ) = 1 and set_weights[1] in Rationals then
+    if Length( set_weights ) = 1 and set_weights[1] in Rationals
+       and IsBound( RP!.NonTrivialDegreePerColumnWithRowPosition ) then
         
         weight := set_weights[1];
         
-        if IsBound( RP!.NonTrivialDegreePerColumnWithRowPosition ) then
-            
-            return
-              function( C )
-                local e;
-                e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
-                SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
-                return weight * e[1]; ## e might be immutable
-            end;
-            
-        fi;
+        return
+          function( C )
+            local e;
+            e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
+            SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
+            return weight * e[1]; ## e might be immutable
+        end;
         
     elif Length( set_weights ) = 2 and 0 in set_weights and
-      ForAll( set_weights, a -> a in Rationals ) then
+      ForAll( set_weights, a -> a in Rationals ) and
+      IsBound( RP!.NonTrivialWeightedDegreePerColumnWithRowPosition ) then
         
         weight := Filtered( set_weights, a -> a <> 0 )[1];
         
         weights := List( weights, a -> AbsInt( SignInt( a ) ) );
         
-        if IsBound( RP!.NonTrivialWeightedDegreePerColumnWithRowPosition ) then
+        return
+          function( C )
+            local e;
+            e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
+            SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
+            return weight * e[1]; ## e might be immutable
+        end;
             
-            return
-              function( C )
-                local e;
-                e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
-                SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
-                return weight * e[1]; ## e might be immutable
-            end;
-            
-        fi;
-        
     elif weights = [ ] then
         
         return
