@@ -595,7 +595,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules, ##
         fi;
     fi;
     
-    n := Length( Indeterminates( A ) );
+    n := Length( IndeterminateAntiCommutingVariablesOfExteriorRing( A ) );
     
     if IsHomalgRing( _M ) then
         M := FreeRightModuleWithDegrees( 1, _M );
@@ -825,7 +825,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
         fi;
     fi;
     
-    n := Length( Indeterminates( A ) );
+    n := Length( IndeterminateAntiCommutingVariablesOfExteriorRing( A ) );
     
     CM := ValueOption( "CM" );
     
