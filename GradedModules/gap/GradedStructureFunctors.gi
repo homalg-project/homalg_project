@@ -747,10 +747,6 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     
     S := HomalgRing( phi );
     
-    if not HasCoefficientsRing( S ) then
-        TryNextMethod( );
-    fi;
-    
     if HasBaseRing( S ) then
         k := BaseRing( S );
     else
