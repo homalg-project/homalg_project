@@ -232,7 +232,7 @@ InstallMethod( RepresentationMapOfKoszulId,
     AM_d := RepresentationObjectOfKoszulId( d, M );
     AM_dp1 := RepresentationObjectOfKoszulId( d+1, M );
     
-    result := GradedMap( A * rep, AM_d, AM_dp1 );;
+    result := GradedMap( rep, AM_d, AM_dp1 );;
     
     Assert( 4, IsMorphism( result ) );
     SetIsMorphism( result, true );
