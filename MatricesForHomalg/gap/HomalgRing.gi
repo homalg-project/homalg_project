@@ -2495,15 +2495,23 @@ InstallMethod( KoszulDualRing,
     
     A := KoszulDualRing( AmbientRing( S ) );
     
+    SetIsExteriorRing( A, true );
+    
     E := A / MatrixOfRelations( S );
 
     SetIsExteriorRing( E, true );
     
     SetIndeterminatesOfExteriorRing( E,
             List( IndeterminatesOfExteriorRing( A ), e -> e / E ) );
-
+    
     SetIndeterminateAntiCommutingVariablesOfExteriorRing( E,
             List( IndeterminateAntiCommutingVariablesOfExteriorRing( A ), e -> e / E ) );
+    
+    if HasBaseRing( S ) then
+        SetBaseRing( E, BaseRing( S ) );
+    fi;
+
+    S!.KoszulDualRing := E;
     
     return E;
     
