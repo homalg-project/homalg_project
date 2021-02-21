@@ -459,7 +459,9 @@ InstallMethod( KoszulAdjointOnMorphisms,
         [ IsMapOfGradedModulesRep, IsHomalgGradedRing, IsInt, IsInt, IsHomalgComplex, IsHomalgComplex ],
         
   function( phi, A, degree_lowest, degree_highest, T_source, T_range )
-    local ii, i, phi_i, T_i, T;
+    local n, ii, i, phi_i, T_i, T;
+    
+    n := Length( IndeterminateAntiCommutingVariablesOfExteriorRing( A ) );
     
     # create the map in each step by converting its homogeneous part to the dual ring.
     for ii in [ degree_lowest .. degree_highest ] do
@@ -467,7 +469,7 @@ InstallMethod( KoszulAdjointOnMorphisms,
         
         phi_i := HomogeneousPartOverCoefficientsRing( i, phi );
         
-        T_i := A * phi_i;
+        T_i := A^(-n) * ( A * phi_i );
         
         if IsBound( T ) then
             Add( T_i, T );
