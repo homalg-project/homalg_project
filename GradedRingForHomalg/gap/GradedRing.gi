@@ -359,8 +359,12 @@ InstallMethod( WeightsOfIndeterminates,
     indets := IndeterminatesOfExteriorRing( E );
     
     n := Length( indets );
-    
-    if HasBaseRing( E ) and HasIsExteriorRing( E ) and IsExteriorRing( E ) then
+
+    if HasAmbientRing( E ) then
+        
+        weights := WeightsOfIndeterminates( AmbientRing( E ) );
+        
+    elif HasBaseRing( E ) and HasIsExteriorRing( E ) and IsExteriorRing( E ) then
         
         old_weights := WeightsOfIndeterminates( BaseRing( E ) );
         
@@ -373,7 +377,9 @@ InstallMethod( WeightsOfIndeterminates,
         
         B := BaseRingDegreeGroup + A;
         
-        SetDegreeGroup( E, B );
+        if not HasDegreeGroup( E ) then
+            SetDegreeGroup( E, B );
+        fi;
         
         iota := MonoOfLeftSummand( B );
         
@@ -392,7 +398,9 @@ InstallMethod( WeightsOfIndeterminates,
         ## if A is a direct sum then MonoOfLeftSummand and MonoOfRightSummand are set
         A := 0 * HOMALG_MATRICES.ZZ + 1 * HOMALG_MATRICES.ZZ;
         
-        SetDegreeGroup( E, A );
+        if not HasDegreeGroup( E ) then
+            SetDegreeGroup( E, A );
+        fi;
         
         gens := GeneratingElements( A );
         
@@ -583,7 +591,9 @@ InstallMethod( SetWeightsOfIndeterminates,
         
   function( S, weights )
     
-    SetWeightsOfIndeterminates( AmbientRing( S ), weights );
+    if not HasWeightsOfIndeterminates( AmbientRing( S ) ) then
+        SetWeightsOfIndeterminates( AmbientRing( S ), weights );
+    fi;
     
     WeightsOfIndeterminates( S );
     
