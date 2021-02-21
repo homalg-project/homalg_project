@@ -607,7 +607,7 @@ InstallMethod( KoszulRightAdjoint,
     
     S := HomalgRing( M );
     
-    if not IsFreePolynomialRing( S ) and IsHomalgGradedRingRep( S ) then
+    if not ( HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) ) and IsHomalgGradedRingRep( S ) and not HasAmbientRing( S ) then
         TryNextMethod();
     fi;
     
@@ -627,7 +627,7 @@ InstallMethod( KoszulRightAdjoint,
     
     S := HomalgRing( M );
     
-    if not IsFreePolynomialRing( S ) and IsHomalgGradedRingRep( S ) then
+    if not ( HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) ) and IsHomalgGradedRingRep( S ) and not HasAmbientRing( S ) then
         TryNextMethod();
     fi;
     
