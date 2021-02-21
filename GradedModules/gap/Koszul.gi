@@ -65,8 +65,8 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     ## this whole computation is over S = HomalgRing( M )
     reps := List( vars, v -> MatrixOfMap( RepresentationMapOfRingElement( v, M, d ) ) );
     
-    ## convert the matrices with constant coefficients
-    ## to matrices of the Koszul dual ring A
+    ## convert the matrices over S with coefficients in the base ring
+    ## to matrices over the Koszul dual ring A, which is ring over the same base ring
     reps := List( reps, mat -> A * mat );
     
     ## this is over the Koszul dual ring A
@@ -232,7 +232,7 @@ InstallMethod( RepresentationMapOfKoszulId,
     AM_d := RepresentationObjectOfKoszulId( d, M );
     AM_dp1 := RepresentationObjectOfKoszulId( d+1, M );
     
-    result := GradedMap( A * rep, AM_d, AM_dp1 );;
+    result := GradedMap( rep, AM_d, AM_dp1 );;
     
     Assert( 4, IsMorphism( result ) );
     SetIsMorphism( result, true );
@@ -607,7 +607,7 @@ InstallMethod( KoszulRightAdjoint,
     
     S := HomalgRing( M );
     
-    if not IsFreePolynomialRing( S ) and IsHomalgGradedRingRep( S ) then
+    if not ( HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) ) and IsHomalgGradedRingRep( S ) and not HasAmbientRing( S ) then
         TryNextMethod();
     fi;
     
@@ -627,7 +627,7 @@ InstallMethod( KoszulRightAdjoint,
     
     S := HomalgRing( M );
     
-    if not IsFreePolynomialRing( S ) and IsHomalgGradedRingRep( S ) then
+    if not ( HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) ) and IsHomalgGradedRingRep( S ) and not HasAmbientRing( S ) then
         TryNextMethod();
     fi;
     

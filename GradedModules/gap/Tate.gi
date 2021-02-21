@@ -112,9 +112,15 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules, ### defines: Tat
         M := _M;
     fi;
     
-    CM := CastelnuovoMumfordRegularity( M );
+    CM := ValueOption( "CM" );
     
-    CM := HomalgElementToInteger( CM );
+    if not IsInt( CM ) then
+        
+        CM := CastelnuovoMumfordRegularity( M );
+        
+        CM := HomalgElementToInteger( CM );
+        
+    fi;
     
     if not IsBound( M!.TateResolution ) then
       M!.TateResolution := rec( );
@@ -397,9 +403,15 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
         fi;
     fi;
     
-    CM := CastelnuovoMumfordRegularity( phi );
+    CM := ValueOption( "CM" );
     
-    CM := HomalgElementToInteger( CM );
+    if not IsInt( CM ) then
+        
+        CM := CastelnuovoMumfordRegularity( phi );
+        
+        CM := HomalgElementToInteger( CM );
+        
+    fi;
     
     degree_highest2 := Maximum( degree_highest, CM + 1 );
     
@@ -583,7 +595,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules, ##
         fi;
     fi;
     
-    n := Length( Indeterminates( A ) );
+    n := Length( IndeterminateAntiCommutingVariablesOfExteriorRing( A ) );
     
     if IsHomalgRing( _M ) then
         M := FreeRightModuleWithDegrees( 1, _M );
@@ -591,9 +603,15 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules, ##
         M := _M;
     fi;
     
-    CM := CastelnuovoMumfordRegularity( M );
+    CM := ValueOption( "CM" );
     
-    CM := HomalgElementToInteger( CM );
+    if not IsInt( CM ) then
+        
+        CM := CastelnuovoMumfordRegularity( M );
+        
+        CM := HomalgElementToInteger( CM );
+        
+    fi;
     
     p := PositionOfTheDefaultPresentation( M );
     
@@ -807,11 +825,17 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
         fi;
     fi;
     
-    n := Length( Indeterminates( A ) );
+    n := Length( IndeterminateAntiCommutingVariablesOfExteriorRing( A ) );
     
-    CM := CastelnuovoMumfordRegularity( phi );
+    CM := ValueOption( "CM" );
     
-    CM := HomalgElementToInteger( CM );
+    if not IsInt( CM ) then
+        
+        CM := CastelnuovoMumfordRegularity( phi );
+        
+        CM := HomalgElementToInteger( CM );
+        
+    fi;
     
     degree_highest2 := Maximum( degree_highest, CM + 1 );
     
