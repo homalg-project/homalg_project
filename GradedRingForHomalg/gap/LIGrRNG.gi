@@ -135,9 +135,12 @@ end );
 ##
 InstallGlobalFunction( HelperToInstallMethodsForGradedRingElementsAttributes,
   function( L )
-    local GRADEDRING_prop;
+    local scope, GRADEDRING_prop;
     
-    for GRADEDRING_prop in L do
+    ## we need this scope to protect GRADEDRING_prop
+    ## from being redefined in the for loop below
+    scope :=
+      function( GRADEDRING_prop )
         
         InstallMethod( GRADEDRING_prop,
                 "for homalg graded rings",
@@ -151,7 +154,10 @@ InstallGlobalFunction( HelperToInstallMethodsForGradedRingElementsAttributes,
             return List( indets, x -> GradedRingElement( x, S ) );
             
         end );
+    end;
         
+    for GRADEDRING_prop in L do
+        scope( GRADEDRING_prop );
     od;
     
 end );
