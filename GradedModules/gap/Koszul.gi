@@ -65,8 +65,8 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     ## this whole computation is over S = HomalgRing( M )
     reps := List( vars, v -> MatrixOfMap( RepresentationMapOfRingElement( v, M, d ) ) );
     
-    ## convert the matrices with constant coefficients
-    ## to matrices of the Koszul dual ring A
+    ## convert the matrices over S with coefficients in the base ring
+    ## to matrices over the Koszul dual ring A, which is ring over the same base ring
     reps := List( reps, mat -> A * mat );
     
     ## this is over the Koszul dual ring A
