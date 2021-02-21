@@ -715,18 +715,16 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         V_weights := List( [ 1 .. NrGenerators( gen ) ], i -> HomalgModuleElement( [ d ], degree_group ) );
         
         V := GradedModule( Presentation( gen, rel ), V_weights, k_graded );
-        
+
+        ## this map is usually not well-defined in the relative case:
         map := GradedMap( HomalgIdentityMatrix( l, S ),
                        S * V, Source( map_having_submodule_as_its_image ) );
-        
-        Assert( 4, IsMorphism( map ) );
-        SetIsMorphism( map, true );
-        
-        Assert( 4, IsIsomorphism( map ) );
-        SetIsIsomorphism( map, true );
-        UpdateObjectsByMorphism( map );
-        
+
+        ## ..., but this one is:
         map_having_submodule_as_its_image := PreCompose( map, map_having_submodule_as_its_image );
+        
+        Assert( 4, IsMorphism( map_having_submodule_as_its_image ) );
+        SetIsMorphism( map_having_submodule_as_its_image, true );
         
     fi;
     
