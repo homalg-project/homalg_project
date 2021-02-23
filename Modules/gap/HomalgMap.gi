@@ -292,14 +292,23 @@ InstallMethod( DecideZero,
         
   function( phi )
     local rel, index_pair, matrix, reduced, zero;
-    
-    rel := RelationsOfModule( Range( phi ) );
+
+    ## for compatibility with GradedModules:
+    ## do not use RelationsOfModule( Range( phi ) ) here
+    ## as it will be non-graded even if phi is graded
+    rel := MatrixOfRelations( Range( phi ) );
     
     index_pair := PairOfPositionsOfTheDefaultPresentations( phi );
     
     matrix := MatrixOfMap( phi );
+
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        reduced := DecideZeroRows( matrix, BasisOfRowModule( rel ) );
+    else
+        reduced := DecideZeroColumns( matrix, BasisOfColumnModule( rel ) );
+    fi;
     
-    reduced := DecideZero( matrix, rel );
+    reduced := DecideZero( reduced );
     
     zero := IsZero( reduced );
     
