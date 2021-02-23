@@ -5,7 +5,7 @@ PackageName := "Modules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
 
 Version := Maximum( [
-  "2020.05-15", ## Mohamed's version
+  "2021.02-01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2020.02-05", ## Markus' version
 ## this line prevents merge conflicts
@@ -22,7 +22,7 @@ Version := Maximum( [
   "2020.10-02", ## Fabian's version
 ] ),
 
-Date := "16/10/2020",
+Date := "23/02/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -131,7 +131,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/Modules",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/Modules",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/Modules/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/Modules/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Modules-", ~.Version, "/Modules-", ~.Version ),

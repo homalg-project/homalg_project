@@ -1,7 +1,7 @@
 name: Modules
-version: "2020.10-02"
+version: "2021.02-01"
 license: "GPL-2.0-or-later"
-date: 2020-10-16
+date: 2021-02-23
 description: |
     A homalg based package for the Abelian category of finitely presented modules over computable rings
 
@@ -28,31 +28,31 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "MatricesForHomalg"
       version: ">=2020.05.09"
-      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg"
+      url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
     - name: "ToolsForHomalg"
       version: ">=2013.04.12"
-      url: "https://homalg-project.github.io/homalg_project/ToolsForHomalg"
+      url: "https://homalg-project.github.io/pkg/ToolsForHomalg"
     - name: "homalg"
       version: ">=2019.09.01"
-      url: "https://homalg-project.github.io/homalg_project/homalg"
+      url: "https://homalg-project.github.io/pkg/homalg"
     - name: "GaussForHomalg"
       version: ">=2019.09.01"
-      url: "https://homalg-project.github.io/homalg_project/GaussForHomalg"
+      url: "https://homalg-project.github.io/pkg/GaussForHomalg"
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/Modules
+www: https://homalg-project.github.io/pkg/Modules
 readme: README.md
 packageinfo: https://homalg-project.github.io/homalg_project/Modules/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.10-02/Modules-2020.10-02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2021.02-01/Modules-2021.02-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.10-02/Modules-2020.10-02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2021.02-01/Modules-2021.02-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/Modules-2020.10-02/Modules-2020.10-02.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/Modules-2021.02-01/Modules-2021.02-01.pdf
 
 abstract: |
     The <span class="pkgname">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings
@@ -64,31 +64,30 @@ keywords: |
     modules, module homomorphisms, functor, ext, tor.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BBDGLW20</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Diebold, F., Gutsche, S., Lange-Hegermann, M. and Wagh, V.</b>,
+    [<span class='BibKey'>BBDGLW21</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Diebold, F., Gutsche, S., Lange-Hegermann, M. and Wagh, V.</b>,
      <i class='BibTitle'>Modules, A homalg based package for the Abelian category of finitely presented modules over computable rings,
-             Version 2020.10-02</i>
-     (<span class='BibYear'>2020</span>)<br />
+             Version 2021.02-01</i>
+     (<span class='BibYear'>2021</span>)<br />
     (<span class='BibNote'>GAP package</span>),
-    <span class='BibHowpublished'><a href="https://homalg-project.github.io/homalg_project/Modules">https://homalg-project.github.io/homalg_project/Modules</a></span>.
+    <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/Modules">https://homalg-project.github.io/pkg/Modules</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ Modules2020.10-02,
+    @misc{ Modules2021.02-01,
       author =           {B{\"a}chler,  T.  and  Barakat, M. and Diebold, F. and
                           Gutsche, S. and Lange-Hegermann, M. and Wagh, V.},
       title =            {{Modules},  A  homalg  based  package  for the Abelian
                           category of finitely presented modules over computable
-                          rings, {V}ersion 2020.10-02},
-      month =            {Oct},
-      year =             {2020},
+                          rings, {V}ersion 2021.02-01},
+      month =            {Feb},
+      year =             {2021},
       note =             {GAP package},
-      howpublished =     {\href
-                          {https://homalg-project.github.io/homalg_project/Modules}
+      howpublished =     {\href   {https://homalg-project.github.io/pkg/Modules}
                           {\texttt{https://homalg-project.github.io/}\discretionary
-                          {}{}{}\texttt{homalg{\textunderscore}project/}\discretionary
+                          {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{Modules}}},
       keywords =         {modules; module homomorphisms; functor; ext; tor},
-      printedkey =       {BBDGLW20}
+      printedkey =       {BBDGLW21}
     }
 
