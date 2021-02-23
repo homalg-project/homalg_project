@@ -611,10 +611,14 @@ InstallMethod( PushPresentationByIsomorphism,
     
     SetNrRows( T, NrColumns( TI ) );
     SetNrColumns( T, NrRows( TI ) );
-    
+
     SetEvalMatrixOperation( T, [ a -> Eval( MatrixOfMap( a^-1, pos[2], pos[1] ) ), [ iso ] ] );
     
-    return AddANewPresentation( M, RelationsOfModule( Source( iso ), pos[1] ), T, TI );
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        return AddANewPresentation( M, RelationsOfModule( Source( iso ), pos[1] ), T, TI );
+    else
+        return AddANewPresentation( M, RelationsOfModule( Source( iso ), pos[2] ), T, TI );
+    fi;
     
 end );
 
