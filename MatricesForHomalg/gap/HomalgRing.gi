@@ -2899,6 +2899,13 @@ InstallMethod( ViewObj,
     
 end );
 
+##
+InstallMethod( ViewString,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  Name );
+
 ## fallback method
 InstallOtherMethod( LaTeXStringOp,
         "for homalg ring elements",
