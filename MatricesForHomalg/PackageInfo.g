@@ -7,7 +7,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2021.02-03", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2021.01-01", ## Fabian's version
+  "2021.02-04", ## Fabian's version
 ## this line prevents merge conflicts
   "2020.02-05", ## Markus' version
 ## this line prevents merge conflicts
@@ -26,7 +26,7 @@ Version := Maximum( [
   "2020.10-04", ## Kamal's version
 ] ),
 
-Date := "21/02/2021",
+Date := "26/02/2021",
 
 License := "GPL-2.0-or-later",
 
