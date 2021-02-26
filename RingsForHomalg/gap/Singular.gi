@@ -2534,7 +2534,6 @@ InstallMethod( HomalgQRingInSingular,
     Unbind( RP!.MatrixOfSymbols );
     Unbind( RP!.MatrixOfSymbols_workaround );
     Unbind( RP!.Diff );
-    Unbind( RP!.Pullback );
     Unbind( RP!.RandomPol );
     Unbind( RP!.Evaluate );
     Unbind( RP!.EvaluateMatrix );
