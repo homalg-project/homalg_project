@@ -102,11 +102,7 @@ BasisOfRowsCoeff :=
     );
     
     homalgSendBlocking(
-      [
-        "list ", v, "l=BasisOfRowsCoeff(", M, "); ",
-        "matrix ", N, " = ", v, "l[1]; ",
-        "matrix ", T, " = ", v, "l[2]"
-      ],
+      [ "matrix ", N, T, " = BasisOfRowsCoeff(", M, ")" ],
       "need_command",
       "BasisCoeff"
     );
@@ -139,11 +135,7 @@ BasisOfColumnsCoeff :=
     );
     
     homalgSendBlocking( 
-      [
-        "list ", v, "l=BasisOfColumnsCoeff(", M, "); ",
-        "matrix ", N, " = ", v, "l[1]; ",
-        "matrix ", T, " = ", v, "l[2]"
-      ],
+      [ "matrix ", N, T, " = BasisOfColumnsCoeff(", M, ")" ],
       "need_command",
       "BasisCoeff"
     );
@@ -238,11 +230,7 @@ DecideZeroRowsEffectively :=
     );
     
     homalgSendBlocking(
-      [
-        "list ", v, "l=DecideZeroRowsEffectively(", A, B, "); ",
-        "matrix ", N, " = ", v, "l[1]; ",
-        "matrix ", T, " = ", v, "l[2]"
-      ],
+      [ "matrix ", N, T, " = DecideZeroRowsEffectively(", A, B, ")" ],
       "need_command",
       "DecideZeroEffectively"
     );
@@ -275,11 +263,7 @@ DecideZeroColumnsEffectively :=
     );
     
     homalgSendBlocking(
-      [
-        "list ", v, "l=DecideZeroColumnsEffectively(", A, B, "); ",
-        "matrix ", N, " = ", v, "l[1]; ",
-        "matrix ", T, " = ", v, "l[2]"
-      ],
+      [ "matrix ", N, T, " = DecideZeroColumnsEffectively(", A, B, ")" ],
       "need_command",
       "DecideZeroEffectively"
     );
