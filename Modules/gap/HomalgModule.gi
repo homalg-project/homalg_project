@@ -3124,7 +3124,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsString ],
+        [ IsHomalgModule, IsString ],
         
   function( M, extra_information )
     local R, l, D, esc;
@@ -3176,7 +3176,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsString ], 1000,
+        [ IsHomalgModule, IsString ], 1000,
         
   function( M, extra_information )
     local r, rel, R, RP, name, elements, display, rk, get_string, color;
@@ -3240,7 +3240,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsString ], 1001,
+        [ IsHomalgModule, IsString ], 1001,
         
   function( M, extra_information )
     local rel, R, RP, name, diag, display, rk, get_string, color;
