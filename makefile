@@ -113,12 +113,10 @@ ci-test_MatricesForHomalg:
 
 ci-test_RingsForHomalg:
 ifneq ($(SINGULAR_PATH),)
-ifneq ($(SAGE_PATH),)
 ifneq ($(M2_PATH),)
 ifneq ($(MAGMA_PATH),)
 ifneq ($(MAPLE_PATH),)
 	$(MAKE) -C RingsForHomalg ci-test
-endif
 endif
 endif
 endif
