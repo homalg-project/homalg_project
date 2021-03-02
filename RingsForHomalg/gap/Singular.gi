@@ -662,8 +662,7 @@ proc BasisOfRowsCoeff (matrix M)
   option(noredSB);
   matrix T = lift(M,B);
   option(redSB);
-  list l = B,T;
-  return(l);
+  return(B,T);
 }
 
  """,
@@ -679,15 +678,14 @@ proc BasisOfRowsCoeff (matrix M)
 ##    <Description>
 ##    
 ##      <Listing Type="Code"><![CDATA[
-    BasisOfColumnsCoeff := "\n\
-proc BasisOfColumnsCoeff (matrix M)\n\
-{\n\
-  list l = BasisOfRowsCoeff(Involution(M));\n\
-  matrix B = l[1];\n\
-  matrix T = l[2];\n\
-  l = Involution(B),Involution(T);\n\
-  return(l);\n\
-}\n\n",
+    BasisOfColumnsCoeff := """
+proc BasisOfColumnsCoeff (matrix M)
+{
+  matrix B,T = BasisOfRowsCoeff(Involution(M));
+  return(Involution(B),Involution(T));
+}
+
+ """,
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -742,15 +740,16 @@ proc DecideZeroColumns (matrix A, matrix B)\n\
 ##    <Description>
 ##    
 ##      <Listing Type="Code"><![CDATA[
-    DecideZeroRowsEffectively := "\n\
-proc DecideZeroRowsEffectively (matrix A, module B)\n\
-{\n\
-  attrib(B,\"isSB\",1);\n\
-  matrix M = reduce(A,B);\n\
-  matrix T = lift(B,M-A);\n\
-  list l = M,T;\n\
-  return(l);\n\
-}\n\n",
+    DecideZeroRowsEffectively := """
+proc DecideZeroRowsEffectively (matrix A, module B)
+{
+  attrib(B,"isSB",1);
+  matrix M = reduce(A,B);
+  matrix T = lift(B,M-A);
+  return(M,T);
+}
+
+ """,
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -763,15 +762,14 @@ proc DecideZeroRowsEffectively (matrix A, module B)\n\
 ##    <Description>
 ##    
 ##      <Listing Type="Code"><![CDATA[
-    DecideZeroColumnsEffectively := "\n\
-proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
-{\n\
-  list l = DecideZeroRowsEffectively(Involution(A),Involution(B));\n\
-  matrix B = l[1];\n\
-  matrix T = l[2];\n\
-  l = Involution(B),Involution(T);\n\
-  return(l);\n\
-}\n\n",
+    DecideZeroColumnsEffectively := """
+proc DecideZeroColumnsEffectively (matrix A, matrix B)
+{
+  matrix M,T = DecideZeroRowsEffectively(Involution(A),Involution(B));
+  return(Involution(M),Involution(T));
+}
+
+ """,
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
