@@ -2979,7 +2979,7 @@ end );
 ##
 InstallMethod( ViewString,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
+        [ IsHomalgModule and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( M )
     local R, vs, result, r, rk, l, rel, num_rel;
@@ -3083,7 +3083,7 @@ end );
 ##
 InstallMethod( ViewString,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
+        [ IsHomalgModule and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
         
   function( M )
     local R, vs, result;
