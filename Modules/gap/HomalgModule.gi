@@ -3010,6 +3010,13 @@ InstallMethod( ViewString,
     
     r := NrGenerators( M );
     
+    if not HasRankOfObject( M ) and
+       HasHasInvariantBasisProperty( R ) and HasInvariantBasisProperty( R ) and
+       HasNrRelations( M ) and NrRelations( M ) = 0 then
+        
+        SetRankOfObject( M, r );
+    fi;
+    
     if HasRankOfObject( M ) then
         rk := RankOfObject( M );
         if vs then
@@ -3353,4 +3360,3 @@ InstallMethod( Display,
     Print( M!.DisplayString, extra_information, "\n" );
     
 end );
-
