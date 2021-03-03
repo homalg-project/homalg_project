@@ -2659,10 +2659,22 @@ InstallMethod( ViewString,
         [ IsHomalgModule ],
         
   function( o )
-    local is_submodule, M, R, left_module, num_gen, first_properties, properties, nz, num_rel,
+    local R, num_gen, is_submodule, M, left_module, first_properties, properties, nz, num_rel,
           gen_string, rel_string, rel, locked;
     
+    R := HomalgRing( o );
+    
     num_gen := NrGenerators( o );
+
+    if num_gen = 0 then
+        SetIsZero( o, true );
+    elif not HasRankOfObject( o ) and
+       HasHasInvariantBasisProperty( R ) and HasInvariantBasisProperty( R ) and
+       HasNrRelations( o ) = true and NrRelations( o ) = 0 then
+        
+        SetRankOfObject( o, num_gen );
+        SetIsFree( o, true );
+    fi;
     
     ## NrGenerators might set IsZero or more generally IsFree to true
     if HasIsFree( o ) and IsFree( o ) then
@@ -3010,9 +3022,12 @@ InstallMethod( ViewString,
     
     r := NrGenerators( M );
     
-    if not HasRankOfObject( M ) and
-       HasHasInvariantBasisProperty( R ) and HasInvariantBasisProperty( R ) and
-       HasNrRelations( M ) and NrRelations( M ) = 0 then
+    if r = 0 then
+        SetIsZero( M, true );
+        return ViewString( M );
+    elif not HasRankOfObject( M ) and
+      HasHasInvariantBasisProperty( R ) and HasInvariantBasisProperty( R ) and
+      HasNrRelations( M ) = true and NrRelations( M ) = 0 then
         
         SetRankOfObject( M, r );
     fi;
