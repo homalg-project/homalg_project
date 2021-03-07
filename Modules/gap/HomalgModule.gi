@@ -2681,7 +2681,7 @@ InstallMethod( ViewString,
         return ViewString( o );
     fi;
     
-    is_submodule := IsFinitelyPresentedSubmoduleRep( o );
+    is_submodule := IsStaticFinitelyPresentedSubobjectRep( o );
     
     if is_submodule and HasEmbeddingInSuperObject( o ) then
         M := UnderlyingObject( o );
