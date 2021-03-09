@@ -13,7 +13,7 @@ PackageName := "GradedRingForHomalg",
 Subtitle := "Endow Commutative Rings with an Abelian Grading",
 
 Version := Maximum( [
-  "2021.02-04", ## Mohamed's version
+  "2021.03-01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2020.02-05", ## Markus' version
 ## this line prevents merge conflicts
@@ -34,7 +34,7 @@ Version := Maximum( [
   "2020.10-02", ## Fabian's version
 ] ),
 
-Date := "21/02/2021",
+Date := "09/03/2021",
 
 License := "GPL-2.0-or-later",
 
