@@ -324,6 +324,19 @@ end );
 ##
 InstallMethod( MonomialMatrix,
         "for homalg rings",
+        [ IsHomalgElement, IsHomalgGradedRing, IsList, IsBool ],
+        
+  function( d, S, degrees, left )
+    
+    d := HomalgElementToInteger( d );
+    
+    return MonomialMatrix( d, S, degrees, left );
+    
+end );
+
+##
+InstallMethod( MonomialMatrix,
+        "for homalg rings",
         [ IsList, IsHomalgGradedRing ],
         
   function( d, S )
