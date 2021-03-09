@@ -277,11 +277,7 @@
     [4X    );[104X
     [4X    [104X
     [4X    homalgSendBlocking([104X
-    [4X      [[104X
-    [4X        "list ", v, "l=BasisOfRowsCoeff(", M, "); ",[104X
-    [4X        "matrix ", N, " = ", v, "l[1]; ",[104X
-    [4X        "matrix ", T, " = ", v, "l[2]"[104X
-    [4X      ],[104X
+    [4X      [ "matrix ", N, T, " = BasisOfRowsCoeff(", M, ")" ],[104X
     [4X      "need_command",[104X
     [4X      "BasisCoeff"[104X
     [4X    );[104X
@@ -303,8 +299,7 @@
     [4X  option(noredSB);[104X
     [4X  matrix T = lift(M,B);[104X
     [4X  option(redSB);[104X
-    [4X  list l = B,T;[104X
-    [4X  return(l);[104X
+    [4X  return(B,T);[104X
     [4X}[104X
     [4X[104X
     [4X """,[104X
@@ -331,11 +326,7 @@
     [4X    );[104X
     [4X    [104X
     [4X    homalgSendBlocking( [104X
-    [4X      [[104X
-    [4X        "list ", v, "l=BasisOfColumnsCoeff(", M, "); ",[104X
-    [4X        "matrix ", N, " = ", v, "l[1]; ",[104X
-    [4X        "matrix ", T, " = ", v, "l[2]"[104X
-    [4X      ],[104X
+    [4X      [ "matrix ", N, T, " = BasisOfColumnsCoeff(", M, ")" ],[104X
     [4X      "need_command",[104X
     [4X      "BasisCoeff"[104X
     [4X    );[104X
@@ -350,15 +341,14 @@
   [33X[1;0Y[29X[2XBasisOfColumnsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
-    [4X    BasisOfColumnsCoeff := "\n\[104X
-    [4Xproc BasisOfColumnsCoeff (matrix M)\n\[104X
-    [4X{\n\[104X
-    [4X  list l = BasisOfRowsCoeff(Involution(M));\n\[104X
-    [4X  matrix B = l[1];\n\[104X
-    [4X  matrix T = l[2];\n\[104X
-    [4X  l = Involution(B),Involution(T);\n\[104X
-    [4X  return(l);\n\[104X
-    [4X}\n\n",[104X
+    [4X    BasisOfColumnsCoeff := """[104X
+    [4Xproc BasisOfColumnsCoeff (matrix M)[104X
+    [4X{[104X
+    [4X  matrix B,T = BasisOfRowsCoeff(Involution(M));[104X
+    [4X  return(Involution(B),Involution(T));[104X
+    [4X}[104X
+    [4X[104X
+    [4X """,[104X
   [4X[32X[104X
   
   [1X3.1-17 DecideZeroRowsEffectively[101X
@@ -383,11 +373,7 @@
     [4X    );[104X
     [4X    [104X
     [4X    homalgSendBlocking([104X
-    [4X      [[104X
-    [4X        "list ", v, "l=DecideZeroRowsEffectively(", A, B, "); ",[104X
-    [4X        "matrix ", N, " = ", v, "l[1]; ",[104X
-    [4X        "matrix ", T, " = ", v, "l[2]"[104X
-    [4X      ],[104X
+    [4X      [ "matrix ", N, T, " = DecideZeroRowsEffectively(", A, B, ")" ],[104X
     [4X      "need_command",[104X
     [4X      "DecideZeroEffectively"[104X
     [4X    );[104X
@@ -402,15 +388,16 @@
   [33X[1;0Y[29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
-    [4X    DecideZeroRowsEffectively := "\n\[104X
-    [4Xproc DecideZeroRowsEffectively (matrix A, module B)\n\[104X
-    [4X{\n\[104X
-    [4X  attrib(B,\"isSB\",1);\n\[104X
-    [4X  matrix M = reduce(A,B);\n\[104X
-    [4X  matrix T = lift(B,M-A);\n\[104X
-    [4X  list l = M,T;\n\[104X
-    [4X  return(l);\n\[104X
-    [4X}\n\n",[104X
+    [4X    DecideZeroRowsEffectively := """[104X
+    [4Xproc DecideZeroRowsEffectively (matrix A, module B)[104X
+    [4X{[104X
+    [4X  attrib(B,"isSB",1);[104X
+    [4X  matrix M = reduce(A,B);[104X
+    [4X  matrix T = lift(B,M-A);[104X
+    [4X  return(M,T);[104X
+    [4X}[104X
+    [4X[104X
+    [4X """,[104X
   [4X[32X[104X
   
   [1X3.1-19 DecideZeroColumnsEffectively[101X
@@ -435,11 +422,7 @@
     [4X    );[104X
     [4X    [104X
     [4X    homalgSendBlocking([104X
-    [4X      [[104X
-    [4X        "list ", v, "l=DecideZeroColumnsEffectively(", A, B, "); ",[104X
-    [4X        "matrix ", N, " = ", v, "l[1]; ",[104X
-    [4X        "matrix ", T, " = ", v, "l[2]"[104X
-    [4X      ],[104X
+    [4X      [ "matrix ", N, T, " = DecideZeroColumnsEffectively(", A, B, ")" ],[104X
     [4X      "need_command",[104X
     [4X      "DecideZeroEffectively"[104X
     [4X    );[104X
@@ -454,15 +437,14 @@
   [33X[1;0Y[29X[2XDecideZeroColumnsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function[133X
   
   [4X[32X  Code  [32X[104X
-    [4X    DecideZeroColumnsEffectively := "\n\[104X
-    [4Xproc DecideZeroColumnsEffectively (matrix A, matrix B)\n\[104X
-    [4X{\n\[104X
-    [4X  list l = DecideZeroRowsEffectively(Involution(A),Involution(B));\n\[104X
-    [4X  matrix B = l[1];\n\[104X
-    [4X  matrix T = l[2];\n\[104X
-    [4X  l = Involution(B),Involution(T);\n\[104X
-    [4X  return(l);\n\[104X
-    [4X}\n\n",[104X
+    [4X    DecideZeroColumnsEffectively := """[104X
+    [4Xproc DecideZeroColumnsEffectively (matrix A, matrix B)[104X
+    [4X{[104X
+    [4X  matrix M,T = DecideZeroRowsEffectively(Involution(A),Involution(B));[104X
+    [4X  return(Involution(M),Involution(T));[104X
+    [4X}[104X
+    [4X[104X
+    [4X """,[104X
   [4X[32X[104X
   
   [1X3.1-21 RelativeSyzygiesGeneratorsOfRows[101X

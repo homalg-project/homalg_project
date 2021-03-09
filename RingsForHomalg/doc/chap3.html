@@ -351,11 +351,7 @@ BasisOfRowsCoeff :=
     );
     
     homalgSendBlocking(
-      [
-        "list ", v, "l=BasisOfRowsCoeff(", M, "); ",
-        "matrix ", N, " = ", v, "l[1]; ",
-        "matrix ", T, " = ", v, "l[2]"
-      ],
+      [ "matrix ", N, T, " = BasisOfRowsCoeff(", M, ")" ],
       "need_command",
       "BasisCoeff"
     );
@@ -379,8 +375,7 @@ proc BasisOfRowsCoeff (matrix M)
   option(noredSB);
   matrix T = lift(M,B);
   option(redSB);
-  list l = B,T;
-  return(l);
+  return(B,T);
 }
 
  """,
@@ -408,11 +403,7 @@ BasisOfColumnsCoeff :=
     );
     
     homalgSendBlocking( 
-      [
-        "list ", v, "l=BasisOfColumnsCoeff(", M, "); ",
-        "matrix ", N, " = ", v, "l[1]; ",
-        "matrix ", T, " = ", v, "l[2]"
-      ],
+      [ "matrix ", N, T, " = BasisOfColumnsCoeff(", M, ")" ],
       "need_command",
       "BasisCoeff"
     );
@@ -429,15 +420,14 @@ BasisOfColumnsCoeff :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 
 <div class="example"><pre>
-    BasisOfColumnsCoeff := "\n\
-proc BasisOfColumnsCoeff (matrix M)\n\
-{\n\
-  list l = BasisOfRowsCoeff(Involution(M));\n\
-  matrix B = l[1];\n\
-  matrix T = l[2];\n\
-  l = Involution(B),Involution(T);\n\
-  return(l);\n\
-}\n\n",
+    BasisOfColumnsCoeff := """
+proc BasisOfColumnsCoeff (matrix M)
+{
+  matrix B,T = BasisOfRowsCoeff(Involution(M));
+  return(Involution(B),Involution(T));
+}
+
+ """,
 </pre></div>
 
 <p><a id="X8009817D78CF032B" name="X8009817D78CF032B"></a></p>
@@ -462,11 +452,7 @@ DecideZeroRowsEffectively :=
     );
     
     homalgSendBlocking(
-      [
-        "list ", v, "l=DecideZeroRowsEffectively(", A, B, "); ",
-        "matrix ", N, " = ", v, "l[1]; ",
-        "matrix ", T, " = ", v, "l[2]"
-      ],
+      [ "matrix ", N, T, " = DecideZeroRowsEffectively(", A, B, ")" ],
       "need_command",
       "DecideZeroEffectively"
     );
@@ -483,15 +469,16 @@ DecideZeroRowsEffectively :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRowsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 
 <div class="example"><pre>
-    DecideZeroRowsEffectively := "\n\
-proc DecideZeroRowsEffectively (matrix A, module B)\n\
-{\n\
-  attrib(B,\"isSB\",1);\n\
-  matrix M = reduce(A,B);\n\
-  matrix T = lift(B,M-A);\n\
-  list l = M,T;\n\
-  return(l);\n\
-}\n\n",
+    DecideZeroRowsEffectively := """
+proc DecideZeroRowsEffectively (matrix A, module B)
+{
+  attrib(B,"isSB",1);
+  matrix M = reduce(A,B);
+  matrix T = lift(B,M-A);
+  return(M,T);
+}
+
+ """,
 </pre></div>
 
 <p><a id="X833A271E83F7B7E6" name="X833A271E83F7B7E6"></a></p>
@@ -516,11 +503,7 @@ DecideZeroColumnsEffectively :=
     );
     
     homalgSendBlocking(
-      [
-        "list ", v, "l=DecideZeroColumnsEffectively(", A, B, "); ",
-        "matrix ", N, " = ", v, "l[1]; ",
-        "matrix ", T, " = ", v, "l[2]"
-      ],
+      [ "matrix ", N, T, " = DecideZeroColumnsEffectively(", A, B, ")" ],
       "need_command",
       "DecideZeroEffectively"
     );
@@ -537,15 +520,14 @@ DecideZeroColumnsEffectively :=
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumnsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 
 <div class="example"><pre>
-    DecideZeroColumnsEffectively := "\n\
-proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
-{\n\
-  list l = DecideZeroRowsEffectively(Involution(A),Involution(B));\n\
-  matrix B = l[1];\n\
-  matrix T = l[2];\n\
-  l = Involution(B),Involution(T);\n\
-  return(l);\n\
-}\n\n",
+    DecideZeroColumnsEffectively := """
+proc DecideZeroColumnsEffectively (matrix A, matrix B)
+{
+  matrix M,T = DecideZeroRowsEffectively(Involution(A),Involution(B));
+  return(Involution(M),Involution(T));
+}
+
+ """,
 </pre></div>
 
 <p><a id="X87131F9182FD3B1C" name="X87131F9182FD3B1C"></a></p>
