@@ -328,40 +328,20 @@ InstallMethod( MonomialMap,
         [ IsInt, IsGradedModuleRep ],
         
   function( d, M )
-    local S, degrees, mon, i, result;
+    local S, degrees, mor;
     
     S := HomalgRing( M );
     
     degrees := DegreesOfGenerators( M );
     
-    degrees := List( degrees, HomalgElementToInteger );
+    mor := MonomialMatrix( d, S, degrees, IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) );
     
-    mon := rec( );
+    mor := GradedMap( mor, "free", M );
     
-    for i in Set( degrees ) do
-        mon.(String( d - i )) := MonomialMatrix( d - i, S );
-    od;
+    Assert( 4, IsMorphism( mor ) );
+    SetIsMorphism( mor, true );
     
-    mon := List( degrees, i -> mon.(String(d - i)) );
-    
-    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
-        mon := List( mon, Involution );
-    fi;
-    
-    if mon <> [ ] then
-        mon := DiagMat( mon );
-    else
-        mon := HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) );
-    fi;
-    
-    mon := MatrixOverGradedRing( mon, S );
-    
-    result:= GradedMap( mon, "free", M );
-    
-    Assert( 4, IsMorphism( result ) );
-    SetIsMorphism( result, true );
-    
-    return result;
+    return mor;
     
 end );
 

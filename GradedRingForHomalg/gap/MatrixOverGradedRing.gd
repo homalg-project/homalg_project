@@ -119,6 +119,9 @@ DeclareOperation( "MonomialMatrix",
         [ IsInt, IsHomalgGradedRing ] );
 
 DeclareOperation( "MonomialMatrix",
+        [ IsInt, IsHomalgGradedRing, IsList, IsBool ] );
+
+DeclareOperation( "MonomialMatrix",
         [ IsList, IsHomalgGradedRing ] );
 
 DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModules",
