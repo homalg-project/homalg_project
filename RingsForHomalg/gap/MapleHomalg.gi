@@ -1125,6 +1125,200 @@ InstallMethod( ExteriorRing,
 end );
 
 ##
+InstallMethod( PseudoDoubleShiftAlgebra,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInMapleRep, IsList ],
+        
+  function( R, indets )
+    local ar, r, var, shift, param, base, stream, display_color, switch, ext_obj,
+          alg, b, n, steps, pairs, d, P, RP, Ds, D_s, S, B, T, Y;
+    
+    ar := _PrepareInputForPseudoDoubleShiftAlgebra( R, indets );
+    
+    r := ar[1];
+    var := ar[2];
+    shift := ar[3];
+    param := ar[4];
+    base := ar[5];
+    
+    stream := homalgStream( R );
+    
+    switch := ValueOption( "switch" );
+    
+    b := Length( base );
+    n := b + Length( var ) + Length( shift );
+    
+    n := Length( shift ) / 2;
+    
+    steps := ValueOption( "steps" );
+    
+    if IsRat( steps ) then
+        steps := ListWithIdenticalEntries( n, steps );
+    elif not ( IsList( steps ) and Length( steps ) = n and ForAll( steps, IsRat ) ) then
+        steps := ListWithIdenticalEntries( n, 1 );
+    fi;
+    
+    pairs := ValueOption( "pairs" );
+    
+    if IsIdenticalObj( pairs, true ) then
+        Ds := shift{List( [ 1 .. n ], i -> 2 * i - 1 )};
+        D_s := shift{List( [ 1 .. n ], i -> 2 * i )};
+    else
+        Ds := shift{[ 1 .. n ]};
+        D_s := shift{[ n + 1 .. 2 * n ]};
+    fi;
+    
+    if IsIdenticalObj( switch, true ) then
+
+        Error( "not supported in Maple\n" );
+        
+    else
+        
+        if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+            
+            Error( "not supported in Maple\n" );
+            
+        else
+            
+            if Set( steps ) = [ 1 ] then
+                ext_obj := ListN( Ds, D_s, var, {a,b,c} -> [ a, b, c ] );
+            elif Set( steps ) = [ -1 ] then
+                ext_obj := ListN( Ds, D_s, var, {a,b,c} -> [ b, a, c ] );
+            else
+                Error( "these steps = ", steps, " are not yet supported\n" );
+            fi;
+                
+            ext_obj := List( ext_obj, a -> Concatenation( "`shift+dual_shift`=[", JoinStringsWithSeparator( a ), "], " ) );
+            ext_obj := Concatenation( ext_obj );
+            ext_obj := Concatenation( ext_obj, "characteristic=", String( Characteristic( R ) ), ", comm=[", JoinStringsWithSeparator( base ), "]" );
+            
+            if base <> "" then
+                
+            else
+                
+            fi;
+            
+        fi;
+        
+    fi;
+    
+    ext_obj := Concatenation( [ "`OreModules/DefineOreAlgebra`(", ext_obj, ")" ] );
+    
+    ext_obj := homalgSendBlocking( [ ext_obj ], R, "initialize" );
+    
+    homalgSendBlocking( [ ext_obj, "[4] := [", JoinStringsWithSeparator( Concatenation( D_s, Ds ) ), "]" ], "need_command", "initialize" );
+    
+    ## as we are not yet done we cannot call CreateHomalgExternalRing
+    ## to create a HomalgRing, and only then would homalgSendBlocking call stream.setring,
+    ## so till then we have to prevent the garbage collector from stepping in
+    stream.DeletePeriod_save := stream.DeletePeriod;
+    stream.DeletePeriod := false;
+    
+    P := RingForHomalgInMapleUsingOreModules( ext_obj, R );
+    
+    SetName( P, Concatenation( RingName( R ), "<", JoinStringsWithSeparator( shift ), ">" ) );
+    
+    ## now it is safe to call the garbage collector
+    stream.DeletePeriod := stream.DeletePeriod_save;
+    Unbind( stream.DeletePeriod_save );
+    
+    var := List( var , a -> HomalgExternalRingElement( a, P ) );
+    
+    Perform( var, Name );
+    
+    shift := List( shift , a -> HomalgExternalRingElement( a, P ) );
+    
+    Perform( shift, Name );
+    
+    SetIsPseudoDoubleShiftAlgebra( P, true );
+    
+    SetBaseRing( P, R );
+    
+    SetRingProperties( P, R, shift );
+    
+    RP := homalgTable( P );
+    
+    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+        Unbind( RP!.IsUnit );
+        Unbind( RP!.GetColumnIndependentUnitPositions );
+        Unbind( RP!.GetRowIndependentUnitPositions );
+        Unbind( RP!.GetUnitPosition );
+    fi;
+    
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
+        RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
+        RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
+        RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+        RP!.RadicalSubobject := RP!.RadicalSubobject_Z;
+        RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
+        Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
+        Unbind( RP!.MaximalDegreePart );
+    fi;
+    
+    shift := List( shift, String );
+    
+    ## the "commutative" double-shift algebra
+    S := R * shift;
+    
+    ## does not reduce elements instantaneously
+    ## S := HomalgQRingInSingular( AmbientRing( S ), RingRelations( S ) );
+    
+    P!.CommutativeDoubleShiftAlgebra := S / ListN( Ds, D_s, {d, d_} -> ( d / S ) * ( d_ / S ) - 1 );
+    
+    ## the Laurent algebra
+    B := BaseRing( R );
+    
+    T := B * shift;
+    
+    P!.LaurentAlgebra := T / ListN( Ds, D_s, {d, d_} -> ( d / T ) * ( d_ / T ) - 1 );
+    
+    ## the double-shift algebra
+    Y := P / ListN( Ds, D_s, {d, d_} -> ( d / P ) * ( d_ / P ) - 1 );
+    
+    Y!.CommutativeDoubleShiftAlgebra := P!.CommutativeDoubleShiftAlgebra;
+    Y!.LaurentAlgebra := P!.LaurentAlgebra;
+    
+    SetBaseRing( Y, BaseRing( P ) );
+    
+    SetIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
+            List( IndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+
+    if HasRelativeIndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ) then
+        
+        SetRelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
+                List( RelativeIndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+    fi;
+    
+    SetIndeterminateShiftsOfDoubleShiftAlgebra( Y,
+            List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+    
+    P!.DoubleShiftAlgebra := Y;
+    
+    #if not IsIdenticalObj( switch, true ) then
+    #    P!.SwitchedPseudoDoubleShiftAlgebra := PseudoDoubleShiftAlgebra( R, indets : switch := true );
+    #fi;
+    
+    return P;
+    
+end );
+
+##
+InstallMethod( DoubleShiftAlgebra,
+        "for homalg rings in Maple",
+        [ IsHomalgExternalRingInMapleRep, IsList ],
+        
+  function( R, indets )
+    local P;
+    
+    P := PseudoDoubleShiftAlgebra( R, indets );
+    
+    return P!.DoubleShiftAlgebra;
+    
+end );
+
+##
 InstallGlobalFunction( MapleHomalgOptions,
   function( arg )
     local nargs, R, s, ar;
