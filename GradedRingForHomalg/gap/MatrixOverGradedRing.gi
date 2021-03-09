@@ -292,6 +292,38 @@ end );
 ##
 InstallMethod( MonomialMatrix,
         "for homalg rings",
+        [ IsInt, IsHomalgGradedRing, IsList, IsBool ],
+        
+  function( d, S, degrees, left )
+    local mon, i;
+    
+    degrees := List( degrees, HomalgElementToInteger );
+    
+    mon := rec( );
+    
+    for i in Set( degrees ) do
+        mon.(String( d - i )) := MonomialMatrix( d - i, S );
+    od;
+    
+    mon := List( degrees, i -> mon.(String(d - i)) );
+    
+    if not left then
+        mon := List( mon, Involution );
+    fi;
+    
+    if mon <> [ ] then
+        mon := DiagMat( mon );
+    else
+        mon := HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) );
+    fi;
+    
+    return MatrixOverGradedRing( mon, S );
+    
+end );
+
+##
+InstallMethod( MonomialMatrix,
+        "for homalg rings",
         [ IsList, IsHomalgGradedRing ],
         
   function( d, S )
