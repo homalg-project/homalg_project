@@ -146,7 +146,7 @@ fi;
 
 InfoOfObject :=
   function( arg )
-    local o, depth, attr, cmpn, prop, tprp, all, i, r, a;
+    local o, depth, attr, cmpn, cats, reps, prop, tprp, all, i, r, a;
     
     o := arg[1];
     
@@ -161,14 +161,19 @@ InfoOfObject :=
     elif IsAttributeStoringRep( o ) then
         attr := KnownAttributesOfObject( o );
         cmpn := Filtered( NamesOfComponents( o ), a -> not( a in attr ) );
+        cats := CategoriesOfObject( o );
+        reps := RepresentationsOfObject( o );
         prop := KnownPropertiesOfObject( o );
         
-        all := rec( object := o,
-                    attributes := attr,
+        all := rec( attributes := attr,
                     components := cmpn,
+                    categories := cats,
+                    representations := reps,
                     properties := prop );
     elif IsComponentObjectRep( o ) then
-        all := rec( object := o, components := NamesOfComponents( o ) );
+        all := rec( components := NamesOfComponents( o ),
+                    categories := cats,
+                    representations := reps );
     else
         return o;
     fi;
