@@ -64,7 +64,7 @@
   
   [1X5.1-4 ToDoList_this_object[101X
   
-  [33X[1;0Y[29X[2XToDoList_this_object[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XToDoList_this_object[102X [32X global variable[133X
   
   [33X[0;0YRepresents the objects for which the blueprint is created in the arguments[133X
   
