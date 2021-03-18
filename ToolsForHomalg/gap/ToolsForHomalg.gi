@@ -171,6 +171,9 @@ InfoOfObject :=
                     representations := reps,
                     properties := prop );
     elif IsComponentObjectRep( o ) then
+        cats := CategoriesOfObject( o );
+        reps := RepresentationsOfObject( o );
+        
         all := rec( components := NamesOfComponents( o ),
                     categories := cats,
                     representations := reps );
