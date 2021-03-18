@@ -5,7 +5,7 @@ PackageName := "ToolsForHomalg",
 Subtitle := "Special methods and knowledge propagation tools",
 
 Version := Maximum( [
-  "2021.03-01", ## Mohamed's version
+  "2021.03-02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.09-12", ## Markus' version
 ## this line prevents merge conflicts
@@ -18,7 +18,7 @@ Version := Maximum( [
 
 ] ),
 
-Date := "17/03/2021",
+Date := "18/03/2021",
 
 License := "GPL-2.0-or-later",
 
