@@ -471,6 +471,10 @@ DeclareGlobalFunction( "CollectEntries" );
 
 DeclareGlobalFunction( "DotToSVG" );
 
+DeclareGlobalFunction( "WriteFileForHomalg" );
+
+DeclareGlobalFunction( "ReadFileForHomalg" );
+
 DeclareGlobalFunction( "ReplacedStringForHomalg" );
 
 DeclareGlobalFunction( "ReplacedFileForHomalg" );
@@ -478,6 +482,10 @@ DeclareGlobalFunction( "ReplacedFileForHomalg" );
 DeclareGlobalFunction( "EvalReplacedFileForHomalg" );
 
 DeclareGlobalFunction( "WriteReplacedFileForHomalg" );
+
+DeclareGlobalFunction( "WriteFileInPackageForHomalg" );
+
+DeclareGlobalFunction( "ReadFileFromPackageForHomalg" );
 
 ##
 DeclareOperation( "IsShowable",

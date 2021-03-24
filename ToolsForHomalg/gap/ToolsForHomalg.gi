@@ -1745,6 +1745,46 @@ InstallGlobalFunction( DotToSVG,
 end );
 
 ##
+InstallGlobalFunction( WriteFileForHomalg,
+  function( path, string )
+    local fs;
+    
+    fs := IO_File( path, "w" );
+    if fs = fail then
+        Error( "unable to open the file ", path, " for writing\n" );
+    fi;
+    if IO_WriteFlush( fs, string ) = fail then
+        Error( "unable to write in the file ", path, "\n" );
+    fi;
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", path, "\n" );
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( ReadFileForHomalg,
+  function( path )
+    local fs, string;
+    
+    fs := IO_File( path, "r" );
+    if fs = fail then
+        Error( "unable to open the file ", path, " for reading\n" );
+    fi;
+    string := IO_ReadUntilEOF( fs );
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", path, "\n" );
+    fi;
+    if string = fail then
+        Error( "unable to read lines from the file ", path, "\n" );
+    fi;
+    
+    return string;
+    
+end );
+
+
+##
 InstallGlobalFunction( ReplacedStringForHomalg,
   function( string, L )
     local old_new;
@@ -1760,19 +1800,9 @@ end );
 ##
 InstallGlobalFunction( ReplacedFileForHomalg,
   function( filename_source, L )
-    local fs, string;
+    local string;
     
-    fs := IO_File( filename_source, "r" );
-    if fs = fail then
-        Error( "unable to open the file ", filename_source, " for reading\n" );
-    fi;
-    string := IO_ReadUntilEOF( fs );
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", filename_source, "\n" );
-    fi;
-    if string = fail then
-        Error( "unable to read lines from the file ", filename_source, "\n" );
-    fi;
+    string := ReadFileForHomalg( filename_source );
     
     return ReplacedStringForHomalg( string, L );
     
@@ -1791,21 +1821,50 @@ end );
 
 ##
 InstallGlobalFunction( WriteReplacedFileForHomalg,
-  function( filename_source, L, filename_target )
-    local string, fs;
+  function( path_source, L, path_target )
+    local string;
     
-    string := ReplacedFileForHomalg( filename_source, L );
+    string := ReplacedFileForHomalg( path_source, L );
     
-    fs := IO_File( filename_target, "w" );
-    if fs = fail then
-        Error( "unable to open the file ", filename_target, " for writing\n" );
+    WriteFileForHomalg( path_target, string );
+    
+end );
+
+##
+InstallGlobalFunction( WriteFileInPackageForHomalg,
+  function( package_name, filename, string )
+    local dirs, path;
+    
+    dirs := DirectoriesPackageLibrary( package_name, "gap" );
+    
+    if Length( dirs ) <> 1 then
+        
+        Error( Concatenation( "could not find gap directory of package ", package_name ) );
+        
     fi;
-    if IO_WriteFlush( fs, string ) = fail then
-        Error( "unable to write in the file ", filename_target, "\n" );
+    
+    path := Filename( dirs[1], filename );
+    
+    WriteFileForHomalg( path, string );
+    
+end );
+
+##
+InstallGlobalFunction( ReadFileFromPackageForHomalg,
+  function( package_name, filename )
+    local dirs, path;
+    
+    dirs := DirectoriesPackageLibrary( package_name, "gap" );
+    
+    if Length( dirs ) <> 1 then
+        
+        Error( Concatenation( "could not find gap directory of package ", package_name ) );
+        
     fi;
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", filename_target, "\n" );
-    fi;
+    
+    path := Filename( dirs[1], filename );
+    
+    return ReadFileForHomalg( path );
     
 end );
 
