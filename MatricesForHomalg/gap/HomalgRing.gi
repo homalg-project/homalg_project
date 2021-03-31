@@ -2491,9 +2491,15 @@ InstallMethod( KoszulDualRing,
         [ IsHomalgRing and HasAmbientRing ],
         
   function( S )
-    local A, E;
+    local R, A, E;
     
-    A := KoszulDualRing( AmbientRing( S ) );
+    R := AmbientRing( S );
+    
+    A := KoszulDualRing( R );
+    
+    if HasBaseRing( R ) then
+        SetBaseRing( A, BaseRing( R ) );
+    fi;
     
     SetIsExteriorRing( A, true );
     
