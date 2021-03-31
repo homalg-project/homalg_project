@@ -2498,7 +2498,7 @@ InstallMethod( KoszulDualRing,
     SetIsExteriorRing( A, true );
     
     E := A / MatrixOfRelations( S );
-
+    
     SetIsExteriorRing( E, true );
     
     SetIndeterminatesOfExteriorRing( E,
@@ -2510,7 +2510,7 @@ InstallMethod( KoszulDualRing,
     if HasBaseRing( S ) then
         SetBaseRing( E, BaseRing( S ) );
     fi;
-
+    
     S!.KoszulDualRing := E;
     
     return E;
