@@ -2523,6 +2523,19 @@ InstallMethod( KoszulDualRing,
     
 end );
 
+## this is a technical method which should not be called by the user
+## as its mathematical assumptions are not checked here:
+## the relations must only involve the base ring
+InstallMethod( BaseRing,
+        "for homalg rings",
+        [ IsExteriorRing and HasAmbientRing ],
+        
+  function( A )
+    
+    return BaseRing( AmbientRing( A ) );
+    
+end );
+
 ##
 InstallGlobalFunction( HomalgRingElement,
   function( arg )
