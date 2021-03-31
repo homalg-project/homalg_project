@@ -102,8 +102,22 @@ InstallMethod( UnderlyingNonGradedRing,
         [ IsHomalgGradedRingRep ],
         
   function( R )
+    local T, B;
     
-    return R!.ring;
+    T := R!.ring;
+    
+    if not HasBaseRing( T ) and HasBaseRing( R ) then
+        B := BaseRing( R );
+        if not IsIdenticalObj( R, B ) then
+            if IsHomalgGradedRingRep( B ) then
+                SetBaseRing( T, UnderlyingNonGradedRing( B ) );
+            else
+                SetBaseRing( T, B );
+            fi;
+        fi;
+    fi;
+    
+    return T;
     
 end );
 

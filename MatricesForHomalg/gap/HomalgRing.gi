@@ -2491,14 +2491,20 @@ InstallMethod( KoszulDualRing,
         [ IsHomalgRing and HasAmbientRing ],
         
   function( S )
-    local A, E;
+    local R, A, E;
     
-    A := KoszulDualRing( AmbientRing( S ) );
+    R := AmbientRing( S );
+    
+    A := KoszulDualRing( R );
+    
+    if HasBaseRing( R ) then
+        SetBaseRing( A, BaseRing( R ) );
+    fi;
     
     SetIsExteriorRing( A, true );
     
     E := A / MatrixOfRelations( S );
-
+    
     SetIsExteriorRing( E, true );
     
     SetIndeterminatesOfExteriorRing( E,
@@ -2510,10 +2516,23 @@ InstallMethod( KoszulDualRing,
     if HasBaseRing( S ) then
         SetBaseRing( E, BaseRing( S ) );
     fi;
-
+    
     S!.KoszulDualRing := E;
     
     return E;
+    
+end );
+
+## this is a technical method which should not be called by the user
+## as its mathematical assumptions are not checked here:
+## the relations must only involve the base ring
+InstallMethod( BaseRing,
+        "for homalg rings",
+        [ IsExteriorRing and HasAmbientRing ],
+        
+  function( A )
+    
+    return BaseRing( AmbientRing( A ) );
     
 end );
 
