@@ -15,7 +15,7 @@
   
   [1X10.4-1 functor_Cokernel[101X
   
-  [33X[1;0Y[29X[2Xfunctor_Cokernel[102X[32X global variable[133X
+  [33X[1;0Y[29X[2Xfunctor_Cokernel[102X [32X global variable[133X
   
   [33X[0;0YThe functor that associates to a map its cokernel.[133X
   
@@ -93,7 +93,7 @@
   
   [1X10.4-3 functor_ImageObject[101X
   
-  [33X[1;0Y[29X[2Xfunctor_ImageObject[102X[32X global variable[133X
+  [33X[1;0Y[29X[2Xfunctor_ImageObject[102X [32X global variable[133X
   
   [33X[0;0YThe functor that associates to a map its image.[133X
   
@@ -253,7 +253,7 @@
   
   [1X10.4-7 Functor_Hom[101X
   
-  [33X[1;0Y[29X[2XFunctor_Hom[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XFunctor_Hom[102X [32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XHom[110X.[133X
   
@@ -506,7 +506,7 @@
   
   [1X10.4-9 Functor_TensorProduct[101X
   
-  [33X[1;0Y[29X[2XFunctor_TensorProduct[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XFunctor_TensorProduct[102X [32X global variable[133X
   
   [33X[0;0YThe tensor product bifunctor.[133X
   
@@ -683,7 +683,7 @@
   
   [1X10.4-11 Functor_Ext[101X
   
-  [33X[1;0Y[29X[2XFunctor_Ext[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XFunctor_Ext[102X [32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XExt[110X.[133X
   
@@ -746,7 +746,7 @@
   
   [1X10.4-13 Functor_Tor[101X
   
-  [33X[1;0Y[29X[2XFunctor_Tor[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XFunctor_Tor[102X [32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XTor[110X.[133X
   
@@ -806,7 +806,7 @@
   
   [1X10.4-15 Functor_RHom[101X
   
-  [33X[1;0Y[29X[2XFunctor_RHom[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XFunctor_RHom[102X [32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XRHom[110X.[133X
   
@@ -959,7 +959,7 @@
   
   [1X10.4-17 Functor_LTensorProduct[101X
   
-  [33X[1;0Y[29X[2XFunctor_LTensorProduct[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XFunctor_LTensorProduct[102X [32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XLTensorProduct[110X.[133X
   
@@ -1113,7 +1113,7 @@
   
   [1X10.4-19 Functor_HomHom[101X
   
-  [33X[1;0Y[29X[2XFunctor_HomHom[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XFunctor_HomHom[102X [32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XHomHom[110X.[133X
   
@@ -1127,7 +1127,7 @@
   
   [1X10.4-20 Functor_LHomHom[101X
   
-  [33X[1;0Y[29X[2XFunctor_LHomHom[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XFunctor_LHomHom[102X [32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XLHomHom[110X.[133X
   
