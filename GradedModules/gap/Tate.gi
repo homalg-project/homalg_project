@@ -16,11 +16,11 @@ InstallMethod( MinimizeLowestDegreeMorphism,
         [ IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( T )
-    local N, phi, TT;
+    local phi, N, TT;
     
-    N := UnderlyingObject( ImageSubobject( LowestDegreeMorphism( T ) ) );
+    phi:= ImageObjectEmb( LowestDegreeMorphism( T ) );
+    N := Source( phi );
     ByASmallerPresentation( N );
-    phi := NaturalGeneralizedEmbedding( N );
     phi := PreCompose( CokernelEpi( PresentationMorphism( N ) ), phi );
     if Length( ObjectDegreesOfComplex( T ) ) = 2 then
         TT := HomalgCocomplex( phi, LowestDegree( T ) );
