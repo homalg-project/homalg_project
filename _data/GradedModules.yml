@@ -1,5 +1,5 @@
 name: GradedModules
-version: "2021.04-01"
+version: "2021.04-02"
 license: "GPL-2.0-or-later"
 date: 2021-04-09
 description: |
@@ -59,11 +59,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/GradedModules/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-01/GradedModules-2021.04-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-02/GradedModules-2021.04-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-01/GradedModules-2021.04-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-02/GradedModules-2021.04-02.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-01/GradedModules-2021.04-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-02/GradedModules-2021.04-02.pdf
 
 abstract: |
     This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring
@@ -77,7 +77,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BGJLLM21</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S., Jambor, S., Lange-Hegermann, M., Lorenz, A. and Motsak, O.</b>,
      <i class='BibTitle'>GradedModules, A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings,
-             Version 2021.04-01</i>
+             Version 2021.04-02</i>
      (<span class='BibYear'>2021</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/GradedModules">https://homalg-project.github.io/pkg/GradedModules</a></span>.
@@ -85,12 +85,12 @@ citeas: |
     
 
 bibtex: |
-    @misc{ GradedModules2021.04-01,
+    @misc{ GradedModules2021.04-02,
       author =           {Barakat,  M.  and  Gutsche,  S.  and  Jambor,  S.  and
                           Lange-Hegermann, M. and Lorenz, A. and Motsak, O.},
       title =            {{GradedModules},   A  homalg  based  package  for  the
                           Abelian  category of finitely presented graded modules
-                          over computable graded rings, {V}ersion 2021.04-01},
+                          over computable graded rings, {V}ersion 2021.04-02},
       month =            {Apr},
       year =             {2021},
       note =             {GAP package},
