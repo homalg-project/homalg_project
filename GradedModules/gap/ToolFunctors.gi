@@ -175,7 +175,7 @@ InstallGlobalFunction( _Functor_PreCompose_OnGradedMaps,	### defines: PreCompose
     source := Source( pre );
     target := Range( post );
     
-    phi := GradedMap( PreCompose( UnderlyingMorphism( pre ), UnderlyingMorphism( post ) ), source, target, S );
+    phi := GradedMap( PreCompose( UnderlyingMorphism( pre ), UnderlyingMorphism( post ) ), source, target );
     
     return SetPropertiesOfComposedMorphism( pre, post, phi );
     
