@@ -116,7 +116,7 @@ InstallMethod( MorphismHavingSubobjectAsItsImage,
     
     # this is mohamed's fault
     upsi := uM!.map_having_subobject_as_its_image;
-    if not IsIdenticalObj( UnderlyingMorphism( psi ), upsi ) then
+    if not IsIdenticalObj( UnderlyingMorphismMutable( psi ), upsi ) then
        psi := GradedMap( upsi, "create", Range( psi ) );
        M!.map_having_subobject_as_its_image := psi;
     fi;
@@ -214,7 +214,7 @@ InstallMethod( ImageSubobject,
   function( phi )
     local img, T, S, N, entry;
     
-    img := ImageSubobject( UnderlyingMorphism( phi ) );
+    img := ImageSubobject( UnderlyingMorphismMutable( phi ) );
     
     T := Range( phi );
     

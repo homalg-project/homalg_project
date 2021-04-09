@@ -90,7 +90,7 @@ InstallMethod( SegreMap,
         Error( "not all weights are multi-weights\n" );
     fi;
     
-    weights := List( weights, w -> EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( w ) ) ) );
+    weights := List( weights, w -> EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphismMutable( w ) ) ) );
     
     l := Length( weights[1] );
     
