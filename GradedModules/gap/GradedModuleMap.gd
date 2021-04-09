@@ -67,14 +67,14 @@ DeclareAttribute( "MaximalIdealAsLeftMorphism",
 DeclareAttribute( "MaximalIdealAsRightMorphism",
         IsHomalgGradedRing );
 
-DeclareAttribute( "UnderlyingMorphism",
-        IsHomalgGradedMap );
-
 ####################################
 #
 # global functions and operations:
 #
 ####################################
+
+DeclareOperation( "UnderlyingMorphismMutable",
+        [ IsHomalgGradedMap ] );
 
 DeclareOperation( "GradedVersionOfMorphismAid",
                  [ IsHomalgMap, IsHomalgGradedModule ] );

@@ -17,7 +17,7 @@ InstallMethod( PositionOfTheDefaultPresentation,
   function( psi )
     
       return PairOfPositionsOfTheDefaultPresentations( psi );
-#     return PositionOfTheDefaultPresentation( UnderlyingMorphism( psi ) );
+#     return PositionOfTheDefaultPresentation( UnderlyingMorphismMutable( psi ) );
     
 end );
 
@@ -28,7 +28,7 @@ InstallMethod( PairOfPositionsOfTheDefaultPresentations,
         
   function( psi )
     
-    return PairOfPositionsOfTheDefaultPresentations( UnderlyingMorphism( psi ) );
+    return PairOfPositionsOfTheDefaultPresentations( UnderlyingMorphismMutable( psi ) );
     
 end );
 
@@ -39,7 +39,7 @@ InstallMethod( MatrixOfMap,
         
   function( phi )
     
-    return MatrixOverGradedRing( MatrixOfMap( UnderlyingMorphism( phi ) ), HomalgRing( phi ) );
+    return MatrixOverGradedRing( MatrixOfMap( UnderlyingMorphismMutable( phi ) ), HomalgRing( phi ) );
     
 end );
 
@@ -50,7 +50,7 @@ InstallMethod( MatrixOfMap,
         
   function( phi, pos_s, pos_t )
     
-    return MatrixOverGradedRing( MatrixOfMap( UnderlyingMorphism( phi ), pos_s, pos_t ), HomalgRing( phi ) );
+    return MatrixOverGradedRing( MatrixOfMap( UnderlyingMorphismMutable( phi ), pos_s, pos_t ), HomalgRing( phi ) );
     
 end );
 
@@ -61,7 +61,7 @@ InstallMethod( DecideZero,
         
   function( phi )
     
-    DecideZero( UnderlyingMorphism( phi ) );
+    DecideZero( UnderlyingMorphismMutable( phi ) );
     
     return phi;
     
@@ -74,7 +74,7 @@ InstallMethod( SyzygiesGenerators,
   function( phi )
     local syz;
 
-    syz := SyzygiesGenerators( UnderlyingMorphism( phi ) );
+    syz := SyzygiesGenerators( UnderlyingMorphismMutable( phi ) );
 
     if NrRelations( syz ) = 0 then
         SetIsMonomorphism( phi, true );
@@ -91,7 +91,7 @@ InstallMethod( ReducedSyzygiesGenerators,
   function( phi )
     local syz;
 
-    syz := ReducedSyzygiesGenerators( UnderlyingMorphism( phi ) );
+    syz := ReducedSyzygiesGenerators( UnderlyingMorphismMutable( phi ) );
 
     if NrRelations( syz ) = 0 then
         SetIsMonomorphism( phi, true );
@@ -108,7 +108,7 @@ InstallMethod( PostInverse,
   function( phi )
     local inv, inv2;
 
-    inv := PostInverse( UnderlyingMorphism( phi ) );
+    inv := PostInverse( UnderlyingMorphismMutable( phi ) );
 
     if IsHomalgMap( inv ) then
         
@@ -139,7 +139,7 @@ InstallMethod( OnAFreeSource,
   function( phi )
     local psi;
     
-    psi := GradedMap( OnAFreeSource( UnderlyingMorphism( phi ) ), "create", Range( phi ) );
+    psi := GradedMap( OnAFreeSource( UnderlyingMorphismMutable( phi ) ), "create", Range( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
         Assert( 4, IsMorphism( psi ) );
@@ -158,7 +158,7 @@ InstallMethod( RemoveMorphismAid,
   function( phi )
     local psi2, psi;
     
-    psi2 := RemoveMorphismAid( UnderlyingMorphism( phi ) );
+    psi2 := RemoveMorphismAid( UnderlyingMorphismMutable( phi ) );
     
     psi := GradedMap( psi2, Source( phi ), Range( phi ) );
     
@@ -221,9 +221,9 @@ InstallMethod( GeneralizedMorphism,
     fi;
     
     if IsList( morphism_aid_map ) then
-        psi := GeneralizedMorphism( UnderlyingMorphism( phi ), [ UnderlyingMorphism( morphism_aid_map[1] ) ] );
+        psi := GeneralizedMorphism( UnderlyingMorphismMutable( phi ), [ UnderlyingMorphismMutable( morphism_aid_map[1] ) ] );
     else
-        psi := GeneralizedMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( morphism_aid_map ) );
+        psi := GeneralizedMorphism( UnderlyingMorphismMutable( phi ), UnderlyingMorphismMutable( morphism_aid_map ) );
     fi;
     
     psi := GradedMap( psi, Source( phi ), Range( phi ) );
@@ -248,7 +248,7 @@ InstallMethod( PostInverse,
         return phi!.PostInverse;
     fi;
     
-    result := PostInverse( UnderlyingMorphism( phi ) );
+    result := PostInverse( UnderlyingMorphismMutable( phi ) );
     
     if result = fail or result = false then
         return result;
@@ -279,7 +279,7 @@ InstallMethod( PreInverse,
         return phi!.PreInverse;
     fi;
     
-    result := PreInverse( UnderlyingMorphism( phi ) );
+    result := PreInverse( UnderlyingMorphismMutable( phi ) );
     
     if result = fail or result = false then
         return result;

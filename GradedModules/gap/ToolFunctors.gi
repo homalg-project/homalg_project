@@ -53,7 +53,7 @@ InstallGlobalFunction( _Functor_MulMorphism_OnGradedMaps,	### defines: MulMorphi
   function( a, phi )
     local a_phi;
     
-    a_phi := GradedMap( EvalRingElement( a ) * UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
+    a_phi := GradedMap( EvalRingElement( a ) * UnderlyingMorphismMutable( phi ), Source( phi ), Range( phi ) );
     
     if IsZero( DegreeOfRingElement( a ) ) then
         
@@ -104,7 +104,7 @@ InstallGlobalFunction( _Functor_AddMorphisms_OnGradedMaps,	### defines: AddMorph
         return Error( "the two maps are not comparable" );
     fi;
     
-    phi := GradedMap( UnderlyingMorphism( phi1 ) + UnderlyingMorphism( phi2 ), Source( phi1 ), Range( phi1 ) );
+    phi := GradedMap( UnderlyingMorphismMutable( phi1 ) + UnderlyingMorphismMutable( phi2 ), Source( phi1 ), Range( phi1 ) );
     
     return SetPropertiesOfSumMorphism( phi1, phi2, phi );
     
@@ -137,7 +137,7 @@ InstallGlobalFunction( _Functor_SubMorphisms_OnGradedMaps,	### defines: SubMorph
         return Error( "the two maps are not comparable" );
     fi;
     
-    phi := GradedMap( UnderlyingMorphism( phi1 ) - UnderlyingMorphism( phi2 ), Source( phi1 ), Range( phi1 ) );
+    phi := GradedMap( UnderlyingMorphismMutable( phi1 ) - UnderlyingMorphismMutable( phi2 ), Source( phi1 ), Range( phi1 ) );
     
     return SetPropertiesOfDifferenceMorphism( phi1, phi2, phi );
     
@@ -175,7 +175,7 @@ InstallGlobalFunction( _Functor_PreCompose_OnGradedMaps,	### defines: PreCompose
     source := Source( pre );
     target := Range( post );
     
-    phi := GradedMap( PreCompose( UnderlyingMorphism( pre ), UnderlyingMorphism( post ) ), source, target );
+    phi := GradedMap( PreCompose( UnderlyingMorphismMutable( pre ), UnderlyingMorphismMutable( post ) ), source, target );
     
     return SetPropertiesOfComposedMorphism( pre, post, phi );
     
@@ -203,7 +203,7 @@ InstallGlobalFunction( _Functor_CoproductMorphism_OnGradedMaps,	### defines: Cop
   function( phi, psi )
     local phi_psi;
     
-    phi_psi := CoproductMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( psi ) );
+    phi_psi := CoproductMorphism( UnderlyingMorphismMutable( phi ), UnderlyingMorphismMutable( psi ) );
     
     phi_psi := GradedMap( phi_psi, Source( phi ) + Source( psi ), Range( phi ) );
     
@@ -233,7 +233,7 @@ InstallGlobalFunction( _Functor_ProductMorphism_OnGradedMaps,	### defines: Produ
   function( phi, psi )
     local phi_psi;
     
-    phi_psi := ProductMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( psi ) );
+    phi_psi := ProductMorphism( UnderlyingMorphismMutable( phi ), UnderlyingMorphismMutable( psi ) );
     
     phi_psi := GradedMap( phi_psi, Source( phi ), Range( phi ) + Range( psi ) );
     
@@ -286,7 +286,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnGradedMaps,  ### defines: PostDivid
     
     N := Range( beta );
     
-    psi := PostDivide( UnderlyingMorphism( gamma ), UnderlyingMorphism( beta ) );
+    psi := PostDivide( UnderlyingMorphismMutable( gamma ), UnderlyingMorphismMutable( beta ) );
     
     if IsBool( psi ) then
         return psi;

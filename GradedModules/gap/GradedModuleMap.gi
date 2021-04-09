@@ -77,6 +77,17 @@ BindGlobal( "TheTypeHomalgSelfMapOfGradedRightModules",
 ####################################
 
 ##
+InstallMethod( UnderlyingMorphismMutable,
+        "for graded maps",
+        [ IsMapOfGradedModulesRep ],
+        
+  function( phi )
+    
+    return phi!.UnderlyingMorphismMutable;
+    
+end );
+
+##
 InstallMethod( GradedVersionOfMorphismAid,
         "for graded maps",
         [ IsHomalgMap, IsGradedModuleRep ],
@@ -107,7 +118,7 @@ InstallMethod( UpdateObjectsByMorphism,
         
   function( phi )
     
-    UpdateObjectsByMorphism( UnderlyingMorphism( phi ) );
+    UpdateObjectsByMorphism( UnderlyingMorphismMutable( phi ) );
     
     MatchPropertiesAndAttributes( Source( phi ), Range( phi ), LIGrMOD.intrinsic_properties, LIGrMOD.intrinsic_attributes );
     
@@ -142,9 +153,9 @@ InstallMethod( PushPresentationByIsomorphism,
         
   function( phi )
     
-    SetIsIsomorphism( UnderlyingMorphism( phi ), true );
+    SetIsIsomorphism( UnderlyingMorphismMutable( phi ), true );
     
-    PushPresentationByIsomorphism( UnderlyingMorphism( phi ) );
+    PushPresentationByIsomorphism( UnderlyingMorphismMutable( phi ) );
     
     UpdateObjectsByMorphism( phi );
     
@@ -542,12 +553,11 @@ InstallMethod( GradedMap,
       underlying_morphism := HomalgMap( matrix, UnderlyingModule( source2 ), UnderlyingModule( target2 ) );
     fi;
     
-    morphism := rec( );
+    morphism := rec( UnderlyingMorphismMutable := underlying_morphism );
 
     ## Objectify:
     ObjectifyWithAttributes(
       morphism, type,
-      UnderlyingMorphism, underlying_morphism,
       Source, source2,
       Range, target2
     );
@@ -563,11 +573,11 @@ InstallMethod( GradedMap,
 #    if AssertionLevel() >= 10 then
 #        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
 #            Assert( 30, 
-#              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+#              not IsIdenticalObj( UnderlyingMorphismMutable( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphismMutable( morphism ) ) 
 #              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
 #            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
 #            Assert( 31, 
-#              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+#              not IsIdenticalObj( UnderlyingMorphismMutable( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphismMutable( morphism ) ) 
 #              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
 #        od;
 #        Add( HOMALG_GRADED_MODULES.MorphismsSave, morphism );
@@ -786,14 +796,13 @@ InstallMethod( GradedMap,
       fi;
     fi;
     
-    morphism := rec( );
+    morphism := rec( UnderlyingMorphismMutable := A );
     
-        ## Objectify:
-        ObjectifyWithAttributes(
-          morphism, type,
-          UnderlyingMorphism, A,
-          Source, B,
-          Range, C );
+    ## Objectify:
+    ObjectifyWithAttributes(
+            morphism, type,
+            Source, B,
+            Range, C );
     
     entry := ToDoListEntryToMaintainEqualAttributes( [ [ morphism, "IsIsomorphism", true ] ],
                                                      [ [ Source, morphism ], [ Range, morphism ] ],
@@ -812,11 +821,11 @@ InstallMethod( GradedMap,
 #    if AssertionLevel() >= 10 then
 #        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
 #            Assert( 30, 
-#              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+#              not IsIdenticalObj( UnderlyingMorphismMutable( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphismMutable( morphism ) ) 
 #              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
 #            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
 #            Assert( 31, 
-#              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+#              not IsIdenticalObj( UnderlyingMorphismMutable( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphismMutable( morphism ) ) 
 #              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
 #        od;
 #        Add( HOMALG_GRADED_MODULES.MorphismsSave, morphism );
@@ -895,7 +904,7 @@ InstallMethod( Display,
     
     target := Range( o );
     
-    Display( UnderlyingMorphism( o ), "graded" );
+    Display( UnderlyingMorphismMutable( o ), "graded" );
     
     if NrGenerators( target ) = 1 then
         Print( "\n(degree of generator of target: " );

@@ -53,7 +53,7 @@ InstallImmediateMethodToPullPropertiesOrAttributes(
         IsMapOfGradedModulesRep,
         LIGrHOM.exchangeable_properties,
         Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
-        UnderlyingMorphism );
+        UnderlyingMorphismMutable );
 
 ##
 InstallImmediateMethodToPullTrueProperties(
@@ -61,7 +61,7 @@ InstallImmediateMethodToPullTrueProperties(
         IsMapOfGradedModulesRep,
         LIGrHOM.exchangeable_true_properties,
         Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
-        UnderlyingMorphism );
+        UnderlyingMorphismMutable );
 
 ##
 InstallImmediateMethodToPullFalseProperties(
@@ -69,25 +69,25 @@ InstallImmediateMethodToPullFalseProperties(
         IsMapOfGradedModulesRep,
         LIGrHOM.exchangeable_false_properties,
         Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
-        UnderlyingMorphism );
+        UnderlyingMorphismMutable );
 
 ##
 InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         IsMapOfGradedModulesRep,
         LIGrHOM.exchangeable_properties,
-        UnderlyingMorphism );
+        UnderlyingMorphismMutable );
 
 ##
 InstallImmediateMethodToPushFalseProperties( Twitter,
         IsMapOfGradedModulesRep,
         LIGrHOM.exchangeable_true_properties,
-        UnderlyingMorphism );
+        UnderlyingMorphismMutable );
 
 ##
 InstallImmediateMethodToPushTrueProperties( Twitter,
         IsMapOfGradedModulesRep,
         LIGrHOM.exchangeable_false_properties,
-        UnderlyingMorphism );
+        UnderlyingMorphismMutable );
 
 ####################################
 #
@@ -101,13 +101,13 @@ InstallImmediateMethodToPullPropertiesOrAttributes(
         IsMapOfGradedModulesRep,
         LIGrHOM.exchangeable_attributes,
         Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
-        UnderlyingMorphism );
+        UnderlyingMorphismMutable );
 
 ##
 InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         IsMapOfGradedModulesRep,
         LIGrHOM.exchangeable_attributes,
-        UnderlyingMorphism );
+        UnderlyingMorphismMutable );
 
 ##
 InstallImmediateMethod( DegreeOfMorphism,
@@ -137,7 +137,7 @@ InstallMethod( KernelSubobject,
     
     source := Source( psi );
     
-    ker := KernelSubobject( UnderlyingMorphism( psi ) );
+    ker := KernelSubobject( UnderlyingMorphismMutable( psi ) );
     
     emb := EmbeddingInSuperObject( ker );
     
@@ -189,7 +189,7 @@ InstallMethod( IsAutomorphism,
         
   function( phi )
     
-    return IsAutomorphism( UnderlyingMorphism( phi ) ) and IsHomalgGradedSelfMap( phi );
+    return IsAutomorphism( UnderlyingMorphismMutable( phi ) ) and IsHomalgGradedSelfMap( phi );
     
 end );
 
@@ -201,7 +201,7 @@ InstallMethod( AdditiveInverse,
   function( phi )
     local psi;
     
-    psi := GradedMap( -UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
+    psi := GradedMap( -UnderlyingMorphismMutable( phi ), Source( phi ), Range( phi ) );
     
     SetPropertiesOfAdditiveInverse( psi, phi );
     
@@ -266,7 +266,7 @@ InstallMethod( IsMorphism,
   function( phi )
     local degs, degt, deg, mat, i, j, nonzero;
     
-    if not IsMorphism( UnderlyingMorphism( phi ) ) then
+    if not IsMorphism( UnderlyingMorphismMutable( phi ) ) then
         return false;
     fi;
     
