@@ -753,6 +753,12 @@ InstallGlobalFunction( InstallMethodWithCache,
     
     if cache <> false then
         
+        if cache!.nr_keys <> Length( filt_list ) then
+            
+            Error( "trying to install a method with ", Length( filt_list ), " arguments using a cache with ", cache!.nr_keys, " keys" );
+            
+        fi;
+        
         new_func := function( arg )
           local value;
             
