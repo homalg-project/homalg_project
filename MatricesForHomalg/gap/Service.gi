@@ -2168,7 +2168,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
-    local R, RP, t, nr, TI, MI, B, TT, nz;
+    local R, RP, t, nr_cols, TT, TI, MI, B, nr_rows, nr, nz;
     
     if IsBound( M!.BasisOfRowsCoeff ) and IsBound( M!.BasisOfRows ) then
         if HasEval( M!.BasisOfRowsCoeff ) then
@@ -2187,30 +2187,66 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     t := homalgTotalRuntimes( );
     
-    nr := NrColumns( M );
+    nr_cols := NrColumns( M );
     
-    ColoredInfoForService( "busy", "BasisOfRowsCoeff", NrRows( M ), " x ", nr, " : ", RingName( R ) );
+    ColoredInfoForService( "busy", "BasisOfRowsCoeff", NrRows( M ), " x ", nr_cols, " : ", RingName( R ) );
+    
+    TT := HomalgVoidMatrix( R );
     
     if IsBound(RP!.BasisOfRowsCoeff) then
         
-        B := RP!.BasisOfRowsCoeff( M, T ); ResetFilterObj( T, IsVoidMatrix );
+        B := RP!.BasisOfRowsCoeff( M, TT ); ResetFilterObj( TT, IsVoidMatrix );
         
         if HasRowRankOfMatrix( B ) then
             SetRowRankOfMatrix( M, RowRankOfMatrix( B ) );
         fi;
         
-        SetNrColumns( B, nr );
+        SetNrColumns( B, nr_cols );
         
-        nr := NrRows( B );
+        nr_rows := NrRows( B );
         
-        SetNrRows( T, nr );
+        if HasIsZero( M ) and not IsZero( M ) then ## M is known to be nonnzero, so B and T are also nonzero
+            
+            ## check assertion
+            Assert( 6, IsZero( B ) = IsZero( M ) );
+            
+            SetIsZero( B, false );
+            
+            SetEval( T, Eval( TT ) );
+            SetIsZero( T, false );
+            SetNrRows( T, nr_rows );
+            
+        elif nr_rows = 1 and IsZero( B ) then
+            
+            ## most computer algebra systems do not support empty matrices
+            ## and return for a trivial BasisOfRowModule a one-row zero matrix
+            
+            B := HomalgZeroMatrix( 0, nr_cols, R );
+            
+            SetIsZero( M, true );
+            
+            SetPreEval( T, HomalgZeroMatrix( 0, NrRows( M ), R ) );
+            
+            SetIsZero( T, true );
+            SetNrRows( T, 0 );
+            
+        else
+            
+            ## check assertion
+            Assert( 6, R!.asserts.BasisOfRowModule( B ) );
+            
+            SetIsZero( B, nr_rows = 0 );
+            SetIsZero( M, nr_rows = 0 );
+            
+            SetEval( T, Eval( TT ) );
+            SetIsZero( T, nr_rows = 0 );
+            SetNrRows( T, nr_rows );
+            
+        fi;
         
-        ## check assertion
-        Assert( 6, R!.asserts.BasisOfRowModule( B ) );
+        ResetFilterObj( T, IsVoidMatrix );
         
-        SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
-        SetIsZero( T, nr = 0 );
+        SetNrColumns( T, NrRows( M ) );
         
         ## check assertion
         Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
@@ -2222,7 +2258,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         M!.BasisOfRows := B;
         M!.BasisOfRowsCoeff := T;
         
-        ColoredInfoForService( t, "BasisOfRowsCoeff", nr );
+        ColoredInfoForService( t, "BasisOfRowsCoeff", nr_rows );
         
         IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
         
@@ -2283,8 +2319,6 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     #=====# begin of the core procedure #=====#
     
-    TT := HomalgVoidMatrix( R );
-    
     B := RowReducedEchelonForm( M, TT );
     
     nz := Length( NonZeroRows( B ) );
@@ -2339,7 +2373,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
-    local R, RP, t, nr, TI, MI, B, TT, nz;
+    local R, RP, t, nr_rows, TT, TI, MI, B, nr_cols, nr, nz;
     
     if IsBound( M!.BasisOfColumnsCoeff ) and IsBound( M!.BasisOfColumns ) then
         if HasEval( M!.BasisOfColumnsCoeff ) then
@@ -2358,30 +2392,66 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     t := homalgTotalRuntimes( );
     
-    nr := NrRows( M );
+    nr_rows := NrRows( M );
     
-    ColoredInfoForService( "busy", "BasisOfColumnsCoeff", nr, " x ", NrColumns( M ), " : ", RingName( R ) );
+    ColoredInfoForService( "busy", "BasisOfColumnsCoeff", nr_rows, " x ", NrColumns( M ), " : ", RingName( R ) );
+    
+    TT := HomalgVoidMatrix( R );
     
     if IsBound(RP!.BasisOfColumnsCoeff) then
         
-        B := RP!.BasisOfColumnsCoeff( M, T ); ResetFilterObj( T, IsVoidMatrix );
+        B := RP!.BasisOfColumnsCoeff( M, TT ); ResetFilterObj( TT, IsVoidMatrix );
         
         if HasColumnRankOfMatrix( B ) then
             SetColumnRankOfMatrix( M, ColumnRankOfMatrix( B ) );
         fi;
         
-        SetNrRows( B, nr );
+        SetNrRows( B, nr_rows );
         
-        nr := NrColumns( B );
+        nr_cols := NrColumns( B );
         
-        SetNrColumns( T, nr );
+        if HasIsZero( M ) and not IsZero( M ) then ## M is known to be nonnzero, so B and T are also nonzero
+            
+            ## check assertion
+            Assert( 6, IsZero( B ) = IsZero( M ) );
+            
+            SetIsZero( B, false );
+            
+            SetEval( T, Eval( TT ) );
+            SetIsZero( T, false );
+            SetNrColumns( T, nr_cols );
+            
+        elif nr_cols = 1 and IsZero( B ) then
+            
+            ## most computer algebra systems do not support empty matrices
+            ## and return for a trivial BasisOfColumnModule a one-col zero matrix
+            
+            B := HomalgZeroMatrix( nr_rows, 0, R );
+            
+            SetIsZero( M, true );
+            
+            SetPreEval( T, HomalgZeroMatrix( NrColumns( M ), 0, R ) );
+            
+            SetIsZero( T, true );
+            SetNrColumns( T, 0 );
+            
+        else
+            
+            ## check assertion
+            Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
+            
+            SetIsZero( B, nr_cols = 0 );
+            SetIsZero( M, nr_cols = 0 );
+            
+            SetEval( T, Eval( TT ) );
+            SetIsZero( T, nr_cols = 0 );
+            SetNrColumns( T, nr_cols );
+            
+        fi;
         
-        ## check assertion
-        Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
+        ResetFilterObj( T, IsVoidMatrix );
         
-        SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
-        SetIsZero( T, nr = 0 );
+        SetNrColumns( T, NrRows( M ) );
         
         ## check assertion
         Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
@@ -2393,7 +2463,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         M!.BasisOfColumns := B;
         M!.BasisOfColumnsCoeff := T;
         
-        ColoredInfoForService( t, "BasisOfColumnsCoeff", nr );
+        ColoredInfoForService( t, "BasisOfColumnsCoeff", nr_cols );
         
         IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
         
@@ -2453,8 +2523,6 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     fi;
     
     #=====# begin of the core procedure #=====#
-    
-    TT := HomalgVoidMatrix( R );
     
     B := ColumnReducedEchelonForm( M, TT );
     
