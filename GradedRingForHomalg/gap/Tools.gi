@@ -756,6 +756,14 @@ InstallMethod( Coefficients,
 end );
 
 ##
+InstallMethod( LaTeXStringOp,
+        "for homalg graded ring elements",
+        [ IsHomalgGradedRingElement ],
+        
+  r -> LaTeXStringOp( EvalRingElement( r ) )
+);
+
+##
 InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
         "for a list",
         [ IsList ],
