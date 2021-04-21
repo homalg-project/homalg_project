@@ -19,15 +19,18 @@ InstallValue( HOMALG_IO_Sage,
             cas := "sage",		## normalized name on which the user should have no control
             name := "Sage",
             executable := [ "sage" ],	## this list is processed from left to right
-            options := [ ],
+            #options := [ ],
+            options := [ "--simple-prompt" ],
             BUFSIZE := 1024,
-            READY := "!$%&/(",
+            READY := "!%&/)(",
+            READY_printed := Concatenation( "'", ~.READY, "'" ),
             CUT_POS_BEGIN := 7,		## these are the most
             CUT_POS_END := 10,		## delicate values!
             eoc_verbose := "",
             eoc_quiet := ";",
-            remove_enter := true,       ## a Sage specific
-	    check_output := true,	## a Sage specific
+            normalized_white_space := NormalizedWhitespace,	## a Sage specific
+            #remove_enter := true,	## a Sage specific
+            #check_output := true,	## a Sage specific
             only_warning := "WARNING:",	## a Sage specific
             define := "=",
             delete := function( var, stream ) homalgSendBlocking( [ "del ", var ], "need_command", stream, "delete" ); end,
