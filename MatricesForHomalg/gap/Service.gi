@@ -19,8 +19,8 @@ HOMALG_MATRICES.colored_info :=
       ## Basic Operations:
       
       ## reduced Echelon form
-      RowReducedEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
-      ColumnReducedEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
+      ReducedRowEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
+      ReducedColumnEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
       ## Basis
       BasisOfRowModule := [ 3, HOMALG_MATRICES.colors.BOB ],
       BasisOfColumnModule := [ 3, HOMALG_MATRICES.colors.BOB ],
@@ -145,7 +145,7 @@ end );
 ################################################################
 
 ##
-InstallMethod( RowReducedEchelonForm,
+InstallMethod( ReducedRowEchelonForm,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -156,23 +156,23 @@ InstallMethod( RowReducedEchelonForm,
     
     RP := homalgTable( R );
     
-    ColoredInfoForService( "busy", "RowReducedEchelonForm", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+    ColoredInfoForService( "busy", "ReducedRowEchelonForm", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
     
     t := homalgTotalRuntimes( );
     
-    if IsBound(RP!.RowReducedEchelonForm) then
+    if IsBound(RP!.ReducedRowEchelonForm) then
         
-        B := RP!.RowReducedEchelonForm( M );
+        B := RP!.ReducedRowEchelonForm( M );
         
-        ColoredInfoForService( t, "RowReducedEchelonForm", Length( NonZeroRows( B ) ) );
+        ColoredInfoForService( t, "ReducedRowEchelonForm", Length( NonZeroRows( B ) ) );
         
         return B;
         
-    elif IsBound(RP!.ColumnReducedEchelonForm) then
+    elif IsBound(RP!.ReducedColumnEchelonForm) then
         
-        B := Involution( RP!.ColumnReducedEchelonForm( Involution( M ) ) );
+        B := Involution( RP!.ReducedColumnEchelonForm( Involution( M ) ) );
         
-        ColoredInfoForService( t, "RowReducedEchelonForm", Length( NonZeroRows( B ) ) );
+        ColoredInfoForService( t, "ReducedRowEchelonForm", Length( NonZeroRows( B ) ) );
         
         return B;
         
@@ -183,7 +183,7 @@ InstallMethod( RowReducedEchelonForm,
 end );
 
 ##
-InstallMethod( RowReducedEchelonForm,
+InstallMethod( ReducedRowEchelonForm,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -194,25 +194,25 @@ InstallMethod( RowReducedEchelonForm,
     
     RP := homalgTable( R );
     
-    ColoredInfoForService( "busy", "RowReducedEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+    ColoredInfoForService( "busy", "ReducedRowEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
     
     t := homalgTotalRuntimes( );
     
-    if IsBound(RP!.RowReducedEchelonForm) then
+    if IsBound(RP!.ReducedRowEchelonForm) then
         
-        B := RP!.RowReducedEchelonForm( M, T );
+        B := RP!.ReducedRowEchelonForm( M, T );
         
-        ColoredInfoForService( t, "RowReducedEchelonForm (M,T)", Length( NonZeroRows( B ) ) );
+        ColoredInfoForService( t, "ReducedRowEchelonForm (M,T)", Length( NonZeroRows( B ) ) );
         
         return B;
         
-    elif IsBound(RP!.ColumnReducedEchelonForm) then
+    elif IsBound(RP!.ReducedColumnEchelonForm) then
         
         TI := HomalgVoidMatrix( R );
         
-        B := Involution( RP!.ColumnReducedEchelonForm( Involution( M ), TI ) );
+        B := Involution( RP!.ReducedColumnEchelonForm( Involution( M ), TI ) );
         
-        ColoredInfoForService( t, "RowReducedEchelonForm (M,T)", Length( NonZeroRows( B ) ) );
+        ColoredInfoForService( t, "ReducedRowEchelonForm (M,T)", Length( NonZeroRows( B ) ) );
         
         SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
         
@@ -225,7 +225,7 @@ InstallMethod( RowReducedEchelonForm,
 end );
 
 ##
-InstallMethod( ColumnReducedEchelonForm,
+InstallMethod( ReducedColumnEchelonForm,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -236,28 +236,28 @@ InstallMethod( ColumnReducedEchelonForm,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.ColumnReducedEchelonForm) then
+    if IsBound(RP!.ReducedColumnEchelonForm) then
         
         t := homalgTotalRuntimes( );
         
-        ColoredInfoForService( "busy", "ColumnReducedEchelonForm", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+        ColoredInfoForService( "busy", "ReducedColumnEchelonForm", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
         
-        B := RP!.ColumnReducedEchelonForm( M );
+        B := RP!.ReducedColumnEchelonForm( M );
         
-        ColoredInfoForService( t, "ColumnReducedEchelonForm", Length( NonZeroColumns( B ) ) );
+        ColoredInfoForService( t, "ReducedColumnEchelonForm", Length( NonZeroColumns( B ) ) );
         
         return B;
         
     fi;
     
-    B := Involution( RowReducedEchelonForm( Involution( M ) ) );
+    B := Involution( ReducedRowEchelonForm( Involution( M ) ) );
     
     return B;
     
 end );
 
 ##
-InstallMethod( ColumnReducedEchelonForm,
+InstallMethod( ReducedColumnEchelonForm,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -268,15 +268,15 @@ InstallMethod( ColumnReducedEchelonForm,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.ColumnReducedEchelonForm) then
+    if IsBound(RP!.ReducedColumnEchelonForm) then
         
         t := homalgTotalRuntimes( );
         
-        ColoredInfoForService( "busy", "ColumnReducedEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+        ColoredInfoForService( "busy", "ReducedColumnEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
         
-        B := RP!.ColumnReducedEchelonForm( M, T );
+        B := RP!.ReducedColumnEchelonForm( M, T );
         
-        ColoredInfoForService( t, "ColumnReducedEchelonForm (M,T)", Length( NonZeroColumns( B ) ) );
+        ColoredInfoForService( t, "ReducedColumnEchelonForm (M,T)", Length( NonZeroColumns( B ) ) );
         
         return B;
         
@@ -284,7 +284,7 @@ InstallMethod( ColumnReducedEchelonForm,
     
     TI := HomalgVoidMatrix( R );
     
-    B := Involution( RowReducedEchelonForm( Involution( M ), TI ) );
+    B := Involution( ReducedRowEchelonForm( Involution( M ), TI ) );
     
     SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
     
@@ -444,7 +444,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     #=====# begin of the core procedure #=====#
     
-    B := RowReducedEchelonForm( M );
+    B := ReducedRowEchelonForm( M );
     
     nz := Length( NonZeroRows( B ) );
     
@@ -626,7 +626,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     #=====# begin of the core procedure #=====#
     
-    B := ColumnReducedEchelonForm( M );
+    B := ReducedColumnEchelonForm( M );
     
     nz := Length( NonZeroColumns( B ) );
     
@@ -798,7 +798,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
     
-    M := RowReducedEchelonForm( M );
+    M := ReducedRowEchelonForm( M );
     
     C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
@@ -962,7 +962,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     M := UnionOfColumns( UnionOfRows( id, A ), UnionOfRows( zz, B ) );
     
-    M := ColumnReducedEchelonForm( M );
+    M := ReducedColumnEchelonForm( M );
     
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
@@ -1078,7 +1078,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     C := HomalgVoidMatrix( R );
     
-    B := RowReducedEchelonForm( M, C );
+    B := ReducedRowEchelonForm( M, C );
     
     nz := Length( NonZeroRows( B ) );
     
@@ -1193,7 +1193,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     C := HomalgVoidMatrix( R );
     
-    B := ColumnReducedEchelonForm( M, C );
+    B := ReducedColumnEchelonForm( M, C );
     
     nz := Length( NonZeroColumns( B ) );
     
@@ -2319,7 +2319,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     #=====# begin of the core procedure #=====#
     
-    B := RowReducedEchelonForm( M, TT );
+    B := ReducedRowEchelonForm( M, TT );
     
     nz := Length( NonZeroRows( B ) );
     
@@ -2524,7 +2524,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     #=====# begin of the core procedure #=====#
     
-    B := ColumnReducedEchelonForm( M, TT );
+    B := ReducedColumnEchelonForm( M, TT );
     
     nz := Length( NonZeroColumns( B ) );
     
@@ -2734,7 +2734,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     TT := HomalgVoidMatrix( R );
     
-    M := RowReducedEchelonForm( M, TT );
+    M := ReducedRowEchelonForm( M, TT );
     
     M := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
@@ -2939,7 +2939,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     TT := HomalgVoidMatrix( R );
     
-    M := ColumnReducedEchelonForm( M, TT );
+    M := ReducedColumnEchelonForm( M, TT );
     
     M := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     

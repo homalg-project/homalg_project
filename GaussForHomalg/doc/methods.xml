@@ -59,7 +59,7 @@ specifically designed for &GaussForHomalg;.
 <#Include Label="RelativeSyzygiesGeneratorsOfRows">
 -->
 <!-- GaussFQI.gi -->
-<#Include Label="RowReducedEchelonForm">
+<#Include Label="ReducedRowEchelonForm">
 <#Include Label="CreateHomalgTable">
 </Section>
 

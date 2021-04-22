@@ -898,7 +898,7 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis
         
         return CallFuncList( RP!.BestBasis, arg );
         
-    elif IsBound(RP!.RowReducedEchelonForm) then
+    elif IsBound(RP!.ReducedRowEchelonForm) then
         
         nargs := Length( arg );
         
@@ -906,15 +906,15 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis
         n := NrColumns( M );
         
         if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
-            B := RowReducedEchelonForm( M, arg[2] );
+            B := ReducedRowEchelonForm( M, arg[2] );
         else
-            B := RowReducedEchelonForm( M );
+            B := ReducedRowEchelonForm( M );
         fi;
         
         if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
-            B := ColumnReducedEchelonForm( B, arg[3] );
+            B := ReducedColumnEchelonForm( B, arg[3] );
         else
-            B := ColumnReducedEchelonForm( B );
+            B := ReducedColumnEchelonForm( B );
         fi;
         
         if m - NrRows( B ) = 0 and n - NrColumns( B ) = 0 then
@@ -1056,8 +1056,8 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
     
     if not finished
        and ( IsBound( RP!.BestBasis )
-             or IsBound( RP!.RowReducedEchelonForm )
-             or IsBound( RP!.ColumnReducedEchelonForm ) ) then
+             or IsBound( RP!.ReducedRowEchelonForm )
+             or IsBound( RP!.ReducedColumnEchelonForm ) ) then
         
         if compute_U or compute_UI then
             U := HomalgVoidMatrix( R );
@@ -1140,8 +1140,8 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         
     elif not finished and
       not ( IsBound( RP!.BestBasis )
-            or IsBound( RP!.RowReducedEchelonForm )
-            or IsBound( RP!.ColumnReducedEchelonForm ) ) then
+            or IsBound( RP!.ReducedRowEchelonForm )
+            or IsBound( RP!.ReducedColumnEchelonForm ) ) then
         
         M_orig := M;
         
@@ -1437,11 +1437,11 @@ InstallGlobalFunction( SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMat
         
         RP := homalgTable( R );
         
-        if IsBound(RP!.RowReducedEchelonForm) or IsBound(RP!.ColumnReducedEchelonForm) then
+        if IsBound(RP!.ReducedRowEchelonForm) or IsBound(RP!.ReducedColumnEchelonForm) then
             
             T := HomalgVoidMatrix( R );
             
-            S := RowReducedEchelonForm( M, T );
+            S := ReducedRowEchelonForm( M, T );
             
         else
             
@@ -1476,11 +1476,11 @@ InstallGlobalFunction( SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMa
         
         RP := homalgTable( R );
         
-        if IsBound(RP!.RowReducedEchelonForm) or IsBound(RP!.ColumnReducedEchelonForm) then
+        if IsBound(RP!.ReducedRowEchelonForm) or IsBound(RP!.ReducedColumnEchelonForm) then
             
             T := HomalgVoidMatrix( R );
             
-            S := ColumnReducedEchelonForm( M, T );
+            S := ReducedColumnEchelonForm( M, T );
             
         else
             

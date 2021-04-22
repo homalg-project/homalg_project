@@ -775,9 +775,9 @@ InstallMethod( RowRankOfMatrix,
         
         return RP!.RowRankOfMatrix( M );
         
-    elif IsBound( RP!.RowReducedEchelonForm ) then
+    elif IsBound( RP!.ReducedRowEchelonForm ) then
         
-        B := RP!.RowReducedEchelonForm( M );
+        B := RP!.ReducedRowEchelonForm( M );
         
         if HasRowRankOfMatrix( B ) then
             return RowRankOfMatrix( B );
@@ -840,19 +840,19 @@ InstallMethod( ColumnRankOfMatrix,
         
         return RP!.RowRankOfMatrix( Involution( M ) );	## in most cases Involution is obsolete
         
-    elif IsBound( RP!.ColumnReducedEchelonForm ) then
+    elif IsBound( RP!.ReducedColumnEchelonForm ) then
         
-        B := RP!.ColumnReducedEchelonForm( M );
+        B := RP!.ReducedColumnEchelonForm( M );
         
         if HasColumnRankOfMatrix( B ) then
             return ColumnRankOfMatrix( B );
         fi;
         
-    elif IsBound( RP!.RowReducedEchelonForm ) then
+    elif IsBound( RP!.ReducedRowEchelonForm ) then
         
         N := Involution( M );
         
-        B := RP!.RowReducedEchelonForm( N );
+        B := RP!.ReducedRowEchelonForm( N );
         
         if HasRowRankOfMatrix( B ) then
             return RowRankOfMatrix( B );
