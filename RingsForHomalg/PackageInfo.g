@@ -5,7 +5,7 @@ PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
 
 Version := Maximum( [
-  "2021.04-01", ## Mohamed's version
+  "2021.04-02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2020.02-05", ## Markus L-H's version
 ## this line prevents merge conflicts
@@ -21,7 +21,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
 ] ),
 
-Date := "21/04/2021",
+Date := "22/04/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -218,7 +218,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2020.06.27" ],
+                   [ "MatricesForHomalg", ">= 2021.04-02" ],
                    [ "HomalgToCAS", ">= 2021.01-01" ],
                    [ "GaussForHomalg", ">= 2020.06.27" ],
                    [ "GAPDoc", ">= 1.0" ]
