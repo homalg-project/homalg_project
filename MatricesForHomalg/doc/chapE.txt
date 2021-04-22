@@ -138,7 +138,7 @@
             │                 │                                                                       
         "b" │     "basic"     │ make the basic matrix operations visible + [10XhomalgMode[110X( "logic" )      
             │                 │                                                                       
-        "d" │     "debug"     │ same as "basic" but also makes [10XRow/ColumnReducedEchelonForm[110X visible   
+        "d" │     "debug"     │ same as "basic" but also makes [10XRow/ReducedColumnEchelonForm[110X visible   
             │                 │                                                                       
         "l" │     "logic"     │ make the logical methods in [5XLIMAT[105X and [5XCOLEM[105X visible                   
             │                 │                                                                       
