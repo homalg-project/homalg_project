@@ -180,9 +180,9 @@
   
   [1X3.3 [33X[0;0YThe Basic Functions and [5Xhomalg[105X[101X[1X table creation[133X[101X
   
-  [1X3.3-1 RowReducedEchelonForm[101X
+  [1X3.3-1 ReducedRowEchelonForm[101X
   
-  [33X[1;0Y[29X[2XRowReducedEchelonForm[102X( [3XM[103X[, [3XU[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XReducedRowEchelonForm[102X( [3XM[103X[, [3XU[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix [3XN[103X[133X
   
   [33X[0;0YIf  one  argument  is  given, this returns the triangular basis (reduced row

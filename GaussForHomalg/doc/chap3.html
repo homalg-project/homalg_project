@@ -55,7 +55,7 @@ functions</span></a>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X87BA6DDD812E02F4">3.3 <span class="Heading">The Basic Functions and <strong class="pkg">homalg</strong> table creation</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D9684E68245618F">3.3-1 RowReducedEchelonForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X791E6BF98311DE55">3.3-1 ReducedRowEchelonForm</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8187F91A834A4276">3.3-2 CreateHomalgTable</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X805204B0834D63EB">3.4 <span class="Heading">Matrix entry manipulation</span></a>
@@ -264,11 +264,11 @@ functions</span></h3>
 
 <h4>3.3 <span class="Heading">The Basic Functions and <strong class="pkg">homalg</strong> table creation</span></h4>
 
-<p><a id="X7D9684E68245618F" name="X7D9684E68245618F"></a></p>
+<p><a id="X791E6BF98311DE55" name="X791E6BF98311DE55"></a></p>
 
-<h5>3.3-1 RowReducedEchelonForm</h5>
+<h5>3.3-1 ReducedRowEchelonForm</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RowReducedEchelonForm</code>( <var class="Arg">M</var>[, <var class="Arg">U</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedRowEchelonForm</code>( <var class="Arg">M</var>[, <var class="Arg">U</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix <var class="Arg">N</var></p>
 
 <p>If one argument is given, this returns the triangular basis (reduced row echelon form) of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, again as a <strong class="pkg">homalg</strong> matrix. In case of two arguments, still only the triangular basis of <var class="Arg">M</var> is returned, but the transformation matrix is stored in the void <strong class="pkg">homalg</strong> matrix <var class="Arg">U</var> as a side effect. The matrices satisfy <span class="SimpleMath">N = U * M</span>.</p>

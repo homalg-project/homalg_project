@@ -6,7 +6,7 @@
                          [1X[5XGauss[105X Functionality for [5Xhomalg[105X[101X
   
   
-                               Version 2020.10-02
+                               Version 2021.04-01
   
   
                                  September 2013
@@ -86,7 +86,7 @@
       3.2-18 ZeroRows
       3.2-19 ZeroColumns
     3.3 [33X[0;0YThe Basic Functions and [5Xhomalg[105X table creation[133X
-      3.3-1 RowReducedEchelonForm
+      3.3-1 ReducedRowEchelonForm
       3.3-2 CreateHomalgTable
     3.4 [33X[0;0YMatrix entry manipulation[133X
       3.4-1 MatElm

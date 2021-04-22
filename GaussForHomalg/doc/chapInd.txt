@@ -21,7 +21,7 @@
   [2XMatElm[102X 3.4-1 
   [2XNrColumns[102X 3.2-15 
   [2XNrRows[102X 3.2-14 
-  [2XRowReducedEchelonForm[102X 3.3-1 
+  [2XReducedRowEchelonForm[102X 3.3-1 
   [2XSetMatElm[102X 3.4-2 
   [2XUnionOfColumns[102X 3.2-9 
   [2XUnionOfRows[102X 3.2-8 

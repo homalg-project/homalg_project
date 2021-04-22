@@ -1,7 +1,7 @@
 name: GaussForHomalg
-version: "2020.10-02"
+version: "2021.04-01"
 license: "GPL-2.0-or-later"
-date: 2020-10-16
+date: 2021-04-22
 description: |
     Gauss functionality for the homalg project
 
@@ -18,25 +18,25 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "Gauss"
       version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/Gauss"
+      url: "https://homalg-project.github.io/pkg/Gauss"
     - name: "MatricesForHomalg"
-      version: ">= 2020.06.27"
-      url: "https://homalg-project.github.io/homalg_project/MatricesForHomalg"
+      version: ">= 2021.04-02"
+      url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
     - name: "GAPDoc"
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-www: https://homalg-project.github.io/homalg_project/GaussForHomalg
+www: https://homalg-project.github.io/pkg/GaussForHomalg
 readme: README.md
 packageinfo: https://homalg-project.github.io/homalg_project/GaussForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.10-02/GaussForHomalg-2020.10-02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2021.04-01/GaussForHomalg-2021.04-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.10-02/GaussForHomalg-2020.10-02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2021.04-01/GaussForHomalg-2021.04-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2020.10-02/GaussForHomalg-2020.10-02.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2021.04-01/GaussForHomalg-2021.04-01.pdf
 
 abstract: |
     The <span class="pkgname">GaussForHomalg</span> package provides Gauss functionality for <span class="pkgname">homalg</span> using the package <span class="pkgname">Gauss</span>
@@ -48,29 +48,29 @@ keywords: |
     GaussForHomalg, homalg, Gauss.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>GB20</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
+    [<span class='BibKey'>GB21</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
      <i class='BibTitle'>GaussForHomalg, Gauss functionality for the homalg project,
-             Version 2020.10-02</i>
-     (<span class='BibYear'>2020</span>)<br />
+             Version 2021.04-01</i>
+     (<span class='BibYear'>2021</span>)<br />
     (<span class='BibNote'>GAP package</span>),
-    <span class='BibHowpublished'><a href="https://homalg-project.github.io/homalg_project/GaussForHomalg">https://homalg-project.github.io/homalg_project/GaussForHomalg</a></span>.
+    <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/GaussForHomalg">https://homalg-project.github.io/pkg/GaussForHomalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ GaussForHomalg2020.10-02,
+    @misc{ GaussForHomalg2021.04-01,
       author =           {G{\"o}rtzen, S. and Barakat, M.},
       title =            {{GaussForHomalg},  Gauss  functionality for the homalg
-                          project, {V}ersion 2020.10-02},
-      month =            {Oct},
-      year =             {2020},
+                          project, {V}ersion 2021.04-01},
+      month =            {Apr},
+      year =             {2021},
       note =             {GAP package},
       howpublished =     {\href
-                          {https://homalg-project.github.io/homalg_project/GaussForHomalg}
+                          {https://homalg-project.github.io/pkg/GaussForHomalg}
                           {\texttt{https://homalg-project.github.io/}\discretionary
-                          {}{}{}\texttt{homalg{\textunderscore}project/}\discretionary
+                          {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{GaussForHomalg}}},
       keywords =         {GaussForHomalg; homalg; Gauss},
-      printedkey =       {GB20}
+      printedkey =       {GB21}
     }
 

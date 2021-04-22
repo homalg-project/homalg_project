@@ -4,9 +4,9 @@ PackageName := "GaussForHomalg",
 
 Subtitle := "Gauss functionality for the homalg project",
 
-Version := "2020.10-02",
+Version := "2021.04-01",
 
-Date := "16/10/2020",
+Date := "22/04/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -51,7 +51,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/GaussForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/GaussForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/GaussForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/GaussForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-", ~.Version, "/GaussForHomalg-", ~.Version ),
@@ -77,7 +77,7 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                 [ "Gauss", ">= 2020.06.27" ],
-                [ "MatricesForHomalg", ">= 2020.06.27" ],
+                [ "MatricesForHomalg", ">= 2021.04-02" ],
                 [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
