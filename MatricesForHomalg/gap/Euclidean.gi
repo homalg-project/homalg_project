@@ -300,7 +300,7 @@ InstallMethod( CreateHomalgTable,
                
                ## Must be defined if other functions are not defined
                
-               RowReducedEchelonForm :=
+               ReducedRowEchelonForm :=
                  function( arg )
                    local M, nargs, U, H;
                    
@@ -314,7 +314,7 @@ InstallMethod( CreateHomalgTable,
                    
                    SetIsUpperStairCaseMatrix( H, true );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not ReducedRowEchelonForm( M, "" )
                        ## compute H and U
                        
                        # assign U:

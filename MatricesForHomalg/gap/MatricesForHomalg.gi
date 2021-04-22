@@ -34,7 +34,7 @@ InstallValue( HOMALG_MATRICES,
             OtherInternalMatrixTypes := [ ],
             
             colors := rec(   ## (B)asic (O)perations:
-                             BOE := "\033[1;37;40m",	## reduced (E)chelon form: RowReducedEchelonForm/Columns
+                             BOE := "\033[1;37;40m",	## reduced (E)chelon form: ReducedRowEchelonForm/Columns
                              BOB := "\033[1;37;45m",	## (B)asis: BasisOfRow/ColumnModule
                              BOC := "\033[1;37;45m",	## Basis: BasisOfRows/Columns(C)oeff
                              BOD := "\033[1;37;42m",	## existence of a particular solution: (D)ecideZeroRows/Columns
@@ -119,7 +119,7 @@ InstallValue( HOMALG_MATRICES,
 ##      <Row>
 ##        <Item>"d"</Item>
 ##        <Item>"debug"</Item>
-##        <Item>same as "basic" but also makes <C>Row/ColumnReducedEchelonForm</C> visible</Item>
+##        <Item>same as "basic" but also makes <C>Row/ReducedColumnEchelonForm</C> visible</Item>
 ##      </Row>
 ##      <Row><Item></Item><Item></Item><Item></Item></Row>
 ##      <Row>

@@ -55,7 +55,7 @@ InstallMethod( CreateHomalgTable,
                
                ## Must be defined if other functions are not defined
                
-               RowReducedEchelonForm :=
+               ReducedRowEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, U;
                    
@@ -67,7 +67,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not ReducedRowEchelonForm( M, "" )
                        # assign U:
                        U := arg[2];
                        SetNrRows( U, NrRows( M ) );
@@ -75,10 +75,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ U, ":=HomalgVoidMatrix(", R, ");;", N, ":=RowReducedEchelonForm(", M, U, ")" ], "need_command", "ReducedEchelonFormC" );
+                       homalgSendBlocking( [ U, ":=HomalgVoidMatrix(", R, ");;", N, ":=ReducedRowEchelonForm(", M, U, ")" ], "need_command", "ReducedEchelonFormC" );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, ":=RowReducedEchelonForm(", M, ")" ], "need_command", "ReducedEchelonForm" );
+                       homalgSendBlocking( [ N, ":=ReducedRowEchelonForm(", M, ")" ], "need_command", "ReducedEchelonForm" );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );

@@ -19,13 +19,13 @@ SageMacros.ElementaryDivisors := "\n\
 def ElementaryDivisors(M):\n\
   return M.transpose().elementary_divisors()\n\n";
 
-SageMacros.RowReducedEchelonForm_NU := "\n\
-def RowReducedEchelonForm_NU(M):\n\
+SageMacros.ReducedRowEchelonForm_NU := "\n\
+def ReducedRowEchelonForm_NU(M):\n\
   N, U = M.hermite_form(transformation=True)\n\
   return N, U\n\n";
 
-SageMacros.RowReducedEchelonForm := "\n\
-def RowReducedEchelonForm(M):\n\
+SageMacros.ReducedRowEchelonForm := "\n\
+def ReducedRowEchelonForm(M):\n\
   N = M.hermite_form()\n\
   return N\n\n";
 
@@ -74,7 +74,7 @@ InstallMethod( CreateHomalgTable,
                
                ## Must be defined if other functions are not defined
                
-               RowReducedEchelonForm :=
+               ReducedRowEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, U;
                    
@@ -86,7 +86,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not ReducedRowEchelonForm( M, "" )
                        # assign U:
                        U := arg[2];
                        SetNrRows( U, NrRows( M ) );
@@ -94,10 +94,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ N, U, " = RowReducedEchelonForm_NU(", M, ")" ], "need_command", "ReducedEchelonFormC" );
+                       homalgSendBlocking( [ N, U, " = ReducedRowEchelonForm_NU(", M, ")" ], "need_command", "ReducedEchelonFormC" );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, " = RowReducedEchelonForm(", M, ")" ], "need_command", "ReducedEchelonForm" );
+                       homalgSendBlocking( [ N, " = ReducedRowEchelonForm(", M, ")" ], "need_command", "ReducedEchelonForm" );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );

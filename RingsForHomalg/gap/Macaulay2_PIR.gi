@@ -52,7 +52,7 @@ InstallMethod( CreateHomalgTable,
                
                ## Must be defined if other functions are not defined
                
-               XRowReducedEchelonForm :=
+               XReducedRowEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, U;
                    
@@ -64,7 +64,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not ReducedRowEchelonForm( M, "" )
                        # assign U:
                        U := arg[2];
                        SetNrRows( U, NrRows( M ) );
