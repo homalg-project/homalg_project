@@ -18,6 +18,9 @@ HOMALG_MATRICES.colored_info :=
   rec(
       ## Basic Operations:
       
+      ## Echelon form
+      RowEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
+      ColumnEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
       ## reduced Echelon form
       ReducedRowEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
       ReducedColumnEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
@@ -143,6 +146,161 @@ end );
 ## of a homalg residue class ring
 ##
 ################################################################
+
+##
+InstallOtherMethod( RowEchelonForm,
+        "for matrices",
+        [ IsMatrix ],
+        
+  _RowEchelonForm );
+
+##
+InstallMethod( RowEchelonForm,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, t, B;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    ColoredInfoForService( "busy", "RowEchelonForm", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+    
+    t := homalgTotalRuntimes( );
+    
+    if IsBound(RP!.RowEchelonForm) then
+        
+        B := RP!.RowEchelonForm( M );
+        
+        ColoredInfoForService( t, "RowEchelonForm", Length( NonZeroRows( B ) ) );
+        
+        return B;
+        
+    elif IsBound(RP!.ColumnEchelonForm) then
+        
+        B := Involution( RP!.ColumnEchelonForm( Involution( M ) ) );
+        
+        ColoredInfoForService( t, "RowEchelonForm", Length( NonZeroRows( B ) ) );
+        
+        return B;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RowEchelonForm,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        
+  function( M, T )
+    local R, RP, t, TI, B;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    ColoredInfoForService( "busy", "RowEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+    
+    t := homalgTotalRuntimes( );
+    
+    if IsBound(RP!.RowEchelonForm) then
+        
+        B := RP!.RowEchelonForm( M, T );
+        
+        ColoredInfoForService( t, "RowEchelonForm (M,T)", Length( NonZeroRows( B ) ) );
+        
+        return B;
+        
+    elif IsBound(RP!.ColumnEchelonForm) then
+        
+        TI := HomalgVoidMatrix( R );
+        
+        B := Involution( RP!.ColumnEchelonForm( Involution( M ), TI ) );
+        
+        ColoredInfoForService( t, "RowEchelonForm (M,T)", Length( NonZeroRows( B ) ) );
+        
+        SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
+        
+        return B;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( ColumnEchelonForm,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, t, B;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ColumnEchelonForm) then
+        
+        t := homalgTotalRuntimes( );
+        
+        ColoredInfoForService( "busy", "ColumnEchelonForm", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+        
+        B := RP!.ColumnEchelonForm( M );
+        
+        ColoredInfoForService( t, "ColumnEchelonForm", Length( NonZeroColumns( B ) ) );
+        
+        return B;
+        
+    fi;
+    
+    B := Involution( RowEchelonForm( Involution( M ) ) );
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( ColumnEchelonForm,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        
+  function( M, T )
+    local R, RP, t, TI, B;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ColumnEchelonForm) then
+        
+        t := homalgTotalRuntimes( );
+        
+        ColoredInfoForService( "busy", "ColumnEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+        
+        B := RP!.ColumnEchelonForm( M, T );
+        
+        ColoredInfoForService( t, "ColumnEchelonForm (M,T)", Length( NonZeroColumns( B ) ) );
+        
+        return B;
+        
+    fi;
+    
+    TI := HomalgVoidMatrix( R );
+    
+    B := Involution( RowEchelonForm( Involution( M ), TI ) );
+    
+    SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return B;
+    
+end );
 
 ##
 InstallMethod( ReducedRowEchelonForm,

@@ -14,6 +14,15 @@
 #
 ####################################
 
+BindGlobal( "_RowEchelonForm", RowEchelonForm );
+Unbind( RowEchelonForm );
+
+DeclareAttribute( "RowEchelonForm",
+        IsHomalgMatrix );
+
+DeclareAttribute( "ColumnEchelonForm",
+        IsHomalgMatrix );
+
 DeclareAttribute( "ReducedRowEchelonForm",
         IsHomalgMatrix );
 
@@ -53,6 +62,12 @@ DeclareAttribute( "ReducedSyzygiesGeneratorsOfColumns",
 DeclareGlobalFunction( "ColoredInfoForService" );
 
 # basic operations:
+
+DeclareOperation( "RowEchelonForm",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "ColumnEchelonForm",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "ReducedRowEchelonForm",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
