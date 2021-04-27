@@ -559,9 +559,9 @@ InstallMethod( CertainColumns,
   end
 );
 
-##  <#GAPDoc Label="UnionOfRows">
+##  <#GAPDoc Label="SparseUnionOfRows">
 ##  <ManSection>
-##    <Func Arg="L" Name="UnionOfRows" Label="for a list of sparse matrices"/>
+##    <Func Arg="L" Name="SparseUnionOfRows" Label="for a list of sparse matrices"/>
 ##    <Returns>a sparse matrix</Returns>
 ##    <Description>
 ##      Stack the sparse matrices in the non-empty list <A>L</A>.
@@ -569,17 +569,33 @@ InstallMethod( CertainColumns,
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( UnionOfRowsOp,
-        "of a list of sparse matrices and a sparse matrix",
-        [ IsList, IsSparseMatrix ],
-  function( L, M )
-    return SparseMatrix( Sum( L, x -> x!.nrows ), L[1]!.ncols, Concatenation( List( L, x -> x!.indices ) ), Concatenation( List( L, x -> x!.entries ) ), L[1]!.ring );
+InstallMethod( SparseUnionOfRows,
+        "of a list of sparse matrices",
+        [ IsList ],
+  function( L )
+    local R, nr_cols, indices;
+    
+    R := L[1]!.ring;
+    nr_cols := L[1]!.ncols;
+    
+    indices := Concatenation( List( L, x -> x!.indices ) );
+    
+    if IsSparseMatrixGF2Rep( L[1] ) then
+        
+        return SparseMatrix( Sum( L, x -> x!.nrows ), nr_cols, indices, R );
+        
+    else
+        
+        return SparseMatrix( Sum( L, x -> x!.nrows ), nr_cols, indices, Concatenation( List( L, x -> x!.entries ) ), R );
+        
+    fi;
+    
   end
 );
 
-##  <#GAPDoc Label="UnionOfColumns">
+##  <#GAPDoc Label="SparseUnionOfColumns">
 ##  <ManSection>
-##    <Func Arg="L" Name="UnionOfColumns" Label="for a list of sparse matrices"/>
+##    <Func Arg="L" Name="SparseUnionOfColumns" Label="for a list of sparse matrices"/>
 ##    <Returns>a sparse matrix</Returns>
 ##    <Description>
 ##      Augment the sparse matrices in the non-empty list <A>L</A>.
@@ -587,18 +603,21 @@ InstallMethod( UnionOfRowsOp,
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( UnionOfColumnsOp,
-        "of a list of sparse matrices and a sparse matrix",
-        [ IsList, IsSparseMatrix ],
-  function( L, M )
-    local indices, c, l, i;
+InstallMethod( SparseUnionOfColumns,
+        "of a list of sparse matrices",
+        [ IsList ],
+  function( L )
+    local R, nr_rows, indices, c, l, i;
     
-    indices := ShallowCopy( L[1]!.indices );
-    c := L[1]!.ncols;
+    R := L[1]!.ring;
+    nr_rows := L[1]!.nrows;
     
-    for l in L{[ 2 .. Length( L ) ]} do
+    indices := List( [ 1 .. nr_rows ], x -> [] );
+    c := 0;
+    
+    for l in L do
         
-        for i in [ 1 .. L[1]!.nrows ] do
+        for i in [ 1 .. nr_rows ] do
             
             indices[i] := Concatenation( indices[i], l!.indices[i] + c );
             
@@ -608,7 +627,15 @@ InstallMethod( UnionOfColumnsOp,
         
     od;
     
-    return SparseMatrix( L[1]!.nrows, Sum( L, x -> x!.ncols ), indices, List( [ 1 .. L[1]!.nrows ], i -> Concatenation( List( L, x -> x!.entries[i] ) ) ), L[1]!.ring );
+    if IsSparseMatrixGF2Rep( L[1] ) then
+        
+        return SparseMatrix( nr_rows, Sum( L, x -> x!.ncols ), indices, R );
+        
+    else
+        
+        return SparseMatrix( nr_rows, Sum( L, x -> x!.ncols ), indices, List( [ 1 .. nr_rows ], i -> Concatenation( List( L, x -> x!.entries[i] ) ) ), R );
+        
+    fi;
     
   end
 );

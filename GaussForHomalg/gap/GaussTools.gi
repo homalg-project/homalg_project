@@ -189,7 +189,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                UnionOfRows :=
                  function( L )
                    
-                   return UnionOfRows( List( L, Eval ) );
+                   return SparseUnionOfRows( List( L, Eval ) );
                    
                  end,
 ##  <#GAPDoc Label="UnionOfColumns">
@@ -206,7 +206,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                UnionOfColumns :=
                  function( L )
                    
-                   return UnionOfColumns( List( L, Eval ) );
+                   return SparseUnionOfColumns( List( L, Eval ) );
                    
                  end,
 ##  <#GAPDoc Label="DiagMat">
