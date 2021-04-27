@@ -4,7 +4,7 @@ PackageName := "Gauss",
 
 Subtitle := "Extended Gauss functionality for GAP",
 
-Version := "2020.10-02",
+Version := "2021.04-01",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
