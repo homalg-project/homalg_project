@@ -63,7 +63,7 @@
   [2XDeterminant[102X, homalgTable entry B.1-23 
       ResidueClassRing D.2-21 
   [2XDeterminantMat[102X 5.4-3 
-  [2XDiagMat[102X, for matrices 5.5-12 
+  [2XDiagMat[102X, for a homalg ring and a list of homalg matrices 5.5-12 
       homalgTable entry B.1-13 
       ResidueClassRing D.2-11 
   [2XDualKroneckerMat[102X, for matrices 5.5-14 
@@ -321,11 +321,11 @@
       homalgTable entry B.1-6 
       ResidueClassRing D.2-6 
   [2XTypeOfHomalgMatrix[102X 3.4-4 
-  [2XUnionOfColumns[102X, for a list of homalg matrices 5.5-11 
+  [2XUnionOfColumns[102X, for a homalg ring, an integer and a list of homalg matrices 5.5-11 
       homalgTable entry B.1-11 
       ResidueClassRing D.2-10 
   [2XUnionOfColumnsPair[102X, homalgTable entry B.1-12 
-  [2XUnionOfRows[102X, for a list of homalg matrices 5.5-10 
+  [2XUnionOfRows[102X, for a homalg ring, an integer and a list of homalg matrices 5.5-10 
       homalgTable entry B.1-9 
       ResidueClassRing D.2-9 
   [2XUnionOfRowsPair[102X, homalgTable entry B.1-10 

@@ -903,30 +903,33 @@
   
   [1X5.5-10 UnionOfRows[101X
   
-  [33X[1;0Y[29X[2XUnionOfRows[102X( [3XL[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XUnionOfRows[102X( [[3XR[103X, [3Xnr_cols[103X, ][3XL[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
-  [33X[0;0YStack the [5Xhomalg[105X matrices in the non-empty list [3XL[103X.[133X
+  [33X[0;0YStack  the  [5Xhomalg[105X matrices in the list [3XL[103X. The entries of [3XL[103X must be matrices
+  over  the  [5Xhomalg[105X  ring  [3XR[103X  with  [3Xnr_cols[103X  columns. If [3XL[103X is non-empty, [3XR[103X and
+  [3Xnr_cols[103X can be omitted.[133X
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-11[114X))[133X
   
   [1X5.5-11 UnionOfColumns[101X
   
-  [33X[1;0Y[29X[2XUnionOfColumns[102X( [3XL[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XUnionOfColumns[102X( [[3XR[103X, [3Xnr_rows[103X, ][3XL[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
-  [33X[0;0YAugment the [5Xhomalg[105X matrices in the non-empty list [3XL[103X.[133X
+  [33X[0;0YAugment the [5Xhomalg[105X matrices in the list [3XL[103X. The entries of [3XL[103X must be matrices
+  over  the  [5Xhomalg[105X ring [3XR[103X with [3Xnr_rows[103X rows. If [3XL[103X is non-empty, [3XR[103X and [3Xnr_rows[103X
+  can be omitted.[133X
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-12[114X))[133X
   
   [1X5.5-12 DiagMat[101X
   
-  [33X[1;0Y[29X[2XDiagMat[102X( [3Xlist[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XDiagMat[102X( [[3XR[103X, ][3Xlist[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YBuild  the  block diagonal matrix out of the [5Xhomalg[105X matrices listed in [3Xlist[103X.
-  An  error  is  issued  if  [3Xlist[103X is empty or if one of the arguments is not a
-  [5Xhomalg[105X matrix.[133X
+  If [3Xlist[103X is non-empty, [3XR[103X can be omitted.[133X
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-13[114X))[133X
   

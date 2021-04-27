@@ -112,9 +112,9 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D0D35B582D9C0B0">5.5-7 TransposedMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CF5CE79796001F6">5.5-8 CertainRows</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8256AF2A840B19C4">5.5-9 CertainColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ADCDAC583BE2355">5.5-10 UnionOfRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F75F6D081D47478">5.5-11 UnionOfColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F2AD04C86F82240">5.5-12 DiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D6D0BDF854C9EBC">5.5-10 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7FF9661D85EC46B1">5.5-11 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C7830BE847D84B4">5.5-12 DiagMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CDA5D848468A0AA">5.5-13 KroneckerMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ECF744B7DE82BED">5.5-14 DualKroneckerMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D1A074278B415BE"><code>5.5-15 \*</code></a></span>
@@ -1198,36 +1198,36 @@ end );
 
 <p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC.html#X835F6F2E7D590F3D"><span class="RefLink">C.4-10</span></a>))</p>
 
-<p><a id="X7ADCDAC583BE2355" name="X7ADCDAC583BE2355"></a></p>
+<p><a id="X7D6D0BDF854C9EBC" name="X7D6D0BDF854C9EBC"></a></p>
 
 <h5>5.5-10 UnionOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( [<var class="Arg">R</var>, <var class="Arg">nr_cols</var>, ]<var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>Stack the <strong class="pkg">homalg</strong> matrices in the non-empty list <var class="Arg">L</var>.</p>
+<p>Stack the <strong class="pkg">homalg</strong> matrices in the list <var class="Arg">L</var>. The entries of <var class="Arg">L</var> must be matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> with <var class="Arg">nr_cols</var> columns. If <var class="Arg">L</var> is non-empty, <var class="Arg">R</var> and <var class="Arg">nr_cols</var> can be omitted.</p>
 
 <p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC.html#X7F35A61C8522A1B0"><span class="RefLink">C.4-11</span></a>))</p>
 
-<p><a id="X7F75F6D081D47478" name="X7F75F6D081D47478"></a></p>
+<p><a id="X7FF9661D85EC46B1" name="X7FF9661D85EC46B1"></a></p>
 
 <h5>5.5-11 UnionOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( [<var class="Arg">R</var>, <var class="Arg">nr_rows</var>, ]<var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>Augment the <strong class="pkg">homalg</strong> matrices in the non-empty list <var class="Arg">L</var>.</p>
+<p>Augment the <strong class="pkg">homalg</strong> matrices in the list <var class="Arg">L</var>. The entries of <var class="Arg">L</var> must be matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> with <var class="Arg">nr_rows</var> rows. If <var class="Arg">L</var> is non-empty, <var class="Arg">R</var> and <var class="Arg">nr_rows</var> can be omitted.</p>
 
 <p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC.html#X7EDE6095820F8128"><span class="RefLink">C.4-12</span></a>))</p>
 
-<p><a id="X7F2AD04C86F82240" name="X7F2AD04C86F82240"></a></p>
+<p><a id="X7C7830BE847D84B4" name="X7C7830BE847D84B4"></a></p>
 
 <h5>5.5-12 DiagMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>( [<var class="Arg">R</var>, ]<var class="Arg">list</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>Build the block diagonal matrix out of the <strong class="pkg">homalg</strong> matrices listed in <var class="Arg">list</var>. An error is issued if <var class="Arg">list</var> is empty or if one of the arguments is not a <strong class="pkg">homalg</strong> matrix.</p>
+<p>Build the block diagonal matrix out of the <strong class="pkg">homalg</strong> matrices listed in <var class="Arg">list</var>. If <var class="Arg">list</var> is non-empty, <var class="Arg">R</var> can be omitted.</p>
 
 <p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC.html#X7FD68F43831046B6"><span class="RefLink">C.4-13</span></a>))</p>
 
