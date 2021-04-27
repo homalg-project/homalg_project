@@ -1147,7 +1147,7 @@ DeclareOperation( "UnionOfColumnsEagerOp",
         [ IsList, IsHomalgMatrix ] );
 
 DeclareOperation( "DiagMat",
-        [ IsList ] );
+        [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "KroneckerMat",
         [ IsHomalgMatrix, IsHomalgMatrix ] );

@@ -1575,33 +1575,44 @@ end );
 
 ##  <#GAPDoc Label="DiagMat">
 ##  <ManSection>
-##    <Meth Arg="list" Name="DiagMat" Label="for matrices"/>
+##    <Meth Arg="[R, ]list" Name="DiagMat" Label="for a homalg ring and a list of homalg matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Build the block diagonal matrix out of the &homalg; matrices listed in <A>list</A>.
-##      An error is issued if <A>list</A> is empty or if one of the arguments is not a &homalg; matrix.<P/>
+##      If <A>list</A> is non-empty, <A>R</A> can be omitted.<P/>
+##      
 ##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with DiagMat"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( DiagMat,
-        "of two homalg matrices",
+        "of a homalg ring and a list of homalg matrices",
+        [ IsHomalgRing, IsHomogeneousList ],
+        
+  function( R, list )
+    
+    return HomalgMatrixWithAttributes( [
+                   EvalDiagMat, list,
+                   NrRows, Sum( List( list, NrRows ) ),
+                   NrColumns, Sum( List( list, NrColumns ) )
+                   ], R );
+    
+end );
+
+##
+# convenience
+InstallOtherMethod( DiagMat,
+        "of a list of homalg matrices",
         [ IsHomogeneousList ],
         
   function( list )
     
     if IsEmpty( list ) then
         Error( "the given list of diagonal blocks is empty\n" );
-    elif not ForAll( list, IsHomalgMatrix ) then
-        Error( "expected a list of homalg matrices\n" );
     fi;
     
-    return HomalgMatrixWithAttributes( [
-                   EvalDiagMat, list,
-                   NrRows, Sum( List( list, NrRows ) ),
-                   NrColumns, Sum( List( list, NrColumns ) )
-                   ], HomalgRing( list[1] ) );
+    return DiagMat( HomalgRing( list[1] ), list );
     
 end );
 

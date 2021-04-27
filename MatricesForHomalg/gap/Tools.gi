@@ -995,7 +995,7 @@ end );
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      In case the matrix was created using
-##      <Ref Meth="DiagMat" Label="for matrices"/>
+##      <Ref Meth="DiagMat" Label="for a homalg ring and a list of homalg matrices"/>
 ##      then the filter <C>HasEvalDiagMat</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="DiagMat" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.

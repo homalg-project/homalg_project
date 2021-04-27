@@ -189,15 +189,12 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "LIMAT: for homalg matrices",
-        [ IsHomogeneousList ], 2,
+        "LIMAT: of a homalg ring and a list of homalg matrices",
+        [ IsHomalgRing, IsHomogeneousList ], 2,
         
-  function( l )
-    local R;
+  function( R, l )
     
     if ForAll( l, HasIsZero and IsEmptyMatrix ) then
-        
-        R := HomalgRing( l[1] );
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DiagMat( [ zero matrices ] )", "\033[0m" );
         

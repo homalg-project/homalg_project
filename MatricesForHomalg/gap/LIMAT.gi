@@ -1260,15 +1260,10 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "LIMAT: for homalg matrices (check input)",
-        [ IsHomogeneousList ], 10001,
+        "LIMAT: of a homalg ring and a list of homalg matrices (check input)",
+        [ IsHomalgRing, IsHomogeneousList ], 10001,
         
-  function( l )
-    local R;
-    
-    if l = [ ] then
-        Error( "recieved an empty list\n" );
-    fi;
+  function( R, l )
     
     if not ForAll( l, IsHomalgMatrix ) then
         Error( "at least one of the matrices in the list is not a homalg matrix\n" );
@@ -1278,9 +1273,7 @@ InstallMethod( DiagMat,
         return l[1];
     fi;
     
-    R := HomalgRing( l[1] );
-    
-    if not ForAll( l{[ 2 .. Length( l ) ]}, a -> IsIdenticalObj( HomalgRing( a ), R ) ) then
+    if not ForAll( l, a -> IsIdenticalObj( HomalgRing( a ), R ) ) then
         Error( "the matrices are not defined over identically the same ring\n" );
     fi;
     
@@ -1290,15 +1283,12 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "LIMAT: for homalg matrices",
-        [ IsHomogeneousList ], 2,
+        "LIMAT: of a homalg ring and a list of homalg matrices",
+        [ IsHomalgRing, IsHomogeneousList ], 2,
         
-  function( l )
-    local R;
+  function( R, l )
     
     if ForAll( l, HasIsOne and IsOne ) then
-        
-        R := HomalgRing( l[1] );
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DiagMat( [ identity matrices ] )", "\033[0m" );
         
@@ -1312,15 +1302,12 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "LIMAT: for homalg matrices",
-        [ IsHomogeneousList ], 2,
+        "LIMAT: of a homalg ring and a list of homalg matrices",
+        [ IsHomalgRing, IsHomogeneousList ], 2,
         
-  function( l )
-    local R;
+  function( R, l )
     
     if ForAll( l, HasIsZero and IsZero ) then
-        
-        R := HomalgRing( l[1] );
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DiagMat( [ zero matrices ] )", "\033[0m" );
         
