@@ -1125,13 +1125,10 @@ DeclareOperation( "CertainColumns",
         [ IsHomalgMatrix, IsList ] );
 
 ## UnionOfRows[Eager][Op]
-if not IsBound( UnionOfRows ) then
-    DeclareGlobalFunction( "UnionOfRows" );
-    BindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES", true );
-fi;
+DeclareGlobalFunction( "UnionOfRows" );
 
 DeclareOperation( "UnionOfRowsOp",
-        [ IsList, IsHomalgMatrix ] );
+        [ IsHomalgRing, IsInt, IsList ] );
 
 DeclareGlobalFunction( "UnionOfRowsEager" );
 
@@ -1139,13 +1136,10 @@ DeclareOperation( "UnionOfRowsEagerOp",
         [ IsList, IsHomalgMatrix ] );
 
 ## UnionOfColumns[Eager][Op]
-if not IsBound( UnionOfColumns ) then
-    DeclareGlobalFunction( "UnionOfColumns" );
-    BindGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES", true );
-fi;
+DeclareGlobalFunction( "UnionOfColumns" );
 
 DeclareOperation( "UnionOfColumnsOp",
-        [ IsList, IsHomalgMatrix ] );
+        [ IsHomalgRing, IsInt, IsList ] );
 
 DeclareGlobalFunction( "UnionOfColumnsEager" );
 
@@ -1153,7 +1147,7 @@ DeclareOperation( "UnionOfColumnsEagerOp",
         [ IsList, IsHomalgMatrix ] );
 
 DeclareOperation( "DiagMat",
-        [ IsList ] );
+        [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "KroneckerMat",
         [ IsHomalgMatrix, IsHomalgMatrix ] );

@@ -45,11 +45,11 @@ DeclareOperation( "CertainRows",
 DeclareOperation( "CertainColumns",
         [ IsSparseMatrix, IsList ] );
 
-DeclareOperation( "UnionOfRowsOp",
-        [ IsList, IsSparseMatrix ] );
+DeclareOperation( "SparseUnionOfRows",
+        [ IsList ] );
 
-DeclareOperation( "UnionOfColumnsOp",
-        [ IsList, IsSparseMatrix ] );
+DeclareOperation( "SparseUnionOfColumns",
+        [ IsList ] );
 
 DeclareGlobalFunction( "SparseDiagMat" );
 

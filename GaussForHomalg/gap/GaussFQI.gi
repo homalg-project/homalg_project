@@ -34,12 +34,14 @@ InstallMethod( CreateHomalgTable,
         [ IsRing and IsFinite ],
         
   function( R )
-    local RP, RP_default, RP_specific, component;
+    local RP, union_of_rows, RP_default, RP_specific, component;
     
     if IsBound( HOMALG_MATRICES.PreferDenseMatrices ) and HOMALG_MATRICES.PreferDenseMatrices = true then
         RP := rec( );
+        union_of_rows := Concatenation;
     else
         RP := ShallowCopy( CommonHomalgTableForGaussTools );
+        union_of_rows := SparseUnionOfRows;
     fi;
     
     RP_default := ShallowCopy( CommonHomalgTableForGaussBasic );
@@ -77,7 +79,7 @@ InstallMethod( CreateHomalgTable,
                        result := EchelonMatTransformation( MyEval( M ) );
                        N := result.vectors;
                        ## assign U:
-                       SetMyEval( arg[2], UnionOfRows( result.coeffs, result.relations ) );
+                       SetMyEval( arg[2], union_of_rows( [ result.coeffs, result.relations ] ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );

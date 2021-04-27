@@ -1178,27 +1178,23 @@ end );
 
 ##
 InstallMethod( UnionOfRowsOp,
-        "LIMAT: for a list of homalg matrices and a homalg matrix (check input, drop empty matrices)",
-        [ IsList, IsHomalgMatrix ], 10001,
+        "LIMAT: of a homalg ring, an integer and a list of homalg matrices (check input, drop empty matrices)",
+        [ IsHomalgRing, IsInt, IsList ], 10001,
         
-  function( L, M )
-    local A, R, c, filtered_L;
+  function( R, nr_cols, L )
+    local c, filtered_L;
     
-    if IsEmpty( L ) then
-        Error( "L must be nonempty" );
-    elif not ForAll( L, IsHomalgMatrix ) then
+    if not ForAll( L, IsHomalgMatrix ) then
         Error( "L must be a list of homalg matrices" );
     fi;
     
-    A := L[1];
-    R := HomalgRing( A );
-    c := NrColumns( A );
+    c := nr_cols;
     
     if Length( L ) = 1 then
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( [ single matrix ] )", "\033[0m" );
         
-        return A;
+        return L[1];
         
     fi;
     
@@ -1222,7 +1218,7 @@ InstallMethod( UnionOfRowsOp,
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( <dropped empty matrices> )", "\033[0m" );
         
-        return UnionOfRowsOp( filtered_L, M );
+        return UnionOfRowsOp( R, nr_cols, filtered_L );
         
     fi;
     
@@ -1236,27 +1232,23 @@ end );
 
 ##
 InstallMethod( UnionOfColumnsOp,
-        "LIMAT: for a list of homalg matrices and a homalg matrix (check input, drop empty matrices)",
-        [ IsList, IsHomalgMatrix ], 10001,
+        "LIMAT: of a homalg ring, an integer and a list of homalg matrices (check input, drop empty matrices)",
+        [ IsHomalgRing, IsInt, IsList ], 10001,
         
-  function( L, M )
-    local A, R, r, filtered_L;
+  function( R, nr_rows, L )
+    local r, filtered_L;
     
-    if IsEmpty( L ) then
-        Error( "L must be nonempty" );
-    elif not ForAll( L, IsHomalgMatrix ) then
+    if not ForAll( L, IsHomalgMatrix ) then
         Error( "L must be a list of homalg matrices" );
     fi;
     
-    A := L[1];
-    R := HomalgRing( A );
-    r := NrRows( A );
+    r := nr_rows;
     
     if Length( L ) = 1 then
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( [ single matrix ] )", "\033[0m" );
         
-        return A;
+        return L[1];
         
     fi;
     
@@ -1280,7 +1272,7 @@ InstallMethod( UnionOfColumnsOp,
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( <dropped empty matrices> )", "\033[0m" );
         
-        return UnionOfColumnsOp( filtered_L, M );
+        return UnionOfColumnsOp( R, nr_rows, filtered_L );
         
     fi;
     
@@ -1294,15 +1286,10 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "LIMAT: for homalg matrices (check input)",
-        [ IsHomogeneousList ], 10001,
+        "LIMAT: of a homalg ring and a list of homalg matrices (check input)",
+        [ IsHomalgRing, IsHomogeneousList ], 10001,
         
-  function( l )
-    local R;
-    
-    if l = [ ] then
-        Error( "recieved an empty list\n" );
-    fi;
+  function( R, l )
     
     if not ForAll( l, IsHomalgMatrix ) then
         Error( "at least one of the matrices in the list is not a homalg matrix\n" );
@@ -1312,9 +1299,7 @@ InstallMethod( DiagMat,
         return l[1];
     fi;
     
-    R := HomalgRing( l[1] );
-    
-    if not ForAll( l{[ 2 .. Length( l ) ]}, a -> IsIdenticalObj( HomalgRing( a ), R ) ) then
+    if not ForAll( l, a -> IsIdenticalObj( HomalgRing( a ), R ) ) then
         Error( "the matrices are not defined over identically the same ring\n" );
     fi;
     
@@ -1324,15 +1309,12 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "LIMAT: for homalg matrices",
-        [ IsHomogeneousList ], 2,
+        "LIMAT: of a homalg ring and a list of homalg matrices",
+        [ IsHomalgRing, IsHomogeneousList ], 2,
         
-  function( l )
-    local R;
+  function( R, l )
     
     if ForAll( l, HasIsOne and IsOne ) then
-        
-        R := HomalgRing( l[1] );
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DiagMat( [ identity matrices ] )", "\033[0m" );
         
@@ -1346,15 +1328,12 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "LIMAT: for homalg matrices",
-        [ IsHomogeneousList ], 2,
+        "LIMAT: of a homalg ring and a list of homalg matrices",
+        [ IsHomalgRing, IsHomogeneousList ], 2,
         
-  function( l )
-    local R;
+  function( R, l )
     
     if ForAll( l, HasIsZero and IsZero ) then
-        
-        R := HomalgRing( l[1] );
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DiagMat( [ zero matrices ] )", "\033[0m" );
         
