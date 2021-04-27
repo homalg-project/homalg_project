@@ -26,11 +26,11 @@
   [2XSparseMatrix[102X, constructor using gap matrices 3.2-1 
       constructor using indices 3.2-1 
       constructor using indices and entries 3.2-1 
+  [2XSparseUnionOfColumns[102X, for a list of sparse matrices 3.2-13 
+  [2XSparseUnionOfRows[102X, for a list of sparse matrices 3.2-12 
   [2XSparseZeroMatrix[102X, constructor using number of rows 3.2-7 
       constructor using number of rows and columns 3.2-7 
   [2XTransposedSparseMat[102X 3.2-9 
-  [2XUnionOfColumns[102X, for a list of sparse matrices 3.2-13 
-  [2XUnionOfRows[102X, for a list of sparse matrices 3.2-12 
   
   
   -------------------------------------------------------
