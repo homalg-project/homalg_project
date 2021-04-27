@@ -655,7 +655,7 @@ end );
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      In case the matrix was created using
-##      <Ref Func="UnionOfRows" Label="for a list of homalg matrices"/>
+##      <Ref Func="UnionOfRows" Label="for a homalg ring, an integer and a list of homalg matrices"/>
 ##      then the filter <C>HasEvalUnionOfRows</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="UnionOfRows" Label="homalgTable entry"/> or the <C>homalgTable</C> function
 ##      <Ref Meth="UnionOfRowsPair" Label="homalgTable entry"/>
@@ -824,7 +824,7 @@ end );
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      In case the matrix was created using
-##      <Ref Func="UnionOfColumns" Label="for a list of homalg matrices"/>
+##      <Ref Func="UnionOfColumns" Label="for a homalg ring, an integer and a list of homalg matrices"/>
 ##      then the filter <C>HasEvalUnionOfColumns</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="UnionOfColumns" Label="homalgTable entry"/> or the <C>homalgTable</C> function
 ##      <Ref Meth="UnionOfColumnsPair" Label="homalgTable entry"/>
