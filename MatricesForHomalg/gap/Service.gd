@@ -14,8 +14,10 @@
 #
 ####################################
 
-BindGlobal( "_RowEchelonForm", RowEchelonForm );
-Unbind( RowEchelonForm );
+if IsBound( RowEchelonForm ) then
+    BindGlobal( "_RowEchelonForm", RowEchelonForm );
+    Unbind( RowEchelonForm );
+fi;
 
 DeclareAttribute( "RowEchelonForm",
         IsHomalgMatrix );
