@@ -1,7 +1,7 @@
 name: MatricesForHomalg
-version: "2021.04-05"
+version: "2021.04-06"
 license: "GPL-2.0-or-later"
-date: 2021-04-28
+date: 2021-05-01
 description: |
     Matrices for the homalg project
 
@@ -38,11 +38,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/MatricesForHomalg/P
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2021.04-05/MatricesForHomalg-2021.04-05.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2021.04-06/MatricesForHomalg-2021.04-06.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2021.04-05/MatricesForHomalg-2021.04-05.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2021.04-06/MatricesForHomalg-2021.04-06.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2021.04-05/MatricesForHomalg-2021.04-05.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2021.04-06/MatricesForHomalg-2021.04-06.pdf
 
 abstract: |
     The <span class="pkgname">MatricesForHomalg</span> package provides lazy evaluated matrices with clever operations for the homalg project
@@ -56,7 +56,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BLLW21</span>]   <b class='BibAuthor'>Barakat, M., Lange-Hegermann, M., Leuner, M. and Wagh, V.</b>,
      <i class='BibTitle'>MatricesForHomalg, Matrices for the homalg project,
-             Version 2021.04-05</i>
+             Version 2021.04-06</i>
      (<span class='BibYear'>2021</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/MatricesForHomalg">https://homalg-project.github.io/pkg/MatricesForHomalg</a></span>.
@@ -64,12 +64,12 @@ citeas: |
     
 
 bibtex: |
-    @misc{ MatricesForHomalg2021.04-05,
+    @misc{ MatricesForHomalg2021.04-06,
       author =           {Barakat, M. and Lange-Hegermann, M. and Leuner, M. and
                           Wagh, V.},
       title =            {{MatricesForHomalg},  Matrices for the homalg project,
-                          {V}ersion 2021.04-05},
-      month =            {Apr},
+                          {V}ersion 2021.04-06},
+      month =            {May},
       year =             {2021},
       note =             {GAP package},
       howpublished =     {\href
