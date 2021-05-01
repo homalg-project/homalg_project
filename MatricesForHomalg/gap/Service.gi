@@ -147,12 +147,14 @@ end );
 ##
 ################################################################
 
+if IsBound( _RowEchelonForm ) then
 ##
 InstallOtherMethod( RowEchelonForm,
         "for matrices",
         [ IsMatrix ],
         
   _RowEchelonForm );
+fi;
 
 ##
 InstallMethod( RowEchelonForm,
