@@ -68,7 +68,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "SCO - Simplicial Cohomology of Orbifolds",
-  Autoload  := true
 ),
 
 
@@ -85,7 +84,6 @@ AvailabilityTest := function()
   end,
 
 
-Autoload := false,
 
 
 Keywords := ["homology", "cohomology", "orbifold", "groupoid", "simplicial", "triangulation" ]

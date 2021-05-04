@@ -94,7 +94,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "A homological algebra meta-package for computable Abelian categories",
-  Autoload  := false
 ),
 
 
@@ -112,7 +111,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := ["homological", "filtration", "bicomplex", "spectral sequence", "Grothendieck", "functor"]

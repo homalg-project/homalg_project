@@ -119,7 +119,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "IO capabilities for the homalg project",
-  Autoload  := false
 ),
 
 
@@ -135,7 +134,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "IO", "streams" ]

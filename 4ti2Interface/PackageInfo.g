@@ -62,7 +62,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "An interface to 4ti2.",
-  Autoload  := false
 ),
 
 
@@ -99,7 +98,6 @@ AvailabilityTest := function()
     
 end,
 
-Autoload := false,
 
 
 Keywords := [  ]

@@ -148,7 +148,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
-  Autoload  := false
 ),
 
 
@@ -169,7 +168,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := ["modules", "module homomorphisms", "functor", "ext", "tor"]

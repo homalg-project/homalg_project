@@ -101,7 +101,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Provides special methods and knowledge propagation tools",
-  Autoload  := false
 ),
 
 
@@ -122,7 +121,6 @@ AvailabilityTest := function()
   end,
 
 
-Autoload := false,
 
 
 Keywords := [  ]

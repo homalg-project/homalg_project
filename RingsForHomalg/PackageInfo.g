@@ -211,7 +211,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Dictionaries of external rings for the homalg project",
-  Autoload  := false
 ),
 
 
@@ -232,7 +231,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "rings", "ideal membership problem", "syzygies", "homalgTable" ]

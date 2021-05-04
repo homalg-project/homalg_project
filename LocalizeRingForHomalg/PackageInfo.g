@@ -97,7 +97,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "A Package for Localization of Polynomial Rings",
-  Autoload  := false
 ),
 
 
@@ -119,7 +118,6 @@ AvailabilityTest := function()
   end,
 
 
-Autoload := false,
 
 
 Keywords := [ "homological algebra", "local ring", "submodule membership problem", "syzygies", "Mora" ]
