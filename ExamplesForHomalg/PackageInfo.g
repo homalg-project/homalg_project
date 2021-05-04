@@ -85,7 +85,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Examples for the GAP Package homalg",
-  Autoload  := false
 ),
 
 
@@ -108,7 +107,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "examples", "homalg" ]

@@ -84,7 +84,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Extended Gauss functionality for GAP",
-  Autoload  := false
 ),
 
 Dependencies := rec(
@@ -104,7 +103,6 @@ AvailabilityTest := function()
   return true;
 end,
 
-Autoload := false,
 
 
 Keywords := ["Gauss", "RREF", "sparse" ]

@@ -161,7 +161,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Endow Commutative Rings with an Abelian Grading",
-  Autoload  := false
 ),
 
 
@@ -185,7 +184,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "homological algebra", "graded ring" ]

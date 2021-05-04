@@ -148,7 +148,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
-  Autoload  := false
 ),
 
 
@@ -172,7 +171,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := ["modules", "graded modules", "graduation", "multi-graded modules", "Tate resolution"]

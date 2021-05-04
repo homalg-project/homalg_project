@@ -149,7 +149,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "A window to the outer world",
-  Autoload  := false
 ),
 
 
@@ -169,7 +168,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "homalgExternalObject", "CreateHomalgExternalRing", "HomalgExternalRingElement", "IsHomalgExternalMatrixRep", "LaunchCAS", "TerminateCAS", "homalgSendBlocking" ]
