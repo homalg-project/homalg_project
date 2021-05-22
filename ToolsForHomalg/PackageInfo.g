@@ -11,14 +11,14 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2018.05-22", ## Sebas' version
 ## this line prevents merge conflicts
-  "2020.10-03", ## Fabian's version
+  "2021.05-01", ## Fabian's version
 ## this line prevents merge conflicts
   "2020.09-02", ## Kamal's version
 ## this line prevents merge conflicts
 
 ] ),
 
-Date := "18/03/2021",
+Date := "22/05/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -101,7 +101,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Provides special methods and knowledge propagation tools",
-  Autoload  := false
 ),
 
 
@@ -122,7 +121,6 @@ AvailabilityTest := function()
   end,
 
 
-Autoload := false,
 
 
 Keywords := [  ]
