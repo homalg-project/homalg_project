@@ -14,7 +14,7 @@
 #
 ####################################
 
-if IsBound( RowEchelonForm ) then
+if IsBound( RowEchelonForm ) and not IsOperation( RowEchelonForm ) then
     BindGlobal( "_RowEchelonForm", RowEchelonForm );
     Unbind( RowEchelonForm );
 fi;
