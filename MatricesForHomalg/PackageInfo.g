@@ -5,7 +5,7 @@ PackageName := "MatricesForHomalg",
 Subtitle := "Matrices for the homalg project",
 
 Version := Maximum( [
-  "2021.04-06", ## Mohamed's version
+  "2021.05-01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2021.04-04", ## Fabian's version
 ## this line prevents merge conflicts
@@ -26,7 +26,7 @@ Version := Maximum( [
   "2020.10-04", ## Kamal's version
 ] ),
 
-Date := "01/05/2021",
+Date := "24/05/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -121,7 +121,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Lazy evaluated matrices with clever operations for the homalg project",
-  Autoload  := false
 ),
 
 
@@ -140,7 +139,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "rings", "ring elements", "matrices", "lazy evaluated matrices", "clever operations for matrices", "submodule membership problem", "syzygies" ]
