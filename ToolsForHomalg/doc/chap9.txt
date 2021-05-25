@@ -304,6 +304,14 @@
   )[110X  and [10XIsShowable( "application/x-latex", object )[110X return [10Xtrue[110X for an [10Xobject[110X
   in the filter [3Xfilter[103X.[133X
   
+  [1X9.1-47 ReplacedStringViaRecord[101X
+  
+  [33X[1;0Y[29X[2XReplacedStringViaRecord[102X( [3Xstring[103X, [3Xrecord[103X ) [32X function[133X
+  
+  [33X[0;0YSearches for the keys of [3Xrecord[103X in [3Xstring[103X and replaces them by their values.
+  The  values can be strings or lists of strings. In the second case, a string
+  is created from the list by joining the entries with the separator [10X", "[110X.[133X
+  
   
   [1X9.2 [33X[0;0YExamplefunctions[133X[101X
   

@@ -71,6 +71,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7F5EB34C835F5EA5">9.1-44 CollectEntries</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X85DB89C57A37721C">9.1-45 MakeShowable</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X81B5CF5380CE2021">9.1-46 MakeShowableWithLaTeX</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7EF0700882F21FD8">9.1-47 ReplacedStringViaRecord</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X8581825F7E412802">9.2 <span class="Heading">Examplefunctions</span></a>
 </span>
@@ -413,6 +414,13 @@
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeShowableWithLaTeX</code>( <var class="Arg">filter</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Installs a method for <code class="code">IsShowable</code> such that <code class="code">IsShowable( "text/latex", object )</code> and <code class="code">IsShowable( "application/x-latex", object )</code> return <code class="code">true</code> for an <code class="code">object</code> in the filter <var class="Arg">filter</var>.</p>
+
+<p><a id="X7EF0700882F21FD8" name="X7EF0700882F21FD8"></a></p>
+
+<h5>9.1-47 ReplacedStringViaRecord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReplacedStringViaRecord</code>( <var class="Arg">string</var>, <var class="Arg">record</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Searches for the keys of <var class="Arg">record</var> in <var class="Arg">string</var> and replaces them by their values. The values can be strings or lists of strings. In the second case, a string is created from the list by joining the entries with the separator <code class="code">", "</code>.</p>
 
 <p><a id="X8581825F7E412802" name="X8581825F7E412802"></a></p>
 
