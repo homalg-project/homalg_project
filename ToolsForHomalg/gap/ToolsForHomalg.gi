@@ -2524,3 +2524,29 @@ InstallMethod( Display,
     Display( o );
     
 end );
+
+##
+InstallGlobalFunction( "ReplacedStringViaRecord", function( string, record )
+  local name;
+    
+    for name in RecNames( record ) do
+        
+        if IsString( record.(name) ) then
+            
+            string := ReplacedString( string, name, record.(name) );
+            
+        elif IsList( record.(name) ) then
+            
+            string := ReplacedString( string, name, JoinStringsWithSeparator( record.(name), ", " ) );
+            
+        else
+            
+            Error( "the record's values must be strings or lists of strings" );
+            
+        fi;
+        
+    od;
+    
+    return string;
+    
+end );
