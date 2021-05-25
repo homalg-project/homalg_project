@@ -506,3 +506,10 @@ DeclareGlobalFunction( "MakeShowable" );
 DeclareGlobalFunction( "MakeShowableWithLaTeX" );
 
 DeclareGlobalFunction( "FillWithCharacterAfterDecimalNumber" );
+
+#! @Description
+#!   Searches for the keys of <A>record</A> in <A>string</A> and replaces them by their values.
+#!   The values can be strings or lists of strings. In the second case, a string is created from the list
+#!   by joining the entries with the separator `", "`.
+#! @Arguments string, record
+DeclareGlobalFunction( "ReplacedStringViaRecord" );
