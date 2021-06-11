@@ -5,7 +5,7 @@ PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
 
 Version := Maximum( [
-  "2021.04-02", ## Mohamed's version
+  "2021.06-01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2020.02-05", ## Markus L-H's version
 ## this line prevents merge conflicts
@@ -21,7 +21,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
 ] ),
 
-Date := "22/04/2021",
+Date := "11/06/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -211,7 +211,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Dictionaries of external rings for the homalg project",
-  Autoload  := false
 ),
 
 
@@ -232,7 +231,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "rings", "ideal membership problem", "syzygies", "homalgTable" ]

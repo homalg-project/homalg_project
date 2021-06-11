@@ -1,7 +1,7 @@
 name: RingsForHomalg
-version: "2021.04-02"
+version: "2021.06-01"
 license: "GPL-2.0-or-later"
-date: 2021-04-22
+date: 2021-06-11
 description: |
     Dictionaries of external rings
 
@@ -55,11 +55,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/RingsForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.04-02/RingsForHomalg-2021.04-02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.06-01/RingsForHomalg-2021.06-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.04-02/RingsForHomalg-2021.04-02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.06-01/RingsForHomalg-2021.06-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.04-02/RingsForHomalg-2021.04-02.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.06-01/RingsForHomalg-2021.06-01.pdf
 
 abstract: |
     The <span class="pkgname">RingsForHomalg</span> package provides small dictionaries for  <span class="pkgname">homalg</span> to speak (as much as needed of) the languages  of Singular, Macaulay2, MAGMA, Sage, and Maple
@@ -73,7 +73,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BGKLMRSSW21</span>]   <b class='BibAuthor'>Barakat, M., Görtzen, S., Kirschmer, M., Lange-Hegermann, M., Motsak, O., Robertz, D., Schönemann, H., Steenpaß, A. and Wagh, V.</b>,
      <i class='BibTitle'>RingsForHomalg, Dictionaries of external rings,
-             Version 2021.04-02</i>
+             Version 2021.06-01</i>
      (<span class='BibYear'>2021</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/RingsForHomalg">https://homalg-project.github.io/pkg/RingsForHomalg</a></span>.
@@ -81,13 +81,13 @@ citeas: |
     
 
 bibtex: |
-    @misc{ RingsForHomalg2021.04-02,
+    @misc{ RingsForHomalg2021.06-01,
       author =           {Barakat,  M. and G{\"o}rtzen, S. and Kirschmer, M. and
                           Lange-Hegermann, M. and Motsak, O. and Robertz, D. and
                           Sch{\"o}nemann, H. and Steenpa{\ss}, A. and Wagh, V.},
       title =            {{RingsForHomalg},   Dictionaries  of  external  rings,
-                          {V}ersion 2021.04-02},
-      month =            {Apr},
+                          {V}ersion 2021.06-01},
+      month =            {Jun},
       year =             {2021},
       note =             {GAP package},
       howpublished =     {\href
