@@ -1342,6 +1342,8 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
     fi;
     
     return R;
@@ -1603,6 +1605,8 @@ InstallMethod( PolynomialRing,
         RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
     fi;
     
     return S;
@@ -1794,6 +1798,8 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
     fi;
     
     return S;
@@ -1944,6 +1950,8 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
     fi;
     
     if 0 in weights then
@@ -2081,6 +2089,8 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
     fi;
     
     return S;
@@ -2325,6 +2335,8 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
         Unbind( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries );
         Unbind( RP!.MaximalDegreePart );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
     fi;
     
     shift := List( shift, String );
