@@ -1337,6 +1337,9 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
         RP := homalgTable( R );
         RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
+        RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
+        RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
         RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
         RP!.RadicalSubobject := RP!.RadicalSubobject_Z;
         RP!.RadicalDecomposition := RP!.RadicalDecomposition_Z;
