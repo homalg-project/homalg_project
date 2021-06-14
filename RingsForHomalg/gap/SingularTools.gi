@@ -880,6 +880,24 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               CoefficientsMatrix :=
+                 function( matrix, var )
+                   local R, v, vars, coeffs;
+                   
+                   R := HomalgRing( matrix );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   var := Product( var );
+                   
+                   homalgSendBlocking( [ "matrix ", v, "m = coef(ideal(", matrix, "),", var, ")" ], "need_command", "Coefficients" );
+                   vars := homalgSendBlocking( [ "submat(", v, "m,1..1,1..ncols(", v, "m))" ], [ "matrix" ], R, "Coefficients" );
+                   coeffs := homalgSendBlocking( [ "submat(", v, "m,2..nrows(", v,"m),1..ncols(", v, "m))" ], [ "matrix" ], R, "Coefficients" );
+                   
+                   return [ vars, coeffs ];
+                   
+                 end,
+               
                CoefficientsWithGivenMonomials :=
                  function( M, monomials )
                    
