@@ -3718,6 +3718,84 @@ InstallMethod( Coefficients,
 end );
 
 ##
+InstallMethod( Coefficients,
+        "for a homalg matrix and a list of indeterminates",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( matrix, var )
+    local R, RP, both, monomials, coeffs;
+    
+    R := HomalgRing( matrix );
+    
+    if IsZero( matrix ) then
+        coeffs := HomalgZeroMatrix( 1, 0, R );
+        coeffs!.monomials := MakeImmutable( [ ] );
+        return coeffs;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.CoefficientsMatrix) then
+        both := RP!.CoefficientsMatrix( matrix, var );	## the pair of external objects
+        monomials := HomalgMatrix( both[1], R );
+        monomials := EntriesOfHomalgMatrix( monomials );
+        coeffs := HomalgMatrix( both[2], Length( monomials ), NrRows( matrix ), R );
+        coeffs!.monomials := MakeImmutable( monomials );
+        return coeffs;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called Coefficients ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( Coefficients,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( matrix )
+    local R, indets, coeffs;
+    
+    R := HomalgRing( matrix );
+    
+    if IsBound( matrix!.Coefficients ) then
+        return matrix!.Coefficients;
+    fi;
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+    elif HasRelativeIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
+        indets := RelativeIndeterminateAntiCommutingVariablesOfExteriorRing( R );
+    elif HasIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
+        indets := IndeterminateAntiCommutingVariablesOfExteriorRing( R );
+    elif HasIndeterminateShiftsOfPseudoDoubleShiftAlgebra( R ) then
+        indets := IndeterminateShiftsOfPseudoDoubleShiftAlgebra( R );
+    elif HasIndeterminateShiftsOfDoubleShiftAlgebra( R ) then
+        indets := IndeterminateShiftsOfDoubleShiftAlgebra( R );
+    elif HasIndeterminateShiftsOfBiasedDoubleShiftAlgebra( R ) then
+        indets := IndeterminateShiftsOfBiasedDoubleShiftAlgebra( R );
+    elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+        indets := [ ];
+    else
+        TryNextMethod( );
+    fi;
+    
+    coeffs := Coefficients( matrix, indets );
+    
+    matrix!.Coefficients := coeffs;
+    
+    return coeffs;
+    
+end );
+
+##
 InstallMethod( DecomposeInMonomials,
         "for a homalg ring element",
         [ IsHomalgRingElement ],
