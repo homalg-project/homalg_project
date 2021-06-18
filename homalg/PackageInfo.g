@@ -5,7 +5,7 @@ PackageName := "homalg",
 Subtitle := "A homological algebra meta-package for computable Abelian categories",
 
 Version := Maximum( [
-  "2020.04-30", ## Mohamed's version
+  "2021.06-01", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.09-17", ## Markus' version
 ## this line prevents merge conflicts
@@ -16,7 +16,7 @@ Version := Maximum( [
   "2020.10-02", ## Fabian's version
 ] ),
 
-Date := "16/10/2020",
+Date := "18/06/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -77,7 +77,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/homalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/homalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/homalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/homalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/homalg-", ~.Version, "/homalg-", ~.Version ),
@@ -94,7 +94,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "A homological algebra meta-package for computable Abelian categories",
-  Autoload  := false
 ),
 
 
@@ -112,7 +111,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := ["homological", "filtration", "bicomplex", "spectral sequence", "Grothendieck", "functor"]

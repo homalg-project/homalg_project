@@ -356,7 +356,7 @@
   
   [1X11.4-1 functor_Kernel[101X
   
-  [33X[1;0Y[29X[2Xfunctor_Kernel[102X[32X global variable[133X
+  [33X[1;0Y[29X[2Xfunctor_Kernel[102X [32X global variable[133X
   
   [33X[0;0YThe functor that associates to a map its kernel.[133X
   
@@ -379,7 +379,7 @@
   
   [1X11.4-2 functor_DefectOfExactness[101X
   
-  [33X[1;0Y[29X[2Xfunctor_DefectOfExactness[102X[32X global variable[133X
+  [33X[1;0Y[29X[2Xfunctor_DefectOfExactness[102X [32X global variable[133X
   
   [33X[0;0YThe  functor  that  associates  to  a  pair  of  composable maps with a zero
   compositum  the defect of exactness, i.e. the kernel of the outer map modulo
