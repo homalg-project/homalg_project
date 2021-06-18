@@ -2358,6 +2358,178 @@ InstallMethod( ColumnRankOfMatrix,			## FIXME: make an extra InstallImmediateMet
 end );
 
 #-----------------------------------
+# RowEchelonForm
+#-----------------------------------
+
+##
+InstallMethod( RowEchelonForm,
+        "LIMAT: for homalg matrices (IsBasisOfRowsMatrix)",
+        [ IsHomalgMatrix and IsBasisOfRowsMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RowEchelonForm( IsBasisOfRowsMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( RowEchelonForm,
+        "LIMAT: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix and IsOne ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RowEchelonForm( IsOne(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( RowEchelonForm,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RowEchelonForm( IsZero(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+#-----------------------------------
+# ColumnEchelonForm
+#-----------------------------------
+
+##
+InstallMethod( ColumnEchelonForm,
+        "LIMAT: for homalg matrices (IsBasisOfColumnsMatrix)",
+        [ IsHomalgMatrix and IsBasisOfColumnsMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ColumnEchelonForm( IsBasisOfColumnsMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ColumnEchelonForm,
+        "LIMAT: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix and IsOne ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ColumnEchelonForm( IsOne(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ColumnEchelonForm,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ColumnEchelonForm( IsZero(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+#-----------------------------------
+# ReducedRowEchelonForm
+#-----------------------------------
+
+##
+InstallMethod( ReducedRowEchelonForm,
+        "LIMAT: for homalg matrices (IsReducedBasisOfRowsMatrix)",
+        [ IsHomalgMatrix and IsReducedBasisOfRowsMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedRowEchelonForm( IsReducedBasisOfRowsMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ReducedRowEchelonForm,
+        "LIMAT: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix and IsOne ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedRowEchelonForm( IsOne(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ReducedRowEchelonForm,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedRowEchelonForm( IsZero(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+#-----------------------------------
+# ReducedColumnEchelonForm
+#-----------------------------------
+
+##
+InstallMethod( ReducedColumnEchelonForm,
+        "LIMAT: for homalg matrices (IsReducedBasisOfColumnsMatrix)",
+        [ IsHomalgMatrix and IsReducedBasisOfColumnsMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedColumnEchelonForm( IsReducedBasisOfColumnsMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ReducedColumnEchelonForm,
+        "LIMAT: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix and IsOne ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedColumnEchelonForm( IsOne(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ReducedColumnEchelonForm,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedColumnEchelonForm( IsZero(Matrix) )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+#-----------------------------------
 # BasisOfRowModule
 #-----------------------------------
 
