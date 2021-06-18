@@ -5,7 +5,7 @@ PackageName := "MatricesForHomalg",
 Subtitle := "Matrices for the homalg project",
 
 Version := Maximum( [
-  "2021.06-01", ## Mohamed's version
+  "2021.06-02", ## Mohamed's version
 ## this line prevents merge conflicts
   "2021.04-04", ## Fabian's version
 ## this line prevents merge conflicts
@@ -26,7 +26,7 @@ Version := Maximum( [
   "2020.10-04", ## Kamal's version
 ] ),
 
-Date := "14/06/2021",
+Date := "18/06/2021",
 
 License := "GPL-2.0-or-later",
 
