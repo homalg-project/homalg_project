@@ -2387,11 +2387,19 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
     SetIndeterminateShiftsOfDoubleShiftAlgebra( Y,
             List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
     
+    Y!.switch := IsIdenticalObj( switch, true );
+    Y!.steps := steps;
+    Y!.pairs := pairs;
+    
     P!.DoubleShiftAlgebra := Y;
     
     if not IsIdenticalObj( switch, true ) then
         P!.SwitchedPseudoDoubleShiftAlgebra := PseudoDoubleShiftAlgebra( R, indets : switch := true );
     fi;
+    
+    P!.switch := IsIdenticalObj( switch, true );
+    P!.steps := steps;
+    P!.pairs := pairs;
     
     return P;
     
