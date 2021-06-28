@@ -1176,7 +1176,7 @@ InstallOtherMethod( \{\},
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      The matrix of which the <M>j</M>-th column is the <M>l</M>-th column of the &homalg; matrix <A>M</A>,
-##      where <M>l=</M><A>plist</A><M>[i]</M>.<P/>
+##      where <M>l=</M><A>plist</A><M>[j]</M>.<P/>
 ##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with CertainColumns"/>)
 ##    </Description>
 ##  </ManSection>
