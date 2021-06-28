@@ -897,7 +897,7 @@
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YThe  matrix of which the [22Xj[122X-th column is the [22Xl[122X-th column of the [5Xhomalg[105X matrix
-  [3XM[103X, where [22Xl=[122X[3Xplist[103X[22X[i][122X.[133X
+  [3XM[103X, where [22Xl=[122X[3Xplist[103X[22X[j][122X.[133X
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-10[114X))[133X
   
