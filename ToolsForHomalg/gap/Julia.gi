@@ -11,14 +11,21 @@ InstallMethod( ConvertJuliaToGAP,
   function( jobj )
     local L;
     
-    if Julia.Base.typeof( jobj ) = Julia.Base.String then
+    if Julia.Base.isa( jobj, Julia.Base.Array ) then
+        L := JuliaToGAP( IsList, jobj );
+        return ConvertJuliaToGAP( L );
+    elif Julia.Base.typeof( jobj ) = Julia.Base.String then
         L := JuliaToGAP( IsString, jobj );
-        return L;
+    elif Julia.Base.isa( jobj, Julia.Base.Int ) then
+        L := JuliaToGAP( IsInt, jobj );
+    elif Julia.Base.isa( jobj, Julia.Base.Rational ) then
+        L := JuliaToGAP( IsRat, jobj );
+    else
+        Error( "only the julia types { Array, String, Int, Rational } are currently supported but got ",
+               Julia.Base.typeof( jobj ), "\n" );
     fi;
     
-    L := JuliaToGAP( IsList, jobj );
-    
-    return ConvertJuliaToGAP( L );
+    return L;
     
 end );
 
