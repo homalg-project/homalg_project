@@ -303,6 +303,17 @@
     [4X[28X<A non-zero 3 x 3 matrix over a residue class ring>[128X[104X
   [4X[32X[104X
   
+  [1X5.2-9 CoercedMatrix[101X
+  
+  [33X[1;0Y[29X[2XCoercedMatrix[102X( [3Xring_from[103X, [3Xring_to[103X, [3Xmat[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XCoercedMatrix[102X( [3Xring_to[103X, [3Xmat[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA  copy  of  the  [5Xhomalg[105X matrix [3Xmat[103X with [5Xhomalg[105X ring [3Xring_from[103X in the [5Xhomalg[105X
+  ring [3Xring_to[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-9[114X))[133X
+  
   
   [1X5.3 [33X[0;0YMatrices: Properties[133X[101X
   
@@ -889,7 +900,7 @@
   [33X[0;0YThe  matrix  of  which  the [22Xi[122X-th row is the [22Xk[122X-th row of the [5Xhomalg[105X matrix [3XM[103X,
   where [22Xk=[122X[3Xplist[103X[22X[i][122X.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-9[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-10[114X))[133X
   
   [1X5.5-9 CertainColumns[101X
   
@@ -899,7 +910,7 @@
   [33X[0;0YThe  matrix of which the [22Xj[122X-th column is the [22Xl[122X-th column of the [5Xhomalg[105X matrix
   [3XM[103X, where [22Xl=[122X[3Xplist[103X[22X[j][122X.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-10[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-11[114X))[133X
   
   [1X5.5-10 UnionOfRows[101X
   
@@ -910,7 +921,7 @@
   over  the  [5Xhomalg[105X  ring  [3XR[103X  with  [3Xnr_cols[103X  columns. If [3XL[103X is non-empty, [3XR[103X and
   [3Xnr_cols[103X can be omitted.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-11[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-12[114X))[133X
   
   [1X5.5-11 UnionOfColumns[101X
   
@@ -921,7 +932,7 @@
   over  the  [5Xhomalg[105X ring [3XR[103X with [3Xnr_rows[103X rows. If [3XL[103X is non-empty, [3XR[103X and [3Xnr_rows[103X
   can be omitted.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-12[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-13[114X))[133X
   
   [1X5.5-12 DiagMat[101X
   
@@ -931,7 +942,7 @@
   [33X[0;0YBuild  the  block diagonal matrix out of the [5Xhomalg[105X matrices listed in [3Xlist[103X.
   If [3Xlist[103X is non-empty, [3XR[103X can be omitted.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-13[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-14[114X))[133X
   
   [1X5.5-13 KroneckerMat[101X
   
@@ -940,7 +951,7 @@
   
   [33X[0;0YThe Kronecker (or tensor) product of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-14[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-15[114X))[133X
   
   [1X5.5-14 DualKroneckerMat[101X
   
@@ -949,7 +960,7 @@
   
   [33X[0;0YThe dual Kronecker product of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-15[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-16[114X))[133X
   
   [1X5.5-15 \*[101X
   
@@ -958,7 +969,7 @@
   
   [33X[0;0YThe product of the ring element [3Xa[103X with the [5Xhomalg[105X matrix [3XA[103X (enter: [3Xa[103X [10X*[110X [3XA[103X;).[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-16[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-17[114X))[133X
   
   [1X5.5-16 \+[101X
   
@@ -967,7 +978,7 @@
   
   [33X[0;0YThe sum of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X (enter: [3XA[103X [10X+[110X [3XB[103X;).[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-17[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-18[114X))[133X
   
   [1X5.5-17 \-[101X
   
@@ -976,7 +987,7 @@
   
   [33X[0;0YThe difference of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X (enter: [3XA[103X [10X-[110X [3XB[103X;).[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-18[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-19[114X))[133X
   
   [1X5.5-18 \*[101X
   
@@ -985,7 +996,7 @@
   
   [33X[0;0YThe matrix product of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X (enter: [3XA[103X [10X*[110X [3XB[103X;).[133X
   
-  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-19[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-20[114X))[133X
   
   [1X5.5-19 \=[101X
   

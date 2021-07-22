@@ -28,7 +28,7 @@
 
 <h2>Matrices for the <strong class="pkg">homalg</strong> project</h2>
 
-<p>Version 2021.06-03</p>
+<p>Version 2021.07-01</p>
 
 <p>June 2015</p>
 
@@ -280,6 +280,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X864ACCB08094F0B7">5.2-6 HomalgMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X872D39C678D0C4AE">5.2-7 HomalgDiagonalMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81225377833C4644"><code>5.2-8 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C4E49D287011DCD">5.2-9 CoercedMatrix</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7D92ECFC8030CF40">5.3 <span class="Heading">Matrices: Properties</span></a>
 </span>
@@ -506,18 +507,19 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X84D72DF482F70AD5">C.4-6 Eval</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7928991E8768FA72">C.4-7 Eval</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X78D5359480EFC5AC">C.4-8 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X852DCBD57A742FA5">C.4-9 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X835F6F2E7D590F3D">C.4-10 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F35A61C8522A1B0">C.4-11 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7EDE6095820F8128">C.4-12 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7FD68F43831046B6">C.4-13 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X84F45FB4854A079C">C.4-14 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X78ADE5C879583E7B">C.4-15 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7B68797C7EA79B10">C.4-16 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X85971C16868BD83C">C.4-17 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X86F848318791595C">C.4-18 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F7682FC86F602C2">C.4-19 Eval</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X848FE4F07BAF89DB">C.4-20 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X87BF7FD083D0EE88">C.4-9 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X852DCBD57A742FA5">C.4-10 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X835F6F2E7D590F3D">C.4-11 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F35A61C8522A1B0">C.4-12 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7EDE6095820F8128">C.4-13 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7FD68F43831046B6">C.4-14 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X84F45FB4854A079C">C.4-15 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X78ADE5C879583E7B">C.4-16 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7B68797C7EA79B10">C.4-17 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X85971C16868BD83C">C.4-18 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X86F848318791595C">C.4-19 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X7F7682FC86F602C2">C.4-20 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC.html#X848FE4F07BAF89DB">C.4-21 Eval</a></span>
 </div></div>
 </div>
 <div class="ContChap"><a href="chapD.html#X7F3BA9AE7A0D245D">D <span class="Heading">The subpackage <strong class="pkg">ResidueClassRingForHomalg</strong> as a sample ring package</span></a>

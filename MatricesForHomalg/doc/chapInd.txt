@@ -43,6 +43,8 @@
   [2XCoefficientsRing[102X 3.4-20 
   [2XCoefficientsWithGivenMonomials[102X, for two homalg matrices 5.5-56 
       homalgTable entry B.1-24 
+  [2XCoercedMatrix[102X, copy a matrix over a different ring 5.2-9 
+      copy a matrix over a different ring (convenience) 5.2-9 
   [2XColumnRankOfMatrix[102X 5.4-11 
   [2XCompose[102X, homalgTable entry B.1-19 
       ResidueClassRing D.2-17 
@@ -71,26 +73,27 @@
       ResidueClassRing D.2-13 
   [2XElementaryRank[102X 3.4-26 
   [2XEliminate[102X 5.5-23 
-  [2XEval[102X, for matrices created with AddMat C.4-17 
-      for matrices created with CertainColumns C.4-10 
-      for matrices created with CertainRows C.4-9 
-      for matrices created with CoefficientsWithGivenMonomials C.4-20 
-      for matrices created with Compose C.4-19 
-      for matrices created with DiagMat C.4-13 
-      for matrices created with DualKroneckerMat C.4-15 
+  [2XEval[102X, for matrices created with AddMat C.4-18 
+      for matrices created with CertainColumns C.4-11 
+      for matrices created with CertainRows C.4-10 
+      for matrices created with CoefficientsWithGivenMonomials C.4-21 
+      for matrices created with CoercedMatrix C.4-9 
+      for matrices created with Compose C.4-20 
+      for matrices created with DiagMat C.4-14 
+      for matrices created with DualKroneckerMat C.4-16 
       for matrices created with HomalgIdentityMatrix C.4-4 
       for matrices created with HomalgInitialIdentityMatrix C.4-2 
       for matrices created with HomalgInitialMatrix C.4-1 
       for matrices created with HomalgZeroMatrix C.4-3 
       for matrices created with Involution C.4-7 
-      for matrices created with KroneckerMat C.4-14 
+      for matrices created with KroneckerMat C.4-15 
       for matrices created with LeftInverseLazy C.4-5 
-      for matrices created with MulMat C.4-16 
+      for matrices created with MulMat C.4-17 
       for matrices created with RightInverseLazy C.4-6 
-      for matrices created with SubMat C.4-18 
+      for matrices created with SubMat C.4-19 
       for matrices created with TransposedMatrix C.4-8 
-      for matrices created with UnionOfColumns C.4-12 
-      for matrices created with UnionOfRows C.4-11 
+      for matrices created with UnionOfColumns C.4-13 
+      for matrices created with UnionOfRows C.4-12 
   [2XGeneralLinearRank[102X 3.4-25 
   [2XGenerateSameColumnModule[102X, for pairs of matrices 5.5-52 
   [2XGenerateSameRowModule[102X, for pairs of matrices 5.5-51 

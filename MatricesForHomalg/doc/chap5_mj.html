@@ -42,6 +42,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X864ACCB08094F0B7">5.2-6 HomalgMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X872D39C678D0C4AE">5.2-7 HomalgDiagonalMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81225377833C4644"><code>5.2-8 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7C4E49D287011DCD">5.2-9 CoercedMatrix</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7D92ECFC8030CF40">5.3 <span class="Heading">Matrices: Properties</span></a>
 </span>
@@ -487,6 +488,18 @@ modulo [ 4 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d2;</span>
 &lt;A non-zero 3 x 3 matrix over a residue class ring&gt;
 </pre></div>
+
+<p><a id="X7C4E49D287011DCD" name="X7C4E49D287011DCD"></a></p>
+
+<h5>5.2-9 CoercedMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoercedMatrix</code>( <var class="Arg">ring_from</var>, <var class="Arg">ring_to</var>, <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoercedMatrix</code>( <var class="Arg">ring_to</var>, <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>A copy of the <strong class="pkg">homalg</strong> matrix <var class="Arg">mat</var> with <strong class="pkg">homalg</strong> ring <var class="Arg">ring_from</var> in the <strong class="pkg">homalg</strong> ring <var class="Arg">ring_to</var>.</p>
+
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X87BF7FD083D0EE88"><span class="RefLink">C.4-9</span></a>))</p>
 
 <p><a id="X7D92ECFC8030CF40" name="X7D92ECFC8030CF40"></a></p>
 
@@ -1188,7 +1201,7 @@ end );
 
 <p>The matrix of which the <span class="SimpleMath">\(i\)</span>-th row is the <span class="SimpleMath">\(k\)</span>-th row of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, where <span class="SimpleMath">\(k=\)</span><var class="Arg">plist</var><span class="SimpleMath">\([i]\)</span>.</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X852DCBD57A742FA5"><span class="RefLink">C.4-9</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X852DCBD57A742FA5"><span class="RefLink">C.4-10</span></a>))</p>
 
 <p><a id="X8256AF2A840B19C4" name="X8256AF2A840B19C4"></a></p>
 
@@ -1199,7 +1212,7 @@ end );
 
 <p>The matrix of which the <span class="SimpleMath">\(j\)</span>-th column is the <span class="SimpleMath">\(l\)</span>-th column of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, where <span class="SimpleMath">\(l=\)</span><var class="Arg">plist</var><span class="SimpleMath">\([j]\)</span>.</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X835F6F2E7D590F3D"><span class="RefLink">C.4-10</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X835F6F2E7D590F3D"><span class="RefLink">C.4-11</span></a>))</p>
 
 <p><a id="X7D6D0BDF854C9EBC" name="X7D6D0BDF854C9EBC"></a></p>
 
@@ -1210,7 +1223,7 @@ end );
 
 <p>Stack the <strong class="pkg">homalg</strong> matrices in the list <var class="Arg">L</var>. The entries of <var class="Arg">L</var> must be matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> with <var class="Arg">nr_cols</var> columns. If <var class="Arg">L</var> is non-empty, <var class="Arg">R</var> and <var class="Arg">nr_cols</var> can be omitted.</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7F35A61C8522A1B0"><span class="RefLink">C.4-11</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7F35A61C8522A1B0"><span class="RefLink">C.4-12</span></a>))</p>
 
 <p><a id="X7FF9661D85EC46B1" name="X7FF9661D85EC46B1"></a></p>
 
@@ -1221,7 +1234,7 @@ end );
 
 <p>Augment the <strong class="pkg">homalg</strong> matrices in the list <var class="Arg">L</var>. The entries of <var class="Arg">L</var> must be matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> with <var class="Arg">nr_rows</var> rows. If <var class="Arg">L</var> is non-empty, <var class="Arg">R</var> and <var class="Arg">nr_rows</var> can be omitted.</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7EDE6095820F8128"><span class="RefLink">C.4-12</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7EDE6095820F8128"><span class="RefLink">C.4-13</span></a>))</p>
 
 <p><a id="X7C7830BE847D84B4" name="X7C7830BE847D84B4"></a></p>
 
@@ -1232,7 +1245,7 @@ end );
 
 <p>Build the block diagonal matrix out of the <strong class="pkg">homalg</strong> matrices listed in <var class="Arg">list</var>. If <var class="Arg">list</var> is non-empty, <var class="Arg">R</var> can be omitted.</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7FD68F43831046B6"><span class="RefLink">C.4-13</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7FD68F43831046B6"><span class="RefLink">C.4-14</span></a>))</p>
 
 <p><a id="X7CDA5D848468A0AA" name="X7CDA5D848468A0AA"></a></p>
 
@@ -1243,7 +1256,7 @@ end );
 
 <p>The Kronecker (or tensor) product of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X84F45FB4854A079C"><span class="RefLink">C.4-14</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X84F45FB4854A079C"><span class="RefLink">C.4-15</span></a>))</p>
 
 <p><a id="X7ECF744B7DE82BED" name="X7ECF744B7DE82BED"></a></p>
 
@@ -1254,7 +1267,7 @@ end );
 
 <p>The dual Kronecker product of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X78ADE5C879583E7B"><span class="RefLink">C.4-15</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X78ADE5C879583E7B"><span class="RefLink">C.4-16</span></a>))</p>
 
 <p><a id="X7D1A074278B415BE" name="X7D1A074278B415BE"></a></p>
 
@@ -1265,7 +1278,7 @@ end );
 
 <p>The product of the ring element <var class="Arg">a</var> with the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> (enter: <var class="Arg">a</var> <code class="code">*</code> <var class="Arg">A</var>;).</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7B68797C7EA79B10"><span class="RefLink">C.4-16</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7B68797C7EA79B10"><span class="RefLink">C.4-17</span></a>))</p>
 
 <p><a id="X87C773DA85B21ADF" name="X87C773DA85B21ADF"></a></p>
 
@@ -1276,7 +1289,7 @@ end );
 
 <p>The sum of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var> (enter: <var class="Arg">A</var> <code class="code">+</code> <var class="Arg">B</var>;).</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X85971C16868BD83C"><span class="RefLink">C.4-17</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X85971C16868BD83C"><span class="RefLink">C.4-18</span></a>))</p>
 
 <p><a id="X784B57617B24208C" name="X784B57617B24208C"></a></p>
 
@@ -1287,7 +1300,7 @@ end );
 
 <p>The difference of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var> (enter: <var class="Arg">A</var> <code class="code">-</code> <var class="Arg">B</var>;).</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X86F848318791595C"><span class="RefLink">C.4-18</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X86F848318791595C"><span class="RefLink">C.4-19</span></a>))</p>
 
 <p><a id="X7F5961D78754157B" name="X7F5961D78754157B"></a></p>
 
@@ -1298,7 +1311,7 @@ end );
 
 <p>The matrix product of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var> (enter: <var class="Arg">A</var> <code class="code">*</code> <var class="Arg">B</var>;).</p>
 
-<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7F7682FC86F602C2"><span class="RefLink">C.4-19</span></a>))</p>
+<p>(for the installed standard method see <code class="func">Eval</code> (<a href="chapC_mj.html#X7F7682FC86F602C2"><span class="RefLink">C.4-20</span></a>))</p>
 
 <p><a id="X7E2074A77AFF518A" name="X7E2074A77AFF518A"></a></p>
 

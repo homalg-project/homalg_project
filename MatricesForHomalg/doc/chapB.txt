@@ -75,7 +75,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XCertainRows[110X  is  bound  then  the method [2XEval[102X ([14XC.4-9[114X) returns
+  component  [22XRP[122X!.[10XCertainRows[110X  is  bound  then the method [2XEval[102X ([14XC.4-10[114X) returns
   [22XRP[122X!.[10XCertainRows[110X applied to the content of the attribute [10XEvalCertainRows[110X[22X( [3XC[103X )
   = [ [3XM[103X, [3Xplist[103X ][122X.[133X
   
@@ -85,7 +85,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XCertainColumns[110X is bound then the method [2XEval[102X ([14XC.4-10[114X) returns
+  component  [22XRP[122X!.[10XCertainColumns[110X is bound then the method [2XEval[102X ([14XC.4-11[114X) returns
   [22XRP[122X!.[10XCertainColumns[110X    applied    to    the    content   of   the   attribute
   [10XEvalCertainColumns[110X[22X( [3XC[103X ) = [ [3XM[103X, [3Xplist[103X ][122X.[133X
   
@@ -95,7 +95,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XUnionOfRows[110X  is  bound  then the method [2XEval[102X ([14XC.4-11[114X) returns
+  component  [22XRP[122X!.[10XUnionOfRows[110X  is  bound  then the method [2XEval[102X ([14XC.4-12[114X) returns
   [22XRP[122X!.[10XUnionOfRows[110X applied to the content of the attribute [10XEvalUnionOfRows[110X[22X( [3XC[103X )
   = [3XL[103X[122X.[133X
   
@@ -106,7 +106,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component   [22XRP[122X!.[10XUnionOfRowsPair[110X  is  bound  and  the  [10XhomalgTable[110X  component
-  [22XRP[122X!.[10XUnionOfRows[110X   is  not  bound  then  the  method  [2XEval[102X  ([14XC.4-11[114X)  returns
+  [22XRP[122X!.[10XUnionOfRows[110X   is  not  bound  then  the  method  [2XEval[102X  ([14XC.4-12[114X)  returns
   [22XRP[122X!.[10XUnionOfRowsPair[110X  applied  recursively  to a balanced binary tree created
   from the content of the attribute [10XEvalUnionOfRows[110X[22X( [3XC[103X )[122X.[133X
   
@@ -116,7 +116,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XUnionOfColumns[110X is bound then the method [2XEval[102X ([14XC.4-12[114X) returns
+  component  [22XRP[122X!.[10XUnionOfColumns[110X is bound then the method [2XEval[102X ([14XC.4-13[114X) returns
   [22XRP[122X!.[10XUnionOfColumns[110X    applied    to    the    content   of   the   attribute
   [10XEvalUnionOfColumns[110X[22X( [3XC[103X ) = [3XL[103X[122X.[133X
   
@@ -127,7 +127,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XUnionOfColumnsPair[110X  is  bound  and  the [10XhomalgTable[110X component
-  [22XRP[122X!.[10XUnionOfColumns[110X  is  not  bound  then  the  method  [2XEval[102X ([14XC.4-12[114X) returns
+  [22XRP[122X!.[10XUnionOfColumns[110X  is  not  bound  then  the  method  [2XEval[102X ([14XC.4-13[114X) returns
   [22XRP[122X!.[10XUnionOfColumnsPair[110X applied recursively to a balanced binary tree created
   from the content of the attribute [10XEvalUnionOfRows[110X[22X( [3XC[103X )[122X.[133X
   
@@ -137,7 +137,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XDiagMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-13[114X) returns
+  component  [22XRP[122X!.[10XDiagMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-14[114X) returns
   [22XRP[122X!.[10XDiagMat[110X applied to the content of the attribute [10XEvalDiagMat[110X[22X( [3XC[103X ) = [3Xe[103X[122X.[133X
   
   [1XB.1-14 KroneckerMat[101X
@@ -146,7 +146,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XKroneckerMat[110X  is  bound then the method [2XEval[102X ([14XC.4-14[114X) returns
+  component  [22XRP[122X!.[10XKroneckerMat[110X  is  bound then the method [2XEval[102X ([14XC.4-15[114X) returns
   [22XRP[122X!.[10XKroneckerMat[110X applied to the content of the attribute [10XEvalKroneckerMat[110X[22X( [3XC[103X
   ) = [ [3XA[103X, [3XB[103X ][122X.[133X
   
@@ -156,7 +156,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XDualKroneckerMat[110X  is  bound  then  the  method  [2XEval[102X ([14XC.4-15[114X)
+  component  [22XRP[122X!.[10XDualKroneckerMat[110X  is  bound  then  the  method  [2XEval[102X ([14XC.4-16[114X)
   returns  [22XRP[122X!.[10XDualKroneckerMat[110X  applied  to  the  content  of  the  attribute
   [10XEvalDualKroneckerMat[110X[22X( [3XC[103X ) = [ [3XA[103X, [3XB[103X ][122X.[133X
   
@@ -166,7 +166,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XMulMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-16[114X)  returns
+  component  [22XRP[122X!.[10XMulMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-17[114X)  returns
   [22XRP[122X!.[10XMulMat[110X  applied to the content of the attribute [10XEvalMulMat[110X[22X( [3XC[103X ) = [ [3Xa[103X, [3XA[103X
   ][122X.[133X
   
@@ -176,7 +176,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XAddMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-17[114X)  returns
+  component  [22XRP[122X!.[10XAddMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-18[114X)  returns
   [22XRP[122X!.[10XAddMat[110X  applied to the content of the attribute [10XEvalAddMat[110X[22X( [3XC[103X ) = [ [3XA[103X, [3XB[103X
   ][122X.[133X
   
@@ -186,7 +186,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XSubMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-18[114X)  returns
+  component  [22XRP[122X!.[10XSubMat[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-19[114X)  returns
   [22XRP[122X!.[10XSubMat[110X  applied to the content of the attribute [10XEvalSubMat[110X[22X( [3XC[103X ) = [ [3XA[103X, [3XB[103X
   ][122X.[133X
   
@@ -196,7 +196,7 @@
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XCompose[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-19[114X) returns
+  component  [22XRP[122X!.[10XCompose[110X  is  bound  then  the  method  [2XEval[102X  ([14XC.4-20[114X) returns
   [22XRP[122X!.[10XCompose[110X  applied to the content of the attribute [10XEvalCompose[110X[22X( [3XC[103X ) = [ [3XA[103X,
   [3XB[103X ][122X.[133X
   
@@ -377,7 +377,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XCoefficientsWithGivenMonomials[110X  is bound then the method [2XEval[102X
-  ([14XC.4-20[114X)  returns  [22XRP[122X!.[10XCoefficientsWithGivenMonomials[110X applied to the content
+  ([14XC.4-21[114X)  returns  [22XRP[122X!.[10XCoefficientsWithGivenMonomials[110X applied to the content
   of the attribute [10XEvalCoefficientsWithGivenMonomials[110X[22X( [3XC[103X ) = [ [3XM[103X, [3Xmonomials[103X ][122X.[133X
   
   
