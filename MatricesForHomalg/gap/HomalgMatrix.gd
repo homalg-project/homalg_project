@@ -460,6 +460,9 @@ DeclareAttribute( "EvalTransposedMatrix",
 DeclareAttribute( "ItsTransposedMatrix",
         IsHomalgMatrix );
 
+DeclareAttribute( "EvalCoercedMatrix",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalCertainRows",
         IsHomalgMatrix );
 
@@ -1117,6 +1120,13 @@ DeclareOperation( "Involution",
 
 DeclareOperation( "TransposedMatrix",
         [ IsHomalgMatrix ] );
+
+# convenience
+DeclareOperation( "CoercedMatrix",
+        [ IsHomalgRing, IsHomalgMatrix ] );
+
+DeclareOperation( "CoercedMatrix",
+        [ IsHomalgRing, IsHomalgRing, IsHomalgMatrix ] );
 
 DeclareOperation( "CertainRows",
         [ IsHomalgMatrix, IsList ] );

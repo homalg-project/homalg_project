@@ -518,6 +518,39 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="Eval:HasEvalCoercedMatrix">
+##  <ManSection>
+##    <Meth Arg="C" Name="Eval" Label="for matrices created with CoercedMatrix"/>
+##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
+##    <Description>
+##      In case the matrix was created using
+##      <Ref Meth="CoercedMatrix" Label="copy a matrix over a different ring"/>
+##      then the filter <C>HasEvalCoercedMatrix</C> for <A>C</A> is set to true and the <C>Eval</C> value
+##      of a copy of <C>EvalCoercedMatrix(</C><A>C</A><C>)</C> in <C>HomalgRing(</C><A>C</A><C>)</C>
+##      will be used to set the attribute <C>Eval</C>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalCoercedMatrix)",
+        [ IsHomalgMatrix and HasEvalCoercedMatrix ],
+        
+  function( C )
+    local R, RP, m;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    m := EvalCoercedMatrix( C );
+    
+    # delegate to the non-lazy coercening
+    return Eval( R * m );
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="Eval:HasEvalCertainRows">
 ##  <ManSection>
 ##    <Meth Arg="C" Name="Eval" Label="for matrices created with CertainRows"/>

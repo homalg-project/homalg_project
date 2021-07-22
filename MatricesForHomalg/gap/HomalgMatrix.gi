@@ -3470,6 +3470,53 @@ InstallMethod( \*,
 end );
 
 ##
+# convenience
+InstallMethod( CoercedMatrix,
+        "for a homalg ring and a homalg matrix",
+        [ IsHomalgRing, IsHomalgMatrix ],
+
+  function( new_ring, M )
+    
+    return CoercedMatrix( HomalgRing( M ), new_ring, M );
+    
+end );
+
+##  <#GAPDoc Label="CoercedMatrix">
+##  <ManSection>
+##    <Oper Arg="ring_from, ring_to, mat" Name="CoercedMatrix" Label="copy a matrix over a different ring"/>
+##    <Oper Arg="ring_to, mat" Name="CoercedMatrix" Label="copy a matrix over a different ring (convenience)"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A copy of the &homalg; matrix <A>mat</A> with &homalg; ring <A>ring_from</A> in the &homalg; ring <A>ring_to</A>.<P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with CoercedMatrix"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( CoercedMatrix,
+        "for two homalg rings and a homalg matrix",
+        [ IsHomalgRing, IsHomalgRing, IsHomalgMatrix ],
+
+  function( old_ring, new_ring, M )
+    local C;
+    
+    if not IsIdenticalObj( old_ring, HomalgRing( M ) ) then
+        
+        Error( "the matrix <M> must be a matrix over the ring <old_ring>" );
+        
+    fi;
+    
+    C := HomalgMatrixWithAttributes( [
+                 EvalCoercedMatrix, M
+                 ], new_ring );
+    
+    BlindlyCopyMatrixProperties( M, C );
+    
+    return C;
+    
+end );
+
+##
 InstallGlobalFunction( ListToListList,
   function( L, r, c )
     
