@@ -4,27 +4,7 @@ PackageName := "MatricesForHomalg",
 
 Subtitle := "Matrices for the homalg project",
 
-Version := Maximum( [
-  "2021.06-03", ## Mohamed's version
-## this line prevents merge conflicts
-  "2021.07-01", ## Fabian's version
-## this line prevents merge conflicts
-  "2020.02-05", ## Markus' version
-## this line prevents merge conflicts
-  "2019.09-01", ## Max' version
-## this line prevents merge conflicts
-  "2019.12-03", ## Sebas' version
-## this line prevents merge conflicts
-  "2017.07-01", ## Vinay's version
-## this line prevents merge conflicts
-  "2013.08-26", ## Martin's version
-## this line prevents merge conflicts
-  "2019.06-04", ## Florian's version
-## this line prevents merge conflicts
-  "2020.09-06", ## Sepp's version
-## this line prevents merge conflicts
-  "2020.10-04", ## Kamal's version
-] ),
+Version := "2021.08-01",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
