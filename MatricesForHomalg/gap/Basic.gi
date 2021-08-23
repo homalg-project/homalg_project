@@ -1396,7 +1396,10 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices,
+InstallMethod( SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
     function( M )
         local ring, U, V, UI, VI, S;
         
@@ -1429,7 +1432,10 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix,
+InstallMethod( SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
     function( M )
         local R, RP, T, S;
         
@@ -1468,7 +1474,10 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix,
+InstallMethod( SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
     function( M )
         local R, RP, T, S;
         
