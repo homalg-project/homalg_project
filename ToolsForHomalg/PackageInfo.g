@@ -4,19 +4,7 @@ PackageName := "ToolsForHomalg",
 
 Subtitle := "Special methods and knowledge propagation tools",
 
-Version := Maximum( [
-  "2021.06-01", ## Mohamed's version
-## this line prevents merge conflicts
-  "2011.09-12", ## Markus' version
-## this line prevents merge conflicts
-  "2018.05-22", ## Sebas' version
-## this line prevents merge conflicts
-  "2021.05-02", ## Fabian's version
-## this line prevents merge conflicts
-  "2020.09-02", ## Kamal's version
-## this line prevents merge conflicts
-
-] ),
+Version := "2021.08-01",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 

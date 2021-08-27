@@ -1850,6 +1850,25 @@ InstallGlobalFunction( WriteFileInPackageForHomalg,
 end );
 
 ##
+InstallGlobalFunction( IsExistingFileInPackageForHomalg,
+  function( package_name, filename )
+    local dirs, path;
+    
+    dirs := DirectoriesPackageLibrary( package_name, "gap" );
+    
+    if Length( dirs ) <> 1 then
+        
+        Error( Concatenation( "could not find gap directory of package ", package_name ) );
+        
+    fi;
+    
+    path := Filename( dirs[1], filename );
+    
+    return IsExistingFile( path );
+    
+end );
+
+##
 InstallGlobalFunction( ReadFileFromPackageForHomalg,
   function( package_name, filename )
     local dirs, path;

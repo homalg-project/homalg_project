@@ -485,6 +485,8 @@ DeclareGlobalFunction( "WriteReplacedFileForHomalg" );
 
 DeclareGlobalFunction( "WriteFileInPackageForHomalg" );
 
+DeclareGlobalFunction( "IsExistingFileInPackageForHomalg" );
+
 DeclareGlobalFunction( "ReadFileFromPackageForHomalg" );
 
 ##
