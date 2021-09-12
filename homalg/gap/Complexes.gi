@@ -524,7 +524,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     # used below works.
     # For example for the category of coherent sheaves on projective space
     # we compute a locally free resolution of M, where the zeroth object of
-    # the resolution is build the way such that "epsilonM/psi" works.
+    # the resolution is built in a way such that "epsilonM/psi" works.
     dM := ResolutionWithRespectToMorphism( q, M, psi );
     dN := Resolution( q, N );
     
