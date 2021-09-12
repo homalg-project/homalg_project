@@ -394,10 +394,8 @@ InstallMethod( HorseShoeResolution,
         "for homalg complexes",
         [ IsList, IsHomalgChainMorphism, IsHomalgChainMorphism, IsHomalgMorphism ],
         
-  function( l, d_phi, d_psi, dEj2 )
-  local dEj, dN, dE, dM, psi, phi, j, dMj, dNj, mu, SyzygiesObjectEmb_j_M, SyzygiesObjectEmb_j_N, epsilonM, epsilonN, epsilon_j, Pj;
-    
-    dEj := dEj2;
+  function( l, d_phi, d_psi, dEj )
+  local dN, dE, dM, psi, phi, j, dMj, dNj, mu, SyzygiesObjectEmb_j_M, SyzygiesObjectEmb_j_N, epsilonM, epsilonN, epsilon_j, Pj;
     
     dN := Source( d_phi );
     dE := Range( d_phi );
