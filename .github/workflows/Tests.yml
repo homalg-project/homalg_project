@@ -29,9 +29,10 @@ jobs:
       - run: |
           export HOME="/home/gap"
           cd /home/gap/.gap/pkg/
-          sudo apt update
-          sudo apt dist-upgrade -y
-          sudo apt install -y texlive-latex-extra texlive-science time python-pathlib install-info --allow-downgrades macaulay2-common=1.16 macaulay2=1.16
+          # work around https://github.com/gap-system/gap-docker-base/issues/30
+          sudo apt -o Acquire::https::Verify-Peer="false" update
+          sudo apt -o Acquire::https::Verify-Peer="false" dist-upgrade -y
+          sudo apt -o Acquire::https::Verify-Peer="false" install -y texlive-latex-extra texlive-science time python-pathlib install-info --allow-downgrades macaulay2-common=1.16 macaulay2=1.16
           cp ./homalg_project/ci_gaprc /home/gap/.gap/gaprc
           git clone --depth 1 https://github.com/gap-packages/AutoDoc.git
           # set SOURCE_DATE_EPOCH for reproducible PDFs
