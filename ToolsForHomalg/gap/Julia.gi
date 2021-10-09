@@ -68,22 +68,26 @@ InstallOtherMethod( Read,
 end );
 
 ##
+InstallGlobalFunction( IsRunningInJupyter,
+  function( )
+    
+    return JuliaEvalString( "isdefined(Main, :IJulia) && Main.IJulia.inited" );
+    
+end );
+
+##
 InstallMethod( Visualize,
         "for a string",
         [ IsString ],
         
   function( str )
+
+    if not IsRunningInJupyter() then
+        TryNextMethod( );
+    fi;
     
     Julia.Base.display(
             Julia.Base.MIME( GAPToJulia( "image/svg+xml" ) ),
             GAPToJulia( DotToSVG( str ) ) );
-    
-end );
-
-##
-InstallGlobalFunction( IsRunningInJupyter,
-  function( )
-    
-    return JuliaEvalString( "isdefined(Main, :IJulia) && Main.IJulia.inited" );
     
 end );
