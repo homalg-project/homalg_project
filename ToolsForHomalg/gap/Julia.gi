@@ -68,7 +68,7 @@ InstallOtherMethod( Read,
 end );
 
 ##
-InstallMethod( VisualizeInJulia,
+InstallMethod( Visualize,
         "for a string",
         [ IsString ],
         
