@@ -4,9 +4,9 @@ PackageName := "ExamplesForHomalg",
 
 Subtitle := "Examples for the GAP Package homalg",
 
-Version := "2020.10-02",
+Version := "2021.10-01",
 
-Date := "16/10/2020",
+Date := "19/10/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -67,7 +67,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/ExamplesForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/ExamplesForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-", ~.Version, "/ExamplesForHomalg-", ~.Version ),
@@ -85,7 +85,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Examples for the GAP Package homalg",
-  Autoload  := false
 ),
 
 
@@ -94,7 +93,7 @@ Dependencies := rec(
   NeededOtherPackages := [
                 [ "MatricesForHomalg", ">= 2020.05.09" ],
                 [ "HomalgToCAS", ">= 2011.08.25" ],
-                [ "RingsForHomalg", ">= 2020.05.09" ],
+                [ "RingsForHomalg", ">= 2021.10-01" ],
                 [ "Modules", ">= 2020.05.09" ],
                 [ "homalg", ">= 2015.06.01" ],
                 [ "GaussForHomalg", ">=2019.09.01" ],
@@ -108,7 +107,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "examples", "homalg" ]
