@@ -12,29 +12,9 @@ PackageName := "GradedRingForHomalg",
 
 Subtitle := "Endow Commutative Rings with an Abelian Grading",
 
-Version := Maximum( [
-  "2021.03-03", ## Mohamed's version
-## this line prevents merge conflicts
-  "2020.02-05", ## Markus' version
-## this line prevents merge conflicts
-  "2020.04-16", ## Kamal's version
-## this line prevents merge conflicts
-  "2019.08-01", ## Max's version
-## this line prevents merge conflicts
-  "2011.05-05", ## Sebastian's version
-## this line prevents merge conflicts
-  "2015.12-04", ## Sebas' version
-## this line prevents merge conflicts
-  "2013.02-07", ## Markus' Kirschmer version
-## this line prevents merge conflicts
-  "2019.06-04", ## Martin's version
-## this line prevents merge conflicts
-  "2019.03-20", ## Sepp's version
-## this line prevents merge conflicts
-  "2020.10-02", ## Fabian's version
-] ),
+Version := "2021.10-01",
 
-Date := "31/03/2021",
+Date := "19/10/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -161,7 +141,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Endow Commutative Rings with an Abelian Grading",
-  Autoload  := false
 ),
 
 
@@ -185,7 +164,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "homological algebra", "graded ring" ]
