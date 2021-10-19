@@ -4,9 +4,9 @@ PackageName := "HomalgToCAS",
 
 Subtitle := "A window to the outer world",
 
-Version := "2021.01-02",
+Version := "2021.10-01",
 
-Date := "19/02/2021",
+Date := "19/10/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -149,7 +149,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "A window to the outer world",
-  Autoload  := false
 ),
 
 
@@ -169,7 +168,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "homalgExternalObject", "CreateHomalgExternalRing", "HomalgExternalRingElement", "IsHomalgExternalMatrixRep", "LaunchCAS", "TerminateCAS", "homalgSendBlocking" ]
