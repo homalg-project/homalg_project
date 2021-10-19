@@ -34,3 +34,4 @@ ReadPackage( "GradedRingForHomalg", "gap/SingularTools.gd" );
 ReadPackage( "GradedRingForHomalg", "gap/Macaulay2Tools.gd" );
 ReadPackage( "GradedRingForHomalg", "gap/MAGMATools.gd" );
 ReadPackage( "GradedRingForHomalg", "gap/MapleHomalgTools.gd" );
+ReadPackage( "GradedRingForHomalg", "gap/OscarTools.gd" );

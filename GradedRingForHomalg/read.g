@@ -35,6 +35,7 @@ ReadPackage( "GradedRingForHomalg", "gap/SingularTools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/Macaulay2Tools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/MAGMATools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/MapleHomalgTools.gi" );
+ReadPackage( "GradedRingForHomalg", "gap/OscarTools.gi" );
 
 if IsBound( MakeThreadLocal ) then
     Perform(
@@ -53,6 +54,8 @@ if IsBound( MakeThreadLocal ) then
              "GradedRingTableForMapleHomalgTools",
              "GradedRingMacrosForSingular",
              "GradedRingTableForSingularTools",
+             "GradedRingMacrosForOscar",
+             "GradedRingTableForOscarTools",
              ],
             MakeThreadLocal );
 fi;

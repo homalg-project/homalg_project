@@ -23,6 +23,7 @@ ReadPackage( "RingsForHomalg", "gap/Macaulay2.gd" );
 ReadPackage( "RingsForHomalg", "gap/Sage.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMA.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalg.gd" );
+ReadPackage( "RingsForHomalg", "gap/Oscar.gd" );
 
 ## GAP (using the GAP implementation of homalg)
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgBasic.gd" );
@@ -71,3 +72,8 @@ ReadPackage( "RingsForHomalg", "gap/MapleHomalgInvolutive.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanet.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanetOre.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgOreModules.gd" );
+
+## Oscar
+ReadPackage( "RingsForHomalg", "gap/OscarBasic.gd" );
+ReadPackage( "RingsForHomalg", "gap/OscarTools.gd" );
+ReadPackage( "RingsForHomalg", "gap/OscarGroebner.gd" );

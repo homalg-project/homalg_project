@@ -72,6 +72,11 @@ DeclareRepresentation( "IsHomalgExternalRingInSingularRep",
         IsHomalgExternalRingRep,
         [  ] );
 
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalQRingInSingularRep",
+        IsHomalgExternalRingInSingularRep,
+        [  ] );
+
 ####################################
 #
 # families and types:
@@ -1617,6 +1622,20 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
+InstallMethod( PolynomialRing,
+        "for a homalg ring in Singular",
+        [ IsHomalgExternalQRingInSingularRep and HasAmbientRing, IsList ],
+        
+  function( R, indets )
+    local S;
+    
+    S := PolynomialRing( AmbientRing( R ), indets );
+    
+    return HomalgQRingInSingular( S, S * RingRelations( R ) );
+    
+end );
+
+##
 InstallMethod( PolynomialRingWithProductOrdering,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep, IsList ],
@@ -2429,9 +2448,9 @@ InstallMethod( HomalgQRingInSingular,
     
     r := CoefficientsRing( R );
     
-    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
-        Error( "Singular qrings are currently only supported over fields" );
-    fi;
+    #if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+    #    Error( "Singular qrings are currently only supported over fields" );
+    #fi;
     
     stream := homalgStream( R );
     
@@ -2447,6 +2466,8 @@ InstallMethod( HomalgQRingInSingular,
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    SetFilterObj( S, IsHomalgExternalQRingInSingularRep );
     
     ## for the view methods:
     ## <A Singular q ring>
@@ -2623,6 +2644,16 @@ InstallMethod( HomalgQRingInSingular,
   function( R, ring_rel )
     
     return HomalgQRingInSingular( R, HomalgRingElement( ring_rel, R ) );
+    
+end );
+
+##
+InstallOtherMethod( HomalgQRingInSingular,
+        [ IsHomalgRing and IsHomalgResidueClassRingRep ],
+        
+  function( R )
+    
+    return HomalgQRingInSingular( AmbientRing( R ), RingRelations( R ) );
     
 end );
 
