@@ -1280,7 +1280,7 @@ InstallMethod( HomalgMap,
 
 ##
 InstallMethod( HomalgMap,
-        "for three objects",
+        "for a homalg matrix and two homalg modules",
         [ IsHomalgMatrix, IsHomalgModule, IsHomalgModule ],
         
   _HomalgMap );
