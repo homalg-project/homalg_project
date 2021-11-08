@@ -4,25 +4,9 @@ PackageName := "Modules",
 
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
 
-Version := Maximum( [
-  "2021.04-01", ## Mohamed's version
-## this line prevents merge conflicts
-  "2020.02-05", ## Markus' version
-## this line prevents merge conflicts
-  "2019.09-01", ## Max's version
-## this line prevents merge conflicts
-  "2011.07-20", ## Florian's version
-## this line prevents merge conflicts
-  "2018.09-20", ## Sebas' version
-## this line prevents merge conflicts
-  "2013.05-05", ## Sepp's version
-## this line prevents merge conflicts
-  "2017.06-19", ## Vinay's version
-## this line prevents merge conflicts
-  "2020.10-02", ## Fabian's version
-] ),
+Version := "2021.11-01",
 
-Date := "04/04/2021",
+Date := "07/11/2021",
 
 License := "GPL-2.0-or-later",
 
@@ -148,7 +132,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
-  Autoload  := false
 ),
 
 
@@ -169,7 +152,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := ["modules", "module homomorphisms", "functor", "ext", "tor"]
