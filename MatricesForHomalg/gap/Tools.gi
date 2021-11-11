@@ -8096,8 +8096,9 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRing,
         
   function( R )
     local phi, psi;
-    
-    phi := RingMapOntoRewrittenResidueClassRing( R );
+
+    # R = A / I
+    phi := RingMapOntoRewrittenResidueClassRing( R ); # replace pi: A -> R = A / I by phi: A -> R_1 := A_1 / I_1
     
     while true do
         
