@@ -1822,9 +1822,15 @@ end );
 ##
 InstallGlobalFunction( WriteReplacedFileForHomalg,
   function( path_source, L, path_target )
-    local string;
+    local header, string;
     
-    string := ReplacedFileForHomalg( path_source, L );
+    header := ValueOption( "header" );
+    
+    if not IsString( header ) then
+        header := "";
+    fi;
+    
+    string := Concatenation( header, ReplacedFileForHomalg( path_source, L ) );
     
     WriteFileForHomalg( path_target, string );
     
