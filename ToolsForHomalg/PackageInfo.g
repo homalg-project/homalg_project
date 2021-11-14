@@ -4,9 +4,9 @@ PackageName := "ToolsForHomalg",
 
 Subtitle := "Special methods and knowledge propagation tools",
 
-Version := "2021.10-02",
+Version := "2021.11-01",
 
-Date := "09/10/2021",
+Date := "14/11/2021",
 
 License := "GPL-2.0-or-later",
 
