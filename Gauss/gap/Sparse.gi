@@ -2,7 +2,7 @@
 ##
 ##  Sparse.gi                  Gauss package                  Simon Goertzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B fÅ¸r Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B f√ºr Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for performing algorithms on sparse matrices.
 ##  Also includes the documentation of these algorithms.

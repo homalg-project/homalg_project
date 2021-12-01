@@ -2,7 +2,7 @@
 ##
 ##  GaussSparseGF2.gi            Gauss package                Simon Goertzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B fÃ¼r Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for performing Gauss alg. on sparse GF(2) matrices.
 ##
