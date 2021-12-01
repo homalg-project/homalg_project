@@ -30,7 +30,7 @@ jobs:
           export HOME="/home/gap"
           cd /home/gap/.gap/pkg/
           sudo apt update
-          sudo apt install -y time install-info --allow-downgrades macaulay2-common=1.16 macaulay2=1.16
+          sudo apt install -y time
           cp ./homalg_project/ci_gaprc /home/gap/.gap/gaprc
           git clone --depth 1 https://github.com/gap-packages/AutoDoc.git
           # set SOURCE_DATE_EPOCH for reproducible PDFs
