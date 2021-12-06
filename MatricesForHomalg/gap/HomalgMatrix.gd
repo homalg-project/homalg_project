@@ -885,6 +885,7 @@ DeclareAttribute( "MaximalDegreePartOfColumnMatrix",
 DeclareGlobalFunction( "homalgInternalMatrixHull" );
 
 DeclareGlobalFunction( "HomalgMatrix" );
+DeclareGlobalFunction( "HomalgMatrixListList" );
 
 DeclareGlobalFunction( "HomalgMatrixWithAttributes" );
 

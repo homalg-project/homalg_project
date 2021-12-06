@@ -2510,6 +2510,7 @@ end );
 ##  <#GAPDoc Label="HomalgMatrix">
 ##  <ManSection>
 ##    <Func Arg="llist, R" Name="HomalgMatrix" Label="constructor for matrices using a listlist"/>
+##    <Func Arg="llist, m, n, R" Name="HomalgMatrix" Label="constructor for matrices using a listlist with given dimensions"/>
 ##    <Func Arg="list, m, n, R" Name="HomalgMatrix" Label="constructor for matrices using a list"/>
 ##    <Func Arg="str_llist, R" Name="HomalgMatrix" Label="constructor for matrices using a string of a listlist"/>
 ##    <Func Arg="str_list, m, n, R" Name="HomalgMatrix" Label="constructor for matrices using a string of a list"/>
@@ -2771,7 +2772,31 @@ InstallGlobalFunction( HomalgMatrix,
     return matrix;
     
 end );
-  
+
+##  <#GAPDoc Label="HomalgMatrixListList">
+##  <ManSection>
+##    <Func Arg="llist, m, n, R" Name="HomalgMatrixListList" Label="constructor for matrices using a listlist with given dimensions"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Special case of <Ref Meth="HomalgMatrix" Label="constructor for matrices using a listlist with given dimensions"/>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( HomalgMatrixListList,
+  function( llist, m, n, R )
+    
+    if m > 0 and n > 0 then
+        
+        Assert( 1, IsList( llist ) and Length( llist ) = m );
+        Assert( 1, ForAll( llist, list -> IsList( list ) and Length( list ) = n ) );
+        
+    fi;
+    
+    return HomalgMatrix( llist, m, n, R );
+    
+end );
+
 ##
 InstallGlobalFunction( HomalgMatrixWithAttributes,
   function( attributes, R )

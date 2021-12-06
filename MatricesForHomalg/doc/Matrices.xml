@@ -29,6 +29,7 @@
 <#Include Label="HomalgIdentityMatrix">
 <#Include Label="HomalgVoidMatrix">
 <#Include Label="HomalgMatrix">
+<#Include Label="HomalgMatrixListList">
 <#Include Label="HomalgDiagonalMatrix">
 <#Include Label="\*:MatrixBaseChange">
 <#Include Label="CoercedMatrix">
