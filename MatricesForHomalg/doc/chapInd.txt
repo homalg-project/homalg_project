@@ -2,8 +2,8 @@
   
   [1XIndex[101X
   
-  [2X\*[102X, copy a matrix over a different ring 5.2-8 
-      copy a matrix over a different ring (right) 5.2-8 
+  [2X\*[102X, copy a matrix over a different ring 5.2-9 
+      copy a matrix over a different ring (right) 5.2-9 
       for composable matrices 5.5-18 
       for ring elements and matrices 5.5-15 
   [2X\+[102X, for matrices 5.5-16 
@@ -43,8 +43,8 @@
   [2XCoefficientsRing[102X 3.4-20 
   [2XCoefficientsWithGivenMonomials[102X, for two homalg matrices 5.5-56 
       homalgTable entry B.1-24 
-  [2XCoercedMatrix[102X, copy a matrix over a different ring 5.2-9 
-      copy a matrix over a different ring (convenience) 5.2-9 
+  [2XCoercedMatrix[102X, copy a matrix over a different ring 5.2-10 
+      copy a matrix over a different ring (convenience) 5.2-10 
   [2XColumnRankOfMatrix[102X 5.4-11 
   [2XCompose[102X, homalgTable entry B.1-19 
       ResidueClassRing D.2-17 
@@ -107,14 +107,16 @@
   [2XHasInvariantBasisProperty[102X 3.3-21 
   [2XHilbertPoincareSeries[102X 5.4-18 
   [2XHilbertPolynomial[102X 5.4-19 
-  [2XHomalgDiagonalMatrix[102X, constructor for diagonal matrices 5.2-7 
+  [2XHomalgDiagonalMatrix[102X, constructor for diagonal matrices 5.2-8 
   [2XHomalgIdentityMatrix[102X, constructor for identity matrices 5.2-4 
   [2XHomalgInitialIdentityMatrix[102X, constructor for initial quadratic matrices with ones on the diagonal 5.2-2 
   [2XHomalgInitialMatrix[102X, constructor for initial matrices filled with zeros 5.2-1 
   [2XHomalgMatrix[102X, constructor for matrices using a list 5.2-6 
       constructor for matrices using a listlist 5.2-6 
+      constructor for matrices using a listlist with given dimensions 5.2-6 
       constructor for matrices using a string of a list 5.2-6 
       constructor for matrices using a string of a listlist 5.2-6 
+  [2XHomalgMatrixListList[102X, constructor for matrices using a listlist with given dimensions 5.2-7 
   [2XhomalgMode[102X E.2-1 
   [2XHomalgRing[102X, for matrices 5.5-1 
   [2XHomalgRingOfIntegers[102X, constructor for the integers 3.2-1 

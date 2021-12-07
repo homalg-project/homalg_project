@@ -168,6 +168,7 @@
   [1X5.2-6 HomalgMatrix[101X
   
   [33X[1;0Y[29X[2XHomalgMatrix[102X( [3Xllist[103X, [3XR[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XHomalgMatrix[102X( [3Xllist[103X, [3Xm[103X, [3Xn[103X, [3XR[103X ) [32X function[133X
   [33X[1;0Y[29X[2XHomalgMatrix[102X( [3Xlist[103X, [3Xm[103X, [3Xn[103X, [3XR[103X ) [32X function[133X
   [33X[1;0Y[29X[2XHomalgMatrix[102X( [3Xstr_llist[103X, [3XR[103X ) [32X function[133X
   [33X[1;0Y[29X[2XHomalgMatrix[102X( [3Xstr_list[103X, [3Xm[103X, [3Xn[103X, [3XR[103X ) [32X function[133X
@@ -244,7 +245,14 @@
     [4X[28X  [  4,  5,  6 ] ][128X[104X
   [4X[32X[104X
   
-  [1X5.2-7 HomalgDiagonalMatrix[101X
+  [1X5.2-7 HomalgMatrixListList[101X
+  
+  [33X[1;0Y[29X[2XHomalgMatrixListList[102X( [3Xllist[103X, [3Xm[103X, [3Xn[103X, [3XR[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YSpecial case of [2XHomalgMatrix[102X ([14X5.2-6[114X).[133X
+  
+  [1X5.2-8 HomalgDiagonalMatrix[101X
   
   [33X[1;0Y[29X[2XHomalgDiagonalMatrix[102X( [3Xdiag[103X, [3XR[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -265,7 +273,7 @@
     [4X[28X<A diagonal 3 x 3 matrix over an internal ring>[128X[104X
   [4X[32X[104X
   
-  [1X5.2-8 \*[101X
+  [1X5.2-9 \*[101X
   
   [33X[1;0Y[29X[2X\*[102X( [3XR[103X, [3Xmat[103X ) [32X operation[133X
   [33X[1;0Y[29X[2X\*[102X( [3Xmat[103X, [3XR[103X ) [32X operation[133X
@@ -303,7 +311,7 @@
     [4X[28X<A non-zero 3 x 3 matrix over a residue class ring>[128X[104X
   [4X[32X[104X
   
-  [1X5.2-9 CoercedMatrix[101X
+  [1X5.2-10 CoercedMatrix[101X
   
   [33X[1;0Y[29X[2XCoercedMatrix[102X( [3Xring_from[103X, [3Xring_to[103X, [3Xmat[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XCoercedMatrix[102X( [3Xring_to[103X, [3Xmat[103X ) [32X operation[133X

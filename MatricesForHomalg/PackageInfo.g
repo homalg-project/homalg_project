@@ -4,9 +4,9 @@ PackageName := "MatricesForHomalg",
 
 Subtitle := "Matrices for the homalg project",
 
-Version := "2021.11-01",
+Version := "2021.12-01",
 
-Date := "14/11/2021",
+Date := "07/12/2021",
 
 License := "GPL-2.0-or-later",
 
