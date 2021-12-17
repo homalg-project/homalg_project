@@ -515,3 +515,18 @@ DeclareGlobalFunction( "FillWithCharacterAfterDecimalNumber" );
 #!   by joining the entries with the separator `", "`.
 #! @Arguments string, record
 DeclareGlobalFunction( "ReplacedStringViaRecord" );
+
+#! @Description
+#!   (Re-)Starts a timer with the given name.
+#! @Arguments name
+DeclareGlobalFunction( "StartTimer" );
+
+#! @Description
+#!   Stops a timer with the given name.
+#! @Arguments name
+DeclareGlobalFunction( "StopTimer" );
+
+#! @Description
+#!   Displays the current value of the timer with the given name.
+#! @Arguments name
+DeclareGlobalFunction( "DisplayTimer" );
