@@ -2575,3 +2575,112 @@ InstallGlobalFunction( "ReplacedStringViaRecord", function( string, record )
     return string;
     
 end );
+
+BindGlobal( "TOOLS_FOR_HOMALG_INTERNAL_TIMERS", rec( ) );
+
+##
+InstallGlobalFunction( StartTimer, function( name )
+    
+    if not IsString( name ) then
+        
+        Error( "<name> must be a string" );
+        
+    fi;
+    
+    if not IsBound( TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name) ) then
+        
+        # first entry is the number of times the timer was started
+        # second entry is the elapsed time
+        TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name) := [ 0, 0 ];
+        
+    fi;
+    
+    if TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2] < 0 then
+        
+        Print( "WARNING: Timer with name ", name, " is already running.\n" );
+        
+    else
+        
+        TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[1] := TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[1] + 1;
+        TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2] := TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2] - Runtime( );
+        
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( StopTimer, function( name )
+  local current_time;
+    
+    # make this more precise by getting the time immediately
+    current_time := Runtime( );
+    
+    if not IsString( name ) then
+        
+        Error( "<name> must be a string" );
+        
+    fi;
+    
+    if not IsBound( TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name) ) then
+        
+        Error( "Timer with name ", name, " was never started." );
+        
+    fi;
+    
+    if TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2] >= 0 then
+        
+        Print( "WARNING: Timer with name ", name, " was not running.\n" );
+        
+    else
+        
+        TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2] := TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2] + current_time;
+        
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( DisplayTimer, function( name )
+  local current_time, elapsed_time, state, execs;
+    
+    # make this more precise by getting the time immediately
+    current_time := Runtime( );
+    
+    if not IsString( name ) then
+        
+        Error( "<name> must be a string" );
+        
+    fi;
+    
+    if not IsBound( TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name) ) then
+        
+        Error( "Timer with name ", name, " was never started." );
+        
+    fi;
+    
+    if TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2] >= 0 then
+        
+        state := "stopped";
+        elapsed_time := TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2];
+        
+    else
+        
+        state := "running";
+        elapsed_time := TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[2] + current_time;
+        
+    fi;
+    
+    execs := TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name)[1];
+    
+    Print(
+        "Timer ", name, " (", state, "):",
+        " started ",
+        execs,
+        " times with a total runtime of ",
+        elapsed_time,
+        " ms ( = ",
+        Int( elapsed_time / execs * 1000 ),
+        " μs per run)\n"
+    );
+    
+end );
