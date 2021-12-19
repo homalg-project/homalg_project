@@ -32,6 +32,7 @@
   [2XDeactivateWhereInfosInEntries[102X 5.8-6 
   [2XDeclareAttributeWithCustomGetter[102X 9.1-31 
   [2XDescriptionOfImplication[102X, for IsToDoListEntry 5.2-10 
+  [2XDisplayTimer[102X 9.1-50 
   [2XExamplesForHomalg[102X 9.2-1 
       for IsInt 9.2-2 
   [2XFunctionWithCache[102X 3.4-4 
@@ -108,6 +109,8 @@
   [2XSetTargetObject[102X, for IsToDoListEntry, IsObject 5.2-8 
   [2XSetTargetValueObject[102X, for IsToDoListEntry, IsObject 5.2-7 
   [2XSourcePart[102X, for IsToDoListEntry 5.2-2 
+  [2XStartTimer[102X 9.1-48 
+  [2XStopTimer[102X 9.1-49 
   [2XTargetPart[102X, for IsToDoListEntry 5.2-3 
   [2XToDoList[102X, for IsObject 5.6-1 
   [2XToDoList_this_object[102X 5.1-4 

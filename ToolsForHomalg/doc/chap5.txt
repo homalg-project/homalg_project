@@ -227,7 +227,7 @@
   [1X5.3-1 IsToDoList[101X
   
   [33X[1;0Y[29X[2XIsToDoList[102X( [3Xarg[103X ) [32X filter[133X
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
   
   [33X[0;0YThis  is  the  category  of ToDo-lists. Every ToDo-list is an object of this
   category, which basically contains the ToDo-lists.[133X

@@ -10,7 +10,7 @@
   [1X10.1-1 IsTree[101X
   
   [33X[1;0Y[29X[2XIsTree[102X( [3Xarg[103X ) [32X filter[133X
-  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
   
   [33X[0;0YThe  category  of  trees. A tree may have a content, a list of successors, a
   predecessor and it knows if it is a leave of a tree or not.[133X

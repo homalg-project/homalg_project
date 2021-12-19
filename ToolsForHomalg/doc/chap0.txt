@@ -6,7 +6,7 @@
                           [1XTools for the [5Xhomalg[105X project[101X
   
   
-                               Version 2021.11-01
+                               Version 2021.12-01
   
   
                                  December 2014
@@ -210,6 +210,9 @@
       9.1-45 MakeShowable
       9.1-46 MakeShowableWithLaTeX
       9.1-47 ReplacedStringViaRecord
+      9.1-48 StartTimer
+      9.1-49 StopTimer
+      9.1-50 DisplayTimer
     9.2 [33X[0;0YExamplefunctions[133X
       9.2-1 ExamplesForHomalg
       9.2-2 ExamplesForHomalg

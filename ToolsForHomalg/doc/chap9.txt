@@ -312,6 +312,24 @@
   The  values can be strings or lists of strings. In the second case, a string
   is created from the list by joining the entries with the separator [10X", "[110X.[133X
   
+  [1X9.1-48 StartTimer[101X
+  
+  [33X[1;0Y[29X[2XStartTimer[102X( [3Xname[103X ) [32X function[133X
+  
+  [33X[0;0Y(Re-)Starts a timer with the given name.[133X
+  
+  [1X9.1-49 StopTimer[101X
+  
+  [33X[1;0Y[29X[2XStopTimer[102X( [3Xname[103X ) [32X function[133X
+  
+  [33X[0;0YStops a timer with the given name.[133X
+  
+  [1X9.1-50 DisplayTimer[101X
+  
+  [33X[1;0Y[29X[2XDisplayTimer[102X( [3Xname[103X ) [32X function[133X
+  
+  [33X[0;0YDisplays the current value of the timer with the given name.[133X
+  
   
   [1X9.2 [33X[0;0YExamplefunctions[133X[101X
   
