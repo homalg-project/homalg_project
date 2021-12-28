@@ -4,7 +4,7 @@ PackageName := "ToolsForHomalg",
 
 Subtitle := "Special methods and knowledge propagation tools",
 
-Version := "2021.12-01",
+Version := "2021.12-02",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 

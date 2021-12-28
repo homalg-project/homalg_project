@@ -76,18 +76,36 @@ InstallGlobalFunction( IsRunningInJupyter,
 end );
 
 ##
+InstallGlobalFunction( IsRunningInPluto,
+  function( )
+    
+    return JuliaEvalString( "isdefined(Main, :PlutoRunner) && Main.PlutoRunner isa Module" );
+    
+end );
+
+##
 InstallMethod( Visualize,
         "for a string",
         [ IsString ],
         
   function( str )
-
-    if not IsRunningInJupyter() then
-        TryNextMethod( );
+    
+    if IsRunningInJupyter( ) then
+        
+        Julia.Base.display(
+                Julia.Base.MIME( GAPToJulia( "image/svg+xml" ) ),
+                GAPToJulia( DotToSVG( str ) ) );
+        
+    elif IsRunningInPluto( ) then
+        
+        JuliaEvalString( "import PlutoUI" );
+        
+        return Julia.PlutoUI.Show(
+                       Julia.Base.MIME( GAPToJulia( "image/svg+xml" ) ),
+                       GAPToJulia( DotToSVG( str ) ) );
+        
     fi;
     
-    Julia.Base.display(
-            Julia.Base.MIME( GAPToJulia( "image/svg+xml" ) ),
-            GAPToJulia( DotToSVG( str ) ) );
+    TryNextMethod( );
     
 end );
