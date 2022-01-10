@@ -698,9 +698,7 @@ InstallGlobalFunction( InstallMethodWithCrispCache,
                        
   function( arg )
     
-    PushOptions( rec( CrispCache := true ) );
-    
-    CallFuncList( InstallMethodWithCache, arg );
+    CallFuncList( InstallMethodWithCache, arg : CrispCache := true );
     
 end );
 
