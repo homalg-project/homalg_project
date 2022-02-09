@@ -204,7 +204,7 @@ InstallMethod( ChernPolynomial,
 end );
 
 ##
-InstallMethod( ZERO,
+InstallMethod( ZeroSameMutability,
         "for an element of the Grothendieck group of a projective space",
         [ IsElementOfGrothendieckGroupOfProjectiveSpaceRep and HasAssociatedPolynomial ],
         
