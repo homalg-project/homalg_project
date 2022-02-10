@@ -1336,7 +1336,7 @@ end );
 
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "constructor for homalg graded free modules of rank 1",
         [ IsGradedModuleRep, IsInt ],
         
@@ -1400,7 +1400,7 @@ InstallMethod( POW,
 end );
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "constructor for homalg graded free modules",
         [ IsGradedModuleRep, IsList ],
         
@@ -1473,7 +1473,7 @@ InstallMethod( POW,
     
 end );
 
-InstallMethod( POW,
+InstallMethod( \^,
         "constructor for homalg graded free modules",
         [ IsGradedModuleRep, IsHomalgElement ],
         
@@ -1535,7 +1535,7 @@ InstallMethod( POW,
 end );
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "constructor for homalg graded free modules of rank 1",
         [ IsHomalgGradedRingRep, IsInt ],
         
@@ -1546,7 +1546,7 @@ InstallMethod( POW,
 end );
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "constructor for homalg graded free modules",
         [ IsHomalgGradedRingRep, IsList ],
         
@@ -1558,7 +1558,7 @@ end );
 
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "constructor for homalg graded free modules",
         [ IsHomalgGradedRingRep, IsHomalgElement ],
         

@@ -25,7 +25,7 @@ Curve := MatrixOfGenerators( curve );
 ## a random plane curve of degree d with s ordinary singularities and genus g
 d := 6;
 
-g := Binomial( d - 1, 2 ) - Iterated( List( [ 1 .. s ], i -> Binomial( r[i], 2 ) ), SUM );
+g := Binomial( d - 1, 2 ) - Sum( [ 1 .. s ], i -> Binomial( r[i], 2 ) );
 
 F := Curve * RandomMatrix( O( -d ), curve );
 

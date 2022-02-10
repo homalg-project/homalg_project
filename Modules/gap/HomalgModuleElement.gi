@@ -507,7 +507,7 @@ end );
 ## I am not sure if this method in this position is
 ## a good idea. Had to delete declarations to make this possible.
 ## Maybe we should make this method more special.
-InstallMethod( POW,
+InstallMethod( \^,
         "for integers",
         [ IsRingElement, IsHomalgModuleElement ],
         
@@ -521,7 +521,7 @@ InstallMethod( POW,
     if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) and
        NrGenerators( M ) = 1 and IsTorsionFree( M ) then
         
-        return POW( a, UnderlyingListOfRingElements( m )[ 1 ] );
+        return a ^ UnderlyingListOfRingElements( m )[ 1 ];
         
     fi;
     

@@ -184,7 +184,7 @@ DeclareOperation( "NonZeroGenerators",
 DeclareOperation( "GetRidOfObsoleteRelations",
         [ IsHomalgRingRelations ] );
 
-DeclareOperation( "POW",
+DeclareOperation( "^",
         [ IsHomalgRingRelations, IsHomalgMatrix ] );
 
 DeclareOperation( "*",

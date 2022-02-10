@@ -242,7 +242,7 @@ InstallMethod( HasNrGenerators,
         if IsList( ar ) and Length( ar ) = 2 then
             return HasNrColumns( ar[1] );
         fi;
-    elif IsIdenticalObj( func_arg[1], POW ) then
+    elif IsIdenticalObj( func_arg[1], \^ ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
             return HasNrRows( ar[2] );
@@ -279,7 +279,7 @@ InstallMethod( HasNrGenerators,
         if IsList( ar ) and Length( ar ) = 2 then
             return HasNrRows( ar[1] );
         fi;
-    elif IsIdenticalObj( func_arg[1], POW ) then
+    elif IsIdenticalObj( func_arg[1], \^ ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
             return HasNrColumns( ar[2] );
@@ -316,7 +316,7 @@ InstallMethod( NrGeneratorsForRelations,
         if IsList( ar ) and Length( ar ) = 2 then
             return NrColumns( ar[1] );
         fi;
-    elif IsIdenticalObj( func_arg[1], POW ) then
+    elif IsIdenticalObj( func_arg[1], \^ ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
             return NrRows( ar[2] );
@@ -353,7 +353,7 @@ InstallMethod( NrGeneratorsForRelations,
         if IsList( ar ) and Length( ar ) = 2 then
             return NrRows( ar[1] );
         fi;
-    elif IsIdenticalObj( func_arg[1], POW ) then
+    elif IsIdenticalObj( func_arg[1], \^ ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
             return NrColumns( ar[2] );
@@ -938,7 +938,7 @@ InstallMethod( GetIndependentUnitPositions,
 end );
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "for sets of relations of homalg modules",
         [ IsHomalgRelations, IsHomalgMatrix ],
         
@@ -963,9 +963,9 @@ InstallMethod( \*,
   function( rel, mat )
     
     if IsHomalgRelationsOfLeftModule( rel ) then
-        return HomalgRelationsForLeftModule( POW, [ rel, mat ] );
+        return HomalgRelationsForLeftModule( \^, [ rel, mat ] );
     else
-        return HomalgRelationsForRightModule( POW, [ rel, mat ] );
+        return HomalgRelationsForRightModule( \^, [ rel, mat ] );
     fi;
     
 end );

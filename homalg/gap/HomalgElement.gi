@@ -230,7 +230,7 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( ZERO_MUT,
+InstallMethod( ZeroMutable,
         "for homalg elements",
         [ IsHomalgElement ],
         
