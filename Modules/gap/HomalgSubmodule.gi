@@ -277,7 +277,7 @@ InstallOtherMethod( \*,
 end );
 
 ##
-InstallOtherMethod( POW,
+InstallOtherMethod( \^,
         "for homalg submodules",
         [ IsStaticFinitelyPresentedSubobjectRep, IsInt ],
         

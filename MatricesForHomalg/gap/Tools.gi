@@ -4169,7 +4169,7 @@ end );
 ####################################
 
 ##
-InstallMethod( SUM,
+InstallMethod( \+,
         "for homalg ring elements",
         [ IsHomalgRingElement, IsHomalgRingElement ],
         
@@ -4199,7 +4199,7 @@ InstallMethod( SUM,
 end );
 
 ##
-InstallMethod( PROD,
+InstallMethod( \*,
         "for homalg ring elements",
         [ IsHomalgRingElement, IsHomalgRingElement ],
         

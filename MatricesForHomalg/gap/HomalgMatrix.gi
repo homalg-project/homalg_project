@@ -1868,7 +1868,7 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "for homalg maps",
         [ IsHomalgMatrix, IsInt ],
         

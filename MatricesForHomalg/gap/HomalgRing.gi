@@ -457,7 +457,7 @@ InstallMethod( LT,
 end );
 
 ##
-InstallMethod( INV,
+InstallMethod( InverseMutable,
         "for homalg ring elements",
         [ IsHomalgRingElement ],
         

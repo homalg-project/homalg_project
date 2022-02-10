@@ -293,7 +293,7 @@ end );
 ##
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "for homalg morphisms",
         [ IsHomalgMorphism, IsInt ],
         

@@ -219,7 +219,7 @@ DeclareOperation( "GetIndependentUnitPositions",
 DeclareOperation( "GetIndependentUnitPositions",
         [ IsHomalgRelations ] );
 
-DeclareOperation( "POW",
+DeclareOperation( "^",
         [ IsHomalgRelations, IsHomalgMatrix ] );
 
 DeclareOperation( "*",

@@ -731,7 +731,7 @@ InstallMethod( \-,
   end
 );
   
-InstallOtherMethod( AINV_MUT,# strangely, doesn't have the filters for arith.op
+InstallOtherMethod( AdditiveInverseMutable,# strangely, doesn't have the filters for arith.op
         [IsSparseMatrix],
         function(A)
     return SparseMatrix( A!.nrows, A!.ncols, A!.indices, -A!.entries, A!.ring );

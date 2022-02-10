@@ -280,22 +280,22 @@ DeclareOperation( "PresentationWithDegrees",
 DeclareOperation( "PresentationWithDegrees",
         [ IsHomalgGenerators, IsHomalgRelations, IsHomalgGradedRing] );
 
-DeclareOperation( "POW",
+DeclareOperation( "^",
         [ IsHomalgModule, IsInt ] );
 
-DeclareOperation( "POW",
+DeclareOperation( "^",
         [ IsHomalgModule, IsList ] );
 
-#DeclareOperation( "POW",
+#DeclareOperation( "^",
 #        [ IsHomalgModule, IsHomalgElement ] );
 
-DeclareOperation( "POW",
+DeclareOperation( "^",
         [ IsHomalgRing, IsInt ] );
 
-DeclareOperation( "POW",
+DeclareOperation( "^",
         [ IsHomalgRing, IsList ] );
 
-#DeclareOperation( "POW",
+#DeclareOperation( "^",
 #        [ IsHomalgRing, IsHomalgElement ] );
 
 # global functions:

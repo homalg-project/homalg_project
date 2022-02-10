@@ -649,7 +649,7 @@ InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations
 end );
 
 ##
-InstallMethod( POW,
+InstallMethod( \^,
         "for sets of ring relations",
         [ IsHomalgRingRelations, IsHomalgMatrix ],
         
