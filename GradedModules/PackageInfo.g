@@ -4,23 +4,7 @@ PackageName := "GradedModules",
 
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
 
-Version := Maximum( [
-  "2021.04-03", ## Mohamed's version
-## this line prevents merge conflicts
-  "2020.02-05", ## Markus' version
-## this line prevents merge conflicts
-  "2019.08-01", ## Max's version
-## this line prevents merge conflicts
-  "2011.05-05", ## Sebastian's version
-## this line prevents merge conflicts
-  "2014.07-25", ## Sepp's version
-## this line prevents merge conflicts
-  "2015.12-04", ## Sebas' version
-## this line prevents merge conflicts
-  "2014.04-09", ## Max' version
-## this line prevents merge conflicts
-  "2020.10-02", ## Fabian's version
-] ),
+Version := "2022.02-01",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
@@ -155,12 +139,12 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "ToolsForHomalg", ">= 2014.12.08" ],
-                   [ "MatricesForHomalg", ">= 2021.02-03" ],
+                   [ "MatricesForHomalg", ">= 2022.02-01" ],
                    [ "HomalgToCAS", ">= 2011.10.05" ],
                    [ "RingsForHomalg", ">= 2020.04.17" ],
                    [ "GradedRingForHomalg", ">= 2021.03-01" ],
-                   [ "Modules", ">= 2020.02.05" ],
-                   [ "homalg", ">= 2013.06.23" ],
+                   [ "Modules", ">= 2022.02-01" ],
+                   [ "homalg", ">= 2022.02-01" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
