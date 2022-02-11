@@ -4,7 +4,7 @@ PackageName := "MatricesForHomalg",
 
 Subtitle := "Matrices for the homalg project",
 
-Version := "2021.12-01",
+Version := "2022.02-01",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
