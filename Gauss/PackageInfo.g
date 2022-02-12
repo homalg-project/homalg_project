@@ -4,9 +4,9 @@ PackageName := "Gauss",
 
 Subtitle := "Extended Gauss functionality for GAP",
 
-Version := "2021.04-01",
+Version := "2022.02-01",
 
-Date := "27/04/2021",
+Date := "12/02/2022",
 
 License := "GPL-2.0-or-later",
 
@@ -84,7 +84,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Extended Gauss functionality for GAP",
-  Autoload  := false
 ),
 
 Dependencies := rec(
@@ -104,7 +103,6 @@ AvailabilityTest := function()
   return true;
 end,
 
-Autoload := false,
 
 
 Keywords := ["Gauss", "RREF", "sparse" ]
