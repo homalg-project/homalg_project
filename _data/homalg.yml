@@ -1,7 +1,7 @@
 name: homalg
-version: "2021.06-01"
+version: "2022.02-01"
 license: "GPL-2.0-or-later"
-date: 2021-06-18
+date: 2022-02-12
 description: |
     A homological algebra meta-package for computable Abelian categories
 
@@ -33,11 +33,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/homalg/PackageInfo.
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/homalg-2021.06-01/homalg-2021.06-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/homalg-2022.02-01/homalg-2022.02-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/homalg-2021.06-01/homalg-2021.06-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/homalg-2022.02-01/homalg-2022.02-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/homalg-2021.06-01/homalg-2021.06-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/homalg-2022.02-01/homalg-2022.02-01.pdf
 
 abstract: |
     A homological algebra meta-package for computable Abelian categories
@@ -49,22 +49,22 @@ keywords: |
     homological, filtration, bicomplex, spectral sequence, Grothendieck, functor.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BGL21</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S. and Lange-Hegermann, M.</b>,
+    [<span class='BibKey'>BGL22</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S. and Lange-Hegermann, M.</b>,
      <i class='BibTitle'>homalg, A homological algebra meta-package for computable Abelian categories,
-             Version 2021.06-01</i>
-     (<span class='BibYear'>2021</span>)<br />
+             Version 2022.02-01</i>
+     (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/homalg">https://homalg-project.github.io/pkg/homalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ homalg2021.06-01,
+    @misc{ homalg2022.02-01,
       author =           {Barakat, M. and Gutsche, S. and Lange-Hegermann, M.},
       title =            {{homalg},   A  homological  algebra  meta-package  for
-                          computable Abelian categories, {V}ersion 2021.06-01},
-      month =            {Jun},
-      year =             {2021},
+                          computable Abelian categories, {V}ersion 2022.02-01},
+      month =            {Feb},
+      year =             {2022},
       note =             {GAP package},
       howpublished =     {\href    {https://homalg-project.github.io/pkg/homalg}
                           {\texttt{https://homalg-project.github.io/}\discretionary
@@ -72,6 +72,6 @@ bibtex: |
                           {}{}{}\texttt{homalg}}},
       keywords =         {homological; filtration; bicomplex; spectral sequence;
                           Grothendieck; functor},
-      printedkey =       {BGL21}
+      printedkey =       {BGL22}
     }
 
