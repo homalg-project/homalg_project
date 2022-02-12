@@ -1,7 +1,7 @@
 name: GradedModules
-version: "2021.04-03"
+version: "2022.02-01"
 license: "GPL-2.0-or-later"
-date: 2021-04-09
+date: 2022-02-12
 description: |
     A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
 
@@ -32,7 +32,7 @@ needed-pkgs:
       version: ">= 2014.12.08"
       url: "https://homalg-project.github.io/pkg/ToolsForHomalg"
     - name: "MatricesForHomalg"
-      version: ">= 2021.02-03"
+      version: ">= 2022.02-01"
       url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
     - name: "HomalgToCAS"
       version: ">= 2011.10.05"
@@ -44,10 +44,10 @@ needed-pkgs:
       version: ">= 2021.03-01"
       url: "https://homalg-project.github.io/pkg/GradedRingForHomalg"
     - name: "Modules"
-      version: ">= 2020.02.05"
+      version: ">= 2022.02-01"
       url: "https://homalg-project.github.io/pkg/Modules"
     - name: "homalg"
-      version: ">= 2013.06.23"
+      version: ">= 2022.02-01"
       url: "https://homalg-project.github.io/pkg/homalg"
     - name: "GAPDoc"
       version: ">= 1.0"
@@ -59,11 +59,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/GradedModules/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-03/GradedModules-2021.04-03.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2022.02-01/GradedModules-2022.02-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-03/GradedModules-2021.04-03.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2022.02-01/GradedModules-2022.02-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2021.04-03/GradedModules-2021.04-03.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2022.02-01/GradedModules-2022.02-01.pdf
 
 abstract: |
     This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring
@@ -75,24 +75,24 @@ keywords: |
     modules, graded modules, graduation, multi-graded modules, Tate resolution.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BGJLLM21</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S., Jambor, S., Lange-Hegermann, M., Lorenz, A. and Motsak, O.</b>,
+    [<span class='BibKey'>BGJLLM22</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S., Jambor, S., Lange-Hegermann, M., Lorenz, A. and Motsak, O.</b>,
      <i class='BibTitle'>GradedModules, A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings,
-             Version 2021.04-03</i>
-     (<span class='BibYear'>2021</span>)<br />
+             Version 2022.02-01</i>
+     (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/GradedModules">https://homalg-project.github.io/pkg/GradedModules</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ GradedModules2021.04-03,
+    @misc{ GradedModules2022.02-01,
       author =           {Barakat,  M.  and  Gutsche,  S.  and  Jambor,  S.  and
                           Lange-Hegermann, M. and Lorenz, A. and Motsak, O.},
       title =            {{GradedModules},   A  homalg  based  package  for  the
                           Abelian  category of finitely presented graded modules
-                          over computable graded rings, {V}ersion 2021.04-03},
-      month =            {Apr},
-      year =             {2021},
+                          over computable graded rings, {V}ersion 2022.02-01},
+      month =            {Feb},
+      year =             {2022},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/GradedModules}
@@ -101,6 +101,6 @@ bibtex: |
                           {}{}{}\texttt{GradedModules}}},
       keywords =         {modules;   graded  modules;  graduation;  multi-graded
                           modules; Tate resolution},
-      printedkey =       {BGJLLM21}
+      printedkey =       {BGJLLM22}
     }
 
