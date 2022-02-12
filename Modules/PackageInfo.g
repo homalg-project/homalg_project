@@ -4,9 +4,9 @@ PackageName := "Modules",
 
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
 
-Version := "2021.11-01",
+Version := "2022.02-01",
 
-Date := "07/11/2021",
+Date := "12/02/2022",
 
 License := "GPL-2.0-or-later",
 
@@ -138,9 +138,9 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">=2020.05.09" ],
+                   [ "MatricesForHomalg", ">=2022.02-01" ],
                    [ "ToolsForHomalg", ">=2013.04.12" ],
-                   [ "homalg", ">=2019.09.01" ],
+                   [ "homalg", ">=2022.02-01" ],
                    [ "GaussForHomalg", ">=2019.09.01" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
