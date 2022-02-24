@@ -4,9 +4,9 @@ PackageName := "ToolsForHomalg",
 
 Subtitle := "Special methods and knowledge propagation tools",
 
-Version := "2022.01-01",
+Version := "2022.02-01",
 
-Date := "10/01/2022",
+Date := "24/02/2022",
 
 License := "GPL-2.0-or-later",
 
@@ -96,10 +96,9 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "GAPDoc", ">= 1.0" ],
-                   [ "AutoDoc", ">=2013.11.10" ],
                    [ "IO", ">=4.5.1" ],
                    ],
-  SuggestedOtherPackages := [ ],
+  SuggestedOtherPackages := [ [ "AutoDoc", ">=2013.11.10" ]  ],
   ExternalConditions := []
                       
 ),
