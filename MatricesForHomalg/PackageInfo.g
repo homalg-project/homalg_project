@@ -4,7 +4,7 @@ PackageName := "MatricesForHomalg",
 
 Subtitle := "Matrices for the homalg project",
 
-Version := "2022.02-01",
+Version := "2022.02-02",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
@@ -108,9 +108,8 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "ToolsForHomalg", ">= 2018.12.15" ],
-                   [ "utils", ">= 0.54" ],
                    [ "GAPDoc", ">= 1.0" ] ],
-  SuggestedOtherPackages := [ ],
+  SuggestedOtherPackages := [ [ "utils", ">= 0.54" ] ],
   ExternalConditions := []
                       
 ),
