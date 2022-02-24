@@ -4,7 +4,7 @@ PackageName := "ToolsForHomalg",
 
 Subtitle := "Special methods and knowledge propagation tools",
 
-Version := "2022.01-01",
+Version := "2022.02-01",
 
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 
@@ -96,10 +96,9 @@ Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "GAPDoc", ">= 1.0" ],
-                   [ "AutoDoc", ">=2013.11.10" ],
                    [ "IO", ">=4.5.1" ],
                    ],
-  SuggestedOtherPackages := [ ],
+  SuggestedOtherPackages := [ [ "AutoDoc", ">=2013.11.10" ]  ],
   ExternalConditions := []
                       
 ),
