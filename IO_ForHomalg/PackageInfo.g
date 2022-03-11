@@ -1,13 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "IO_ForHomalg",
-
 Subtitle := "IO capabilities for the homalg project",
-
-Version := "2020.10-02",
-
-Date := "16/10/2020",
-
+Version := "2022.03-01",
+Date := "11/03/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -101,7 +97,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/IO_ForHomalg",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/IO_ForHomalg",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/IO_ForHomalg/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/IO_ForHomalg/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-", ~.Version, "/IO_ForHomalg-", ~.Version ),
@@ -119,12 +115,11 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "IO capabilities for the homalg project",
-  Autoload  := false
 ),
 
 
 Dependencies := rec(
-  GAP := ">=4.7",
+  GAP := ">= 4.11.1",
   NeededOtherPackages := [ [ "IO", ">= 2.3" ], [ "HomalgToCAS", ">= 2009.06.18" ] ],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
   ExternalConditions := []
@@ -135,7 +130,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
 
 
 Keywords := [ "IO", "streams" ]
