@@ -1,13 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "SCO",
-
 Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
-
-Version := "2020.10-02",
-
-Date := "16/10/2020",
-
+Version := "2022.03-01",
+Date := "11/03/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -51,7 +47,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/SCO",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/SCO",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/SCO/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/SCO/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/SCO-", ~.Version, "/SCO-", ~.Version ),
@@ -68,12 +64,11 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "SCO - Simplicial Cohomology of Orbifolds",
-  Autoload  := true
 ),
 
 
 Dependencies := rec(
-  GAP := ">=4.7",
+  GAP := ">= 4.11.1",
   NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.08.10" ], [ "Modules", ">= 2011.06.29" ], [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
@@ -85,7 +80,6 @@ AvailabilityTest := function()
   end,
 
 
-Autoload := false,
 
 
 Keywords := ["homology", "cohomology", "orbifold", "groupoid", "simplicial", "triangulation" ]
