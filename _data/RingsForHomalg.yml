@@ -1,7 +1,7 @@
 name: RingsForHomalg
-version: "2021.10-01"
+version: "2022.03-01"
 license: "GPL-2.0-or-later"
-date: 2021-10-19
+date: 2022-03-11
 description: |
     Dictionaries of external rings
 
@@ -33,7 +33,7 @@ contributors:
     - name: Max Neunhöffer
       url: http://www-groups.mcs.st-and.ac.uk/~neunhoef/
 
-GAP: ">=4.7"
+GAP: ">= 4.11.1"
 
 needed-pkgs:
     - name: "MatricesForHomalg"
@@ -55,11 +55,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/RingsForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.10-01/RingsForHomalg-2021.10-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2022.03-01/RingsForHomalg-2022.03-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.10-01/RingsForHomalg-2021.10-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2022.03-01/RingsForHomalg-2022.03-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2021.10-01/RingsForHomalg-2021.10-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/RingsForHomalg-2022.03-01/RingsForHomalg-2022.03-01.pdf
 
 abstract: |
     The <span class="pkgname">RingsForHomalg</span> package provides small dictionaries for  <span class="pkgname">homalg</span> to speak (as much as needed of) the languages  of Singular, Macaulay2, MAGMA, Sage, and Maple
@@ -71,24 +71,24 @@ keywords: |
     rings, ideal membership problem, syzygies, homalgTable.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BGKLMRSSW21</span>]   <b class='BibAuthor'>Barakat, M., Görtzen, S., Kirschmer, M., Lange-Hegermann, M., Motsak, O., Robertz, D., Schönemann, H., Steenpaß, A. and Wagh, V.</b>,
+    [<span class='BibKey'>BGKLMRSSW22</span>]   <b class='BibAuthor'>Barakat, M., Görtzen, S., Kirschmer, M., Lange-Hegermann, M., Motsak, O., Robertz, D., Schönemann, H., Steenpaß, A. and Wagh, V.</b>,
      <i class='BibTitle'>RingsForHomalg, Dictionaries of external rings,
-             Version 2021.10-01</i>
-     (<span class='BibYear'>2021</span>)<br />
+             Version 2022.03-01</i>
+     (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/RingsForHomalg">https://homalg-project.github.io/pkg/RingsForHomalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ RingsForHomalg2021.10-01,
+    @misc{ RingsForHomalg2022.03-01,
       author =           {Barakat,  M. and G{\"o}rtzen, S. and Kirschmer, M. and
                           Lange-Hegermann, M. and Motsak, O. and Robertz, D. and
                           Sch{\"o}nemann, H. and Steenpa{\ss}, A. and Wagh, V.},
       title =            {{RingsForHomalg},   Dictionaries  of  external  rings,
-                          {V}ersion 2021.10-01},
-      month =            {Oct},
-      year =             {2021},
+                          {V}ersion 2022.03-01},
+      month =            {Mar},
+      year =             {2022},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/RingsForHomalg}
@@ -96,6 +96,6 @@ bibtex: |
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{RingsForHomalg}}},
       keywords =         {rings; ideal membership problem; syzygies; homalgTable},
-      printedkey =       {BGKLMRSSW21}
+      printedkey =       {BGKLMRSSW22}
     }
 
