@@ -1,13 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "MatricesForHomalg",
-
 Subtitle := "Matrices for the homalg project",
-
-Version := "2022.02-02",
-
-Date := "24/02/2022",
-
+Version := "2022.03-01",
+Date := "11/03/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -105,7 +101,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.7",
+  GAP := ">= 4.11.1",
   NeededOtherPackages := [
                    [ "ToolsForHomalg", ">= 2018.12.15" ],
                    [ "GAPDoc", ">= 1.0" ] ],
