@@ -1,13 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "ToolsForHomalg",
-
 Subtitle := "Special methods and knowledge propagation tools",
-
-Version := "2022.02-01",
-
-Date := "24/02/2022",
-
+Version := "2022.03-01",
+Date := "11/03/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -93,7 +89,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.7",
+  GAP := ">= 4.11.1",
   NeededOtherPackages := [
                    [ "GAPDoc", ">= 1.0" ],
                    [ "IO", ">=4.5.1" ],
