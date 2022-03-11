@@ -1,7 +1,7 @@
 name: GaussForHomalg
-version: "2021.04-02"
+version: "2022.03-01"
 license: "GPL-2.0-or-later"
-date: 2021-04-27
+date: 2022-03-11
 description: |
     Gauss functionality for the homalg project
 
@@ -13,7 +13,7 @@ maintainers:
     - name: Mohamed Barakat
       url: https://mohamed-barakat.github.io
 
-GAP: ">=4.7"
+GAP: ">= 4.11.1"
 
 needed-pkgs:
     - name: "Gauss"
@@ -32,11 +32,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/GaussForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2021.04-02/GaussForHomalg-2021.04-02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2022.03-01/GaussForHomalg-2022.03-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2021.04-02/GaussForHomalg-2021.04-02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2022.03-01/GaussForHomalg-2022.03-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2021.04-02/GaussForHomalg-2021.04-02.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2022.03-01/GaussForHomalg-2022.03-01.pdf
 
 abstract: |
     The <span class="pkgname">GaussForHomalg</span> package provides Gauss functionality for <span class="pkgname">homalg</span> using the package <span class="pkgname">Gauss</span>
@@ -48,22 +48,22 @@ keywords: |
     GaussForHomalg, homalg, Gauss.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>GB21</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
+    [<span class='BibKey'>GB22</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
      <i class='BibTitle'>GaussForHomalg, Gauss functionality for the homalg project,
-             Version 2021.04-02</i>
-     (<span class='BibYear'>2021</span>)<br />
+             Version 2022.03-01</i>
+     (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/GaussForHomalg">https://homalg-project.github.io/pkg/GaussForHomalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ GaussForHomalg2021.04-02,
+    @misc{ GaussForHomalg2022.03-01,
       author =           {G{\"o}rtzen, S. and Barakat, M.},
       title =            {{GaussForHomalg},  Gauss  functionality for the homalg
-                          project, {V}ersion 2021.04-02},
-      month =            {Apr},
-      year =             {2021},
+                          project, {V}ersion 2022.03-01},
+      month =            {Mar},
+      year =             {2022},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/GaussForHomalg}
@@ -71,6 +71,6 @@ bibtex: |
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{GaussForHomalg}}},
       keywords =         {GaussForHomalg; homalg; Gauss},
-      printedkey =       {GB21}
+      printedkey =       {GB22}
     }
 
