@@ -1,21 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "4ti2Interface",
-
 Subtitle := "A link to 4ti2",
-
-Version := Maximum( [
-  "2019.06-02", ## Sebas' version
-## this line prevents merge conflicts
-  "2020.07-19", ## Kamal's version
-## this line prevents merge conflicts
-  "2020.05-11", ## Mohamed's version
-## this line prevents merge conflicts
-  "2020.10-02", ## Fabian's version
-] ),
-
-Date := "16/10/2020",
-
+Version := "2022.03-01",
+Date := "11/03/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -45,7 +33,7 @@ SourceRepository := rec(
     URL := "https://github.com/homalg-project/homalg_project",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://homalg-project.github.io/homalg_project/4ti2Interface",
+PackageWWWHome  := "https://homalg-project.github.io/pkg/4ti2Interface",
 PackageInfoURL  := "https://homalg-project.github.io/homalg_project/4ti2Interface/PackageInfo.g",
 README_URL      := "https://homalg-project.github.io/homalg_project/4ti2Interface/README.md",
 ArchiveURL      := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-", ~.Version, "/4ti2Interface-", ~.Version ),
@@ -62,12 +50,11 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "An interface to 4ti2.",
-  Autoload  := false
 ),
 
 
 Dependencies := rec(
-  GAP := ">=4.7",
+  GAP := ">= 4.11.1",
   NeededOtherPackages := [ [ "io", ">=4.2" ] ],
   SuggestedOtherPackages := [ [ "AutoDoc", ">=2013.08.22" ]  ],
   ExternalConditions := [ [ "4ti2", "https://4ti2.github.io/" ] ],
@@ -99,7 +86,6 @@ AvailabilityTest := function()
     
 end,
 
-Autoload := false,
 
 
 Keywords := [  ]
