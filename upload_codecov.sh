@@ -23,4 +23,18 @@ shasum -a 256 -c codecov.SHA256SUM
 
 # execute
 chmod +x codecov
-./codecov -Z -f "coverage*.json"
+./codecov -Z -f "coverage*.json" -F homalg
+./codecov -Z -f "coverage*.json" -F 4ti2Interface
+./codecov -Z -f "coverage*.json" -F ExamplesForHomalg
+./codecov -Z -f "coverage*.json" -F Gauss
+./codecov -Z -f "coverage*.json" -F GaussForHomalg
+./codecov -Z -f "coverage*.json" -F GradedModules
+./codecov -Z -f "coverage*.json" -F GradedRingForHomalg
+./codecov -Z -f "coverage*.json" -F HomalgToCAS
+./codecov -Z -f "coverage*.json" -F IO_ForHomalg
+./codecov -Z -f "coverage*.json" -F LocalizeRingForHomalg
+./codecov -Z -f "coverage*.json" -F MatricesForHomalg
+./codecov -Z -f "coverage*.json" -F Modules
+./codecov -Z -f "coverage*.json" -F RingsForHomalg
+./codecov -Z -f "coverage*.json" -F SCO
+./codecov -Z -f "coverage*.json" -F ToolsForHomalg

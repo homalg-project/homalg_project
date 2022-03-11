@@ -1,25 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "LocalizeRingForHomalg",
-
 Subtitle := "A Package for Localization of Polynomial Rings",
-
-Version := Maximum( [ ##To prevent merge conflicts
-  "2020.04-30", ## Markus' version
-## this line prevents merge conflicts
-  "2019.09-02", ## Mohamed's version
-## this line prevents merge conflicts
-  "2019.08-01", ## Max's version
-## this line prevents merge conflicts
-  "2013.07-15", ## Vinay's version
-## this line prevents merge conflicts
-  "2013.11-11", ## Sebas' version
-## this line prevents merge conflicts
-  "2020.10-02", ## Fabian's version
-] ),
-
+Version := "2022.03-01",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
-
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -101,7 +85,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.7",
+  GAP := ">= 4.11.1",
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2020.06.27" ],
                    [ "HomalgToCAS", ">= 2020.06.27" ],

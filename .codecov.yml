@@ -4,3 +4,49 @@ fixes:
   - "/home/gap/.gap/pkg/homalg_project/::"
 ignore:
   - "home/"
+flags:
+  homalg:
+    paths:
+      - "homalg/"
+  4ti2Interface:
+    paths:
+      - "4ti2Interface/"
+  ExamplesForHomalg:
+    paths:
+      - "ExamplesForHomalg/"
+  Gauss:
+    paths:
+      - "Gauss/"
+  GaussForHomalg:
+    paths:
+      - "GaussForHomalg/"
+  GradedModules:
+    paths:
+      - "GradedModules/"
+  GradedRingForHomalg:
+    paths:
+      - "GradedRingForHomalg/"
+  HomalgToCAS:
+    paths:
+      - "HomalgToCAS/"
+  IO_ForHomalg:
+    paths:
+      - "IO_ForHomalg/"
+  LocalizeRingForHomalg:
+    paths:
+      - "LocalizeRingForHomalg/"
+  MatricesForHomalg:
+    paths:
+      - "MatricesForHomalg/"
+  Modules:
+    paths:
+      - "Modules/"
+  RingsForHomalg:
+    paths:
+      - "RingsForHomalg/"
+  SCO:
+    paths:
+      - "SCO/"
+  ToolsForHomalg:
+    paths:
+      - "ToolsForHomalg/"
