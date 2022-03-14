@@ -23,18 +23,19 @@ shasum -a 256 -c codecov.SHA256SUM
 
 # execute
 chmod +x codecov
-./codecov -Z -f "coverage*.json" -F homalg
-./codecov -Z -f "coverage*.json" -F 4ti2Interface
-./codecov -Z -f "coverage*.json" -F ExamplesForHomalg
-./codecov -Z -f "coverage*.json" -F Gauss
-./codecov -Z -f "coverage*.json" -F GaussForHomalg
-./codecov -Z -f "coverage*.json" -F GradedModules
-./codecov -Z -f "coverage*.json" -F GradedRingForHomalg
-./codecov -Z -f "coverage*.json" -F HomalgToCAS
-./codecov -Z -f "coverage*.json" -F IO_ForHomalg
-./codecov -Z -f "coverage*.json" -F LocalizeRingForHomalg
-./codecov -Z -f "coverage*.json" -F MatricesForHomalg
-./codecov -Z -f "coverage*.json" -F Modules
-./codecov -Z -f "coverage*.json" -F RingsForHomalg
-./codecov -Z -f "coverage*.json" -F SCO
-./codecov -Z -f "coverage*.json" -F ToolsForHomalg
+./codecov -Z || ./codecov -Z || ./codecov -Z
+./codecov -Z -F homalg || ./codecov -Z -F homalg || ./codecov -Z -F homalg
+./codecov -Z -F 4ti2Interface || ./codecov -Z -F 4ti2Interface || ./codecov -Z -F 4ti2Interface
+./codecov -Z -F ExamplesForHomalg || ./codecov -Z -F ExamplesForHomalg || ./codecov -Z -F ExamplesForHomalg
+./codecov -Z -F Gauss || ./codecov -Z -F Gauss || ./codecov -Z -F Gauss
+./codecov -Z -F GaussForHomalg || ./codecov -Z -F GaussForHomalg || ./codecov -Z -F GaussForHomalg
+./codecov -Z -F GradedModules || ./codecov -Z -F GradedModules || ./codecov -Z -F GradedModules
+./codecov -Z -F GradedRingForHomalg || ./codecov -Z -F GradedRingForHomalg || ./codecov -Z -F GradedRingForHomalg
+./codecov -Z -F HomalgToCAS || ./codecov -Z -F HomalgToCAS || ./codecov -Z -F HomalgToCAS
+./codecov -Z -F IO_ForHomalg || ./codecov -Z -F IO_ForHomalg || ./codecov -Z -F IO_ForHomalg
+./codecov -Z -F LocalizeRingForHomalg || ./codecov -Z -F LocalizeRingForHomalg || ./codecov -Z -F LocalizeRingForHomalg
+./codecov -Z -F MatricesForHomalg || ./codecov -Z -F MatricesForHomalg || ./codecov -Z -F MatricesForHomalg
+./codecov -Z -F Modules || ./codecov -Z -F Modules || ./codecov -Z -F Modules
+./codecov -Z -F RingsForHomalg || ./codecov -Z -F RingsForHomalg || ./codecov -Z -F RingsForHomalg
+./codecov -Z -F SCO || ./codecov -Z -F SCO || ./codecov -Z -F SCO
+./codecov -Z -F ToolsForHomalg || ./codecov -Z -F ToolsForHomalg || ./codecov -Z -F ToolsForHomalg
