@@ -4553,6 +4553,8 @@ InstallMethod( Random,
     
 end );
 
+if IsPackageMarkedForLoading( "utils", ">= 0.54" ) then
+
 ##
 InstallMethod( Random,
         "for a homalg ring",
@@ -4563,6 +4565,8 @@ InstallMethod( Random,
     return Random( R, RandomCombination( [ 0 .. 10 ], Random( [ 1 .. 11 ] ) ) );
     
 end );
+
+fi;
 
 ##
 InstallMethod( Random,
