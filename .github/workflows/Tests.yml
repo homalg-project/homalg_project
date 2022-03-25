@@ -47,7 +47,7 @@ jobs:
           TERM=dumb make -C homalg_project -j $(nproc) --output-sync ci-test
           cp ./homalg_project/.codecov.yml ./
           (cd homalg_project && LANG=C.UTF-8 python3 process_coverage_ignored_lines.py)
-          [ "${{ matrix.image }}" = "ghcr.io/homalg-project/gap-docker-master:latest" ] && ./homalg_project/upload_codecov.sh
+          [ "$GITHUB_EVENT_NAME" != "schedule" ] && [ "${{ matrix.image }}" = "ghcr.io/homalg-project/gap-docker-master:latest" ] && ./homalg_project/upload_codecov.sh
           git config --global user.name "Bot"
           git config --global user.email "empty"
           cd homalg_project
