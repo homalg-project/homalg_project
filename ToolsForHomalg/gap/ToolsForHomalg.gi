@@ -2614,6 +2614,7 @@ InstallGlobalFunction( StartTimer, function( name )
     if not IsString( name ) then
         
         Error( "<name> must be a string" );
+        return;
         
     fi;
     
@@ -2648,12 +2649,14 @@ InstallGlobalFunction( StopTimer, function( name )
     if not IsString( name ) then
         
         Error( "<name> must be a string" );
+        return;
         
     fi;
     
     if not IsBound( TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name) ) then
         
         Error( "Timer with name ", name, " was never started." );
+        return;
         
     fi;
     
@@ -2679,12 +2682,14 @@ InstallGlobalFunction( DisplayTimer, function( name )
     if not IsString( name ) then
         
         Error( "<name> must be a string" );
+        return;
         
     fi;
     
     if not IsBound( TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name) ) then
         
         Error( "Timer with name ", name, " was never started." );
+        return;
         
     fi;
     
