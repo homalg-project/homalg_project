@@ -1822,7 +1822,7 @@ end );
 ##
 InstallGlobalFunction( WriteReplacedFileForHomalg,
   function( path_source, L, path_target )
-    local header, string;
+    local header, string, parts, header_parts;
     
     header := ValueOption( "header" );
     
@@ -1830,7 +1830,37 @@ InstallGlobalFunction( WriteReplacedFileForHomalg,
         header := "";
     fi;
     
-    string := Concatenation( header, ReplacedFileForHomalg( path_source, L ) );
+    string := ReplacedFileForHomalg( path_source, L );
+    
+    # put `header` below the default file header (i.e. below the first 5 lines)
+    
+    parts := SplitString( string, '\n' );
+    
+    if Last( string ) = '\n' then
+        
+        # add empty part corresponding to the trailing new line which is dropped by SplitString
+        Add( parts, "" );
+        
+    fi;
+    
+    header_parts := SplitString( header, '\n' );
+    
+    if Last( header ) = '\n' then
+        
+        # add empty part corresponding to the trailing new line which is dropped by SplitString
+        Add( header_parts, "" );
+        
+    fi;
+    
+    if Length( parts ) < 5 then
+        
+        Error( "the source file has no proper header, this is not supported" );
+        
+    fi;
+    
+    parts := Concatenation( parts{[ 1 .. 5 ]}, header_parts, parts{[ 6 .. Length( parts ) ]} );
+    
+    string := JoinStringsWithSeparator( parts, "\n" );
     
     WriteFileForHomalg( path_target, string );
     
