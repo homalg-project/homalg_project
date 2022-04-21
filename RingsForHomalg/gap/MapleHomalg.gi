@@ -1125,7 +1125,7 @@ InstallMethod( ExteriorRing,
 end );
 
 ##
-InstallMethod( PseudoDoubleShiftAlgebra,
+InstallMethod( RationalPseudoDoubleShiftAlgebra,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
@@ -1169,7 +1169,7 @@ InstallMethod( PseudoDoubleShiftAlgebra,
     fi;
     
     if IsIdenticalObj( switch, true ) then
-
+        
         Error( "not supported in Maple\n" );
         
     else
@@ -1187,7 +1187,7 @@ InstallMethod( PseudoDoubleShiftAlgebra,
             else
                 Error( "these steps = ", steps, " are not yet supported\n" );
             fi;
-                
+            
             ext_obj := List( ext_obj, a -> Concatenation( "`shift+dual_shift`=[", JoinStringsWithSeparator( a ), "], " ) );
             ext_obj := Concatenation( ext_obj );
             ext_obj := Concatenation( ext_obj, "characteristic=", String( Characteristic( R ) ), ", comm=[", JoinStringsWithSeparator( base ), "]" );
@@ -1216,7 +1216,10 @@ InstallMethod( PseudoDoubleShiftAlgebra,
     
     P := RingForHomalgInMapleUsingOreModules( ext_obj, R );
     
-    SetName( P, Concatenation( RingName( R ), "<", JoinStringsWithSeparator( shift ), ">" ) );
+    SetName( P,
+            Concatenation(
+                    Concatenation( RingName( r ), "(", JoinStringsWithSeparator( base ), ")(", JoinStringsWithSeparator( var ), ")" ),
+                    "<", JoinStringsWithSeparator( shift ), ">" ) );
     
     ## now it is safe to call the garbage collector
     stream.DeletePeriod := stream.DeletePeriod_save;
@@ -1230,7 +1233,7 @@ InstallMethod( PseudoDoubleShiftAlgebra,
     
     Perform( shift, Name );
     
-    SetIsPseudoDoubleShiftAlgebra( P, true );
+    SetIsRationalPseudoDoubleShiftAlgebra( P, true );
     
     SetBaseRing( P, R );
     
@@ -1282,19 +1285,19 @@ InstallMethod( PseudoDoubleShiftAlgebra,
     
     SetBaseRing( Y, BaseRing( P ) );
     
-    SetIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
-            List( IndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
-
-    if HasRelativeIndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ) then
+    SetParametersOfRationalDoubleShiftAlgebra( Y,
+            List( ParametersOfRationalPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+    
+    if HasRelativeParametersOfRationalPseudoDoubleShiftAlgebra( P ) then
         
-        SetRelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y,
-                List( RelativeIndeterminateCoordinatesOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+        SetRelativeParametersOfRationalDoubleShiftAlgebra( Y,
+                List( RelativeParametersOfRationalPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
     fi;
     
-    SetIndeterminateShiftsOfDoubleShiftAlgebra( Y,
-            List( IndeterminateShiftsOfPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
+    SetIndeterminateShiftsOfRationalDoubleShiftAlgebra( Y,
+            List( IndeterminateShiftsOfRationalPseudoDoubleShiftAlgebra( P ), d -> d / Y ) );
     
-    P!.DoubleShiftAlgebra := Y;
+    P!.RationalDoubleShiftAlgebra := Y;
     
     #if not IsIdenticalObj( switch, true ) then
     #    P!.SwitchedPseudoDoubleShiftAlgebra := PseudoDoubleShiftAlgebra( R, indets : switch := true );
@@ -1305,16 +1308,16 @@ InstallMethod( PseudoDoubleShiftAlgebra,
 end );
 
 ##
-InstallMethod( DoubleShiftAlgebra,
+InstallMethod( RationalDoubleShiftAlgebra,
         "for homalg rings in Maple",
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )
     local P;
     
-    P := PseudoDoubleShiftAlgebra( R, indets );
+    P := RationalPseudoDoubleShiftAlgebra( R, indets );
     
-    return P!.DoubleShiftAlgebra;
+    return P!.RationalDoubleShiftAlgebra;
     
 end );
 
