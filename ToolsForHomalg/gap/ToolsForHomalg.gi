@@ -2719,3 +2719,40 @@ InstallGlobalFunction( DisplayTimer, function( name )
     );
     
 end );
+
+## copied from gap/lib/methwhy.g
+InstallGlobalFunction( ListImpliedFilters,
+  function(filter)
+  local flags, implied, f, extra_implications, implication, name, diff_reqs,
+        diff_impls, reduced, list;
+
+  flags:=FLAGS_FILTER(filter);
+  implied := WITH_IMPS_FLAGS(flags);
+  atomic readonly IMPLICATIONS_SIMPLE do
+    # select all implications which involved <filter> in the requirements
+    f:=Filtered(IMPLICATIONS_SIMPLE, x->IS_SUBSET_FLAGS(x[2],flags));
+    Append(f, Filtered(IMPLICATIONS_COMPOSED, x->IS_SUBSET_FLAGS(x[2],flags)));
+  od; # end atomic
+
+  # remove "obvious" implications
+  if IS_ELEMENTARY_FILTER(filter) then
+    implied := SUB_FLAGS(implied, flags);
+  fi;
+
+  reduced:= function( trues )
+    atomic readonly FILTER_REGION do
+      return Filtered( trues,
+      i -> not ( INFO_FILTERS[i] in FNUM_TPRS
+                 and FLAG1_FILTER( FILTERS[i] ) in trues ) );
+    od;
+  end;
+
+  list := [ ];
+  
+  if SIZE_FLAGS(implied) > 0 then
+      Append( list, NamesFilter( reduced( TRUES_FLAGS( implied ) ) ) );
+  fi;
+  
+  return SortedList( list );
+  
+end);

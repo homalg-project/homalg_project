@@ -530,3 +530,8 @@ DeclareGlobalFunction( "StopTimer" );
 #!   Displays the current value of the timer with the given name.
 #! @Arguments name
 DeclareGlobalFunction( "DisplayTimer" );
+
+#! @Description
+#!   List the all filters implied by filter <A>filt</A>.
+#! @Arguments filt
+DeclareGlobalFunction( "ListImpliedFilters" );
