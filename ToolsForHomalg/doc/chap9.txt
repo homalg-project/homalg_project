@@ -330,6 +330,12 @@
   
   [33X[0;0YDisplays the current value of the timer with the given name.[133X
   
+  [1X9.1-51 ListImpliedFilters[101X
+  
+  [33X[1;0Y[29X[2XListImpliedFilters[102X( [3Xfilt[103X ) [32X function[133X
+  
+  [33X[0;0YList the all filters implied by filter [3Xfilt[103X.[133X
+  
   
   [1X9.2 [33X[0;0YExamplefunctions[133X[101X
   
