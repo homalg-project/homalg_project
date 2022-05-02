@@ -18,6 +18,8 @@ ReadPackage( "ToolsForHomalg", "gap/Trees.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/ToDoListWeakPointer.gi" );
 
+ReadPackage( "ToolsForHomalg", "gap/LazyArrays.gi" );
+
 ReadPackage( "ToolsForHomalg", "gap/ListsWithAttributes.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/GenericView.gi" );
