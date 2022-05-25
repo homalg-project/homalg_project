@@ -92,9 +92,9 @@ InstallMethod( Visualize,
     
     if IsRunningInJupyter( ) then
         
-        Julia.Base.display(
-                Julia.Base.MIME( GAPToJulia( "image/svg+xml" ) ),
-                GAPToJulia( DotToSVG( str ) ) );
+        return Julia.Base.display(
+                       Julia.Base.MIME( GAPToJulia( "image/svg+xml" ) ),
+                       GAPToJulia( DotToSVG( str ) ) );
         
     elif IsRunningInPluto( ) then
         
