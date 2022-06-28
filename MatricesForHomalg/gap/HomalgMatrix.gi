@@ -3922,7 +3922,7 @@ InstallMethod( String,
   ViewString );
 
 ##
-InstallMethod( LaTeXStringOp,
+InstallMethod( LaTeXOutput,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -3949,7 +3949,7 @@ InstallMethod( LaTeXStringOp,
             if IsZero( e ) then
                 Append( l, "\\cdot" );
             else
-                Append( l, LaTeXStringOp( m[i][j] ) );
+                Append( l, LaTeXOutput( m[i][j] ) );
             fi;
             if j < c then
                 Append( l, " &" );

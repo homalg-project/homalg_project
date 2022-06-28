@@ -3002,14 +3002,14 @@ InstallMethod( ViewString,
   Name );
 
 ## fallback method
-InstallOtherMethod( LaTeXStringOp,
+InstallOtherMethod( LaTeXOutput,
         "for homalg ring elements",
         [ IsRingElement ],
         
   String );
 
 ##
-InstallOtherMethod( LaTeXStringOp,
+InstallOtherMethod( LaTeXOutput,
         "for homalg ring elements",
         [ IsRat ],
         
@@ -3037,7 +3037,7 @@ InstallOtherMethod( LaTeXStringOp,
 end );
 
 ##
-InstallMethod( LaTeXStringOp,
+InstallMethod( LaTeXOutput,
         "for homalg ring elements",
         [ IsHomalgRingElement ],
         
@@ -3063,21 +3063,21 @@ InstallMethod( LaTeXStringOp,
 end );
 
 ## fallback method
-InstallMethod( LaTeXStringOp,
+InstallMethod( LaTeXOutput,
         "for homalg ring",
         [ IsHomalgRing ],
         
   x -> "R" );
 
 ##
-InstallMethod( LaTeXStringOp,
+InstallMethod( LaTeXOutput,
         "for homalg ring of integers",
         [ IsHomalgRing and IsIntegersForHomalg ],
     x -> "\\mathbb{Z}"
 );
 
 ##
-InstallMethod( LaTeXStringOp,
+InstallMethod( LaTeXOutput,
         "for homalg fields",
         [ IsHomalgRing and IsFieldForHomalg ],
         

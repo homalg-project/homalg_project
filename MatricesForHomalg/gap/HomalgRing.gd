@@ -1828,8 +1828,8 @@ DeclareOperation( "UnusedVariableName",
 DeclareOperation( "Inequalities",
         [ IsHomalgRing ] );
 
-DeclareOperation( "LaTeXStringOp",
+DeclareOperation( "LaTeXOutput",
         [ IsHomalgRingElement ] );
 
-DeclareOperation( "LaTeXStringOp",
+DeclareOperation( "LaTeXOutput",
         [ IsHomalgRing ] );

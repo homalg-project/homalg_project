@@ -756,11 +756,11 @@ InstallMethod( Coefficients,
 end );
 
 ##
-InstallMethod( LaTeXStringOp,
+InstallMethod( LaTeXOutput,
         "for homalg graded ring elements",
         [ IsHomalgGradedRingElement ],
         
-  r -> LaTeXStringOp( EvalRingElement( r ) )
+  r -> LaTeXOutput( EvalRingElement( r ) )
 );
 
 ##
