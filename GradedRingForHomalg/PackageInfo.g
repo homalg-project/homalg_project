@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "GradedRingForHomalg",
 Subtitle := "Endow Commutative Rings with an Abelian Grading",
-Version := "2022.03-01",
-Date := "11/03/2022",
+Version := "2022.06-01",
+Date := "29/06/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
