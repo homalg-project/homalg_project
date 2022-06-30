@@ -390,6 +390,10 @@ InstallValue( CommonHomalgTableForGaussTools,
                    
                  end,
 
+## this is a fallback method
+               RadicalSubobject :=
+                 C -> Eval( BasisOfRows( C ) ),
+
         )
  );
 
