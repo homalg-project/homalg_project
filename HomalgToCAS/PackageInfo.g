@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "HomalgToCAS",
 Subtitle := "A window to the outer world",
-Version := "2022.03-01",
-Date := "11/03/2022",
+Version := "2022.07-01",
+Date := "28/07/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
