@@ -86,7 +86,7 @@ NonTrivialWeightedDegreePerColumnWithRowPosition = (M,weights,R) -> ( local n,p;
     LinearSyzygiesGeneratorsOfRows := "\n\
 LinearSyzygiesGeneratorsOfRows = M -> Involution(LinearSyzygiesGeneratorsOfColumns(Involution(M)));\n\n",
     
-    LinearSyzygiesGeneratorsOfColumns := "\n\
+    0_LinearSyzygiesGeneratorsOfColumns := "\n\
 LinearSyzygiesGeneratorsOfColumns = M -> (\n\
   local R,S;\n\
   R = ring M;\n\

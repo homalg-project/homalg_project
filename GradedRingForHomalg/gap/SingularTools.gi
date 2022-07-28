@@ -134,7 +134,7 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
   return(m);\n\
 }\n\n",
     
-    LinSyzForHomalg := "\n\
+    ("#LinSyzForHomalg") := "\n\
 proc LinSyzForHomalg(matrix m)\n\
 {\n\
   def save=degBound;\n\

@@ -893,7 +893,7 @@ proc ReducedSyzygiesGeneratorsOfColumns (matrix M)\n\
 ##  </ManSection>
 ##  <#/GAPDoc>
     
-    superCommutative_ForHomalg := "\n\
+    ("#superCommutative_ForHomalg") := "\n\
 if ( defined(superCommutative) == 1 ) // the new name of the SCA constructor\n\
 { proc superCommutative_ForHomalg = superCommutative; }\n\
 else\n\

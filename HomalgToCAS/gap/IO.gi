@@ -206,7 +206,7 @@ InstallGlobalFunction( InitializeMacros,
         Error( "the second argument must be a record\n" );
     fi;
     
-    names := NamesOfComponents( macros );
+    names := SortedList( NamesOfComponents( macros ) );
     
     if IsBound( macros._order ) and
        IsList( macros._order ) and
