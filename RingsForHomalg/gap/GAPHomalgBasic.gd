@@ -7,12 +7,3 @@
 ##  Declarations for the external rings provided by the GAP package homalg.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForGAPHomalgBasic" );
-

@@ -7,12 +7,3 @@
 ##  Declarations for the rings provided by Sage.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForSageBasic" );
-

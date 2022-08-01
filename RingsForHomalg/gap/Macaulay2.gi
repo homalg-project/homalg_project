@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_Macaulay2,
+BindGlobal( "HOMALG_IO_Macaulay2",
         rec(
             cas := "macaulay2",		## normalized name on which the user should have no control
             name := "Macaulay2",
@@ -99,7 +99,7 @@ InstallGlobalFunction( _Macaulay2_SetInvolution,
 end );
 
 ##
-InstallValue( Macaulay2Macros,
+BindGlobal( "Macaulay2Macros",
         rec(
             
     IsIdentityMatrix := "\n\

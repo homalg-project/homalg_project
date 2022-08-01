@@ -14,8 +14,6 @@
 #
 ####################################
 
-DeclareGlobalVariable( "HOMALG_IO_Sage" );
-
 BindGlobal( "SageMacros", rec() );
 
 ####################################

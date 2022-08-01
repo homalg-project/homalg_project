@@ -8,12 +8,3 @@
 ##  of the GAP implementation of homalg.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForGAPHomalgBestBasis" );
-

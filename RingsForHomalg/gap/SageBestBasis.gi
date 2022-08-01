@@ -23,7 +23,7 @@ def BestBasis_S_only(M):\n\
   return TempMat\n\n";
 
 ##
-InstallValue( CommonHomalgTableForSageBestBasis,
+BindGlobal( "CommonHomalgTableForSageBestBasis",
         
         rec(
                ## Can optionally be provided by the RingPackage

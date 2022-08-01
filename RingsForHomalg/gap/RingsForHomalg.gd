@@ -13,9 +13,6 @@
 DeclareInfoClass( "InfoRingsForHomalg" );
 SetInfoLevel( InfoRingsForHomalg, 1 );
 
-# a central place for configurations:
-DeclareGlobalVariable( "HOMALG_RINGS" );
-
 ####################################
 #
 # global functions and operations:

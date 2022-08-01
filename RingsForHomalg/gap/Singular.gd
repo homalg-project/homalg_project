@@ -16,16 +16,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_Singular" );
-
-DeclareGlobalVariable( "SingularMacros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

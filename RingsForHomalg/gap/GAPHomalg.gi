@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_GAP,
+BindGlobal( "HOMALG_IO_GAP",
         rec(
             cas := "gap",		## normalized name on which the user should have no control
             name := "GAP",
@@ -76,7 +76,7 @@ InstallGlobalFunction( _ExternalGAP_multiple_delete,
 end );
 
 ##
-InstallValue( GAPHomalgMacros,
+BindGlobal( "GAPHomalgMacros",
         rec(
             
             )

@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForGAPHomalgTools,
+BindGlobal( "CommonHomalgTableForGAPHomalgTools",
         
         rec(
                Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ "Zero( ", R, " )" ], "Zero" ), "GAP", IsZero ),

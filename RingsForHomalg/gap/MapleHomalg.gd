@@ -10,16 +10,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_Maple" );
-
-DeclareGlobalVariable( "MapleMacros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

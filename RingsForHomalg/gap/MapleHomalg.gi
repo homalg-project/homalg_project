@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_Maple,
+BindGlobal( "HOMALG_IO_Maple",
         rec(
             cas := "maple",		## normalized name on which the user should have no control
             name := "Maple",
@@ -152,7 +152,7 @@ InstallGlobalFunction( _Maple_multiple_delete,
 end );
 
 ##
-InstallValue( MapleMacros,
+BindGlobal( "MapleMacros",
         rec(
     
     Eliminate := "\n\

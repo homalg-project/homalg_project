@@ -16,7 +16,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_MAGMA,
+BindGlobal( "HOMALG_IO_MAGMA",
         rec(
             cas := "magma",		## normalized name on which the user should have no control
             name := "MAGMA",
@@ -131,7 +131,7 @@ InstallGlobalFunction( _MAGMA_multiple_delete,
 end );
 
 ##
-InstallValue( MAGMAMacros,
+BindGlobal( "MAGMAMacros",
         rec(
             
     _order := [

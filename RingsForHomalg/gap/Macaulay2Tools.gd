@@ -8,12 +8,3 @@
 ##  of the Maple implementation of homalg.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForMacaulay2Tools" );
-

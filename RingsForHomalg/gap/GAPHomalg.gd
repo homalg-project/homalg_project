@@ -10,16 +10,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_GAP" );
-
-DeclareGlobalVariable( "GAPHomalgMacros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

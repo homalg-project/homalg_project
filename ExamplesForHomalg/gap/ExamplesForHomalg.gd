@@ -15,9 +15,6 @@
 DeclareInfoClass( "InfoExamplesForHomalg" );
 SetInfoLevel( InfoExamplesForHomalg, 1 );
 
-# a central place for configurations:
-DeclareGlobalVariable( "HOMALG_EXAMPLES" );
-
 ####################################
 #
 # global functions and operations:

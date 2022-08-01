@@ -8,7 +8,7 @@
 ##
 #############################################################################
 
-InstallValue( 4ti2Interface_BINARIES,
+BindGlobal( "4ti2Interface_BINARIES",
         rec(
             required_binaries := [ "groebner", "hilbert", "zsolve", "graver" ],
             ) );

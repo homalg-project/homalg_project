@@ -18,7 +18,7 @@
 
 # a central place for configuration variables:
 
-InstallValue( HOMALG_EXAMPLES,
+BindGlobal( "HOMALG_EXAMPLES",
         rec(
             OwnRingOrReadFile := 1
             )

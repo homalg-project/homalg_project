@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_Sage,
+BindGlobal( "HOMALG_IO_Sage",
         rec(
             cas := "sage",		## normalized name on which the user should have no control
             name := "Sage",

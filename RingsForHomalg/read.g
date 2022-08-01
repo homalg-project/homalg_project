@@ -16,15 +16,6 @@
 ## init
 ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gi" );
 
-## all the supported external computer algebra systems
-ReadPackage( "RingsForHomalg", "gap/GAPHomalg.gi" );
-ReadPackage( "RingsForHomalg", "gap/Singular.gi" );
-ReadPackage( "RingsForHomalg", "gap/Macaulay2.gi" );
-ReadPackage( "RingsForHomalg", "gap/Sage.gi" );
-ReadPackage( "RingsForHomalg", "gap/MAGMA.gi" );
-ReadPackage( "RingsForHomalg", "gap/MapleHomalg.gi" );
-ReadPackage( "RingsForHomalg", "gap/Oscar.gi" );
-
 ## GAP (using the GAP implementation of homalg)
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgBasic.gi" );
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgBestBasis.gi" );
@@ -76,6 +67,15 @@ ReadPackage( "RingsForHomalg", "gap/MapleHomalgOreModules.gi" );
 ReadPackage( "RingsForHomalg", "gap/OscarBasic.gi" );
 ReadPackage( "RingsForHomalg", "gap/OscarTools.gi" );
 ReadPackage( "RingsForHomalg", "gap/OscarGroebner.gi" );
+
+## all the supported external computer algebra systems
+ReadPackage( "RingsForHomalg", "gap/GAPHomalg.gi" );
+ReadPackage( "RingsForHomalg", "gap/Singular.gi" );
+ReadPackage( "RingsForHomalg", "gap/Macaulay2.gi" );
+ReadPackage( "RingsForHomalg", "gap/Sage.gi" );
+ReadPackage( "RingsForHomalg", "gap/MAGMA.gi" );
+ReadPackage( "RingsForHomalg", "gap/MapleHomalg.gi" );
+ReadPackage( "RingsForHomalg", "gap/Oscar.gi" );
 
 if IsBound( MakeThreadLocal ) then
     Perform(

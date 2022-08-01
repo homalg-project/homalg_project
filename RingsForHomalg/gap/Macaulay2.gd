@@ -10,16 +10,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_Macaulay2" );
-
-DeclareGlobalVariable( "Macaulay2Macros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

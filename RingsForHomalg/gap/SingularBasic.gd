@@ -7,12 +7,3 @@
 ##  Declarations for the rings provided by Singular.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForSingularBasic" );
-

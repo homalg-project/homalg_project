@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_Oscar,
+BindGlobal( "HOMALG_IO_Oscar",
         rec(
             cas := "oscar",			## normalized name on which the user should have no control
             name := "Oscar",
@@ -128,7 +128,7 @@ InstallGlobalFunction( _Oscar_multiple_delete,
 end );
 
 ##
-InstallValue( OscarMacros,
+BindGlobal( "OscarMacros",
         rec(
 
             init := """

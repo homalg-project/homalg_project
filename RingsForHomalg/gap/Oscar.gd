@@ -16,16 +16,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_Oscar" );
-
-DeclareGlobalVariable( "OscarMacros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

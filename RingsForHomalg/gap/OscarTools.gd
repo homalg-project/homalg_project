@@ -1,8 +1,0 @@
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForOscarTools" );
-

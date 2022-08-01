@@ -4,7 +4,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForOscarTools,
+BindGlobal( "CommonHomalgTableForOscarTools",
         
         rec(
                Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "(0)" ], R, "Zero" ), "Oscar", IsZero ),

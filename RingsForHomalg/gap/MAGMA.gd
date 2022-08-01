@@ -11,16 +11,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
-
-DeclareGlobalVariable( "MAGMAMacros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

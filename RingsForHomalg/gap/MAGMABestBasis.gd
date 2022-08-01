@@ -7,12 +7,3 @@
 ##  Declarations for the rings with BestBasis provided by MAGMA.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForMAGMABestBasis" );
-

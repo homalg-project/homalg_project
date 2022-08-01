@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForSageTools,
+BindGlobal( "CommonHomalgTableForSageTools",
         
         rec(
                Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".zero()" ], "Zero" ), "Sage", IsZero ),

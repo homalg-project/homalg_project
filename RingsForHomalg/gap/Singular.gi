@@ -18,7 +18,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_Singular,
+BindGlobal( "HOMALG_IO_Singular",
         rec(
             cas := "singular",			## normalized name on which the user should have no control
             name := "Singular",
@@ -130,7 +130,7 @@ InstallGlobalFunction( _Singular_multiple_delete,
 end );
 
 ##
-InstallValue( SingularMacros,
+BindGlobal( "SingularMacros",
         rec(
             
     IsMemberOfList := "\n\
