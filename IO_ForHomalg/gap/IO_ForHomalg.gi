@@ -43,7 +43,7 @@ end );
 InstallGlobalFunction( SendToCAS,
   function( s, command )
     # Note that it is the responsibility of the caller of this
-    # function to call IO_WaitPID on the resulting pid eventually,
+    # function to call IO_WaitPid on the resulting pid eventually,
     # if the result is an integer rather than fail!
     local cmd,pid;
     
