@@ -49,3 +49,25 @@ DeclareGlobalFunction( "HomalgRingOfIntegersInSingular" );
 DeclareOperation( "HomalgQRingInSingular", [ IsFreePolynomialRing, IsHomalgRingRelations ] );
 DeclareOperation( "HomalgQRingInSingular", [ IsFreePolynomialRing, IsRingElement ] ); # also includes IsHomalgMatrix
 DeclareOperation( "HomalgQRingInSingular", [ IsFreePolynomialRing, IsList ] ); # also includes IsString
+
+
+####################################
+#
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInSingularRep",
+        IshomalgExternalRingObjectRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInSingularRep",
+        IsHomalgExternalRingRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalQRingInSingularRep",
+        IsHomalgExternalRingInSingularRep,
+        [  ] );

@@ -46,22 +46,6 @@ HOMALG_IO_MAGMA.READY_LENGTH := Length( HOMALG_IO_MAGMA.READY );
 
 ####################################
 #
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInMAGMARep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInMAGMARep",
-        IsHomalgExternalRingRep,
-        [  ] );
-
-####################################
-#
 # families and types:
 #
 ####################################

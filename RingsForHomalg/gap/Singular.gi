@@ -58,27 +58,6 @@ HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
 
 ####################################
 #
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInSingularRep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInSingularRep",
-        IsHomalgExternalRingRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalQRingInSingularRep",
-        IsHomalgExternalRingInSingularRep,
-        [  ] );
-
-####################################
-#
 # families and types:
 #
 ####################################

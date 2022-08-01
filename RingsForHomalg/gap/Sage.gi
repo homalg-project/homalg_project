@@ -46,22 +46,6 @@ HOMALG_IO_Sage.READY_LENGTH := Length( HOMALG_IO_Sage.READY );
 
 ####################################
 #
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInSageRep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInSageRep",
-        IsHomalgExternalRingRep,
-        [  ] );
-
-####################################
-#
 # families and types:
 #
 ####################################

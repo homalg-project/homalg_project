@@ -39,4 +39,18 @@ DeclareGlobalFunction( "HomalgFieldOfRationalsInSage" );
 # basic operations:
 
 
+####################################
+#
+# representations:
+#
+####################################
 
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInSageRep",
+        IshomalgExternalRingObjectRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInSageRep",
+        IsHomalgExternalRingRep,
+        [  ] );

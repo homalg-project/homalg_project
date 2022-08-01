@@ -44,22 +44,6 @@ HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 
 ####################################
 #
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInGAPRep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInGAPRep",
-        IsHomalgExternalRingRep,
-        [  ] );
-
-####################################
-#
 # families and types:
 #
 ####################################

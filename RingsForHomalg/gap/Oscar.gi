@@ -60,22 +60,6 @@ HOMALG_IO_Oscar.READY_LENGTH := Length( HOMALG_IO_Oscar.READY_printed );
 
 ####################################
 #
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInOscarRep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInOscarRep",
-        IsHomalgExternalRingRep,
-        [  ] );
-
-####################################
-#
 # families and types:
 #
 ####################################
