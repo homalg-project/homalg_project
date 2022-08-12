@@ -13,6 +13,5 @@ files := AUTODOC_FindMatchingFiles( dir,
 files := List(files, x -> Concatenation("../", x));
 
 example_tree := ExtractExamples( Directory("doc/"), "LocalizeRingForHomalg.xml", files, "All" );
-RunExamples( example_tree, rec( compareFunction := "uptowhitespace" ) );
 
-QUIT;
+QUIT_GAP( RunExamples( example_tree, rec( compareFunction := "uptowhitespace" ) ) );

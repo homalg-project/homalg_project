@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 
 PackageName := "GaussForHomalg",
 Subtitle := "Gauss functionality for the homalg project",
-Version := "2022.06-01",
+Version := "2022.08-01",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 License := "GPL-2.0-or-later",
 
@@ -83,7 +83,7 @@ AvailabilityTest := function()
     return true;
   end,
 
-
+TestFile := "maketest.g",
 
 Keywords := ["GaussForHomalg", "homalg", "Gauss" ]
 

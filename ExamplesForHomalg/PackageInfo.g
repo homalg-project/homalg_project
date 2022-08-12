@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 
 PackageName := "ExamplesForHomalg",
 Subtitle := "Examples for the GAP Package homalg",
-Version := "2022.03-01",
+Version := "2022.08-01",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 License := "GPL-2.0-or-later",
 
@@ -103,7 +103,7 @@ AvailabilityTest := function()
     return true;
   end,
 
-
+TestFile := "maketest.g",
 
 Keywords := [ "examples", "homalg" ]
 

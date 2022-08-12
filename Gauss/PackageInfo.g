@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 
 PackageName := "Gauss",
 Subtitle := "Extended Gauss functionality for GAP",
-Version := "2022.03-01",
+Version := "2022.08-01",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 License := "GPL-2.0-or-later",
 
@@ -99,7 +99,7 @@ AvailabilityTest := function()
   return true;
 end,
 
-
+TestFile := "maketest.g",
 
 Keywords := ["Gauss", "RREF", "sparse" ]
 
