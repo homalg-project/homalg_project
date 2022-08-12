@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "GaussForHomalg",
 Subtitle := "Gauss functionality for the homalg project",
-Version := "2022.03-01",
-Date := "11/03/2022",
+Version := "2022.06-01",
+Date := "12/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
