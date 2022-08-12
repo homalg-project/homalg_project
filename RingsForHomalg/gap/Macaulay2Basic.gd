@@ -7,12 +7,3 @@
 ##  Declarations for the rings provided by Macaulay2.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForMacaulay2Basic" );
-

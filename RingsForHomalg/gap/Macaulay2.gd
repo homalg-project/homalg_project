@@ -10,16 +10,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_Macaulay2" );
-
-DeclareGlobalVariable( "Macaulay2Macros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################
@@ -42,3 +32,19 @@ DeclareGlobalFunction( "HomalgFieldOfRationalsInMacaulay2" );
 
 # basic operations:
 
+
+####################################
+#
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInMacaulay2Rep",
+        IshomalgExternalRingObjectRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInMacaulay2Rep",
+        IsHomalgExternalRingRep,
+        [  ] );

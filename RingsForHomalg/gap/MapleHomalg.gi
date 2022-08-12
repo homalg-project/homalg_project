@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_Maple,
+BindGlobal( "HOMALG_IO_Maple",
         rec(
             cas := "maple",		## normalized name on which the user should have no control
             name := "Maple",
@@ -52,43 +52,6 @@ InstallValue( HOMALG_IO_Maple,
 );
 
 HOMALG_IO_Maple.READY_LENGTH := Length( HOMALG_IO_Maple.READY );
-
-####################################
-#
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInMapleRep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# five new subrepresentations of the representation IsHomalgExternalRingObjectInMapleRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingPIRRep",
-        IsHomalgExternalRingObjectInMapleRep,
-        [  ] );
-
-DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingInvolutiveRep",
-        IsHomalgExternalRingObjectInMapleRep,
-        [  ] );
-
-DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingJanetRep",
-        IsHomalgExternalRingObjectInMapleRep,
-        [  ] );
-
-DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingJanetOreRep",
-        IsHomalgExternalRingObjectInMapleRep,
-        [  ] );
-
-DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingOreModulesRep",
-        IsHomalgExternalRingObjectInMapleRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInMapleRep",
-        IsHomalgExternalRingRep,
-        [  ] );
 
 ####################################
 #
@@ -189,7 +152,7 @@ InstallGlobalFunction( _Maple_multiple_delete,
 end );
 
 ##
-InstallValue( MapleMacros,
+BindGlobal( "MapleMacros",
         rec(
     
     Eliminate := "\n\

@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_GAP,
+BindGlobal( "HOMALG_IO_GAP",
         rec(
             cas := "gap",		## normalized name on which the user should have no control
             name := "GAP",
@@ -41,22 +41,6 @@ InstallValue( HOMALG_IO_GAP,
 );
 
 HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
-
-####################################
-#
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInGAPRep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInGAPRep",
-        IsHomalgExternalRingRep,
-        [  ] );
 
 ####################################
 #
@@ -92,7 +76,7 @@ InstallGlobalFunction( _ExternalGAP_multiple_delete,
 end );
 
 ##
-InstallValue( GAPHomalgMacros,
+BindGlobal( "GAPHomalgMacros",
         rec(
             
             )

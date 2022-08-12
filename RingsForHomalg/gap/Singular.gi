@@ -18,7 +18,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_Singular,
+BindGlobal( "HOMALG_IO_Singular",
         rec(
             cas := "singular",			## normalized name on which the user should have no control
             name := "Singular",
@@ -55,27 +55,6 @@ InstallValue( HOMALG_IO_Singular,
 );
 
 HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
-
-####################################
-#
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInSingularRep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInSingularRep",
-        IsHomalgExternalRingRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalQRingInSingularRep",
-        IsHomalgExternalRingInSingularRep,
-        [  ] );
 
 ####################################
 #
@@ -151,7 +130,7 @@ InstallGlobalFunction( _Singular_multiple_delete,
 end );
 
 ##
-InstallValue( SingularMacros,
+BindGlobal( "SingularMacros",
         rec(
             
     IsMemberOfList := "\n\

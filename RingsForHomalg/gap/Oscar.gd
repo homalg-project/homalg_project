@@ -16,16 +16,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_Oscar" );
-
-DeclareGlobalVariable( "OscarMacros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################
@@ -53,3 +43,20 @@ DeclareGlobalFunction( "HomalgRingOfGoldenRatioIntegersInOscar" );
 DeclareOperation( "HomalgQRingInOscar", [ IsFreePolynomialRing, IsHomalgRingRelations ] );
 DeclareOperation( "HomalgQRingInOscar", [ IsFreePolynomialRing, IsRingElement ] ); # also includes IsHomalgMatrix
 DeclareOperation( "HomalgQRingInOscar", [ IsFreePolynomialRing, IsList ] ); # also includes IsString
+
+
+####################################
+#
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInOscarRep",
+        IshomalgExternalRingObjectRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInOscarRep",
+        IsHomalgExternalRingRep,
+        [  ] );

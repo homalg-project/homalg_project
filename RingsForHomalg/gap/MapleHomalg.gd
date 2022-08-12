@@ -10,16 +10,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_Maple" );
-
-DeclareGlobalVariable( "MapleMacros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################
@@ -50,3 +40,40 @@ DeclareGlobalFunction( "MapleHomalgOptions" );
 
 # basic operations:
 
+
+####################################
+#
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInMapleRep",
+        IshomalgExternalRingObjectRep,
+        [  ] );
+
+# five new subrepresentations of the representation IsHomalgExternalRingObjectInMapleRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingPIRRep",
+        IsHomalgExternalRingObjectInMapleRep,
+        [  ] );
+
+DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingInvolutiveRep",
+        IsHomalgExternalRingObjectInMapleRep,
+        [  ] );
+
+DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingJanetRep",
+        IsHomalgExternalRingObjectInMapleRep,
+        [  ] );
+
+DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingJanetOreRep",
+        IsHomalgExternalRingObjectInMapleRep,
+        [  ] );
+
+DeclareRepresentation( "IsHomalgExternalRingObjectInMapleUsingOreModulesRep",
+        IsHomalgExternalRingObjectInMapleRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInMapleRep",
+        IsHomalgExternalRingRep,
+        [  ] );

@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
+BindGlobal( "CommonHomalgTableForMapleHomalgBestBasis",
         
         rec(
                ## Can optionally be provided by the RingPackage

@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForSingularTools,
+BindGlobal( "CommonHomalgTableForSingularTools",
         
         rec(
                Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ "0" ], [ "number" ], R, "Zero" ), "Singular", IsZero ),

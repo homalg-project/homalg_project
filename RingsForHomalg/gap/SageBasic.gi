@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForSageBasic,
+BindGlobal( "CommonHomalgTableForSageBasic",
         
         rec(
                

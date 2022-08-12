@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMacaulay2Tools,
+BindGlobal( "CommonHomalgTableForMacaulay2Tools",
         
         rec(
                Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "#0" ], "Zero" ), "Macaulay2", IsZero ),

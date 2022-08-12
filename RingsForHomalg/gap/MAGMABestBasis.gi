@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMAGMABestBasis,
+BindGlobal( "CommonHomalgTableForMAGMABestBasis",
         
         rec(
                ## Can optionally be provided by the RingPackage

@@ -14,9 +14,7 @@
 #
 ####################################
 
-DeclareGlobalVariable( "HOMALG_IO_Sage" );
-
-DeclareGlobalVariable( "SageMacros" );
+BindGlobal( "SageMacros", rec() );
 
 ####################################
 #
@@ -39,4 +37,18 @@ DeclareGlobalFunction( "HomalgFieldOfRationalsInSage" );
 # basic operations:
 
 
+####################################
+#
+# representations:
+#
+####################################
 
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInSageRep",
+        IshomalgExternalRingObjectRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInSageRep",
+        IsHomalgExternalRingRep,
+        [  ] );

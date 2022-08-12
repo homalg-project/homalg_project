@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMAGMATools,
+BindGlobal( "CommonHomalgTableForMAGMATools",
         
         rec(
                Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ "Zero(", R, ")" ], "Zero" ), "MAGMA", IsZero ),

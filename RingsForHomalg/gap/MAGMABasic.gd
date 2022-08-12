@@ -7,12 +7,3 @@
 ##  Declarations for the rings provided by MAGMA.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForMAGMABasic" );
-

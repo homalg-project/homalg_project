@@ -17,7 +17,7 @@
 # a central place for configuration variables:
 
 ##
-InstallValue( HOMALG_RINGS,
+BindGlobal( "HOMALG_RINGS",
         rec(
             RingOfIntegersDefaultCAS := "Singular",
             FieldOfRationalsDefaultCAS := "Singular",

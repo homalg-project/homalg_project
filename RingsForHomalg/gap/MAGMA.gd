@@ -11,16 +11,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
-
-DeclareGlobalVariable( "MAGMAMacros" );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################
@@ -43,3 +33,19 @@ DeclareGlobalFunction( "HomalgCyclotomicFieldInMAGMA" );
 
 # basic operations:
 
+
+####################################
+#
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInMAGMARep",
+        IshomalgExternalRingObjectRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInMAGMARep",
+        IsHomalgExternalRingRep,
+        [  ] );

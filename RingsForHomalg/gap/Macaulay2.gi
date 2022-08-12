@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_Macaulay2,
+BindGlobal( "HOMALG_IO_Macaulay2",
         rec(
             cas := "macaulay2",		## normalized name on which the user should have no control
             name := "Macaulay2",
@@ -45,22 +45,6 @@ InstallValue( HOMALG_IO_Macaulay2,
 );
             
 HOMALG_IO_Macaulay2.READY_LENGTH := Length( HOMALG_IO_Macaulay2.READY );
-
-####################################
-#
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInMacaulay2Rep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInMacaulay2Rep",
-        IsHomalgExternalRingRep,
-        [  ] );
 
 ####################################
 #
@@ -115,7 +99,7 @@ InstallGlobalFunction( _Macaulay2_SetInvolution,
 end );
 
 ##
-InstallValue( Macaulay2Macros,
+BindGlobal( "Macaulay2Macros",
         rec(
             
     IsIdentityMatrix := "\n\

@@ -7,12 +7,3 @@
 ##  Declarations for the rings with BestBasis provided by Sage.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "CommonHomalgTableForSageBestBasis" );
-

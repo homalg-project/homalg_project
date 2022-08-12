@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForGAPHomalgBestBasis,
+BindGlobal( "CommonHomalgTableForGAPHomalgBestBasis",
         
         rec(
                ## Can optionally be provided by the RingPackage

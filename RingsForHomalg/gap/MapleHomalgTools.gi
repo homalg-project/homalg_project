@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMapleHomalgTools,
+BindGlobal( "CommonHomalgTableForMapleHomalgTools",
         
         rec(
                Zero := HomalgExternalRingElement( function( R ) homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", "initialize" );

@@ -16,7 +16,7 @@
 #
 ####################################
 
-InstallValue( HOMALG_IO_MAGMA,
+BindGlobal( "HOMALG_IO_MAGMA",
         rec(
             cas := "magma",		## normalized name on which the user should have no control
             name := "MAGMA",
@@ -43,22 +43,6 @@ InstallValue( HOMALG_IO_MAGMA,
 );
 
 HOMALG_IO_MAGMA.READY_LENGTH := Length( HOMALG_IO_MAGMA.READY );
-
-####################################
-#
-# representations:
-#
-####################################
-
-# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
-DeclareRepresentation( "IsHomalgExternalRingObjectInMAGMARep",
-        IshomalgExternalRingObjectRep,
-        [  ] );
-
-# a new subrepresentation of the representation IsHomalgExternalRingRep:
-DeclareRepresentation( "IsHomalgExternalRingInMAGMARep",
-        IsHomalgExternalRingRep,
-        [  ] );
 
 ####################################
 #
@@ -147,7 +131,7 @@ InstallGlobalFunction( _MAGMA_multiple_delete,
 end );
 
 ##
-InstallValue( MAGMAMacros,
+BindGlobal( "MAGMAMacros",
         rec(
             
     _order := [
