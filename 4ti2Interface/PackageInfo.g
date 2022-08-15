@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "4ti2Interface",
 Subtitle := "A link to 4ti2",
-Version := "2022.03-01",
-Date := "11/03/2022",
+Version := "2022.08-01",
+Date := "16/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -86,7 +86,7 @@ AvailabilityTest := function()
     
 end,
 
-
+TestFile := "tst/testall.g",
 
 Keywords := [  ]
 

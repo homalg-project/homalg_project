@@ -1,7 +1,7 @@
 name: 4ti2Interface
-version: "2022.03-01"
+version: "2022.08-01"
 license: "GPL-2.0-or-later"
-date: 2022-03-11
+date: 2022-08-16
 description: |
     A link to 4ti2
 
@@ -31,11 +31,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/4ti2Interface/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2022.03-01/4ti2Interface-2022.03-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2022.08-01/4ti2Interface-2022.08-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2022.03-01/4ti2Interface-2022.03-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2022.08-01/4ti2Interface-2022.08-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2022.03-01/4ti2Interface-2022.03-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2022.08-01/4ti2Interface-2022.08-01.pdf
 
 abstract: |
     The <span class="pkgname">4ti2Interface</span> package provides an interface to 4ti2
@@ -47,7 +47,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>Gut22</span>]   <b class='BibAuthor'>Gutsche, S.</b>,
      <i class='BibTitle'>4ti2Interface, A link to 4ti2,
-             Version 2022.03-01</i>
+             Version 2022.08-01</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/4ti2Interface">https://homalg-project.github.io/pkg/4ti2Interface</a></span>.
@@ -55,10 +55,10 @@ citeas: |
     
 
 bibtex: |
-    @misc{ 4ti2Interface2022.03-01,
+    @misc{ 4ti2Interface2022.08-01,
       author =           {Gutsche, S.},
-      title =            {{4ti2Interface}, A link to 4ti2, {V}ersion 2022.03-01},
-      month =            {Mar},
+      title =            {{4ti2Interface}, A link to 4ti2, {V}ersion 2022.08-01},
+      month =            {Aug},
       year =             {2022},
       note =             {GAP package},
       howpublished =     {\href
