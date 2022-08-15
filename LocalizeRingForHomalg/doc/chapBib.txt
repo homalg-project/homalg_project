@@ -3,7 +3,7 @@
   [1XReferences[101X
   
   [[20XBar10[120X]   [16XBarakat,   M.[116X,   [17XThe   homalg   package   --   GAP4[117X   (2007-2010),
-  ((https://homalg-project.github.io/homalg_project/homalg/)).
+  ((\url{https://homalg-project.github.io/homalg_project/homalg/})).
   
   [[20XBLH11[120X]  [16XBarakat,  M.  and  Lange-Hegermann,  M.[116X,  [17XAn  axiomatic  setup  for
   algorithmic homological algebra and an alternative approach to localization[117X,

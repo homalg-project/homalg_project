@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "LocalizeRingForHomalg",
 Subtitle := "A Package for Localization of Polynomial Rings",
-Version := "2022.03-01",
-Date := "11/03/2022",
+Version := "2022.08-01",
+Date := "16/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -101,8 +101,7 @@ AvailabilityTest := function()
     return true;
   end,
 
-
-
+TestFile := "maketest.g",
 
 Keywords := [ "homological algebra", "local ring", "submodule membership problem", "syzygies", "Mora" ]
 
