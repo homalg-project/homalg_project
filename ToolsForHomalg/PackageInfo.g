@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 
 PackageName := "ToolsForHomalg",
 Subtitle := "Special methods and knowledge propagation tools",
-Version := "2022.05-01",
+Version := "2022.08-01",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 License := "GPL-2.0-or-later",
 
@@ -104,7 +104,7 @@ AvailabilityTest := function()
   end,
 
 
-
+TestFile := "tst/testall.g",
 
 Keywords := [  ]
 

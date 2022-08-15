@@ -10,4 +10,7 @@ doc/manual.six: makedoc.g \
 docclean:
 	(cd doc ; ./clean)
 
+test: doc
+	gap tst/testall.g
+
 .PHONY: all doc docclean
