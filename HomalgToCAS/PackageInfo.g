@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "HomalgToCAS",
 Subtitle := "A window to the outer world",
-Version := "2022.07-01",
-Date := "28/07/2022",
+Version := "2022.08-01",
+Date := "16/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -164,7 +164,7 @@ AvailabilityTest := function()
     return true;
   end,
 
-
+TestFile := "maketest.g",
 
 Keywords := [ "homalgExternalObject", "CreateHomalgExternalRing", "HomalgExternalRingElement", "IsHomalgExternalMatrixRep", "LaunchCAS", "TerminateCAS", "homalgSendBlocking" ]
 
