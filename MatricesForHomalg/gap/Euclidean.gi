@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  MatricesForHomalg.gi                           MatricesForHomalg package
-##
-##  Copyright 2007-2020, Mohamed Barakat, University of Siegen
-##
-##  Implementations for MatricesForHomalg.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Implementations
+#
 
 ## Efficiency is not among the two purposes served by the implementation below:
 ## 1. Prove that Euclidean rings are computable in the sense of Barakat and Lange-Hegermann.

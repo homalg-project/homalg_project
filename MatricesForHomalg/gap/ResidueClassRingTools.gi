@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  ResidueClassRingTools.gi    MatricesForHomalg package    Mohamed Barakat
-##
-##  Copyright 2007-2009 Mohamed Barakat, Universität des Saarlandes
-##
-##  Implementation stuff for homalg residue class rings.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Implementations
+#
 
 ####################################
 #

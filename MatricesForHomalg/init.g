@@ -1,8 +1,8 @@
-#############################################################################
-##
-##  init.g                MatricesForHomalg package          Mohamed Barakat
-##
-##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen University
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Reading the declaration part of the package.
+#
 ##
 ##  Reading the declaration part of the MatricesForHomalg package.
 ##

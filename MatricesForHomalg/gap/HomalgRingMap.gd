@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  HomalgRingMaps.gd           MatricesForHomalg package    Mohamed Barakat
-##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##
-##  Declarations of procedures for homalg ring maps.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Declarations
+#
 
 ####################################
 #
