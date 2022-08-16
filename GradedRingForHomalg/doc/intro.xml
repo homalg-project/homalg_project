@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- 
@@ -29,10 +30,6 @@ behind the package.
     <Heading>Functionality</Heading> The package &GradedRingForHomalg;
     on the one hand builds on the package &MatricesForHomalg; and on
     the other hands adds functionality to &MatricesForHomalg;.
-  </Section>
-
-  <Section Label="math">
-    <Heading>The Math Behind This Package</Heading>
   </Section>
 
 </Chapter>

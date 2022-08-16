@@ -62,10 +62,8 @@
 
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
-<#Include SYSTEM "QuickStart.xml">
 <#Include SYSTEM "GradedRing.xml">
 <#Include SYSTEM "MatrixOverGradedRing.xml">
-<#Include SYSTEM "examples.xml">
 </Body>
 
 <#Include SYSTEM "Tools.xml">
@@ -77,4 +75,3 @@
 <TheIndex/>
 
 </Book>
-
