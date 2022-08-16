@@ -1,3 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# ToolsForHomalg: Special methods and knowledge propagation tools
+#
+# Declarations
+#
+
 #! @Chapter Lists with attributes
 #!  These are homogeneous lists which still carry enough information of their context even if they are empty.
 

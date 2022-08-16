@@ -1,15 +1,12 @@
-#############################################################################
-##
-##  ToolsForHomalg.gd                                 ToolsForHomalg package
-##
-##  Copyright 2007-2012, Mohamed Barakat, University of Kaiserslautern
-##                       Sebastian Gutsche, RWTH-Aachen University
-##                  Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Declarations for ToolsForHomalg.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# ToolsForHomalg: Special methods and knowledge propagation tools
+#
+# Declarations
+#
 
+#! @Chapter Basics
+
+#! @Section Global variables
 
 # our info classes:
 DeclareInfoClass( "InfoToolsForHomalg" );
@@ -21,7 +18,6 @@ SetInfoLevel( InfoHomalgBasicOperations, 1 );
 # a central place for configurations:
 #! @Description 
 #! A central place for configurations.
-#! ChapterInfo Basics, Variables
 DeclareGlobalVariable( "HOMALG_TOOLS" );
 
 ####################################
@@ -32,8 +28,7 @@ DeclareGlobalVariable( "HOMALG_TOOLS" );
 
 # three new categories:
 
-#! @Chapter Basics
-#! @Section Categories
+#! @Section GAP Categories
 
 #! @Description
 #! This is the super super GAP-category which will
@@ -344,14 +339,14 @@ DeclareOperation( "homalgLaTeX",
 #! @Description
 #!  Runs the examples for homalg if the package is loadable.
 #! @Returns <C>true</C> or <C>false</C>
-#! @ChapterInfo Tools, Examplefunctions
+#! @ChapterInfo Tools, Example functions
 DeclareOperation( "ExamplesForHomalg",
                   [ ] );
 
 #! @Description
 #!  Runs the named example for homalg
 #! @Returns <C>true</C> or <C>false</C>
-#! @ChapterInfo Tools, Examplefunctions
+#! @ChapterInfo Tools, Example functions
 DeclareOperation( "ExamplesForHomalg",
                   [ IsInt ] );
 
