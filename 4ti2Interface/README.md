@@ -21,8 +21,8 @@
 [date-img]: https://img.shields.io/endpoint?url=https://homalg-project.github.io/homalg_project/4ti2Interface/badge_date.json&label=🔗%20released%20on&color=yellow
 [date-url]: https://homalg-project.github.io/homalg_project/4ti2Interface/view_release.html
 
-[tests-img]: https://github.com/homalg-project/homalg_project/workflows/Tests/badge.svg?branch=master
-[tests-url]: https://github.com/homalg-project/homalg_project/actions?query=workflow%3ATests+branch%3Amaster
+[tests-img]: https://github.com/homalg-project/homalg_project/actions/workflows/Tests.yml/badge.svg?branch=master
+[tests-url]: https://github.com/homalg-project/homalg_project/actions/workflows/Tests.yml?query=branch%3Amaster
 
 [codecov-img]: https://codecov.io/gh/homalg-project/homalg_project/branch/master/graph/badge.svg?flag=4ti2Interface
 [codecov-url]: https://codecov.io/gh/homalg-project/homalg_project/tree/master/4ti2Interface
