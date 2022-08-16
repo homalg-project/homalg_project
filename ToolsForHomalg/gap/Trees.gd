@@ -1,14 +1,8 @@
-#############################################################################
-##
-##  Trees.gd                                 ToolsForHomalg package
-##
-##  Copyright 2007-2013, Mohamed Barakat, University of Kaiserslautern
-##                       Sebastian Gutsche, RWTH-Aachen University
-##                  Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Trees for use in ToDoLists.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# ToolsForHomalg: Special methods and knowledge propagation tools
+#
+# Declarations
+#
 
 #! @Chapter Trees
 #!  The trees are used in ToDoLists.

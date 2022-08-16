@@ -1,14 +1,8 @@
-#############################################################################
-##
-##  ToDoLists.gd                                 ToolsForHomalg package
-##
-##  Copyright 2007-2012, Mohamed Barakat, University of Kaiserslautern
-##                       Sebastian Gutsche, RWTH-Aachen University
-##                  Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Declarations for ToDo-Lists.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# ToolsForHomalg: Special methods and knowledge propagation tools
+#
+# Declarations
+#
 
 DeclareInfoClass( "InfoToDoList" );
 SetInfoLevel( InfoToDoList, 1 );

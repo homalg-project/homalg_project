@@ -1,9 +1,10 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# ToolsForHomalg: Special methods and knowledge propagation tools
+#
+# Declarations
+#
+
 #############################################################################
-##
-##                                               ToolsForHomalg package
-##
-##  Copyright 2013-2014, Sebastian Gutsche, TU Kaiserslautern
-##                       Sebastian Posur,   RWTH Aachen
 ##
 #! @Chapter Caches
 ##

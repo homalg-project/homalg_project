@@ -1,11 +1,8 @@
-#############################################################################
-##
-##                                                     ToolsForHomalg package
-##
-##  Copyright 2014, Sebastian Gutsche, University of Kaiserslautern
-##
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# ToolsForHomalg: Special methods and knowledge propagation tools
+#
+# Implementations
+#
 
 DeclareRepresentation( "IsAttributeDependencyGraphForPrintingRep",
                        IsAttributeDependencyGraphForPrinting and IsAttributeStoringRep,
