@@ -17,6 +17,3 @@
   [5XMatricesForHomalg[105X   and   on   the   other   hands   adds  functionality  to
   [5XMatricesForHomalg[105X.[133X
   
-  
-  [1X1.3 [33X[0;0YThe Math Behind This Package[133X[101X
-  
