@@ -36,15 +36,16 @@ jobs:
           # build documentation of packages which we might want to reference, keep this in sync with `release-gap-package`
           [ -d "CAP_project/CAP" ] && make -C "CAP_project/CAP" doc
           [ -d "CAP_project/CompilerForCAP" ] && make -C "CAP_project/CompilerForCAP" doc
-          [ -d "CAP_project/FreydCategoriesForCAP" ] && make -C "CAP_project/FreydCategoriesForCAP" doc
           [ -d "CAP_project/MonoidalCategories" ] && make -C "CAP_project/MonoidalCategories" doc
+          [ -d "CAP_project/CartesianCategories" ] && make -C "CAP_project/CartesianCategories" doc
+          [ -d "CAP_project/FreydCategoriesForCAP" ] && make -C "CAP_project/FreydCategoriesForCAP" doc
           [ -d "HigherHomologicalAlgebra/ToolsForHigherHomologicalAlgebra" ] && make -C "HigherHomologicalAlgebra/ToolsForHigherHomologicalAlgebra" doc
           [ -d "homalg_project/homalg" ] && make -C "homalg_project/homalg" doc
           [ -d "homalg_project/Modules" ] && make -C "homalg_project/Modules" doc
           [ -d "Toposes" ] && make -C "Toposes" doc
           TERM=dumb make -C homalg_project -j $(nproc) --output-sync ci-test
           cp ./homalg_project/.codecov.yml ./
-          (cd homalg_project && LANG=C.UTF-8 python3 process_coverage_ignored_lines.py)
+          (cd homalg_project && LANG=C.UTF-8 python3 process_coverage.py)
           [ "$GITHUB_EVENT_NAME" != "schedule" ] && [ "${{ matrix.image }}" = "ghcr.io/homalg-project/gap-docker-master:latest" ] && ./homalg_project/upload_codecov.sh
           git config --global user.name "Bot"
           git config --global user.email "empty"
@@ -54,6 +55,7 @@ jobs:
             git worktree add gh-pages/ gh-pages || (echo "There was an error. Make sure there is a branch named 'gh-pages'. See https://github.com/homalg-project/PackageJanitor#error-there-was-an-error-make-sure-there-is-a-branch-named-gh-pages"; exit 1); \
             git checkout master; \
             LANG=C.UTF-8 ./make_dist.sh --token "${{ secrets.GITHUB_TOKEN }}"; \
+            # publish subsplits
           else \
             echo "Not making a release."; \
           fi
