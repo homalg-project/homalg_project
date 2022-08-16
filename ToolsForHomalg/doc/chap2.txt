@@ -1,16 +1,31 @@
   
-  [1X2 [33X[0;0YInstallation of the [5XToolsForHomalg[105X[101X[1X Package[133X[101X
+  [1X2 [33X[0;0YLists with attributes[133X[101X
   
-  [33X[0;0YTo  install  this package just extract the package's archive file to the [5XGAP[105X
-  [11Xpkg[111X directory.[133X
+  [33X[0;0YThese  are  homogeneous  lists which still carry enough information of their
+  context even if they are empty.[133X
   
-  [33X[0;0YBy  default  the  [5XToolsForHomalg[105X  package is not automatically loaded by [5XGAP[105X
-  when it is installed. You must load the package with[133X
-  [33X[0;0Y[10XLoadPackage[110X( "ToolsForHomalg" );[133X
-  [33X[0;0Ybefore its functions become available.[133X
   
-  [33X[0;0YPlease,  send  me an e-mail if you have any questions, remarks, suggestions,
-  etc.  concerning  this  package.  Also,  I  would  be  pleased to hear about
-  applications of this package.[133X
-  [33X[0;0YMohamed Barakat[133X
+  [1X2.1 [33X[0;0YGAP categories[133X[101X
+  
+  [1X2.1-1 IsListWithAttributes[101X
+  
+  [33X[1;0Y[29X[2XIsListWithAttributes[102X( [3XL[103X ) [32X filter[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of lists with attributes.[133X
+  
+  
+  [1X2.2 [33X[0;0YConstructors[133X[101X
+  
+  [1X2.2-1 TypedListWithAttributes[101X
+  
+  [33X[1;0Y[29X[2XTypedListWithAttributes[102X( [3XL[103X, [3Xtype[103X, [3Xattr1[103X, [3Xvalue1[103X, [3Xattr2[103X, [3Xvalue2[103X, [3X...[103X ) [32X function[133X
+  
+  [33X[0;0YConstruct a list with attributes.[133X
+  
+  [1X2.2-2 ListWithAttributes[101X
+  
+  [33X[1;0Y[29X[2XListWithAttributes[102X( [3XL[103X, [3Xattr1[103X, [3Xvalue1[103X, [3Xattr2[103X, [3Xvalue2[103X, [3X...[103X ) [32X function[133X
+  
+  [33X[0;0YConstruct a list with attributes of type TheTypeListWithAttributesRep[133X
   

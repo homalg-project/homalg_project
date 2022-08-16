@@ -1,15 +1,15 @@
   
   
-                                 [1X[5XToolsForHomalg[105X[101X
+                                [1X ToolsForHomalg [101X
   
   
-                          [1XTools for the [5Xhomalg[105X project[101X
+               [1X Special methods and knowledge propagation tools [101X
   
   
-                               Version 2022.08-01
+                                   2022.08-02
   
   
-                                 December 2014
+                                 17 August 2022
   
   
                                 Mohamed Barakat
@@ -20,48 +20,33 @@
   
   
   
-            [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
-            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
-            latest version is available [12Xonline[112X at:[133X
-            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/ToolsForHomalg/doc/chap0.html[107X[133X
-            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
-            documentation  subfolder of the package. This package is
-            part of the [5Xhomalg[105X-project:[133X
-            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/index.php/core-packages/toolsforhomalg[107X[133X
-  
-  
-  
   Mohamed Barakat
       Email:    [7Xmailto:mohamed.barakat@uni-siegen.de[107X
       Homepage: [7Xhttps://mohamed-barakat.github.io[107X
-      Address:  [33X[0;14YDepartment of Mathematics,[133X
-                [33X[0;14YUniversity of Siegen,[133X
-                [33X[0;14Y57072 Siegen,[133X
+      Address:  [33X[0;14YWalter-Flex-Str. 3[133X
+                [33X[0;14Y57072 Siegen[133X
                 [33X[0;14YGermany[133X
   
   
   Sebastian Gutsche
-      Email:    [7Xmailto:sebastian.gutsche@rwth-aachen.de[107X
-      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/[107X
-      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
-                52056 Aachen, Germany[133X
+      Email:    [7Xmailto:gutsche@mathematik.uni-siegen.de[107X
+      Homepage: [7Xhttps://sebasguts.github.io[107X
+      Address:  [33X[0;14YDepartment Mathematik[133X
+                [33X[0;14YUniversität Siegen[133X
+                [33X[0;14YWalter-Flex-Straße 3[133X
+                [33X[0;14Y57072 Siegen[133X
+                [33X[0;14YGermany[133X
   
   
   Markus Lange-Hegermann
       Email:    [7Xmailto:markus.lange.hegermann@rwth-aachen.de[107X
       Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~markus/[107X
-      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
-                52056 Aachen, Germany[133X
+      Address:  [33X[0;14YMarkus Lange-Hegermann[133X
+                [33X[0;14YLehrstuhl B fuer Mathematik, RWTH Aachen[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14YGermany[133X
   
-  
-  
-  -------------------------------------------------------
-  [1XCopyright[101X
-  [33X[0;0Y©   2007-2014   by   Mohamed   Barakat,   Sebastian   Gutsche,   and  Markus
-  Lange-Hegermann[133X
-  
-  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
@@ -69,167 +54,162 @@
   
   [1XContents (ToolsForHomalg)[101X
   
-  1 [33X[0;0YIntroduction[133X
-    1.1 [33X[0;0YWhat is the role of the [5XToolsForHomalg[105X package in the [5Xhomalg[105X project?[133X
-      1.1-1 [33X[0;0Y[5XToolsForHomalg[105X provides ...[133X
-  2 [33X[0;0YInstallation of the [5XToolsForHomalg[105X Package[133X
-  3 [33X[0;0YCaches[133X
-    3.1 [33X[0;0YObject constructors[133X
-      3.1-1 CachingObject
-      3.1-2 CachingObject
-    3.2 [33X[0;0YSetters, getters[133X
-      3.2-1 CacheValue
-      3.2-2 SetCacheValue
-      3.2-3 IsEqualForCache
-    3.3 [33X[0;0YManaging functions[133X
-      3.3-1 SetCachingObjectCrisp
-      3.3-2 SetCachingObjectWeak
-      3.3-3 DeactivateCachingObject
-    3.4 [33X[0;0YInstall functions[133X
-      3.4-1 InstallMethodWithCache
-      3.4-2 InstallMethodWithCrispCache
-      3.4-3 InstallMethodWithCacheFromObject
-      3.4-4 FunctionWithCache
-  4 [33X[0;0YLists with attributes[133X
-    4.1 [33X[0;0YGAP categories[133X
-      4.1-1 IsListWithAttributes
-    4.2 [33X[0;0YConstructors[133X
-      4.2-1 TypedListWithAttributes
-      4.2-2 ListWithAttributes
-  5 [33X[0;0YToDo-list[133X
-    5.1 [33X[0;0YBlueprints[133X
-      5.1-1 ToDoListEntryToMaintainEqualAttributes
-      5.1-2 ToDoListEntryToMaintainFollowingAttributes
-      5.1-3 ToDoListEntry
-      5.1-4 ToDoList_this_object
-      5.1-5 ToDoListEntryToMaintainEqualAttributesBlueprint
-      5.1-6 ToDoListEntryToMaintainFollowingAttributesBlueprint
-      5.1-7 ToDoListEntryBlueprint
-    5.2 [33X[0;0YToDo-list entries[133X
-      5.2-1 AddToToDoList
-      5.2-2 SourcePart
-      5.2-3 TargetPart
-      5.2-4 ProcessAToDoListEntry
-      5.2-5 ToDoListEntry
-      5.2-6 ToDoListEntry
-      5.2-7 SetTargetValueObject
-      5.2-8 SetTargetObject
-      5.2-9 ToDoListEntryWithContraposition
-      5.2-10 DescriptionOfImplication
-      5.2-11 ToDoListEntryForEqualAttributes
-      5.2-12 ToDoListEntryForEquivalentAttributes
-    5.3 [33X[0;0YCategory[133X
-      5.3-1 IsToDoList
-    5.4 [33X[0;0YConstructor[133X
-      5.4-1 NewToDoList
-    5.5 [33X[0;0YThis is the magic[133X
-      5.5-1 Process_A_ToDo_List_Entry
-      5.5-2 ProcessToDoList
-    5.6 [33X[0;0YMethods for all objects[133X
-      5.6-1 ToDoList
-    5.7 [33X[0;0YProof tracking[133X
-      5.7-1 TraceProof
-    5.8 [33X[0;0YMaintainance[133X
-      5.8-1 ActivateToDoList
-      5.8-2 ActivateToDoList
-      5.8-3 DeactivateToDoList
-      5.8-4 DeactivateToDoList
-      5.8-5 ActivateWhereInfosInEntries
-      5.8-6 DeactivateWhereInfosInEntries
-  6 [33X[0;0YToolsForHomalg automatic generated documentation[133X
-    6.1 [33X[0;0YToolsForHomalg automatic generated documentation of global variables[133X
-      6.1-1 HOMALG_TOOLS
-  7 [33X[0;0YBasics[133X
-    7.1 [33X[0;0YCategories[133X
-      7.1-1 IsStructureObjectOrObjectOrMorphism
-      7.1-2 IsStructureObjectOrObject
-      7.1-3 IsStructureObject
-      7.1-4 IsStructureObjectMorphism
-      7.1-5 IsHomalgRingOrModule
-  8 [33X[0;0YPointers[133X
-    8.1 [33X[0;0YWeak pointer objects[133X
-      8.1-1 IsContainerForWeakPointers
-      8.1-2 ContainerForWeakPointers
-      8.1-3 UpdateContainerOfWeakPointers
-      8.1-4 _AddElmWPObj_ForHomalg
-      8.1-5 _AddTwoElmWPObj_ForHomalg
-      8.1-6 _ElmWPObj_ForHomalg
-    8.2 [33X[0;0YPointer objects[133X
-      8.2-1 IsContainerForPointers
-      8.2-2 ContainerForPointers
-      8.2-3 UpdateContainerOfPointers
-      8.2-4 _AddElmPObj_ForHomalg
-      8.2-5 _AddTwoElmPObj_ForHomalg
-      8.2-6 _ElmPObj_ForHomalg
-  9 [33X[0;0YTools[133X
-    9.1 [33X[0;0YFunctions[133X
-      9.1-1 homalgTotalRuntimes
-      9.1-2 AddLeftRightLogicalImplicationsForHomalg
-      9.1-3 LogicalImplicationsForOneHomalgObject
-      9.1-4 LogicalImplicationsForTwoHomalgBasicObjects
-      9.1-5 InstallLogicalImplicationsForHomalgBasicObjects
-      9.1-6 LeftRightAttributesForHomalg
-      9.1-7 InstallLeftRightAttributesForHomalg
-      9.1-8 MatchPropertiesAndAttributes
-      9.1-9 InstallImmediateMethodToPullPropertyOrAttribute
-      9.1-10 InstallImmediateMethodToConditionallyPullPropertyOrAttribute
-      9.1-11 InstallImmediateMethodToPullPropertyOrAttributeWithDifferentName
-      9.1-12 InstallImmediateMethodToPullPropertiesOrAttributes
-      9.1-13 InstallImmediateMethodToPullTrueProperty
-      9.1-14 InstallImmediateMethodToConditionallyPullTrueProperty
-      9.1-15 InstallImmediateMethodToPullTruePropertyWithDifferentName
-      9.1-16 InstallImmediateMethodToPullTrueProperties
-      9.1-17 InstallImmediateMethodToPullFalseProperty
-      9.1-18 InstallImmediateMethodToConditionallyPullFalseProperty
-      9.1-19 InstallImmediateMethodToPullFalsePropertyWithDifferentName
-      9.1-20 InstallImmediateMethodToPullFalseProperties
-      9.1-21 InstallImmediateMethodToPushPropertyOrAttribute
-      9.1-22 InstallImmediateMethodToConditionallyPushPropertyOrAttribute
-      9.1-23 InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName
-      9.1-24 InstallImmediateMethodToPushPropertiesOrAttributes
-      9.1-25 InstallImmediateMethodToPushTrueProperty
-      9.1-26 InstallImmediateMethodToPushTruePropertyWithDifferentName
-      9.1-27 InstallImmediateMethodToPushTrueProperties
-      9.1-28 InstallImmediateMethodToPushFalseProperty
-      9.1-29 InstallImmediateMethodToPushFalsePropertyWithDifferentName
-      9.1-30 InstallImmediateMethodToPushFalseProperties
-      9.1-31 DeclareAttributeWithCustomGetter
-      9.1-32 AppendToAhomalgTable
-      9.1-33 homalgNamesOfComponentsToIntLists
-      9.1-34 IncreaseExistingCounterInObject
-      9.1-35 IncreaseExistingCounterInObjectWithTiming
-      9.1-36 IncreaseCounterInObject
-      9.1-37 MemoryToString
-      9.1-38 PrimePowerExponent
-      9.1-39 ViewList
-      9.1-40 homalgLaTeX
-      9.1-41 IdenticalPosition
-      9.1-42 PositionsOfMaximalObjects
-      9.1-43 MaximalObjects
-      9.1-44 CollectEntries
-      9.1-45 MakeShowable
-      9.1-46 MakeShowableWithLaTeX
-      9.1-47 ReplacedStringViaRecord
-      9.1-48 StartTimer
-      9.1-49 StopTimer
-      9.1-50 DisplayTimer
-      9.1-51 ListImpliedFilters
-    9.2 [33X[0;0YExamplefunctions[133X
-      9.2-1 ExamplesForHomalg
-      9.2-2 ExamplesForHomalg
-  10 [33X[0;0YTrees[133X
-    10.1 [33X[0;0YTrees[133X
-      10.1-1 IsTree
-      10.1-2 Content
-      10.1-3 ListOfSuccessors
-      10.1-4 Predecessor
-      10.1-5 ListOfSentinels
-      10.1-6 RemoveHead
-      10.1-7 Tree
-      10.1-8 Tree
-      10.1-9 Add
-      10.1-10 ContentListFromSentinelToHead
-      10.1-11 PostOrder
+  1 [33X[0;0YCaches[133X
+    1.1 [33X[0;0YObject constructors[133X
+      1.1-1 CachingObject
+      1.1-2 CachingObject
+    1.2 [33X[0;0YSetters, getters[133X
+      1.2-1 CacheValue
+      1.2-2 SetCacheValue
+      1.2-3 IsEqualForCache
+    1.3 [33X[0;0YManaging functions[133X
+      1.3-1 SetCachingObjectCrisp
+      1.3-2 SetCachingObjectWeak
+      1.3-3 DeactivateCachingObject
+    1.4 [33X[0;0YInstall functions[133X
+      1.4-1 InstallMethodWithCache
+      1.4-2 InstallMethodWithCrispCache
+      1.4-3 InstallMethodWithCacheFromObject
+      1.4-4 FunctionWithCache
+  2 [33X[0;0YLists with attributes[133X
+    2.1 [33X[0;0YGAP categories[133X
+      2.1-1 IsListWithAttributes
+    2.2 [33X[0;0YConstructors[133X
+      2.2-1 TypedListWithAttributes
+      2.2-2 ListWithAttributes
+  3 [33X[0;0YToDo-list[133X
+    3.1 [33X[0;0YBlueprints[133X
+      3.1-1 ToDoListEntryToMaintainEqualAttributes
+      3.1-2 ToDoListEntryToMaintainFollowingAttributes
+      3.1-3 ToDoListEntry
+      3.1-4 ToDoList_this_object
+      3.1-5 ToDoListEntryToMaintainEqualAttributesBlueprint
+      3.1-6 ToDoListEntryToMaintainFollowingAttributesBlueprint
+      3.1-7 ToDoListEntryBlueprint
+    3.2 [33X[0;0YToDo-list entries[133X
+      3.2-1 AddToToDoList
+      3.2-2 SourcePart
+      3.2-3 TargetPart
+      3.2-4 ProcessAToDoListEntry
+      3.2-5 ToDoListEntry
+      3.2-6 ToDoListEntry
+      3.2-7 SetTargetValueObject
+      3.2-8 SetTargetObject
+      3.2-9 ToDoListEntryWithContraposition
+      3.2-10 DescriptionOfImplication
+      3.2-11 ToDoListEntryForEqualAttributes
+      3.2-12 ToDoListEntryForEquivalentAttributes
+    3.3 [33X[0;0YCategory[133X
+      3.3-1 IsToDoList
+    3.4 [33X[0;0YConstructor[133X
+      3.4-1 NewToDoList
+    3.5 [33X[0;0YThis is the magic[133X
+      3.5-1 Process_A_ToDo_List_Entry
+      3.5-2 ProcessToDoList
+    3.6 [33X[0;0YMethods for all objects[133X
+      3.6-1 ToDoList
+    3.7 [33X[0;0YProof tracking[133X
+      3.7-1 TraceProof
+    3.8 [33X[0;0YMaintainance[133X
+      3.8-1 ActivateToDoList
+      3.8-2 ActivateToDoList
+      3.8-3 DeactivateToDoList
+      3.8-4 DeactivateToDoList
+      3.8-5 ActivateWhereInfosInEntries
+      3.8-6 DeactivateWhereInfosInEntries
+  4 [33X[0;0YBasics[133X
+    4.1 [33X[0;0YGlobal variables[133X
+      4.1-1 HOMALG_TOOLS
+    4.2 [33X[0;0YGAP Categories[133X
+      4.2-1 IsStructureObjectOrObjectOrMorphism
+      4.2-2 IsStructureObjectOrObject
+      4.2-3 IsStructureObject
+      4.2-4 IsStructureObjectMorphism
+      4.2-5 IsHomalgRingOrModule
+  5 [33X[0;0YPointers[133X
+    5.1 [33X[0;0YWeak pointer objects[133X
+      5.1-1 IsContainerForWeakPointers
+      5.1-2 ContainerForWeakPointers
+      5.1-3 UpdateContainerOfWeakPointers
+      5.1-4 _AddElmWPObj_ForHomalg
+      5.1-5 _AddTwoElmWPObj_ForHomalg
+      5.1-6 _ElmWPObj_ForHomalg
+    5.2 [33X[0;0YPointer objects[133X
+      5.2-1 IsContainerForPointers
+      5.2-2 ContainerForPointers
+      5.2-3 UpdateContainerOfPointers
+      5.2-4 _AddElmPObj_ForHomalg
+      5.2-5 _AddTwoElmPObj_ForHomalg
+      5.2-6 _ElmPObj_ForHomalg
+  6 [33X[0;0YTools[133X
+    6.1 [33X[0;0YFunctions[133X
+      6.1-1 homalgTotalRuntimes
+      6.1-2 AddLeftRightLogicalImplicationsForHomalg
+      6.1-3 LogicalImplicationsForOneHomalgObject
+      6.1-4 LogicalImplicationsForTwoHomalgBasicObjects
+      6.1-5 InstallLogicalImplicationsForHomalgBasicObjects
+      6.1-6 LeftRightAttributesForHomalg
+      6.1-7 InstallLeftRightAttributesForHomalg
+      6.1-8 MatchPropertiesAndAttributes
+      6.1-9 InstallImmediateMethodToPullPropertyOrAttribute
+      6.1-10 InstallImmediateMethodToConditionallyPullPropertyOrAttribute
+      6.1-11 InstallImmediateMethodToPullPropertyOrAttributeWithDifferentName
+      6.1-12 InstallImmediateMethodToPullPropertiesOrAttributes
+      6.1-13 InstallImmediateMethodToPullTrueProperty
+      6.1-14 InstallImmediateMethodToConditionallyPullTrueProperty
+      6.1-15 InstallImmediateMethodToPullTruePropertyWithDifferentName
+      6.1-16 InstallImmediateMethodToPullTrueProperties
+      6.1-17 InstallImmediateMethodToPullFalseProperty
+      6.1-18 InstallImmediateMethodToConditionallyPullFalseProperty
+      6.1-19 InstallImmediateMethodToPullFalsePropertyWithDifferentName
+      6.1-20 InstallImmediateMethodToPullFalseProperties
+      6.1-21 InstallImmediateMethodToPushPropertyOrAttribute
+      6.1-22 InstallImmediateMethodToConditionallyPushPropertyOrAttribute
+      6.1-23 InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName
+      6.1-24 InstallImmediateMethodToPushPropertiesOrAttributes
+      6.1-25 InstallImmediateMethodToPushTrueProperty
+      6.1-26 InstallImmediateMethodToPushTruePropertyWithDifferentName
+      6.1-27 InstallImmediateMethodToPushTrueProperties
+      6.1-28 InstallImmediateMethodToPushFalseProperty
+      6.1-29 InstallImmediateMethodToPushFalsePropertyWithDifferentName
+      6.1-30 InstallImmediateMethodToPushFalseProperties
+      6.1-31 DeclareAttributeWithCustomGetter
+      6.1-32 AppendToAhomalgTable
+      6.1-33 homalgNamesOfComponentsToIntLists
+      6.1-34 IncreaseExistingCounterInObject
+      6.1-35 IncreaseExistingCounterInObjectWithTiming
+      6.1-36 IncreaseCounterInObject
+      6.1-37 MemoryToString
+      6.1-38 PrimePowerExponent
+      6.1-39 ViewList
+      6.1-40 homalgLaTeX
+      6.1-41 IdenticalPosition
+      6.1-42 PositionsOfMaximalObjects
+      6.1-43 MaximalObjects
+      6.1-44 CollectEntries
+      6.1-45 MakeShowable
+      6.1-46 MakeShowableWithLaTeX
+      6.1-47 ReplacedStringViaRecord
+      6.1-48 StartTimer
+      6.1-49 StopTimer
+      6.1-50 DisplayTimer
+      6.1-51 ListImpliedFilters
+    6.2 [33X[0;0YExample functions[133X
+      6.2-1 ExamplesForHomalg
+      6.2-2 ExamplesForHomalg
+  7 [33X[0;0YTrees[133X
+    7.1 [33X[0;0YTrees[133X
+      7.1-1 IsTree
+      7.1-2 Content
+      7.1-3 ListOfSuccessors
+      7.1-4 Predecessor
+      7.1-5 ListOfSentinels
+      7.1-6 RemoveHead
+      7.1-7 Tree
+      7.1-8 Tree
+      7.1-9 Add
+      7.1-10 ContentListFromSentinelToHead
+      7.1-11 PostOrder
   
   
   [32X

@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>GAP (ToolsForHomalg) - Chapter 4: Lists with attributes</title>
+<title>GAP (ToolsForHomalg) - Chapter 4: Basics</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
 <link rel="stylesheet" type="text/css" href="manual.css" />
@@ -15,66 +15,96 @@
 <body class="chap4"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
 
 <p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
-<p><a id="X7AE60B0886355B92" name="X7AE60B0886355B92"></a></p>
-<div class="ChapSects"><a href="chap4.html#X7AE60B0886355B92">4 <span class="Heading">Lists with attributes</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7D03633A7D98026B">4.1 <span class="Heading">GAP categories</span></a>
+<p><a id="X868F7BAB7AC2EEBC" name="X868F7BAB7AC2EEBC"></a></p>
+<div class="ChapSects"><a href="chap4.html#X868F7BAB7AC2EEBC">4 <span class="Heading">Basics</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7D9044767BEB1523">4.1 <span class="Heading">Global variables</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X831B2B37870A29FD">4.1-1 IsListWithAttributes</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CB459E282D621B2">4.1-1 HOMALG_TOOLS</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X86EC0F0A78ECBC10">4.2 <span class="Heading">Constructors</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7D03633A7D98026B">4.2 <span class="Heading">GAP Categories</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X794FB63684D26A64">4.2-1 TypedListWithAttributes</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X870B67E178BEA1B6">4.2-2 ListWithAttributes</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E36B19C7FFEC100">4.2-1 IsStructureObjectOrObjectOrMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A9BB94E7D9F3AB6">4.2-2 IsStructureObjectOrObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85DC9C0A83ADB0C6">4.2-3 IsStructureObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D2734947FBEB2EF">4.2-4 IsStructureObjectMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8346DBCF876C70F7">4.2-5 IsHomalgRingOrModule</a></span>
 </div></div>
 </div>
 
-<h3>4 <span class="Heading">Lists with attributes</span></h3>
+<h3>4 <span class="Heading">Basics</span></h3>
 
-<p>These are homogeneous lists which still carry enough information of their context even if they are empty.</p>
+<p><a id="X7D9044767BEB1523" name="X7D9044767BEB1523"></a></p>
+
+<h4>4.1 <span class="Heading">Global variables</span></h4>
+
+<p><a id="X7CB459E282D621B2" name="X7CB459E282D621B2"></a></p>
+
+<h5>4.1-1 HOMALG_TOOLS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HOMALG_TOOLS</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>A central place for configurations.</p>
 
 <p><a id="X7D03633A7D98026B" name="X7D03633A7D98026B"></a></p>
 
-<h4>4.1 <span class="Heading">GAP categories</span></h4>
+<h4>4.2 <span class="Heading">GAP Categories</span></h4>
 
-<p><a id="X831B2B37870A29FD" name="X831B2B37870A29FD"></a></p>
+<p><a id="X7E36B19C7FFEC100" name="X7E36B19C7FFEC100"></a></p>
 
-<h5>4.1-1 IsListWithAttributes</h5>
+<h5>4.2-1 IsStructureObjectOrObjectOrMorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsListWithAttributes</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectOrObjectOrMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
-<p>The <strong class="pkg">GAP</strong> category of lists with attributes.</p>
+<p>This is the super super GAP-category which will include the GAP-categories IsStructureObjectOrObject and IsHomalgObjectOrMorphism</p>
 
-<p><a id="X86EC0F0A78ECBC10" name="X86EC0F0A78ECBC10"></a></p>
+<p><a id="X7A9BB94E7D9F3AB6" name="X7A9BB94E7D9F3AB6"></a></p>
 
-<h4>4.2 <span class="Heading">Constructors</span></h4>
+<h5>4.2-2 IsStructureObjectOrObject</h5>
 
-<p><a id="X794FB63684D26A64" name="X794FB63684D26A64"></a></p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectOrObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
-<h5>4.2-1 TypedListWithAttributes</h5>
+<p>This is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex</p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TypedListWithAttributes</code>( <var class="Arg">L</var>, <var class="Arg">type</var>, <var class="Arg">attr1</var>, <var class="Arg">value1</var>, <var class="Arg">attr2</var>, <var class="Arg">value2</var>, <var class="Arg">...</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Construct a list with attributes.</p>
+<p><a id="X85DC9C0A83ADB0C6" name="X85DC9C0A83ADB0C6"></a></p>
 
-<p><a id="X870B67E178BEA1B6" name="X870B67E178BEA1B6"></a></p>
+<h5>4.2-3 IsStructureObject</h5>
 
-<h5>4.2-2 ListWithAttributes</h5>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListWithAttributes</code>( <var class="Arg">L</var>, <var class="Arg">attr1</var>, <var class="Arg">value1</var>, <var class="Arg">attr2</var>, <var class="Arg">value2</var>, <var class="Arg">...</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Construct a list with attributes of type TheTypeListWithAttributesRep</p>
+<p>This is the super GAP-category which will include the GAP-categories IsHomalgRing we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)</p>
+
+<p><a id="X7D2734947FBEB2EF" name="X7D2734947FBEB2EF"></a></p>
+
+<h5>4.2-4 IsStructureObjectMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>This is the super GAP-category which will include the GAP-categories IsHomalgRingMap, etc.</p>
+
+<p><a id="X8346DBCF876C70F7" name="X8346DBCF876C70F7"></a></p>
+
+<h5>4.2-5 IsHomalgRingOrModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingOrModule</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule:</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

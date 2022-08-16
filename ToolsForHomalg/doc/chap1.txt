@@ -1,11 +1,120 @@
   
-  [1X1 [33X[0;0YIntroduction[133X[101X
+  [1X1 [33X[0;0YCaches[133X[101X
   
   
-  [1X1.1 [33X[0;0YWhat is the role of the [5XToolsForHomalg[105X[101X[1X package in the [5Xhomalg[105X[101X[1X project?[133X[101X
+  [1X1.1 [33X[0;0YObject constructors[133X[101X
+  
+  [33X[0;0YCaches  are  objects which store for a fixed number of keys a value, so they
+  are  a  map  Obj^k -> Obj, while the k is fixed. A cache ususally stores the
+  result in a weak pointer list, which means that if the value which the cache
+  should  store  is  not  referenced  in  the  system  anymore, it will not be
+  remembered  by  the  cache.  However,  caches  can be set to store the value
+  permanently  (crisp),  or  not  to store any new value at all (inaktive). In
+  that  case, already stored values are still in the cache and can be accessed
+  once the cache is set active again.[133X
+  
+  [1X1.1-1 CachingObject[101X
+  
+  [33X[1;0Y[29X[2XCachingObject[102X( [[3Xk[103X, ][[3Xis_crisp[103X] ) [32X operation[133X
+  [33X[1;0Y[29X[2XCachingObject[102X( [3Xarg[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XCachingObject[102X( [3Xarg1[103X, [3Xarg2[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya cache[133X
+  
+  [33X[0;0YIf  no  argument is given, the function returns a weak cache with key length
+  one,  if  an  integer k is given, a weak cache with key length k, and if the
+  bool is_crisp is true, a crisp cache with the corresponding length.[133X
+  
+  [1X1.1-2 CachingObject[101X
+  
+  [33X[1;0Y[29X[2XCachingObject[102X( [3Xobject[103X, [3Xcache_name[103X, [3Xlength[103X[, [3Xis_crisp[103X] ) [32X operation[133X
+  [33X[1;0Y[29X[2XCachingObject[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation[133X
+  
+  [33X[0;0YThis   methods   are   not   installed,  they  serve  as  an  interface  for
+  InstallMethodWithCacheFromObject.[133X
   
   
-  [1X1.1-1 [33X[0;0Y[5XToolsForHomalg[105X[101X[1X provides ...[133X[101X
+  [1X1.2 [33X[0;0YSetters, getters[133X[101X
   
-  [33X[0;0YThe package [5XToolsForHomalg[105X provides for the [5Xhomalg[105X project [hpa10]:[133X
+  [1X1.2-1 CacheValue[101X
+  
+  [33X[1;0Y[29X[2XCacheValue[102X( [3Xcache[103X, [3Xkey[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ystored value[133X
+  
+  [33X[0;0YIf  there  is a value stored in the cache for key, which can be a single key
+  for caches with key length one or a list of keys depending on the key length
+  of  the  cache,  this  method  returns  a  list  only contraining the value,
+  otherwise an empty list.[133X
+  
+  [1X1.2-2 SetCacheValue[101X
+  
+  [33X[1;0Y[29X[2XSetCacheValue[102X( [3Xcache[103X, [3Xkey[103X, [3Xvalue[103X ) [32X operation[133X
+  
+  [33X[0;0YSets the value of key of the cache to value.[133X
+  
+  [1X1.2-3 IsEqualForCache[101X
+  
+  [33X[1;0Y[29X[2XIsEqualForCache[102X( [3Xobj1[103X, [3Xobj2[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YThis function is used to compare objects for the caches. The standard way is
+  IsIdenticalObj,  and  lists are compared recursive with this function. It is
+  possible and recommended to overload this function as needed.[133X
+  
+  
+  [1X1.3 [33X[0;0YManaging functions[133X[101X
+  
+  [1X1.3-1 SetCachingObjectCrisp[101X
+  
+  [33X[1;0Y[29X[2XSetCachingObjectCrisp[102X( [3Xcache[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YSets the caching to crisp, weak, or deativates the cache completely.[133X
+  
+  [1X1.3-2 SetCachingObjectWeak[101X
+  
+  [33X[1;0Y[29X[2XSetCachingObjectWeak[102X( [3Xarg[103X ) [32X function[133X
+  
+  [1X1.3-3 DeactivateCachingObject[101X
+  
+  [33X[1;0Y[29X[2XDeactivateCachingObject[102X( [3Xarg[103X ) [32X function[133X
+  
+  
+  [1X1.4 [33X[0;0YInstall functions[133X[101X
+  
+  [1X1.4-1 InstallMethodWithCache[101X
+  
+  [33X[1;0Y[29X[2XInstallMethodWithCache[102X( [3XLike[103X, [3XInstallMethod[103X ) [32X function[133X
+  
+  [33X[0;0YInstalls  a  method  like InstallMethod, but additionally puts a cache layer
+  around  it so that the result is cached. It is possible to give the cache as
+  the option Cache, to use the same cache for more than one method or store it
+  somewhere to have access to the cache.[133X
+  
+  [1X1.4-2 InstallMethodWithCrispCache[101X
+  
+  [33X[1;0Y[29X[2XInstallMethodWithCrispCache[102X( [3Xarg[103X ) [32X function[133X
+  
+  [33X[0;0YLike InstallMethodWithCache, but with a crisp cache.[133X
+  
+  [1X1.4-3 InstallMethodWithCacheFromObject[101X
+  
+  [33X[1;0Y[29X[2XInstallMethodWithCacheFromObject[102X( [3XLike[103X, [3XInstallMethod[103X ) [32X function[133X
+  
+  [33X[0;0YThis  works  just like InstallMethodWithCache, but it extracts the cache via
+  the  CachingObject  method from one of its arguments. The CachingObject must
+  then  be implemented for one of the arguments, and the option ArgumentNumber
+  can  specify which option to be used. As second argument for CachingObject a
+  string  is  used,  which can identify the cache. Standard is the name of the
+  operation,  for which the method is installed, but it can be specified using
+  the CacheName option.[133X
+  
+  [1X1.4-4 FunctionWithCache[101X
+  
+  [33X[1;0Y[29X[2XFunctionWithCache[102X( [3Xfunc[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya function[133X
+  
+  [33X[0;0YCreates  a cached function out of a given function [3Xfunc[103X. If the option Cache
+  is  a  cache, this cache is used. If the option Cache is the string crisp, a
+  crisp  cache is used. All other values for this option lead to a single weak
+  cache.[133X
   
