@@ -1,13 +1,8 @@
-############################################################################
-##
-##  Sparse.gi                  Gauss package                  Simon Goertzen
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Implementation stuff for performing algorithms on sparse matrices.
-##  Also includes the documentation of these algorithms.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Gauss: Extended Gauss functionality for GAP
+#
+# Implementations
+#
 
 ##  <#GAPDoc Label="EchelonMat">
 ##  <ManSection Label="echelonmat">

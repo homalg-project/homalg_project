@@ -23,13 +23,30 @@
   <pages>29--32</pages>
   <note><URL>https://www.algebra.mathematik.uni-siegen.de/barakat/eaca/homalg_eaca06.pdf</URL></note>
 </inproceedings></entry>
+<entry id="homalg"><manual>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Daniel</first><last>Robertz</last></name>
+  </author>  
+  <title>The homalg package -- Maple</title>
+  <year>2003-2008</year>
+  <note><URL>https://algebra.mathematik.uni-siegen.de/barakat/homalg_in_maple/</URL></note>
+</manual></entry>
 <entry id="homalg-package"><manual>
   <author>
     <name><first>Mohamed</first><last>Barakat</last></name>
   </author>  
-  <title>The homalg package -- GAP4</title>
+  <title>homalg -- A homological algebra meta-package for computable Abelian categories</title>
   <year>2007-2020</year>
-  <note><URL>https://homalg-project.github.io/homalg_project/homalg/</URL></note>
+  <note><URL>https://homalg-project.github.io/pkg/homalg</URL></note>
+</manual></entry>
+<entry id="homalg-project"><manual>
+  <author>
+    <name><last>The homalg team</last></name>
+  </author>  
+  <title>The homalg project</title>
+  <year>2003-2022</year>
+  <note><URL>https://homalg-project.github.io/prj/homalg_project/</URL></note>
 </manual></entry>
 <entry id="BR"><article>
   <author>
@@ -43,11 +60,12 @@
   <volume>7</volume>
   <number>3</number>
   <pages>299--317</pages>
-  <note>arXiv:math.AC/0701146</note>
+  <note><URL>https://arxiv.org/abs/math/0701146</URL></note>
   <issn>0219-4988</issn>
   <mrnumber>MR2431811</mrnumber>
   <mrclass>16E30 (16-04)</mrclass>
   <other type="fjournal">Journal of Algebra and its Applications</other>
+  <other type="eprint">arXiv:math.AC/0701146</other>
 </article></entry>
 <entry id="MP_SCO"><article>
   <author>
@@ -74,17 +92,17 @@
     <name><first>Markus</first><last>Kirschmer</last></name>
     <name><first>Markus</first><last>Lange-Hegermann</last></name>
   </author>  
-  <title>GAP Package RingsForHomalg</title>
+  <title>RingsForHomalg -- Dictionaries of external rings</title>
   <year>2007-2008</year>
-  <note><URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/ringsforhomalg</URL></note>
+  <note><URL>https://homalg-project.github.io/pkg/RingsForHomalg/</URL></note>
 </manual></entry>
 <entry id="SCO"><manual>
   <author>
     <name><first>Simon</first><last>Görtzen</last></name>
   </author>  
-  <title>GAP Package SCO</title>
+  <title>SCO -- Simplicial Cohomology of Orbifolds</title>
   <year>2007-2008</year>
-  <note><URL>http://wwwb.math.rwth-aachen.de/goertzen/SCO</URL></note>
+  <note><URL>https://homalg-project.github.io/pkg/SCO/</URL></note>
 </manual></entry>
 <entry id="Gauss"><manual>
   <author>
@@ -92,15 +110,15 @@
   </author>
   <title>GAP Package Gauss</title>
   <year>2007-2008</year>
-  <note><URL>http://wwwb.math.rwth-aachen.de/goertzen/Gauss</URL></note>
+  <note><URL>https://homalg-project.github.io/pkg/Gauss/</URL></note>
 </manual></entry>
 <entry id="GaussForHomalg"><manual>
   <author>
     <name><first>Simon</first><last>Görtzen</last></name>
   </author>  
-  <title>GAP Package GaussForHomalg</title>
+  <title>GaussForHomalg -- Gauss functionality for the homalg project</title>
   <year>2007-2008</year>
-  <note><URL>http://wwwb.math.rwth-aachen.de/goertzen/GaussForHomalg</URL></note>
+  <note><URL>https://homalg-project.github.io/pkg/GaussForHomalg/</URL></note>
 </manual></entry>
 <entry id="GAPDoc"><manual>
   <author>

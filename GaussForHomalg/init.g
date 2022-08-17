@@ -1,8 +1,8 @@
-#############################################################################
-##
-##  init.g                    GaussForHomalg package          Simon Goertzen
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GaussForHomalg: Gauss functionality for the homalg project
+#
+# Reading the declaration part of the package.
+#
 ##
 ##  Reading the declaration part of the GaussForHomalg package.
 ##

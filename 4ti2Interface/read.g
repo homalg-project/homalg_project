@@ -3,8 +3,6 @@
 #
 # Reading the implementation part of the package.
 #
-##
-#############################################################################
 
 ## read
 ReadPackage( "4ti2Interface", "gap/4ti2Interface.gi" );

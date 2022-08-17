@@ -18,9 +18,9 @@ test: doc
 
 test-basic-spacing:
 	#grep -RPl "\t" examples/ gap/ && echo "Tabs found" && exit 1 || exit 0
-	grep -RPl "\r" examples/ gap/ && echo "Windows line-endings found" && exit 1 || exit 0
+	grep -RPl "\r" gap/ && echo "Windows line-endings found" && exit 1 || exit 0
 	# the second grep is a hack to fix the exit code with -L for grep <= 3.1
-	grep -RPzL "\n\z" examples/ gap/ | grep "" && echo "File with no newline at end of file found" && exit 1 || exit 0
+	grep -RPzL "\n\z" gap/ | grep "" && echo "File with no newline at end of file found" && exit 1 || exit 0
 
 test-doc: doc
 	cp -aT doc/ doc_tmp/
@@ -36,7 +36,7 @@ test-spacing:
 	grep -RE '[^ ] +$$' gap/* && echo "Trailing whitespace found" && exit 1 || exit 0
 	for filename in gap/*; do \
 		echo $$filename; \
-		echo "LoadPackage(\"GaussForHomalg\"); SizeScreen([4096]); func := ReadAsFunction(\"$$filename\"); FileString(\"gap_spacing\", DisplayString(func));" | gap --quitonbreak --banner; \
+		echo "LoadPackage(\"Gauss\"); SizeScreen([4096]); func := ReadAsFunction(\"$$filename\"); FileString(\"gap_spacing\", DisplayString(func));" | gap --quitonbreak --banner; \
 		echo -e "\033[0m"; \
 		# In a perfect world, the DisplayString of a function would exactly match our code. However, our line breaks and indentation might differ from the GAP ones, \
 		# so we remove all indentation, line breaks, and empty lines, and afterwards insert line breaks at semicolons again for better readability. \

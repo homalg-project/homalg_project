@@ -13,45 +13,7 @@
 
 <Book Name="Gauss">
 
-<TitlePage>
-  <Title> The &Gauss; Package Manual</Title>
-  <Subtitle>Extended Gauss Functionality for &GAP;</Subtitle>
-  <Version>
-      Version <#Include SYSTEM "../VERSION">
-  </Version>
-  <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
-          <Email>simon.goertzen@rwth-aachen.de</Email>
-          <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
-	  <Address>
-	  Lehrstuhl B für Mathematik<Br/>
-	  Templergraben 64<Br/>
-	  52062 Aachen<Br/>
-	  (Germany)
-	  </Address>
-  </Author>
-  <Date>March 2013</Date>
-  <Abstract>This document explains the primary uses of the &Gauss; package.
-            Included is a documented list of the most important methods
-            and functions needed to work with sparse matrices and the
-            algorithms provided by the &Gauss; package.
-  </Abstract>
-  <Copyright>&copyright; 2007-2013 by Simon Goertzen<P/>
-  This package may be distributed under the terms and conditions of
-  the GNU Public License Version 2 or (at your option) any later version.
-  </Copyright>
-  <Acknowledgements>The &Gauss; package would not have been possible without the helpful contributions by
-   <List>
-    <Item>Max Neunhöffer, University of St Andrews, and</Item>
-    <Item>Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH Aachen.</Item>
-   </List>
-   Many thanks to these two and the Lehrstuhl B für Mathematik in general.
-   It should be noted that the &GAP; algorithms for
-   <C>SemiEchelonForm</C> and other methods formed an important and
-   informative basis for the development of the extended Gaussian
-   algorithms. This manual was created with the help of the &GAPDoc;
-   package by F. Lübeck and M. Neunhöffer <Cite Key="GAPDoc"/>.
-  </Acknowledgements>
-</TitlePage>
+<#Include SYSTEM "title.xml">
 
 <TableOfContents/>
 

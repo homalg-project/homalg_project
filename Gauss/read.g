@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  read.g                    Gauss package                   Simon Goertzen
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Reading the implementation part of the Gauss package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Gauss: Extended Gauss functionality for GAP
+#
+# Reading the implementation part of the package.
+#
 
 ################################
 # First look after our C part: #

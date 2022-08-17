@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  SparseMatrix.gd              Gauss package                Simon Goertzen
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Gauss: Extended Gauss functionality for GAP
+#
+# Declarations
+#
+
 ##  Declaration stuff for the Category IsSparseMatrix of sparse matrices.
-##
-#############################################################################
 
 ##
 DeclareCategory( "IsSparseMatrix",

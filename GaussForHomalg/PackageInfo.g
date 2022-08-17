@@ -1,8 +1,17 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GaussForHomalg: Gauss functionality for the homalg project
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
+
 SetPackageInfo( rec(
 
 PackageName := "GaussForHomalg",
 Subtitle := "Gauss functionality for the homalg project",
-Version := "2022.08-01",
+Version := "2022.08-02",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 License := "GPL-2.0-or-later",
 
@@ -83,8 +92,35 @@ AvailabilityTest := function()
     return true;
   end,
 
-TestFile := "maketest.g",
+TestFile := "tst/testall.g",
 
-Keywords := ["GaussForHomalg", "homalg", "Gauss" ]
+Keywords := ["GaussForHomalg", "homalg", "Gauss" ],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+            "&copyright; 2007-2013 by Simon Goertzen<P/>\n\n",
+            "This package may be distributed under the terms and conditions ", 
+            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            ), 
+        Abstract := Concatenation( 
+            "This document explains the primary uses of the &GaussForHomalg; package. ", 
+            "Included in this manual is a documented list of ",  
+            "the most important methods and functions you will need.",
+            "<P/>\n"
+            ), 
+        Acknowledgements := Concatenation( 
+            "Many thanks to Mohamed Barakat ",
+            "and the Lehrstuhl B für Mathematik at RWTH Aachen University in ",
+            "general for their support. It should be noted that &GaussForHomalg; ",
+            "is dependant on the &GAP; &MatricesForHomalg; package by M. Barakat et al. ",
+            "<Cite Key=\"homalg-package\"/>, as well as the &Gauss; package by myself ",
+            "<Cite Key=\"Gauss\"/>. This should be clear as &GaussForHomalg; presents a ",
+            "link between these two packages. ",
+            "This manual was created with the help of the &GAPDoc; ",
+            "package by M. Neunhöffer and F. Lübeck <Cite Key=\"GAPDoc\"/>."
+            )
+    )
+),
 
 ));
