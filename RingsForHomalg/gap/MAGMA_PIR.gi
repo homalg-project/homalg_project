@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  MAGMA_PIR.gi              RingsForHomalg package         Mohamed Barakat
-##
-##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# RingsForHomalg: Dictionaries of external rings
+#
+# Implementations
+#
+
 ##  Implementations for commutative principal ideal rings in MAGMA.
-##
-#############################################################################
 
 ####################################
 #

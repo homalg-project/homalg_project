@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  GAPHomalgBasic.gi         RingsForHomalg package         Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# RingsForHomalg: Dictionaries of external rings
+#
+# Implementations
+#
+
 ##  Implementations for the external rings provided by the GAP package homalg.
-##
-#############################################################################
 
 ####################################
 #

@@ -1,13 +1,11 @@
-#############################################################################
-##
-##  Macaulay2Tools.gi         RingsForHomalg package          Daniel Robertz
-##
-##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# RingsForHomalg: Dictionaries of external rings
+#
+# Implementations
+#
+
 ##  Implementations for the external rings provided by the ring packages
 ##  of the GAP implementation of homalg.
-##
-#############################################################################
 
 ####################################
 #
