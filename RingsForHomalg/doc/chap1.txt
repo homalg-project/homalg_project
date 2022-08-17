@@ -1,7 +1,7 @@
   
   [1X1 [33X[0;0YIntroduction[133X[101X
   
-  [33X[0;0YThis  package is part of the [5Xhomalg[105X project [hpa10]. The role of the package
+  [33X[0;0YThis  package is part of the [5Xhomalg[105X project [tpa22]. The role of the package
   is described in the manual of the [5Xhomalg[105X package.[133X
   
   
