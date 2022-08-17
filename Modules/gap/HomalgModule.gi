@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgModule.gi             Modules package              Mohamed Barakat
-##
-##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Implementations
+#
+
 ##  Implementation stuff for homalg modules.
-##
-#############################################################################
 
 ##  <#GAPDoc Label="Modules:intro">
 ##  A &homalg; module is a data structure for a finitely presented module. A presentation is given by

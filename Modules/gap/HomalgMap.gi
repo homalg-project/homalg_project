@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgMap.gi                Modules package              Mohamed Barakat
-##
-##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Implementations
+#
+
 ##  Implementation stuff for homalg maps ( = module homomorphisms ).
-##
-#############################################################################
 
 ##  <#GAPDoc Label="Maps:intro">
 ##    A &homalg; map is a data structures for maps (module homomorphisms) between finitely generated modules.

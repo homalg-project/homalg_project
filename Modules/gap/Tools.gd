@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  Tools.gd                                                 Modules package
-##
-##  Copyright 2011, Mohamed Barakat, University of Kaiserslautern
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Declarations
+#
+
 ##  Declarations of tool procedures.
-##
-#############################################################################
 
 ####################################
 #

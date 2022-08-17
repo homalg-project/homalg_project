@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  Modules.gi                  Modules package              Mohamed Barakat
-##
-##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Implementations
+#
+
 ##  Implementations of homalg procedures for modules.
-##
-#############################################################################
 
 ##
 InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule)

@@ -1,104 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+	  [
+	  <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+	  <!ENTITY GAP4 '<Package>GAP4</Package>'>
+	  <!ENTITY Maple '<Package>Maple</Package>'>
+	  <!ENTITY Mathematica '<Package>Mathematica</Package>'>
+	  <!ENTITY Singular '<Package>Singular</Package>'>
+	  <!ENTITY Plural '<Package>Plural</Package>'>
+	  <!ENTITY Sage '<Package>Sage</Package>'>
+	  <!ENTITY python '<Package>python</Package>'>
+	  <!ENTITY cython '<Package>cython</Package>'>
+	  <!ENTITY C '<Package>C</Package>'>
+	  <!ENTITY MAGMA '<Package>MAGMA</Package>'>
+	  <!ENTITY Macaulay2 '<Package>Macaulay2</Package>'>
+	  <!ENTITY IO '<Package>IO</Package>'>
+	  <!ENTITY MatricesForHomalg "<Package>MatricesForHomalg</Package>">
+	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY Modules "<Package>Modules</Package>">
+	  <!ENTITY GradedModules "<Package>GradedModules</Package>">
+	  <!ENTITY ResidueClassRingForHomalg "<Package>ResidueClassRingForHomalg</Package>">
+	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
+	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
+	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
+	  <!ENTITY COLEM "<Package>COLEM</Package>">
+	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
+	  <!ENTITY LIHOM "<Package>LIHOM</Package>">
+	  <!ENTITY LICPX "<Package>LICPX</Package>">
+	  <!ENTITY ExamplesForHomalg "<Package>ExamplesForHomalg</Package>">
+	  <!ENTITY alexander "<Package>alexander</Package>">
+	  <!ENTITY Gauss "<Package>Gauss</Package>">
+	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+	  <!ENTITY HomalgToCAS "<Package>HomalgToCAS</Package>">
+	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
+	  <!ENTITY MapleForHomalg "<Package>MapleForHomalg</Package>">
+	  <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
+	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
+	  <!ENTITY Sheaves "<Package>Sheaves</Package>">
+	  <!ENTITY SCO "<Package>SCO</Package>">
+	  <!ENTITY LocalizeRingForHomalg "<Package>LocalizeRingForHomalg</Package>">
+	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+	  ]
+	  >
 
-  Modules.xml            Modules package documentation
+<!--
 
-         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+  ModulesForHomalg.xml          Modules package documentation
+
+  Copyright (C) 2007-2010, Mohamed Barakat, University of Kaiserslautern
 
 -->
 
-<Chapter Label="Modules">
-<Heading>Modules</Heading>
+<Book Name="Modules">
 
-<#Include Label="Modules:intro">
+<#Include SYSTEM "title.xml">
 
-<Section Label="Modules:Category">
-<Heading>Modules: Category and Representations</Heading>
+<!--  TableOfContents  . . . . . .  generate a table of contents   -->
+<TableOfContents/>
 
-<#Include Label="IsHomalgModule">
+<!--  chapters of the book  -->
+<Body>
 
-<#Include Label="IsFinitelyPresentedModuleOrSubmoduleRep">
-<#Include Label="IsFinitelyPresentedModuleRep">
-<#Include Label="IsFinitelyPresentedSubmoduleRep">
+<Index>&Modules;</Index>
 
-</Section>
+<#Include SYSTEM "intro.xml">
+<#Include SYSTEM "install.xml">
+<#Include SYSTEM "QuickStart.xml">
+<#Include SYSTEM "RingMaps.xml">
+<#Include SYSTEM "Relations.xml">
+<#Include SYSTEM "Generators.xml">
+<#Include SYSTEM "HomalgModules.xml">
+<#Include SYSTEM "Maps.xml">
+<#Include SYSTEM "ModuleElements.xml">
+<#Include SYSTEM "Functors.xml">
+<#Include SYSTEM "SymmetricAlgebra.xml">
+<#Include SYSTEM "ExteriorAlgebra.xml">
+<#Include SYSTEM "examples.xml">
+</Body>
 
-<Section Label="Modules:Constructors">
-<Heading>Modules: Constructors</Heading>
+<#Include SYSTEM "Idea.xml">
+<#Include SYSTEM "Logic.xml">
+<#Include SYSTEM "appendix.xml">
 
-<#Include Label="LeftPresentation">
-<#Include Label="RightPresentation">
-<#Include Label="HomalgFreeLeftModule">
-<#Include Label="HomalgFreeRightModule">
-<#Include Label="HomalgZeroLeftModule">
-<#Include Label="HomalgZeroRightModule">
-<#Include Label="\*:ModuleBaseChange">
-<#Include Label="Subobject:matrix">
-<#Include Label="Subobject:list">
-<#Include Label="LeftSubmodule">
-<#Include Label="RightSubmodule">
+<Bibliography Databases="Modules.bib"/>
 
-</Section>
+<!--  And finally an index as well   -->
+<TheIndex/>
 
-<Section Label="Modules:Properties">
-<Heading>Modules: Properties</Heading>
+</Book>
 
-<#Include Label="IsCyclic">
-<#Include Label="IsHolonomic">
-<#Include Label="IsReduced">
-<#Include Label="IsPrimeIdeal">
-<#Include Label="IsPrimeModule">
-
-For more properties see the corresponding section <Ref BookName="homalg"
-Sect="Objects: Properties"/>) in the documentation of the &homalg; package.
-
-</Section>
-
-<Section Label="Modules:Attributes">
-<Heading>Modules: Attributes</Heading>
-
-<#Include Label="ResidueClassRing">
-<#Include Label="PrimaryDecomposition">
-<#Include Label="RadicalDecomposition">
-<#Include Label="ModuleOfKaehlerDifferentials">
-<#Include Label="RadicalSubobject">
-<#Include Label="SymmetricAlgebra">
-<#Include Label="ExteriorAlgebra">
-
-<!-- the following attributes are intrinsic in the sense that
-     they can safely be attached to any copy of the module -->
-
-<#Include Label="ElementaryDivisors">
-<#Include Label="FittingIdeal">
-<#Include Label="NonFlatLocus">
-<#Include Label="LargestMinimalNumberOfLocalGenerators">
-
-<#Include Label="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries">
-<#Include Label="CoefficientsOfNumeratorOfHilbertPoincareSeries">
-<#Include Label="UnreducedNumeratorOfHilbertPoincareSeries">
-<#Include Label="NumeratorOfHilbertPoincareSeries">
-<#Include Label="HilbertPoincareSeries">
-<#Include Label="AffineDegree">
-<#Include Label="DataOfHilbertFunction">
-<#Include Label="HilbertFunction">
-<#Include Label="IndexOfRegularity">
-
-For more attributes see the corresponding section <Ref BookName="homalg"
-Sect="Objects: Attributes"/>) in the documentation of the &homalg; package.
-
-</Section>
-
-<Section Label="Modules:Operations">
-<Heading>Modules: Operations and Functions</Heading>
-
-<#Include Label="HomalgRing:module">
-<#Include Label="ByASmallerPresentation:module">
-<#Include Label="SubmoduleOfIdealMultiples">
-<#Include Label="SubobjectQuotient">
-
-</Section>
-
-<!-- ############################################################ -->
-
-</Chapter>

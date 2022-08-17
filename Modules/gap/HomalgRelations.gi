@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgRelations.gi          Modules package              Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Implementations
+#
+
 ##  Implementation stuff for a set of relations.
-##
-#############################################################################
 
 ##  <#GAPDoc Label="Relations:intro">
 ##  A finite presentation of a module is given by a finite set of generators and a finite set of relations

@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgGenerators.gi         Modules package              Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Implementations
+#
+
 ##  Implementation stuff for a set of generators.
-##
-#############################################################################
 
 ##  <#GAPDoc Label="Generators:intro">
 ##  To present a left/right module it suffices to take a matrix <A>rel</A> and interpret its rows/columns

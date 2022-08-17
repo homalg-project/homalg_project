@@ -1,8 +1,17 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
+
 SetPackageInfo( rec(
 
 PackageName := "Modules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
-Version := "2022.08-01",
+Version := "2022.08-02",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 License := "GPL-2.0-or-later",
 
@@ -148,8 +157,19 @@ AvailabilityTest := function()
     return true;
   end,
 
-TestFile := "maketest.g",
+TestFile := "tst/testall.g",
 
-Keywords := ["modules", "module homomorphisms", "functor", "ext", "tor"]
+Keywords := ["modules", "module homomorphisms", "functor", "ext", "tor"],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+            "&copyright; 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann\n\n",
+            "This package may be distributed under the terms and conditions ", 
+            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            ), 
+        Acknowledgements := "We are very much indebted to Alban Quadrat."
+    )
+),
 
 ));

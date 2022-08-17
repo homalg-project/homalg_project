@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  SetsOfGenerators.gd         homalg package               Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Declarations
+#
+
 ##  Declaration stuff for sets of generators.
-##
-#############################################################################
 
 ####################################
 #
