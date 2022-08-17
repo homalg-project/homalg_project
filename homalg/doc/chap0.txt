@@ -1,57 +1,59 @@
   
   
-                                     [1X[5Xhomalg[105X[101X
+                                    [1X homalg [101X
   
   
-      [1XA homological algebra meta-package for computable Abelian categories[101X
+     [1X A homological algebra meta-package for computable Abelian categories [101X
   
   
-                               Version 2022.08-01
+                                   2022.08-02
   
   
-                                 September 2015
+                                 17 August 2022
   
   
                                 Mohamed Barakat
   
+                               Sebastian Gutsche
+  
                              Markus Lange-Hegermann
-  
-  
-  
-            [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
-            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
-            latest version is available [12Xonline[112X at:[133X
-            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/homalg/doc/chap0.html[107X[133X
-            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
-            documentation  subfolder of the package. This package is
-            part of the [5Xhomalg[105X-project:[133X
-            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/[107X[133X
   
   
   
   Mohamed Barakat
       Email:    [7Xmailto:mohamed.barakat@uni-siegen.de[107X
       Homepage: [7Xhttps://mohamed-barakat.github.io[107X
-      Address:  [33X[0;14YDepartment of Mathematics,[133X
-                [33X[0;14YUniversity of Siegen,[133X
-                [33X[0;14Y57072 Siegen,[133X
+      Address:  [33X[0;14YWalter-Flex-Str. 3[133X
+                [33X[0;14Y57072 Siegen[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Sebastian Gutsche
+      Email:    [7Xmailto:gutsche@mathematik.uni-siegen.de[107X
+      Homepage: [7Xhttps://sebasguts.github.io[107X
+      Address:  [33X[0;14YDepartment Mathematik[133X
+                [33X[0;14YUniversität Siegen[133X
+                [33X[0;14YWalter-Flex-Straße 3[133X
+                [33X[0;14Y57072 Siegen[133X
                 [33X[0;14YGermany[133X
   
   
   Markus Lange-Hegermann
-      Email:    [7Xmailto:markus.lange.hegermann@rwth-aachen.de[107X
+      Email:    [7Xmailto:markus.lange-hegermann@hs-owl.de[107X
       Homepage: [7Xhttps://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/[107X
-      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
-                52056 Aachen, Germany[133X
+      Address:  [33X[0;14YMarkus Lange-Hegermann[133X
+                [33X[0;14YHochschule Ostwestfalen-Lippe[133X
+                [33X[0;14YLiebigstraße 87[133X
+                [33X[0;14Y32657 Lemgo[133X
+                [33X[0;14YGermany[133X
   
   
   
   -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y© 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann[133X
-  
-  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2 or (at your option) any later version.[133X
+  [33X[0;0Y©  2007-2015  by Mohamed Barakat and Markus Lange-Hegermann This package may
+  be  distributed  under  the  terms  and conditions of the GNU Public License
+  Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
