@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  LocalizeRingBasic.gi     LocalizeRingBasic package       Mohamed Barakat
-##                                                    Markus Lange-Hegermann
-##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# LocalizeRingForHomalg: A Package for Localization of Polynomial Rings
+#
+# Implementations
+#
+
 ##  Implementation stuff for LocalizeRingForHomalg.
-##
-#############################################################################
 
 ####################################
 #
