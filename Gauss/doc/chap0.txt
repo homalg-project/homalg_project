@@ -6,7 +6,7 @@
                      [1X Extended Gauss functionality for [5XGAP[105X [101X
   
   
-                                   2022.08-02
+                                   2022.08-03
   
   
                                  17 August 2022
