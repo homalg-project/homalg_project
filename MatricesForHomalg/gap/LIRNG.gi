@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  LIRNG.gi                    LIRNG subpackage             Mohamed Barakat
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Implementations
+#
+
 ##         LIRNG = Logical Implications for homalg RiNGs
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Implementation stuff for the LIRNG subpackage.
-##
-#############################################################################
 
 ####################################
 #

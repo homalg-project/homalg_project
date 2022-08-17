@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  LIMAP.gd                    LIMAP subpackage             Mohamed Barakat
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Declarations
+#
+
 ##         LIMAP = Logical Implications for homalg ring MAPs
-##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##
-##  Declaration stuff for the LIMAP subpackage.
-##
-#############################################################################
 
 # our info class:
 DeclareInfoClass( "InfoLIMAP" );

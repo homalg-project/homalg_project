@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  ResidueClassRingForHomalg.gd  MatricesForHomalg package  Mohamed Barakat
-##
-##  Copyright 2007-2009 Mohamed Barakat, Universität des Saarlandes
-##
-##  Declaration stuff for homalg residue class rings.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Declarations
+#
 
 # our info class:
 DeclareInfoClass( "InfoResidueClassRingForHomalg" );

@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  homalgTable.gi              MatricesForHomalg package    Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Implementation stuff for rings.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Implementations
+#
 
 ####################################
 #

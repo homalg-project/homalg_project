@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  LIMAT.gd                    LIMAT subpackage             Mohamed Barakat
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Declarations
+#
+
 ##         LIMAT = Logical Implications for homalg MATrices
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Declaration stuff for the LIMAT subpackage.
-##
-#############################################################################
 
 # our info class:
 DeclareInfoClass( "InfoLIMAT" );

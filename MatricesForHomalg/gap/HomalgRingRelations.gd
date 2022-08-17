@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  HomalgRingRelations.gd      MatricesForHomalg package    Mohamed Barakat
-##
-##  Copyright 2007-2010, Mohamed Barakat, RWTH-Aachen University
-##
-##  Declaration stuff for a set of ring relations.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Declarations
+#
 
 ####################################
 #

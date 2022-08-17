@@ -1,14 +1,8 @@
-#############################################################################
-##
-##  MatricesForHomalg.gd                           MatricesForHomalg package
-##
-##  Copyright 2007-2012, Mohamed Barakat, University of Kaiserslautern
-##                  Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Declarations for MatricesForHomalg.
-##
-#############################################################################
-
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Declarations
+#
 
 # our info classes:
 DeclareInfoClass( "InfoMatricesForHomalg" );

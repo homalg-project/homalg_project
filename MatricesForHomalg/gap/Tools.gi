@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  Tools.gi                    MatricesForHomalg package    Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Implementations of homalg tools.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Implementations
+#
 
 ####################################
 #

@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  HomalgRingRelations.gi      MatricesForHomalg package    Mohamed Barakat
-##
-##  Copyright 2007-2010, Mohamed Barakat, RWTH-Aachen University
-##
-##  Implementation stuff for a set of relations.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Implementations
+#
 
 ####################################
 #

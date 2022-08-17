@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  HomalgRingMaps.gi           MatricesForHomalg package    Mohamed Barakat
-##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##
-##  Implementations of procedures for ring maps.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# MatricesForHomalg: Matrices for the homalg project
+#
+# Implementations
+#
 
 ##  <#GAPDoc Label="RingMaps:intro">
 ##  A &homalg; ring map is a data structure for maps between finitely generated rings. &homalg; more or less provides the basic
