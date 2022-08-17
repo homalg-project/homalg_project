@@ -1,9 +1,18 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedModules: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
+
 SetPackageInfo( rec(
 
 PackageName := "GradedModules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
-Version := "2022.08-01",
-Date := "16/08/2022",
+Version := "2022.08-02",
+Date := "17/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -151,8 +160,18 @@ AvailabilityTest := function()
     return true;
   end,
 
-TestFile := "maketest.g",
+TestFile := "tst/testall.g",
 
-Keywords := ["modules", "graded modules", "graduation", "multi-graded modules", "Tate resolution"]
+Keywords := ["modules", "graded modules", "graduation", "multi-graded modules", "Tate resolution"],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+            "&copyright; 2008-2015 by Mohamed Barakat, Sebastian Gutsche, and Markus Lange-Hegermann\n\n",
+            "This package may be distributed under the terms and conditions ",
+            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            )
+    )
+),
 
 ));
