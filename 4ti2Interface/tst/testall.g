@@ -1,18 +1,34 @@
-#
-# 4ti2Interface
+# SPDX-License-Identifier: GPL-2.0-or-later
+# 4ti2Interface: A link to 4ti2
 #
 # This file runs package tests. It is also referenced in the package
 # metadata in PackageInfo.g.
 #
-
 options := rec(
     exitGAP := true,
     testOptions := rec(
-        compareFunction := "uptowhitespace"
+        compareFunction := "uptowhitespace",
     ),
 );
 
-LoadPackage( "4ti2Interface" );
+# reverse RecNames 50% of the time to detect code relying on the order of RecNames
+if Random( RandomSource( IsMersenneTwister, NanosecondsSinceEpoch( ) ), [ false, true ] ) then
+    
+    Display( "Executing with reversed RecNames" );
+    
+    MakeReadWriteGlobal( "RecNames" );
+    
+    old_RecNames := RecNames;
+    
+    RecNames := record -> Reversed( old_RecNames( record ) );
+    
+    MakeReadOnlyGlobal( "RecNames" );
+    
+else
+    
+    Display( "Executing with non-reversed RecNames" );
+    
+fi;
 
 TestDirectory( DirectoriesPackageLibrary( "4ti2Interface", "tst" ), options );
 

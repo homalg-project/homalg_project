@@ -1,3 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# 4ti2Interface: A link to 4ti2
+#
+# Implementations
+#
+
 ##
 InstallGlobalFunction( lib4ti2_prepare_gap_input,
  function( arg )

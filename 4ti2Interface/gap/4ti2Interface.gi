@@ -1,12 +1,8 @@
-#############################################################################
-##
-##                                                      4ti2Interface package
-##
-##  Copyright 2013-2017,                 Sebastian Gutsche, Siegen University
-##
-##  Reading the declaration part of the 4ti2Interface package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# 4ti2Interface: A link to 4ti2
+#
+# Implementations
+#
 
 BindGlobal( "4ti2Interface_BINARIES",
         rec(

@@ -1,13 +1,8 @@
-#############################################################################
-##
-##                                                      4ti2Interface package
-##
-##  Copyright 2013,           Sebastian Gutsche, University of Kaiserslautern
-##
-##  Reading the declaration part of the 4ti2Interface package.
-##
-#############################################################################
-
+# SPDX-License-Identifier: GPL-2.0-or-later
+# 4ti2Interface: A link to 4ti2
+#
+# Declarations
+#
 
 #! @Chapter Introduction
 #! @Section What is the idea of 4ti2Interface
