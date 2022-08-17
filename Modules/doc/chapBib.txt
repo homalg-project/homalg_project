@@ -2,17 +2,20 @@
   
   [1XReferences[101X
   
-  [[20XBar[120X] [16XBarakat, M.[116X, [17XSpectral Filtrations via Generalized Morphisms[117X, [18X[118X, [19X[119X, (), ,
-  ((arxiv.org/abs/0904.0240)).
+  [[20XBar09[120X]  [16XBarakat, M.[116X, [17XSpectral filtrations via generalized morphisms[117X (2009),
+  ((submitted
+  (\href{http://arxiv.org/abs/0904.0240}{\texttt{arXiv:0904.0240}}))).
   
-  [[20XBR06[120X]  [16XBarakat,  M.  and  Robertz,  D.[116X,  [17Xhomalg: First steps to an abstract
-  package  for  homological  algebra[117X,  in  Proceedings  of  the  X  meeting on
-  computational  algebra  and  its  applications  (EACA 2006), Sevilla (Spain)
-  (2006),                                                              29--32,
-  ((https://www.algebra.mathematik.uni-siegen.de/barakat/eaca/homalg_eaca06.pdf)).
+  [[20XBR06[120X]          [16XBarakat,         M.         and         Robertz,         D.[116X,
+  [17X\hrefhttps://algebra.mathematik.uni-siegen.de/barakat/eaca/homalg_eaca06.pdfmathtthomalg:
+  First  steps  to an abstract package for homological algebra[117X, in Proceedings
+  of   the   X  meeting  on  computational  algebra  and  its  applications  -
+  \hrefhttp://alojamientos.us.es/eaca2006/eaca2006_eng.htmlEACA 2006, Sevilla,
+  Spain (2006), 29--32.
   
-  [[20XBR08[120X] [16XBarakat, M. and Robertz, D.[116X, [17Xhomalg -- A Meta-Package for Homological
-  Algebra[117X, [18XJ. Algebra Appl.[118X, [19X7[119X, 3 (2008), 299--317, ((arXiv:math.AC/0701146)).
+  [[20XBR08[120X]  [16XBarakat,  M.  and  Robertz,  D.[116X,  [17Xmathtthomalg -- A meta-package for
+  homological   algebra[117X,   [18XJ.   Algebra   Appl.[118X,   [19X7[119X,   3   (2008),  299--317,
+  (((\href{http://arxiv.org/abs/math.AC/0701146}{\texttt{arXiv:math.AC/0701146}}))).
   
   [[20XCQ11[120X]  [16XCoquand,  T.  and  Quitté, C.[116X, [17XConstructive finite free resolutions[117X,
   [18Xmanuscripta mathematica[118X, Springer Berlin / Heidelberg (2011), 1-15.
