@@ -1,7 +1,7 @@
   
   [1X1 [33X[0;0YIntroduction[133X[101X
   
-  [33X[0;0Y[5XHomalgToCAS[105X  is  one of the core packages of the [5Xhomalg[105X project [hpa10]. But
+  [33X[0;0Y[5XHomalgToCAS[105X  is  one of the core packages of the [5Xhomalg[105X project [tpa22]. But
   as  one  of  the  rather  technical packages, this manual is probably not of
   interest  for  the  average  uers.  The average user will usually not get in
   direct contact with the operations provided by this package.[133X

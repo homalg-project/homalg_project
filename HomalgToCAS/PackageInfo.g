@@ -1,9 +1,18 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# HomalgToCAS: A window to the outer world
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
+
 SetPackageInfo( rec(
 
 PackageName := "HomalgToCAS",
 Subtitle := "A window to the outer world",
-Version := "2022.08-01",
-Date := "16/08/2022",
+Version := "2022.08-02",
+Date := "18/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -164,8 +173,24 @@ AvailabilityTest := function()
     return true;
   end,
 
-TestFile := "maketest.g",
+TestFile := "tst/testall.g",
 
-Keywords := [ "homalgExternalObject", "CreateHomalgExternalRing", "HomalgExternalRingElement", "IsHomalgExternalMatrixRep", "LaunchCAS", "TerminateCAS", "homalgSendBlocking" ]
+Keywords := [ "homalgExternalObject", "CreateHomalgExternalRing", "HomalgExternalRingElement", "IsHomalgExternalMatrixRep", "LaunchCAS", "TerminateCAS", "homalgSendBlocking" ],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+            "&copyright; 2007-2015 by Mohamed Barakat, Thomas Breuer, Simon Görtzen, and Frank Lübeck.\n\n",
+            "This package may be distributed under the terms and conditions ",
+            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            ),
+        Acknowledgements := """
+             We are very much indebted to Max Neunhöffer who provided the first
+             piece of code around which the package &IO_ForHomalg; was built. The
+             package &HomalgToCAS; provides a further abstraction layer preparing
+             the communication.
+                    """
+    )
+),
 
 ));

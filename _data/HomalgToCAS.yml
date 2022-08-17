@@ -1,7 +1,7 @@
 name: HomalgToCAS
-version: "2022.08-01"
+version: "2022.08-02"
 license: "GPL-2.0-or-later"
-date: 2022-08-16
+date: 2022-08-18
 description: |
     A window to the outer world
 
@@ -46,11 +46,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/HomalgToCAS/Package
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2022.08-01/HomalgToCAS-2022.08-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2022.08-02/HomalgToCAS-2022.08-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2022.08-01/HomalgToCAS-2022.08-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2022.08-02/HomalgToCAS-2022.08-02.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2022.08-01/HomalgToCAS-2022.08-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2022.08-02/HomalgToCAS-2022.08-02.pdf
 
 abstract: |
     The <span class="pkgname">HomalgToCAS</span> package provides the first layer of abstraction  needed for <span class="pkgname">homalg</span> to access external computer algebra systems
@@ -64,7 +64,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BBGGW22</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Görtzen, S., Gutsche, S. and Wagh, V.</b>,
      <i class='BibTitle'>HomalgToCAS, A window to the outer world,
-             Version 2022.08-01</i>
+             Version 2022.08-02</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/HomalgToCAS">https://homalg-project.github.io/pkg/HomalgToCAS</a></span>.
@@ -72,11 +72,11 @@ citeas: |
     
 
 bibtex: |
-    @misc{ HomalgToCAS2022.08-01,
+    @misc{ HomalgToCAS2022.08-02,
       author =           {B{\"a}chler,  T.  and  Barakat, M. and G{\"o}rtzen, S.
                           and Gutsche, S. and Wagh, V.},
       title =            {{HomalgToCAS},  A window to the outer world, {V}ersion
-                          2022.08-01},
+                          2022.08-02},
       month =            {Aug},
       year =             {2022},
       note =             {GAP package},
