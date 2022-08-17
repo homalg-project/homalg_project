@@ -5,7 +5,7 @@
   [1X1.1  [33X[0;0YWhat  is  the  Role  of the [5XLocalizeRingForHomalg[105X[101X[1X Package in the [5Xhomalg[105X[101X[1X[101X
   [1XProject?[133X[101X
   
-  [33X[0;0YThe  [5Xhomalg[105X  project  [hpa10]  aims  at  providing  a  general  and abstract
+  [33X[0;0YThe  [5Xhomalg[105X  project  [tpa22]  aims  at  providing  a  general  and abstract
   framework  for  homological  computations. The package [5XLocalizeRingForHomalg[105X
   enables the [5Xhomalg[105X project to construct localizations from commutative rings
   in [5Xhomalg[105X at their maximal ideals.[133X
@@ -30,7 +30,7 @@
   
   [33X[0;0YThe  math  behind  this  package  is  a  simple  trick  in  allowing  global
   computation  to  be  done  instead  of local computations. This works on any
-  commutative computable ring (in the sense of [5Xhomalg[105X [Bar10]) without need of
+  commutative computable ring (in the sense of [5Xhomalg[105X [BLH20]) without need of
   implementing  new  low  level  algorithms. Details can be found in the paper
   [BLH11].   This   ring   can  be  constructed  by  [2XLocalizeAt[102X  ([14X4.3-14[114X)  and
   [2XLocalizeAtZero[102X ([14X4.3-15[114X).[133X

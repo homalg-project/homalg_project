@@ -1,9 +1,18 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# LocalizeRingForHomalg: A Package for Localization of Polynomial Rings
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
+
 SetPackageInfo( rec(
 
 PackageName := "LocalizeRingForHomalg",
 Subtitle := "A Package for Localization of Polynomial Rings",
-Version := "2022.08-01",
-Date := "16/08/2022",
+Version := "2022.08-02",
+Date := "17/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -101,8 +110,18 @@ AvailabilityTest := function()
     return true;
   end,
 
-TestFile := "maketest.g",
+TestFile := "tst/testall.g",
 
-Keywords := [ "homological algebra", "local ring", "submodule membership problem", "syzygies", "Mora" ]
+Keywords := [ "homological algebra", "local ring", "submodule membership problem", "syzygies", "Mora" ],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+            "&copyright; 2009-2015 by Mohamed Barakat and Markus Lange-Hegermann\n\n",
+            "This package may be distributed under the terms and conditions ",
+            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            )
+    )
+),
 
 ));

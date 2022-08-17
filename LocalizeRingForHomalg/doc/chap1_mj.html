@@ -45,7 +45,7 @@
 
 <h4>1.1 <span class="Heading">What is the Role of the <strong class="pkg">LocalizeRingForHomalg</strong> Package in the <strong class="pkg">homalg</strong> Project?</span></h4>
 
-<p>The <strong class="pkg">homalg</strong> project <a href="chapBib_mj.html#biBhomalg-project">[hpa10]</a> aims at providing a general and abstract framework for homological computations. The package <strong class="pkg">LocalizeRingForHomalg</strong> enables the <strong class="pkg">homalg</strong> project to construct localizations from commutative rings in <strong class="pkg">homalg</strong> at their maximal ideals.</p>
+<p>The <strong class="pkg">homalg</strong> project <a href="chapBib_mj.html#biBhomalg-project">[tpa22]</a> aims at providing a general and abstract framework for homological computations. The package <strong class="pkg">LocalizeRingForHomalg</strong> enables the <strong class="pkg">homalg</strong> project to construct localizations from commutative rings in <strong class="pkg">homalg</strong> at their maximal ideals.</p>
 
 <p><a id="X87F1120883F5B4D0" name="X87F1120883F5B4D0"></a></p>
 
@@ -59,7 +59,7 @@
 
 <h4>1.3 <span class="Heading">The Math Behind This Package</span></h4>
 
-<p>The math behind this package is a simple trick in allowing global computation to be done instead of local computations. This works on any commutative computable ring (in the sense of <strong class="pkg">homalg</strong> <a href="chapBib_mj.html#biBhomalg-package">[Bar10]</a>) without need of implementing new low level algorithms. Details can be found in the paper <a href="chapBib_mj.html#biBBL">[BLH11]</a>. This ring can be constructed by <code class="func">LocalizeAt</code> (<a href="chap4_mj.html#X7E4E70FE82978F9C"><span class="RefLink">4.3-14</span></a>) and <code class="func">LocalizeAtZero</code> (<a href="chap4_mj.html#X7D910AA785CEED34"><span class="RefLink">4.3-15</span></a>).</p>
+<p>The math behind this package is a simple trick in allowing global computation to be done instead of local computations. This works on any commutative computable ring (in the sense of <strong class="pkg">homalg</strong> <a href="chapBib_mj.html#biBhomalg-package">[BLH20]</a>) without need of implementing new low level algorithms. Details can be found in the paper <a href="chapBib_mj.html#biBBL">[BLH11]</a>. This ring can be constructed by <code class="func">LocalizeAt</code> (<a href="chap4_mj.html#X7E4E70FE82978F9C"><span class="RefLink">4.3-14</span></a>) and <code class="func">LocalizeAtZero</code> (<a href="chap4_mj.html#X7D910AA785CEED34"><span class="RefLink">4.3-15</span></a>).</p>
 
 <p>Furthermore we use the package <strong class="pkg">RingsForHomalg</strong> to communicate with <strong class="pkg">Singular</strong> and use the implementation of Mora's algorithm there. This is restricted to polynomial rings and needs the package <strong class="pkg">RingsForHomalg</strong>. This ring can be constructed by <code class="func">LocalizePolynomialRingAtZeroWithMora</code> (<a href="chap4_mj.html#X7F790F3B852C1A5C"><span class="RefLink">4.3-16</span></a>).</p>
 

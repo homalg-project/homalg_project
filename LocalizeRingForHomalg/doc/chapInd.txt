@@ -24,7 +24,7 @@
   [2XLocalizeAt[102X, for a commutative ring and a maximal ideal 4.3-14 
   [2XLocalizeAtZero[102X, for a free polynomial ring 4.3-15 
   [2XLocalizePolynomialRingAtZeroWithMora[102X, constructor for homalg localized rings using Mora's algorithm 4.3-16 
-  [5XLocalizeRingForHomalg[105X .-3 
+  [5XLocalizeRingForHomalg[105X .-2 
   [2XMatElm[102X, for homalg local matrices 4.3-12 
   [2XMatElmAsString[102X, for homalg local matrices 4.3-11 
   [2XName[102X, for homalg local ring elements 4.3-8 
