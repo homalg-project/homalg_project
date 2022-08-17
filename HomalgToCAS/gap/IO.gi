@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  IO.gi                     HomalgToCAS package            Mohamed Barakat
-##
-##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# HomalgToCAS: A window to the outer world
+#
+# Implementations
+#
+
 ##  Implementation stuff to launch and terminate external CASystems.
-##
-#############################################################################
 
 ####################################
 #
