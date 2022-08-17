@@ -1,17 +1,8 @@
-#############################################################################
-##
-##  init.g                    RingsForHomalg package         Mohamed Barakat
-##                                                            Simon Goertzen
-##                                                          Markus Kirschmer
-##                                                    Markus Lange-Hegermann
-##                                                           Max Neunhoeffer
-##                                                            Daniel Robertz
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Reading the declaration part of the RingsForHomalg package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# RingsForHomalg: Dictionaries of external rings
+#
+# Reading the declaration part of the package.
+#
 
 ## init
 ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gd" );

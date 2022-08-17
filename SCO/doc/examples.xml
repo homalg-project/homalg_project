@@ -140,7 +140,7 @@ This is the <M>V_4</M> group cohomology up to degree 4.
 You have seen a manifold in example 1, and group cohomology in example
 2. Now we will meet our first proper orbifold, the Teardrop. This is
 the example Moerdijk and Pronk used in their paper <Cite
-Key="MP_SCO"/> on which my work is based. It is an easy example, but
+Key="mps"/> on which my work is based. It is an easy example, but
 includes both nontrivial isotropy and <M>\mu</M>-maps. We take the
 isotropy at the top to be <M>C_2</M>.
 

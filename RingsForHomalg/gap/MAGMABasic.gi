@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  MAGMABasic.gi             RingsForHomalg package        Markus Kirschmer
-##
-##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# RingsForHomalg: Dictionaries of external rings
+#
+# Implementations
+#
+
 ##  Implementations for the rings provided by MAGMA.
-##
-#############################################################################
 
 ####################################
 #

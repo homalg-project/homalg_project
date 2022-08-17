@@ -38,9 +38,12 @@ complete triangulations of the 17 orbifolds corresponding to the
 2-dimensional wallpaper groups (these should be exactly the
 uncapitalized files, ranging from <F>p1.g</F> to
 <F>p6m.g</F>). Computing the cohomology of these orbifolds was
-an important part of my diploma thesis <Cite Key="Goe"/> and I have
-also created a separate document <Cite Key="WGC"/> to present my
-results.<P/>
+an important part of my diploma thesis <Cite Key="Goe"/>.<P/>
+
+<!--
+and I have also created a separate document <Cite Key="WGC"/> to present my
+results
+-->
 
 Please note that the variables <A>M</A>, <A>iso</A>, and <A>mu</A>
 in the orbifold files have to keep their name for the example script

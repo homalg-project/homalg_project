@@ -1,10 +1,7 @@
-#############################################################################
-##
-##  Macaulay2_PIR.gi              RingsForHomalg package      Daniel Robertz 
-##
-##  Copyright 2009 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Implementations for commutative principal ideal rings in Macaulay2.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# RingsForHomalg: Dictionaries of external rings
+#
+# Declarations
+#
 
+##  Implementations for commutative principal ideal rings in Macaulay2.

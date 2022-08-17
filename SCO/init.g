@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  init.g                    SCO package                    Simon Goertzen
-##
-##  Copyright 2007-2008 Lehrstuhl B fuer Mathematik, RWTH Aachen
-##
-##  Reading the declaration part of the SCO package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SCO: SCO - Simplicial Cohomology of Orbifolds
+#
+# Reading the declaration part of the package.
+#
 
 ReadPackage( "SCO", "gap/OrbifoldTriangulation.gd" );
 

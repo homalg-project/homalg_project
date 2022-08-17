@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  SingularBestBasis.gi      RingsForHomalg package  Markus Lange-Hegermann
-##
-##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# RingsForHomalg: Dictionaries of external rings
+#
+# Implementations
+#
+
 ##  Implementations for the rings with BestBasis provided by Singular.
-##
-#############################################################################
 
 ####################################
 #

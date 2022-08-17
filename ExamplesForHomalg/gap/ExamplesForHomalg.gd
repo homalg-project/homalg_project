@@ -1,15 +1,10 @@
-#############################################################################
-##
-##  ExamplesForHomalg.gd      ExamplesForHomalg package      Mohamed Barakat
-##                                                            Simon Goertzen
-##                                                    Markus Lange-Hegermann
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Declaration stuff for ExamplesForHomalg.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# ExamplesForHomalg: Examples for the GAP Package homalg
+#
+# Declarations
+#
 
+##  Declaration stuff for ExamplesForHomalg.
 
 # our info class:
 DeclareInfoClass( "InfoExamplesForHomalg" );
