@@ -1,13 +1,10 @@
-#############################################################################
-##
-##  HomalgToCAS.gd           HomalgToCAS package             Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Declaration stuff for HomalgToCAS.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# HomalgToCAS: A window to the outer world
+#
+# Declarations
+#
 
+##  Declaration stuff for HomalgToCAS.
 
 # our info class:
 DeclareInfoClass( "InfoHomalgToCAS" );

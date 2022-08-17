@@ -1,15 +1,8 @@
-#############################################################################
-##
-##  read.g                    HomalgToCAS package            Mohamed Barakat
-##                                                             Thomas Breuer
-##                                                            Simon Goertzen
-##                                                              Frank Lübeck
-##
-##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Reading the implementation part of the HomalgToCAS package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# HomalgToCAS: A window to the outer world
+#
+# Reading the implementation part of the package.
+#
 
 ## general stuff
 ReadPackage( "HomalgToCAS", "gap/HomalgToCAS.gi" );

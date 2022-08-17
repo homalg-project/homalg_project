@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  homalgExternalObject.gd     homalg package               Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# HomalgToCAS: A window to the outer world
+#
+# Declarations
+#
+
 ##  Declaration stuff for homalg's external objects.
-##
-#############################################################################
 
 ####################################
 #
