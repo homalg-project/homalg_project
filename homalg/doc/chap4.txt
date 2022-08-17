@@ -284,7 +284,7 @@
   [33X[1;0Y[29X[2XInverseOfGeneralizedMorphismWithFullDomain[102X( [3Xphi[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X morphism[133X
   
-  [33X[0;0YThe generalized inverse of the epimorphism [3Xphi[103X (cf. [Bar, Cor. 4.8])).[133X
+  [33X[0;0YThe generalized inverse of the epimorphism [3Xphi[103X (cf. [Bar09, Cor. 4.8])).[133X
   
   [1X4.4-12 DegreeOfMorphism[101X
   
