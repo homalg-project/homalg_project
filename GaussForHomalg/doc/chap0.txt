@@ -1,29 +1,29 @@
   
   
-                       [1XThe [5XGaussForHomalg[105X Package Manual[101X
+                                [1X GaussForHomalg [101X
   
   
-                         [1X[5XGauss[105X Functionality for [5Xhomalg[105X[101X
+                  [1X Gauss functionality for the homalg project [101X
   
   
-                               Version 2022.08-01
+                                   2022.08-02
   
   
-                                 September 2013
+                                 17 August 2022
   
   
-                                 Simon Goertzen
+                                 Simon Görtzen
   
   
   
-  Simon Goertzen
+  Simon Görtzen
       Email:    [7Xmailto:simon.goertzen@rwth-aachen.de[107X
-      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X
-      Address:  [33X[0;14YLehrstuhl B für Mathematik[133X
-                [33X[0;14YRWTH Aachen[133X
+      Homepage: [7Xhttps://www.linkedin.com/in/simongoertzen/[107X
+      Address:  [33X[0;14YSimon Görtzen[133X
+                [33X[0;14YLehrstuhl B fuer Mathematik, RWTH Aachen[133X
                 [33X[0;14YTemplergraben 64[133X
                 [33X[0;14Y52062 Aachen[133X
-                [33X[0;14Y(Germany)[133X
+                [33X[0;14YGermany[133X
   
   
   
