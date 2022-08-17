@@ -1,9 +1,18 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SCO: SCO - Simplicial Cohomology of Orbifolds
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
+
 SetPackageInfo( rec(
 
 PackageName := "SCO",
 Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
-Version := "2022.08-01",
-Date := "16/08/2022",
+Version := "2022.08-02",
+Date := "17/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -79,8 +88,38 @@ AvailabilityTest := function()
     return true;
   end,
 
-TestFile := "maketest.g",
+TestFile := "tst/testall.g",
 
-Keywords := ["homology", "cohomology", "orbifold", "groupoid", "simplicial", "triangulation" ]
+Keywords := ["homology", "cohomology", "orbifold", "groupoid", "simplicial", "triangulation" ],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+            "&copyright; 2007-2011 by Simon Goertzen<P/>\n\n",
+            "This package may be distributed under the terms and conditions ", 
+            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            ), 
+        Abstract := """
+             This document explains the primary uses of the &SCO;
+             package. Included in this manual is a documented list of
+             the most important methods and functions you will
+             need. For the theoretical basis of this package please
+             refer to my diploma thesis and the corresponding paper
+             (work in progress; <Cite Key="Goe"/>).
+                    """, 
+        Acknowledgements := """
+             The &SCO; package would not have been possible
+             without the theoretical work by I. Moerdijk and D. A. Pronk
+             concerning  simplicial cohomology of orbifolds <Cite
+             Key="mps"/>. Many thanks to these two, as well as Mohamed Barakat
+             and the Lehrstuhl B für Mathematik at RWTH Aachen University in
+             general. It should be noted that &SCO; in its current functionality
+             is dependent on the &GAP; package &homalg; by M. Barakat <Cite
+             Key="homalg-package"/>, as it relies on &homalg; to do the actual
+             computations. This manual was created with the help of the &GAPDoc;
+             package by M. Neunhöffer and F. Lübeck.
+               """
+    )
+),
 
 ));

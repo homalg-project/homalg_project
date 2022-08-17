@@ -1,15 +1,15 @@
   
   
-                             [1XThe [5XSCO[105X Package Manual[101X
+                                     [1X SCO [101X
   
   
-                       [1XSimplicial Cohomology of Orbifolds[101X
+                   [1X SCO - Simplicial Cohomology of Orbifolds [101X
   
   
-                               Version 2022.08-01
+                                   2022.08-02
   
   
-                                  August 2011
+                                 17 August 2022
   
   
                                  Simon Görtzen
@@ -18,12 +18,12 @@
   
   Simon Görtzen
       Email:    [7Xmailto:simon.goertzen@rwth-aachen.de[107X
-      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X
-      Address:  [33X[0;14YLehrstuhl B für Mathematik[133X
-                [33X[0;14YRWTH Aachen[133X
+      Homepage: [7Xhttps://www.linkedin.com/in/simongoertzen/[107X
+      Address:  [33X[0;14YSimon Görtzen[133X
+                [33X[0;14YLehrstuhl B fuer Mathematik, RWTH Aachen[133X
                 [33X[0;14YTemplergraben 64[133X
                 [33X[0;14Y52062 Aachen[133X
-                [33X[0;14Y(Germany)[133X
+                [33X[0;14YGermany[133X
   
   
   
@@ -32,12 +32,12 @@
   [33X[0;0YThis document explains the primary uses of the [5XSCO[105X package. Included in this
   manual  is a documented list of the most important methods and functions you
   will  need.  For  the  theoretical  basis of this package please refer to my
-  diploma thesis and the corresponding paper (work in progress; [Gör08a]).[133X
+  diploma thesis and the corresponding paper (work in progress; [G\t08]).[133X
   
   
   -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y© 2007-2011 by Simon Görtzen[133X
+  [33X[0;0Y© 2007-2011 by Simon Goertzen[133X
   
   [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
   Public License Version 2 or (at your option) any later version.[133X
@@ -50,9 +50,9 @@
   [MP99].  Many  thanks  to  these  two,  as  well  as Mohamed Barakat and the
   Lehrstuhl  B  für Mathematik at RWTH Aachen University in general. It should
   be  noted  that  [5XSCO[105X  in  its  current functionality is dependent on the [5XGAP[105X
-  package [5Xhomalg[105X by M. Barakat [BR08], as it relies on [5Xhomalg[105X to do the actual
-  computations. This manual was created with the help of the [5XGAPDoc[105X package by
-  M. Neunhöffer and F. Lübeck.[133X
+  package  [5Xhomalg[105X  by  M.  Barakat  [BLH20],  as it relies on [5Xhomalg[105X to do the
+  actual  computations.  This  manual  was created with the help of the [5XGAPDoc[105X
+  package by M. Neunhöffer and F. Lübeck.[133X
   
   
   -------------------------------------------------------
