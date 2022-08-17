@@ -1,9 +1,18 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Gauss: Extended Gauss functionality for GAP
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
+
 SetPackageInfo( rec(
 
 PackageName := "Gauss",
 Subtitle := "Extended Gauss functionality for GAP",
-Version := "2022.08-01",
-Date := "16/08/2022",
+Version := "2022.08-02",
+Date := "17/08/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -99,8 +108,36 @@ AvailabilityTest := function()
   return true;
 end,
 
-TestFile := "maketest.g",
+TestFile := "tst/testall.g",
 
-Keywords := ["Gauss", "RREF", "sparse" ]
+Keywords := ["Gauss", "RREF", "sparse" ],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+            "&copyright; 2007-2013 by Simon Goertzen<P/>\n\n",
+            "This package may be distributed under the terms and conditions ", 
+            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            ), 
+        Abstract := Concatenation( 
+            "This document explains the primary uses of the &Gauss; package. ", 
+            "Included is a documented list of the most important methods ",  
+            "and functions needed to work with sparse matrices and the ",  
+            "algorithms provided by the &Gauss; package. ",  
+            "<P/>\n"
+            ), 
+        Acknowledgements := Concatenation( 
+            "The &Gauss; package would not have been possible without the helpful contributions by ",
+            "<List><Item>Max Neunhöffer, University of St Andrews, and</Item>", 
+            "<Item>Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH Aachen.</Item></List>",
+            "Many thanks to these two and the Lehrstuhl B für Mathematik in general. ",
+            "It should be noted that the &GAP; algorithms for ",
+            "<C>SemiEchelonForm</C> and other methods formed an important and ",
+            "informative basis for the development of the extended Gaussian ",
+            "algorithms. This manual was created with the help of the &GAPDoc; ",
+            "package by F. Lübeck and M. Neunhöffer <Cite Key=\"GAPDoc\"/>."
+            )
+    )
+),
 
 ));

@@ -33,7 +33,7 @@
   
   [1X2.2 [33X[0;0YThe applications of the [5XGauss[105X[101X[1X package algorithms[133X[101X
   
-  [33X[0;0YPlease  refer  to  [ht09]  to find out more about the [5Xhomalg[105X project and its
+  [33X[0;0YPlease  refer  to  [ht22]  to find out more about the [5Xhomalg[105X project and its
   related  packages.  Most  of  the motivation for the algorithms in the [5XGauss[105X
   package can be found there. If you are interested in this project, you might
   also  want  to  check out my [5XGaussForHomalg[105X [Gör08a] package, which, just as
