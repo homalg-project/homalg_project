@@ -259,7 +259,7 @@
   [2XLeftInverse[102X 5.4-12 
       for matrices 5.5-2 
   [2XLeftInverseLazy[102X, for matrices 5.5-4 
-  [5XMatricesForHomalg[105X .-2 
+  [5XMatricesForHomalg[105X .-1 
   [2XMatrixOfSymbols[102X 5.4-24 
   [2XMinusOne[102X 3.4-8 
   [2XMulMat[102X, homalgTable entry B.1-16 
