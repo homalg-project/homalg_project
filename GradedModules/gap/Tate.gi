@@ -1,13 +1,10 @@
-#############################################################################
-##
-##  Tate.gi                     Graded Modules package
-##
-##  Copyright 2008-2010, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedModules: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
+#
+# Implementations
+#
+
 ##  Implementations of procedures for the pair of adjoint Tate functors.
-##
-#############################################################################
 
 ##
 ## Removes the morphism of lowest degree in the complex T and instead adds another (minimal) morphism there having the same image.

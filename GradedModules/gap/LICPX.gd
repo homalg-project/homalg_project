@@ -1,15 +1,10 @@
-#############################################################################
-##
-##  LICPX.gd                                                LICPX subpackage
-##
-##         LICPX = Logical Implications for homalg ComPleXes
-##
-##  Copyright 2007-2010, Mohamed Barakat, RWTH-Aachen
-##
-##  Declaration stuff for the LICPX subpackage.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedModules: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
+#
+# Declarations
+#
 
+##         LICPX = Logical Implications for homalg ComPleXes
 
 DeclareAttribute( "BettiTableOverCoefficientsRing",
         IsHomalgComplex );

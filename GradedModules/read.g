@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  read.g                                             GradedModules package
-##
-##  Copyright 2008-2011, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH-Aachen
-##
-##  Reading the implementation part of the GradedModules package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedModules: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
+#
+# Reading the implementation part of the package.
+#
 
 ##
 ReadPackage( "GradedModules", "gap/GradedModule.gi" );

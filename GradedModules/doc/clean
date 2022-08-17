@@ -1,4 +1,2 @@
 #!/bin/sh
-
-rm -f *.{aux,lab,log,dvi,ps,pdf,bbl,ilg,ind,idx,out,html,tex,pnr,txt,blg,toc,six,brf}
-
+rm -f *.{aux,bbl,blg,brf,css,html,idx,ilg,ind,js,lab,log,out,pdf,pnr,six,tex,toc,txt,xml.bib}

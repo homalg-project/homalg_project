@@ -1,27 +1,10 @@
-#############################################################################
-##
-##  LIGrRNG.gi                                            LIGrRNG subpackage
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedModules: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
+#
+# Implementations
+#
+
 ##         LIGrRNG = Logical Implications for homalg GRaded RiNGs
-##
-##  Copyright 2011, Mohamed Barakat, University of Kaiserslautern
-##           Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Implementations for the LIGrRNG subpackage.
-##
-#############################################################################
-
-####################################
-#
-# immediate methods for properties:
-#
-####################################
-
-####################################
-#
-# immediate methods for attributes:
-#
-####################################
 
 ####################################
 #
