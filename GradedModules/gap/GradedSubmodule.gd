@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  GradedSubmodule.gd             Graded Modules package
-##
-##  Copyright 2010,      Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH Aachen
-##
-##  Declaration stuff for graded submodules.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedModules: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
+#
+# Declarations
+#
 
+##  Declaration stuff for graded submodules.
 
 ####################################
 #

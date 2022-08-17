@@ -1,15 +1,10 @@
-#############################################################################
-##
-##  LIGrHOM.gi                    LIGrHOM subpackage
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedModules: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
+#
+# Declarations
+#
+
 ##         LIGrHOM = Logical Implications for Graded HOMomorphisms
-##
-##  Copyright 2010,      Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH Aachen
-##
-##  Declaration stuff for the LIGrHOM subpackage.
-##
-#############################################################################
 
 # a central place for configurations:
 DeclareGlobalVariable( "LIGrHOM" );

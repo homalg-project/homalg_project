@@ -1,15 +1,10 @@
-#############################################################################
-##
-##  LIGrMOD.gd                                            LIGrMOD subpackage
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# GradedModules: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
+#
+# Declarations
+#
+
 ##         LIGrMOD = Logical Implications for Graded MODules
-##
-##  Copyright 2010,      Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH Aachen
-##
-##  Declarations for the LIGrMOD subpackage.
-##
-#############################################################################
 
 # our info class:
 DeclareInfoClass( "InfoLIGrMOD" );

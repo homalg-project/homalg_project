@@ -1,68 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+	  [
+	  <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+	  <!ENTITY GAP4 '<Package>GAP4</Package>'>
+	  <!ENTITY Maple '<Package>Maple</Package>'>
+	  <!ENTITY Mathematica '<Package>Mathematica</Package>'>
+	  <!ENTITY Singular '<Package>Singular</Package>'>
+	  <!ENTITY Plural '<Package>Plural</Package>'>
+	  <!ENTITY Sage '<Package>Sage</Package>'>
+	  <!ENTITY python '<Package>python</Package>'>
+	  <!ENTITY cython '<Package>cython</Package>'>
+	  <!ENTITY C '<Package>C</Package>'>
+	  <!ENTITY MAGMA '<Package>MAGMA</Package>'>
+	  <!ENTITY IO '<Package>IO</Package>'>
+	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
+	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
+	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
+	  <!ENTITY COLEM "<Package>COLEM</Package>">
+	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
+	  <!ENTITY LIMOR "<Package>LIMOR</Package>">
+	  <!ENTITY LICPX "<Package>LICPX</Package>">
+	  <!ENTITY LILIN "<Package>LILIN</Package>">
+	  <!ENTITY LISHV "<Package>LISHV</Package>">
+	  <!ENTITY LISCM "<Package>LISCM</Package>">
+	  <!ENTITY LIMOS "<Package>LIMOS</Package>">
+	  <!ENTITY ExamplesForHomalg "<Package>ExamplesForHomalg</Package>">
+	  <!ENTITY alexander "<Package>alexander</Package>">
+	  <!ENTITY Gauss "<Package>Gauss</Package>">
+	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
+	  <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
+	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
+	  <!ENTITY Modules "<Package>Modules</Package>">
+	  <!ENTITY GradedModules "<Package>GradedModules</Package>">
+	  <!ENTITY Sheaves "<Package>Sheaves</Package>">
+	  <!ENTITY SCO "<Package>SCO</Package>">
+	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+	  ]
+	  >
+
 <!--
 
-  GradedModules.xml            GradedModules package documentation            Mohamed Barakat
+  GradedModulesForHomalg.xml          GradedModules package documentation              Mohamed Barakat
 
-         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+  Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
 
 -->
 
-<Chapter Label="GradedModules">
-<Heading>GradedModules</Heading>
+<Book Name="GradedModules">
 
-<Section Label="GradedModules:Category">
-<Heading>GradedModules: Category and Representations</Heading>
+<#Include SYSTEM "title.xml">
 
-</Section>
+<!--  TableOfContents  . . . . . .  generate a table of contents   -->
+<TableOfContents/>
 
-<Section Label="GradedModules:Constructors">
-<Heading>GradedModules: Constructors</Heading>
+<!--  chapters of the book  -->
+<Body>
 
-</Section>
+<Index>&GradedModules;</Index>
 
-<Section Label="GradedModules:Properties">
-<Heading>GradedModules: Properties</Heading>
+<#Include SYSTEM "install.xml">
+<#Include SYSTEM "RingMaps.xml">
+<#Include SYSTEM "GradedModulesForHomalg.xml">
+<#Include SYSTEM "Tate.xml">
+<#Include SYSTEM "examples.xml">
+</Body>
 
-For more properties see the corresponding section <Ref BookName="Modules"
-Sect="Modules: Properties"/>) in the documentation of the &homalg; package.
+<Bibliography Databases="GradedModules.bib"/>
 
-</Section>
+<!--  And finally an index as well   -->
+<TheIndex/>
 
-<Section Label="GradedModules:Attributes">
-<Heading>GradedModules: Attributes</Heading>
+</Book>
 
-<!-- the following attributes are intrinsic in the sense that
-     they can safely be attached to any copy of the sheaf -->
-
-<#Include Label="BettiTable:module">
-<#Include Label="CastelnuovoMumfordRegularity">
-<#Include Label="CastelnuovoMumfordRegularityOfSheafification">
-
-For more attributes see the corresponding section <Ref BookName="Modules"
-Sect="Modules: Attributes"/>) in the documentation of the &homalg; package.
-
-</Section>
-
-<Section Label="GradedModules:LIGrMOD">
-<Heading>&LISHV;: Logical Implications for GradedModules</Heading>
-
-</Section>
-
-<Section Label="GradedModules:Operations">
-<Heading>GradedModules: Operations and Functions</Heading>
-
-<#Include Label="MonomialMap">
-<#Include Label="RandomMatrix">
-<#Include Label="GeneratorsOfHomogeneousPart">
-<#Include Label="SubmoduleGeneratedByHomogeneousPart">
-<#Include Label="RepresentationMapOfRingElement">
-<#Include Label="RepresentationMatrixOfKoszulId">
-<#Include Label="RepresentationMapOfKoszulId">
-<#Include Label="KoszulRightAdjoint">
-<#Include Label="HomogeneousPartOverCoefficientsRing">
-
-</Section>
-<!-- ############################################################ -->
-
-</Chapter>
