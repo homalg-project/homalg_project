@@ -1,3 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# 4ti2Interface: A link to 4ti2
+#
+# Declarations
+#
+
 DeclareGlobalFunction( "lib4ti2_prepare_gap_input" );
 DeclareGlobalFunction( "lib4ti2_groebner" );
 DeclareGlobalFunction( "lib4ti2_groebner_matrix" );
