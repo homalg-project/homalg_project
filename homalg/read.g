@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  read.g                homalg package
-##
-##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
-##
-##  Reading the implementation part of the homalg package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Reading the implementation part of the package.
+#
 
 ## init
 ReadPackage( "homalg", "gap/homalg.gi" );

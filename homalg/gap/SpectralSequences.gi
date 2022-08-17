@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  SpectralSequences.gi        homalg package               Mohamed Barakat
-##
-##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Implementations
+#
+
 ##  Implementation stuff for homalg spectral sequences.
-##
-#############################################################################
 
 ## we assume E collapsed to its p-axes
 InstallMethod( AddTotalEmbeddingsToCollapsedToZeroSpectralSequence,

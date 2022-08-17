@@ -1,13 +1,8 @@
-#############################################################################
-##
-##  init.g                Modules package                    Mohamed Barakat
-##
-##  Copyright 2007-2011, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH-Aachen
-##
-##  Reading the declaration part of the homalg package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Reading the declaration part of the package.
+#
 
 ## init
 ReadPackage( "Modules", "gap/ModulesForHomalg.gd" );

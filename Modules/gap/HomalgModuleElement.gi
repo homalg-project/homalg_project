@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgModuleElement.gi                                   Modules package
-##
-##  Copyright 2011 Mohamed Barakat, University of Kaiserslautern
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Implementations
+#
+
 ##  Implementations for module elements.
-##
-#############################################################################
 
 ##  <#GAPDoc Label="ModuleElements:intro">
 ##  An element of a module <M>M</M> is internally represented by a module map from the (distinguished)

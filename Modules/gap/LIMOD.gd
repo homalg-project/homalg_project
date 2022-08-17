@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  LIMOD.gd                    LIMOD subpackage             Mohamed Barakat
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Declarations
+#
+
 ##         LIMOD = Logical Implications for homalg MODules
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Declaration stuff for the LIMOD subpackage.
-##
-#############################################################################
 
 # our info class:
 DeclareInfoClass( "InfoLIMOD" );

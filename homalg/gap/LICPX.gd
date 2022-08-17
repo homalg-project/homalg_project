@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  LICPX.gd                    LICPX subpackage             Mohamed Barakat
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Declarations
+#
+
 ##         LICPX = Logical Implications for homalg ComPleXes
-##
-##  Copyright 2007-2010, Mohamed Barakat, RWTH-Aachen
-##
-##  Declaration stuff for the LICPX subpackage.
-##
-#############################################################################
 
 # our info class:
 DeclareInfoClass( "InfoLICPX" );

@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgSpectralSequence.gi   homalg package               Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Implementations
+#
+
 ##  Implementations for homalg spectral sequences.
-##
-#############################################################################
 
 ##  <#GAPDoc Label="SpectralSequences:intro">
 ##    Spectral sequences are regarded as the computational sledgehammer in homological algebra. Quoting the last lines

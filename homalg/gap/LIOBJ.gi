@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  LIOBJ.gi                    LIOBJ subpackage             Mohamed Barakat
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Implementations
+#
+
 ##         LIOBJ = Logical Implications for homalg static OBJects
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Implementation stuff for the LIOBJ subpackage.
-##
-#############################################################################
 
 ####################################
 #

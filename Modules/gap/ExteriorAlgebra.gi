@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  ExteriorAlgebra.gi                                       Modules package
-##
-##  Copyright 2011, Florian Diebold, University of Kaiserslautern
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Modules: A homalg based package for the Abelian category of finitely presented modules over computable rings
+#
+# Implementations
+#
+
 ##  Some stuff for calculating with exterior powers of free modules.
-##
-#############################################################################
 
 ## <#GAPDoc Label="ExteriorAlgebra:intro">
 ## What follows are several operations related to the exterior algebra
