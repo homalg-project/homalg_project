@@ -1,15 +1,8 @@
-#############################################################################
-##
-##  read.g                    IO_ForHomalg package            Thomas Bächler
-##                                                           Mohamed Barakat
-##                                                           Max Neunhoeffer
-##                                                            Daniel Robertz
-##
-##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Reading the implementation part of the IO_ForHomalg package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# IO_ForHomalg: IO capabilities for the homalg project
+#
+# Reading the implementation part of the package.
+#
 
 ## wrappers to some functionality of the IO package of Max
 ReadPackage( "IO_ForHomalg", "gap/IO_ForHomalg.gi" );

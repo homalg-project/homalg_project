@@ -60,11 +60,8 @@
 
 <Index>&IO_ForHomalg;</Index>
 
-<#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
 </Body>
-
-<Bibliography Databases="IO_ForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>
