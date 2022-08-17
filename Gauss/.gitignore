@@ -32,3 +32,5 @@
 /doc_tmp/
 /stats
 /tst/gauss*.tst
+
+makefile

@@ -1,15 +1,10 @@
-#############################################################################
-##
-##  IO.gi                     IO_ForHomalg package            Thomas Bächler
-##                                                           Mohamed Barakat
-##                                                           Max Neunhoeffer
-##                                                            Daniel Robertz
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# IO_ForHomalg: IO capabilities for the homalg project
+#
+# Implementations
+#
+
 ##  Implementation stuff to use the GAP4 I/O package of Max Neunhoeffer.
-##
-#############################################################################
 
 ####################################
 #
