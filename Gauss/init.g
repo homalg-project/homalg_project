@@ -1,12 +1,8 @@
-#############################################################################
-##
-##  init.g                    Gauss package                   Simon Goertzen
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Reading the declaration part of the Gauss package.
-##
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Gauss: Extended Gauss functionality for GAP
+#
+# Reading the declaration part of the package.
+#
 
 ReadPackage( "Gauss", "gap/GaussDense.gd" );
 

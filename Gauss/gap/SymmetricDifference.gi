@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  SymmetricDifference.gi     Gauss package                Sebastian Gutsche
-##
-##  Copyright 2017, University of Siegen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Gauss: Extended Gauss functionality for GAP
+#
+# Implementations
+#
+
 ##  Fallback for symmetric difference operation
-##
-#############################################################################
 
 InstallGlobalFunction( SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS,
   
