@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgFunctor.gi            homalg package               Mohamed Barakat
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Implementations
+#
+
 ##  Implementations for functors.
-##
-#############################################################################
 
 ##  <#GAPDoc Label="Functors:intro">
 ##    Functors and their natural transformations form the heart of the &homalg; package. Usually, a functor is realized

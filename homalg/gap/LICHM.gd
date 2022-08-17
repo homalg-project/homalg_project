@@ -1,14 +1,10 @@
-#############################################################################
-##
-##  LICHM.gd                    LICHM subpackage             Mohamed Barakat
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Declarations
+#
+
 ##         LICHM = Logical Implications for homalg CHain Morphisms
-##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
-##
-##  Declaration stuff for the LICHM subpackage.
-##
-#############################################################################
 
 # our info class:
 DeclareInfoClass( "InfoLICHM" );

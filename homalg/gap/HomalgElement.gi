@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgElement.gi                                          homalg package
-##
-##  Copyright 2011 Mohamed Barakat, University of Kaiserslautern
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Implementations
+#
+
 ##  Implementations for homalg elements.
-##
-#############################################################################
 
 ##  <#GAPDoc Label="ObjectElements:intro">
 ##  An element of an object <M>M</M> is internally represented by a morphism from the <Q>structure object</Q>

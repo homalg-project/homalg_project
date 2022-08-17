@@ -1,12 +1,10 @@
-#############################################################################
-##
-##  HomalgCategory.gd                                         homalg package
-##
-##  Copyright 2012 Mohamed Barakat, University of Kaiserslautern
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
+# homalg: A homological algebra meta-package for computable Abelian categories
+#
+# Declarations
+#
+
 ##  Declarations for categories.
-##
-#############################################################################
 
 ####################################
 #
