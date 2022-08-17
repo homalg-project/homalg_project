@@ -1,15 +1,15 @@
   
   
-                               [1X[5XExamplesForHomalg[105X[101X
+                              [1X ExamplesForHomalg [101X
   
   
-                      [1XExamples for the [5XGAP[105X package [5Xhomalg[105X[101X
+                     [1X Examples for the [5XGAP[105X Package homalg [101X
   
   
-                               Version 2022.08-01
+                                   2022.08-02
   
   
-                                   June 2015
+                                 17 August 2022
   
   
                                 Mohamed Barakat
@@ -20,47 +20,40 @@
   
   
   
-            [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
-            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
-            latest version is available [12Xonline[112X at:[133X
-            [33X[0;10Y[7Xhttps://homalg-project.github.io/homalg_project/ExamplesForHomalg/doc/chap0.html[107X[133X
-            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
-            documentation  subfolder of the package. This package is
-            part of the [5Xhomalg[105X-project:[133X
-            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/index.php/core-packages/examplesforhomalg[107X[133X
-  
-  
-  
   Mohamed Barakat
       Email:    [7Xmailto:mohamed.barakat@uni-siegen.de[107X
       Homepage: [7Xhttps://mohamed-barakat.github.io[107X
-      Address:  [33X[0;14YDepartment of Mathematics,[133X
-                [33X[0;14YUniversity of Siegen,[133X
-                [33X[0;14Y57072 Siegen,[133X
+      Address:  [33X[0;14YWalter-Flex-Str. 3[133X
+                [33X[0;14Y57072 Siegen[133X
                 [33X[0;14YGermany[133X
   
   
   Simon Görtzen
       Email:    [7Xmailto:simon.goertzen@rwth-aachen.de[107X
-      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X
-      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
-                52056 Aachen, Germany[133X
+      Homepage: [7Xhttps://www.linkedin.com/in/simongoertzen/[107X
+      Address:  [33X[0;14YSimon Görtzen[133X
+                [33X[0;14YLehrstuhl B fuer Mathematik, RWTH Aachen[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14YGermany[133X
   
   
   Markus Lange-Hegermann
-      Email:    [7Xmailto:markus.lange.hegermann@rwth-aachen.de[107X
-      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~markus/[107X
-      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
-                52056 Aachen, Germany[133X
+      Email:    [7Xmailto:markus.lange-hegermann@hs-owl.de[107X
+      Homepage: [7Xhttps://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/[107X
+      Address:  [33X[0;14YMarkus Lange-Hegermann[133X
+                [33X[0;14YHochschule Ostwestfalen-Lippe[133X
+                [33X[0;14YLiebigstraße 87[133X
+                [33X[0;14Y32657 Lemgo[133X
+                [33X[0;14YGermany[133X
   
   
   
   -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y© 2008-2015 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann[133X
-  
-  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
-  Public License Version 2 or (at your option) any later version.[133X
+  [33X[0;0Y©  2008-2015 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann This
+  package  may be distributed under the terms and conditions of the GNU Public
+  License Version 2 or (at your option) any later version.[133X
   
   
   -------------------------------------------------------
