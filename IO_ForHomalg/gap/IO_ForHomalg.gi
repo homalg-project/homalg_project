@@ -264,7 +264,7 @@ InstallGlobalFunction( SendBlockingToCAS,
 end );
 
 ##
-InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
+InstallGlobalFunction( TryLaunchCAS_IO_ForHomalg,
   function( arg )
     local nargs, HOMALG_IO_CAS, executables, options, env, e, x, s;
     
@@ -330,7 +330,21 @@ InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
     od;
     
     if s = fail then
-        Error( "found no ",  HOMALG_IO_CAS.name, " executable in PATH while searching the following list:\n", executables, "\n" );
+        return rec( success := false, name := HOMALG_IO_CAS.name, executables := executables );
+    else
+        return s;
+    fi;
+    
+end );
+
+InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
+  function( arg )
+    local s;
+    
+    s := CallFuncList( TryLaunchCAS_IO_ForHomalg, arg );
+    
+    if not IsBound( s.stdout ) then
+        Error( "found no ",  s.name, " executable in PATH while searching the following list:\n", s.executables, "\n" );
     fi;
     
     s.stdout!.rbufsize := false;   # switch off buffering

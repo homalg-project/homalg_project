@@ -2,6 +2,7 @@
 ##  <Subsection Label="Singular">
 ##  <Heading>&Singular;</Heading>
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Singular ).stdout )
 ##  gap> F2 := HomalgRingOfIntegersInSingular( 2 );
 ##  GF(2)
 ##  gap> Display( F2 );
@@ -26,9 +27,11 @@
 ##  Q[i]/(i^2+1)
 ##  gap> Display( Qi );
 ##  <An external ring residing in the CAS Singular>
+##  #@fi
 ##  ]]></Example>
 ##  <C>Q := HomalgFieldOfRationalsInSingular( )</C> would launch another Singular.
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Singular ).stdout )
 ##  gap> F2xyz := F2 * "x,y,z";
 ##  GF(2)[x,y,z]
 ##  gap> Display( F2xyz );
@@ -103,6 +106,7 @@
 ##  <An external ring residing in the CAS Singular>
 ##  gap> "z + x*y" / qring = "z" / qring;
 ##  true
+##  #@fi
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

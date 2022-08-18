@@ -112,17 +112,7 @@ ci-test_MatricesForHomalg:
 	$(MAKE) -C MatricesForHomalg ci-test
 
 ci-test_RingsForHomalg:
-ifneq ($(SINGULAR_PATH),)
-ifneq ($(SAGE_PATH),)
-ifneq ($(M2_PATH),)
-ifneq ($(MAGMA_PATH),)
-ifneq ($(MAPLE_PATH),)
 	$(MAKE) -C RingsForHomalg ci-test
-endif
-endif
-endif
-endif
-endif
 
 ci-test_SCO:
 	$(MAKE) -C SCO ci-test

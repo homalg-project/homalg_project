@@ -24,6 +24,8 @@ DeclareGlobalFunction( "CheckOutputOfCAS" );
 
 DeclareGlobalFunction( "SendBlockingToCAS" );
 
+DeclareGlobalFunction( "TryLaunchCAS_IO_ForHomalg" );
+
 #! @ChapterInfo Tools, Functions
 #! @Arguments function, args
 #! @Returns list

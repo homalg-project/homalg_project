@@ -2,6 +2,7 @@
 ##  <Subsection Label="Sage">
 ##  <Heading>&Sage;</Heading>
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )
 ##  gap> ZZ := HomalgRingOfIntegersInSage( );
 ##  Z
 ##  gap> Display( ZZ );
@@ -10,9 +11,11 @@
 ##  GF(2)
 ##  gap> Display( F2 );
 ##  <An external ring residing in the CAS Sage>
+##  #@fi
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInSage( 2 )</C> would launch another Sage.
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )
 ##  gap> Z_4 := HomalgRingOfIntegersInSage( ZZ ) / 4;
 ##  Z/( 4 )
 ##  gap> Display( Z_4 );
@@ -29,6 +32,7 @@
 ##  Q[x]
 ##  gap> Display( Qx );
 ##  <An external ring residing in the CAS Sage>
+##  #@fi
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

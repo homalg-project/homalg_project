@@ -2,6 +2,7 @@
 ##  <Subsection Label="Macaulay2">
 ##  <Heading>&Macaulay2;</Heading>
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )
 ##  gap> ZZ := HomalgRingOfIntegersInMacaulay2( );
 ##  Z
 ##  gap> Display( ZZ );
@@ -10,9 +11,11 @@
 ##  GF(2)
 ##  gap> Display( F2 );
 ##  <An external ring residing in the CAS Macaulay2>
+##  #@fi
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInMacaulay2( 2 )</C> would launch another Macaulay2.
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )
 ##  gap> Z_4 := HomalgRingOfIntegersInMacaulay2( ZZ ) / 4;
 ##  Z/( 4 )
 ##  gap> Display( Z_4 );
@@ -37,6 +40,7 @@
 ##  Q{e,f,g}
 ##  gap> Display( Exyz );
 ##  <An external ring residing in the CAS Macaulay2>
+##  #@fi
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
