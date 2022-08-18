@@ -577,7 +577,7 @@ InstallMethod( ViewObj,
     for p in degrees do
         s := ListWithIdenticalEntries( 4 - Length( String( p ) ), ' ' );
         ConvertToStringRep( s );
-        Print( s, p, ":\t" );
+        Print( s, p, ":   " );
         ViewObj( CertainObject( o, p ) );
         Print( "\n" );
     od;
