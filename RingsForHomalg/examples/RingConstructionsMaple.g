@@ -2,6 +2,7 @@
 ##  <Subsection Label="Maple">
 ##  <Heading>&Maple;</Heading>
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )
 ##  gap> ZZ := HomalgRingOfIntegersInMaple( );
 ##  Z
 ##  gap> Display( ZZ );
@@ -10,9 +11,11 @@
 ##  GF(2)
 ##  gap> Display( F2 );
 ##  <An external ring residing in the CAS Maple>
+##  #@fi
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInMaple( 2 )</C> would launch another Maple.
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )
 ##  gap> Z4 := HomalgRingOfIntegersInMaple( 4, ZZ );
 ##  Z/4Z
 ##  gap> Display( Z4 );
@@ -41,6 +44,7 @@
 ##  Q{e,f,g}
 ##  gap> Display( Exyz );
 ##  <An external ring residing in the CAS Maple>
+##  #@fi
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

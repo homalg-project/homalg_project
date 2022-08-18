@@ -2,6 +2,7 @@
 ##  <Subsection Label="MAGMA">
 ##  <Heading>&MAGMA;</Heading>
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )
 ##  gap> ZZ := HomalgRingOfIntegersInMAGMA( );
 ##  Z
 ##  gap> Display( ZZ );
@@ -10,9 +11,11 @@
 ##  GF(2)
 ##  gap> Display( F2 );
 ##  <An external ring residing in the CAS MAGMA>
+##  #@fi
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInMAGMA( 2 )</C> would launch another MAGMA.
 ##  <Example><![CDATA[
+##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )
 ##  gap> Z_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;
 ##  Z/( 4 )
 ##  gap> Display( Z_4 );
@@ -33,6 +36,7 @@
 ##  Q{e,f,g}
 ##  gap> Display( Exyz );
 ##  <An external ring residing in the CAS MAGMA>
+##  #@fi
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
