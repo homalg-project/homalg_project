@@ -506,8 +506,8 @@ end );
 
 ## the second argument is there for method selection
 InstallMethod( DiagonalMorphismOp,
-	"for a list of homalg morphims and a single one",
-	[ IsList, IsHomalgMorphism ],
+        "for a list of homalg morphims and a single one",
+        [ IsList, IsHomalgMorphism ],
 
   function( L, phi )
 

@@ -31,10 +31,10 @@ InstallValue( LIMOR,
               "IsSplitMonomorphism",
               "IsSplitEpimorphism",
               "IsIsomorphism",
-	      "IsAutomorphism" ],
+              "IsAutomorphism" ],
             intrinsic_attributes :=
             [ "DegreeOfMorphism" ],
-	    )
+          )
         );
 
 ##

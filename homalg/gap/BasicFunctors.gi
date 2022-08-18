@@ -455,7 +455,7 @@ InstallFunctor( functor_DefectOfExactness );
 InstallFunctor( Functor_Dualize );
 
 ##
-## TensorProduct( M, N )	( M * N )
+## TensorProduct( M, N ) ( M * N )
 ##
 
 if not IsOperation( TensorProduct ) then
