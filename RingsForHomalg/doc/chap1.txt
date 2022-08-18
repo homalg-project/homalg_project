@@ -44,6 +44,7 @@
   [1X1.1-2 [33X[0;0Y[5XSingular[105X[101X[1X[133X[101X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Singular ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInSingular( 2 );[127X[104X
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
@@ -68,11 +69,13 @@
     [4X[28XQ[i]/(i^2+1)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Qi );[127X[104X
     [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   [33X[0;0Y[10XQ := HomalgFieldOfRationalsInSingular( )[110X would launch another Singular.[133X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Singular ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XF2xyz := F2 * "x,y,z";[127X[104X
     [4X[28XGF(2)[x,y,z][128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2xyz );[127X[104X
@@ -147,12 +150,14 @@
     [4X[28X<An external ring residing in the CAS Singular>[128X[104X
     [4X[25Xgap>[125X [27X"z + x*y" / qring = "z" / qring;[127X[104X
     [4X[28Xtrue[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   
   [1X1.1-3 [33X[0;0Y[5XMAGMA[105X[101X[1X[133X[101X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMAGMA( );[127X[104X
     [4X[28XZ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
@@ -161,11 +166,13 @@
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   [33X[0;0Y[10XF2 := HomalgRingOfIntegersInMAGMA( 2 )[110X would launch another MAGMA.[133X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
@@ -186,12 +193,14 @@
     [4X[28XQ{e,f,g}[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Exyz );[127X[104X
     [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   
   [1X1.1-4 [33X[0;0Y[5XMacaulay2[105X[101X[1X[133X[101X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMacaulay2( );[127X[104X
     [4X[28XZ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
@@ -200,11 +209,13 @@
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   [33X[0;0Y[10XF2 := HomalgRingOfIntegersInMacaulay2( 2 )[110X would launch another Macaulay2.[133X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMacaulay2( ZZ ) / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
@@ -229,12 +240,14 @@
     [4X[28XQ{e,f,g}[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Exyz );[127X[104X
     [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   
   [1X1.1-5 [33X[0;0Y[5XSage[105X[101X[1X[133X[101X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInSage( );[127X[104X
     [4X[28XZ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
@@ -243,11 +256,13 @@
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS Sage>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   [33X[0;0Y[10XF2 := HomalgRingOfIntegersInSage( 2 )[110X would launch another Sage.[133X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInSage( ZZ ) / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
@@ -264,12 +279,14 @@
     [4X[28XQ[x][128X[104X
     [4X[25Xgap>[125X [27XDisplay( Qx );[127X[104X
     [4X[28X<An external ring residing in the CAS Sage>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   
   [1X1.1-6 [33X[0;0Y[5XMaple[105X[101X[1X[133X[101X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMaple( );[127X[104X
     [4X[28XZ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
@@ -278,11 +295,13 @@
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   
   [33X[0;0Y[10XF2 := HomalgRingOfIntegersInMaple( 2 )[110X would launch another Maple.[133X
   
   [4X[32X  Example  [32X[104X
+    [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )[128X[104X
     [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegersInMaple( 4, ZZ );[127X[104X
     [4X[28XZ/4Z[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
@@ -311,5 +330,6 @@
     [4X[28XQ{e,f,g}[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Exyz );[127X[104X
     [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+    [4X[28X#@fi[128X[104X
   [4X[32X[104X
   

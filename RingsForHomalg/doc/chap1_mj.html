@@ -93,6 +93,7 @@ Q
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Singular ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInSingular( 2 );</span>
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
@@ -117,12 +118,14 @@ Q(s)
 Q[i]/(i^2+1)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Qi );</span>
 &lt;An external ring residing in the CAS Singular&gt;
+#@fi
 </pre></div>
 
 <p><code class="code">Q := HomalgFieldOfRationalsInSingular( )</code> would launch another Singular.</p>
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Singular ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2xyz := F2 * "x,y,z";</span>
 GF(2)[x,y,z]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2xyz );</span>
@@ -197,6 +200,7 @@ Q[x,y,z]/( x*y )
 &lt;An external ring residing in the CAS Singular&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">"z + x*y" / qring = "z" / qring;</span>
 true
+#@fi
 </pre></div>
 
 <p><a id="X839147CF813312D6" name="X839147CF813312D6"></a></p>
@@ -205,6 +209,7 @@ true
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInMAGMA( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
@@ -213,12 +218,14 @@ Z
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS MAGMA&gt;
+#@fi
 </pre></div>
 
 <p><code class="code">F2 := HomalgRingOfIntegersInMAGMA( 2 )</code> would launch another MAGMA.</p>
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z_4 );</span>
@@ -239,6 +246,7 @@ Q[x,y,z]
 Q{e,f,g}
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Exyz );</span>
 &lt;An external ring residing in the CAS MAGMA&gt;
+#@fi
 </pre></div>
 
 <p><a id="X83D66E0279CF39E6" name="X83D66E0279CF39E6"></a></p>
@@ -247,6 +255,7 @@ Q{e,f,g}
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInMacaulay2( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
@@ -255,12 +264,14 @@ Z
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS Macaulay2&gt;
+#@fi
 </pre></div>
 
 <p><code class="code">F2 := HomalgRingOfIntegersInMacaulay2( 2 )</code> would launch another Macaulay2.</p>
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInMacaulay2( ZZ ) / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z_4 );</span>
@@ -285,6 +296,7 @@ Q[x,y,z]&lt;Dx,Dy,Dz&gt;
 Q{e,f,g}
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Exyz );</span>
 &lt;An external ring residing in the CAS Macaulay2&gt;
+#@fi
 </pre></div>
 
 <p><a id="X7A9D29E187AA3F83" name="X7A9D29E187AA3F83"></a></p>
@@ -293,6 +305,7 @@ Q{e,f,g}
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInSage( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
@@ -301,12 +314,14 @@ Z
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS Sage&gt;
+#@fi
 </pre></div>
 
 <p><code class="code">F2 := HomalgRingOfIntegersInSage( 2 )</code> would launch another Sage.</p>
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInSage( ZZ ) / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z_4 );</span>
@@ -323,6 +338,7 @@ GF(2)[x]
 Q[x]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Qx );</span>
 &lt;An external ring residing in the CAS Sage&gt;
+#@fi
 </pre></div>
 
 <p><a id="X83E0B3C584764593" name="X83E0B3C584764593"></a></p>
@@ -331,6 +347,7 @@ Q[x]
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInMaple( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
@@ -339,12 +356,14 @@ Z
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS Maple&gt;
+#@fi
 </pre></div>
 
 <p><code class="code">F2 := HomalgRingOfIntegersInMaple( 2 )</code> would launch another Maple.</p>
 
 
 <div class="example"><pre>
+#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := HomalgRingOfIntegersInMaple( 4, ZZ );</span>
 Z/4Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z4 );</span>
@@ -373,6 +392,7 @@ Q[x,y,z]&lt;Dx,Dy,Dz&gt;
 Q{e,f,g}
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Exyz );</span>
 &lt;An external ring residing in the CAS Maple&gt;
+#@fi
 </pre></div>
 
 
