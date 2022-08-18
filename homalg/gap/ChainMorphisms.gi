@@ -51,7 +51,7 @@ InstallMethod( DefectOfExactness,
         Error( "the ", i, ". morphism of the chain morphism is neither at one of the ends nor in the middle of both source and target complexes\n" );
     fi;
     
-    return def;		## the output is handled by the methods installed by InstallSpecialFunctorOnMorphisms
+    return def; ## the output is handled by the methods installed by InstallSpecialFunctorOnMorphisms
     
 end );
 
@@ -94,7 +94,7 @@ InstallMethod( DefectOfExactness,
         Error( "the ", i, ". morphism of the chain morphism is neither at one of the ends nor in the middle of both source and target complexes\n" );
     fi;
     
-    return def;		## the output is handled by the methods installed by InstallSpecialFunctorOnMorphisms
+    return def; ## the output is handled by the methods installed by InstallSpecialFunctorOnMorphisms
     
 end );
 

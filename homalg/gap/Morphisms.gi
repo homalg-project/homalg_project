@@ -13,7 +13,7 @@
 ####################################
 
 ##
-InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single map)
+InstallMethod( Resolution, ### defines: Resolution (ResolutionOfSeq for a single map)
         "for homalg static morphisms",
         [ IsInt, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         

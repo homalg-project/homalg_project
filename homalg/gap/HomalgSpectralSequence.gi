@@ -523,7 +523,7 @@ InstallMethod( AssociatedFirstSpectralSequence,
         BC := UnderlyingBicomplex( II_E );
         
         if not IsTransposedWRTTheAssociatedComplex( BC ) then
-            return fail;	## this doesn't seem like the second spectral sequence
+            return fail; ## this doesn't seem like the second spectral sequence
         fi;
         
         BC := TransposedBicomplex( BC );
@@ -536,7 +536,7 @@ InstallMethod( AssociatedFirstSpectralSequence,
         
         ## enforce computation till the second sheet, even if things stabilize earlier
         if HighestLevelInSpectralSequence( I_E ) < 2 then
-            I_E := HomalgSpectralSequence( 2, BC );	## FIXME: find a way to avoid recomputing things
+            I_E := HomalgSpectralSequence( 2, BC ); ## FIXME: find a way to avoid recomputing things
         fi;
         
         ## finally enrich the second spectral sequence with the first
@@ -812,7 +812,7 @@ InstallMethod( HomalgSpectralSequence,
         "for homalg bicomplexes",
         [ IsInt, IsHomalgBicomplex, IsInt ],
         
-  function( r, B, a )				## a could, for example, be the level where E_r becomes intrinsic
+  function( r, B, a ) ## a could, for example, be the level where E_r becomes intrinsic
     local bidegrees, E, Ei, type, rr, i;
     
     bidegrees := ObjectDegreesOfBicomplex( B );

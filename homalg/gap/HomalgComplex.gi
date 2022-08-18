@@ -1123,7 +1123,7 @@ InstallMethod( CertainMorphismAsSubcomplex,
     elif HasIsComplex( C ) and IsComplex( C ) then
         SetIsComplex( A, true );
     elif HasIsSequence( C ) and IsSequence( C ) then
-        SetIsComplex( A, true );	## this is not a mistake
+        SetIsComplex( A, true ); ## this is not a mistake
     fi;
     
     return A;
@@ -1153,7 +1153,7 @@ InstallMethod( CertainMorphismAsSubcomplex,
     elif HasIsComplex( C ) and IsComplex( C ) then
         SetIsComplex( A, true );
     elif HasIsSequence( C ) and IsSequence( C ) then
-        SetIsComplex( A, true );	## this is not a mistake
+        SetIsComplex( A, true ); ## this is not a mistake
     fi;
     
     return A;

@@ -299,7 +299,7 @@ InstallMethod( FunctorOfGenesis,
         
   function( M )
     
-    return FunctorOfGenesis( M, 0 );	## the last functor
+    return FunctorOfGenesis( M, 0 ); ## the last functor
     
 end );
 
@@ -363,7 +363,7 @@ InstallMethod( ArgumentsOfGenesis,
         
   function( M )
     
-    return ArgumentsOfGenesis( M, 0 );	## the last functor
+    return ArgumentsOfGenesis( M, 0 ); ## the last functor
     
 end );
 

@@ -633,7 +633,7 @@ end );
 ##
 InstallMethod( RankOfObject,
         "LIOBJ: for homalg static objects",
-        [ IsStaticFinitelyPresentedObjectRep ], 1001,	## 10001 is above the getter method value and would lead to infinite loops
+        [ IsStaticFinitelyPresentedObjectRep ], 1001, ## 10001 is above the getter method value and would lead to infinite loops
         
   function( M )
     
@@ -723,7 +723,7 @@ InstallMethod( Grade,
     
     if IsZero( M ) then
         return infinity;
-    elif not IsTorsion( M ) then	## and not IsZero( M )
+    elif not IsTorsion( M ) then ## and not IsZero( M )
         return 0;
     fi;
     

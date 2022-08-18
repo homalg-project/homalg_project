@@ -16,7 +16,7 @@
 ## AsATwoSequence
 ##
 
-InstallGlobalFunction( _Functor_AsATwoSequence_OnObjects,	### defines: AsATwoSequence
+InstallGlobalFunction( _Functor_AsATwoSequence_OnObjects, ### defines: AsATwoSequence
   function( phi, psi )
     local pre, post, C;
     
@@ -129,7 +129,7 @@ end );
 InstallMethod( \*,
         "for homalg composable morphisms",
         [ IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsHomalgMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which could be an endomorphism
+          IsHomalgMorphism ], 1001, ## this must be ranked higher than multiplication with a ring element, which could be an endomorphism
         
   function( pre, post )
     
@@ -141,7 +141,7 @@ end );
 InstallMethod( \*,
         "for homalg composable morphisms",
         [ IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsHomalgMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
+          IsHomalgMorphism ], 1001, ## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
         
   function( post, pre )
     
@@ -159,7 +159,7 @@ end );
 #   v                v
 #   B_ --(beta1)---> B
 
-InstallGlobalFunction( _Functor_AsChainMorphismForPullback_OnObjects,	### defines: AsChainMorphismForPullback
+InstallGlobalFunction( _Functor_AsChainMorphismForPullback_OnObjects, ### defines: AsChainMorphismForPullback
   function( phi, beta1 )
     local S, T, c;
     
@@ -207,7 +207,7 @@ functor_AsChainMorphismForPullback!.ContainerForWeakPointersOnComputedBasicObjec
 #   v                v
 #   B_ ----<?>-----> ?
 
-InstallGlobalFunction( _Functor_AsChainMorphismForPushout_OnObjects,	### defines: AsChainMorphismForPushout
+InstallGlobalFunction( _Functor_AsChainMorphismForPushout_OnObjects, ### defines: AsChainMorphismForPushout
   function( alpha1, psi )
     local S, T, c;
     
@@ -407,7 +407,7 @@ end );
 ## PreDivide
 ##
 
-InstallGlobalFunction( _Functor_PreDivide_OnMorphisms,	### defines: PreDivide
+InstallGlobalFunction( _Functor_PreDivide_OnMorphisms, ### defines: PreDivide
   function( epsilon, eta )
     local gen_iso, eta0;
     

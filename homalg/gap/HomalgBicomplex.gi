@@ -536,7 +536,7 @@ InstallMethod( CertainHorizontalMorphism,
         return fail;
     fi;
     
-    if IsEvenInt( pq[2] ) then		## yes pq[2], not pq[1]
+    if IsEvenInt( pq[2] ) then ## yes pq[2], not pq[1]
         return mor;
     else
         return -mor;
@@ -663,12 +663,12 @@ InstallMethod( MorphismOfTotalComplex,
   function( B, n )
     local bidegrees_source, bidegrees_target;
     
-    bidegrees_source := Reversed( BidegreesOfObjectOfTotalComplex( B, n ) );		## this has the effect, that [ n, 0 ] comes last
+    bidegrees_source := Reversed( BidegreesOfObjectOfTotalComplex( B, n ) ); ## this has the effect, that [ n, 0 ] comes last
     
     if IsBicomplexOfFinitelyPresentedObjectsRep( B ) then
-        bidegrees_target := Reversed( BidegreesOfObjectOfTotalComplex( B, n - 1 ) );	## this has the effect, that [ n - 1, 0 ] comes last
+        bidegrees_target := Reversed( BidegreesOfObjectOfTotalComplex( B, n - 1 ) ); ## this has the effect, that [ n - 1, 0 ] comes last
     else
-        bidegrees_target := Reversed( BidegreesOfObjectOfTotalComplex( B, n + 1 ) );	## this has the effect, that [ n + 1, 0 ] comes last
+        bidegrees_target := Reversed( BidegreesOfObjectOfTotalComplex( B, n + 1 ) ); ## this has the effect, that [ n + 1, 0 ] comes last
     fi;
     
     return MorphismOfTotalComplex( B, bidegrees_source, bidegrees_target );
@@ -863,7 +863,7 @@ InstallMethod( TransposedBicomplex,
     tB := HomalgBicomplex( C, "TransposedBicomplex" );
     
     B!.TransposedBicomplex := tB;
-    tB!.TransposedBicomplex := B;	## thanks GAP
+    tB!.TransposedBicomplex := B; ## thanks GAP
     
     return tB;
     

@@ -98,9 +98,9 @@ DeclareAttribute( "OperationOfFunctor",
 ##  Z
 ##  gap> LeftDualizingFunctor( ZZ, "ZZ_Hom" );
 ##  <The functor ZZ_Hom for f.p. modules and their maps over computable rings>
-##  gap> Functor_ZZ_Hom_for_fp_modules;	## got automatically defined
+##  gap> Functor_ZZ_Hom_for_fp_modules; ## got automatically defined
 ##  <The functor ZZ_Hom for f.p. modules and their maps over computable rings>
-##  gap> ZZ_Hom;		## got automatically defined
+##  gap> ZZ_Hom; ## got automatically defined
 ##  <Operation "ZZ_Hom">
 ##  gap> Genesis( Functor_ZZ_Hom_for_fp_modules );
 ##  [ "InsertObjectInMultiFunctor",

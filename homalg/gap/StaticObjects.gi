@@ -76,7 +76,7 @@ InstallMethod( \/,
         "for homalg subobjects of static objects",
         [ IsStaticFinitelyPresentedObjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
-  function( M, N )	## M must be either the super object of N or 1 * R or R * 1
+  function( M, N ) ## M must be either the super object of N or 1 * R or R * 1
     local R;
     
     CheckIfTheyLieInTheSameCategory( M, N );
@@ -96,7 +96,7 @@ InstallMethod( \/,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep, IsStaticFinitelyPresentedObjectRep and HasUnderlyingSubobject ],
         
-  function( M, N )	## M must be either the super object of N or 1 * R or R * 1
+  function( M, N ) ## M must be either the super object of N or 1 * R or R * 1
     
     return M / UnderlyingSubobject( N );
     
@@ -161,7 +161,7 @@ InstallMethod( FiniteFreeResolution,
     
     if HasAFiniteFreeResolution( M ) then
         return AFiniteFreeResolution( M );
-    elif not HasFiniteFreeResolutionExists( M ) or FiniteFreeResolutionExists( M ) then	## in words: either a finite free resolution exists or its existence is not known yet
+    elif not HasFiniteFreeResolutionExists( M ) or FiniteFreeResolutionExists( M ) then ## in words: either a finite free resolution exists or its existence is not known yet
         Resolution( M );
     fi;
     
@@ -398,7 +398,7 @@ InstallMethod( ShortenResolution,
         "an integer and a right acyclic complex",
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsRightAcyclic ],
         
-  function( q, d )	## q is the number of shortening steps
+  function( q, d ) ## q is the number of shortening steps
     local max, min, m, n, mx, d_m, d_m_1, shortened, F_m, s_m_1, d_m_2,
           d_short, l, epi;
     
@@ -415,7 +415,7 @@ InstallMethod( ShortenResolution,
     fi;
     
     ## initialize
-    n := q;	## number of shortening steps
+    n := q; ## number of shortening steps
     mx := max;
     
     d_m := CertainMorphism( d, mx );
@@ -582,7 +582,7 @@ InstallMethod( AsEpimorphicImage,
     local pos, iso;
     
     if not ( HasIsEpimorphism( phi ) and IsEpimorphism( phi ) ) and
-       not IsZero( Cokernel( phi ) ) then	## I do not require phi to be a morphism, that's why I don't use IsEpimorphism
+       not IsZero( Cokernel( phi ) ) then ## I do not require phi to be a morphism, that's why I don't use IsEpimorphism
         Error( "the first argument must be an epimorphism\n" );
     fi;
     
@@ -838,7 +838,7 @@ InstallMethod( Saturate,
 end );
 
 ##
-InstallMethod( \-,	## a geometrically motivated definition
+InstallMethod( \-, ## a geometrically motivated definition
         "for homalg subobjects of static objects",
         [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
