@@ -160,7 +160,7 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects, ### defines: Kernel(Emb)
     ## figure out an upper bound for the projective dimension of ker:
     if not HasProjectiveDimension( ker ) and HasIsProjective( S ) and IsProjective( S ) then
         T := Range( psi );
-        if HasIsProjective( T ) and IsProjective( T ) then ## typical for M^* which is a K_2(D(M)) (up to projective equivalence)
+        if HasIsProjective( T ) and IsProjective( T ) then  ## typical for M^* which is a K_2(D(M)) (up to projective equivalence)
             SetUpperBoundForProjectiveDimension( ker, -2 ); ## since ker = K_2( coker )
             if HasCokernelEpi( psi ) then
                 coker := Range( CokernelEpi( psi ) ); ## S & T projective, then pd( ker ) = pd( coker ) - 2

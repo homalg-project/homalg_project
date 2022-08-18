@@ -657,9 +657,9 @@ InstallMethod( BidualizingBicomplex,
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         F := RightDualizingFunctor( R ); # Hom(-,R) for right objects
-        G := LeftDualizingFunctor( R ); # Hom(-,R) for left objects
+        G := LeftDualizingFunctor( R );  # Hom(-,R) for left objects
     else
-        F := LeftDualizingFunctor( R ); # Hom(-,R) for left objects
+        F := LeftDualizingFunctor( R );  # Hom(-,R) for left objects
         G := RightDualizingFunctor( R ); # Hom(-,R) for right objects
     fi;
     

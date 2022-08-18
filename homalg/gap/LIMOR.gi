@@ -147,7 +147,7 @@ InstallImmediateMethod( IsZero,
   function( phi )
     
     if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) and ## to place "or" here we need to know that phi is a morphism;
-       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then ## see the method below
+       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then  ## see the method below
         return true;
     fi;
     

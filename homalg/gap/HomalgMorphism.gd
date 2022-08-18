@@ -412,10 +412,10 @@ DeclareOperation( "AreComparableMorphisms",
 DeclareOperation( "AreComposableMorphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "*", ## this must remain, since an element in IsHomalgMorphism
+DeclareOperation( "*",                            ## this must remain, since an element in IsHomalgMorphism
         [ IsHomalgMorphism, IsHomalgMorphism ] ); ## is not a priori IsMultiplicativeElement
 
-DeclareOperation( "^", ## this must remain, since an element in IsHomalgMorphism
+DeclareOperation( "^",                 ## this must remain, since an element in IsHomalgMorphism
         [ IsHomalgMorphism, IsInt ] ); ## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "PreInverse",

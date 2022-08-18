@@ -828,8 +828,8 @@ InstallMethod( ConnectingHomomorphism,
     snake := iota_Hqn;
     snake := snake / jn;
     snake := PreCompose( snake, bn ); ## the connecting homomorphism is what b[n] induces between certain subfactors of C[n] and C[n-1]
-    snake := snake / in_1; ## lift
-    snake := snake / iota_Hsn_1; ## lift
+    snake := snake / in_1;            ## lift
+    snake := snake / iota_Hsn_1;      ## lift
     
     ## check assertion
     Assert( 3, IsMorphism( snake ) );
