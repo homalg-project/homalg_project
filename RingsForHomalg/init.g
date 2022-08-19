@@ -29,8 +29,6 @@ ReadPackage( "RingsForHomalg", "gap/SingularBasic.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularTools.gd" );
 
-ReadPackage( "RingsForHomalg", "gap/SingularGF2.gd" );
-ReadPackage( "RingsForHomalg", "gap/SingularQX.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularGroebner.gd" );
 
 ## Macaulay2
