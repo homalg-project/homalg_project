@@ -10,8 +10,8 @@ LoadPackage( "Modules" );
 
 I := LeftSubmodule( "y,z", R );
 
-Assert( IsProjective( I ), false );
-Assert( IsReflexive( I ), true );
+Assert( 0, not IsProjective( I ) );
+Assert( 0, IsReflexive( I ) );
 
 ViewObj( I ); Print( "\n" );
 
