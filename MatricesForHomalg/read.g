@@ -49,7 +49,6 @@ ReadPackage( "MatricesForHomalg", "gap/LIMAT.gi" );
 ReadPackage( "MatricesForHomalg", "gap/Euclidean.gi" );
 ReadPackage( "MatricesForHomalg", "gap/Integers.gi" );
 #ReadPackage( "MatricesForHomalg", "gap/EDIM.gi" );
-ReadPackage( "MatricesForHomalg", "gap/UnivariatePolynomials.gi" );
 
 ## the subpackage ResidueClassRingForHomalg
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingForHomalg.gi" );

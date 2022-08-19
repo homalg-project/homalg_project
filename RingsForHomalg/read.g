@@ -20,8 +20,6 @@ ReadPackage( "RingsForHomalg", "gap/SingularBasic.gi" );
 ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gi" );
 ReadPackage( "RingsForHomalg", "gap/SingularTools.gi" );
 
-ReadPackage( "RingsForHomalg", "gap/SingularGF2.gi" );
-ReadPackage( "RingsForHomalg", "gap/SingularQX.gi" );
 ReadPackage( "RingsForHomalg", "gap/SingularGroebner.gi" );
 
 ## Macaulay2
