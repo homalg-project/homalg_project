@@ -3,17 +3,17 @@
   [1XReferences[101X
   
   [[20XBar09[120X]  [16XBarakat, M.[116X, [17XSpectral filtrations via generalized morphisms[117X (2009),
-  ((submitted
-  (\href{http://arxiv.org/abs/0904.0240}{\texttt{arXiv:0904.0240}}))).
+  (submitted
+  (\href{http://arxiv.org/abs/0904.0240}{\texttt{arXiv:0904.0240}})).
   
   [[20XBR08[120X]  [16XBarakat,  M.  and  Robertz,  D.[116X,  [17Xmathtthomalg -- A meta-package for
   homological   algebra[117X,   [18XJ.   Algebra   Appl.[118X,   [19X7[119X,   3   (2008),  299--317,
-  (((\href{http://arxiv.org/abs/math.AC/0701146}{\texttt{arXiv:math.AC/0701146}}))).
+  ((\href{http://arxiv.org/abs/math.AC/0701146}{\texttt{arXiv:math.AC/0701146}})).
   
   [[20XCE99[120X]   [16XCartan,  H.  and  Eilenberg,  S.[116X,  [17XHomological  algebra[117X,  Princeton
   University  Press, Princeton Landmarks in Mathematics, Princeton, NJ (1999),
-  xvi+390 pages, ((With an appendix by David A. Buchsbaum, Reprint of the 1956
-  original)).
+  xvi+390  pages, (With an appendix by David A. Buchsbaum, Reprint of the 1956
+  original).
   
   [[20XGM03[120X]  [16XGelfand,  S.  I.  and  Manin, Y. I.[116X, [17XMethods of homological algebra[117X,
   Springer-Verlag,  2.  edition,  Springer  Monographs  in Mathematics, Berlin

@@ -526,7 +526,7 @@
     [4Xend );[104X
     [4X[104X
     [4X[104X
-    [4XInstallMethod( \-,	## a geometrically motivated definition[104X
+    [4XInstallMethod( \-, ## a geometrically motivated definition[104X
     [4X        "for homalg subobjects of static objects",[104X
     [4X        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],[104X
     [4X        [104X

@@ -114,9 +114,9 @@
     [4X[28X<The free right module of rank 1 on a free generator>[128X[104X
     [4X[25Xgap>[125X [27XInsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, ZZ * 1, "Hom_ZZ" );[127X[104X
     [4X[28X<The functor Hom_ZZ for f.p. modules and their maps over computable rings>[128X[104X
-    [4X[25Xgap>[125X [27XFunctor_Hom_ZZ_for_fp_modules;	## got automatically defined[127X[104X
+    [4X[25Xgap>[125X [27XFunctor_Hom_ZZ_for_fp_modules; ## got automatically defined[127X[104X
     [4X[28X<The functor Hom_ZZ for f.p. modules and their maps over computable rings>[128X[104X
-    [4X[25Xgap>[125X [27XHom_ZZ;		## got automatically defined[127X[104X
+    [4X[25Xgap>[125X [27XHom_ZZ; ## got automatically defined[127X[104X
     [4X[28X<Operation "Hom_ZZ">[128X[104X
   [4X[32X[104X
   
@@ -221,10 +221,10 @@
     [4X[25Xgap>[125X [27XFunctor_Hom_for_fp_modules * Functor_TensorProduct_for_fp_modules;[127X[104X
     [4X[28X<The functor HomTensorProduct for f.p. modules and their maps over computable \[128X[104X
     [4X[28Xrings>[128X[104X
-    [4X[25Xgap>[125X [27XFunctor_HomTensorProduct_for_fp_modules;	## got automatically defined[127X[104X
+    [4X[25Xgap>[125X [27XFunctor_HomTensorProduct_for_fp_modules; ## got automatically defined[127X[104X
     [4X[28X<The functor HomTensorProduct for f.p. modules and their maps over computable \[128X[104X
     [4X[28Xrings>[128X[104X
-    [4X[25Xgap>[125X [27XHomTensorProduct;		## got automatically defined[127X[104X
+    [4X[25Xgap>[125X [27XHomTensorProduct; ## got automatically defined[127X[104X
     [4X[28X<Operation "HomTensorProduct">[128X[104X
   [4X[32X[104X
   
@@ -285,9 +285,9 @@
           [4X[28XZ[128X[104X
           [4X[25Xgap>[125X [27XLeftDualizingFunctor( ZZ, "ZZ_Hom" );[127X[104X
           [4X[28X<The functor ZZ_Hom for f.p. modules and their maps over computable rings>[128X[104X
-          [4X[25Xgap>[125X [27XFunctor_ZZ_Hom_for_fp_modules;	## got automatically defined[127X[104X
+          [4X[25Xgap>[125X [27XFunctor_ZZ_Hom_for_fp_modules; ## got automatically defined[127X[104X
           [4X[28X<The functor ZZ_Hom for f.p. modules and their maps over computable rings>[128X[104X
-          [4X[25Xgap>[125X [27XZZ_Hom;		## got automatically defined[127X[104X
+          [4X[25Xgap>[125X [27XZZ_Hom; ## got automatically defined[127X[104X
           [4X[28X<Operation "ZZ_Hom">[128X[104X
           [4X[25Xgap>[125X [27XGenesis( Functor_ZZ_Hom_for_fp_modules );[127X[104X
           [4X[28X[ "InsertObjectInMultiFunctor",[128X[104X
