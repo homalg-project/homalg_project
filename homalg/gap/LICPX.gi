@@ -217,7 +217,7 @@ InstallMethod( \=,
     objects2 := ObjectsOfComplex( C2 );
     
     if IsHomalgStaticObject( objects1[1] ) then
-        b := ForAll( [ 1 .. l ], i -> IsIdenticalObj( objects1[i], objects2[i] ) );	## yes, identical.
+        b := ForAll( [ 1 .. l ], i -> IsIdenticalObj( objects1[i], objects2[i] ) ); ## yes, identical.
         if not b then
             return false;
         fi;
@@ -352,7 +352,7 @@ InstallMethod( IsRightAcyclic,
         return false;
     fi;
     
-    if MorphismDegreesOfComplex( C ) = [ ] then	## just a single object
+    if MorphismDegreesOfComplex( C ) = [ ] then ## just a single object
         return true;
     fi;
     
@@ -376,7 +376,7 @@ InstallMethod( IsLeftAcyclic,
         return false;
     fi;
     
-    if MorphismDegreesOfComplex( C ) = [ ] then	## just a single object
+    if MorphismDegreesOfComplex( C ) = [ ] then ## just a single object
         return IsZero( LowestDegreeObject( C ) );
     fi;
     
@@ -411,9 +411,9 @@ InstallMethod( IsShortExactSequence,
     
     l := Length( support );
     
-    if support = [ ] then			## the zero complex
+    if support = [ ] then ## the zero complex
         return true;
-    elif support[l] - support[1] > 2 then	## too many non-trivial objects
+    elif support[l] - support[1] > 2 then ## too many non-trivial objects
         return false;
     fi;
     

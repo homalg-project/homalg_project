@@ -302,7 +302,7 @@ InstallMethod( \^,
         
         id := TheIdentityMorphism( Range( phi ) );
         
-        inv := id / phi;	## mimic lift
+        inv := id / phi; ## mimic lift
         
         if HasIsIsomorphism( phi ) then
             SetIsIsomorphism( inv, IsIsomorphism( phi ) );
@@ -425,7 +425,7 @@ end );
 #_______________________________________________________________________
 
 ##
-InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
+InstallMethod( CompleteImageSquare, ### defines: CompleteImageSquare (CompleteImSq)
         "for homalg morphisms",
         [ IsHomalgMorphism,
           IsHomalgMorphism,
@@ -433,7 +433,7 @@ InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteI
         
   function( alpha1, phi, beta1 )
     
-    return PreCompose( alpha1, phi ) / beta1;	## lift or projective lift
+    return PreCompose( alpha1, phi ) / beta1; ## lift or projective lift
     
 end );
 
@@ -452,7 +452,7 @@ end );
 #_______________________________________________________________________
 
 ##
-InstallMethod( CompleteKernelSquare,		### defines: CompleteKernelSquare
+InstallMethod( CompleteKernelSquare, ### defines: CompleteKernelSquare
         "for homalg morphisms",
         [ IsHomalgMorphism,
           IsHomalgMorphism,
@@ -460,7 +460,7 @@ InstallMethod( CompleteKernelSquare,		### defines: CompleteKernelSquare
         
   function( alpha2, phi, beta2 )
     
-    return PreDivide( alpha2, PreCompose( phi, beta2 ) );	## colift
+    return PreDivide( alpha2, PreCompose( phi, beta2 ) ); ## colift
     
 end );
 
@@ -506,8 +506,8 @@ end );
 
 ## the second argument is there for method selection
 InstallMethod( DiagonalMorphismOp,
-	"for a list of homalg morphims and a single one",
-	[ IsList, IsHomalgMorphism ],
+        "for a list of homalg morphims and a single one",
+        [ IsList, IsHomalgMorphism ],
 
   function( L, phi )
 
@@ -693,7 +693,7 @@ InstallMethod( ViewString,
     if HasIsMorphism( o ) then
         if IsMorphism( o ) then
             s := Concatenation( s, "homomorphism of" );
-        elif HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
+        elif HasMorphismAid( o ) then ## otherwise the notion of generalized morphism is meaningless
             if HasIsGeneralizedMorphismWithFullDomain( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
                     s := Concatenation( s, "generalized isomorphism of" );
@@ -713,7 +713,7 @@ InstallMethod( ViewString,
             s := Concatenation( s, "non-well-defined map between" );
         fi;
     else
-        if HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
+        if HasMorphismAid( o ) then ## otherwise the notion of generalized morphism is meaningless
             if HasIsGeneralizedMorphismWithFullDomain( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
                     s := Concatenation( s, "generalized isomorphism of" );

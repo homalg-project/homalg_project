@@ -277,7 +277,7 @@ InstallMethod( CertainMorphismOfSpecialChainMorphism,
 end );
 
 ##
-InstallMethod( DegreesOfChainMorphism,		## this might differ from ObjectDegreesOfComplex( Source( cm ) ) when the chain morphism is not full
+InstallMethod( DegreesOfChainMorphism, ## this might differ from ObjectDegreesOfComplex( Source( cm ) ) when the chain morphism is not full
         "for homalg chain morphisms",
         [ IsHomalgChainMorphism ],
         
@@ -288,7 +288,7 @@ InstallMethod( DegreesOfChainMorphism,		## this might differ from ObjectDegreesO
 end );
 
 ##
-InstallMethod( ObjectDegreesOfComplex,		## this is not a mistake
+InstallMethod( ObjectDegreesOfComplex, ## this is not a mistake
         "for homalg chain morphisms",
         [ IsHomalgChainMorphism ],
         
@@ -299,7 +299,7 @@ InstallMethod( ObjectDegreesOfComplex,		## this is not a mistake
 end );
 
 ##
-InstallMethod( MorphismDegreesOfComplex,	## this is not a mistake
+InstallMethod( MorphismDegreesOfComplex, ## this is not a mistake
         "for homalg chain morphisms",
         [ IsHomalgChainMorphism ],
         

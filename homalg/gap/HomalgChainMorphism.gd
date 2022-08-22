@@ -265,10 +265,10 @@ DeclareOperation( "CertainMorphismOfSpecialChainMorphism",
 DeclareOperation( "DegreesOfChainMorphism",
         [ IsHomalgChainMorphism ] );
 
-DeclareOperation( "ObjectDegreesOfComplex",	## this is not a mistake
+DeclareOperation( "ObjectDegreesOfComplex", ## this is not a mistake
         [ IsHomalgChainMorphism ] );
 
-DeclareOperation( "MorphismDegreesOfComplex",	## this is not a mistake
+DeclareOperation( "MorphismDegreesOfComplex", ## this is not a mistake
         [ IsHomalgChainMorphism ] );
 
 DeclareOperation( "CertainMorphism",

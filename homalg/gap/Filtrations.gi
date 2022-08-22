@@ -286,7 +286,7 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
-  function( M )	## does not set the attribute PurityFiltration
+  function( M ) ## does not set the attribute PurityFiltration
     local II_E, filt, I_E, iso;
     
     II_E := BidualizingSpectralSequence( M, [ 0 ] );
@@ -308,7 +308,7 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     iso := PreCompose( iso, I_E!.NaturalGeneralizedEmbeddings.(String( [ 0, 0 ])) );
     
     ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> CoveringObject( FG( M ) ) -> CoveringObject( M )
-    iso := iso / NatTrIdToHomHom_R( CoveringObject( M ) );	## lift
+    iso := iso / NatTrIdToHomHom_R( CoveringObject( M ) ); ## lift
     
     ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> CoveringObject( FG( M ) ) -> CoveringObject( M ) -> M
     ## finally giving the isomorphism

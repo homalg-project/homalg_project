@@ -359,7 +359,7 @@ InstallMethod( DefectOfExactness,
 end );
 
 ##
-InstallMethod( Homology,			### defines: Homology (HomologyModules)
+InstallMethod( Homology, ### defines: Homology (HomologyModules)
         "for a homalg complexes",
         [ IsHomalgComplex ],
         
@@ -374,7 +374,7 @@ InstallMethod( Homology,			### defines: Homology (HomologyModules)
 end );
 
 ##
-InstallMethod( Cohomology,			### defines: Cohomology (CohomologyModules)
+InstallMethod( Cohomology, ### defines: Cohomology (CohomologyModules)
         "for a homalg complexes",
         [ IsHomalgComplex ],
         
@@ -488,7 +488,7 @@ end );
 ## 0 <-- M <-(psi)- E <-(phi)- N <-- 0
 ## or
 ## 0 --> N -(phi)-> E -(psi)-> M --> 0
-InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExactSeq)
+InstallMethod( Resolution, ### defines: Resolution (generalizes ResolveShortExactSeq)
         "for homalg complexes",
         [ IsInt, IsHomalgComplex and IsShortExactSequence ],
         
@@ -827,9 +827,9 @@ InstallMethod( ConnectingHomomorphism,
     
     snake := iota_Hqn;
     snake := snake / jn;
-    snake := PreCompose( snake, bn );	## the connecting homomorphism is what b[n] induces between certain subfactors of C[n] and C[n-1]
-    snake := snake / in_1;		## lift
-    snake := snake / iota_Hsn_1;	## lift
+    snake := PreCompose( snake, bn ); ## the connecting homomorphism is what b[n] induces between certain subfactors of C[n] and C[n-1]
+    snake := snake / in_1;            ## lift
+    snake := snake / iota_Hsn_1;      ## lift
     
     ## check assertion
     Assert( 3, IsMorphism( snake ) );
@@ -1022,7 +1022,7 @@ InstallMethod( DefectOfExactnessSequence,
     F_B := ImageObjectEmb( pre );
     
     ## read: Z <- B
-    Z_B := F_B / F_Z;	## lift
+    Z_B := F_B / F_Z; ## lift
     
     H := DefectOfExactness( cpx_post_pre );
     
@@ -1030,7 +1030,7 @@ InstallMethod( DefectOfExactnessSequence,
     F_H := NaturalGeneralizedEmbedding( H );
     
     ## read: H <- Z
-    H_Z := F_Z / F_H;	## generalized lift
+    H_Z := F_Z / F_H; ## generalized lift
     
     C := HomalgComplex( H_Z );
     
@@ -1073,7 +1073,7 @@ InstallMethod( DefectOfExactnessCosequence,
     B_F := ImageObjectEmb( pre );
     
     ## read: B -> Z
-    B_Z := B_F / Z_F;	## lift
+    B_Z := B_F / Z_F; ## lift
     
     H := DefectOfExactness( cpx_post_pre );
     
@@ -1081,7 +1081,7 @@ InstallMethod( DefectOfExactnessCosequence,
     H_F := NaturalGeneralizedEmbedding( H );
     
     ## read: Z -> H
-    Z_H := Z_F / H_F;	## generalized lift
+    Z_H := Z_F / H_F; ## generalized lift
     
     C := HomalgCocomplex( B_Z );
     
@@ -1107,7 +1107,7 @@ InstallMethod( DefectOfExactnessCosequence,
 end );
 
 ## the Cartan-Eilenberg resolution [HS. Lemma VIII.9.4]
-InstallMethod( Resolution,	### defines: Resolution
+InstallMethod( Resolution, ### defines: Resolution
         "for homalg complexes",
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep ],
         
@@ -1347,7 +1347,7 @@ InstallMethod( Resolution,	### defines: Resolution
 end );
 
 ## the Cartan-Eilenberg resolution [HS. Lemma VIII.9.4]
-InstallMethod( Resolution,	### defines: Resolution
+InstallMethod( Resolution, ### defines: Resolution
         "for homalg complexes",
         [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep ],
         

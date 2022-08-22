@@ -239,7 +239,7 @@ InstallMethod( AddSpectralFiltrationOfObjects,
             gen_emb2 := embeddings.(String( [ p, q ] ));
             
             ## [Ba, Cor. 3.3]: gen_emb1 lifts gen_emb2
-            filtration.(String( [ p, q ] )) := gen_emb2 / gen_emb1;	## generalized lift
+            filtration.(String( [ p, q ] )) := gen_emb2 / gen_emb1; ## generalized lift
             
             ## this last line is one of the highlights in the code,
             ## where generalized embeddings play a decisive role
@@ -393,7 +393,7 @@ InstallMethod( SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectral
     
     ## the transposed spectral sequence (w.r.t. BC),
     ## which we assume collapsed to its p-axes
-    tE := HomalgSpectralSequence( r, tBC );	## enforce computation till the r-th sheet, even if things stabilize earlier
+    tE := HomalgSpectralSequence( r, tBC ); ## enforce computation till the r-th sheet, even if things stabilize earlier
     
     ## enrich E with tE
     E!.TransposedSpectralSequence := tE;
@@ -656,11 +656,11 @@ InstallMethod( BidualizingBicomplex,
     R := StructureObject( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        F := RightDualizingFunctor( R );	# Hom(-,R) for right objects
-        G := LeftDualizingFunctor( R );		# Hom(-,R) for left objects
+        F := RightDualizingFunctor( R ); # Hom(-,R) for right objects
+        G := LeftDualizingFunctor( R );  # Hom(-,R) for left objects
     else
-        F := LeftDualizingFunctor( R );		# Hom(-,R) for left objects
-        G := RightDualizingFunctor( R );	# Hom(-,R) for right objects
+        F := LeftDualizingFunctor( R );  # Hom(-,R) for left objects
+        G := RightDualizingFunctor( R ); # Hom(-,R) for right objects
     fi;
     
     return GrothendieckBicomplex( F, G, M );
@@ -725,7 +725,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
     if IsCovariantFunctor( BC!.OuterFunctor ) then
         for p in p_degrees do
             if IsBound( natural_transformations.(p) ) then
-                nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p);	## generalized lift
+                nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p); ## generalized lift
             else
                 nat_trafos.(p) := TheZeroMorphism( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
             fi;

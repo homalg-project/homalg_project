@@ -67,7 +67,7 @@ InstallMethod( ImageObjectEpi,
     
     emb := ImageObjectEmb( phi );
     
-    epi := phi / emb;	## lift
+    epi := phi / emb; ## lift
     
     ## check assertion
     Assert( 5, IsMorphism( epi ) );
@@ -117,7 +117,7 @@ InstallMethod( Kernel,
 end );
 
 ##
-InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
+InstallGlobalFunction( _Functor_Kernel_OnObjects, ### defines: Kernel(Emb)
   function( psi )
     local S, ker_subobject, ker, emb, img_epi, T, coker, im;
     
@@ -160,17 +160,17 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     ## figure out an upper bound for the projective dimension of ker:
     if not HasProjectiveDimension( ker ) and HasIsProjective( S ) and IsProjective( S ) then
         T := Range( psi );
-        if HasIsProjective( T ) and IsProjective( T ) then	## typical for M^* which is a K_2(D(M)) (up to projective equivalence)
-            SetUpperBoundForProjectiveDimension( ker, -2 );	## since ker = K_2( coker )
+        if HasIsProjective( T ) and IsProjective( T ) then  ## typical for M^* which is a K_2(D(M)) (up to projective equivalence)
+            SetUpperBoundForProjectiveDimension( ker, -2 ); ## since ker = K_2( coker )
             if HasCokernelEpi( psi ) then
-                coker := Range( CokernelEpi( psi ) );		## S & T projective, then pd( ker ) = pd( coker ) - 2
+                coker := Range( CokernelEpi( psi ) ); ## S & T projective, then pd( ker ) = pd( coker ) - 2
                 if HasProjectiveDimension( coker ) then
                     SetProjectiveDimension( ker, Maximum( 0, ProjectiveDimension( coker ) - 2 ) );
                 elif IsBound( coker!.UpperBoundForProjectiveDimension ) then
                     SetUpperBoundForProjectiveDimension( ker, coker!.UpperBoundForProjectiveDimension - 2 );
                 fi;
             elif HasImageObjectEmb( psi ) then
-                im := Source( ImageObjectEmb( psi ) );	## S projective, then pd( ker ) = pd( im ) - 1
+                im := Source( ImageObjectEmb( psi ) ); ## S projective, then pd( ker ) = pd( im ) - 1
                 if HasProjectiveDimension( im ) then
                     SetProjectiveDimension( ker, Maximum( 0, ProjectiveDimension( im ) - 1 ) );
                 elif IsBound( im!.UpperBoundForProjectiveDimension ) then
@@ -178,9 +178,9 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
                 fi;
             fi;
         else
-            SetUpperBoundForProjectiveDimension( ker, -1 );	## since ker = K_1( im )
+            SetUpperBoundForProjectiveDimension( ker, -1 ); ## since ker = K_1( im )
             if HasImageObjectEmb( psi ) then
-                im := Source( ImageObjectEmb( psi ) );	## S projective, then pd( ker ) = pd( im ) - 1
+                im := Source( ImageObjectEmb( psi ) ); ## S projective, then pd( ker ) = pd( im ) - 1
                 if HasProjectiveDimension( im ) then
                     SetProjectiveDimension( ker, Maximum( 0, ProjectiveDimension( im ) - 1 ) );
                 elif IsBound( im!.UpperBoundForProjectiveDimension ) then
@@ -220,7 +220,7 @@ functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## DefectOfExactness
 ##
 
-InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: DefectOfExactness (DefectOfHoms)
+InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects, ### defines: DefectOfExactness (DefectOfHoms)
   function( phi, psi )
     local pre, post;
     
@@ -455,7 +455,7 @@ InstallFunctor( functor_DefectOfExactness );
 InstallFunctor( Functor_Dualize );
 
 ##
-## TensorProduct( M, N )	( M * N )
+## TensorProduct( M, N ) ( M * N )
 ##
 
 if not IsOperation( TensorProduct ) then

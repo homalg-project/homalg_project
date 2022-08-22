@@ -31,10 +31,10 @@ InstallValue( LIMOR,
               "IsSplitMonomorphism",
               "IsSplitEpimorphism",
               "IsIsomorphism",
-	      "IsAutomorphism" ],
+              "IsAutomorphism" ],
             intrinsic_attributes :=
             [ "DegreeOfMorphism" ],
-	    )
+          )
         );
 
 ##
@@ -146,8 +146,8 @@ InstallImmediateMethod( IsZero,
         
   function( phi )
     
-    if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) and	## to place "or" here we need to know that phi is a morphism;
-       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then	## see the method below
+    if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) and ## to place "or" here we need to know that phi is a morphism;
+       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then  ## see the method below
         return true;
     fi;
     
@@ -478,7 +478,7 @@ InstallMethod( IsIsomorphism,
     iso := IsEpimorphism( phi ) and IsMonomorphism( phi );
     
     if iso then
-        SetIsIsomorphism( phi, true );	## needed for UpdateObjectsByMorphism
+        SetIsIsomorphism( phi, true ); ## needed for UpdateObjectsByMorphism
         UpdateObjectsByMorphism( phi );
     fi;
     

@@ -135,7 +135,7 @@ DeclareProperty( "IsExactSequence",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
+DeclareProperty( "IsShortExactSequence", ## we also need this as property!!!
         IsHomalgComplex );
 
 ##  <#GAPDoc Label="IsSplitShortExactSequence">
@@ -177,8 +177,8 @@ DeclareProperty( "IsTriangle",
 DeclareProperty( "IsExactTriangle",
         IsHomalgComplex );
 
-DeclareProperty( "IsATwoSequence",		## the output of AsATwoSequence (and only this) is marked as IsATwoSequence in order to distinguish
-        IsHomalgComplex );			##  between different methods for DefectOfExactness which all apply to complexes
+DeclareProperty( "IsATwoSequence", ## the output of AsATwoSequence (and only this) is marked as IsATwoSequence in order to distinguish
+        IsHomalgComplex );         ##  between different methods for DefectOfExactness which all apply to complexes
 
 ####################################
 #

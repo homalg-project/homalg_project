@@ -228,7 +228,7 @@ DeclareProperty( "IsIsomorphism",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
+DeclareProperty( "IsAutomorphism", ## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
         IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsIdempotent">
@@ -240,7 +240,7 @@ DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this 
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsIdempotent",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
+DeclareProperty( "IsIdempotent", ## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
         IsHomalgMorphism );
 
 ####################################
@@ -412,11 +412,11 @@ DeclareOperation( "AreComparableMorphisms",
 DeclareOperation( "AreComposableMorphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorphism
-        [ IsHomalgMorphism, IsHomalgMorphism ] );	## is not a priori IsMultiplicativeElement
+DeclareOperation( "*",                            ## this must remain, since an element in IsHomalgMorphism
+        [ IsHomalgMorphism, IsHomalgMorphism ] ); ## is not a priori IsMultiplicativeElement
 
-DeclareOperation( "^",				## this must remain, since an element in IsHomalgMorphism
-        [ IsHomalgMorphism, IsInt ] );			## is not a priori IsMultiplicativeElement
+DeclareOperation( "^",                 ## this must remain, since an element in IsHomalgMorphism
+        [ IsHomalgMorphism, IsInt ] ); ## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "PreInverse",
         [ IsHomalgMorphism ] );

@@ -561,7 +561,7 @@ InstallMethod( ViewObj,
     fi;
     
     if IsDescendingFiltration( o ) then
-        degrees := Reversed( degrees );		## we want to start with the highest (sub)factor
+        degrees := Reversed( degrees ); ## we want to start with the highest (sub)factor
     fi;
     
     if plural then
@@ -571,13 +571,13 @@ InstallMethod( ViewObj,
     fi;
     
     if IsAscendingFiltration( o ) then
-        degrees := Reversed( degrees );		## we want to start with the highest (sub)factor
+        degrees := Reversed( degrees ); ## we want to start with the highest (sub)factor
     fi;
     
     for p in degrees do
         s := ListWithIdenticalEntries( 4 - Length( String( p ) ), ' ' );
         ConvertToStringRep( s );
-        Print( s, p, ":\t" );
+        Print( s, p, ":   " );
         ViewObj( CertainObject( o, p ) );
         Print( "\n" );
     od;
@@ -598,7 +598,7 @@ InstallMethod( Display,
     
     degrees := DegreesOfFiltration( o );
     
-    degrees := Reversed( degrees );		## we want to start with the highest (sub)factor
+    degrees := Reversed( degrees ); ## we want to start with the highest (sub)factor
     
     l := Length( degrees );
     

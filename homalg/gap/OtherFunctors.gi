@@ -32,7 +32,7 @@ InstallMethod( TorsionObject,
 end );
 
 ##
-InstallGlobalFunction( _Functor_TorsionObject_OnObjects,	### defines: TorsionObject(Emb)
+InstallGlobalFunction( _Functor_TorsionObject_OnObjects, ### defines: TorsionObject(Emb)
   function( M )
     local tor_subobject, tor, emb;
     
@@ -71,7 +71,7 @@ Functor_TorsionObject!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## TorsionFreeFactor
 ##
 
-InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: TorsionFreeFactor(Epi)
+InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects, ### defines: TorsionFreeFactor(Epi)
   function( M )
     local emb, epi, M0, N0;
     
@@ -162,7 +162,7 @@ InstallMethod( SetPropertiesOfDirectSum,
     if HasIsZero( M ) and HasIsZero( N ) then
         if IsZero( M ) and IsZero( N ) then
             SetIsZero( sum, true );
-        else	## the converse is also true: trivial since we do not allow virtual objects
+        else ## the converse is also true: trivial since we do not allow virtual objects
             SetIsZero( sum, false );
         fi;
     fi;
@@ -187,7 +187,7 @@ InstallMethod( SetPropertiesOfDirectSum,
     if HasIsArtinian( M ) and HasIsArtinian( N ) then
         if IsArtinian( M ) and IsArtinian( N ) then
             SetIsArtinian( sum, true );
-        else	## the converse is also true: trivial
+        else ## the converse is also true: trivial
             SetIsArtinian( sum, false );
         fi;
     fi;
@@ -196,7 +196,7 @@ InstallMethod( SetPropertiesOfDirectSum,
     if HasIsTorsion( M ) and HasIsTorsion( N ) then
         if IsTorsion( M ) and IsTorsion( N ) then
             SetIsTorsion( sum, true );
-        else	## the converse is also true: Hom(-,R) commutes with finite direct sums
+        else ## the converse is also true: Hom(-,R) commutes with finite direct sums
             SetIsTorsion( sum, false );
         fi;
     fi;
@@ -205,7 +205,7 @@ InstallMethod( SetPropertiesOfDirectSum,
     if HasIsTorsionFree( M ) and HasIsTorsionFree( N ) then
         if IsTorsionFree( M ) and IsTorsionFree( N ) then
             SetIsTorsionFree( sum, true );
-        else	## the converse is also true: Hom(-,R) commutes with finite direct sums
+        else ## the converse is also true: Hom(-,R) commutes with finite direct sums
             SetIsTorsionFree( sum, false );
         fi;
     fi;
@@ -214,7 +214,7 @@ InstallMethod( SetPropertiesOfDirectSum,
     if HasIsReflexive( M ) and HasIsReflexive( N ) then
         if IsReflexive( M ) and IsReflexive( N ) then
             SetIsReflexive( sum, true );
-        else	## the converse is also true: Hom(-,R) commutes with finite direct sums
+        else ## the converse is also true: Hom(-,R) commutes with finite direct sums
             SetIsReflexive( sum, false );
         fi;
     fi;
@@ -300,7 +300,7 @@ fi;
 #   v                v
 #   B_ --(beta1)---> B
 
-InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOfMaps)
+InstallGlobalFunction( _Functor_Pullback_OnObjects, ### defines: Pullback(PairOfMaps)
   function( chm_phi_beta1 )
     local phi, beta1, phi_beta1, ApB_, emb, pb, S, pair;
     
@@ -394,7 +394,7 @@ end );
 #   v                v
 #   B_ ----<?>-----> ?
 
-InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMaps)
+InstallGlobalFunction( _Functor_Pushout_OnObjects, ### defines: Pushout(PairOfMaps)
   function( chm_alpha1_psi )
     local psi, alpha1, alpha1_psi, epi, po, T, pair;
     
@@ -540,7 +540,7 @@ end );
 ## AuslanderDual
 ##
 
-InstallGlobalFunction( _Functor_AuslanderDual_OnObjects,	### defines: AuslanderDual
+InstallGlobalFunction( _Functor_AuslanderDual_OnObjects, ### defines: AuslanderDual
   function( M )
     local d0;
     
@@ -583,7 +583,7 @@ InstallFunctor( Functor_TorsionObject );
 InstallFunctor( Functor_TorsionFreeFactor );
 
 ##
-## DirectSum( M, N )		( M + N )
+## DirectSum( M, N ) ( M + N )
 ##
 
 ## the second argument is there for method selection
