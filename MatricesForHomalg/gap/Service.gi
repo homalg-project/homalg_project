@@ -2607,7 +2607,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         ResetFilterObj( T, IsVoidMatrix );
         
-        SetNrColumns( T, NrRows( M ) );
+        SetNrRows( T, NrColumns( M ) );
         
         ## check assertion
         Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
