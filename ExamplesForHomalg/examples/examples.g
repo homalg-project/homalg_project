@@ -19,8 +19,8 @@ Print( Concatenation( "\nSelect Computer Algebra System:\n",
         " 3) Sage\n",
         " 4) MAGMA\n",
         " 5) Macaulay2\n",
-        " 6) Maple	(default for Z-algebras)\n",
-        " 7) Singular	(default for Q-algebras)\n",
+        " 6) Maple      (default for Z-algebras)\n",
+        " 7) Singular   (default for Q-algebras)\n",
         ":" ) );
 
 CAS := Filtered( ReadLine( input ), c->c <> '\n' );
@@ -105,7 +105,7 @@ elif mode = 1 then
             Print( "\033[01mgap> R := HomalgFieldOfRationalsInDefaultCAS( );\033[0m    # (Default = Singular)" );
         fi;
         Print( "\n" );
-	R := HomalgFieldOfRationalsInDefaultCAS( );
+        R := HomalgFieldOfRationalsInDefaultCAS( );
     else
         if i <> 0 then
             str := Concatenation( " ", String( AbsInt( i ) ), " " );
@@ -121,7 +121,7 @@ elif mode = 1 then
         else
             Print( "\033[01mgap> R := HomalgRingOfIntegersInDefaultCAS(", str, ");\033[0m    # (Default = Maple)" );
         fi;
-	Print( "\n" );
+        Print( "\n" );
         R := HomalgRingOfIntegersInDefaultCAS( AbsInt( i ) );
     fi;
     

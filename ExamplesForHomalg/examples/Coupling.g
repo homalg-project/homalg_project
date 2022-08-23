@@ -18,7 +18,7 @@ Dy, \
 Dz  \
 ]", 3, 1, A3 );
 M := DiagMat( [ M1, M2, M3 ] );
-M := ShallowCopy( M );	## copy M before setting entries
+M := ShallowCopy( M ); ## copy M before setting entries
 SetIsMutableMatrix( M, true );
 M[ 1, 2 ] := "1";;
 M[ 2, 3 ] := "1";;

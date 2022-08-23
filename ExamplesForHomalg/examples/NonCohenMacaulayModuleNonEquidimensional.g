@@ -15,7 +15,7 @@ Assert( 0, Depth( K ) = 2 );
 M := 1 * R / ( I * J );
 
 Assert( 0, Depth( I, M ) = 0 );
-Assert( 0, Depth( J, M ) = 0 );	## R is not Cohen-Macaulayness
+Assert( 0, Depth( J, M ) = 0 ); ## R is not Cohen-Macaulayness
 Assert( 0, Depth( K, M ) = 1 );
 
 R0 := LocalizeAtZero( R );

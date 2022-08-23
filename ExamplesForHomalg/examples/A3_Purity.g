@@ -22,15 +22,15 @@
 ##  <A left module presented by 8 relations for 2 generators>
 ##  gap> filt := PurityFiltration( N );
 ##  <The ascending purity filtration with degrees [ -3 .. 0 ] and graded parts:
-##     0:	<A zero left module>
+##     0:   <A zero left module>
 ##  
-##  -1:	<A cyclic reflexively pure grade 1 left module presented by 1 relation for\
+##  -1:   <A cyclic reflexively pure grade 1 left module presented by 1 relation for\
 ##   a cyclic generator>
 ##  
-##  -2:	<A cyclic reflexively pure grade 2 left module presented by 2 relations fo\
+##  -2:   <A cyclic reflexively pure grade 2 left module presented by 2 relations fo\
 ##  r a cyclic generator>
 ##  
-##  -3:	<A cyclic reflexively pure grade 3 left module presented by 3 relations fo\
+##  -3:   <A cyclic reflexively pure grade 3 left module presented by 3 relations fo\
 ##  r a cyclic generator>
 ##  of
 ##  <A non-pure grade 1 left module presented by 8 relations for 2 generators>>

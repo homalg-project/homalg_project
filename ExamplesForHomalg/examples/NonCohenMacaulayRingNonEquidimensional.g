@@ -23,11 +23,11 @@ J := LeftSubmodule( "x,y", R );
 K := LeftSubmodule( "x,y-1", R );
 
 Assert( 0, Depth( I ) = 0 );
-Assert( 0, Depth( J ) = 0 );	## R is not Cohen-Macaulayness
+Assert( 0, Depth( J ) = 0 ); ## R is not Cohen-Macaulayness
 Assert( 0, Depth( K ) = 1 );
 
 O := 1 * R / J;
 
 Assert( 0, Depth( O ) = 0 );
 
-Assert( 0, not IsZero( Hom( Ext( 1, O ) ) ) );	## R is not Cohen-Macaulayness
+Assert( 0, not IsZero( Hom( Ext( 1, O ) ) ) ); ## R is not Cohen-Macaulayness

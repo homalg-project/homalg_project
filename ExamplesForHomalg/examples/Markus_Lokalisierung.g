@@ -1,6 +1,6 @@
-# From: 	viktor.levandovskyy@rwth-aachen.de
-# Subject: 	double Ext
-# Date: 	December 10, 2007 9:42:07 PM GMT+01:00
+# From:         viktor.levandovskyy@rwth-aachen.de
+# Subject:      double Ext
+# Date:         December 10, 2007 9:42:07 PM GMT+01:00
 #
 # wir fangen an mit F = x2-y3,
 # betrachten:
