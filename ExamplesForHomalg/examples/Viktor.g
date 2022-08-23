@@ -1,6 +1,6 @@
-# From: 	viktor.levandovskyy@rwth-aachen.de
-# Subject: 	wieder double Ext
-# Date: 	February 6, 2008 11:22:12 PM GMT+01:00
+# From:         viktor.levandovskyy@rwth-aachen.de
+# Subject:      wieder double Ext
+# Date:         February 6, 2008 11:22:12 PM GMT+01:00
 #
 # ein interessantes Phenomen: betrachten wir I \subset J,
 # wobei I = <xd - n> und J = <xd-n, d^{n+1}> in der
