@@ -28,7 +28,7 @@ InstallMethod( EchelonMatTransformationDestructive,
           row2,
           rank,
           list,
-	  a;
+          a;
     
     nrows := Length( mat );
     ncols := Length( mat[1] );
@@ -321,7 +321,7 @@ InstallMethod( ReduceMatWithEchelonMatTransformation,
           f,
           v,
           vc,
-	  T,
+          T,
           zero,
           i,
           row2,

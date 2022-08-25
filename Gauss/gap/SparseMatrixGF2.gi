@@ -12,7 +12,7 @@ InstallMethod( ConvertSparseMatrixToMatrix,
   function( SM )
     local indices, i, j, ring, M;
     if SM!.nrows = 0 then
-	return [ ];
+        return [ ];
     elif SM!.ncols = 0 then
         return List( [ 1 .. SM!.nrows ], i -> [] );
     fi;
@@ -128,7 +128,7 @@ InstallMethod( Display,
         for i in [ 1 .. M!.nrows ] do
             last := 0;
             for j in [ 1 .. Length( M!.indices[i] ) ] do
-		str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.indices[i][j] - 1 - last, Concatenation( ws, "." ) ) ), ws, "1" );
+                str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.indices[i][j] - 1 - last, Concatenation( ws, "." ) ) ), ws, "1" );
                 last := M!.indices[i][j];
             od;
             str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.ncols - last, Concatenation( ws, "." ) ) ), "\n" );
@@ -196,7 +196,7 @@ InstallMethod( CertainColumns,
         for j in [ 1 .. Length( L ) ] do
             column := L[j];
             p := PositionSet( M!.indices[i], column);
-	    if p <> fail then
+            if p <> fail then
                 Add( indices[i], j );
             fi;
         od;

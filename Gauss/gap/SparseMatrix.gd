@@ -20,7 +20,7 @@ DeclareOperation( "CopyMat",
 
 DeclareOperation( "GetEntry",
         [ IsSparseMatrix, IsInt, IsInt ] );
-	
+
 DeclareOperation( "SetEntry",
         [ IsSparseMatrix, IsInt, IsInt, IsRingElement ] );
 
