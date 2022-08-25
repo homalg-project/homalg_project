@@ -27,11 +27,10 @@ InstallMethod( EchelonMatDestructive,
           x,
           rank,
           list,
-	  row_indices,
-	  row_entries,
-	  p,
-	  a;
-	  
+          row_indices,
+          row_entries,
+          p,
+          a;
     
     nrows := mat!.nrows;
     ncols := mat!.ncols;
@@ -262,7 +261,7 @@ InstallMethod( ReduceMatWithEchelonMat,
                 row1_indices := M!.indices[k];
                 row1_entries := M!.entries[k];
                 p := PositionSet( row1_indices, j );
-		if p <> fail then
+                if p <> fail then
                     x := - row1_entries[p];
                     AddRow( row2_indices, N!.entries[i] * x, row1_indices, row1_entries );
                 fi;
@@ -282,7 +281,7 @@ InstallMethod( ReduceMatWithEchelonMatTransformation,
   function( mat, N )
     local nrows1,
           nrows2,
-	  ring,
+          ring,
           M,
           T,
           i,
@@ -379,7 +378,7 @@ InstallMethod( KernelEchelonMatDestructive,
     od;
     
     for i in [ 1 .. nrows ] do
-	row_indices := indices[i];        
+        row_indices := indices[i];
         # Reduce the row with the known basis vectors.
         for j in [ 1 .. ncols ] do
             head := heads[j];

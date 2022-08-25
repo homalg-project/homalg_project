@@ -179,7 +179,7 @@ InstallMethod( ConvertSparseMatrixToMatrix,
   function( SM )
     local indices, entries, i, j, ring, M;
     if SM!.nrows = 0 then
-	return [ ];
+        return [ ];
     elif SM!.ncols = 0 then
         return List( [ 1 .. SM!.nrows ], i -> [] );
     fi;
@@ -278,7 +278,7 @@ InstallMethod( SetEntry,
             M!.entries[i][pos] := e;
         fi;
     else
-	if e <> Zero( ring ) then
+        if e <> Zero( ring ) then
             Add( M!.indices[i], j, pos );
             Add( M!.entries[i], e, pos );
         fi;
@@ -319,7 +319,7 @@ InstallMethod( AddToEntry,
         else
             M!.entries[i][pos] := res;
         fi;
-	return res;
+        return res;
     else
         Add( M!.indices[i], j, pos );
         Add( M!.entries[i], e, pos );
@@ -356,7 +356,7 @@ InstallMethod( Display,
         for i in [ 1 .. M!.nrows ] do
             last := 0;
             for j in [ 1 .. Length( M!.indices[i] ) ] do
-		str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.indices[i][j] - 1 - last, Concatenation( ws, "." ) ) ), ws{ [ 1 .. Length( ws ) + 1 - Length( String( Int( M!.entries[i][j] ) ) ) ] }, String( Int( M!.entries[i][j] ) ) );
+                str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.indices[i][j] - 1 - last, Concatenation( ws, "." ) ) ), ws{ [ 1 .. Length( ws ) + 1 - Length( String( Int( M!.entries[i][j] ) ) ) ] }, String( Int( M!.entries[i][j] ) ) );
                 last := M!.indices[i][j];
             od;
             str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.ncols - last, Concatenation( ws, "." ) ) ), "\n" );
@@ -544,7 +544,7 @@ InstallMethod( CertainColumns,
         for j in [ 1 .. Length( L ) ] do
             column := L[j];
             p := PositionSet( M!.indices[i], column);
-	    if p <> fail then
+            if p <> fail then
                 Add( indices[i], j );
                 Add( entries[i], M!.entries[i][p] );
             fi;
@@ -699,7 +699,7 @@ InstallMethod( \*,
     for i in [ 1 .. C!.nrows ] do
         for j in [ 1 .. Length( A!.indices[i] ) ] do
             rownr := A!.indices[i][j];
-	    m := MultRow( B!.indices[ rownr ], B!.entries[ rownr ], A!.entries[i][j] );
+            m := MultRow( B!.indices[ rownr ], B!.entries[ rownr ], A!.entries[i][j] );
             AddRow( m.indices, m.entries, C!.indices, C!.entries, i );
         od;
     od;

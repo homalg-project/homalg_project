@@ -26,9 +26,9 @@ InstallMethod( EchelonMatDestructive,
           x,
           rank,
           list,
-	  row_indices,
-	  p,
-	  a;
+          row_indices,
+          p,
+          a;
     
     
     nrows := mat!.nrows;
@@ -116,7 +116,7 @@ InstallMethod( EchelonMatTransformationDestructive,
           list,
           row_indices,
           p,
-	  a;
+          a;
     
     nrows := mat!.nrows;
     ncols := mat!.ncols;
@@ -233,7 +233,7 @@ InstallMethod( ReduceMatWithEchelonMat,
             j := row2_indices[1];
             for k in [ 1 .. nrows1 ] do
                 p := PositionSet( M!.indices[k], j );
-		if p <> fail then
+                if p <> fail then
                     M!.indices[k] := AddRow( row2_indices, M!.indices[k] );
                 fi;
             od;
@@ -266,7 +266,7 @@ InstallMethod( ReduceMatWithEchelonMatTransformation,
     nrows2 := N!.nrows;
     
     T := SparseZeroMatrix( nrows1, nrows2, GF(2) );
-	
+    
     
     if nrows1 = 0 or nrows2 = 0 then
         return rec( reduced_matrix := mat, transformation := T );
@@ -408,7 +408,7 @@ InstallMethod( RankDestructive,
             # We found a new basis vector.
             Add( vectors.indices, indices[i] );
             heads[j]:= Length( vectors.indices );
-	    if heads[j] = upper_boundary then
+            if heads[j] = upper_boundary then
                 return upper_boundary;
             fi;
         fi;

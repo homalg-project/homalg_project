@@ -21,8 +21,8 @@ InstallMethod( HermiteMatDestructive,
           entries,
           vectors,   # list of basis vectors
           heads,     # list of pivot positions in 'vectors'
-	  char,      # characteristic of the Ring
-	  column,    # loop over columns
+          char,      # characteristic of the Ring
+          column,    # loop over columns
           i,         # loop over rows
           j,         # loop over columns
           min,
@@ -35,10 +35,10 @@ InstallMethod( HermiteMatDestructive,
           rank,
           p,
           list_of_rows,
-	  row_indices,
-	  row_entries,
+          row_indices,
+          row_entries,
           factor,
-	  a;
+          a;
     
     nrows := mat!.nrows;
     ncols := mat!.ncols;
@@ -103,7 +103,7 @@ InstallMethod( HermiteMatDestructive,
         head := heads[j];
         if head <> 0 then
             e := vectors.entries[ head ][1];
-	    a := Difference( [1..head-1], heads{[j+1..ncols]} );
+            a := Difference( [1..head-1], heads{[j+1..ncols]} );
             for i in a do
                 row_indices := vectors.indices[i];
                 p := PositionSet( row_indices, j );
@@ -157,7 +157,7 @@ InstallMethod( HermiteMatTransformationDestructive,
           p,
           list_of_rows,
           factor,
-	  a;
+          a;
     
     
     nrows := mat!.nrows;
@@ -239,7 +239,7 @@ InstallMethod( HermiteMatTransformationDestructive,
         head := heads[j];
         if head <> 0 then
             e := vectors.entries[ head ][1];
-	    a := Difference( [1..head-1], heads{[j+1..ncols]} );
+            a := Difference( [1..head-1], heads{[j+1..ncols]} );
             for i in a do
                 row_indices := vectors.indices[i];
                 p := PositionSet( row_indices, j );
@@ -314,7 +314,7 @@ InstallMethod( ReduceMatWithHermiteMat,
                 row1_indices := M!.indices[k];
                 row1_entries := M!.entries[k];
                 p := PositionSet( row1_indices, j );
-		if p <> fail then
+                if p <> fail then
                    x := row1_entries[p];
                    factor := - QuoInt( Int( x ), Int( e ) );
                    if factor <> 0 then
@@ -338,11 +338,11 @@ InstallMethod( ReduceMatWithHermiteMatTransformation,
     local nrows1,
           ncols,
           nrows2,
-	  r,
+          r,
           one,
-	  char,
+          char,
           M,
-	  T,
+          T,
           i,
           j,
           e,
@@ -393,8 +393,8 @@ InstallMethod( ReduceMatWithHermiteMatTransformation,
                     if factor <> 0 then
                         m := MultRow( row2_indices, N!.entries[i], factor );
                         AddRow( m.indices, m.entries, row1_indices, row1_entries );
-			Add( T!.indices[k], i );
-			Add( T!.entries[k], one * factor );
+                        Add( T!.indices[k], i );
+                        Add( T!.entries[k], one * factor );
                     fi;
                 fi;
             od;
@@ -433,8 +433,8 @@ InstallMethod( KernelHermiteMatDestructive,
           head,
           x,
           m,
-	  mc,
-	  mv,
+          mc,
+          mv,
           rank,
           list,
           row_indices,
@@ -500,16 +500,16 @@ InstallMethod( KernelHermiteMatDestructive,
             
             heads[column] := Length( vectors.indices );
             
-	    #check for "hidden" kernel relations
+            #check for "hidden" kernel relations
             if min[2] > 1 then
                 len := heads[column];
                 #Print( "we have a basis vector with a non-unit pivot:  #", len, "!\n" );
                 
                 mv := MultRow( vectors.indices[len], vectors.entries[len], char / min[2] );
                 mc := MultRow( coeffs.indices[len], coeffs.entries[len], char / min[2] );
-		
+                
                 #it is not possible to check only the vector: if it is zero we might need relations
-		#it is not possible to check only the coefficient vector: it might appear to be zero because of L
+                #it is not possible to check only the coefficient vector: it might appear to be zero because of L
                 
                 if mv.indices <> [] or mc.indices <> [] then
                     
@@ -526,7 +526,7 @@ InstallMethod( KernelHermiteMatDestructive,
             else
                 list_of_rows := Difference( list_of_rows, [ row_indices[ min[1] ] ] );
             fi;
-	    
+            
             #reduce the other rows with the newfound basis vector.
             head := heads[column];
             e := vectors.entries[head][1];
