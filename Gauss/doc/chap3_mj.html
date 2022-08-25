@@ -90,7 +90,7 @@
 <td class="tdcenter">1</td>
 <td class="tdcenter">0</td>
 </tr>
-</table><br /><p>&nbsp;</p><br />
+</table><br />
 </div>
 
 <p>The matrix <span class="SimpleMath">\(M\)</span> carries the same information as the following table, if and only if you know how many rows and columns the matrix has. There is also the matter of the base ring, but this is not important for now:</p>
@@ -116,7 +116,7 @@
 <td class="tdcenter">(3,4)</td>
 <td class="tdcenter">1</td>
 </tr>
-</table><br /><p>&nbsp;</p><br />
+</table><br />
 </div>
 
 <p>This table relates each index tuple to its nonzero entry, all other matrix entries are defined to be zero. This only works for known dimensions of the matrix, otherwise trailing zero rows and columns could get lost (notice how the table gives no hint about the existence of a 5th column). To convert the above table into a sparse data structure, one could list the table entries in this way:</p>
@@ -125,7 +125,7 @@
 <tr>
 <td class="tdcenter"><span class="SimpleMath">\([ [ 1, 3, 2 ], [ 1, 4, 9 ], [ 2, 2, 5 ], [ 3, 4, 1 ] ]\)</span></td>
 </tr>
-</table><br /><p>&nbsp;</p><br />
+</table><br />
 </div>
 
 <p>However, this data structure would not be very efficient. Whenever you are interested in a row <span class="SimpleMath">\(i\)</span> of <span class="SimpleMath">\(M\)</span> (this happens all the time when performing Gaussian elimination) the whole list would have to be searched for 3-tuples of the form <span class="SimpleMath">\([ i, *, * ]\)</span>. This is why I tried to manage the row index by putting the tuples into the corresponding list entry:<br /></p>
@@ -140,7 +140,7 @@
 <tr>
 <td class="tdleft"><span class="SimpleMath">\([ [ 4, 1 ] ] ]\)</span></td>
 </tr>
-</table><br /><p>&nbsp;</p><br />
+</table><br />
 </div>
 
 <p>As you can see, this looks fairly complicated. However, the same information can be stored in this form, which would become the final data structure for <strong class="pkg">Gauss</strong> sparse matrices:</p>
@@ -164,7 +164,7 @@
 <td class="tdcenter"></td>
 <td class="tdleft">[ 1 ] ]</td>
 </tr>
-</table><br /><p>&nbsp;</p><br />
+</table><br />
 </div>
 
 <p>Although now the number of rows is equal to the Length of both `indices' and `entries', it is still stored in the sparse matrix. Here is the full data structure (--&gt; <code class="func">SparseMatrix</code> (<a href="chap3_mj.html#X829481DA85587996"><span class="RefLink">3.2-1</span></a>)):</p>
