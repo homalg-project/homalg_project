@@ -64,22 +64,23 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    SetNrColumns( H, NrColumns( M ) );
-		   
+                   
                    SetRowRankOfMatrix( H, NrRows( H ) );
-		   
+                   
                    SetIsUpperTriangularMatrix( H, true );
                    
                    return H;
                    
-                 end,
-                 
-		 RowRankOfMatrix :=
-		   function( M )
-		     return Rank( MyEval( M ) );
-                   end,
-                 
-                 RadicalSubobject := MyEval,
-                 
+               end,
+               
+               RowRankOfMatrix :=
+                 function( M )
+                   
+                   return Rank( MyEval( M ) );
+                   
+               end,
+               
+               RadicalSubobject := MyEval,
           );
                  
     for component in NamesOfComponents( RP_default ) do
