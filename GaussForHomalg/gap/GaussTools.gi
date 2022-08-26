@@ -335,7 +335,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                IsIdentityMatrix :=
                  function( M )
                    
-		   return IsSparseIdentityMatrix( Eval( M ) );
+                   return IsSparseIdentityMatrix( Eval( M ) );
                    
                  end,
 ##  <#GAPDoc Label="IsDiagonalMatrix">

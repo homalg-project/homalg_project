@@ -94,23 +94,25 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    SetNrColumns( H, NrColumns( M ) );
-		   
+                   
                    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
                        SetRowRankOfMatrix( H, NrRows( H ) );
-	           fi;
-		   
-		   SetZeroRows( H, [] );
-		   
+                   fi;
+                   
+                   SetZeroRows( H, [] );
+                   
                    SetIsUpperTriangularMatrix( H, true );
                    
                    return H;
                    
-                 end,
-
-		 RowRankOfMatrixOverDomain :=
-		   function( M )
-		     return Rank( MyEval( M ) );
-                   end
+               end,
+               
+               RowRankOfMatrixOverDomain :=
+                 function( M )
+                   
+                   return Rank( MyEval( M ) );
+                   
+               end,
           );
                  
     for component in NamesOfComponents( RP_default ) do
