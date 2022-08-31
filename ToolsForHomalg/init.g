@@ -23,6 +23,8 @@ ReadPackage( "ToolsForHomalg", "gap/CachingObjects.gd" );
 
 ReadPackage( "ToolsForHomalg", "gap/CachingObjects.gi" );
 
+ReadPackage( "ToolsForHomalg", "gap/LazyArrays.gd" );
+
 ReadPackage( "ToolsForHomalg", "gap/ListsWithAttributes.gd" );
 
 if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ) then
