@@ -1,15 +1,12 @@
   
-  [1X2 [33X[0;0YLists with attributes[133X[101X
-  
-  [33X[0;0YThese  are  homogeneous  lists which still carry enough information of their
-  context even if they are empty.[133X
+  [1X2 [33X[0;0YLazy Lists[133X[101X
   
   
   [1X2.1 [33X[0;0YGAP categories[133X[101X
   
-  [1X2.1-1 IsListWithAttributes[101X
+  [1X2.1-1 IsLazyArray[101X
   
-  [33X[1;0Y[29X[2XIsListWithAttributes[102X( [3XL[103X ) [32X filter[133X
+  [33X[1;0Y[29X[2XIsLazyArray[102X( [3XL[103X ) [32X filter[133X
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
   
   [33X[0;0YThe [5XGAP[105X category of lists with attributes.[133X
@@ -17,15 +14,9 @@
   
   [1X2.2 [33X[0;0YConstructors[133X[101X
   
-  [1X2.2-1 TypedListWithAttributes[101X
+  [1X2.2-1 LazyArray[101X
   
-  [33X[1;0Y[29X[2XTypedListWithAttributes[102X( [3XL[103X, [3Xtype[103X, [3Xattr1[103X, [3Xvalue1[103X, [3Xattr2[103X, [3Xvalue2[103X, [3X...[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XLazyArray[102X( [3XL[103X, [3Xfunc[103X ) [32X function[133X
   
-  [33X[0;0YConstruct a list with attributes.[133X
-  
-  [1X2.2-2 ListWithAttributes[101X
-  
-  [33X[1;0Y[29X[2XListWithAttributes[102X( [3XL[103X, [3Xattr1[103X, [3Xvalue1[103X, [3Xattr2[103X, [3Xvalue2[103X, [3X...[103X ) [32X function[133X
-  
-  [33X[0;0YConstruct a list with attributes of type TheTypeListWithAttributesRep[133X
+  [33X[0;0YConstruct a lazy list[133X
   
