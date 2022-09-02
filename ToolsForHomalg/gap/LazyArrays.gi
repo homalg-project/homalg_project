@@ -1,3 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# ToolsForHomalg: Special methods and knowledge propagation tools
+#
+# Implementations
+#
+
 DeclareRepresentation( "IsLazyArrayRep",
         IsLazyArray,
         [ ] );
@@ -9,12 +15,22 @@ BindGlobal( "TheTypeLazyArrayRep",
         NewType( TheFamilyOfLazyArrays,
                 IsLazyArrayRep ) );
 
-##
+## LazyArray must ShallowCopy the third argument to protect it from CompilerForCAP
+## that might identify multiple different (mutable) lists (e.g., empty lists),
+## which  should be changed in different ways
 InstallGlobalFunction( LazyArray,
-  function( domain, func )
+  function( length, func, values )
     
     return ObjectifyWithAttributes(
-                   rec( domain := domain, func := func, values := [ ] ), TheTypeLazyArrayRep );
+                   rec( length := length, range := [ 0 .. length - 1 ], func := ShallowCopy( func ), values := ShallowCopy( values ) ), TheTypeLazyArrayRep );
+    
+end );
+
+##
+InstallGlobalFunction( LazyArrayFromList,
+  function( L )
+    
+    return LazyArray( Length( L ), i -> L[1 + i], L );
     
 end );
 
@@ -24,7 +40,30 @@ InstallMethod( Length,
         
   function( L )
     
-    return Length( L!.domain );
+    return Length( L!.range );
+    
+end );
+
+##
+InstallMethod( \[\],
+        [ IsLazyArrayRep, IsInt ],
+        
+  function( L, i )
+    local values;
+    
+    if not i in L!.range then
+        Error( "the index ", i, " is not in the valid range ", L!.range );
+    fi;
+    
+    values := L!.values;
+    
+    if not IsBound( values[1 + i] ) then
+        values[1 + i] := L!.func( i );
+    else
+        Assert( 4, values[1 + i] = L!.func( i ) );
+    fi;
+    
+    return values[1 + i];
     
 end );
 
@@ -34,7 +73,7 @@ InstallMethod( ListOfValues,
         
   function( L )
     
-    Perform( [ 1 .. Length( L ) ], i -> L[i] );
+    Perform( L!.range, i -> L[i] );
     
     return L!.values;
     
@@ -46,9 +85,9 @@ InstallMethod( \=,
         
   function( L1, L2 )
     
-    return Length( L1 ) = Length( L2 ) and
-           ( ( L1!.domain = L2!.domain and IsIdenticalObj( L1!.func, L2!.func ) ) or
-             ForAll( [ 1 .. Length( L1 ) ], i -> L1[i] = L2[i] ) );
+    return L1!.length = L2!.length and
+           ( IsIdenticalObj( L1!.func, L2!.func ) or
+             ForAll( L1!.range, i -> L1[i] = L2[i] ) );
     
 end );
 
@@ -58,7 +97,7 @@ InstallMethod( ListOp,
         
   function( L, g )
     
-    return LazyArray( L!.domain, x -> g( L!.func( x ) ) );
+    return LazyArray( L!.range, x -> g( L!.func( x ) ) );
     
 end );
 
@@ -67,87 +106,59 @@ InstallMethod( ShallowCopy,
         [ IsLazyArrayRep ], 100001,
         
   function( L )
-    local copy;
     
-    copy := LazyArray( ShallowCopy( L!.domain ), L!.func );
-    
-    copy!.values := ShallowCopy( L!.values );
-    
-    return copy;
+    ## LazyArray shallow-copies the values
+    return LazyArray( L!.length, ShallowCopy( L!.func ), L!.values );
     
 end );
 
 ##
 InstallMethod( IsBound\[\],
-        [ IsLazyArrayRep, IsPosInt ],
+        [ IsLazyArrayRep, IsInt ],
         
   function( L, i )
     
-    return i in [ 1 .. Length( L ) ];
+    return i in L!.range;
     
 end );
 
 ##
 InstallOtherMethod( Unbind\[\],
-        [ IsLazyArrayRep, IsPosInt ],
+        [ IsLazyArrayRep, IsInt ],
         
   function( L, i )
     
-    Error( "this operation is not permitted for lazy lists\n" );
+    Error( "this operation is not permitted for lazy arrays\n" );
     
 end );
 
 ##
 InstallMethod( Position,
-        [ IsLazyArrayRep, IsObject ],
+        [ IsLazyArrayRep, IsObject, IsInt ],
         
-  function( L, o )
+  function( L, o, start )
     
-    return First( [ 1 .. Length( L ) ], i -> L[i] = o );
+    return First( [ start .. L!.length - 1 ], i -> L[i] = o );
     
 end );
 
 ##
-InstallOtherMethod( \[\],
-        [ IsLazyArrayRep, IsObject ],
+InstallMethod( \in,
+        [ IsObject, IsLazyArrayRep ],
         
-  function( L, o )
-    local i;
+  function( o, L )
     
-    i := Position( L!.domain, o );
-    
-    if not IsBound( L!.values[i] ) then
-        L!.values[i] := L!.func( o );
-    fi;
-    
-    return L!.values[i];
-    
-end );
-
-##
-InstallMethod( \[\],
-        [ IsLazyArrayRep, IsPosInt ],
-        
-  function( L, i )
-    local values;
-    
-    values := L!.values;
-    
-    if not IsBound( values[i] ) then
-        values[i] := L!.func( L!.domain[i] );
-    fi;
-    
-    return values[i];
+    return IsInt( Position( L, o ) );
     
 end );
 
 ##
 InstallOtherMethod( \[\]\:\=,
-        [ IsLazyArrayRep, IsPosInt, IsObject ],
+        [ IsLazyArrayRep, IsInt, IsObject ],
         
   function( L, i, o )
     
-    L!.values[i] := o;
+    L!.values[1 + i] := o;
     
     return o;
     
@@ -168,7 +179,7 @@ InstallOtherMethod( \{\}\:\=,
         [ IsLazyArrayRep, IsList, IsList ],
         
   function( L, l, o )
-
+    
     Error( "not implemented yet\n" );
     
 end );
@@ -178,8 +189,26 @@ InstallOtherMethod( Add,
         [ IsLazyArrayRep, IsObject ],
         
   function( L, o )
+    local l, func;
     
-    Error( "not implemented yet\n" );
+    l := L!.length;
+    
+    L!.length := l + 1;
+    
+    L!.range := [ 0 .. L!.length - 1 ];
+    
+    L!.values[L!.length] := o;
+    
+    func := ShallowCopy( L!.func );
+    
+    L!.func :=
+      function( i )
+        if i = l then
+            return o;
+        else
+            return func( i );
+        fi;
+    end;
     
 end );
 
@@ -198,8 +227,31 @@ InstallOtherMethod( Append,
         [ IsLazyArrayRep, IsLazyArrayRep ],
         
   function( L1, L2 )
+    local l1, func1, func2, i;
     
-    Error( "not implemented yet\n" );
+    l1 := L1!.length;
+    
+    func1 := ShallowCopy( L1!.func );
+    func2 := ShallowCopy( L2!.func );
+    
+    L1!.length := l1 + L2!.length;
+    
+    L1!.range := [ 0 .. L1!.length - 1 ];
+    
+    for i in [ 1 .. Length( L2!.values ) ] do
+        if IsBound(  L2!.values[i] ) then
+            L1!.values[l1 + i] := L2!.values[i];
+        fi;
+    od;
+    
+    L1!.func :=
+      function( i )
+        if i < l1 then
+            return func1( i );
+        else
+            return func2( i - l1 );
+        fi;
+    end;
     
 end );
 
@@ -219,7 +271,7 @@ InstallMethod( ForAllOp,
         
   function( L, f )
     
-    return ForAllOp( [ 1 .. Length( L ) ], i -> f( L[i] ) );
+    return ForAllOp( L!.range, i -> f( L[i] ) );
     
 end );
 
@@ -229,8 +281,49 @@ InstallMethod( ForAnyOp,
         
   function( L, f )
     
-    return ForAnyOp( [ 1 .. Length( L ) ], i -> f( L[i] ) );
+    return ForAnyOp( L!.range, i -> f( L[i] ) );
     
+end );
+
+##
+InstallMethod( SSortedList,
+        [ IsLazyArrayRep ],
+        
+  function( L )
+    
+    return SSortedList( ListOfValues( L ) );
+    
+end );
+
+##
+InstallMethod( Iterator,
+        [ IsLazyArrayRep ],
+        
+  function( L )
+    
+    return IteratorByFunctions(
+             rec(
+                 pos := -1,
+                 length := L!.length,
+                 NextIterator :=
+                 function( iter )
+                   iter!.pos := iter!.pos + 1;
+                   return L[iter!.pos];
+                 end,
+                 IsDoneIterator :=
+                   function( iter )
+                     return iter!.pos = iter!.length - 1;
+                 end,
+                 ShallowCopy :=
+                   function( iter )
+                     return
+                       rec( pos := iter!.pos,
+                            length := iter!.length,
+                            NextIterator := iter!.NextIterator,
+                            IsDoneIterator := iter!.IsDoneIterator,
+                            ShallowCopy := iter!.ShallowCopy );
+                   end ) );
+                   
 end );
 
 ##
@@ -239,7 +332,7 @@ InstallMethod( ViewObj,
         
   function( L )
     
-    Print( "LazyArray with evaluated values: " );
+    Print( "LazyArray of length ", L!.length, " and evaluated values: " );
     ViewObj( L!.values );
     
 end );
@@ -249,7 +342,15 @@ InstallMethod( PrintObj,
         [ IsLazyArrayRep ],
         
   function( L )
+    local values;
     
-    PrintObj( ListOfValues( L ) );
+    values := L!.values;
+    
+    if L!.length = Length( values ) then
+        PrintObj( values );
+    else
+        PrintObj( values);
+        Print( ".?."  );
+    fi;
     
 end );
