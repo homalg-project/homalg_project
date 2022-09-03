@@ -75,7 +75,8 @@
   [2XIsContainerForWeakPointers[102X, for IsComponentObjectRep 6.1-1 
   [2XIsEqualForCache[102X, for IsObject, IsObject 1.2-3 
   [2XIsHomalgRingOrModule[102X, for IsStructureObjectOrObject 5.2-5 
-  [2XIsLazyArray[102X, for IsAttributeStoringRep and IsList 2.1-1 
+  [2XIsLazyArray[102X, for IsComponentObjectRep and IsList 2.1-1 
+  [2XIsLazyList[102X, for IsComponentObjectRep and IsList 2.1-2 
   [2XIsListWithAttributes[102X, for IsAttributeStoringRep and IsList 3.1-1 
   [2XIsStructureObject[102X, for IsStructureObjectOrObject 5.2-3 
   [2XIsStructureObjectMorphism[102X, for IsAttributeStoringRep 5.2-4 
@@ -84,6 +85,8 @@
   [2XIsToDoList[102X, for IsObject 4.3-1 
   [2XIsTree[102X, for IsObject 8.1-1 
   [2XLazyArray[102X 2.2-1 
+  [2XLazyArrayFromList[102X 2.2-1 
+  [2XLazyList[102X 2.2-2 
   [2XLeftRightAttributesForHomalg[102X 7.1-6 
   [2XListImpliedFilters[102X 7.1-51 
   [2XListOfSentinels[102X, for IsTree 8.1-5 

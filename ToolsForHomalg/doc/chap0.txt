@@ -6,10 +6,10 @@
                [1X Special methods and knowledge propagation tools [101X
   
   
-                                   2022.08-03
+                                   2022.09-01
   
   
-                                 31 August 2022
+                                3 September 2022
   
   
                                 Mohamed Barakat
@@ -74,8 +74,10 @@
   2 [33X[0;0YLazy Lists[133X
     2.1 [33X[0;0YGAP categories[133X
       2.1-1 IsLazyArray
+      2.1-2 IsLazyList
     2.2 [33X[0;0YConstructors[133X
       2.2-1 LazyArray
+      2.2-2 LazyList
   3 [33X[0;0YLists with attributes[133X
     3.1 [33X[0;0YGAP categories[133X
       3.1-1 IsListWithAttributes
