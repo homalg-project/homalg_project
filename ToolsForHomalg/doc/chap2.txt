@@ -21,16 +21,23 @@
   
   [1X2.2 [33X[0;0YConstructors[133X[101X
   
-  [1X2.2-1 LazyArray[101X
+  [1X2.2-1 LazyArrayWithValues[101X
   
-  [33X[1;0Y[29X[2XLazyArray[102X( [3Xn[103X, [3Xfunc[103X, [3Xvalues[103X ) [32X function[133X
-  [33X[1;0Y[29X[2XLazyArrayFromList[102X( [3Xvalues[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XLazyArrayWithValues[102X( [3Xn[103X, [3Xfunc[103X, [3Xvalues[103X, [3Xtype[103X ) [32X function[133X
   
   [33X[0;0YConstruct  a  lazy  array  out of the nonnegative integer [3Xn[103X and the function
   [3Xfunc[103X  defined  in  the  range  [  0 .. [3Xn[103X ], and possibly empty (sparse) list
   [3Xvalues[103X of a posteriori possibly known values.[133X
   
-  [1X2.2-2 LazyList[101X
+  [1X2.2-2 LazyArray[101X
+  
+  [33X[1;0Y[29X[2XLazyArray[102X( [3Xn[103X, [3Xfunc[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XLazyStandardInterval[102X( [3Xlength[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XLazyInterval[102X( [3Xlength[103X, [3Xstart[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XLazyConstantArray[102X( [3Xn[103X, [3Xnumber[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XLazyArrayFromList[102X( [3Xlist[103X ) [32X function[133X
+  
+  [1X2.2-3 LazyList[101X
   
   [33X[1;0Y[29X[2XLazyList[102X( [3XL[103X, [3Xfunc[103X ) [32X function[133X
   

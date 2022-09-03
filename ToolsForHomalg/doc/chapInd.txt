@@ -84,9 +84,13 @@
   [2XIsStructureObjectOrObjectOrMorphism[102X, for IsAttributeStoringRep 5.2-1 
   [2XIsToDoList[102X, for IsObject 4.3-1 
   [2XIsTree[102X, for IsObject 8.1-1 
-  [2XLazyArray[102X 2.2-1 
-  [2XLazyArrayFromList[102X 2.2-1 
-  [2XLazyList[102X 2.2-2 
+  [2XLazyArray[102X 2.2-2 
+  [2XLazyArrayFromList[102X 2.2-2 
+  [2XLazyArrayWithValues[102X 2.2-1 
+  [2XLazyConstantArray[102X 2.2-2 
+  [2XLazyInterval[102X 2.2-2 
+  [2XLazyList[102X 2.2-3 
+  [2XLazyStandardInterval[102X 2.2-2 
   [2XLeftRightAttributesForHomalg[102X 7.1-6 
   [2XListImpliedFilters[102X 7.1-51 
   [2XListOfSentinels[102X, for IsTree 8.1-5 

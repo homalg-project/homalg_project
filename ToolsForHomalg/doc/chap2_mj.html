@@ -34,8 +34,9 @@
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X86EC0F0A78ECBC10">2.2 <span class="Heading">Constructors</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86F0DA10864BD2AC">2.2-1 LazyArray</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82B09AE484B6B33F">2.2-2 LazyList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F49E56781DF539E">2.2-1 LazyArrayWithValues</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86F0DA10864BD2AC">2.2-2 LazyArray</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82B09AE484B6B33F">2.2-3 LazyList</a></span>
 </div></div>
 </div>
 
@@ -67,17 +68,25 @@
 
 <h4>2.2 <span class="Heading">Constructors</span></h4>
 
-<p><a id="X86F0DA10864BD2AC" name="X86F0DA10864BD2AC"></a></p>
+<p><a id="X7F49E56781DF539E" name="X7F49E56781DF539E"></a></p>
 
-<h5>2.2-1 LazyArray</h5>
+<h5>2.2-1 LazyArrayWithValues</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyArray</code>( <var class="Arg">n</var>, <var class="Arg">func</var>, <var class="Arg">values</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyArrayFromList</code>( <var class="Arg">values</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyArrayWithValues</code>( <var class="Arg">n</var>, <var class="Arg">func</var>, <var class="Arg">values</var>, <var class="Arg">type</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Construct a lazy array out of the nonnegative integer <var class="Arg">n</var> and the function <var class="Arg">func</var> defined in the range [ 0 .. <var class="Arg">n</var> ], and possibly empty (sparse) list <var class="Arg">values</var> of a posteriori possibly known values.</p>
 
+<p><a id="X86F0DA10864BD2AC" name="X86F0DA10864BD2AC"></a></p>
+
+<h5>2.2-2 LazyArray</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyArray</code>( <var class="Arg">n</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyStandardInterval</code>( <var class="Arg">length</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyInterval</code>( <var class="Arg">length</var>, <var class="Arg">start</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyConstantArray</code>( <var class="Arg">n</var>, <var class="Arg">number</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyArrayFromList</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p><a id="X82B09AE484B6B33F" name="X82B09AE484B6B33F"></a></p>
 
-<h5>2.2-2 LazyList</h5>
+<h5>2.2-3 LazyList</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyList</code>( <var class="Arg">L</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Construct a lazy list</p>

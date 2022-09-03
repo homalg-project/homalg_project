@@ -1,5 +1,5 @@
 name: ToolsForHomalg
-version: "2022.09-01"
+version: "2022.09-02"
 license: "GPL-2.0-or-later"
 date: 2022-09-03
 description: |
@@ -42,11 +42,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/ToolsForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2022.09-01/ToolsForHomalg-2022.09-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2022.09-02/ToolsForHomalg-2022.09-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2022.09-01/ToolsForHomalg-2022.09-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2022.09-02/ToolsForHomalg-2022.09-02.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2022.09-01/ToolsForHomalg-2022.09-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2022.09-02/ToolsForHomalg-2022.09-02.pdf
 
 abstract: |
     The <span class="pkgname">ToolsForHomalg</span> package provides GAP extensions for the homalg project
@@ -58,7 +58,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BGL22</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S. and Lange-Hegermann, M.</b>,
      <i class='BibTitle'>ToolsForHomalg, Special methods and knowledge propagation tools,
-             Version 2022.09-01</i>
+             Version 2022.09-02</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/ToolsForHomalg">https://homalg-project.github.io/pkg/ToolsForHomalg</a></span>.
@@ -66,10 +66,10 @@ citeas: |
     
 
 bibtex: |
-    @misc{ ToolsForHomalg2022.09-01,
+    @misc{ ToolsForHomalg2022.09-02,
       author =           {Barakat, M. and Gutsche, S. and Lange-Hegermann, M.},
       title =            {{ToolsForHomalg},   Special   methods   and  knowledge
-                          propagation tools, {V}ersion 2022.09-01},
+                          propagation tools, {V}ersion 2022.09-02},
       month =            {Sep},
       year =             {2022},
       note =             {GAP package},
