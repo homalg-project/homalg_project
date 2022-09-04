@@ -6,10 +6,10 @@
                [1X Special methods and knowledge propagation tools [101X
   
   
-                                   2022.09-02
+                                   2022.09-03
   
   
-                                3 September 2022
+                                4 September 2022
   
   
                                 Mohamed Barakat
