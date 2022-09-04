@@ -148,8 +148,9 @@ InstallMethod( \[\],
         
   function( L, i )
     local values;
-    
-    if not IsBound( L[i] ) then
+
+    ## do not use IsBound( L[i] ) since this will invoke a function call
+    if i < 0 or i >= L!.length then
         Error( "the index ", i, " is not in the valid range [ 0 .. ", L!.length, " - 1 ]" );
     fi;
     
