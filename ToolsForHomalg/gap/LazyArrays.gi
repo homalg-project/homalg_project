@@ -79,24 +79,23 @@ InstallMethod( Iterator,
     return IteratorByFunctions(
              rec(
                  pos := -1,
-                 length := L!.length,
+                 len := L!.length,
+                 list := L,
                  NextIterator :=
                  function( iter )
                    iter!.pos := iter!.pos + 1;
-                   return L[iter!.pos];
+                   return iter!.list[iter!.pos];
                  end,
                  IsDoneIterator :=
                    function( iter )
-                     return iter!.pos = iter!.length - 1;
+                     return iter!.pos = iter!.len - 1;
                  end,
                  ShallowCopy :=
                    function( iter )
                      return
                        rec( pos := iter!.pos,
-                            length := iter!.length,
-                            NextIterator := iter!.NextIterator,
-                            IsDoneIterator := iter!.IsDoneIterator,
-                            ShallowCopy := iter!.ShallowCopy );
+                            len := iter!.len,
+                            list := iter!.list );
                    end ) );
                    
 end );
