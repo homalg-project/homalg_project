@@ -4,14 +4,14 @@
 # Declarations
 #
 
-#! @Chapter Lazy Lists
+#! @Chapter Lazy homogeneous lists
 
 #! @Section GAP categories
 
 #! @Description
-#!  The &GAP; category of lazy lists.
+#!  The &GAP; category of lazy homogeneous lists.
 #! @Arguments L
-DeclareCategory( "IsLazyList",
+DeclareCategory( "IsLazyHList",
         IsComponentObjectRep and IsList );
 
 #! @Section Constructors
@@ -19,8 +19,8 @@ DeclareCategory( "IsLazyList",
 #! @Description
 #!  Construct a lazy list
 #! @Arguments L, func
-DeclareGlobalFunction( "LazyList" );
+DeclareGlobalFunction( "LazyHList" );
 
 #! @Section Operations
 
-DeclareOperation( "ListOfValues", [ IsLazyList ] );
+DeclareOperation( "ListOfValues", [ IsLazyHList ] );
