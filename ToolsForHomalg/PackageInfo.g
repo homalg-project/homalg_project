@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "ToolsForHomalg",
 Subtitle := "Special methods and knowledge propagation tools",
-Version := "2022.09-03",
-Date := "04/09/2022",
+Version := "2022.09-04",
+Date := "05/09/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [

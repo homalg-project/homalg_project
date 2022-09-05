@@ -8,7 +8,7 @@
 <script type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<title>GAP (ToolsForHomalg) - Chapter 2: Lazy Lists</title>
+<title>GAP (ToolsForHomalg) - Chapter 2: Lazy arrays</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
 <link rel="stylesheet" type="text/css" href="manual.css" />
@@ -18,29 +18,26 @@
 <body class="chap2"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 <p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
-<p><a id="X8181B29C850948BD" name="X8181B29C850948BD"></a></p>
-<div class="ChapSects"><a href="chap2_mj.html#X8181B29C850948BD">2 <span class="Heading">Lazy Lists</span></a>
+<p><a id="X83F0437887B743C6" name="X83F0437887B743C6"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X83F0437887B743C6">2 <span class="Heading">Lazy arrays</span></a>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7D03633A7D98026B">2.1 <span class="Heading">GAP categories</span></a>
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X863831C4843545B3">2.1-1 IsLazyArray</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X81FBA99684B9735A">2.1-2 IsLazyList</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X86EC0F0A78ECBC10">2.2 <span class="Heading">Constructors</span></a>
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F49E56781DF539E">2.2-1 LazyArrayWithValues</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86F0DA10864BD2AC">2.2-2 LazyArray</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82B09AE484B6B33F">2.2-3 LazyList</a></span>
 </div></div>
 </div>
 
-<h3>2 <span class="Heading">Lazy Lists</span></h3>
+<h3>2 <span class="Heading">Lazy arrays</span></h3>
 
 <p><a id="X7D03633A7D98026B" name="X7D03633A7D98026B"></a></p>
 
@@ -55,15 +52,6 @@
 
 <p>The <strong class="pkg">GAP</strong> category of lazy arrays.</p>
 
-<p><a id="X81FBA99684B9735A" name="X81FBA99684B9735A"></a></p>
-
-<h5>2.1-2 IsLazyList</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLazyList</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
-<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
-
-<p>The <strong class="pkg">GAP</strong> category of lazy lists.</p>
-
 <p><a id="X86EC0F0A78ECBC10" name="X86EC0F0A78ECBC10"></a></p>
 
 <h4>2.2 <span class="Heading">Constructors</span></h4>
@@ -73,29 +61,18 @@
 <h5>2.2-1 LazyArrayWithValues</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyArrayWithValues</code>( <var class="Arg">n</var>, <var class="Arg">func</var>, <var class="Arg">values</var>, <var class="Arg">type</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Construct a lazy array out of the nonnegative integer <var class="Arg">n</var> and the function <var class="Arg">func</var> defined in the range [ 0 .. <var class="Arg">n</var> ], and possibly empty (sparse) list <var class="Arg">values</var> of a posteriori possibly known values.</p>
-
-<p><a id="X86F0DA10864BD2AC" name="X86F0DA10864BD2AC"></a></p>
-
-<h5>2.2-2 LazyArray</h5>
-
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyArray</code>( <var class="Arg">n</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyStandardInterval</code>( <var class="Arg">length</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyInterval</code>( <var class="Arg">length</var>, <var class="Arg">start</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyConstantArray</code>( <var class="Arg">n</var>, <var class="Arg">number</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyArrayFromList</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X82B09AE484B6B33F" name="X82B09AE484B6B33F"></a></p>
-
-<h5>2.2-3 LazyList</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LazyList</code>( <var class="Arg">L</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Construct a lazy list</p>
+<p>Construct a lazy array out of the nonnegative integer <var class="Arg">n</var> and the function <var class="Arg">func</var> defined in the range [ 0 .. <var class="Arg">n</var> ], and possibly empty (sparse) list <var class="Arg">values</var> of a posteriori possibly known values.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
