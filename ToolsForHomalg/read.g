@@ -20,7 +20,7 @@ ReadPackage( "ToolsForHomalg", "gap/ToDoListWeakPointer.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/LazyArrays.gi" );
 
-ReadPackage( "ToolsForHomalg", "gap/LazyLists.gi" );
+ReadPackage( "ToolsForHomalg", "gap/LazyHLists.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/ListsWithAttributes.gi" );
 

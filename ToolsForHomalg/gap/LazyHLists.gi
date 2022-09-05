@@ -4,29 +4,29 @@
 # Implementations
 #
 
-DeclareRepresentation( "IsLazyListRep",
-        IsLazyList,
+DeclareRepresentation( "IsLazyHListRep",
+        IsLazyHList,
         [ ] );
 
-BindGlobal( "TheFamilyOfLazyLists",
-        NewFamily( "TheFamilyOfLazyLists" ) );
+BindGlobal( "TheFamilyOfLazyHLists",
+        NewFamily( "TheFamilyOfLazyHLists" ) );
 
-BindGlobal( "TheTypeLazyListRep",
-        NewType( TheFamilyOfLazyLists,
-                IsLazyListRep ) );
+BindGlobal( "TheTypeLazyHListRep",
+        NewType( TheFamilyOfLazyHLists,
+                IsLazyHListRep ) );
 
 ##
-InstallGlobalFunction( LazyList,
+InstallGlobalFunction( LazyHList,
   function( domain, func )
     
     return ObjectifyWithAttributes(
-                   rec( domain := domain, func := func, values := [ ] ), TheTypeLazyListRep );
+                   rec( domain := domain, func := func, values := [ ] ), TheTypeLazyHListRep );
     
 end );
 
 ##
 InstallMethod( Length,
-        [ IsLazyListRep ],
+        [ IsLazyHListRep ],
         
   function( L )
     
@@ -36,7 +36,7 @@ end );
 
 ##
 InstallMethod( ListOfValues,
-        [ IsLazyListRep ],
+        [ IsLazyHListRep ],
         
   function( L )
     
@@ -48,7 +48,7 @@ end );
 
 ##
 InstallMethod( \=,
-        [ IsLazyListRep, IsLazyListRep ],
+        [ IsLazyHListRep, IsLazyHListRep ],
         
   function( L1, L2 )
     
@@ -60,22 +60,22 @@ end );
 
 ##
 InstallMethod( ListOp,
-        [ IsLazyListRep, IsFunction ],
+        [ IsLazyHListRep, IsFunction ],
         
   function( L, g )
     
-    return LazyList( L!.domain, x -> g( L!.func( x ) ) );
+    return LazyHList( L!.domain, x -> g( L!.func( x ) ) );
     
 end );
 
 ##
 InstallMethod( ShallowCopy,
-        [ IsLazyListRep ], 100001,
+        [ IsLazyHListRep ], 100001,
         
   function( L )
     local copy;
     
-    copy := LazyList( ShallowCopy( L!.domain ), L!.func );
+    copy := LazyHList( ShallowCopy( L!.domain ), L!.func );
     
     copy!.values := ShallowCopy( L!.values );
     
@@ -85,7 +85,7 @@ end );
 
 ##
 InstallMethod( IsBound\[\],
-        [ IsLazyListRep, IsPosInt ],
+        [ IsLazyHListRep, IsPosInt ],
         
   function( L, i )
     
@@ -95,7 +95,7 @@ end );
 
 ##
 InstallOtherMethod( Unbind\[\],
-        [ IsLazyListRep, IsPosInt ],
+        [ IsLazyHListRep, IsPosInt ],
         
   function( L, i )
     
@@ -105,7 +105,7 @@ end );
 
 ##
 InstallMethod( Position,
-        [ IsLazyListRep, IsObject ],
+        [ IsLazyHListRep, IsObject ],
         
   function( L, o )
     
@@ -115,7 +115,7 @@ end );
 
 ##
 InstallOtherMethod( \[\],
-        [ IsLazyListRep, IsObject ],
+        [ IsLazyHListRep, IsObject ],
         
   function( L, o )
     local i;
@@ -132,7 +132,7 @@ end );
 
 ##
 InstallMethod( \[\],
-        [ IsLazyListRep, IsPosInt ],
+        [ IsLazyHListRep, IsPosInt ],
         
   function( L, i )
     local values;
@@ -149,7 +149,7 @@ end );
 
 ##
 InstallOtherMethod( \[\]\:\=,
-        [ IsLazyListRep, IsPosInt, IsObject ],
+        [ IsLazyHListRep, IsPosInt, IsObject ],
         
   function( L, i, o )
     
@@ -161,7 +161,7 @@ end );
 
 ##
 InstallMethod( \{\},
-        [ IsLazyListRep, IsList ], 100001,
+        [ IsLazyHListRep, IsList ], 100001,
         
   function( L, l )
     
@@ -171,7 +171,7 @@ end );
 
 ##
 InstallOtherMethod( \{\}\:\=,
-        [ IsLazyListRep, IsList, IsList ],
+        [ IsLazyHListRep, IsList, IsList ],
         
   function( L, l, o )
 
@@ -181,7 +181,7 @@ end );
 
 ##
 InstallOtherMethod( Add,
-        [ IsLazyListRep, IsObject ],
+        [ IsLazyHListRep, IsObject ],
         
   function( L, o )
     
@@ -191,7 +191,7 @@ end );
 
 ##
 InstallOtherMethod( Append,
-        [ IsLazyListRep, IsList ],
+        [ IsLazyHListRep, IsList ],
         
   function( L, l )
     
@@ -201,7 +201,7 @@ end );
 
 ##
 InstallOtherMethod( Append,
-        [ IsLazyListRep, IsLazyListRep ],
+        [ IsLazyHListRep, IsLazyHListRep ],
         
   function( L1, L2 )
     
@@ -211,7 +211,7 @@ end );
 
 ##
 InstallMethod( FilteredOp,
-        [ IsLazyListRep, IsFunction ], 100001,
+        [ IsLazyHListRep, IsFunction ], 100001,
         
   function( L, f )
     
@@ -221,7 +221,7 @@ end );
 
 ##
 InstallMethod( ForAllOp,
-        [ IsLazyListRep, IsFunction ],
+        [ IsLazyHListRep, IsFunction ],
         
   function( L, f )
     
@@ -231,7 +231,7 @@ end );
 
 ##
 InstallMethod( ForAnyOp,
-        [ IsLazyListRep, IsFunction ],
+        [ IsLazyHListRep, IsFunction ],
         
   function( L, f )
     
@@ -241,18 +241,18 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        [ IsLazyListRep ],
+        [ IsLazyHListRep ],
         
   function( L )
     
-    Print( "LazyList of length ", Length( L ), " and evaluated values: " );
+    Print( "LazyHList of length ", Length( L ), " and evaluated values: " );
     ViewObj( L!.values );
     
 end );
 
 ##
 InstallMethod( PrintObj,
-        [ IsLazyListRep ],
+        [ IsLazyHListRep ],
         
   function( L )
     

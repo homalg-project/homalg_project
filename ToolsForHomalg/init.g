@@ -25,7 +25,7 @@ ReadPackage( "ToolsForHomalg", "gap/CachingObjects.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/LazyArrays.gd" );
 
-ReadPackage( "ToolsForHomalg", "gap/LazyLists.gd" );
+ReadPackage( "ToolsForHomalg", "gap/LazyHLists.gd" );
 
 ReadPackage( "ToolsForHomalg", "gap/ListsWithAttributes.gd" );
 
