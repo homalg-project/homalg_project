@@ -4,7 +4,7 @@
 # Declarations
 #
 
-#! @Chapter Lazy Lists
+#! @Chapter Lazy arrays
 
 #! @Section GAP categories
 
@@ -20,28 +20,28 @@ DeclareCategory( "IsLazyArray",
 #!  Construct a lazy array out of the nonnegative integer <A>n</A>
 #!  and the function <A>func</A> defined in the range [ 0 .. <A>n</A> ],
 #!  and possibly empty (sparse) list <A>values</A> of a posteriori possibly known values.
-#! @Group LazyArrayWithValues
 #! @Arguments n, func, values, type
+#! @Group lazyarray
 DeclareGlobalFunction( "LazyArrayWithValues" );
 
-#! @Group LazyArray
 #! @Arguments n, func
+#! @Group lazyarray
 DeclareGlobalFunction( "LazyArray" );
 
-#! @Group LazyArray
 #! @Arguments length
+#! @Group lazyarray
 DeclareGlobalFunction( "LazyStandardInterval" );
 
-#! @Group LazyArray
 #! @Arguments length, start
+#! @Group lazyarray
 DeclareGlobalFunction( "LazyInterval" );
 
-#! @Group LazyArray
 #! @Arguments n, number
+#! @Group lazyarray
 DeclareGlobalFunction( "LazyConstantArray" );
 
-#! @Group LazyArray
 #! @Arguments list
+#! @Group lazyarray
 DeclareGlobalFunction( "LazyArrayFromList" );
 
 #! @Section Operations
