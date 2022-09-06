@@ -1331,9 +1331,17 @@ InstallMethod( SetRingProperties,
         fi;
     fi;
     
-    SetIndeterminateAntiCommutingVariablesOfExteriorRing( A, anti );
+    if not HasIndeterminateAntiCommutingVariablesOfExteriorRing( A ) then
+        
+        SetIndeterminateAntiCommutingVariablesOfExteriorRing( A, anti );
+        
+    fi;
     
-    SetIndeterminatesOfExteriorRing( A, Concatenation( comm, anti ) );
+    if not HasIndeterminatesOfExteriorRing( A ) then
+        
+        SetIndeterminatesOfExteriorRing( A, Concatenation( comm, anti ) );
+        
+    fi;
     
     SetBasisAlgorithmRespectsPrincipalIdeals( A, true );
     
