@@ -16,7 +16,7 @@
 ## TheZeroMorphism
 ##
 
-InstallGlobalFunction( _Functor_TheZeroMorphism_OnGradedModules,	### defines: TheZeroMorphism
+InstallGlobalFunction( _Functor_TheZeroMorphism_OnGradedModules, ### defines: TheZeroMorphism
   function( M, N )
     local psi;
     
@@ -46,7 +46,7 @@ InstallValue( functor_TheZeroMorphism_for_graded_modules,
 ## MulMorphism
 ##
 
-InstallGlobalFunction( _Functor_MulMorphism_OnGradedMaps,	### defines: MulMorphism
+InstallGlobalFunction( _Functor_MulMorphism_OnGradedMaps, ### defines: MulMorphism
   function( a, phi )
     local a_phi;
     
@@ -68,7 +68,7 @@ InstallValue( functor_MulMorphism_for_maps_of_graded_modules,
         CreateHomalgFunctor(
                 [ "name", "MulMorphism" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
-                [ "operation", "MulMorphism" ],	## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
+                [ "operation", "MulMorphism" ], ## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgGradedRingElementRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfGradedModulesRep ] ] ],
@@ -93,7 +93,7 @@ end );
 ## AddMorphisms
 ##
 
-InstallGlobalFunction( _Functor_AddMorphisms_OnGradedMaps,	### defines: AddMorphisms
+InstallGlobalFunction( _Functor_AddMorphisms_OnGradedMaps, ### defines: AddMorphisms
   function( phi1, phi2 )
     local phi;
     
@@ -126,7 +126,7 @@ functor_AddMorphisms_for_maps_of_graded_modules!.ContainerForWeakPointersOnCompu
 ## SubMorphisms
 ##
 
-InstallGlobalFunction( _Functor_SubMorphisms_OnGradedMaps,	### defines: SubMorphisms
+InstallGlobalFunction( _Functor_SubMorphisms_OnGradedMaps, ### defines: SubMorphisms
   function( phi1, phi2 )
     local phi;
     
@@ -159,7 +159,7 @@ functor_SubMorphisms_for_maps_of_graded_modules!.ContainerForWeakPointersOnCompu
 ## Compose
 ##
 
-InstallGlobalFunction( _Functor_PreCompose_OnGradedMaps,	### defines: PreCompose
+InstallGlobalFunction( _Functor_PreCompose_OnGradedMaps, ### defines: PreCompose
   function( pre, post )
     local S, source, target, phi;
     
@@ -196,7 +196,7 @@ InstallValue( functor_PreCompose_for_maps_of_graded_modules,
 ## CoproductMorphism
 ##
 
-InstallGlobalFunction( _Functor_CoproductMorphism_OnGradedMaps,	### defines: CoproductMorphism
+InstallGlobalFunction( _Functor_CoproductMorphism_OnGradedMaps, ### defines: CoproductMorphism
   function( phi, psi )
     local phi_psi;
     
@@ -226,7 +226,7 @@ InstallValue( functor_CoproductMorphism_for_maps_of_graded_modules,
 ## ProductMorphism
 ##
 
-InstallGlobalFunction( _Functor_ProductMorphism_OnGradedMaps,	### defines: ProductMorphism
+InstallGlobalFunction( _Functor_ProductMorphism_OnGradedMaps, ### defines: ProductMorphism
   function( phi, psi )
     local phi_psi;
     
@@ -265,8 +265,8 @@ InstallValue( functor_ProductMorphism_for_maps_of_graded_modules,
 #     N_ -(beta)-> N
 #
 #
-# row convention (left modules): psi := gamma * beta^(-1)	( -> RightDivide )
-# column convention (right modules): psi := beta^(-1) * gamma	( -> LeftDivide )
+# row convention (left modules): psi := gamma * beta^(-1)       ( -> RightDivide )
+# column convention (right modules): psi := beta^(-1) * gamma   ( -> LeftDivide )
 #_______________________________________________________________________
 
 ##

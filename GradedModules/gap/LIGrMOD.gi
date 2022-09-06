@@ -85,9 +85,9 @@ InstallValue( LIGrMOD,
               "AffineDimension",
               "AffineDegree",
               "ProjectiveDegree",
-              "PrimaryDecomposition",	## wrong, we need the preimages of this
-              "RadicalDecomposition",	## wrong, we need the preimages of this
-              "RadicalSubobject",	## wrong, we need the preimages of this
+              "PrimaryDecomposition", ## wrong, we need the preimages of this
+              "RadicalDecomposition", ## wrong, we need the preimages of this
+              "RadicalSubobject",     ## wrong, we need the preimages of this
               "HilbertPolynomial",
               ],
             

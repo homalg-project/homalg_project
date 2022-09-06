@@ -17,7 +17,7 @@
 ##
 
 ##
-InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(Epi)
+InstallGlobalFunction( _Functor_Cokernel_OnGradedModules, ### defines: Cokernel(Epi)
   function( phi )
     local S, R, U_phi, epi, positions, p2, p, coker_U_phi, coker, gen_iso, img_emb, emb;
     
@@ -141,7 +141,7 @@ functor_Cokernel_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphi
 ## ImageObject
 ##
 
-InstallGlobalFunction( _Functor_ImageObject_OnGradedModules,	### defines: ImageObject(Emb)
+InstallGlobalFunction( _Functor_ImageObject_OnGradedModules, ### defines: ImageObject(Emb)
   function( phi )
     local S, emb, img, coker_epi, img_submodule;
     
@@ -230,7 +230,7 @@ functor_ImageObject_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMor
 ## GradedHom
 ##
 
-InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedHom (object part)
+InstallGlobalFunction( _Functor_GradedHom_OnGradedModules, ### defines: GradedHom (object part)
   function( M, N )
     local S, hom, emb, degHP0N, p, HP0N;
     
@@ -419,7 +419,7 @@ RightDerivedCofunctor( Functor_GradedHom_ForGradedModules );
 ## TensorProduct
 ##
 
-InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules,		### defines: TensorProduct (object part)
+InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules, ### defines: TensorProduct (object part)
   function( M, N )
     local S, degM, degN, degMN, T, alpha, p;
     
@@ -463,7 +463,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules,		### defines: Ten
 end );
 
 ##
-InstallGlobalFunction( _Functor_TensorProduct_OnGradedMaps,	### defines: TensorProduct (morphism part)
+InstallGlobalFunction( _Functor_TensorProduct_OnGradedMaps, ### defines: TensorProduct (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local psi;
     
@@ -544,7 +544,7 @@ fi;
 ##
 
 ##
-InstallGlobalFunction( _functor_BaseChange_OnGradedModules,		### defines: BaseChange (object part)
+InstallGlobalFunction( _functor_BaseChange_OnGradedModules, ### defines: BaseChange (object part)
   function( _R, M )
     local R, S, N, p;
     

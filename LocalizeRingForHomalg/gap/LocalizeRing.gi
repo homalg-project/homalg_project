@@ -386,7 +386,7 @@ InstallMethod( String,
 end );
 
 ##
-InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
+InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix, ## under construction
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgLocalMatrixRep ],
         
@@ -672,7 +672,7 @@ InstallMethod( Cancel,
         
         return result;
         
-    else	#fallback: no cancelation
+    else #fallback: no cancelation
         
         return [ a, b ];
         
@@ -860,7 +860,7 @@ InstallMethod( SetRingProperties,
     fi;
     
 #    if HasGlobalDimension( R ) then
-#        SetGlobalDimension( S, GlobalDimension( R ) );	## would be wrong
+#        SetGlobalDimension( S, GlobalDimension( R ) ); ## would be wrong
 #    fi;
 #    if HasKrullDimension( R ) then
 #        SetKrullDimension( S, KrullDimension( R ) ); ## would be wrong
@@ -1063,7 +1063,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
         if IsHomalgRing( arg[2] ) then
             ring := arg[2];
             ar := [ numer, One( AssociatedComputationRing( ring ) ), ring ];
-            properties := KnownTruePropertiesOfObject( numer );	## FIXME: a huge potential for problems
+            properties := KnownTruePropertiesOfObject( numer ); ## FIXME: a huge potential for problems
             Add( ar, List( properties, ValueGlobal ) );  ## at least an empty list is inserted; avoids infinite loops
             return CallFuncList( HomalgLocalRingElement, ar );
         fi;

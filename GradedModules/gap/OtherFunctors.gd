@@ -219,7 +219,7 @@ DeclareGlobalVariable( "Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGrade
 #
 ####################################
 
-# DeclareGlobalFunction( "_UCT_Homology" );	## FIXME: generalize
+# DeclareGlobalFunction( "_UCT_Homology" ); ## FIXME: generalize
 # 
-# DeclareGlobalFunction( "_UCT_Cohomology" );	## FIXME: generalize
+# DeclareGlobalFunction( "_UCT_Cohomology" ); ## FIXME: generalize
 

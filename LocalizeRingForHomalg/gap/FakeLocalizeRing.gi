@@ -337,7 +337,7 @@ end );
 
 
 ##
-InstallMethod( BlindlyCopyMatrixPropertiesToFakeLocalMatrix,	## under construction
+InstallMethod( BlindlyCopyMatrixPropertiesToFakeLocalMatrix, ## under construction
         "for homalg matrices",
         [ IsHomalgMatrix, IsMatrixOverHomalgFakeLocalRingRep ],
         
@@ -561,7 +561,7 @@ InstallMethod( Cancel,
         
         return result;
         
-    else	#fallback: no cancelation
+    else #fallback: no cancelation
         
         return [ a, b ];
         

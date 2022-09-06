@@ -763,7 +763,7 @@ InstallGlobalFunction( homalgIOMode,
     
     if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then
         mode := "default";
-    elif IsString( arg[1] ) then	## now we know, the string is not empty
+    elif IsString( arg[1] ) then ## now we know, the string is not empty
         s := arg[1];
         if LowercaseString( s{[1]} ) = "a" then
             mode := "all";
@@ -799,19 +799,19 @@ InstallGlobalFunction( homalgIOMode,
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
         SetInfoLevel( InfoHomalgToCAS, 4 );
-        homalgMode( "basic" );	## use homalgIOMode( "basic", "" ) to reset
+        homalgMode( "basic" ); ## use homalgIOMode( "basic", "" ) to reset
     elif mode = "debug" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
         SetInfoLevel( InfoHomalgToCAS, 8 );
-        homalgMode( "debug" );	## use homalgIOMode( "debug", "" ) to reset
+        homalgMode( "debug" ); ## use homalgIOMode( "debug", "" ) to reset
     elif mode = "file" then
         HOMALG_IO.save_CAS_commands_to_file := true;
     elif mode = "picto" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
         SetInfoLevel( InfoHomalgToCAS, 4 );
-        homalgMode( "logic" );	## use homalgIOMode( "picto", "" ) to reset
+        homalgMode( "logic" ); ## use homalgIOMode( "picto", "" ) to reset
     fi;
     
     if nargs > 1 and IsString( arg[2] ) then

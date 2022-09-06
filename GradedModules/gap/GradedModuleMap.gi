@@ -36,9 +36,9 @@ DeclareRepresentation( "IsMapOfGradedModulesRep",
 ####################################
 
 HOMALG_GRADED_MODULES.FunctorOn :=  [ IsHomalgGradedRingOrGradedModuleRep,
-				      IsMapOfGradedModulesRep,
-				      [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
-				      [ IsChainMorphismOfFinitelyPresentedObjectsRep, IsCochainMorphismOfFinitelyPresentedObjectsRep ] ];
+                                      IsMapOfGradedModulesRep,
+                                      [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
+                                      [ IsChainMorphismOfFinitelyPresentedObjectsRep, IsCochainMorphismOfFinitelyPresentedObjectsRep ] ];
 
 ####################################
 #
@@ -432,7 +432,7 @@ InstallMethod( GradedMap,
           source2 := FreeRightModuleWithDegrees( degrees_s, S );
         fi;
       else
-      	Error( "Unknow configuration of the second parameter: expected a list of a homalg graded module and an integer (indicating the position of the presentation) or a list of degrees" );
+        Error( "Unknow configuration of the second parameter: expected a list of a homalg graded module and an integer (indicating the position of the presentation) or a list of degrees" );
       fi;
     elif IsInt( source ) then
       if left then
