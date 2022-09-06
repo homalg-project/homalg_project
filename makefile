@@ -35,7 +35,7 @@ build_Gauss:
 ifndef GAP_HOME
 	$(error environment variable GAP_HOME is not set)
 endif
-	cd Gauss && GAPPATH=$$GAP_HOME ./configure && $(MAKE)
+	cd Gauss && ./configure $$GAP_HOME && $(MAKE)
 
 ############################################
 test_4ti2Interface:
