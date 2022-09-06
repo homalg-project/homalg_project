@@ -63,7 +63,7 @@
     [4X    [104X
     [4X    if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then[104X
     [4X        mode := "default";[104X
-    [4X    elif IsString( arg[1] ) then	## now we know, the string is not empty[104X
+    [4X    elif IsString( arg[1] ) then ## now we know, the string is not empty[104X
     [4X        s := arg[1];[104X
     [4X        if LowercaseString( s{[1]} ) = "a" then[104X
     [4X            mode := "all";[104X
@@ -99,19 +99,19 @@
     [4X        HOMALG_IO.color_display := true;[104X
     [4X        HOMALG_IO.show_banners := true;[104X
     [4X        SetInfoLevel( InfoHomalgToCAS, 4 );[104X
-    [4X        homalgMode( "basic" );	## use homalgIOMode( "basic", "" ) to reset[104X
+    [4X        homalgMode( "basic" ); ## use homalgIOMode( "basic", "" ) to reset[104X
     [4X    elif mode = "debug" then[104X
     [4X        HOMALG_IO.color_display := true;[104X
     [4X        HOMALG_IO.show_banners := true;[104X
     [4X        SetInfoLevel( InfoHomalgToCAS, 8 );[104X
-    [4X        homalgMode( "debug" );	## use homalgIOMode( "debug", "" ) to reset[104X
+    [4X        homalgMode( "debug" ); ## use homalgIOMode( "debug", "" ) to reset[104X
     [4X    elif mode = "file" then[104X
     [4X        HOMALG_IO.save_CAS_commands_to_file := true;[104X
     [4X    elif mode = "picto" then[104X
     [4X        HOMALG_IO.color_display := true;[104X
     [4X        HOMALG_IO.show_banners := true;[104X
     [4X        SetInfoLevel( InfoHomalgToCAS, 4 );[104X
-    [4X        homalgMode( "logic" );	## use homalgIOMode( "picto", "" ) to reset[104X
+    [4X        homalgMode( "logic" ); ## use homalgIOMode( "picto", "" ) to reset[104X
     [4X    fi;[104X
     [4X    [104X
     [4X    if nargs > 1 and IsString( arg[2] ) then[104X
