@@ -6,29 +6,24 @@
 #  This file is free software, see license information at the end.
 #
 
-# Inspired  by the makefile prototype for the EDIM package of Frank Lübeck
+GAPPATH = @GAPPATH@
 
-CONFIGNAME=@CONFIGNAME@
-GAPPATH=@GAPPATH@
-GAPARCH=@GAPARCH@
+# read GAP's build settings
+include $(GAPPATH)/sysinfo.gap
 
-PKGROOT=$(shell pwd)
-
-GAP=$(PKGROOT)/../../bin/gap-$(CONFIGNAME).sh
+# the following settings are provided by sysinfo.gap in GAP >= 4.12;
+# for compatibility with older GAP version (at least 4.9, 4.10, 4.11)
+# we try to "guess" suitable values here
+GAP ?= $(GAPPATH)/gap
+GAC ?= $(GAPPATH)/gac
 
 .PHONY: default static doc clean distclean docclean test
 
-default: bin/@GAPARCH@/gauss.so
+default: bin/$(GAParch)/gauss.so
 
-static:
-	mkdir -p bin/@GAPARCH@
-	(cd $(GAPPATH)/bin/@GAPARCH@; \
-	./gac -o gap-static -p "-DGAUSSSTATIC" -P "-static" \
-	../../pkg/Gauss/src/gauss.c)
-
-bin/@GAPARCH@/gauss.so: src/gauss.c
-	mkdir -p bin/@GAPARCH@
-	$(GAPPATH)/bin/@GAPARCH@/gac -d -o bin/@GAPARCH@/gauss.so src/gauss.c
+bin/$(GAParch)/gauss.so: src/gauss.c
+	mkdir -p bin/$(GAParch)
+	$(GAC) -d -o bin/$(GAParch)/gauss.so src/gauss.c
 
 doc: doc/manual.six
 
@@ -38,7 +33,7 @@ doc/manual.six:	makedoc.g \
 		gap makedoc.g
 
 clean:
-	rm -rf bin/@GAPARCH@ Makefile Makefile-$(CONFIGNAME) *~
+	rm -rf bin/$(GAParch) Makefile *~
 
 distclean:
 	rm -rf bin Makefile Makefile-*
