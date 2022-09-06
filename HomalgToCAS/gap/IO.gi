@@ -306,7 +306,7 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
         local container, assignments_pending;
         
         ## set back the original stream communicator
-        stream!.SendBlockingToCAS := send;	## GAP is wonderful
+        stream!.SendBlockingToCAS := send; ## GAP is wonderful
         
         ## save the current pending assignments
         container := stream.homalgExternalObjectsPointingToVariables;

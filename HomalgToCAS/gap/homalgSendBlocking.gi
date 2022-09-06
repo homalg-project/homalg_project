@@ -205,7 +205,7 @@ InstallGlobalFunction( TerminateAllCAS,
 end );
 
 ##
-InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush for performance reasons
+InstallGlobalFunction( _SetElmWPObj_ForHomalg, ## is not based on homalgFlush for performance reasons
   function( stream, ext_obj )
     local container, weak_pointers, l, DeletePeriod, var,
           active_ring_creation_number, ring_creation_numbers, deleted;
@@ -459,7 +459,7 @@ InstallGlobalFunction( homalgSendBlocking,
     need_output := false;
     
     for ar in arg{[ 2 .. nargs ]} do ## the order of the following might be important for the performance!!!
-        if IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then	## this must come before prefix and suffix
+        if IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then ## this must come before prefix and suffix
             Append( properties, ar );
         elif not IsBound( prefix ) and IsList( ar ) and not IsStringRep( ar ) then
             prefix := ar;

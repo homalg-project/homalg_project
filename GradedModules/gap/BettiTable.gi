@@ -85,7 +85,7 @@ InstallGlobalFunction( HomalgBettiTable,
                    matrix := betti,
                    row_range := row_range,
                    column_range := column_range,
-                   reverse := false	## read the row range upside down?: default value is false (might get reset below)
+                   reverse := false ## read the row range upside down?: default value is false (might get reset below)
                    );
     
     ## search for options

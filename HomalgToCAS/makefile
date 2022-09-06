@@ -17,10 +17,10 @@ test: doc
 	gap tst/testall.g
 
 test-basic-spacing:
-	#grep -RPl "\t" gap/ && echo "Tabs found" && exit 1 || exit 0
-	grep -RPl "\r" gap/ && echo "Windows line-endings found" && exit 1 || exit 0
+	grep -RPl "\t" examples/ gap/ && echo "Tabs found" && exit 1 || exit 0
+	grep -RPl "\r" examples/ gap/ && echo "Windows line-endings found" && exit 1 || exit 0
 	# the second grep is a hack to fix the exit code with -L for grep <= 3.1
-	grep -RPzL "\n\z" gap/ | grep "" && echo "File with no newline at end of file found" && exit 1 || exit 0
+	grep -RPzL "\n\z" examples/ gap/ | grep "" && echo "File with no newline at end of file found" && exit 1 || exit 0
 
 test-doc: doc
 	cp -aT doc/ doc_tmp/

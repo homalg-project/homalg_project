@@ -16,7 +16,7 @@
 ## DirectSum
 ##
 
-InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSum
+InstallGlobalFunction( _Functor_DirectSum_OnGradedModules, ### defines: DirectSum
   function( M, N )
     local S, degMN, sum, iotaM, iotaN, piM, piN, natural, phi;
     

@@ -99,16 +99,16 @@ InstallGlobalFunction( CheckOutputOfCAS,
     
     gotsomething := false;
     
-    while true do	# will be exited with break or return
+    while true do # will be exited with break or return
         l := [ IO_GetFD( s.stdout ), IO_GetFD( s.stderr ) ];
         nr := IO_select( l, [], [], 0, 0 );
         #Print( "select: nr=", nr, "\n" );
         
         if nr = 0 then
             if original_lines then
-                s.LINES := ShallowCopy( s.lines );	## for debugging purposes
+                s.LINES := ShallowCopy( s.lines ); ## for debugging purposes
             fi;
-            if handle_output then	## a Singular specific
+            if handle_output then ## a Singular specific
                 len := Length( s.lines );
                 while len > 0 and s.lines[len] = '\n' do
                     Remove( s.lines );
@@ -126,7 +126,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
         
         if nr = fail then continue; fi;  # probably an interupted system call...
 
-        if l[1] <> fail then	# something on stdout
+        if l[1] <> fail then # something on stdout
             pos := Length( s.lines );
             bytes := IO_read( l[1], s.lines, pos, s.BUFSIZE );
             if bytes > 0 then
@@ -138,9 +138,9 @@ InstallGlobalFunction( CheckOutputOfCAS,
                         #        pos
                 if pos <> fail then
                     s.casready := true;
-                    if handle_output then	## a Singular specific
+                    if handle_output then ## a Singular specific
                         if original_lines then
-                            s.lines_original := ShallowCopy( s.lines );	## for debugging purposes
+                            s.lines_original := ShallowCopy( s.lines ); ## for debugging purposes
                         fi;
                         s.pos := pos;
                         len := Length( s.lines );
@@ -154,13 +154,13 @@ InstallGlobalFunction( CheckOutputOfCAS,
                             s.lines := Concatenation( s.lines{ [ 1 .. pos - 1 ] },
                                                s.lines{ [ pos + READY_LENGTH + 1 .. len ] } );
                         fi;
-                    elif SEARCH_READY_TWICE then	## a Macaulay2 specific
+                    elif SEARCH_READY_TWICE then ## a Macaulay2 specific
                         pos2 := PositionSublist( s.lines, READY );
                         pos3 := PositionSublist( s.lines, READY, pos2 + 1 );
                         if pos3 = fail then
                             gotsomething := false;
                         else
-                            ## Print("s.lines", s.lines);	## die Feuerwehr
+                            ## Print("s.lines", s.lines); ## die Feuerwehr
                             pos1 := PositionSublist( s.lines, "\n\n" );
                             if pos1 = fail then
                                 pos1 := 1;

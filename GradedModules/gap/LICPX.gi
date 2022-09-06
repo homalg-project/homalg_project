@@ -262,7 +262,7 @@ InstallMethod( BettiTable,
     
     ## take care of cocomplexes
     if cocomplex then
-        Append( ar, [ "reverse" ] );	## read the row range upside down
+        Append( ar, [ "reverse" ] ); ## read the row range upside down
     fi;
     
     return CallFuncList( HomalgBettiTable, ar  );

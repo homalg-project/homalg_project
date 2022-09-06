@@ -130,9 +130,9 @@ InstallMethod( \*,
     if not IsIdenticalObj( HomalgRing( m ), R ) and
        IsHomalgExternalRingRep( HomalgRing( m ) ) and
        IsIdenticalObj( homalgStream( HomalgRing( m ) ), homalgStream( R ) ) and
-       IsBound( RP!.CopyMatrix ) then	## make a "copy" over a different ring
+       IsBound( RP!.CopyMatrix ) then ## make a "copy" over a different ring
         
-        Eval( m );	## enforce evaluation
+        Eval( m ); ## enforce evaluation
         
         mat := HomalgMatrix( R );
         
