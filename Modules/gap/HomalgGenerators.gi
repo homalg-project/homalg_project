@@ -241,7 +241,7 @@ InstallMethod( HasNrGenerators,
 end );
 
 ##
-InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
+InstallMethod( NrGenerators, ### defines: NrGenerators (NumberOfGenerators)
         "for sets of generators of homalg modules",
         [ IsHomalgGeneratorsOfRightModule ],
         
@@ -252,7 +252,7 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
-InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
+InstallMethod( NrGenerators, ### defines: NrGenerators (NumberOfGenerators)
         "for sets of generators of homalg modules",
         [ IsHomalgGeneratorsOfLeftModule ],
         
@@ -381,7 +381,7 @@ InstallMethod( DecideZero,
   function( gen )
     local gen_old, gen_new;
     
-    if not IsBound( gen!.DecideZero ) then	## IsReduced is not set, otherwise the method below would apply
+    if not IsBound( gen!.DecideZero ) then ## IsReduced is not set, otherwise the method below would apply
         gen_old := MatrixOfGenerators( gen );
         gen_new := DecideZero( gen_old, RelationsOfHullModule( gen ) );
         if gen_new = gen_old then
@@ -429,7 +429,7 @@ InstallMethod( DecideZero,
 end );
 
 ##
-InstallMethod( GetRidOfZeroGenerators,	### defines: GetRidOfZeroGenerators (BetterBasis)
+InstallMethod( GetRidOfZeroGenerators, ### defines: GetRidOfZeroGenerators (BetterBasis)
         "for sets of generators of homalg modules",
         [ IsHomalgGenerators ],
         

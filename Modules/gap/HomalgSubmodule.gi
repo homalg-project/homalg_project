@@ -181,7 +181,7 @@ InstallMethod( OnBasisOfPresentation,
     if HasEmbeddingInSuperObject( N ) then
         
         phi := ImageObjectEmb( phi );
-        phi := phi / EmbeddingInSuperObject( N );	## lift
+        phi := phi / EmbeddingInSuperObject( N ); ## lift
         
         Assert( 4, IsEpimorphism( phi ) );
         
@@ -232,7 +232,7 @@ InstallMethod( OnLessGenerators,
     if HasEmbeddingInSuperObject( N ) then
         
         phi := ImageObjectEmb( phi );
-        phi := phi / EmbeddingInSuperObject( N );	## lift
+        phi := phi / EmbeddingInSuperObject( N ); ## lift
         
         Assert( 4, IsEpimorphism( phi ) );
         
@@ -306,7 +306,7 @@ InstallMethod( IsSubset,
         "for homalg submodules",
         [ IsHomalgModule, IsFinitelyPresentedSubmoduleRep ],
         
-  function( K, J )	## GAP-standard: is J a subset of K
+  function( K, J ) ## GAP-standard: is J a subset of K
     local M, mapJ, mapK, rel, red;
     
     M := SuperObject( J );
@@ -542,7 +542,7 @@ InstallMethod( Subobject,
 end );
 
 ##
-InstallMethod( Subobject,	## in case the methods below do not apply
+InstallMethod( Subobject, ## in case the methods below do not apply
         "constructor for homalg submodules",
         [ IsHomalgRelations, IsFinitelyPresentedModuleRep ],
         

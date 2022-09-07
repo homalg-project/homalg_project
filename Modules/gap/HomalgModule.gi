@@ -186,7 +186,7 @@ end );
 ##
 InstallOtherMethod( Zero,
         "for homalg modules",
-        [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ], 10001,	## FIXME: is it O.K. to use such a high ranking
+        [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ], 10001, ## FIXME: is it O.K. to use such a high ranking
         
   function( M )
     
@@ -197,7 +197,7 @@ end );
 ##
 InstallOtherMethod( Zero,
         "for homalg modules",
-        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ], 10001,	## FIXME: is it O.K. to use such a high ranking
+        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ], 10001, ## FIXME: is it O.K. to use such a high ranking
         
   function( M )
     
@@ -394,7 +394,7 @@ InstallMethod( OnLastStoredPresentation,
 end );
 
 ##
-InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
+InstallMethod( GeneratorsOfModule, ### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
         [ IsHomalgModule, IsPosInt ],
         
@@ -409,7 +409,7 @@ InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsO
 end );
 
 ##
-InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
+InstallMethod( GeneratorsOfModule, ### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
         [ IsHomalgModule ],
         
@@ -485,7 +485,7 @@ InstallMethod( GeneratingElements,
 end );
 
 ##
-InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
+InstallMethod( RelationsOfModule, ### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
         [ IsHomalgModule, IsPosInt ],
         
@@ -500,7 +500,7 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
 end );
 
 ##
-InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
+InstallMethod( RelationsOfModule, ### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
         [ IsHomalgModule ],
         
@@ -511,7 +511,7 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
 end );
 
 ##
-InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
+InstallMethod( RelationsOfHullModule, ### defines: RelationsOfHullModule
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -529,7 +529,7 @@ InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
 end );
 
 ##
-InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
+InstallMethod( RelationsOfHullModule, ### defines: RelationsOfHullModule
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep, IsPosInt ],
         
@@ -1074,7 +1074,7 @@ InstallMethod( AddANewPresentation,
     gens!.(l+1) := gen;
     
     ## adjust the list of positions:
-    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1; ## the list is allowed to contain holes (sparse list)
     
     ## define the (l+1)st set of relations:
     if IsBound( rels!.(d) ) then
@@ -1082,7 +1082,7 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the list of positions:
-    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1; ## the list is allowed to contain holes (sparse list)
     
     id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
     
@@ -1187,13 +1187,13 @@ InstallMethod( AddANewPresentation,
     gens!.(l+1) := gens!.(d);
     
     ## adjust the list of positions:
-    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1; ## the list is allowed to contain holes (sparse list)
     
     ## define the (l+1)st set of relations:
     rels!.(l+1) := rel;
     
     ## adjust the list of positions:
-    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1; ## the list is allowed to contain holes (sparse list)
     
     id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
     
@@ -1267,13 +1267,13 @@ InstallMethod( AddANewPresentation,
     gens!.(l+1) := gen;
     
     ## adjust the list of positions:
-    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1; ## the list is allowed to contain holes (sparse list)
     
     ## define the (l+1)st set of relations:
     rels!.(l+1) := rel;
     
     ## adjust the list of positions:
-    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1; ## the list is allowed to contain holes (sparse list)
     
     if IsHomalgRelationsOfLeftModule( rel ) then
         M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := T;
@@ -1329,7 +1329,7 @@ InstallMethod( AddANewPresentation,
 end );
 
 ##
-InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly affecting the module M
+InstallMethod( BasisOfModule, ### CAUTION: has the side effect of possibly affecting the module M
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1339,10 +1339,10 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
     rel := RelationsOfModule( M );
     
     if not ( HasCanBeUsedToDecideZeroEffectively( rel ) and CanBeUsedToDecideZeroEffectively( rel ) ) then
-        bas := BasisOfModule( rel );		## CAUTION: might have a side effect on rel
+        bas := BasisOfModule( rel ); ## CAUTION: might have a side effect on rel
         
         if not IsIdenticalObj( rel, bas ) then
-            AddANewPresentation( M, bas );	## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
+            AddANewPresentation( M, bas ); ## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
         fi;
     fi;
     
@@ -1470,7 +1470,7 @@ InstallMethod( NonZeroGenerators,
 end );
 
 ##
-InstallMethod( GetRidOfZeroGenerators,	### defines: GetRidOfZeroGenerators (BetterPresentation)
+InstallMethod( GetRidOfZeroGenerators, ### defines: GetRidOfZeroGenerators (BetterPresentation)
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1627,18 +1627,18 @@ InstallMethod( ByASmallerPresentation,
         r := NrRelations( M );
         p := PositionOfTheDefaultSetOfGenerators( M );
         OnLessGenerators( M );
-        if NrGenerators( M ) = g then	## try to compute a basis first
+        if NrGenerators( M ) = g then ## try to compute a basis first
             rel := RelationsOfModule( M, p );
             if not ( HasCanBeUsedToDecideZeroEffectively( rel ) and
                      CanBeUsedToDecideZeroEffectively( rel ) ) then
-                SetPositionOfTheDefaultSetOfGenerators( M, p );	    ## just in case
+                SetPositionOfTheDefaultSetOfGenerators( M, p ); ## just in case
                 if not ValueOption( "BasisOfModule" ) = false then
                     BasisOfModule( M );
                 fi;
                 OnLessGenerators( M );
             fi;
         fi;
-        if NrGenerators( M ) = g then	## there is nothing we can do more!
+        if NrGenerators( M ) = g then ## there is nothing we can do more!
             break;
         fi;
     od;
@@ -1731,24 +1731,24 @@ InstallMethod( SetUpperBoundForProjectiveDimension,
   function( M, ub_pd )
     local left, R, ub, min;
     
-    if not HasProjectiveDimension( M ) then	## otherwise don't do anything
+    if not HasProjectiveDimension( M ) then ## otherwise don't do anything
         if ub_pd < 0 then
             ## decrease the upper bound by |ub_pd| *relative* to the left/right global dimension of the ring:
             left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
             R := HomalgRing( M );
             if left and HasLeftGlobalDimension( R ) and IsInt( LeftGlobalDimension( R ) ) then
-                ub := LeftGlobalDimension( R ) + ub_pd;			## recall, ub_pd < 0
+                ub := LeftGlobalDimension( R ) + ub_pd; ## recall, ub_pd < 0
                 if ub < 0 then
                     SetProjectiveDimension( M, 0 );
                 else
-                    SetUpperBoundForProjectiveDimension( M, ub );	## ub >= 0
+                    SetUpperBoundForProjectiveDimension( M, ub ); ## ub >= 0
                 fi;
             elif not left and HasRightGlobalDimension( R ) and IsInt( RightGlobalDimension( R ) ) then
-                ub := RightGlobalDimension( R ) + ub_pd;		## recall, ub_pd < 0
+                ub := RightGlobalDimension( R ) + ub_pd; ## recall, ub_pd < 0
                 if ub < 0 then
                     SetProjectiveDimension( M, 0 );
                 else
-                    SetUpperBoundForProjectiveDimension( M, ub );	## ub >= 0
+                    SetUpperBoundForProjectiveDimension( M, ub ); ## ub >= 0
                 fi;
             fi;
         else
@@ -2146,7 +2146,7 @@ InstallMethod( LeftPresentation,
   function( rel, R )
     local gens, rels, M, is_zero_module;
     
-    if Length( rel ) = 0 then	## since one doesn't specify generators here giving no relations defines the zero module
+    if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
         gens := CreateSetsOfGeneratorsForLeftModule( [ ], R );
         is_zero_module := true;
     elif IsList( rel[1] ) and ForAll( rel[1], IsRingElement ) then
@@ -2278,7 +2278,7 @@ InstallMethod( RightPresentation,
   function( rel, R )
     local gens, rels, M, is_zero_module;
     
-    if Length( rel ) = 0 then	## since one doesn't specify generators here giving no relations defines the zero module
+    if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
         gens := CreateSetsOfGeneratorsForRightModule( [ ], R );
         is_zero_module := true;
     elif IsList( rel[1] ) and ForAll( rel[1], IsRingElement ) then
@@ -2723,7 +2723,7 @@ InstallMethod( ViewString,
     
     if HasIsStablyFree( M ) and IsStablyFree( M ) then
         Append( properties, " stably free" );
-        if HasIsFree( M ) and not IsFree( M ) then	## the "not"s are obsolete but kept for better readability
+        if HasIsFree( M ) and not IsFree( M ) then ## the "not"s are obsolete but kept for better readability
             Append( properties, " non-free" );
             nz := true;
         fi;
@@ -2805,7 +2805,7 @@ InstallMethod( ViewString,
             ## only display the grade if the global dimension of the ring is > 1:
             if ( ( left_module and HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 ) or
                  ( not left_module and HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 ) )
-               and ( HasIsZero( M ) and not IsZero( M ) )	## we actually no that IsZero( M ) = false (but anyway)
+               and ( HasIsZero( M ) and not IsZero( M ) ) ## we actually no that IsZero( M ) = false (but anyway)
                and not ( IsBound( nz ) and nz = true ) then
                 properties := Concatenation( " non-zero", properties );
                 Append( properties, " torsion" );
@@ -3235,7 +3235,7 @@ InstallMethod( Display,
         color := false;
     fi;
     
-    if elements <> [ ] then	## this will never happen, since the below method will catch it
+    if elements <> [ ] then ## this will never happen, since the below method will catch it
         if color then
             display := List( elements, x -> [ "\033[01m", get_string( x ), "\033[0m, " ] );
         else
@@ -3334,7 +3334,7 @@ InstallMethod( Display,
                 Print( display, name, "^(", rk, " x 1)" );
             fi;
         fi;
-    elif HasIsZero( M ) and IsZero( M ) then	## MatrixOfRelations = [ [ 1 ] ]
+    elif HasIsZero( M ) and IsZero( M ) then ## MatrixOfRelations = [ [ 1 ] ]
         Print( "0" );
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] } );

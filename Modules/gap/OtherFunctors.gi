@@ -16,7 +16,7 @@
 ## DirectSum
 ##
 
-InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
+InstallGlobalFunction( _Functor_DirectSum_OnModules, ### defines: DirectSum
   function( M, N )
     local matM, matN, sum, R, idM, idN, F, zeroMN, zeroNM, iotaM, iotaN, piM, piN;
     
@@ -72,7 +72,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
     
 end );
 
-InstallGlobalFunction( _Functor_DirectSum_OnMaps,	### defines: DirectSum (morphism part)
+InstallGlobalFunction( _Functor_DirectSum_OnMaps, ### defines: DirectSum (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local R, L, idL, hull_phi, emb_source, emb_target, mor;
     
@@ -191,7 +191,7 @@ InstallMethod( SetPropertiesOfDirectSum,
 end );
 
 ##
-## DirectSum( M, N )		( M + N )
+## DirectSum( M, N ) ( M + N )
 ##
 
 InstallFunctor( Functor_DirectSum_for_fp_modules );

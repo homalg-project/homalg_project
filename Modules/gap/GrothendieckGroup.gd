@@ -56,7 +56,7 @@ DeclareCategory( "IsPolynomialModuloSomePower",
         IsMultiplicativeElementWithInverse and
         IsAssociativeElement and
         IsAdditivelyCommutativeElement and
-	## all the above guarantees IsPolynomialModuloSomePower => IsRingElement (in GAP4)
+        ## all the above guarantees IsPolynomialModuloSomePower => IsRingElement (in GAP4)
         IsAttributeStoringRep );
 ##  ]]></Listing>
 ##    </Description>
@@ -78,7 +78,7 @@ DeclareCategory( "IsChernPolynomialWithRank",
         IsMultiplicativeElementWithInverse and
         IsAssociativeElement and
         IsAdditivelyCommutativeElement and
-	## all the above guarantees IsChernPolynomialWithRank => IsRingElement (in GAP4)
+        ## all the above guarantees IsChernPolynomialWithRank => IsRingElement (in GAP4)
         IsAttributeStoringRep );
 ##  ]]></Listing>
 ##    </Description>
@@ -100,7 +100,7 @@ DeclareCategory( "IsChernCharacter",
         IsMultiplicativeElementWithInverse and
         IsAssociativeElement and
         IsAdditivelyCommutativeElement and
-	## all the above guarantees IsChernCharacter => IsRingElement (in GAP4)
+        ## all the above guarantees IsChernCharacter => IsRingElement (in GAP4)
         IsAttributeStoringRep );
 ##  ]]></Listing>
 ##    </Description>

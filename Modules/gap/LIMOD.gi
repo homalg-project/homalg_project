@@ -86,9 +86,9 @@ InstallValue( LIMOD,
               "AffineDimension",
               "AffineDegree",
               "ProjectiveDegree",
-              "PrimaryDecomposition",	## wrong, we need the preimages of this
-              "RadicalDecomposition",	## wrong, we need the preimages of this
-              "RadicalSubobject",	## wrong, we need the preimages of this
+              "PrimaryDecomposition", ## wrong, we need the preimages of this
+              "RadicalDecomposition", ## wrong, we need the preimages of this
+              "RadicalSubobject",     ## wrong, we need the preimages of this
               "ElementaryDivisors",
               "FittingIdeal",
               "NonFlatLocus",
@@ -171,10 +171,10 @@ InstallValue( LogicalImplicationsForHomalgModules,
             "imply", IsHolonomic ],
           
           ## [ IsHolonomic,
-          ##  "implies", IsTorsion ],	false for fields
+          ##  "implies", IsTorsion ], false for fields
           
           ## [ IsHolonomic,
-          ##  "implies", IsArtinian ],	there is no clear definition of holonomic
+          ##  "implies", IsArtinian ], there is no clear definition of holonomic
           
           ## see homalg/LIOBJ.gi for more implications
           
@@ -543,7 +543,7 @@ InstallImmediateMethod( IsTorsionFree,
     
     if Tester( global_dimension )( R ) and global_dimension( R ) <= 1 and not IsProjective( M ) then
         return false;
-    fi;			## the true case is taken care of elsewhere
+    fi; ## the true case is taken care of elsewhere
     
     TryNextMethod( );
     
@@ -566,7 +566,7 @@ InstallImmediateMethod( IsReflexive,
     
     if Tester( global_dimension )( R ) and global_dimension( R ) <= 2 and not IsProjective( M ) then
         return false;
-    fi;			## the true case is taken care of elsewhere
+    fi; ## the true case is taken care of elsewhere
     
     TryNextMethod( );
     
@@ -589,7 +589,7 @@ InstallImmediateMethod( IsProjective,
     
     if Tester( global_dimension )( R ) and global_dimension( R ) <= 1 then
         return true;
-    fi;			## the false case is taken care of elsewhere
+    fi; ## the false case is taken care of elsewhere
     
     TryNextMethod( );
     
@@ -979,7 +979,7 @@ InstallMethod( IsArtinian,
     
     R := HomalgRing( M );
     
-    if HasGlobalDimension( R ) and	## FIXME: declare an appropriate property for such rings
+    if HasGlobalDimension( R ) and ## FIXME: declare an appropriate property for such rings
        ( ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) or
          ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
          ( HasIsWeylRing( R ) and IsWeylRing( R ) ) or
@@ -1023,7 +1023,7 @@ InstallMethod( IsHolonomic,
     
     R := HomalgRing( M );
     
-    if HasGlobalDimension( R ) and	## FIXME: declare an appropriate property for such rings
+    if HasGlobalDimension( R ) and ## FIXME: declare an appropriate property for such rings
        ( ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) or
          ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
          ( HasIsWeylRing( R ) and IsWeylRing( R ) ) or
@@ -1529,7 +1529,7 @@ InstallMethod( TheMorphismToZero,
         
   function( M )
     
-    return HomalgZeroMap( M, 0*M );	## never set its Kernel to M, since a possibly existing NaturalGeneralizedEmbedding in M will be overwritten!
+    return HomalgZeroMap( M, 0*M ); ## never set its Kernel to M, since a possibly existing NaturalGeneralizedEmbedding in M will be overwritten!
     
 end );
 
@@ -1704,7 +1704,7 @@ InstallMethod( DegreeOfTorsionFreeness,
     
     if IsReflexive( M ) then
         k := 3;
-    fi;	## do not return 1 in case the ring has global dimension 0
+    fi; ## do not return 1 in case the ring has global dimension 0
     
     R := HomalgRing( M );
     

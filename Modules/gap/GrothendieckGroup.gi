@@ -1048,7 +1048,7 @@ InstallMethod( InverseOp,
     ## y might be zero
     y := 1 - poly;
     
-    p := y^0;	## retain the type of y
+    p := y^0; ## retain the type of y
     
     ## it is ugly that we need this
     SetIndeterminateOfUnivariateRationalFunction( p, h );

@@ -50,7 +50,7 @@ InstallMethod( KernelSubobject,
     if IsBound( phi!.left ) and phi!.left = false then
         S := S * 1;
     else
-        S := 1 * S;	## the default
+        S := 1 * S; ## the default
     fi;
     
     return Subobject( rel, S );
@@ -120,7 +120,7 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
     if IsBound( phi!.left ) and phi!.left = false then
         S := S * 1;
     else
-        S := 1 * S;	## the default
+        S := 1 * S; ## the default
     fi;
     
     return Subobject( mat, S );

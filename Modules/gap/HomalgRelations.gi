@@ -289,7 +289,7 @@ InstallMethod( HasNrGenerators,
 end );
 
 ##
-InstallMethod( NrGeneratorsForRelations,		### defines: NrGenerators (NumberOfGenerators)
+InstallMethod( NrGeneratorsForRelations, ### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule ],
         
@@ -326,7 +326,7 @@ InstallMethod( NrGeneratorsForRelations,
 end );
 
 ##
-InstallMethod( NrGeneratorsForRelations,		### defines: NrGenerators (NumberOfGenerators)
+InstallMethod( NrGeneratorsForRelations, ### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
@@ -400,7 +400,7 @@ InstallMethod( HasNrRelations,
 end );
 
 ##
-InstallMethod( NrRelationsForRelations,		### defines: NrRelations (NumberOfColumns)
+InstallMethod( NrRelationsForRelations, ### defines: NrRelations (NumberOfColumns)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule ],
         
@@ -411,7 +411,7 @@ InstallMethod( NrRelationsForRelations,		### defines: NrRelations (NumberOfColum
 end );
 
 ##
-InstallMethod( NrRelationsForRelations,		### defines: NrRelations (NumberOfRows)
+InstallMethod( NrRelationsForRelations, ### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
@@ -429,7 +429,7 @@ InstallMethod( NrRelations,
   NrRelationsForRelations );
 
 ##
-InstallMethod( CertainRelations,		### defines: CertainRelations
+InstallMethod( CertainRelations, ### defines: CertainRelations
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule, IsList ],
         
@@ -443,7 +443,7 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
 end );
 
 ##
-InstallMethod( CertainRelations,		### defines: CertainRelations
+InstallMethod( CertainRelations, ### defines: CertainRelations
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule, IsList ],
         
@@ -457,7 +457,7 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
 end );
 
 ##
-InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
+InstallMethod( UnionOfRelations, ### defines: UnionOfRelations (SumRelations)
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
@@ -495,7 +495,7 @@ InstallMethod( UnionOfRelations,
 end );
 
 ##
-InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
+InstallMethod( UnionOfRelations, ### defines: UnionOfRelations (SumRelations)
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
@@ -549,7 +549,7 @@ InstallMethod( BasisOfModule,
         
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
-            rel!.EvaluatedMatrixOfRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
+            rel!.EvaluatedMatrixOfRelations := bas; ## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
             fi;
@@ -591,7 +591,7 @@ InstallMethod( BasisOfModule,
         
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
-            rel!.EvaluatedMatrixOfRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
+            rel!.EvaluatedMatrixOfRelations := bas; ## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
             fi;
@@ -838,7 +838,7 @@ InstallMethod( ReducedSyzygiesGenerators,
 end );
 
 ##
-InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
+InstallMethod( NonZeroGenerators, ### defines: NonZeroGenerators
         "for sets of relations of homalg modules",
         [ IsHomalgRelations ],
         
@@ -870,7 +870,7 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
 end );
 
 ##
-InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations (BetterBasis)
+InstallMethod( GetRidOfObsoleteRelations, ### defines: GetRidOfObsoleteRelations (BetterBasis)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule ],
         
@@ -881,7 +881,7 @@ InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations
 end );
 
 ##
-InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations (BetterBasis)
+InstallMethod( GetRidOfObsoleteRelations, ### defines: GetRidOfObsoleteRelations (BetterBasis)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         

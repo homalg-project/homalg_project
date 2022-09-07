@@ -55,7 +55,7 @@ InstallGlobalFunction( OrbifoldTriangulation,
     info := "";
     if IsString( arg[nargs] ) then
         info := arg[nargs];
-	nargs := nargs - 1;
+        nargs := nargs - 1;
     fi;
     vertices := Union( arg[1] );
     mu := function( x )
@@ -97,7 +97,7 @@ InstallMethod( PrintObj,
         if str[i] = '\n' then
             str[i] := ' ';
         fi;
-	if str{[i,i+1]} in forbidden then
+        if str{[i,i+1]} in forbidden then
             Add( delete, i+1 );
         fi;
     od;
@@ -176,7 +176,7 @@ InstallMethod( Display,
     Print( "\n", " Simplices = ", ot!.max_simplices, "\n" );
     if ot!.mu_data <> [ ] then
         Print( "\n", " Mu =" );
-	ViewObj( ot!.mu_data );
+        ViewObj( ot!.mu_data );
     fi;
     Print( "\n" );
   end
