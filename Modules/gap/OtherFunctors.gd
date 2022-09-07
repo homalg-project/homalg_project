@@ -25,7 +25,7 @@ DeclareGlobalVariable( "Functor_DirectSum_for_fp_modules" );
 #
 ####################################
 
-DeclareGlobalFunction( "_UCT_Homology" );	## FIXME: generalize
+DeclareGlobalFunction( "_UCT_Homology" ); ## FIXME: generalize
 
-DeclareGlobalFunction( "_UCT_Cohomology" );	## FIXME: generalize
+DeclareGlobalFunction( "_UCT_Cohomology" ); ## FIXME: generalize
 

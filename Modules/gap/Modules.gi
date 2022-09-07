@@ -7,7 +7,7 @@
 ##  Implementations of homalg procedures for modules.
 
 ##
-InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule)
+InstallGlobalFunction( ReducedBasisOfModule, ### defines: ReducedBasisOfModule (ReducedBasisOfModule)
   function( arg )
     local nargs, M, COMPUTE_BASIS, COMPUTE_SMALLER_BASIS, ar, bas, R;
     
@@ -88,10 +88,10 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
     
     if COMPUTE_BASIS or COMPUTE_SMALLER_BASIS then
         arg[1]!.ReducedBasisOfModule := M;
-        M!.ReducedBasisOfModule := M;	## thanks GAP4
+        M!.ReducedBasisOfModule := M; ## thanks GAP4
     else
         arg[1]!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS := M;
-        M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS := M;	## thanks GAP4
+        M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS := M; ## thanks GAP4
     fi;
     
     return M;
@@ -151,7 +151,7 @@ InstallMethod( CheckIfTheyLieInTheSameCategory,
 end );
 
 ## ( cf. [BR08, Subsection 3.2.2] )
-InstallMethod( \/,				### defines: / (SubfactorModule)
+InstallMethod( \/, ### defines: / (SubfactorModule)
         "for a homalg matrix",
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
@@ -178,7 +178,7 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     IsOne( MatrixOfGenerators( N ) );
     
     # compute the syzygies of N modulo B, i.e. the relations among N modulo B:
-    S := SyzygiesGenerators( N, B );	## using ReducedSyzygiesGenerators here causes too many operations (cf. the ex. Triangle.g)
+    S := SyzygiesGenerators( N, B ); ## using ReducedSyzygiesGenerators here causes too many operations (cf. the ex. Triangle.g)
     
     # the subfactor module
     SF := Presentation( N, S );
@@ -198,7 +198,7 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
 end );
 
 ##
-InstallMethod( \/,				## needed by _Functor_Kernel_OnObjects since SyzygiesGenerators returns a set of relations
+InstallMethod( \/, ## needed by _Functor_Kernel_OnObjects since SyzygiesGenerators returns a set of relations
         "for a set of homalg relations",
         [ IsHomalgRelations, IsFinitelyPresentedModuleRep ],
         
@@ -267,7 +267,7 @@ InstallMethod( BoundForResolution,
 end );
 
 ## ( cf. [BR08, Subsection 3.2.1] )
-InstallMethod( CurrentResolution,		### defines: Resolution (ResolutionOfModule/ResolveModule)
+InstallMethod( CurrentResolution, ### defines: Resolution (ResolutionOfModule/ResolveModule)
         "for homalg relations",
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
@@ -282,7 +282,7 @@ InstallMethod( CurrentResolution,		### defines: Resolution (ResolutionOfModule/R
     if _q < 0 then
         q := BoundForResolution( M );
     elif _q = 0 then
-        q := 1;		## this is the minimum
+        q := 1; ## this is the minimum
     else
         q := _q;
     fi;
@@ -340,7 +340,7 @@ InstallMethod( CurrentResolution,		### defines: Resolution (ResolutionOfModule/R
     
     if NrGenerators( Source( d_j ) ) = 1 and
        HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
-        S := SyzygiesGenerators( d_j );	## this will be handled by internal logic
+        S := SyzygiesGenerators( d_j ); ## this will be handled by internal logic
     fi;
     
     if IsBound( S ) and NrRelations( S ) = 0 and not IsBound( d!.LengthOfResolution ) then
@@ -392,10 +392,10 @@ InstallMethod( BoundForResolution,
     R := HomalgRing( M );
     
     #if HasProjectiveDimension( M ) then
-    #    q := ProjectiveDimension( M );			## +1 ???
+    #    q := ProjectiveDimension( M ); ## +1 ???
     #elif IsBound( M!.UpperBoundForProjectiveDimension )
     #  and IsInt( M!.UpperBoundForProjectiveDimension ) then
-    #    q := M!.UpperBoundForProjectiveDimension;	## +1 ???
+    #    q := M!.UpperBoundForProjectiveDimension; ## +1 ???
     if IsBound( M!.MaximumNumberOfResolutionSteps )
       and IsInt( M!.MaximumNumberOfResolutionSteps ) then
         q := M!.MaximumNumberOfResolutionSteps;
@@ -425,7 +425,7 @@ InstallMethod( Resolution,
         M!.MaximumNumberOfResolutionSteps := BoundForResolution( M );
         q := _q;
     elif _q = 0 then
-        q := 1;		## this is the minimum
+        q := 1; ## this is the minimum
     else
         q := _q;
     fi;
@@ -434,8 +434,8 @@ InstallMethod( Resolution,
     
     if IsBound( d!.LengthOfResolution ) then
         M!.UpperBoundForProjectiveDimension := d!.LengthOfResolution;
-    elif IsBound( M!.UpperBoundForProjectiveDimension ) then			## the last map is not a monomorphism:
-        if _q < 0 or M!.UpperBoundForProjectiveDimension <= q then		## but still its kernel is projective
+    elif IsBound( M!.UpperBoundForProjectiveDimension ) then       ## the last map is not a monomorphism:
+        if _q < 0 or M!.UpperBoundForProjectiveDimension <= q then ## but still its kernel is projective
             d!.LengthOfResolution := Length( MorphismDegreesOfComplex( d ) );
         fi;
     fi;
@@ -473,7 +473,7 @@ InstallMethod( SyzygiesObjectEpi,
     
     mu := SyzygiesObjectEmb( q, M );
     
-    epi := CertainMorphism( d, q ) / mu;	## lift
+    epi := CertainMorphism( d, q ) / mu; ## lift
     
     SetIsEpimorphism( epi, true );
     
@@ -1684,13 +1684,13 @@ InstallMethod( FittingIdeal,
         mat := MatrixOfRelations( M );
     fi;
     
-    if n - i <= 0 then	## <=> i >= n
+    if n - i <= 0 then ## <=> i >= n
         if left then
             Fitt_i := LeftSubmodule( R );
         else
             Fitt_i := RightSubmodule( R );
         fi;
-    elif n - i > Minimum( n, m ) then	## <=> i < Maximum( n - m, 0 )
+    elif n - i > Minimum( n, m ) then ## <=> i < Maximum( n - m, 0 )
         if left then
             Fitt_i := ZeroLeftSubmodule( R );
         else

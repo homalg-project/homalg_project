@@ -229,10 +229,10 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
         for i in [ 1 .. Length( M ) ] do
             L[i] :=[ NrRows(  M[i] ), NrColumns( M[i] ) ];
             Print( "# ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
-	    t := Runtimes().user_time;
-	    L[i][3] := RowRankOfMatrix( M[i] );
-	    d := Runtimes().user_time - t;
-	    L[i][4] := L[i][2] - L[i][3];
+            t := Runtimes().user_time;
+            L[i][3] := RowRankOfMatrix( M[i] );
+            d := Runtimes().user_time - t;
+            L[i][4] := L[i][2] - L[i][3];
             Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ". Time: ", TimeToString( d ), "\n" );
         od;
         H := [ L[1][4] ]; #first image dimension

@@ -17,7 +17,7 @@
 ##
 
 ##
-InstallGlobalFunction( _Functor_Cokernel_OnModules,	### defines: Cokernel(Epi)
+InstallGlobalFunction( _Functor_Cokernel_OnModules, ### defines: Cokernel(Epi)
   function( phi )
     local R, T, p, rel, gen, coker, id, epi, gen_iso, img_emb, emb;
     
@@ -129,7 +129,7 @@ functor_Cokernel_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphism
 ## ImageObject
 ##
 
-InstallGlobalFunction( _Functor_ImageObject_OnModules,	### defines: ImageObject(Emb)
+InstallGlobalFunction( _Functor_ImageObject_OnModules, ### defines: ImageObject(Emb)
   function( phi )
     local T, p, img, emb, coker_epi, img_submodule;
     
@@ -213,7 +213,7 @@ functor_ImageObject_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorph
 ## Hom
 ##
 
-InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
+InstallGlobalFunction( _Functor_Hom_OnModules, ### defines: Hom (object part)
   function( M, N )
     local s, t, dM, dN, P1, l0, l1, _l0, matM, matN, R, HP0N, HP1N, r, c, idN,
           alpha, hom, gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
@@ -374,7 +374,7 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
 end );
 
 ##
-InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
+InstallGlobalFunction( _Functor_Hom_OnMaps, ### defines: Hom (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local R, L, idL, hull_phi, covariant, emb_source, emb_target, mor;
     
@@ -600,7 +600,7 @@ InstallMethod( Dualize,
 ## TensorProduct
 ##
 
-InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorProduct (object part)
+InstallGlobalFunction( _Functor_TensorProduct_OnModules, ### defines: TensorProduct (object part)
   function( M, N )
     local R, rl, l0, _l0, matM, matN, idM, idN, MN,
           F, gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
@@ -633,7 +633,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorPro
     matN := MatrixOfMap( PresentationMorphism( N ) );
     
     if rl = [ true, true ] or rl = [ false, false ] then
-        matM := Involution( matM );	## the first module follows the second
+        matM := Involution( matM ); ## the first module follows the second
     fi;
     
     idM := HomalgIdentityMatrix( l0, R );
@@ -658,7 +658,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorPro
 end );
 
 ##
-InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct (morphism part)
+InstallGlobalFunction( _Functor_TensorProduct_OnMaps, ### defines: TensorProduct (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local R, L, M_or_mor, N_or_mor, rl, idL, hull_phi,
           emb_source, emb_target, mor;
@@ -714,7 +714,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
         if rl = [ true, true ] or rl = [ false, false ] then
-            phi := Involution( MatrixOfMap( phi ) );	## the first module follows the second
+            phi := Involution( MatrixOfMap( phi ) ); ## the first module follows the second
         else
             phi := MatrixOfMap( phi );
         fi;
@@ -797,7 +797,7 @@ Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMor
 ##
 
 ##
-InstallGlobalFunction( _functor_BaseChange_OnModules,		### defines: BaseChange (object part)
+InstallGlobalFunction( _functor_BaseChange_OnModules, ### defines: BaseChange (object part)
   function( _R, M )
     local R, S, lift, mat, left, distinguished, N;
     
@@ -1132,9 +1132,9 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  <A monomorphism of left modules>
 ##  gap> DefectOfExactness( iota, phi );
 ##  <A zero left module>
-##  gap> hom_iota := Hom( iota );	## a shorthand for Hom( iota, ZZ );
+##  gap> hom_iota := Hom( iota ); ## a shorthand for Hom( iota, ZZ );
 ##  <A homomorphism of right modules>
-##  gap> hom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );
+##  gap> hom_phi := Hom( phi ); ## a shorthand for Hom( phi, ZZ );
 ##  <A homomorphism of right modules>
 ##  gap> DefectOfExactness( hom_iota, hom_phi );
 ##  <A cyclic right module on a cyclic generator satisfying yet unknown relations>
@@ -1200,11 +1200,11 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> homNM := Source( psi );
 ##  <A rank 2 right module on 4 generators satisfying 2 relations>
-##  gap> IsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work
+##  gap> IsIdenticalObj( homNM, Hom( N, M ) ); ## the caching at work
 ##  true
 ##  gap> homMM := Range( psi );
 ##  <A rank 1 right module on 3 generators satisfying 2 relations>
-##  gap> IsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work
+##  gap> IsIdenticalObj( homMM, Hom( M, M ) ); ## the caching at work
 ##  true
 ##  gap> Display( homNM );
 ##  Z/< 3 > + Z/< 3 > + Z^(2 x 1)
@@ -1360,17 +1360,17 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##    
-##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying
+##  -1:   <A non-zero cyclic torsion right module on a cyclic generator satisfying
 ##       yet unknown relations>
-##     0:	<A rank 1 right module on 3 generators satisfying 2 relations>
+##     0:   <A rank 1 right module on 3 generators satisfying 2 relations>
 ##  of
 ##  <A right module on 4 generators satisfying yet unknown relations>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##    
-##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 1\
+##  -1:   <A non-zero cyclic torsion right module on a cyclic generator satisfying 1\
 ##   relation>
-##     0:	<A rank 1 right module on 2 generators satisfying 1 relation>
+##     0:   <A rank 1 right module on 2 generators satisfying 1 relation>
 ##  of
 ##  <A rank 1 right module on 3 generators satisfying 2 relations>>
 ##  gap> Display( filt );
@@ -1391,7 +1391,7 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 InstallFunctor( Functor_Hom_for_fp_modules );
 
 ##
-## TensorProduct( M, N )	( M * N )
+## TensorProduct( M, N ) ( M * N )
 ##
 
 ##  <#GAPDoc Label="Functor_TensorProduct">
@@ -1458,11 +1458,11 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##  the map is currently represented by the above 4 x 4 matrix
 ##  gap> ML := Source( psi );
 ##  <A rank 1 right module on 4 generators satisfying 3 relations>
-##  gap> IsIdenticalObj( ML, M * L );	## the caching at work
+##  gap> IsIdenticalObj( ML, M * L ); ## the caching at work
 ##  true
 ##  gap> NL := Range( psi );
 ##  <A rank 2 right module on 4 generators satisfying 2 relations>
-##  gap> IsIdenticalObj( NL, N * L );	## the caching at work
+##  gap> IsIdenticalObj( NL, N * L ); ## the caching at work
 ##  true
 ##  gap> Display( ML );
 ##  Z/< 3 > + Z/< 3 > + Z/< 3 > + Z^(1 x 1)
@@ -1532,14 +1532,14 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##   . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-##     0:	<A rank 1 left module presented by 1 relation for 2 generators>
-##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
+##     0:   <A rank 1 left module presented by 1 relation for 2 generators>
+##    -1:   <A non-zero left module presented by 2 relations for 2 generators>
 ##  of
 ##  <A non-zero left module presented by 10 relations for 6 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-##     0:	<A rank 1 left module presented by 1 relation for 2 generators>
-##    -1:	<A non-zero torsion left module presented by 2 relations
+##     0:   <A rank 1 left module presented by 1 relation for 2 generators>
+##    -1:   <A non-zero torsion left module presented by 2 relations
 ##               for 2 generators>
 ##  of
 ##  <A rank 1 left module presented by 3 relations for 4 generators>>
@@ -1764,12 +1764,12 @@ RightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );
 ##  gap> extNN := Range( psi );
 ##  <A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\
 ##  ation>
-##  gap> IsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work
+##  gap> IsIdenticalObj( extNN, Ext( 1, N, N ) ); ## the caching at work
 ##  true
 ##  gap> extMN := Source( psi );
 ##  <A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\
 ##  ation>
-##  gap> IsIdenticalObj( extMN, Ext( 1, M, N ) );	## the caching at work
+##  gap> IsIdenticalObj( extMN, Ext( 1, M, N ) ); ## the caching at work
 ##  true
 ##  gap> Display( extNN );
 ##  Z/< 3 >
@@ -1841,12 +1841,12 @@ LeftSatelliteOfFunctor( Functor_TensorProduct_for_fp_modules, "Tor" );
 ##  gap> torNN := Source( psi );
 ##  <A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\
 ##  nerator>
-##  gap> IsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work
+##  gap> IsIdenticalObj( torNN, Tor( 1, N, N ) ); ## the caching at work
 ##  true
 ##  gap> torMN := Range( psi );
 ##  <A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\
 ##  nerator>
-##  gap> IsIdenticalObj( torMN, Tor( 1, M, N ) );	## the caching at work
+##  gap> IsIdenticalObj( torMN, Tor( 1, M, N ) ); ## the caching at work
 ##  true
 ##  gap> Display( torNN );
 ##  Z/< 3 >

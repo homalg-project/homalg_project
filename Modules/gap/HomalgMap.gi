@@ -159,7 +159,7 @@ InstallMethod( PairOfPositionsOfTheDefaultPresentations,
 end );
 
 ##
-InstallMethod( MatrixOfMap,		## FIXME: make this optimal by finding shortest ways
+InstallMethod( MatrixOfMap, ## FIXME: make this optimal by finding shortest ways
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsInt, IsInt ],
         
@@ -515,10 +515,10 @@ InstallMethod( PreInverse,
         sigma := LeftDivide( A, B, L );
     fi;
     
-    if IsBool( sigma ) then	## no split
+    if IsBool( sigma ) then ## no split
         
         ## from a method below we already know that phi is an epimorphism
-        if IsEpimorphism( phi ) then	## to be sure ;)
+        if IsEpimorphism( phi ) then ## to be sure ;)
             ## so T is not projective since phi is not split
             SetIsProjective( T, false );
         fi;
@@ -607,7 +607,7 @@ InstallMethod( PreInverse,
         sigma := LeftDivide( A, Id, L );
     fi;
     
-    if not IsHomalgMatrix( sigma ) then	## no split even on the level of matrices
+    if not IsHomalgMatrix( sigma ) then ## no split even on the level of matrices
         
         ## from above we already know that phi is an epimorphism,
         ## so T is not projective since phi is not split [HS, I.4.7.(3)]
@@ -823,7 +823,7 @@ InstallMethod( \/,
     
     map := CallFuncList( proc[1], Concatenation( [ map ], proc{[ 2 .. Length( proc ) ]} ) );
     
-    if left then	## H not phi !!!
+    if left then ## H not phi !!!
         return RightDivide( map, gen, rel );
     else
         return LeftDivide( gen, map, rel );
@@ -922,7 +922,7 @@ end );
 ##  ]]></Example>
 ##  To construct a map between not yet specified free left modules
 ##      <Example><![CDATA[
-##  gap> chi := HomalgMap( mat );	## or chi := HomalgMap( mat, "l" );
+##  gap> chi := HomalgMap( mat ); ## or chi := HomalgMap( mat, "l" );
 ##  <A homomorphism of left modules>
 ##  gap> Source( chi );
 ##  <A free left module of rank 3 on free generators>
@@ -999,7 +999,7 @@ InstallGlobalFunction( _HomalgMap,
         
         if nargs > 1 and IsStringRep( arg[2] ) and Length( arg[2] ) > 0
            and  LowercaseString( arg[2]{[1..1]} ) = "r" then
-            left := false;	## we explicitly asked for a morphism of right modules
+            left := false; ## we explicitly asked for a morphism of right modules
         elif not IsBound( left ) then
             left := true;
         fi;
@@ -1034,11 +1034,11 @@ InstallGlobalFunction( _HomalgMap,
         fi;
         
         if HasIsZero( source ) and IsZero( source ) then
-            SetIsGeneralizedMonomorphism( morphism, true );	## we don't know yet if IsMorhphism( morphism ) = true
+            SetIsGeneralizedMonomorphism( morphism, true ); ## we don't know yet if IsMorhphism( morphism ) = true
         fi;
         
         if HasIsZero( target ) and IsZero( target ) then
-            SetIsGeneralizedEpimorphism( morphism, true );	## we don't know yet if IsMorhphism( morphism ) = true
+            SetIsGeneralizedEpimorphism( morphism, true ); ## we don't know yet if IsMorhphism( morphism ) = true
         fi;
         
         return morphism;
@@ -1073,7 +1073,7 @@ InstallGlobalFunction( _HomalgMap,
                 if not IsIdenticalObj( arg[2], arg[3] ) then
                     Error( "the source and target modules must be defined over the same ring\n" );
                 fi;
-                target := source;	## we get an endomorphism
+                target := source; ## we get an endomorphism
                 pos_s := PositionOfTheDefaultPresentation( source );
                 pos_t := pos_s;
             else
@@ -1089,7 +1089,7 @@ InstallGlobalFunction( _HomalgMap,
         fi;
     elif source = "ring" then
         source := HomalgFreeLeftModule( 1, arg[2] );
-        target := source;	## we get an endomorphism
+        target := source; ## we get an endomorphism
         pos_s := PositionOfTheDefaultPresentation( source );
         pos_t := pos_s;
     else
@@ -1258,11 +1258,11 @@ InstallGlobalFunction( _HomalgMap,
     fi;
     
     if HasIsZero( source ) and IsZero( source ) then
-        SetIsGeneralizedMonomorphism( morphism, true );	## we don't know yet if IsMorhphism( morphism ) = true
+        SetIsGeneralizedMonomorphism( morphism, true ); ## we don't know yet if IsMorhphism( morphism ) = true
     fi;
     
     if HasIsZero( target ) and IsZero( target ) then
-        SetIsGeneralizedEpimorphism( morphism, true );	## we don't know yet if IsMorhphism( morphism ) = true
+        SetIsGeneralizedEpimorphism( morphism, true ); ## we don't know yet if IsMorhphism( morphism ) = true
     fi;
     
     return morphism;
