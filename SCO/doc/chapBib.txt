@@ -5,15 +5,15 @@
   [[20XBLH20[120X]  [16XBarakat,  M. and Lange-Hegermann, M.[116X, [17XThe mathtthomalg package -- A
   homological   algebra   mathsfGAP4   meta-package   for  computable  Abelian
   categories[117X                                                     (2007--2020),
-  (((\url{https://homalg-project.github.io/pkg/homalg}))).
+  ((\url{https://homalg-project.github.io/pkg/homalg})).
   
   [[20XG\t08[120X]  [16XG\"{o}rtzen,  S.[116X,  [17XSimplicial  cohomology  of  orbifolds[117X,  Master's
   thesis,           RWTH           Aachen          University          (2008),
-  ((\url{https://algebra.mathematik.uni-siegen.de/barakat/goertzen/Diplomarbeit_Simon_Goertzen.pdf})).
+  (\url{https://algebra.mathematik.uni-siegen.de/barakat/goertzen/Diplomarbeit_Simon_Goertzen.pdf}).
   
   [[20XMP99[120X]  [16XMoerdijk,  I.  and Pronk, D. A.[116X, [17XSimplicial cohomology of orbifolds[117X,
   [18XIndag.       Math.       (N.S.)[118X,      [19X10[119X,      2      (1999),      269--293,
-  (((\href{http://arxiv.org/abs/q-alg/9708021}{\tt arXiv:q-alg/9708021}))).
+  ((\href{http://arxiv.org/abs/q-alg/9708021}{\tt arXiv:q-alg/9708021})).
   
   
   

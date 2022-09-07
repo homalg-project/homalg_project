@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "SCO",
 Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
-Version := "2022.08-02",
-Date := "17/08/2022",
+Version := "2022.09-01",
+Date := "07/09/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
