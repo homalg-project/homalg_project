@@ -239,9 +239,9 @@
     [4X[28X<A monomorphism of left modules>[128X[104X
     [4X[25Xgap>[125X [27XDefectOfExactness( iota, phi );[127X[104X
     [4X[28X<A zero left module>[128X[104X
-    [4X[25Xgap>[125X [27Xhom_iota := Hom( iota );	## a shorthand for Hom( iota, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xhom_iota := Hom( iota ); ## a shorthand for Hom( iota, ZZ );[127X[104X
     [4X[28X<A homomorphism of right modules>[128X[104X
-    [4X[25Xgap>[125X [27Xhom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xhom_phi := Hom( phi ); ## a shorthand for Hom( phi, ZZ );[127X[104X
     [4X[28X<A homomorphism of right modules>[128X[104X
     [4X[25Xgap>[125X [27XDefectOfExactness( hom_iota, hom_phi );[127X[104X
     [4X[28X<A cyclic right module on a cyclic generator satisfying yet unknown relations>[128X[104X
@@ -314,11 +314,11 @@
     [4X[28Xthe map is currently represented by the above 3 x 4 matrix[128X[104X
     [4X[25Xgap>[125X [27XhomNM := Source( psi );[127X[104X
     [4X[28X<A rank 2 right module on 4 generators satisfying 2 relations>[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( homNM, Hom( N, M ) ); ## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XhomMM := Range( psi );[127X[104X
     [4X[28X<A rank 1 right module on 3 generators satisfying 2 relations>[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( homMM, Hom( M, M ) ); ## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XDisplay( homNM );[127X[104X
     [4X[28XZ/< 3 > + Z/< 3 > + Z^(2 x 1)[128X[104X
@@ -479,17 +479,17 @@
     [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E );[127X[104X
     [4X[28X<A descending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
     [4X[28X  [128X[104X
-    [4X[28X-1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying[128X[104X
+    [4X[28X-1:   <A non-zero cyclic torsion right module on a cyclic generator satisfying[128X[104X
     [4X[28X     yet unknown relations>[128X[104X
-    [4X[28X   0:	<A rank 1 right module on 3 generators satisfying 2 relations>[128X[104X
+    [4X[28X   0:   <A rank 1 right module on 3 generators satisfying 2 relations>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A right module on 4 generators satisfying yet unknown relations>>[128X[104X
     [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
     [4X[28X<A descending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
     [4X[28X  [128X[104X
-    [4X[28X-1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 1\[128X[104X
+    [4X[28X-1:   <A non-zero cyclic torsion right module on a cyclic generator satisfying 1\[128X[104X
     [4X[28X relation>[128X[104X
-    [4X[28X   0:	<A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
+    [4X[28X   0:   <A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A rank 1 right module on 3 generators satisfying 2 relations>>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( filt );[127X[104X
@@ -582,11 +582,11 @@
     [4X[28Xthe map is currently represented by the above 4 x 4 matrix[128X[104X
     [4X[25Xgap>[125X [27XML := Source( psi );[127X[104X
     [4X[28X<A rank 1 right module on 4 generators satisfying 3 relations>[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( ML, M * L );	## the caching at work[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( ML, M * L ); ## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XNL := Range( psi );[127X[104X
     [4X[28X<A rank 2 right module on 4 generators satisfying 2 relations>[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( NL, N * L );	## the caching at work[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( NL, N * L ); ## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XDisplay( ML );[127X[104X
     [4X[28XZ/< 3 > + Z/< 3 > + Z/< 3 > + Z^(1 x 1)[128X[104X
@@ -658,14 +658,14 @@
     [4X[28X . s[128X[104X
     [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E );[127X[104X
     [4X[28X<An ascending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
-    [4X[28X   0:	<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
-    [4X[28X  -1:	<A non-zero left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[28X   0:   <A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[28X  -1:   <A non-zero left module presented by 2 relations for 2 generators>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A non-zero left module presented by 10 relations for 6 generators>>[128X[104X
     [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
     [4X[28X<An ascending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
-    [4X[28X   0:	<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
-    [4X[28X  -1:	<A non-zero torsion left module presented by 2 relations[128X[104X
+    [4X[28X   0:   <A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[28X  -1:   <A non-zero torsion left module presented by 2 relations[128X[104X
     [4X[28X             for 2 generators>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A rank 1 left module presented by 3 relations for 4 generators>>[128X[104X
@@ -731,12 +731,12 @@
     [4X[25Xgap>[125X [27XextNN := Range( psi );[127X[104X
     [4X[28X<A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\[128X[104X
     [4X[28Xation>[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( extNN, Ext( 1, N, N ) ); ## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XextMN := Source( psi );[127X[104X
     [4X[28X<A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\[128X[104X
     [4X[28Xation>[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( extMN, Ext( 1, M, N ) );	## the caching at work[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( extMN, Ext( 1, M, N ) ); ## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XDisplay( extNN );[127X[104X
     [4X[28XZ/< 3 >[128X[104X
@@ -791,12 +791,12 @@
     [4X[25Xgap>[125X [27XtorNN := Source( psi );[127X[104X
     [4X[28X<A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\[128X[104X
     [4X[28Xnerator>[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( torNN, Tor( 1, N, N ) ); ## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XtorMN := Range( psi );[127X[104X
     [4X[28X<A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\[128X[104X
     [4X[28Xnerator>[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( torMN, Tor( 1, M, N ) );	## the caching at work[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( torMN, Tor( 1, M, N ) ); ## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XDisplay( torNN );[127X[104X
     [4X[28XZ/< 3 >[128X[104X

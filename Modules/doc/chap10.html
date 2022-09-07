@@ -316,9 +316,9 @@ true
 &lt;A monomorphism of left modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefectOfExactness( iota, phi );</span>
 &lt;A zero left module&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_iota := Hom( iota );	## a shorthand for Hom( iota, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_iota := Hom( iota ); ## a shorthand for Hom( iota, ZZ );</span>
 &lt;A homomorphism of right modules&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_phi := Hom( phi ); ## a shorthand for Hom( phi, ZZ );</span>
 &lt;A homomorphism of right modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefectOfExactness( hom_iota, hom_phi );</span>
 &lt;A cyclic right module on a cyclic generator satisfying yet unknown relations&gt;
@@ -393,11 +393,11 @@ true
 the map is currently represented by the above 3 x 4 matrix
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homNM := Source( psi );</span>
 &lt;A rank 2 right module on 4 generators satisfying 2 relations&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( homNM, Hom( N, M ) ); ## the caching at work</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homMM := Range( psi );</span>
 &lt;A rank 1 right module on 3 generators satisfying 2 relations&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( homMM, Hom( M, M ) ); ## the caching at work</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( homNM );</span>
 Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z^(2 x 1)
@@ -559,17 +559,17 @@ Level 2:
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">filt := FiltrationBySpectralSequence( II_E );</span>
 &lt;A descending filtration with degrees [ -1 .. 0 ] and graded parts:
   
--1:	&lt;A non-zero cyclic torsion right module on a cyclic generator satisfying
+-1:   &lt;A non-zero cyclic torsion right module on a cyclic generator satisfying
      yet unknown relations&gt;
-   0:	&lt;A rank 1 right module on 3 generators satisfying 2 relations&gt;
+   0:   &lt;A rank 1 right module on 3 generators satisfying 2 relations&gt;
 of
 &lt;A right module on 4 generators satisfying yet unknown relations&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
 &lt;A descending filtration with degrees [ -1 .. 0 ] and graded parts:
   
--1:	&lt;A non-zero cyclic torsion right module on a cyclic generator satisfying 1\
+-1:   &lt;A non-zero cyclic torsion right module on a cyclic generator satisfying 1\
  relation&gt;
-   0:	&lt;A rank 1 right module on 2 generators satisfying 1 relation&gt;
+   0:   &lt;A rank 1 right module on 2 generators satisfying 1 relation&gt;
 of
 &lt;A rank 1 right module on 3 generators satisfying 2 relations&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( filt );</span>
@@ -663,11 +663,11 @@ Z/&lt; 3 &gt; + Z^(1 x 1)
 the map is currently represented by the above 4 x 4 matrix
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ML := Source( psi );</span>
 &lt;A rank 1 right module on 4 generators satisfying 3 relations&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( ML, M * L );	## the caching at work</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( ML, M * L ); ## the caching at work</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NL := Range( psi );</span>
 &lt;A rank 2 right module on 4 generators satisfying 2 relations&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( NL, N * L );	## the caching at work</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( NL, N * L ); ## the caching at work</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ML );</span>
 Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z^(1 x 1)
@@ -740,14 +740,14 @@ Level 2:
  . s
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">filt := FiltrationBySpectralSequence( II_E );</span>
 &lt;An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-   0:	&lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
-  -1:	&lt;A non-zero left module presented by 2 relations for 2 generators&gt;
+   0:   &lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
+  -1:   &lt;A non-zero left module presented by 2 relations for 2 generators&gt;
 of
 &lt;A non-zero left module presented by 10 relations for 6 generators&gt;&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
 &lt;An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-   0:	&lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
-  -1:	&lt;A non-zero torsion left module presented by 2 relations
+   0:   &lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
+  -1:   &lt;A non-zero torsion left module presented by 2 relations
              for 2 generators&gt;
 of
 &lt;A rank 1 left module presented by 3 relations for 4 generators&gt;&gt;
@@ -809,12 +809,12 @@ the map is currently represented by the above 1 x 1 matrix
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">extNN := Range( psi );</span>
 &lt;A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\
 ation&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( extNN, Ext( 1, N, N ) ); ## the caching at work</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">extMN := Source( psi );</span>
 &lt;A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\
 ation&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( extMN, Ext( 1, M, N ) );	## the caching at work</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( extMN, Ext( 1, M, N ) ); ## the caching at work</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( extNN );</span>
 Z/&lt; 3 &gt;
@@ -866,12 +866,12 @@ the map is currently represented by the above 1 x 1 matrix
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">torNN := Source( psi );</span>
 &lt;A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\
 nerator&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( torNN, Tor( 1, N, N ) ); ## the caching at work</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">torMN := Range( psi );</span>
 &lt;A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\
 nerator&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( torMN, Tor( 1, M, N ) );	## the caching at work</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( torMN, Tor( 1, M, N ) ); ## the caching at work</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( torNN );</span>
 Z/&lt; 3 &gt;

@@ -156,7 +156,7 @@
   [33X[0;0YTo construct a map between not yet specified free left modules[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xchi := HomalgMap( mat );	## or chi := HomalgMap( mat, "l" );[127X[104X
+    [4X[25Xgap>[125X [27Xchi := HomalgMap( mat ); ## or chi := HomalgMap( mat, "l" );[127X[104X
     [4X[28X<A homomorphism of left modules>[128X[104X
     [4X[25Xgap>[125X [27XSource( chi );[127X[104X
     [4X[28X<A free left module of rank 3 on free generators>[128X[104X
