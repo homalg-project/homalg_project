@@ -23,7 +23,6 @@ shasum -a 256 -c codecov.SHA256SUM
 
 # execute
 chmod +x codecov
-./codecov -Z || ./codecov -Z || ./codecov -Z
 ./codecov -Z -F homalg || ./codecov -Z -F homalg || ./codecov -Z -F homalg
 ./codecov -Z -F 4ti2Interface || ./codecov -Z -F 4ti2Interface || ./codecov -Z -F 4ti2Interface
 ./codecov -Z -F ExamplesForHomalg || ./codecov -Z -F ExamplesForHomalg || ./codecov -Z -F ExamplesForHomalg
