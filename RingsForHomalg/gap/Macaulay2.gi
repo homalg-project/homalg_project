@@ -14,24 +14,24 @@
 
 BindGlobal( "HOMALG_IO_Macaulay2",
         rec(
-            cas := "macaulay2",		## normalized name on which the user should have no control
+            cas := "macaulay2", ## normalized name on which the user should have no control
             name := "Macaulay2",
-            executable := [ "M2" ],	## this list is processed from left to right
+            executable := [ "M2" ], ## this list is processed from left to right
             options := [ "--no-prompts", "--no-readline", "--print-width", "80" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            SEARCH_READY_TWICE := true,	## a Macaulay2 specific
-            #variable_name := "o",	## a Macaulay2 specific ;-): o2 = 5 -> o1 = 5 : a = 7 -> o2 = 7 : o2 -> o3 = 5  # definition of macros spoils numbering!
+            SEARCH_READY_TWICE := true, ## a Macaulay2 specific
+            #variable_name := "o", ## a Macaulay2 specific ;-): o2 = 5 -> o1 = 5 : a = 7 -> o2 = 7 : o2 -> o3 = 5  # definition of macros spoils numbering!
             variable_name := "oo",
-            CUT_POS_BEGIN := -1,	## these values are
-            CUT_POS_END := -1,		## not important for Macaulay2
+            CUT_POS_BEGIN := -1, ## these values are
+            CUT_POS_END := -1,   ## not important for Macaulay2
             eoc_verbose := "",
             eoc_quiet := ";",
-            break_lists := true,		## a Macaulay2 specific
-            setring := _Macaulay2_SetRing,	## a Macaulay2 specific
+            break_lists := true, ## a Macaulay2 specific
+            setring := _Macaulay2_SetRing, ## a Macaulay2 specific
             setinvol := _Macaulay2_SetInvolution,## a Macaulay2 specific
-            remove_enter := true,       	## a Macaulay2 specific
-            only_warning := "--warning",	## a Macaulay2 specific
+            remove_enter := true, ## a Macaulay2 specific
+            only_warning := "--warning", ## a Macaulay2 specific
             define := "=",
             garbage_collector := function( stream ) homalgSendBlocking( [ "collectGarbage()" ], "need_command", stream, "garbage_collector" ); end,
             prompt := "\033[01mM2>\033[0m ",
@@ -442,8 +442,8 @@ InstallMethod( PolynomialRing,
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];	## all indeterminates, relative and base
-    nr_var := ar[3];	## the number of relative indeterminates
+    var := ar[2];    ## all indeterminates, relative and base
+    nr_var := ar[3]; ## the number of relative indeterminates
     properties := ar[4];
     
     ## create the new ring

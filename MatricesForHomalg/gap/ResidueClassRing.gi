@@ -560,7 +560,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
+InstallMethod( \/, ## this operation is declared in the file HomalgRelations.gd
         "constructor for homalg rings",
         [ IsHomalgRing, IsHomalgRingRelations ],
         
@@ -627,7 +627,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         SetAmbientRing( S, A );
         
         ## the new ring relations
-        mat := mat * AmbientRing( S );	## be sure to have all relations over the true ambient ring
+        mat := mat * AmbientRing( S ); ## be sure to have all relations over the true ambient ring
         if left then
             rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( mat );
         else
@@ -784,7 +784,7 @@ InstallGlobalFunction( HomalgResidueClassRingElement,
             ring := arg[2];
             ar := [ a, ring ];
             if IsHomalgRingElement( a ) then
-                properties := KnownTruePropertiesOfObject( a );	    ## FIXME: a huge potential for problems
+                properties := KnownTruePropertiesOfObject( a ); ## FIXME: a huge potential for problems
             else
                 properties := [ ];
             fi;

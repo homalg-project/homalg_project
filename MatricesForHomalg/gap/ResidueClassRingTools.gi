@@ -42,7 +42,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    rel := MatrixOfRelations( rel );
                    
                    if IsHomalgRingRelationsAsGeneratorsOfRightIdeal( rel ) then
-                       rel := Involution( rel );	## I prefer row convention
+                       rel := Involution( rel ); ## I prefer row convention
                    fi;
                    
                    au := RightDivide( A, U, rel );

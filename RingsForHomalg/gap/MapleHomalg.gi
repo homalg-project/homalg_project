@@ -14,20 +14,20 @@
 
 BindGlobal( "HOMALG_IO_Maple",
         rec(
-            cas := "maple",		## normalized name on which the user should have no control
+            cas := "maple", ## normalized name on which the user should have no control
             name := "Maple",
-            executable := [ "maple_for_homalg", "maple14", "maple13", "maple12", "maple11", "maple10", "maple9", "maple" ],	## this list is processed from left to right
+            executable := [ "maple_for_homalg", "maple14", "maple13", "maple12", "maple11", "maple10", "maple9", "maple" ], ## this list is processed from left to right
             options := [ "-q" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_POS_BEGIN := 1,		## these are the most
-            CUT_POS_END := 4,		## delicate values!
+            CUT_POS_BEGIN := 1, ## these are the most
+            CUT_POS_END := 4,   ## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ":",
-            error_stdout := "Error, ",	## a Maple specific
-            normalized_white_space := NormalizedWhitespace,	## a Maple specific
-            trim_display := function( str ) return str{ [ 1 .. Length( str ) - 36 ] }; end,	## a Maple specific
-            setring := _MapleHomalg_SetRing,	## a MapleHomalg specific
+            error_stdout := "Error, ", ## a Maple specific
+            normalized_white_space := NormalizedWhitespace, ## a Maple specific
+            trim_display := function( str ) return str{ [ 1 .. Length( str ) - 36 ] }; end, ## a Maple specific
+            setring := _MapleHomalg_SetRing, ## a MapleHomalg specific
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ var, " := '", var, "'"  ], "need_command", stream, "delete" ); end,
             multiple_delete := _Maple_multiple_delete,
@@ -35,7 +35,7 @@ BindGlobal( "HOMALG_IO_Maple",
             prompt := "\033[01mmaple>\033[0m ",
             output_prompt := "\033[1;34;47m<maple\033[0m ",
             display_color := "\033[0;34m",
-            #banner :=  function( s ) Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } ); end,	## this line is commented since we must start Maple using the -q option, which unfortunately also suppresses the Maple banner
+            #banner :=  function( s ) Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } ); end, ## this line is commented since we must start Maple using the -q option, which unfortunately also suppresses the Maple banner
             banner := "\
     |\\^/|     Launching Maple\n\
 ._|\\|   |/|_. Copyright (c) Maplesoft, a division of Waterloo Maple Inc.\n\
@@ -239,7 +239,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( "HOMALG_IO_Maple" );
-        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+        if not IsBound( stream.path_to_maple_packages ) then ## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
         
@@ -335,7 +335,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( "HOMALG_IO_Maple" );
-        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+        if not IsBound( stream.path_to_maple_packages ) then ## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
         homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, "initialize" );
@@ -470,7 +470,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( "HOMALG_IO_Maple" );
-        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+        if not IsBound( stream.path_to_maple_packages ) then ## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
         homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, "initialize" );
@@ -572,7 +572,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( "HOMALG_IO_Maple" );
-        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+        if not IsBound( stream.path_to_maple_packages ) then ## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
         homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, "initialize" );
@@ -663,7 +663,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( "HOMALG_IO_Maple" );
-        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+        if not IsBound( stream.path_to_maple_packages ) then ## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
         homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, "initialize" );
@@ -874,8 +874,8 @@ InstallMethod( PolynomialRing,
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];	## all indeterminates, relative and base
-    nr_var := ar[3];	## the number of relative indeterminates
+    var := ar[2];    ## all indeterminates, relative and base
+    nr_var := ar[3]; ## the number of relative indeterminates
     properties := ar[4];
     param := ar[5];
     
@@ -1538,7 +1538,7 @@ InstallMethod( SaveHomalgMatrixToFile,
     if mode = "ListList" then
         command := [ "_fs := fopen(\"", filename, "\",WRITE): ",
                      "fprintf( _fs, %s, convert(convert(", M, ",listlist),string)): ",
-		     "fflush( _fs ): ",
+                     "fflush( _fs ): ",
                      "fclose( _fs )" ];
         
         homalgSendBlocking( command, "need_command", "SaveHomalgMatrixToFile" );

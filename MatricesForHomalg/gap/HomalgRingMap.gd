@@ -120,7 +120,7 @@ DeclareProperty( "IsIsomorphism",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
+DeclareProperty( "IsAutomorphism", ## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
         IsHomalgRingMap );
 
 ####################################

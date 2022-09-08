@@ -14,19 +14,19 @@
 
 BindGlobal( "HOMALG_IO_MAGMA",
         rec(
-            cas := "magma",		## normalized name on which the user should have no control
+            cas := "magma", ## normalized name on which the user should have no control
             name := "MAGMA",
-            executable := [ "magma" ],	## this list is processed from left to right
+            executable := [ "magma" ], ## this list is processed from left to right
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_POS_BEGIN := 1,		## these are the most
-            CUT_POS_END := 2,		## delicate values!
+            CUT_POS_BEGIN := 1, ## these are the most
+            CUT_POS_END := 2,   ## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
-            remove_enter := true,	## a MAGMA specific
-            error_stdout := " error",	## a MAGMA specific
-            setring := _MAGMA_SetRing,	## a MAGMA specific
+            remove_enter := true, ## a MAGMA specific
+            error_stdout := " error", ## a MAGMA specific
+            setring := _MAGMA_SetRing, ## a MAGMA specific
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ "delete ", var ], "need_command", stream, "delete" ); end,
             multiple_delete := _MAGMA_multiple_delete,
@@ -530,7 +530,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-	l := 2;
+        l := 2;
         ## characteristic:
         c := AbsInt( arg[1] );
         if IsPrime( c ) then
@@ -712,8 +712,8 @@ InstallMethod( PolynomialRing,
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];	## all indeterminates, relative and base
-    nr_var := ar[3];	## the number of relative indeterminates
+    var := ar[2];    ## all indeterminates, relative and base
+    nr_var := ar[3]; ## the number of relative indeterminates
     properties := ar[4];
     
     ## create the new ring

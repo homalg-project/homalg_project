@@ -398,8 +398,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return false;
             fi;
             
-            if not 0 in pos					## NrRows( M ) <= NrColumns( M )
-               or  Length( pos_non_zero ) = NrColumns( mat )	## NrColumns( M ) <= NrRows( M )
+            if not 0 in pos                                  ## NrRows( M ) <= NrColumns( M )
+               or  Length( pos_non_zero ) = NrColumns( mat ) ## NrColumns( M ) <= NrRows( M )
                then
                 return true;
             fi;
@@ -446,8 +446,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return false;
             fi;
             
-            if not 0 in plist 					## NrRows( M ) <= NrColumns( M )
-               or Length( plist_non_zero ) = NrColumns( mat )	## NrColumns( M ) <= NrRows( M )
+            if not 0 in plist                                 ## NrRows( M ) <= NrColumns( M )
+               or Length( plist_non_zero ) = NrColumns( mat ) ## NrColumns( M ) <= NrRows( M )
                then
                 return true;
             fi;
@@ -495,8 +495,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return false;
             fi;
             
-            if not 0 in pos					## NrColumns( M ) <= NrRows( M )
-               or  Length( pos_non_zero ) = NrRows( mat )	## NrRows( M ) <= NrColumns( M )
+            if not 0 in pos                               ## NrColumns( M ) <= NrRows( M )
+               or  Length( pos_non_zero ) = NrRows( mat ) ## NrRows( M ) <= NrColumns( M )
                then
                 return true;
             fi;
@@ -543,8 +543,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return false;
             fi;
             
-            if not 0 in plist 					## NrColumns( M ) <= NrRows( M )
-               or Length( plist_non_zero ) = NrRows( mat )	## NrRows( M ) <= NrColumns( M )
+            if not 0 in plist                              ## NrColumns( M ) <= NrRows( M )
+               or Length( plist_non_zero ) = NrRows( mat ) ## NrRows( M ) <= NrColumns( M )
                then
                 return true;
             fi;
@@ -2283,8 +2283,8 @@ end );
 #    rowsA := [ 1 .. a ];
 #    rowsB := [ 1 .. NrRows( B ) ];
 #    
-#    plistA := Filtered( plist, x -> x in rowsA );		## CAUTION: don't use Intersection(2)
-#    plistB := Filtered( plist - a, x -> x in rowsB );		## CAUTION: don't use Intersection(2)
+#    plistA := Filtered( plist, x -> x in rowsA );     ## CAUTION: don't use Intersection(2)
+#    plistB := Filtered( plist - a, x -> x in rowsB ); ## CAUTION: don't use Intersection(2)
 #    
 #    return UnionOfRows( CertainRows( A, plistA ), CertainRows( B, plistB ) );
 #    
@@ -2437,8 +2437,8 @@ end );
 #    columnsA := [ 1 .. a ];
 #    columnsB := [ 1 .. NrColumns( B ) ];
 #    
-#    plistA := Filtered( plist, x -> x in columnsA );			## CAUTION: don't use Intersection(2)
-#    plistB := Filtered( plist - a, x -> x in columnsB );		## CAUTION: don't use Intersection(2)
+#    plistA := Filtered( plist, x -> x in columnsA );     ## CAUTION: don't use Intersection(2)
+#    plistB := Filtered( plist - a, x -> x in columnsB ); ## CAUTION: don't use Intersection(2)
 #    
 #    return UnionOfColumns( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
 #    
@@ -2516,7 +2516,7 @@ InstallMethod( DiagMat,
         r := NrRows( l[pos] );
         c := NrColumns( l[pos] );
         
-        len := Length( l );	## we can assume l >= 2, since other methods would then apply
+        len := Length( l ); ## we can assume l >= 2, since other methods would then apply
         
         if pos = 1 then
             L := l{[ 2 .. len ]};
@@ -3257,7 +3257,7 @@ InstallMethod( \*,
     
     LI := AA[2];
     
-    if HasEvalLeftInverse( LI ) then	## give it a chance
+    if HasEvalLeftInverse( LI ) then ## give it a chance
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "( IsHomalgMatrix * LeftInverse ) * IsHomalgMatrix", "\033[0m" );
         
@@ -3281,7 +3281,7 @@ InstallMethod( \*,
     
     RI := BB[1];
     
-    if HasEvalRightInverse( RI ) then	## give it a chance
+    if HasEvalRightInverse( RI ) then ## give it a chance
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * ( RightInverse * IsHomalgMatrix )", "\033[0m" );
         

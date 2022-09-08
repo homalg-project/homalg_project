@@ -3287,7 +3287,7 @@ InstallMethod( MaxDimensionalRadicalSubobjectOp,
     RP := homalgTable( R );
     
     if IsBound(RP!.MaxDimensionalRadicalSubobject) then
-        rad := RP!.MaxDimensionalRadicalSubobject( M );	## the external object
+        rad := RP!.MaxDimensionalRadicalSubobject( M ); ## the external object
         rad := HomalgMatrix( rad, R );
         if IsZero( rad ) then
             return HomalgZeroMatrix( 0, 1, R );
@@ -3330,7 +3330,7 @@ InstallMethod( RadicalSubobjectOp,
     RP := homalgTable( R );
     
     if IsBound(RP!.RadicalSubobject) then
-        rad := RP!.RadicalSubobject( M );	## the external object
+        rad := RP!.RadicalSubobject( M ); ## the external object
         rad := HomalgMatrix( rad, R );
         if IsZero( rad ) then
             rad := HomalgZeroMatrix( 0, 1, R );
@@ -3456,7 +3456,7 @@ InstallMethod( MaxDimensionalSubobjectOp,
     RP := homalgTable( R );
     
     if IsBound(RP!.MaxDimensionalSubobject) then
-        max := RP!.MaxDimensionalSubobject( M );	## the external object
+        max := RP!.MaxDimensionalSubobject( M ); ## the external object
         max := HomalgMatrix( max, R );
         if IsZero( max ) then
             return HomalgZeroMatrix( 0, 1, R );
@@ -3550,7 +3550,7 @@ InstallMethod( Eliminate,
     RP := homalgTable( R );
     
     if IsBound(RP!.Eliminate) then
-        elim := RP!.Eliminate( rel, indets, R );	## the external object
+        elim := RP!.Eliminate( rel, indets, R ); ## the external object
         elim := HomalgMatrix( elim, R );
         if IsZero( elim ) then
             return HomalgZeroMatrix( 0, 1, R );
@@ -3665,7 +3665,7 @@ InstallMethod( Coefficients,
     RP := homalgTable( R );
     
     if IsBound(RP!.Coefficients) then
-        both := RP!.Coefficients( poly, var );	## the pair of external objects
+        both := RP!.Coefficients( poly, var ); ## the pair of external objects
         monomials := HomalgMatrix( both[1], R );
         monomials := EntriesOfHomalgMatrix( monomials );
         coeffs := HomalgMatrix( both[2], Length( monomials ), 1, R );
@@ -3765,7 +3765,7 @@ InstallMethod( Coefficients,
     RP := homalgTable( R );
     
     if IsBound(RP!.CoefficientsMatrix) then
-        both := RP!.CoefficientsMatrix( matrix, var );	## the pair of external objects
+        both := RP!.CoefficientsMatrix( matrix, var ); ## the pair of external objects
         monomials := HomalgMatrix( both[1], R );
         monomials := EntriesOfHomalgMatrix( monomials );
         coeffs := HomalgMatrix( both[2], Length( monomials ), NrRows( matrix ), R );
@@ -5896,7 +5896,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         zero_cols := ZeroColumns( M );
         
         if zero_cols <> [ ] and
-           not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then	## avoid infinite loops
+           not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then ## avoid infinite loops
             ## take care of matrices with zero columns, especially of 0 x n matrices
             
             free := HomalgZeroMatrix( 1, 1, R );
@@ -5989,7 +5989,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         free := ZeroColumns( M );
         
         if free <> [ ] and
-           not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then	## avoid infinite loops
+           not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then ## avoid infinite loops
             ## take care of matrices with zero columns, especially of 0 x n matrices
             
             r := Length( free );
@@ -6068,7 +6068,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         "for a rational function and the integer 0",
         [ IsRationalFunction, IsInt and IsZero ],
         
-  function( series, i )	## i = 0
+  function( series, i ) ## i = 0
     local coeffs;
     
     coeffs := CoefficientsOfNumeratorOfHilbertPoincareSeries( series );
@@ -6886,8 +6886,8 @@ InstallMethod( AffineDimension,
     elif ZeroColumns( M ) <> [ ] then
         ## take care of matrices with zero columns, especially of 0 x n matrices
         if HasKrullDimension( R ) then
-            return KrullDimension( R );	## this is not a mistake
-        elif not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then	## avoid infinite loops
+            return KrullDimension( R ); ## this is not a mistake
+        elif not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then ## avoid infinite loops
             free := HomalgZeroMatrix( 1, 1, R );
             return AffineDimension( free, weights, degrees );
         fi;
@@ -6946,8 +6946,8 @@ InstallMethod( AffineDimension,
     elif ZeroColumns( M ) <> [ ] then
         ## take care of matrices with zero columns, especially of 0 x n matrices
         if HasKrullDimension( R ) then
-            return KrullDimension( R );	## this is not a mistake
-        elif not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then	## avoid infinite loops
+            return KrullDimension( R ); ## this is not a mistake
+        elif not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then ## avoid infinite loops
             free := HomalgZeroMatrix( 1, 1, R );
             return AffineDimension( free );
         fi;

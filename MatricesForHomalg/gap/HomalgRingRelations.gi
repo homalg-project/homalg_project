@@ -181,7 +181,7 @@ InstallMethod( HasNrRelations,
 end );
 
 ##
-InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
+InstallMethod( NrRelations, ### defines: NrRelations (NumberOfRows)
         "for sets of ring relations",
         [ IsHomalgRingRelationsAsGeneratorsOfRightIdeal ],
         
@@ -192,7 +192,7 @@ InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
 end );
 
 ##
-InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
+InstallMethod( NrRelations, ### defines: NrRelations (NumberOfRows)
         "for sets of ring relations",
         [ IsHomalgRingRelationsAsGeneratorsOfLeftIdeal ],
         
@@ -203,7 +203,7 @@ InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
 end );
 
 ##
-InstallMethod( CertainRelations,		### defines: CertainRelations
+InstallMethod( CertainRelations, ### defines: CertainRelations
         "for sets of ring relations",
         [ IsHomalgRingRelationsAsGeneratorsOfRightIdeal, IsList ],
         
@@ -222,7 +222,7 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
 end );
 
 ##
-InstallMethod( CertainRelations,		### defines: CertainRelations
+InstallMethod( CertainRelations, ### defines: CertainRelations
         "for sets of ring relations",
         [ IsHomalgRingRelationsAsGeneratorsOfLeftIdeal, IsList ],
         
@@ -241,7 +241,7 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
 end );
 
 ##
-InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
+InstallMethod( UnionOfRelations, ### defines: UnionOfRelations (SumRelations)
         "for sets of ring relations",
         [ IsHomalgMatrix, IsHomalgRingRelationsAsGeneratorsOfRightIdeal ],
         
@@ -284,7 +284,7 @@ InstallMethod( UnionOfRelations,
 end );
 
 ##
-InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
+InstallMethod( UnionOfRelations, ### defines: UnionOfRelations (SumRelations)
         "for sets of ring relations",
         [ IsHomalgMatrix, IsHomalgRingRelationsAsGeneratorsOfLeftIdeal ],
         
@@ -343,7 +343,7 @@ InstallMethod( BasisOfModule,
         
         if bas = mat then
             SetCanBeUsedToDecideZero( rel, true );
-            rel!.EvaluatedMatrixOfRingRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
+            rel!.EvaluatedMatrixOfRingRelations := bas; ## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
             fi;
@@ -385,7 +385,7 @@ InstallMethod( BasisOfModule,
         
         if bas = mat then
             SetCanBeUsedToDecideZero( rel, true );
-            rel!.EvaluatedMatrixOfRingRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
+            rel!.EvaluatedMatrixOfRingRelations := bas; ## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
             fi;
@@ -623,7 +623,7 @@ InstallMethod( ReducedSyzygiesGenerators,
 end );
 
 ##
-InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations (BetterBasis)
+InstallMethod( GetRidOfObsoleteRelations, ### defines: GetRidOfObsoleteRelations (BetterBasis)
         "for sets of ring relations",
         [ IsHomalgRingRelationsAsGeneratorsOfRightIdeal ],
         
@@ -634,7 +634,7 @@ InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations
 end );
 
 ##
-InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations (BetterBasis)
+InstallMethod( GetRidOfObsoleteRelations, ### defines: GetRidOfObsoleteRelations (BetterBasis)
         "for sets of ring relations",
         [ IsHomalgRingRelationsAsGeneratorsOfLeftIdeal ],
         

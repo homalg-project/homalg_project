@@ -392,7 +392,7 @@ InstallMethod( ReducedSyzygiesOfColumns,
 end );
 
 ##
-InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesBasis)
+InstallMethod( SyzygiesBasisOfRows, ### defines: SyzygiesBasisOfRows (SyzygiesBasis)
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -406,7 +406,7 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
 end );
 
 ##
-InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesBasis)
+InstallMethod( SyzygiesBasisOfRows, ### defines: SyzygiesBasisOfRows (SyzygiesBasis)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
@@ -420,7 +420,7 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
 end );
 
 ##
-InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
+InstallMethod( SyzygiesBasisOfColumns, ### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -434,7 +434,7 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
 end );
 
 ##
-InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
+InstallMethod( SyzygiesBasisOfColumns, ### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
@@ -462,11 +462,11 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
+InstallMethod( RightDivide, ### defines: RightDivide (RightDivideF)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( B, A )				## CAUTION: Do not use lazy evaluation here!!!
+  function( B, A ) ## CAUTION: Do not use lazy evaluation here!!!
     local R, T, B_;
     
     R := HomalgRing( B );
@@ -504,11 +504,11 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
+InstallMethod( LeftDivide, ### defines: LeftDivide (LeftDivideF)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( A, B )				## CAUTION: Do not use lazy evaluation here!!!
+  function( A, B ) ## CAUTION: Do not use lazy evaluation here!!!
     local R, T, B_;
     
     R := HomalgRing( B );
@@ -546,7 +546,7 @@ InstallMethod( RightDivide,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( B, A, L )	## CAUTION: Do not use lazy evaluation here!!!
+  function( B, A, L ) ## CAUTION: Do not use lazy evaluation here!!!
     local R, BL, ZA, AL, ZB, T, B_;
     
     R := HomalgRing( B );
@@ -598,7 +598,7 @@ InstallMethod( LeftDivide,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( A, B, L )	## CAUTION: Do not use lazy evaluation here!!!
+  function( A, B, L ) ## CAUTION: Do not use lazy evaluation here!!!
     local R, BL, ZA, AL, ZB, T, B_;
     
     R := HomalgRing( B );
@@ -653,7 +653,7 @@ InstallMethod( LeftInverse,
     
     Id := HomalgIdentityMatrix( NrColumns( RI ), HomalgRing( RI ) );
     
-    LI := RightDivide( Id, RI );	## ( cf. [BR08, Subsection 3.1.3] )
+    LI := RightDivide( Id, RI ); ## ( cf. [BR08, Subsection 3.1.3] )
     
     ## CAUTION: for the following SetXXX RightDivide is assumed
     ## NOT to be lazy evaluated!!!
@@ -707,7 +707,7 @@ InstallMethod( RightInverse,
     
     Id := HomalgIdentityMatrix( NrRows( LI ), HomalgRing( LI ) );
     
-    RI := LeftDivide( LI, Id );	## ( cf. [BR08, Subsection 3.1.3] )
+    RI := LeftDivide( LI, Id ); ## ( cf. [BR08, Subsection 3.1.3] )
     
     ## CAUTION: for the following SetXXX LeftDivide is assumed
     ## NOT to be lazy evaluated!!!
@@ -876,7 +876,7 @@ end );
 ##  <#/GAPDoc>
 
 ##
-InstallGlobalFunction( BestBasis,		### defines: BestBasis
+InstallGlobalFunction( BestBasis, ### defines: BestBasis
   function( arg )
     local M, R, RP, nargs, m, n, B, U, V;
     
@@ -930,7 +930,7 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis
 end );
 
 ##
-InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMatrix (BetterGenerators) (incomplete)
+InstallGlobalFunction( SimplerEquivalentMatrix, ### defines: SimplerEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
     local M, R, RP, nargs, compute_U, compute_V, compute_UI, compute_VI,
           nar_U, nar_V, nar_UI, nar_VI, MM, m, n, finished, U, V, UI, VI, u, v,

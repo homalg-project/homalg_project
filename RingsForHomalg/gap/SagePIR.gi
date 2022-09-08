@@ -63,12 +63,12 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                  
-	       RowRankOfMatrix :=
-	         function( M )
+               RowRankOfMatrix :=
+                 function( M )
                    
                    return Int( homalgSendBlocking( [ M, ".rank()" ], "need_output" ) );
                    
-		 end,
+                 end,
                
                ## Must be defined if other functions are not defined
                
@@ -99,12 +99,12 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );
-		   
+                   
                    return N;
                    
                  end
                
-	);
+        );
     
     for component in NamesOfComponents( RP_General ) do
         RP.(component) := RP_General.(component);

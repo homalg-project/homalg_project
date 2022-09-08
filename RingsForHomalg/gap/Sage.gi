@@ -14,22 +14,22 @@
 
 BindGlobal( "HOMALG_IO_Sage",
         rec(
-            cas := "sage",		## normalized name on which the user should have no control
+            cas := "sage", ## normalized name on which the user should have no control
             name := "Sage",
-            executable := [ "sage" ],	## this list is processed from left to right
+            executable := [ "sage" ], ## this list is processed from left to right
             #options := [ ],
             options := [ "--simple-prompt" ],
             BUFSIZE := 1024,
             READY := "!%&/)(",
             READY_printed := Concatenation( "'", ~.READY, "'" ),
-            CUT_POS_BEGIN := 7,		## these are the most
-            CUT_POS_END := 10,		## delicate values!
+            CUT_POS_BEGIN := 7, ## these are the most
+            CUT_POS_END := 10,  ## delicate values!
             eoc_verbose := "",
             eoc_quiet := ";",
-            normalized_white_space := NormalizedWhitespace,	## a Sage specific
-            #remove_enter := true,	## a Sage specific
-            #check_output := true,	## a Sage specific
-            only_warning := "WARNING:",	## a Sage specific
+            normalized_white_space := NormalizedWhitespace, ## a Sage specific
+            #remove_enter := true, ## a Sage specific
+            #check_output := true, ## a Sage specific
+            only_warning := "WARNING:", ## a Sage specific
             define := "=",
             delete := function( var, stream ) homalgSendBlocking( [ "del ", var ], "need_command", stream, "delete" ); end,
             multiple_delete := _Sage_multiple_delete,
@@ -229,8 +229,8 @@ InstallMethod( PolynomialRing,
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];	## all indeterminates, relative and base
-    nr_var := ar[3];	## the number of relative indeterminates
+    var := ar[2];    ## all indeterminates, relative and base
+    nr_var := ar[3]; ## the number of relative indeterminates
     properties := ar[4];
     
     ## create the new ring
