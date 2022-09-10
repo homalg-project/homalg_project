@@ -34,6 +34,12 @@ InstallMethod( Length,
     
 end );
 
+## fallback method
+InstallOtherMethod( ListOfValues,
+        [ IsList ],
+        
+  IdFunc );
+
 ##
 InstallMethod( ListOfValues,
         [ IsLazyHListRep ],
