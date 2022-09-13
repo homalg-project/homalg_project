@@ -2,22 +2,15 @@
 
 cd ..
 
-# TODO: MapleForHomalg
 PACKAGES_TO_CLONE="
 test_suite
-AbelianSystems
 alcove
 alexander
 CddInterface
 CAP_project
-Conley
 D-Modules
-k-Points
 NConvex
-Orbifolds
 Sheaves
-SimplicialObjects
-SystemTheory
 ToricVarieties_project
 VirtualCAS
 "

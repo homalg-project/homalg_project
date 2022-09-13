@@ -23,11 +23,11 @@ ci-prepare:
 
 ci-test_homalg_packages: ci-test_4ti2Interface ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_homalg
 
-ci-test_additional_packages: ci-test_AbelianSystems ci-test_alexander ci-test_CAP_project ci-test_Conley ci-test_D-Modules ci-test_k-Points ci-test_Orbifolds ci-test_Sheaves ci-test_SimplicialObjects ci-test_SystemTheory ci-test_ToricVarieties ci-test_VirtualCAS
+ci-test_additional_packages: ci-test_alexander ci-test_CAP_project ci-test_D-Modules ci-test_Sheaves ci-test_ToricVarieties ci-test_VirtualCAS
 
-ci-test_test_suite: ci-test_test_suite_D-Modules ci-test_test_suite_ExamplesForHomalg_GAP ci-test_test_suite_ExamplesForHomalg_Macaulay ci-test_test_suite_ExamplesForHomalg_MAGMA ci-test_test_suite_ExamplesForHomalg_maple ci-test_test_suite_ExamplesForHomalg_Singular ci-test_test_suite_GradedModules_Macaulay ci-test_test_suite_GradedModules_MAGMA ci-test_test_suite_GradedModules_maple ci-test_test_suite_GradedModules_Singular ci-test_test_suite_MapleForHomalg ci-test_test_suite_RingsForHomalg ci-test_test_suite_Sheaves_Macaulay ci-test_test_suite_Sheaves_MAGMA ci-test_test_suite_Sheaves_maple ci-test_test_suite_Sheaves_Singular
+ci-test_test_suite: ci-test_test_suite_D-Modules ci-test_test_suite_ExamplesForHomalg_GAP ci-test_test_suite_ExamplesForHomalg_Macaulay ci-test_test_suite_ExamplesForHomalg_MAGMA ci-test_test_suite_ExamplesForHomalg_maple ci-test_test_suite_ExamplesForHomalg_Singular ci-test_test_suite_GradedModules_Macaulay ci-test_test_suite_GradedModules_maple ci-test_test_suite_GradedModules_Singular ci-test_test_suite_RingsForHomalg ci-test_test_suite_Sheaves_MAGMA ci-test_test_suite_Sheaves_Singular
 
-ci-test: ci-test_LoadSheaves ci-test_LoadAllPackages ci-test_homalg_packages ci-test_additional_packages ci-test_test_suite
+ci-test: ci-test_LoadSheaves ci-test_homalg_packages ci-test_additional_packages ci-test_test_suite
 	cd .. && homalg_project/gather_performance_data.py
 
 ############################################
@@ -127,47 +127,19 @@ ci-test_homalg:
 ci-test_LoadSheaves: ci-prepare build
 	echo 'Assert( 0, LoadPackage( "Sheaves" ) = true );' | gap --quitonbreak
 
-ci-test_LoadAllPackages: ci-prepare build
-	# TODO: make test pass and remove "|| true"
-	echo 'LoadAllPackages( );' | gap --quitonbreak || true
-
-ci-test_AbelianSystems: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../AbelianSystems ci-test || true
-
 ci-test_alexander: ci-prepare
 	$(MAKE) -C ../alexander ci-test
 
 ci-test_CAP_project: ci-prepare
 	/usr/bin/time --quiet --format="%U %S\n%e" --output=../CAP_project/performance.out $(MAKE) -C ../CAP_project ci-test
 
-ci-test_Conley: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../Conley ci-test || true
-
 ci-test_D-Modules: ci-prepare
 ifneq ($(MAPLE_PATH),)
 	$(MAKE) -C ../D-Modules ci-test
 endif
 
-ci-test_k-Points: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../k-Points ci-test || true
-
-ci-test_Orbifolds: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../Orbifolds ci-test || true
-
 ci-test_Sheaves: ci-prepare
 	$(MAKE) -C ../Sheaves ci-test
-
-ci-test_SimplicialObjects: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../SimplicialObjects ci-test || true
-
-ci-test_SystemTheory: ci-prepare
-	# TODO: make test pass and remove "|| true"
-	$(MAKE) -C ../SystemTheory ci-test || true
 
 ci-test_ToricVarieties: ci-prepare
 	$(MAKE) -C ../ToricVarieties_project/ToricVarieties ci-test
@@ -234,16 +206,6 @@ ifneq ($(M2_PATH),)
 	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
-ci-test_test_suite_GradedModules_MAGMA: ci-prepare
-ifneq ($(MAGMA_PATH),)
-	# TODO: does not terminate
-	# TODO: make test pass and remove "|| true"
-	#mkdir -p ../test_suite/test_suite_GradedModules_MAGMA; \
-	#cd ../test_suite/test_suite_GradedModules_MAGMA; \
-	#exec 9>&1; \
-	#! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
-endif
-
 ci-test_test_suite_GradedModules_maple: ci-prepare
 ifneq ($(MAPLE_PATH),)
 	mkdir -p ../test_suite/test_suite_GradedModules_maple; \
@@ -260,15 +222,6 @@ ifneq ($(SINGULAR_PATH),)
 	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
-ci-test_test_suite_MapleForHomalg: ci-prepare
-ifneq ($(MAPLE_PATH),)
-	# TODO: make test pass and remove "|| true"
-	mkdir -p ../test_suite/test_suite_MapleForHomalg; \
-	cd ../test_suite/test_suite_MapleForHomalg; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../MapleForHomalg.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
-endif
-
 ci-test_test_suite_RingsForHomalg: ci-prepare
 ifneq ($(SINGULAR_PATH),)
 ifneq ($(M2_PATH),)
@@ -283,30 +236,12 @@ endif
 endif
 endif
 
-ci-test_test_suite_Sheaves_Macaulay: ci-prepare
-ifneq ($(M2_PATH),)
-	# TODO: make test pass and remove "|| true"
-	mkdir -p ../test_suite/test_suite_Sheaves_Macaulay; \
-	cd ../test_suite/test_suite_Sheaves_Macaulay; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
-endif
-
 ci-test_test_suite_Sheaves_MAGMA: ci-prepare
 ifneq ($(MAGMA_PATH),)
 	mkdir -p ../test_suite/test_suite_Sheaves_MAGMA; \
 	cd ../test_suite/test_suite_Sheaves_MAGMA; \
 	exec 9>&1; \
 	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
-
-ci-test_test_suite_Sheaves_maple: ci-prepare
-ifneq ($(MAPLE_PATH),)
-	# TODO: make test pass and remove "|| true"
-	mkdir -p ../test_suite/test_suite_Sheaves_maple; \
-	cd ../test_suite/test_suite_Sheaves_maple; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null || true
 endif
 
 ci-test_test_suite_Sheaves_Singular: ci-prepare
