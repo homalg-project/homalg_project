@@ -842,7 +842,7 @@ InstallMethod( ColumnRankOfMatrix,
         
     elif IsBound( RP!.RowRankOfMatrix ) then
         
-        return RP!.RowRankOfMatrix( Involution( M ) );	## in most cases Involution is obsolete
+        return RP!.RowRankOfMatrix( Involution( M ) ); ## in most cases Involution is obsolete
         
     elif IsBound( RP!.ColumnEchelonForm ) then
         
@@ -1376,7 +1376,7 @@ end );
 ##
 InstallMethod( KroneckerMat,
         "LIMAT: for homalg matrices (IsZero)",
-        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001,	## FIXME: this must be ranked higher than the "KroneckerMat( IsOne, IsHomalgMatrix )", why?
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001, ## FIXME: this must be ranked higher than the "KroneckerMat( IsOne, IsHomalgMatrix )", why?
         
   function( A, B )
     local R;
@@ -1473,7 +1473,7 @@ end );
 ##
 InstallMethod( DualKroneckerMat,
         "LIMAT: for homalg matrices (IsZero)",
-        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001,	## FIXME: this must be ranked higher than the "DualKroneckerMat( IsOne, IsHomalgMatrix )", why?
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001, ## FIXME: this must be ranked higher than the "DualKroneckerMat( IsOne, IsHomalgMatrix )", why?
         
   function( A, B )
     local R;
@@ -1672,7 +1672,7 @@ InstallMethod( \+,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) + IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) + IsHomalgMatrix", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ) );
     
     return B;
     
@@ -1685,7 +1685,7 @@ InstallMethod( \+,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix + IsZero(Matrix)", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix + IsZero(Matrix)", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ) );
     
     return A;
     
@@ -1744,7 +1744,7 @@ InstallMethod( \-,
     
     if IsIdenticalObj( A, B ) then
         
-        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "M - M", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "M - M", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ) );
         
         return 0 * A;
         
@@ -1761,7 +1761,7 @@ InstallMethod( \-,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) - IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) - IsHomalgMatrix", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ) );
     
     return -B;
     
@@ -1774,7 +1774,7 @@ InstallMethod( \-,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix - IsZero(Matrix)", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix - IsZero(Matrix)", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ) );
     
     return A;
     
@@ -1817,7 +1817,7 @@ InstallMethod( \*,
         TryNextMethod( );
     fi;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "CertainRows(IsOne(Matrix)) * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "CertainRows(IsOne(Matrix)) * IsHomalgMatrix", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     return CertainRows( B, EvalCertainRows( A )[2] );
     
@@ -1837,7 +1837,7 @@ InstallMethod( \*,
         TryNextMethod( );
     fi;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * CertainColumns(IsOne(Matrix))", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * CertainColumns(IsOne(Matrix))", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     return CertainColumns( A, EvalCertainColumns( B )[2] );
     
@@ -1850,7 +1850,7 @@ InstallMethod( \*,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsOne(Matrix) * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsOne(Matrix) * IsHomalgMatrix", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     return B;
     
@@ -1863,7 +1863,7 @@ InstallMethod( \*,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsOne(Matrix)", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsOne(Matrix)", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     return A;
     
@@ -1876,7 +1876,7 @@ InstallMethod( \*,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) * IsHomalgMatrix", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     if NrRows( B ) = NrColumns( B ) then
         return A;
@@ -1893,7 +1893,7 @@ InstallMethod( \*,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsZero(Matrix)", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsZero(Matrix)", "\033[0m", "    ", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     if NrRows( A ) = NrColumns( A ) then
         return B;
@@ -2205,7 +2205,7 @@ InstallMethod( LeftInverse,
     ## the consistency test is performed by a high rank method above
     C := EvalCertainColumns( M );
     
-    C := CertainRows( Involution( C[1] ), C[2] );	## Involution( Id ) = Id;
+    C := CertainRows( Involution( C[1] ), C[2] ); ## Involution( Id ) = Id;
     
     SetRightInverse( M, C );
     
@@ -2278,7 +2278,7 @@ InstallMethod( RightInverse,
     ## the consistency test is performed by a high rank method above
     C := EvalCertainRows( M );
     
-    C := CertainColumns( Involution( C[1] ), C[2] );	## Involution( Id ) = Id;
+    C := CertainColumns( Involution( C[1] ), C[2] ); ## Involution( Id ) = Id;
     
     SetLeftInverse( M, C );
     
@@ -2310,7 +2310,7 @@ end );
 #-----------------------------------
 
 ##
-InstallMethod( RowRankOfMatrix,			 	## FIXME: make an extra InstallImmediateMethod when NonZeroRows( M ) is set
+InstallMethod( RowRankOfMatrix, ## FIXME: make an extra InstallImmediateMethod when NonZeroRows( M ) is set
         "LIMAT: for homalg matrices (IsUpperStairCaseMatrix)",
         [ IsHomalgMatrix and IsUpperStairCaseMatrix ],
         
@@ -2334,7 +2334,7 @@ end );
 #-----------------------------------
 
 ##
-InstallMethod( ColumnRankOfMatrix,			## FIXME: make an extra InstallImmediateMethod when NonZeroColumns( M ) is set
+InstallMethod( ColumnRankOfMatrix, ## FIXME: make an extra InstallImmediateMethod when NonZeroColumns( M ) is set
         "LIMAT: for homalg matrices (IsLowerStairCaseMatrix)",
         [ IsHomalgMatrix and IsLowerStairCaseMatrix ],
         
@@ -3052,14 +3052,14 @@ InstallMethod( DecideZeroRowsEffectively,
     R := HomalgRing( A );
     
     if HasRingRelations( R ) then
-        TryNextMethod( );	## FIXME: this can be improved
+        TryNextMethod( ); ## FIXME: this can be improved
     fi;
     
     nz := NonZeroColumns( B );
     
     l := Length( nz );
     
-    if l = 0 then	## just to be on the safe side
+    if l = 0 then ## just to be on the safe side
         TryNextMethod( );
     fi;
     
@@ -3196,14 +3196,14 @@ InstallMethod( DecideZeroColumnsEffectively,
     R := HomalgRing( A );
     
     if HasRingRelations( R ) then
-        TryNextMethod( );	## FIXME: this can be improved
+        TryNextMethod( ); ## FIXME: this can be improved
     fi;
     
     nz := NonZeroRows( B );
     
     l := Length( nz );
     
-    if l = 0 then	## just to be on the safe side
+    if l = 0 then ## just to be on the safe side
         TryNextMethod( );
     fi;
     

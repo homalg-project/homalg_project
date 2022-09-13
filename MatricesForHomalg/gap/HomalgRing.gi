@@ -1126,9 +1126,9 @@ InstallMethod( SetRingProperties,
         SetKrullDimension( S, d + KrullDimension( R ) );
     fi;
     
-    SetGeneralLinearRank( S, 1 );	## Quillen-Suslin Theorem (see [McCRob, 11.5.5]
+    SetGeneralLinearRank( S, 1 );       ## Quillen-Suslin Theorem (see [McCRob, 11.5.5]
     
-    if d = 1 then			## [McCRob, 11.5.7]
+    if d = 1 then                       ## [McCRob, 11.5.7]
         SetElementaryRank( S, 1 );
     elif d > 2 then
         SetElementaryRank( S, 2 );
@@ -1202,8 +1202,8 @@ InstallMethod( SetRingProperties,
     fi;
     
     if HasIsFieldForHomalg( b ) and IsFieldForHomalg( b ) and Characteristic( S ) = 0 then
-        SetGeneralLinearRank( S, 2 );	## [Stafford78], [McCRob, 11.2.15(i)]
-        SetIsSimpleRing( S, true );	## [Coutinho, Thm 2.2.1]
+        SetGeneralLinearRank( S, 2 );   ## [Stafford78], [McCRob, 11.2.15(i)]
+        SetIsSimpleRing( S, true );     ## [Coutinho, Thm 2.2.1]
     fi;
     
     if HasIsIntegralDomain( r ) and IsIntegralDomain( r ) then
@@ -1257,10 +1257,10 @@ InstallMethod( SetRingProperties,
     SetIsLeftNoetherian( S, true );
     SetIsRightNoetherian( S, true );
     
-    SetGlobalDimension( S, d + 0 );	## Janet only knows Q as the coefficient ring
+    SetGlobalDimension( S, d + 0 );     ## Janet only knows Q as the coefficient ring
     
-    ## SetGeneralLinearRank( S, 2 );	## [Stafford78], [McCRob, 11.2.15(i)]
-    SetIsSimpleRing( S, true );		## [Coutinho, Thm 2.2.1]
+    ## SetGeneralLinearRank( S, 2 );    ## [Stafford78], [McCRob, 11.2.15(i)]
+    SetIsSimpleRing( S, true );         ## [Coutinho, Thm 2.2.1]
     
     if d > 0 then
         SetIsPrincipalIdealRing( S, false );
@@ -1577,7 +1577,7 @@ InstallMethod( SetRingProperties,
         SetContainsAField( R, false );
         SetIsIntegralDomain( R, true );
         SetIsArtinian( R, false );
-        SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
+        SetKrullDimension( R, 1 ); ## FIXME: it is not set automatically although an immediate method is installed
     elif not IsPrime( c ) then
         SetIsSemiLocalRing( R, true );
         SetIsIntegralDomain( R, false );
@@ -1625,7 +1625,7 @@ InstallMethod( SetRingProperties,
         SetIsIntegersForHomalg( R, true );
         SetContainsAField( R, false );
         SetIsArtinian( R, false );
-        SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
+        SetKrullDimension( R, 1 ); ## FIXME: it is not set automatically although an immediate method is installed
     elif IsPrime( c ) then
         SetIsFieldForHomalg( R, true );
         SetRingProperties( R, c );
@@ -2284,8 +2284,8 @@ InstallMethod( PolynomialRing,
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];	## all indeterminates, relative and base
-    nr_var := ar[3];	## the number of relative indeterminates
+    var := ar[2];    ## all indeterminates, relative and base
+    nr_var := ar[3]; ## the number of relative indeterminates
     properties := ar[4];
     
     ## create the new ring
@@ -2320,7 +2320,7 @@ end );
 ##
 InstallMethod( \*,
         "for homalg rings",
-        [ IsHomalgRing, IsList ], 1001,	## a high rank is necessary to overwrite the default behaviour of applying R to each list element
+        [ IsHomalgRing, IsList ], 1001, ## a high rank is necessary to overwrite the default behaviour of applying R to each list element
         
   function( R, indets )
     
@@ -2994,7 +2994,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( Name( o ) );	## this sets the attribute Name and the view method is never triggered again (as long as Name is set)
+    Print( Name( o ) ); ## this sets the attribute Name and the view method is never triggered again (as long as Name is set)
     
 end );
 
@@ -3104,7 +3104,7 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( Name( o ), "\n" );	## this sets the attribute Name and the display method is never triggered again (as long as Name is set)
+    Print( Name( o ), "\n" ); ## this sets the attribute Name and the display method is never triggered again (as long as Name is set)
     
 end );
 

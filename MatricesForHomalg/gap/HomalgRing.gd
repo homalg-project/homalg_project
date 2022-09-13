@@ -972,7 +972,7 @@ DeclareProperty( "IsIrreducibleHomalgRingElement",
 ##  Z/( 256 )
 ##  gap> r := (1/3*One(R)+1/5)+3/7;
 ##  |[ 157 ]|
-##  gap> 1 / r;	## = r^-1;
+##  gap> 1 / r; ## = r^-1;
 ##  |[ 181 ]|
 ##  gap> s := (1/3*One(R)+2/5)+3/7;
 ##  |[ 106 ]|
@@ -1737,7 +1737,7 @@ DeclareOperation( "Factors",
 DeclareOperation( "Roots",
         [ IsHomalgRingElement ] );
 
-DeclareOperation( "HomalgRing",	## returns itself
+DeclareOperation( "HomalgRing", ## returns itself
         [ IsHomalgRing ] );
 
 #DeclareOperation( "Indeterminate",

@@ -14,17 +14,17 @@
 
 BindGlobal( "HOMALG_IO_GAP",
         rec(
-            cas := "gap",		## normalized name on which the user should have no control
+            cas := "gap", ## normalized name on which the user should have no control
             name := "GAP",
-            executable := [ "gapL", "gap" ],	## this list is processed from left to right
+            executable := [ "gapL", "gap" ], ## this list is processed from left to right
             options := [ "-q", "-T", "-m", "128m", "-o", "15g" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_POS_BEGIN := 1,		## these are the most
-            CUT_POS_END := 4,		## delicate values!
+            CUT_POS_BEGIN := 1, ## these are the most
+            CUT_POS_END := 4,   ## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";;",
-            show_banner := false,	## the GAP banner screws the display of several terminals :(
+            show_banner := false, ## the GAP banner screws the display of several terminals :(
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ "Unbind( ", var, " )" ], "need_command", stream, "delete" ); end,
             multiple_delete := _ExternalGAP_multiple_delete,
@@ -32,7 +32,7 @@ BindGlobal( "HOMALG_IO_GAP",
             prompt := "\033[01mgap>\033[0m ",
             output_prompt := "\033[1;37;44m<gap\033[0m ",
             display_color := "\033[0;35m",
-            init_string := "LoadPackage(\"HomalgToCAS\");LoadPackage(\"GaussForHomalg\")",	## needed for LoadHomalgMatrixFromFile
+            init_string := "LoadPackage(\"HomalgToCAS\");LoadPackage(\"GaussForHomalg\")", ## needed for LoadHomalgMatrixFromFile
             InitializeCASMacros := InitializeGAPHomalgMacros,
             time := function( stream, t ) return Int( homalgSendBlocking( [ "homalgTotalRuntimes( )" ], "need_output", stream, "time" ) ) - t; end,
            )

@@ -115,7 +115,7 @@ InstallGlobalFunction( ColoredInfoForService,
         
         Append( s, Concatenation( List( arg{[ 3 .. nargs ]}, function( a ) if IsStringRep( a ) then return a; else return String( a ); fi; end ) ) );
         
-        s := Concatenation( s, "\033[0m ", "	in ", homalgTotalRuntimes( arg[1], "" ) );
+        s := Concatenation( s, "\033[0m ", "    in ", homalgTotalRuntimes( arg[1], "" ) );
         
         Info( InfoHomalgBasicOperations, l, s );
     
@@ -467,7 +467,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (low-level))
+InstallMethod( BasisOfRowModule, ### defines: BasisOfRowModule (BasisOfModule (low-level))
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -548,7 +548,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         SetNrRows( B, nr_cols );
         
-        nr_rows := NrColumns( B );	## this is not a mistake
+        nr_rows := NrColumns( B ); ## this is not a mistake
         
         if HasIsZero( M ) and not IsZero( M ) then
             
@@ -649,7 +649,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfModule (low-level))
+InstallMethod( BasisOfColumnModule, ### defines: BasisOfColumnModule (BasisOfModule (low-level))
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -730,7 +730,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         SetNrColumns( B, nr_rows );
         
-        nr_cols := NrRows( B );		## this is not a mistake
+        nr_cols := NrRows( B ); ## this is not a mistake
         
         if HasIsZero( M ) and not IsZero( M ) then
             
@@ -831,7 +831,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
+InstallMethod( DecideZeroRows, ### defines: DecideZeroRows (Reduce)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
@@ -995,7 +995,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
+InstallMethod( DecideZeroColumns, ### defines: DecideZeroColumns (Reduce)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
@@ -1184,7 +1184,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
             
             SetIsLeftRegular( M, true );
             
-            C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
+            C := HomalgZeroMatrix( 0, NrRows( M ), R ); ## most of the computer algebra systems cannot handle degenerated matrices
             
         else
             
@@ -1212,7 +1212,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
             
             SetIsLeftRegular( M, true );
             
-            C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
+            C := HomalgZeroMatrix( 0, NrRows( M ), R ); ## most of the computer algebra systems cannot handle degenerated matrices
             
         else
             
@@ -1387,7 +1387,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
+InstallMethod( SyzygiesGeneratorsOfRows, ### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
@@ -1507,7 +1507,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
+InstallMethod( SyzygiesGeneratorsOfColumns, ### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
@@ -1666,7 +1666,7 @@ InstallMethod( ReducedBasisOfRowModule,
         SetIsZero( B, nr = 0 );
         
         if M = B then
-            B := M;	## we might know more about M
+            B := M; ## we might know more about M
         else
             SetIsZero( M, nr = 0 );
             
@@ -1712,7 +1712,7 @@ InstallMethod( ReducedBasisOfRowModule,
         SetIsZero( B, nr = 0 );
         
         if M = B then
-            B := M;	## we might know more about M
+            B := M; ## we might know more about M
         else
             SetIsZero( M, nr = 0 );
             
@@ -1755,7 +1755,7 @@ InstallMethod( ReducedBasisOfRowModule,
         SetIsZero( B, nr = 0 );
         
         if NrRows( M ) <= nr then
-            B := M;	## we might know more about M
+            B := M; ## we might know more about M
         else
             SetIsZero( M, nr = 0 );
             
@@ -1787,7 +1787,7 @@ InstallMethod( ReducedBasisOfRowModule,
         SetIsZero( B, nr = 0 );
         
         if NrRows( M ) <= nr then
-            B := M;	## we might know more about M
+            B := M; ## we might know more about M
         else
             SetIsZero( M, nr = 0 );
             
@@ -1897,7 +1897,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         SetIsZero( B, nr = 0 );
         
         if M = B then
-            B := M;	## we might know more about M
+            B := M; ## we might know more about M
         else
             SetIsZero( M, nr = 0 );
             
@@ -1943,7 +1943,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         SetIsZero( B, nr = 0 );
         
         if M = B then
-            B := M;	## we might know more about M
+            B := M; ## we might know more about M
         else
             SetIsZero( M, nr = 0 );
             
@@ -1986,7 +1986,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         SetIsZero( B, nr = 0 );
         
         if NrColumns( M ) <= nr then
-            B := M;	## we might know more about M
+            B := M; ## we might know more about M
         else
             SetIsZero( M, nr = 0 );
             
@@ -2018,7 +2018,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         SetIsZero( B, nr = 0 );
         
         if NrColumns( M ) <= nr then
-            B := M;	## we might know more about M
+            B := M; ## we might know more about M
         else
             SetIsZero( M, nr = 0 );
             
@@ -2181,7 +2181,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
     
     C := SyzygiesGeneratorsOfRows( M );
     
-    C := ReducedBasisOfRowModule( C );	## a priori computing a basis of C causes obsolete computations, at least in general
+    C := ReducedBasisOfRowModule( C ); ## a priori computing a basis of C causes obsolete computations, at least in general
     
     ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfRows", NrRows( C ) );
     
@@ -2295,7 +2295,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
     
     C := SyzygiesGeneratorsOfColumns( M );
     
-    C := ReducedBasisOfColumnModule( C );	## a priori computing a basis of C causes obsolete computations, at least in general
+    C := ReducedBasisOfColumnModule( C ); ## a priori computing a basis of C causes obsolete computations, at least in general
     
     ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfColumns", NrColumns( C ) );
     
@@ -2319,7 +2319,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
+InstallMethod( BasisOfRowsCoeff, ### defines: BasisOfRowsCoeff (BasisCoeff)
         "for a homalg matrix",
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -2405,7 +2405,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         SetNrColumns( T, NrRows( M ) );
         
         ## check assertion
-        Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+        Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) ); ## B = T * M;
         
         SetIsBasisOfRowsMatrix( B, true );
         
@@ -2454,7 +2454,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         SetIsZero( T, nr = 0 );
         
         ## check assertion
-        Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+        Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) ); ## B = T * M;
         
         SetIsBasisOfRowsMatrix( B, true );
         
@@ -2495,7 +2495,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     SetIsZero( T, nz = 0 );
     
     ## check assertion
-    Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+    Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) ); ## B = T * M;
     
     SetIsBasisOfRowsMatrix( B, true );
     
@@ -2524,7 +2524,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoeff)
+InstallMethod( BasisOfColumnsCoeff, ### defines: BasisOfColumnsCoeff (BasisCoeff)
         "for a homalg matrix",
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -2610,7 +2610,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         SetNrRows( T, NrColumns( M ) );
         
         ## check assertion
-        Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+        Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) ); # B = M * T
         
         SetIsBasisOfColumnsMatrix( B, true );
         
@@ -2659,7 +2659,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         SetIsZero( T, nr = 0 );
         
         ## check assertion
-        Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+        Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) ); # B = M * T
         
         SetIsBasisOfColumnsMatrix( B, true );
         
@@ -2700,7 +2700,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     SetIsZero( T, nz = 0 );
     
     ## check assertion
-    Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+    Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) ); # B = M * T
     
     SetIsBasisOfColumnsMatrix( B, true );
     
@@ -2729,7 +2729,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively (ReduceCoeff)
+InstallMethod( DecideZeroRowsEffectively, ### defines: DecideZeroRowsEffectively (ReduceCoeff)
         "for a homalg matrix",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -2792,7 +2792,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     ## knowing this will avoid computations
     IsOne( CB );
     
-    ## IsSpecialSubidentityMatrix( CB );	## does not increase performance
+    ## IsSpecialSubidentityMatrix( CB ); ## does not increase performance
     
     if HasIsZero( B ) and IsZero( B ) then
         ## redispatch to the specialized methods
@@ -2823,8 +2823,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         ## check assertions
         Assert( 6,
-                R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and		# M = A + T * B
-                R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
+                R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and # M = A + T * B
+                R!.asserts.DecideZeroRows_Effectively( M, A, B ) );    # M = DecideZeroRows( A, B )
         
         M!.DecideZeroRowsEffectively := B;
         
@@ -2857,8 +2857,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         ## check assertions
         Assert( 6,
-                R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and		# M = A + T * B
-                R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
+                R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and # M = A + T * B
+                R!.asserts.DecideZeroRows_Effectively( M, A, B ) );    # M = DecideZeroRows( A, B )
         
         M!.DecideZeroRowsEffectively := B;
         
@@ -2905,8 +2905,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     ## check assertions
     Assert( 6,
-            R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and	# M = A + T * B
-            R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
+            R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and # M = A + T * B
+            R!.asserts.DecideZeroRows_Effectively( M, A, B ) );    # M = DecideZeroRows( A, B )
     
     M!.DecideZeroRowsEffectively := B;
     
@@ -2934,7 +2934,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffectively (ReduceCoeff)
+InstallMethod( DecideZeroColumnsEffectively, ### defines: DecideZeroColumnsEffectively (ReduceCoeff)
         "for a homalg matrix",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -2997,7 +2997,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     ## knowing this will avoid computations
     IsOne( BC );
     
-    ## IsSpecialSubidentityMatrix( BC );	## does not increase performance
+    ## IsSpecialSubidentityMatrix( BC ); ## does not increase performance
     
     if HasIsZero( B ) and IsZero( B ) then
         ## redispatch to the specialized method
@@ -3028,8 +3028,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         ## check assertions
         Assert( 6,
-                R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
-                R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );		# M = DecideZeroColumns( A, B )
+                R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and # M = A + B * T
+                R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );    # M = DecideZeroColumns( A, B )
         
         M!.DecideZeroColumnsEffectively := B;
         
@@ -3062,8 +3062,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         ## check assertions
         Assert( 6,
-                R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
-                R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );		# M = DecideZeroColumns( A, B )
+                R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and # M = A + B * T
+                R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );    # M = DecideZeroColumns( A, B )
         
         M!.DecideZeroColumnsEffectively := B;
         
@@ -3110,8 +3110,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     ## check assertions
     Assert( 6,
-            R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
-            R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
+            R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and # M = A + B * T
+            R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );    # M = DecideZeroColumns( A, B )
     
     M!.DecideZeroColumnsEffectively := B;
     

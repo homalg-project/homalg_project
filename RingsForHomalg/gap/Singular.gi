@@ -14,24 +14,24 @@
 
 BindGlobal( "HOMALG_IO_Singular",
         rec(
-            cas := "singular",			## normalized name on which the user should have no control
+            cas := "singular", ## normalized name on which the user should have no control
             name := "Singular",
-            executable := [ "Singular" ],	## this list is processed from left to right
-            options := [ "-t", "--ticks-per-sec", "1000", "--echo=0", "--no-warn", "--cntrlc=a" ],	## the option "-q" causes IO to believe that Singular has died!
+            executable := [ "Singular" ], ## this list is processed from left to right
+            options := [ "-t", "--ticks-per-sec", "1000", "--echo=0", "--no-warn", "--cntrlc=a" ], ## the option "-q" causes IO to believe that Singular has died!
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_POS_BEGIN := 1,			## these are the most
-            CUT_POS_END := 2,			## delicate values!
+            CUT_POS_BEGIN := 1, ## these are the most
+            CUT_POS_END := 2,   ## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
-            nolistlist := true,			## a Singular specific
-            break_lists := true,		## a Singular specific
-            handle_output := true,		## a Singular specific
-#            original_lines := true,		## a Singular specific
-            check_output := true,		## a Singular specific looks for newlines without commas
-            setring := _Singular_SetRing,	## a Singular specific
+            nolistlist := true, ## a Singular specific
+            break_lists := true, ## a Singular specific
+            handle_output := true, ## a Singular specific
+#            original_lines := true, ## a Singular specific
+            check_output := true, ## a Singular specific looks for newlines without commas
+            setring := _Singular_SetRing, ## a Singular specific
             ## prints polynomials in a format compatible with other CASs
-            setring_post := [ "short=0;", "option(redTail);" ],	## a Singular specific
+            setring_post := [ "short=0;", "option(redTail);" ], ## a Singular specific
             setinvol := _Singular_SetInvolution,## a Singular specific
             define := "=",
             delete := function( var, stream ) homalgSendBlocking( [ "kill ", var ], "need_command", stream, "delete" ); end,
@@ -1451,8 +1451,8 @@ InstallMethod( PolynomialRing,
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];	## all indeterminates, relative and base
-    nr_var := ar[3];	## the number of relative indeterminates
+    var := ar[2];    ## all indeterminates, relative and base
+    nr_var := ar[3]; ## the number of relative indeterminates
     properties := ar[4];
     param := ar[5];
     
@@ -2826,7 +2826,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
                 "matrix ", v, "m[", NrColumns( M ),"][1]; ",
                 v, "s=\"[\"; ",
                 "for(int i=1;i<=", NrRows( M ), ";i++){",
-                v, "m=", M, "[1..", NrColumns( M ), ",i]; ",	## matrices are saved transposed in Singular
+                v, "m=", M, "[1..", NrColumns( M ), ",i]; ", ## matrices are saved transposed in Singular
                 "if(i!=1){", v, "s=", v, "s+\",\";}; ",
                 v, "s=", v, "s+\"[\"+string(", v, "m)+\"]\";}; ",
                 v, "s=", v, "s+\"]\"; kill ", v, "m"
@@ -2880,7 +2880,7 @@ InstallMethod( SaveHomalgMatrixToFile,
                     "matrix ", v, "m[", NrColumns( M ),"][1]; ",
                     v, "s=\"[\"; ",
                     "for(int i=1;i<=", NrRows( M ), ";i++) ",
-                    "{", v, "m=", M, "[1..", NrColumns( M ), ",i]; ",	## matrices are saved transposed in Singular
+                    "{", v, "m=", M, "[1..", NrColumns( M ), ",i]; ", ## matrices are saved transposed in Singular
                     "if(i!=1){", v, "s=", v, "s+\",\";}; ",
                     v, "s=", v, "s+\"[\"+string(", v, "m)+\"]\";}; ",
                     v, "s=", v, "s+\"]\"; ",
@@ -2949,7 +2949,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
         command := [
                     v, "s=read(\"r: ", fname, "\"); ",
                     "execute( \"matrix ", M, "[", r, "][", c, "] = \" + ", v, "s + \";\" ); ",
-                    M, "=transpose(", M, "); ",	## matrices are saved transposed in Singular
+                    M, "=transpose(", M, "); ", ## matrices are saved transposed in Singular
                     v, "s=\"\""
                     ];
         

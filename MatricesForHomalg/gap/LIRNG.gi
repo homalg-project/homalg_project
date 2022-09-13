@@ -255,49 +255,49 @@ InstallValue( LogicalImplicationsForHomalgRings,
           
           ## Is/Left/Right/Hereditary (every left/right ideal is projective, cf. [Lam06, Definition II.2.1])
           [ IsHereditary, "and", IsCommutative, "and", IsIntegralDomain,
-            "imply", IsDedekindDomain ],		## [Lam06, footnote on p. 72]
+            "imply", IsDedekindDomain ],                ## [Lam06, footnote on p. 72]
           
           ## IsIntegrallyClosedDomain (closed in its field of fractions)
           [ IsIntegrallyClosedDomain,
-            "implies", IsIntegralDomain ],		## by definition
+            "implies", IsIntegralDomain ],              ## by definition
           
           ## IsUniqueFactorizationDomain (unique factorization domain)
           [ IsUniqueFactorizationDomain,
-            "implies", IsCommutative ],			## by definition
+            "implies", IsCommutative ],                 ## by definition
           
           [ IsUniqueFactorizationDomain,
-            "implies", IsIntegrallyClosedDomain ],	## easy, wikipedia
+            "implies", IsIntegrallyClosedDomain ],      ## easy, wikipedia
           
           ## IsCommutative
           [ IsCommutative, "and", IsNonZeroRing,
-            "implies", HasInvariantBasisProperty ],	## [Lam06, p. 26]
+            "implies", HasInvariantBasisProperty ],     ## [Lam06, p. 26]
           
           [ IsCommutative,
-            "implies", AreUnitsCentral ],	## by definition
+            "implies", AreUnitsCentral ],               ## by definition
           
           ## IsLocal (a single maximal left/right/ideal)
           [ IsLocal,
-            "implies", IsSemiLocalRing ],		## trivial
+            "implies", IsSemiLocalRing ],               ## trivial
           
           [ IsLocal,
-            "implies", HasInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
+            "implies", HasInvariantBasisProperty ],     ## [Lam06, bottom of p. 26]
           
-          ## IsSemiLocalRing				## commutative def.: finitely many maximal ideals [Lam06, bottom of p. 20], general def. R/rad R is left or eq. right artinian [Lam06, top of p. 28]
+          ## IsSemiLocalRing                            ## commutative def.: finitely many maximal ideals [Lam06, bottom of p. 20], general def. R/rad R is left or eq. right artinian [Lam06, top of p. 28]
           [ IsSemiLocalRing,
-            "implies", IsHermite ],			## [Lam06, Example I.4.7,(3)], with the correct notion of semilocal, commutativity is not essential, as Lam noted.
+            "implies", IsHermite ],                     ## [Lam06, Example I.4.7,(3)], with the correct notion of semilocal, commutativity is not essential, as Lam noted.
           
           ## IsSimpleRing: CAUTION: IsSimple does not imply IsSemiSimple; the Weyl algebra is a counter example
           
           ## IsSemiSimpleRing
           [ IsSemiSimpleRing,
-            "implies", IsHermite ],			## [Lam06, Example I.4.7(1)]
+            "implies", IsHermite ],                     ## [Lam06, Example I.4.7(1)]
           
           ## Is/Left/Right/PrincipalIdealRing
           [ IsLeftPrincipalIdealRing,
-            "implies", IsLeftNoetherian ],		## trivial
+            "implies", IsLeftNoetherian ],              ## trivial
           
           [ IsRightPrincipalIdealRing,
-            "implies", IsRightNoetherian ],		## trivial
+            "implies", IsRightNoetherian ],             ## trivial
           
           [ IsLeftPrincipalIdealRing, "and", IsIntegralDomain,
             "imply", IsLeftFiniteFreePresentationRing ],## trivial
@@ -306,36 +306,36 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "imply", IsRightFiniteFreePresentationRing ],## trivial
           
           [ IsPrincipalIdealRing, "and", IsCommutative,
-            "imply", IsKaplanskyHermite ],		## [Lam06, Theorem I.4.31]
+            "imply", IsKaplanskyHermite ],              ## [Lam06, Theorem I.4.31]
           
           [ IsPrincipalIdealRing, "and", IsCommutative,
-            "imply", IsBezoutRing ],			## trivial
+            "imply", IsBezoutRing ],                    ## trivial
           
           [ IsPrincipalIdealRing, "and", IsCommutative, "and", IsIntegralDomain,
-            "imply", IsUniqueFactorizationDomain ],	## trivial
+            "imply", IsUniqueFactorizationDomain ],     ## trivial
           
           [ IsPrincipalIdealRing, "and", IsCommutative, "and", IsIntegralDomain,
-            "imply", IsDedekindDomain ],		## trivial
+            "imply", IsDedekindDomain ],                ## trivial
           
           ## Is/Left/Right/Noetherian
           [ IsLeftNoetherian, "and", IsNonZeroRing,
-            "implies", HasInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
+            "implies", HasInvariantBasisProperty ],     ## [Lam06, bottom of p. 26]
           
           [ IsRightNoetherian, "and", IsNonZeroRing,
-            "implies", HasInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
+            "implies", HasInvariantBasisProperty ],     ## [Lam06, bottom of p. 26]
           
           [ IsLeftNoetherian, "and", IsIntegralDomain,
-            "implies", IsLeftOreDomain ],		## easy ...
+            "implies", IsLeftOreDomain ],               ## easy ...
           
           [ IsRightNoetherian, "and", IsIntegralDomain,
-            "implies", IsRightOreDomain ],		## easy ...
+            "implies", IsRightOreDomain ],              ## easy ...
           
           ## Is/Left/Right/OreDomain
           [ IsLeftOreDomain,
-            "implies", IsIntegralDomain ],		## by definition
+            "implies", IsIntegralDomain ],              ## by definition
           
           [ IsRightOreDomain,
-            "implies", IsIntegralDomain ],		## by definition
+            "implies", IsIntegralDomain ],              ## by definition
           
           ## Serre's theorem: IsRegular <=> IsGlobalDimensionFinite:
           [ IsRegular,
@@ -349,13 +349,13 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "implies", IsNoetherian ],
           
           [ IsFreePolynomialRing,
-            "implies", IsFiniteFreePresentationRing ],	## Hilbert Syzygies Theorem
+            "implies", IsFiniteFreePresentationRing ],  ## Hilbert Syzygies Theorem
           
           [ IsFreePolynomialRing,
             "implies", IsUniqueFactorizationDomain ],
           
           [ IsFreePolynomialRing,
-            "implies", IsHermite ],			## Quillen-Suslin theorem: IsFreePolynomialRing => IsHermite
+            "implies", IsHermite ],                     ## Quillen-Suslin theorem: IsFreePolynomialRing => IsHermite
           
 ##--------------------------------------
 ## IsFiniteFreePresentationRing implies:
@@ -808,7 +808,7 @@ end );
 
 ##
 InstallImmediateMethod( GlobalDimension,
-        IsHomalgRing and IsDedekindDomain and HasIsFieldForHomalg, 0,		## hence by Serre's theorem: IsDedekindDomain implies GlobalDimension <= 1 < infinity implies IsRegular
+        IsHomalgRing and IsDedekindDomain and HasIsFieldForHomalg, 0, ## hence by Serre's theorem: IsDedekindDomain implies GlobalDimension <= 1 < infinity implies IsRegular
         
   function( R )
     
@@ -1095,7 +1095,7 @@ end );
 ####################################
 
 ##
-InstallMethod( \*,	## check if both elements reside in the same ring
+InstallMethod( \*, ## check if both elements reside in the same ring
         "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
         
@@ -1154,7 +1154,7 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( \+,	## check if both elements reside in the same ring
+InstallMethod( \+, ## check if both elements reside in the same ring
         "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
         
@@ -1213,7 +1213,7 @@ InstallMethod( \+,
 end );
 
 ##
-InstallMethod( \-,	## check if both elements reside in the same ring
+InstallMethod( \-, ## check if both elements reside in the same ring
         "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
         

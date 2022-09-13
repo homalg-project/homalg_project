@@ -29,12 +29,12 @@ InstallValue( HOMALG_MATRICES,
             OtherInternalMatrixTypes := [ ],
             
             colors := rec(   ## (B)asic (O)perations:
-                             BOE := "\033[1;37;40m",	## reduced (E)chelon form: (Reduced)RowEchelonForm/Columns
-                             BOB := "\033[1;37;45m",	## (B)asis: BasisOfRow/ColumnModule
-                             BOC := "\033[1;37;45m",	## Basis: BasisOfRows/Columns(C)oeff
-                             BOD := "\033[1;37;42m",	## existence of a particular solution: (D)ecideZeroRows/Columns
-                             BOP := "\033[1;37;42m",	## (P)articular solution: DecideZeroRows/Columns(Effectively)
-                             BOH := "\033[1;37;41m",	## solutions of the (H)omogeneous system: SyzygiesGeneratorsOfRows/Columns
+                             BOE := "\033[1;37;40m", ## reduced (E)chelon form: (Reduced)RowEchelonForm/Columns
+                             BOB := "\033[1;37;45m", ## (B)asis: BasisOfRow/ColumnModule
+                             BOC := "\033[1;37;45m", ## Basis: BasisOfRows/Columns(C)oeff
+                             BOD := "\033[1;37;42m", ## existence of a particular solution: (D)ecideZeroRows/Columns
+                             BOP := "\033[1;37;42m", ## (P)articular solution: DecideZeroRows/Columns(Effectively)
+                             BOH := "\033[1;37;41m", ## solutions of the (H)omogeneous system: SyzygiesGeneratorsOfRows/Columns
                              busy := "\033[01m\033[4;31;40m",
                              done := "\033[01m\033[4;32;40m",
                              ),
@@ -138,7 +138,7 @@ InstallGlobalFunction( homalgMode,
     
     if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then
         mode := "default";
-    elif IsString( arg[1] ) then	## now we know, the string is not empty
+    elif IsString( arg[1] ) then ## now we know, the string is not empty
         s := arg[1];
         if LowercaseString( s{[1]} ) = "b" then
             mode := "basic";

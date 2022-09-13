@@ -14,21 +14,21 @@
 
 BindGlobal( "HOMALG_IO_Oscar",
         rec(
-            cas := "oscar",			## normalized name on which the user should have no control
+            cas := "oscar", ## normalized name on which the user should have no control
             name := "Oscar",
-            executable := [ "julia" ],		## this list is processed from left to right
+            executable := [ "julia" ], ## this list is processed from left to right
             environment := [ "NEMO_THREADED=1" ],
             options := [ "--history-file=no", "--depwarn=error", "--color=no", "--code-coverage=none" ],
             #options := [ "--depwarn=error", "--color=no", "--code-coverage=none" ],
             BUFSIZE := 1024,
             READY := "!%&/)(",
             READY_printed := Concatenation( "\"", ~.READY, "\"" ),
-            CUT_POS_BEGIN := 1,			## these are the most
-            CUT_POS_END := 1,			## delicate values!
+            CUT_POS_BEGIN := 1, ## these are the most
+            CUT_POS_END := 1,   ## delicate values!
             eoc_verbose := "",
-            eoc_quiet := ";0",	## an Oscar specific
-            normalized_white_space := NormalizedWhitespace,	## an Oscar specific
-            setring := _Oscar_SetRing,		## an Oscar specific
+            eoc_quiet := ";0", ## an Oscar specific
+            normalized_white_space := NormalizedWhitespace, ## an Oscar specific
+            setring := _Oscar_SetRing, ## an Oscar specific
             ## prints polynomials in a format compatible with other CASs
             setinvol := _Oscar_SetInvolution,## an Oscar specific
             define := "=",
@@ -1235,8 +1235,8 @@ InstallMethod( PolynomialRing,
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];	## all indeterminates, relative and base
-    nr_var := ar[3];	## the number of relative indeterminates
+    var := ar[2];    ## all indeterminates, relative and base
+    nr_var := ar[3]; ## the number of relative indeterminates
     properties := ar[4];
     param := ar[5];
     
@@ -2500,7 +2500,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
                 "matrix ", v, "m[", NrColumns( M ),"][1]; ",
                 v, "s=\"[\"; ",
                 "for(int i=1;i<=", NrRows( M ), ";i++){",
-                v, "m=", M, "[1..", NrColumns( M ), ",i]; ",	## matrices are saved transposed in Oscar
+                v, "m=", M, "[1..", NrColumns( M ), ",i]; ", ## matrices are saved transposed in Oscar
                 "if(i!=1){", v, "s=", v, "s+\",\";}; ",
                 v, "s=", v, "s+\"[\"+string(", v, "m)+\"]\";}; ",
                 v, "s=", v, "s+\"]\"; kill ", v, "m"
@@ -2581,7 +2581,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
         command := [
                     v, "s=read(\"", filename, "\", String); ",
                     v, "r=[]; for i = split(", v, "s, r\"[\\[,\\]\\n\\r\]+\"); if length(i)>0; push!(", v, "r, eval(Meta.parse(replace(i, \"\/\" => \"\/\/\")))); end; end; ",
-                    M, "=Involution(MatrixForHomalg(", R, r, c, ", ", v, "r)); ",	## matrices are saved transposed in Oscar
+                    M, "=Involution(MatrixForHomalg(", R, r, c, ", ", v, "r)); ", ## matrices are saved transposed in Oscar
                     v, "s=\"\"; ", v, "r=\"\"",
                     ];
         

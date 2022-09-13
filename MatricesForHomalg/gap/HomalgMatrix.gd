@@ -1162,8 +1162,8 @@ DeclareOperation( "KroneckerMat",
 DeclareOperation( "DualKroneckerMat",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "*",						## this must remain, since an element in IsInternalMatrixHull
-        [ IsInternalMatrixHull, IsInternalMatrixHull ] );	## is not a priori IsMultiplicativeElement
+DeclareOperation( "*",                                    ## this must remain, since an element in IsInternalMatrixHull
+        [ IsInternalMatrixHull, IsInternalMatrixHull ] ); ## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "DiagonalEntries",
         [ IsHomalgMatrix ] );
