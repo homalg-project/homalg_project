@@ -13,7 +13,7 @@ convert_commands := [
 
 for convert in convert_commands do
     
-    Print( "\n## ", convert, ":\n" );
+    Print( "\n", convert, ":\n" );
     
     convert := ValueGlobal( convert );
     
@@ -26,7 +26,7 @@ for convert in convert_commands do
     Print( "\n" );
     Display( cmat );
     
-    Print( "\n## and back:\n" );
+    Print( "\nand back:\n" );
     
     ## and back
     bmat := convert( cmat, R );

@@ -1,5 +1,4 @@
 LoadPackage( "RingsForHomalg" );
-HOMALG_IO.color_display := true;
 Qx := HomalgFieldOfRationalsInMAGMA() * "x";
 Display( Qx );
 wmat := HomalgMatrix( " \
