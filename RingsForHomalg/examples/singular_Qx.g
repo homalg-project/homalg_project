@@ -1,5 +1,4 @@
 LoadPackage( "RingsForHomalg" );
-HOMALG_IO.color_display := true;
 ## replace the following to lines with HomalgFieldOfRationalsInSingular() * "x"
 Qx := HomalgFieldOfRationalsInSingular( ) * "x";
 SetName( Qx, "Q[x]" );
