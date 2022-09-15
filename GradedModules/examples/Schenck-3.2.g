@@ -45,17 +45,17 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "RingsForHomalg" );
+LoadPackage( "RingsForHomalg", false );
 
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 mmat := HomalgMatrix( "[ x, x^3 + y^3 + z^3 ]", 1, 2, Qxyz );
 
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedRingForHomalg", false );
 
 S := GradedRing( Qxyz );;
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 M := RightPresentationWithDegrees( mmat, S );
 

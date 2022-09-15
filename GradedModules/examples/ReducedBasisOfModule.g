@@ -1,4 +1,4 @@
-Read( "MainExample.g" );
+ReadPackage( "GradedModules", "examples/MainExample.g" );
 
 Hom( W, W );
 WW := UnderlyingModule( W );

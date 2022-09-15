@@ -1,4 +1,4 @@
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "GradedModules", "examples/ReducedBasisOfModule.g" );
 
 triangle := RGradedHom( C, T );
 lecs := LongSequence( triangle );
@@ -13,4 +13,4 @@ ByASmallerPresentation( lehs );
 homalgResetFilters( lehs );
 Assert( 0, IsExactSequence( lehs ) );
 
-Display( StringTime( homalgTime( Qxyzt ) ) );
+#Display( StringTime( homalgTime( Qxyzt ) ) );

@@ -28,17 +28,17 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "RingsForHomalg" );
+LoadPackage( "RingsForHomalg", false );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,w";;
 
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedRingForHomalg", false );
 
 S := GradedRing( R );;
 
 jmat := HomalgMatrix( "[ z*w, x*w, y*z, x*y, x^3*z - x*z^3 ]", 1, 5, S );
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 J := RightPresentationWithDegrees( jmat );
 

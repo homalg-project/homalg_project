@@ -1,4 +1,4 @@
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 Q:=GradedRing( HomalgFieldOfRationalsInDefaultCAS() );
 

@@ -1,4 +1,4 @@
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 Q := HomalgFieldOfRationalsInSingular();
 Q := GradedRing( Q );
 R := Q * "x_0..4";

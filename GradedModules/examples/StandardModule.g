@@ -1,4 +1,4 @@
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedRingForHomalg", false );
 
 Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";
 S := GradedRing( Qxy );
@@ -7,7 +7,7 @@ wmat := HomalgMatrix( "[ \
 x, -y\
 ]", 1, 2, Qxy );
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 wmor := GradedMap( wmat, "free", [1,1], "left", S );
 W := Cokernel( wmor );
