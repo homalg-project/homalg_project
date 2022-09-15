@@ -1,4 +1,4 @@
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 Qxyz := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z" );
 

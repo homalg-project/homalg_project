@@ -57,7 +57,7 @@
 ##  ]]></Example>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 S := GradedRing( R );;
 M := HomalgMatrix( "[ x, y^2, z^3 ]", 3, 1, S );;

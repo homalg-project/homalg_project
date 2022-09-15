@@ -1,8 +1,8 @@
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedRingForHomalg", false );
 
 R := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c" );
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 O := n -> (R * 1)^n;
 

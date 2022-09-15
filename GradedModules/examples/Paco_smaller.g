@@ -1,4 +1,4 @@
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 S := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "x0..2" );
 

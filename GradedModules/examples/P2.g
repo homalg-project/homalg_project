@@ -1,4 +1,4 @@
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedRingForHomalg", false );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";
 
@@ -6,7 +6,7 @@ S := GradedRing( R );
 
 A := KoszulDualRing( S, "e0,e1,e2" );
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 ## the residue class field (i.e. S modulo the maximal homogeneous ideal)
 k := HomalgMatrix( Indeterminates( S ), Length( Indeterminates( S ) ), 1, S );

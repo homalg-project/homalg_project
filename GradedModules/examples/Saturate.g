@@ -21,7 +21,7 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 

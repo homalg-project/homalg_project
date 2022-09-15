@@ -1,4 +1,4 @@
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "GradedModules", "examples/ReducedBasisOfModule.g" );
 
 Ext( 0, iota, pi );
 Ext( 1, iota, pi );
@@ -61,4 +61,4 @@ LTensorProduct( 3, pi, iota );
 LTensorProduct( 4, pi, iota );
 LTensorProduct( 5, pi, iota );
 
-Display( StringTime( homalgTime( Qxyzt ) ) );
+#Display( StringTime( homalgTime( Qxyzt ) ) );

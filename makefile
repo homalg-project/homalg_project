@@ -25,7 +25,7 @@ ci-test_homalg_packages: ci-test_4ti2Interface ci-test_Gauss ci-test_ExamplesFor
 
 ci-test_additional_packages: ci-test_alexander ci-test_CAP_project ci-test_D-Modules ci-test_Sheaves ci-test_ToricVarieties ci-test_VirtualCAS
 
-ci-test_test_suite: ci-test_test_suite_D-Modules ci-test_test_suite_ExamplesForHomalg_GAP ci-test_test_suite_ExamplesForHomalg_Macaulay ci-test_test_suite_ExamplesForHomalg_MAGMA ci-test_test_suite_ExamplesForHomalg_maple ci-test_test_suite_ExamplesForHomalg_Singular ci-test_test_suite_GradedModules_Macaulay ci-test_test_suite_GradedModules_maple ci-test_test_suite_GradedModules_Singular ci-test_test_suite_Sheaves_MAGMA ci-test_test_suite_Sheaves_Singular
+ci-test_test_suite: ci-test_test_suite_D-Modules ci-test_test_suite_ExamplesForHomalg_GAP ci-test_test_suite_ExamplesForHomalg_Macaulay ci-test_test_suite_ExamplesForHomalg_MAGMA ci-test_test_suite_ExamplesForHomalg_maple ci-test_test_suite_ExamplesForHomalg_Singular ci-test_test_suite_GradedModules_Macaulay ci-test_test_suite_GradedModules_maple ci-test_test_suite_Sheaves_MAGMA ci-test_test_suite_Sheaves_Singular
 
 ci-test: ci-test_LoadSheaves ci-test_homalg_packages ci-test_additional_packages ci-test_test_suite
 	cd .. && homalg_project/gather_performance_data.py
@@ -212,14 +212,6 @@ ifneq ($(MAPLE_PATH),)
 	cd ../test_suite/test_suite_GradedModules_maple; \
 	exec 9>&1; \
 	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
-
-ci-test_test_suite_GradedModules_Singular: ci-prepare
-ifneq ($(SINGULAR_PATH),)
-	mkdir -p ../test_suite/test_suite_GradedModules_Singular; \
-	cd ../test_suite/test_suite_GradedModules_Singular; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../GradedModules_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
 endif
 
 ci-test_test_suite_Sheaves_MAGMA: ci-prepare

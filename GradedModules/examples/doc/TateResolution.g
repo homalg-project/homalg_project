@@ -6,7 +6,7 @@
 ##  ]]></Example>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x3";;
 S := GradedRing( R );;
 A := KoszulDualRing( S );;

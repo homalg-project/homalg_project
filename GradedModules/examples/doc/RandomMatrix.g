@@ -11,7 +11,7 @@
 ##  ]]></Example>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 S := GradedRing( R );;
 rand := RandomMatrix( S^1 + S^2, S^2 + S^3 + S^4 );

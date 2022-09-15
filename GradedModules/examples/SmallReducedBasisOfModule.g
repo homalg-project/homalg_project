@@ -1,4 +1,4 @@
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedRingForHomalg", false );
 
 Qxyzt := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,t";
 S := GradedRing( Qxyzt );
@@ -11,7 +11,7 @@ x^4,  x^3*z,  0,         \
 0,    0,      x^2*z      \
 ]", 5, 3, Qxyzt );
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 wmor := GradedMap( wmat, "free", "free", "left", S );
 W := LeftPresentationWithDegrees( wmat, S );

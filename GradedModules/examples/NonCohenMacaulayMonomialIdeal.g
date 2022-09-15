@@ -1,8 +1,8 @@
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedRingForHomalg", false );
 
 S := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z" );
 
-LoadPackage( "GradedModules" );
+LoadPackage( "GradedModules", false );
 
 I := GradedLeftSubmodule( "x", S ) * MaximalGradedLeftIdeal( S ) + GradedLeftSubmodule( "y^3", S );
 
