@@ -206,6 +206,8 @@ InstallGlobalFunction( 4ti2Interface_groebner,
     
     err := Concatenation( IO_ReadLines( filestream.stderr ) );
     
+    err := ReplacedString( err, "egrep: warning: egrep is obsolescent; using grep -E\n", "" );
+    
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
     IO_Close( filestream.stdin );
