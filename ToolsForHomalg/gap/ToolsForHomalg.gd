@@ -506,8 +506,8 @@ DeclareGlobalFunction( "FillWithCharacterAfterDecimalNumber" );
 
 #! @Description
 #!   Searches for the keys of <A>record</A> in <A>string</A> and replaces them by their values.
-#!   The values can be strings or lists of strings. In the second case, a string is created from the list
-#!   by joining the entries with the separator `", "`.
+#!   The values can be strings or lists of strings. In the second case, the search term must be followed by `...`
+#!   and the replacement string is formed by joining the entries of the list with the separator `", "`.
 #! @Arguments string, record
 DeclareGlobalFunction( "ReplacedStringViaRecord" );
 

@@ -2580,13 +2580,14 @@ InstallGlobalFunction( "ReplacedStringViaRecord", function( string, record )
     
     for name in RecNames( record ) do
         
-        if IsString( record.(name) ) then
+        # use IsStringRep instead of IsString to differentiate between `""` and `[]`
+        if IsStringRep( record.(name) ) then
             
             string := ReplacedString( string, name, record.(name) );
             
         elif IsList( record.(name) ) then
             
-            string := ReplacedString( string, name, JoinStringsWithSeparator( record.(name), ", " ) );
+            string := ReplacedString( string, Concatenation( name, "..." ), JoinStringsWithSeparator( record.(name), ", " ) );
             
         else
             
