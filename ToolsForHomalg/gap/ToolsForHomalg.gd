@@ -506,8 +506,8 @@ DeclareGlobalFunction( "FillWithCharacterAfterDecimalNumber" );
 
 #! @Description
 #!   Searches for the keys of <A>record</A> in <A>string</A> and replaces them by their values.
-#!   The values can be strings or lists of strings. In the second case, a string is created from the list
-#!   by joining the entries with the separator `", "`.
+#!   The values can be strings or lists of strings. In the second case, the search term must be followed by `...`
+#!   and the replacement string is formed by joining the entries of the list with the separator `", "`.
 #! @Arguments string, record
 DeclareGlobalFunction( "ReplacedStringViaRecord" );
 
@@ -530,3 +530,10 @@ DeclareGlobalFunction( "DisplayTimer" );
 #!   List the all filters implied by filter <A>filt</A>.
 #! @Arguments filt
 DeclareGlobalFunction( "ListImpliedFilters" );
+
+#! @Description
+#!   If only a string <A>name</A> is given, displays an incrementing number every time a breakpoint with this name is visited.
+#!   If additionally an integer <A>break_at</A> is given, enters a break-loop if the breakpoint has been visited the specified number of times.
+#!   If a function <A>break_function</A> is given, it is executed before entering the break-loop.
+#! @Arguments name[, break_at[, break_function]]
+DeclareGlobalFunction( "Breakpoint" );

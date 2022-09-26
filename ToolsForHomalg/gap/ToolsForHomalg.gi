@@ -2580,13 +2580,14 @@ InstallGlobalFunction( "ReplacedStringViaRecord", function( string, record )
     
     for name in RecNames( record ) do
         
-        if IsString( record.(name) ) then
+        # use IsStringRep instead of IsString to differentiate between `""` and `[]`
+        if IsStringRep( record.(name) ) then
             
             string := ReplacedString( string, name, record.(name) );
             
         elif IsList( record.(name) ) then
             
-            string := ReplacedString( string, name, JoinStringsWithSeparator( record.(name), ", " ) );
+            string := ReplacedString( string, Concatenation( name, "..." ), JoinStringsWithSeparator( record.(name), ", " ) );
             
         else
             
@@ -2750,3 +2751,73 @@ InstallGlobalFunction( ListImpliedFilters,
   return SortedList( list );
   
 end);
+
+BindGlobal( "TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS", rec( ) );
+
+##
+InstallGlobalFunction( Breakpoint, function( name, args... )
+  local break_at, break_function;
+    
+    if Length( args ) = 0 then
+        
+        break_at := -1;
+        break_function := ReturnTrue;
+        
+    elif Length( args ) = 1 then
+        
+        break_at := args[1];
+        break_function := ReturnTrue;
+        
+    elif Length( args ) = 2 then
+        
+        break_at := args[1];
+        break_function := args[2];
+        
+    else
+        
+        Error( "Breakpoint must be called with at most 3 arguments" );
+        
+    fi;
+    
+    if not IsString( name ) then
+        
+        Error( "<name> must be a string" );
+        return;
+        
+    fi;
+    
+    if not IsInt( break_at ) then
+        
+        Error( "<break_at> must be an integer" );
+        return;
+        
+    fi;
+    
+    if not IsFunction( break_function ) then
+        
+        Error( "<break_function> must be a function" );
+        return;
+        
+    fi;
+    
+    if not IsBound( TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS.(name) ) then
+        
+        TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS.(name) := 0;
+        
+    fi;
+    
+    TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS.(name) := TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS.(name) + 1;
+    
+    if TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS.(name) = break_at then
+        
+        break_function( );
+        
+        Error( "Breakpoint ", name, ": ", TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS.(name) );
+        
+    else
+        
+        Print( "Breakpoint ", name, ": ", TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS.(name), "\n" );
+        
+    fi;
+    
+end );
