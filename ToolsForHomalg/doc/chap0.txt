@@ -6,7 +6,7 @@
                [1X Special methods and knowledge propagation tools [101X
   
   
-                                   2022.09-06
+                                   2022.09-07
   
   
                                27 September 2022
