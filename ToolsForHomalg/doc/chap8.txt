@@ -309,8 +309,9 @@
   [33X[1;0Y[29X[2XReplacedStringViaRecord[102X( [3Xstring[103X, [3Xrecord[103X ) [32X function[133X
   
   [33X[0;0YSearches for the keys of [3Xrecord[103X in [3Xstring[103X and replaces them by their values.
-  The  values can be strings or lists of strings. In the second case, a string
-  is created from the list by joining the entries with the separator [10X", "[110X.[133X
+  The  values  can  be  strings  or  lists of strings. In the second case, the
+  search  term must be followed by [10X...[110X and the replacement string is formed by
+  joining the entries of the list with the separator [10X", "[110X.[133X
   
   [1X8.1-48 StartTimer[101X
   
@@ -335,6 +336,16 @@
   [33X[1;0Y[29X[2XListImpliedFilters[102X( [3Xfilt[103X ) [32X function[133X
   
   [33X[0;0YList the all filters implied by filter [3Xfilt[103X.[133X
+  
+  [1X8.1-52 Breakpoint[101X
+  
+  [33X[1;0Y[29X[2XBreakpoint[102X( [3Xname[103X[, [3Xbreak_at[103X[, [3Xbreak_function[103X]] ) [32X function[133X
+  
+  [33X[0;0YIf only a string [3Xname[103X is given, displays an incrementing number every time a
+  breakpoint with this name is visited. If additionally an integer [3Xbreak_at[103X is
+  given,  enters a break-loop if the breakpoint has been visited the specified
+  number  of  times.  If  a  function  [3Xbreak_function[103X is given, it is executed
+  before entering the break-loop.[133X
   
   
   [1X8.2 [33X[0;0YExample functions[133X[101X

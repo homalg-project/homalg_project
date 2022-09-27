@@ -6,10 +6,10 @@
                [1X Special methods and knowledge propagation tools [101X
   
   
-                                   2022.09-05
+                                   2022.09-06
   
   
-                               10 September 2022
+                               27 September 2022
   
   
                                 Mohamed Barakat
@@ -204,6 +204,7 @@
       8.1-49 StopTimer
       8.1-50 DisplayTimer
       8.1-51 ListImpliedFilters
+      8.1-52 Breakpoint
     8.2 [33X[0;0YExample functions[133X
       8.2-1 ExamplesForHomalg
       8.2-2 ExamplesForHomalg

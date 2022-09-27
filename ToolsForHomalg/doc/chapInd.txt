@@ -15,6 +15,7 @@
   [2XAddLeftRightLogicalImplicationsForHomalg[102X 8.1-2 
   [2XAddToToDoList[102X, for IsToDoListEntry 5.2-1 
   [2XAppendToAhomalgTable[102X 8.1-32 
+  [2XBreakpoint[102X 8.1-52 
   [2XCacheValue[102X, for IsCachingObject, IsObject 1.2-1 
   [2XCachingObject[102X 1.1-1 
       for IsObject 1.1-1 

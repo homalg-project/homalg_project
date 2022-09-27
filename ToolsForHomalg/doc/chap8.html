@@ -76,6 +76,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F11AC1E7EF7D799">8.1-49 StopTimer</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X796292DF861A07AE">8.1-50 DisplayTimer</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F6543E78601EC4A">8.1-51 ListImpliedFilters</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7B82900C85ABA1C8">8.1-52 Breakpoint</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X86F60B7B826FA61E">8.2 <span class="Heading">Example functions</span></a>
 </span>
@@ -424,7 +425,7 @@
 <h5>8.1-47 ReplacedStringViaRecord</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReplacedStringViaRecord</code>( <var class="Arg">string</var>, <var class="Arg">record</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Searches for the keys of <var class="Arg">record</var> in <var class="Arg">string</var> and replaces them by their values. The values can be strings or lists of strings. In the second case, a string is created from the list by joining the entries with the separator <code class="code">", "</code>.</p>
+<p>Searches for the keys of <var class="Arg">record</var> in <var class="Arg">string</var> and replaces them by their values. The values can be strings or lists of strings. In the second case, the search term must be followed by <code class="code">...</code> and the replacement string is formed by joining the entries of the list with the separator <code class="code">", "</code>.</p>
 
 <p><a id="X7FED6864832055C4" name="X7FED6864832055C4"></a></p>
 
@@ -453,6 +454,13 @@
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListImpliedFilters</code>( <var class="Arg">filt</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>List the all filters implied by filter <var class="Arg">filt</var>.</p>
+
+<p><a id="X7B82900C85ABA1C8" name="X7B82900C85ABA1C8"></a></p>
+
+<h5>8.1-52 Breakpoint</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Breakpoint</code>( <var class="Arg">name</var>[, <var class="Arg">break_at</var>[, <var class="Arg">break_function</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If only a string <var class="Arg">name</var> is given, displays an incrementing number every time a breakpoint with this name is visited. If additionally an integer <var class="Arg">break_at</var> is given, enters a break-loop if the breakpoint has been visited the specified number of times. If a function <var class="Arg">break_function</var> is given, it is executed before entering the break-loop.</p>
 
 <p><a id="X86F60B7B826FA61E" name="X86F60B7B826FA61E"></a></p>
 
