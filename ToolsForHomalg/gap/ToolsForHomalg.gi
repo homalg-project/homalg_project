@@ -2589,8 +2589,6 @@ InstallGlobalFunction( "ReplacedStringViaRecord", function( string, record )
             
             string := ReplacedString( string, Concatenation( name, "..." ), JoinStringsWithSeparator( record.(name), ", " ) );
             
-            string := ReplacedString( string, name, JoinStringsWithSeparator( record.(name), ", " ) );
-            
         else
             
             Error( "the record's values must be strings or lists of strings" );
