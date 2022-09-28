@@ -21,6 +21,11 @@ SetAsOriginalPresentation( H );
 
 FilteredByPurity( H );
 
-Display( H );
+# Macaulay2 does not have a stable output
+if HOMALG_RINGS.RingOfIntegersDefaultCAS <> "Macaulay2" then
+    
+    Display( H );
+    
+fi;
 
 Assert( 0, DegreesOfGenerators( H ) = [ 0, 0, 0, 0, 0, 1, 2, 2, 0 ] );

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-for i in ${1-*.g}; do
-  cp -uv ../$i $i
-done
-
-sed -i 's/DefaultCAS/Macaulay2/g' *.g
