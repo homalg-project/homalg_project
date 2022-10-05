@@ -5095,6 +5095,13 @@ InstallMethod( RandomMatrix,
   function( r, c, R )
     local RP, params;
     
+    # Some CAS are having a really hard time creating random empty matrices. Too many choices to make?...
+    if r = 0 or c = 0 then
+        
+        return HomalgZeroMatrix( r, c, R );
+        
+    fi;
+    
     RP := homalgTable( R );
     
     if IsBound(RP!.RandomMat) then
