@@ -324,6 +324,9 @@
     [4X  ## random polynomial:[104X
     [4X  RandomPol                               := "rpl",[104X
     [4X  [104X
+    [4X  ## random matrix:[104X
+    [4X  RandomMat                               := "rma",[104X
+    [4X  [104X
     [4X  ## numerator:[104X
     [4X  Numerator                               := "num",[104X
     [4X  [104X
