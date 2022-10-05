@@ -166,6 +166,9 @@ InstallValue( HOMALG_IO,
                 ## random polynomial:
                 RandomPol                               := "rpl",
                 
+                ## random matrix:
+                RandomMat                               := "rma",
+                
                 ## numerator:
                 Numerator                               := "num",
                 

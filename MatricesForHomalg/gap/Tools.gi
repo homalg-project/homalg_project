@@ -5093,9 +5093,17 @@ InstallMethod( RandomMatrix,
         [ IsInt, IsInt, IsHomalgRing ],
         
   function( r, c, R )
-    local RP;
+    local RP, params;
     
     RP := homalgTable( R );
+    
+    if IsBound(RP!.RandomMat) then
+        
+        params := RandomCombination( [ 0 .. 10 ], Random( [ 1 .. 11 ] ) );
+        
+        return HomalgMatrix( CallFuncList( RP!.RandomMat, Concatenation( [ R, r, c ], params ) ), r, c, R );
+        
+    fi;
     
     if not IsBound(RP!.RandomPol) then
         TryNextMethod( );
