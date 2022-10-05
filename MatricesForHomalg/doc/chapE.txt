@@ -159,7 +159,7 @@
     [4X    [104X
     [4X    if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then[104X
     [4X        mode := "default";[104X
-    [4X    elif IsString( arg[1] ) then	## now we know, the string is not empty[104X
+    [4X    elif IsString( arg[1] ) then ## now we know, the string is not empty[104X
     [4X        s := arg[1];[104X
     [4X        if LowercaseString( s{[1]} ) = "b" then[104X
     [4X            mode := "basic";[104X

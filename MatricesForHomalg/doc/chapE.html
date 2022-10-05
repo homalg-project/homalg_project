@@ -245,7 +245,7 @@ InstallGlobalFunction( homalgMode,
     
     if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then
         mode := "default";
-    elif IsString( arg[1] ) then	## now we know, the string is not empty
+    elif IsString( arg[1] ) then ## now we know, the string is not empty
         s := arg[1];
         if LowercaseString( s{[1]} ) = "b" then
             mode := "basic";
