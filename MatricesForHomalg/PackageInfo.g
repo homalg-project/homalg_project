@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "MatricesForHomalg",
 Subtitle := "Matrices for the homalg project",
-Version := "2022.10-01",
+Version := "2022.10-02",
 Date := "05/10/2022",
 License := "GPL-2.0-or-later",
 
