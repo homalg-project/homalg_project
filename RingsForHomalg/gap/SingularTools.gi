@@ -983,12 +983,28 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  end,
                
                RandomPol :=
-                 function( arg )
-                   local R;
+                 function( R, args... )
                    
-                   R := arg[1];
+                   return homalgSendBlocking( [ "sparsepoly(", args, ")" ], [ "def" ], R, "RandomPol" );
                    
-                   return homalgSendBlocking( [ "sparsepoly(", arg{[ 2 .. Length( arg ) ]}, ")" ], [ "def" ], R, "RandomPol" );
+                 end,
+               
+               RandomMat :=
+                 function( R, r, c, args... )
+                   local tmp;
+                   
+                   if Length( args ) >= 2 then
+                       
+                       # The 3rd and 4th argument of sparsematrix correspond to the 2nd and 1st argument of sparsepoly above, i.e. are swapped.
+                       # To keep the interface consistent, we swap the corresponding entries of args here.
+                       args := ShallowCopy( args );
+                       tmp := args[2];
+                       args[2] := args[1];
+                       args[1] := tmp;
+                       
+                   fi;
+                   
+                   return homalgSendBlocking( [ "sparsematrix(", Concatenation( [ c, r ], args ), ")" ], [ "def" ], R, "RandomMat" );
                    
                  end,
                
