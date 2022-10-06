@@ -1,4 +1,4 @@
-Read( "Markus_Lokalisierung.g" );
+ReadPackage( "ExamplesForHomalg", "examples/Markus_Lokalisierung.g" );
 
 filt := PurityFiltration( M );
 

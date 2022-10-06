@@ -1,4 +1,4 @@
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "ExamplesForHomalg", "examples/ReducedBasisOfModule.g" );
 
 II_E := GrothendieckSpectralSequence( RightDualizingFunctor( Qxyz ), LeftDualizingFunctor( Qxyz ), W );
 

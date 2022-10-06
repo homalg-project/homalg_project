@@ -115,7 +115,7 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "ExamplesForHomalg", "examples/ReducedBasisOfModule.g" );
 
 InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, Y, "TensorY" );
 
@@ -127,4 +127,4 @@ ByASmallerPresentation( filt );
 
 m := IsomorphismOfFiltration( filt );
 
-Display( StringTime( homalgTime( Qxyz ) ) );
+#Display( StringTime( homalgTime( Qxyz ) ) );

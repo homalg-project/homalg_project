@@ -1,4 +1,4 @@
-Read( "Markus_Lokalisierung.g" );
+ReadPackage( "ExamplesForHomalg", "examples/Markus_Lokalisierung.g" );
 
 II_E := GrothendieckSpectralSequence( RightDualizingFunctor( A2 ), LeftDualizingFunctor( A2 ), M );
 

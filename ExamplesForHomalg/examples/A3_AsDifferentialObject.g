@@ -1,4 +1,4 @@
-Read( "Coupling.g" );
+ReadPackage( "ExamplesForHomalg", "examples/Coupling.g" );
 
 ## compute a free resolution of N
 P := Resolution( N );
