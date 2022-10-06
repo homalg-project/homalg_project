@@ -1,5 +1,5 @@
 ## Abelian.g
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "ExamplesForHomalg", "examples/ReducedBasisOfModule.g" );
 
 ## abelian category: [HS, Prop. II.9.6]
 d := Resolution( W );

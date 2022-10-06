@@ -1,4 +1,4 @@
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "ExamplesForHomalg", "examples/ReducedBasisOfModule.g" );
 
 ## compute a free resolution of W as a right module
 P := Resolution( W );

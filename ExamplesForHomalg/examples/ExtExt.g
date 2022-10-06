@@ -18,8 +18,10 @@
 ##  <A left module presented by 6 relations for 5 generators>
 ##  gap> Y := Hom( Qxyz, W );
 ##  <A right module on 5 generators satisfying yet unknown relations>
+##  gap> SetInfoLevel( InfoWarning, 0 );
 ##  gap> F := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, Y, "TensorY" );
 ##  <The functor TensorY for f.p. modules and their maps over computable rings>
+##  gap> SetInfoLevel( InfoWarning, 1 );
 ##  gap> G := LeftDualizingFunctor( Qxyz );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, W );
 ##  <A stable homological spectral sequence with sheets at levels 
@@ -115,9 +117,11 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "ExamplesForHomalg", "examples/ReducedBasisOfModule.g" );
 
+SetInfoLevel( InfoWarning, 0 );
 InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, Y, "TensorY" );
+SetInfoLevel( InfoWarning, 1 );
 
 II_E := GrothendieckSpectralSequence( Functor_TensorY_for_fp_modules, LeftDualizingFunctor( Qxyz ), W );
 
@@ -127,4 +131,4 @@ ByASmallerPresentation( filt );
 
 m := IsomorphismOfFiltration( filt );
 
-Display( StringTime( homalgTime( Qxyz ) ) );
+#Display( StringTime( homalgTime( Qxyz ) ) );

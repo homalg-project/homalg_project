@@ -1,4 +1,4 @@
-Read( "Viktor.g" );
+ReadPackage( "ExamplesForHomalg", "examples/Viktor.g" );
 
 II_E := GrothendieckSpectralSequence( RightDualizingFunctor( A1 ), LeftDualizingFunctor( A1 ), V );
 

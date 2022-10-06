@@ -138,7 +138,7 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-Read( "Coupling.g" );
+ReadPackage( "ExamplesForHomalg", "examples/Coupling.g" );
 
 filt := PurityFiltration( N );
 
@@ -146,4 +146,4 @@ II_E := SpectralSequence( filt );
 
 m := IsomorphismOfFiltration( filt );
 
-Display( StringTime( homalgTime( A3 ) ) );
+#Display( StringTime( homalgTime( A3 ) ) );

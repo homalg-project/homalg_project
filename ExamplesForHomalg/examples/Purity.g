@@ -179,7 +179,7 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "ExamplesForHomalg", "examples/ReducedBasisOfModule.g" );
 
 filt := PurityFiltration( W );
 
@@ -187,4 +187,4 @@ II_E := SpectralSequence( filt );
 
 m := IsomorphismOfFiltration( filt );
 
-Display( StringTime( homalgTime( Qxyz ) ) );
+#Display( StringTime( homalgTime( Qxyz ) ) );

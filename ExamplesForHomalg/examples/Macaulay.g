@@ -27,4 +27,4 @@ filt := PurityFiltration( M );
 
 m := IsomorphismOfFiltration( filt );
 
-Display( StringTime( homalgTime( R ) ) );
+#Display( StringTime( homalgTime( R ) ) );

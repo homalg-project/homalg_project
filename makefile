@@ -3,10 +3,6 @@ SHELL=/bin/bash
 DIRS=4ti2Interface Gauss ExamplesForHomalg GaussForHomalg GradedModules HomalgToCAS GradedRingForHomalg IO_ForHomalg LocalizeRingForHomalg MatricesForHomalg RingsForHomalg SCO ToolsForHomalg Modules homalg
 ECHO=echo
 MAKE=make
-SINGULAR_PATH=$(shell command -v Singular)
-SAGE_PATH=$(shell command -v sage)
-M2_PATH=$(shell command -v M2)
-MAGMA_PATH=$(shell command -v magma)
 MAPLE_PATH=$(shell command -v maple)
 
 all: doc test
@@ -26,9 +22,7 @@ ci-test_homalg_packages: ci-test_4ti2Interface ci-test_Gauss ci-test_ExamplesFor
 ci-test_additional_packages: ci-test_alexander ci-test_CAP_project ci-test_D-Modules ci-test_Sheaves ci-test_VirtualCAS
 # ci-test_ToricVarieties: https://github.com/homalg-project/ToricVarieties_project/issues/200
 
-ci-test_test_suite: ci-test_test_suite_ExamplesForHomalg_GAP ci-test_test_suite_ExamplesForHomalg_Macaulay ci-test_test_suite_ExamplesForHomalg_MAGMA ci-test_test_suite_ExamplesForHomalg_maple ci-test_test_suite_ExamplesForHomalg_Singular ci-test_test_suite_Sheaves_MAGMA ci-test_test_suite_Sheaves_Singular
-
-ci-test: ci-test_LoadSheaves ci-test_homalg_packages ci-test_additional_packages ci-test_test_suite
+ci-test: ci-test_LoadSheaves ci-test_homalg_packages ci-test_additional_packages
 	cd .. && homalg_project/gather_performance_data.py
 
 ############################################
@@ -149,63 +143,7 @@ ci-test_VirtualCAS: ci-prepare
 	$(MAKE) -C ../VirtualCAS ci-test
 
 ############################################
-ci-test_test_suite_ExamplesForHomalg_GAP: ci-prepare
-ifneq ($(MAPLE_PATH),)
-	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_GAP; \
-	cd ../test_suite/test_suite_ExamplesForHomalg_GAP; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_GAP.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
 
-ci-test_test_suite_ExamplesForHomalg_Macaulay: ci-prepare
-ifneq ($(M2_PATH),)
-	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_Macaulay; \
-	cd ../test_suite/test_suite_ExamplesForHomalg_Macaulay; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_Macaulay.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
-
-ci-test_test_suite_ExamplesForHomalg_MAGMA: ci-prepare
-ifneq ($(MAGMA_PATH),)
-	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_MAGMA; \
-	cd ../test_suite/test_suite_ExamplesForHomalg_MAGMA; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
-
-ci-test_test_suite_ExamplesForHomalg_maple: ci-prepare
-ifneq ($(MAPLE_PATH),)
-	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_maple; \
-	cd ../test_suite/test_suite_ExamplesForHomalg_maple; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_maple.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
-
-ci-test_test_suite_ExamplesForHomalg_Singular: ci-prepare
-ifneq ($(SINGULAR_PATH),)
-ifneq ($(MAPLE_PATH),)
-	mkdir -p ../test_suite/test_suite_ExamplesForHomalg_Singular; \
-	cd ../test_suite/test_suite_ExamplesForHomalg_Singular; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../ExamplesForHomalg_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
-endif
-
-ci-test_test_suite_Sheaves_MAGMA: ci-prepare
-ifneq ($(MAGMA_PATH),)
-	mkdir -p ../test_suite/test_suite_Sheaves_MAGMA; \
-	cd ../test_suite/test_suite_Sheaves_MAGMA; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_MAGMA.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
-
-ci-test_test_suite_Sheaves_Singular: ci-prepare
-ifneq ($(SINGULAR_PATH),)
-	mkdir -p ../test_suite/test_suite_Sheaves_Singular; \
-	cd ../test_suite/test_suite_Sheaves_Singular; \
-	exec 9>&1; \
-	! /usr/bin/time --quiet --format="%U %S\n%e" --output=performance.out ../Sheaves_Singular.g 2>&1 | tee >(cat - >&9) | grep "No such file or directory\|Could not read file\|Error\|from paragraph\|Diff in" > /dev/null
-endif
 # BEGIN PACKAGE JANITOR
 doc: doc_homalg doc_4ti2Interface doc_ExamplesForHomalg doc_Gauss doc_GaussForHomalg doc_GradedModules doc_GradedRingForHomalg doc_HomalgToCAS doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_Modules doc_RingsForHomalg doc_SCO doc_ToolsForHomalg
 

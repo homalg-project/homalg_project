@@ -1,4 +1,4 @@
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "ExamplesForHomalg", "examples/ReducedBasisOfModule.g" );
 
 V := Hom( Qxyz, W );
 

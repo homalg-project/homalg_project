@@ -1,4 +1,4 @@
-Read( "ReducedBasisOfModule.g" );
+ReadPackage( "ExamplesForHomalg", "examples/ReducedBasisOfModule.g" );
 
 triangle := RHom( C, T );
 lecs := LongSequence( triangle );
@@ -13,4 +13,4 @@ ByASmallerPresentation( lehs );
 homalgResetFilters( lehs );
 Assert( 0, IsExactSequence( lehs ) );
 
-Display( StringTime( homalgTime( Qxyz ) ) );
+#Display( StringTime( homalgTime( Qxyz ) ) );

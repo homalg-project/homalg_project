@@ -1,4 +1,4 @@
-Read( "Viktor.g" );
+ReadPackage( "ExamplesForHomalg", "examples/Viktor.g" );
 
 filt := PurityFiltration( V );
 

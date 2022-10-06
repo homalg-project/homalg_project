@@ -1,4 +1,4 @@
-Read( "Coupling.g" );
+ReadPackage( "ExamplesForHomalg", "examples/Coupling.g" );
 
 II_E := GrothendieckSpectralSequence( RightDualizingFunctor( A3 ), LeftDualizingFunctor( A3 ), N );
 
