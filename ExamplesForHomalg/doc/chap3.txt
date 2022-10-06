@@ -25,8 +25,10 @@
     [4X[28X<A left module presented by 6 relations for 5 generators>[128X[104X
     [4X[25Xgap>[125X [27XY := Hom( Qxyz, W );[127X[104X
     [4X[28X<A right module on 5 generators satisfying yet unknown relations>[128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel( InfoWarning, 0 );[127X[104X
     [4X[25Xgap>[125X [27XF := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, Y, "TensorY" );[127X[104X
     [4X[28X<The functor TensorY for f.p. modules and their maps over computable rings>[128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel( InfoWarning, 1 );[127X[104X
     [4X[25Xgap>[125X [27XG := LeftDualizingFunctor( Qxyz );;[127X[104X
     [4X[25Xgap>[125X [27XII_E := GrothendieckSpectralSequence( F, G, W );[127X[104X
     [4X[28X<A stable homological spectral sequence with sheets at levels [128X[104X
