@@ -5104,9 +5104,9 @@ InstallMethod( RandomMatrix,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.RandomMat) then
+    if IsBound(RP!.RandomMat) and IsPackageMarkedForLoading( "utils", ">= 0.54" ) then
         
-        params := RandomCombination( [ 0 .. 10 ], Random( [ 1 .. 11 ] ) );
+        params := ValueGlobal( "RandomCombination" )( [ 0 .. 10 ], Random( [ 1 .. 11 ] ) );
         
         return HomalgMatrix( CallFuncList( RP!.RandomMat, Concatenation( [ R, r, c ], params ) ), r, c, R );
         
