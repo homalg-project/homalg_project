@@ -4519,6 +4519,11 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
 end );
 
 ##
+## L = [ min_deg, max_deg, zt, coeff ]
+## min_deg and max_deg determine the minimal and maximal degree of the element
+## zt determines the percentage of the zero terms in the element
+## The non-trivial coefficients belong to the interval [ 1 .. coeffs ]
+##
 InstallMethod( Random,
         "for a homalg ring and a list",
         [ IsHomalgRing, IsList ],
@@ -4549,8 +4554,6 @@ InstallMethod( Random,
     
 end );
 
-if IsPackageMarkedForLoading( "utils", ">= 0.54" ) then
-
 ##
 InstallMethod( Random,
         "for a homalg ring",
@@ -4558,11 +4561,9 @@ InstallMethod( Random,
         
   function( R )
     
-    return Random( R, RandomCombination( [ 0 .. 10 ], Random( [ 1 .. 11 ] ) ) );
+    return Random( R, [ 0, Random( [ 0, 1, 1, 1, 2, 2, 2, 3 ] ), 80, 50 ] );
     
 end );
-
-fi;
 
 ##
 InstallMethod( Random,
@@ -5088,6 +5089,30 @@ InstallMethod( RandomMatrix,
 end );
 
 ##
+## params = [ min_deg,max_deg,ze,zt,coeffs ]
+##
+## min_deg and max_deg determine the minimal and maximal degree of an entry in the matrix
+## ze determines the percentage of the zero entries in the matrix (The default value is 50)
+## zt determines the percentage of the zero terms in each entry in the matrix (The default value is 80)
+## The non-trivial coefficients of each entry belong to the interval [ 1 .. coeffs ]  (The default value is 10)
+##
+InstallOtherMethod( RandomMatrix,
+        "for two integers, a homalg ring and a list",
+        [ IsInt, IsInt, IsHomalgRing, IsList ],
+  function( r, c, R, params )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.RandomMat) then
+        return HomalgMatrix( CallFuncList( RP!.RandomMat, Concatenation( [ R, r, c ], params ) ), r, c, R );
+    else
+        TryNextMethod();
+    fi;
+    
+end );
+
+##
 InstallMethod( RandomMatrix,
         "for two integers and a homalg ring",
         [ IsInt, IsInt, IsHomalgRing ],
@@ -5104,11 +5129,11 @@ InstallMethod( RandomMatrix,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.RandomMat) and IsPackageMarkedForLoading( "utils", ">= 0.54" ) then
+    if IsBound(RP!.RandomMat) then
         
-        params := ValueGlobal( "RandomCombination" )( [ 0 .. 10 ], Random( [ 1 .. 11 ] ) );
+        params := [ 0, Random( [ 1, 1, 1, 2, 2, 2, 3 ] ), 50, 80, 50 ];
         
-        return HomalgMatrix( CallFuncList( RP!.RandomMat, Concatenation( [ R, r, c ], params ) ), r, c, R );
+        return RandomMatrix( r, c, R, params );
         
     fi;
     
