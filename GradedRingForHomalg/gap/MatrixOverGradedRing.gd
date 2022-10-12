@@ -133,6 +133,9 @@ DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModules",
 DeclareOperation( "RandomMatrixBetweenGradedFreeRightModules",
         [ IsList, IsList, IsHomalgGradedRing ] );
 
+DeclareOperation( "RandomMatrix",
+        [ IsList, IsList, IsHomalgGradedRing ] );
+
 DeclareOperation( "NonTrivialDegreePerRow",
         [ IsMatrixOverGradedRing, IsList ] );
 
