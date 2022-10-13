@@ -539,6 +539,19 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
 end );
 
 ##
+InstallMethod( RandomMatrix,
+        [ IsList, IsList, IsHomalgGradedRing ],
+        
+  function( degreesS, degreesT, S )
+    local matrix;
+    
+    matrix := List( degreesS, s -> List( degreesT, t -> RandomHomogeneousElement( S, t - s ) ) );
+    
+    return HomalgMatrix( matrix, Length( degreesS ), Length( degreesT ), S );
+    
+end );
+
+##
 InstallMethod( DegreesOfEntries,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgGradedRing ],
