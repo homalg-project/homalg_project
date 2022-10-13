@@ -1,7 +1,7 @@
 name: Gauss
-version: "2022.09-01"
+version: "2022.10-01"
 license: "GPL-2.0-or-later"
-date: 2022-09-06
+date: 2022-10-13
 description: |
     Extended Gauss functionality for GAP
 
@@ -28,11 +28,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/Gauss/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2022.09-01/Gauss-2022.09-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2022.10-01/Gauss-2022.10-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2022.09-01/Gauss-2022.09-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2022.10-01/Gauss-2022.10-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2022.09-01/Gauss-2022.09-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2022.10-01/Gauss-2022.10-01.pdf
 
 abstract: |
     The <span class="pkgname">Gauss</span> package provideds extended Gauss functionality for <span class="pkgname">GAP</span>
@@ -46,7 +46,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>GBG22</span>]   <b class='BibAuthor'>Görtzen, S., Barakat, M. and Gutsche, S.</b>,
      <i class='BibTitle'>Gauss, Extended Gauss functionality for GAP,
-             Version 2022.09-01</i>
+             Version 2022.10-01</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/Gauss">https://homalg-project.github.io/pkg/Gauss</a></span>.
@@ -54,11 +54,11 @@ citeas: |
     
 
 bibtex: |
-    @misc{ Gauss2022.09-01,
+    @misc{ Gauss2022.10-01,
       author =           {G{\"o}rtzen, S. and Barakat, M. and Gutsche, S.},
       title =            {{Gauss},   Extended   Gauss   functionality  for  GAP,
-                          {V}ersion 2022.09-01},
-      month =            {Sep},
+                          {V}ersion 2022.10-01},
+      month =            {Oct},
       year =             {2022},
       note =             {GAP package},
       howpublished =     {\href     {https://homalg-project.github.io/pkg/Gauss}
