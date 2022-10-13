@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
-Version := "2022.10-01",
-Date := "05/10/2022",
+Version := "2022.10-02",
+Date := "13/10/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
