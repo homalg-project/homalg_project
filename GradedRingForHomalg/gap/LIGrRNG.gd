@@ -37,3 +37,6 @@ DeclareAttribute( "MaximalIdealAsRowMatrix",
 ####################################
 
 DeclareGlobalFunction( "HelperToInstallMethodsForGradedRingElementsAttributes" );
+
+
+DeclareOperation( "RandomHomogeneousElement", [ IsHomalgGradedRing, IsHomalgModuleElement, IsInt ] );

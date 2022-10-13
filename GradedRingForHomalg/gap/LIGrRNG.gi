@@ -549,3 +549,38 @@ InstallMethod( MaximalIdealAsRowMatrix,
     return HomalgMatrix( var, 1, Length( var ), S );
     
 end );
+
+##
+InstallMethod( RandomHomogeneousElement,
+        [ IsHomalgGradedRing, IsHomalgModuleElement, IsInt ],
+        
+  function( S, degree, n )
+    local monomials;
+    
+    monomials := MonomialsWithGivenDegree( S, degree );
+    
+    if IsEmpty( monomials ) then
+      return Zero( S );
+    else
+      return Sum( [ 0 .. n ], i -> Random( [ 1, -1 ] ) * i * Random( monomials ) );
+    fi;
+    
+end );
+
+##
+InstallOtherMethod( RandomHomogeneousElement,
+        [ IsHomalgGradedRing, IsList, IsInt ],
+        
+  { S, degree, n } -> RandomHomogeneousElement( S, HomalgModuleElement( degree, DegreeGroup( S ) ), n ) );
+
+
+##
+InstallOtherMethod( RandomHomogeneousElement,
+        [ IsHomalgGradedRing, IsInt, IsInt ],
+        
+  { S, degree, n } -> RandomHomogeneousElement( S, HomalgModuleElement( [ degree ], DegreeGroup( S ) ), n ) );
+  
+##
+InstallOtherMethod( RandomHomogeneousElement,
+        [ IsHomalgGradedRing, IsObject ],
+  { S, degree } -> RandomHomogeneousElement( S, degree, Random( [ 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3 ] ) ) );
