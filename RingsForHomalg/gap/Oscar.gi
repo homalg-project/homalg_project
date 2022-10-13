@@ -632,7 +632,7 @@ end
 
 if true then ## AbstactAlgebra matrices
 
-OscarMacros.matrices := """
+OscarMacros.("$matrices") := """
 
 TypeOfMatrixForHomalg = AbstractAlgebra.Generic.MatSpaceElem
 
@@ -744,7 +744,7 @@ end
 
 else ## Singular matrices
 
-OscarMacros.matrices := """
+OscarMacros.("$matrices") := """
 
 TypeOfMatrixForHomalg = Singular.smatrix
 
