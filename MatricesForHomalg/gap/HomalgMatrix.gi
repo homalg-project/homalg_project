@@ -1430,6 +1430,10 @@ InstallMethod( ConvertRowToMatrix,
         Error( "expecting a single row matrix as a first argument\n" );
     fi;
     
+    if NrColumns( M ) <> r * c then
+        Error( "the row has not the expected length\n" );
+    fi;
+    
     R := HomalgRing( M );
     
     if r = 1 then
@@ -1467,6 +1471,10 @@ InstallMethod( ConvertColumnToMatrix,
     
     if NrColumns( M ) <> 1 then
         Error( "expecting a single column matrix as a first argument\n" );
+    fi;
+    
+    if NrRows( M ) <> r * c then
+        Error( "the column has not the expected height\n" );
     fi;
     
     R := HomalgRing( M );

@@ -118,6 +118,10 @@
 <#Include Label="CertainColumns">
 <#Include Label="UnionOfRows">
 <#Include Label="UnionOfColumns">
+<#Include Label="ConvertRowToMatrix">
+<#Include Label="ConvertColumnToMatrix">
+<#Include Label="ConvertMatrixToRow">
+<#Include Label="ConvertMatrixToColumn">
 <#Include Label="DiagMat">
 <#Include Label="KroneckerMat">
 <#Include Label="DualKroneckerMat">
