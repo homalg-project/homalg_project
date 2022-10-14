@@ -647,7 +647,7 @@
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YA  left  inverse  [22XC[122X of the matrix [3XM[103X. If no left inverse exists then [10Xfalse[110X is
-  returned. (--> [2XRightDivide[102X ([14X5.5-47[114X))[133X
+  returned. (--> [2XRightDivide[102X ([14X5.5-51[114X))[133X
   
   [33X[0;0Y(for the installed standard method see [2XLeftInverse[102X ([14X5.5-2[114X))[133X
   
@@ -657,7 +657,7 @@
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YA  right inverse [22XC[122X of the matrix [3XM[103X. If no right inverse exists then [10Xfalse[110X is
-  returned. (--> [2XLeftDivide[102X ([14X5.5-48[114X))[133X
+  returned. (--> [2XLeftDivide[102X ([14X5.5-52[114X))[133X
   
   [33X[0;0Y(for the installed standard method see [2XRightInverse[102X ([14X5.5-3[114X))[133X
   
@@ -765,7 +765,7 @@
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
   
   [33X[0;0YThe  left  inverse  of  the matrix [3XRI[103X. The lazy version of this operation is
-  [2XLeftInverseLazy[102X ([14X5.5-4[114X). (--> [2XRightDivide[102X ([14X5.5-47[114X))[133X
+  [2XLeftInverseLazy[102X ([14X5.5-4[114X). (--> [2XRightDivide[102X ([14X5.5-51[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( LeftInverse,[104X
@@ -816,7 +816,7 @@
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
   
   [33X[0;0YThe  right  inverse  of the matrix [3XLI[103X. The lazy version of this operation is
-  [2XRightInverseLazy[102X ([14X5.5-5[114X). (--> [2XLeftDivide[102X ([14X5.5-48[114X))[133X
+  [2XRightInverseLazy[102X ([14X5.5-5[114X). (--> [2XLeftDivide[102X ([14X5.5-52[114X))[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( RightInverse,[104X
@@ -942,7 +942,35 @@
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-13[114X))[133X
   
-  [1X5.5-12 DiagMat[101X
+  [1X5.5-12 ConvertRowToMatrix[101X
+  
+  [33X[1;0Y[29X[2XConvertRowToMatrix[102X( [3XM[103X, [3Xr[103X, [3Xc[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YFold the row [3XM[103X to an [3Xr[103Xx[3Xc[103X-matrix.[133X
+  
+  [1X5.5-13 ConvertColumnToMatrix[101X
+  
+  [33X[1;0Y[29X[2XConvertColumnToMatrix[102X( [3XM[103X, [3Xr[103X, [3Xc[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YFold the column [3XM[103X to an [3Xr[103Xx[3Xc[103X-matrix.[133X
+  
+  [1X5.5-14 ConvertMatrixToRow[101X
+  
+  [33X[1;0Y[29X[2XConvertMatrixToRow[102X( [3XM[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YUnfold the matrix [3XM[103X row-wise into a row.[133X
+  
+  [1X5.5-15 ConvertMatrixToColumn[101X
+  
+  [33X[1;0Y[29X[2XConvertMatrixToColumn[102X( [3XM[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YUnfold the matrix [3XM[103X column-wise into a column.[133X
+  
+  [1X5.5-16 DiagMat[101X
   
   [33X[1;0Y[29X[2XDiagMat[102X( [[3XR[103X, ][3Xlist[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -952,7 +980,7 @@
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-14[114X))[133X
   
-  [1X5.5-13 KroneckerMat[101X
+  [1X5.5-17 KroneckerMat[101X
   
   [33X[1;0Y[29X[2XKroneckerMat[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -961,7 +989,7 @@
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-15[114X))[133X
   
-  [1X5.5-14 DualKroneckerMat[101X
+  [1X5.5-18 DualKroneckerMat[101X
   
   [33X[1;0Y[29X[2XDualKroneckerMat[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -970,7 +998,7 @@
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-16[114X))[133X
   
-  [1X5.5-15 \*[101X
+  [1X5.5-19 \*[101X
   
   [33X[1;0Y[29X[2X\*[102X( [3Xa[103X, [3XA[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -979,7 +1007,7 @@
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-17[114X))[133X
   
-  [1X5.5-16 \+[101X
+  [1X5.5-20 \+[101X
   
   [33X[1;0Y[29X[2X\+[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -988,7 +1016,7 @@
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-18[114X))[133X
   
-  [1X5.5-17 \-[101X
+  [1X5.5-21 \-[101X
   
   [33X[1;0Y[29X[2X\-[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -997,7 +1025,7 @@
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-19[114X))[133X
   
-  [1X5.5-18 \*[101X
+  [1X5.5-22 \*[101X
   
   [33X[1;0Y[29X[2X\*[102X( [3XA[103X, [3XB[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1006,7 +1034,7 @@
   
   [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-20[114X))[133X
   
-  [1X5.5-19 \=[101X
+  [1X5.5-23 \=[101X
   
   [33X[1;0Y[29X[2X\=[102X( [3XA[103X, [3XB[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
@@ -1041,7 +1069,7 @@
     [4X[28Xtrue[128X[104X
   [4X[32X[104X
   
-  [1X5.5-20 GetColumnIndependentUnitPositions[101X
+  [1X5.5-24 GetColumnIndependentUnitPositions[101X
   
   [33X[1;0Y[29X[2XGetColumnIndependentUnitPositions[102X( [3XA[103X, [3Xposlist[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
@@ -1056,7 +1084,7 @@
   [33X[0;0Y(for  the  installed  standard  method see [2XGetColumnIndependentUnitPositions[102X
   ([14XB.2-6[114X))[133X
   
-  [1X5.5-21 GetRowIndependentUnitPositions[101X
+  [1X5.5-25 GetRowIndependentUnitPositions[101X
   
   [33X[1;0Y[29X[2XGetRowIndependentUnitPositions[102X( [3XA[103X, [3Xposlist[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
@@ -1072,7 +1100,7 @@
   [33X[0;0Y(for   the  installed  standard  method  see  [2XGetRowIndependentUnitPositions[102X
   ([14XB.2-7[114X))[133X
   
-  [1X5.5-22 GetUnitPosition[101X
+  [1X5.5-26 GetUnitPosition[101X
   
   [33X[1;0Y[29X[2XGetUnitPosition[102X( [3XA[103X, [3Xposlist[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
@@ -1084,7 +1112,7 @@
   
   [33X[0;0Y(for the installed standard method see [2XGetUnitPosition[102X ([14XB.2-8[114X))[133X
   
-  [1X5.5-23 Eliminate[101X
+  [1X5.5-27 Eliminate[101X
   
   [33X[1;0Y[29X[2XEliminate[102X( [3Xrel[103X, [3Xindets[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1095,7 +1123,7 @@
   generated  by  all  indeterminates  except  those  in [3Xindets[103X. by the list of
   indeterminates [3Xindets[103X.[133X
   
-  [1X5.5-24 BasisOfRowModule[101X
+  [1X5.5-28 BasisOfRowModule[101X
   
   [33X[1;0Y[29X[2XBasisOfRowModule[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1110,7 +1138,7 @@
   and  computing  [22XB[122X  is  typically  the  first step of such an algorithm. (-->
   Appendix [14XA[114X)[133X
   
-  [1X5.5-25 BasisOfColumnModule[101X
+  [1X5.5-29 BasisOfColumnModule[101X
   
   [33X[1;0Y[29X[2XBasisOfColumnModule[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1125,7 +1153,7 @@
   computing  [22XB[122X is typically the first step of such an algorithm. (--> Appendix
   [14XA[114X)[133X
   
-  [1X5.5-26 DecideZeroRows[101X
+  [1X5.5-30 DecideZeroRows[101X
   
   [33X[1;0Y[29X[2XDecideZeroRows[102X( [3XA[103X, [3XB[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1139,7 +1167,7 @@
   if  and  only  if  the row [22X[3XA[103X^i[122X is an element of [22XS[122X. So [10XDecideZeroRows[110X decides
   which rows of [3XA[103X are zero modulo the rows of [3XB[103X. (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-27 DecideZeroColumns[101X
+  [1X5.5-31 DecideZeroColumns[101X
   
   [33X[1;0Y[29X[2XDecideZeroColumns[102X( [3XA[103X, [3XB[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1154,7 +1182,7 @@
   decides  which  columns of [3XA[103X are zero modulo the columns of [3XB[103X. (--> Appendix
   [14XA[114X)[133X
   
-  [1X5.5-28 SyzygiesGeneratorsOfRows[101X
+  [1X5.5-32 SyzygiesGeneratorsOfRows[101X
   
   [33X[1;0Y[29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1164,7 +1192,7 @@
   the  left  kernel  of [3XM[103X, i.e. the [22XR[122X-submodule of the free left module [22XR^(1 ×
   NrRows( [3XM[103X ))[122X consisting of all rows [22XX[122X satisfying [22XX[3XM[103X=0[122X. (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-29 SyzygiesGeneratorsOfColumns[101X
+  [1X5.5-33 SyzygiesGeneratorsOfColumns[101X
   
   [33X[1;0Y[29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1175,7 +1203,7 @@
   module  [22XR^(NrColumns(  [3XM[103X ) × 1)[122X consisting of all columns [22XX[122X satisfying [22X[3XM[103XX=0[122X.
   (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-30 SyzygiesGeneratorsOfRows[101X
+  [1X5.5-34 SyzygiesGeneratorsOfRows[101X
   
   [33X[1;0Y[29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X, [3XM2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1186,7 +1214,7 @@
   left module [22XR^(1 × NrRows( [3XM[103X ))[122X consisting of all rows [22XX[122X satisfying [22XX[3XM[103X+Y[3XM2[103X=0[122X
   for some row [22XY ∈ R^(1 × NrRows( [3XM2[103X ))[122X. (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-31 SyzygiesGeneratorsOfColumns[101X
+  [1X5.5-35 SyzygiesGeneratorsOfColumns[101X
   
   [33X[1;0Y[29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1198,7 +1226,7 @@
   satisfying  [22X[3XM[103XX+[3XM2[103XY=0[122X  for  some  column  [22XY  ∈  R^(NrColumns( [3XM2[103X ) × 1)[122X. (-->
   Appendix [14XA[114X)[133X
   
-  [1X5.5-32 ReducedBasisOfRowModule[101X
+  [1X5.5-36 ReducedBasisOfRowModule[101X
   
   [33X[1;0Y[29X[2XReducedBasisOfRowModule[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1206,10 +1234,10 @@
   [33X[0;0YLike  [10XBasisOfRowModule[110X(  [3XM[103X  ) but where the matrix [10XSyzygiesGeneratorsOfRows[110X(
   [10XReducedBasisOfRowModule[110X(  [3XM[103X  )  )  contains  no  units.  This  can easily be
   achieved    starting    from    [22XB:=[122X[10XBasisOfRowModule[110X(    [3XM[103X   )   (and   using
-  [2XGetColumnIndependentUnitPositions[102X  ([14X5.5-20[114X)  applied  to  the  matrix of row
+  [2XGetColumnIndependentUnitPositions[102X  ([14X5.5-24[114X)  applied  to  the  matrix of row
   syzygies of [22XB[122X, etc). (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-33 ReducedBasisOfColumnModule[101X
+  [1X5.5-37 ReducedBasisOfColumnModule[101X
   
   [33X[1;0Y[29X[2XReducedBasisOfColumnModule[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1217,10 +1245,10 @@
   [33X[0;0YLike     [10XBasisOfColumnModule[110X(     [3XM[103X     )     but     where    the    matrix
   [10XSyzygiesGeneratorsOfColumns[110X(  [10XReducedBasisOfColumnModule[110X(  [3XM[103X ) ) contains no
   units. This can easily be achieved starting from [22XB:=[122X[10XBasisOfColumnModule[110X( [3XM[103X )
-  (and  using [2XGetRowIndependentUnitPositions[102X ([14X5.5-21[114X) applied to the matrix of
+  (and  using [2XGetRowIndependentUnitPositions[102X ([14X5.5-25[114X) applied to the matrix of
   column syzygies of [22XB[122X, etc.). (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-34 ReducedSyzygiesGeneratorsOfRows[101X
+  [1X5.5-38 ReducedSyzygiesGeneratorsOfRows[101X
   
   [33X[1;0Y[29X[2XReducedSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1229,10 +1257,10 @@
   [10XSyzygiesGeneratorsOfRows[110X( [10XReducedSyzygiesGeneratorsOfRows[110X( [3XM[103X ) ) contains no
   units.     This     can     easily     be     achieved     starting     from
   [22XC:=[122X[10XSyzygiesGeneratorsOfRows[110X(          [3XM[103X         )         (and         using
-  [2XGetColumnIndependentUnitPositions[102X  ([14X5.5-20[114X)  applied  to  the  matrix of row
+  [2XGetColumnIndependentUnitPositions[102X  ([14X5.5-24[114X)  applied  to  the  matrix of row
   syzygies of [22XC[122X, etc.). (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-35 ReducedSyzygiesGeneratorsOfColumns[101X
+  [1X5.5-39 ReducedSyzygiesGeneratorsOfColumns[101X
   
   [33X[1;0Y[29X[2XReducedSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1241,10 +1269,10 @@
   [10XSyzygiesGeneratorsOfColumns[110X(   [10XReducedSyzygiesGeneratorsOfColumns[110X(   [3XM[103X  )  )
   contains   no   units.   This   can   easily   be   achieved  starting  from
   [22XC:=[122X[10XSyzygiesGeneratorsOfColumns[110X(         [3XM[103X         )        (and        using
-  [2XGetRowIndependentUnitPositions[102X  ([14X5.5-21[114X)  applied  to  the  matrix of column
+  [2XGetRowIndependentUnitPositions[102X  ([14X5.5-25[114X)  applied  to  the  matrix of column
   syzygies of [22XC[122X, etc.). (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-36 BasisOfRowsCoeff[101X
+  [1X5.5-40 BasisOfRowsCoeff[101X
   
   [33X[1;0Y[29X[2XBasisOfRowsCoeff[102X( [3XM[103X, [3XT[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1252,7 +1280,7 @@
   [33X[0;0YReturns  [22XB:=[122X[10XBasisOfRowModule[110X(  [3XM[103X  )  and  assigns  the  [13Xvoid[113X  matrix  [3XT[103X (-->
   [2XHomalgVoidMatrix[102X ([14X5.2-5[114X)) such that [22XB = [3XT[103X [3XM[103X[122X. (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-37 BasisOfColumnsCoeff[101X
+  [1X5.5-41 BasisOfColumnsCoeff[101X
   
   [33X[1;0Y[29X[2XBasisOfColumnsCoeff[102X( [3XM[103X, [3XT[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1260,7 +1288,7 @@
   [33X[0;0YReturns  [22XB:=[122X[10XBasisOfRowModule[110X(  [3XM[103X  )  and  assigns  the  [13Xvoid[113X  matrix  [3XT[103X (-->
   [2XHomalgVoidMatrix[102X ([14X5.2-5[114X)) such that [22XB = [3XM[103X [3XT[103X[122X. (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-38 DecideZeroRowsEffectively[101X
+  [1X5.5-42 DecideZeroRowsEffectively[101X
   
   [33X[1;0Y[29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1268,7 +1296,7 @@
   [33X[0;0YReturns  [22XM:=[122X[10XDecideZeroRows[110X(  [3XA[103X,  [3XB[103X  )  and  assigns  the  [13Xvoid[113X matrix [3XT[103X (-->
   [2XHomalgVoidMatrix[102X ([14X5.2-5[114X)) such that [22XM = [3XA[103X + [3XT[103X[3XB[103X[122X. (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-39 DecideZeroColumnsEffectively[101X
+  [1X5.5-43 DecideZeroColumnsEffectively[101X
   
   [33X[1;0Y[29X[2XDecideZeroColumnsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1276,25 +1304,25 @@
   [33X[0;0YReturns  [22XM:=[122X[10XDecideZeroColumns[110X(  [3XA[103X,  [3XB[103X  )  and assigns the [13Xvoid[113X matrix [3XT[103X (-->
   [2XHomalgVoidMatrix[102X ([14X5.2-5[114X)) such that [22XM = [3XA[103X + [3XB[103X[3XT[103X[122X. (--> Appendix [14XA[114X)[133X
   
-  [1X5.5-40 BasisOfRows[101X
+  [1X5.5-44 BasisOfRows[101X
   
   [33X[1;0Y[29X[2XBasisOfRows[102X( [3XM[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XBasisOfRows[102X( [3XM[103X, [3XT[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
-  [33X[0;0YWith  one  argument  it  is a synonym of [2XBasisOfRowModule[102X ([14X5.5-24[114X). with two
-  arguments it is a synonym of [2XBasisOfRowsCoeff[102X ([14X5.5-36[114X).[133X
+  [33X[0;0YWith  one  argument  it  is a synonym of [2XBasisOfRowModule[102X ([14X5.5-28[114X). with two
+  arguments it is a synonym of [2XBasisOfRowsCoeff[102X ([14X5.5-40[114X).[133X
   
-  [1X5.5-41 BasisOfColumns[101X
+  [1X5.5-45 BasisOfColumns[101X
   
   [33X[1;0Y[29X[2XBasisOfColumns[102X( [3XM[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XBasisOfColumns[102X( [3XM[103X, [3XT[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
-  [33X[0;0YWith  one argument it is a synonym of [2XBasisOfColumnModule[102X ([14X5.5-25[114X). with two
-  arguments it is a synonym of [2XBasisOfColumnsCoeff[102X ([14X5.5-37[114X).[133X
+  [33X[0;0YWith  one argument it is a synonym of [2XBasisOfColumnModule[102X ([14X5.5-29[114X). with two
+  arguments it is a synonym of [2XBasisOfColumnsCoeff[102X ([14X5.5-41[114X).[133X
   
-  [1X5.5-42 DecideZero[101X
+  [1X5.5-46 DecideZero[101X
   
   [33X[1;0Y[29X[2XDecideZero[102X( [3Xmat[103X, [3Xrel[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -1311,47 +1339,47 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1X5.5-43 SyzygiesOfRows[101X
+  [1X5.5-47 SyzygiesOfRows[101X
   
   [33X[1;0Y[29X[2XSyzygiesOfRows[102X( [3XM[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XSyzygiesOfRows[102X( [3XM[103X, [3XM2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
-  [33X[0;0YWith one argument it is a synonym of [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-28[114X). with
-  two arguments it is a synonym of [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-30[114X).[133X
+  [33X[0;0YWith one argument it is a synonym of [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-32[114X). with
+  two arguments it is a synonym of [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-34[114X).[133X
   
-  [1X5.5-44 SyzygiesOfColumns[101X
+  [1X5.5-48 SyzygiesOfColumns[101X
   
   [33X[1;0Y[29X[2XSyzygiesOfColumns[102X( [3XM[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XSyzygiesOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
-  [33X[0;0YWith  one  argument it is a synonym of [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-29[114X).
-  with two arguments it is a synonym of [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-31[114X).[133X
+  [33X[0;0YWith  one  argument it is a synonym of [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-33[114X).
+  with two arguments it is a synonym of [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-35[114X).[133X
   
-  [1X5.5-45 ReducedSyzygiesOfRows[101X
+  [1X5.5-49 ReducedSyzygiesOfRows[101X
   
   [33X[1;0Y[29X[2XReducedSyzygiesOfRows[102X( [3XM[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XReducedSyzygiesOfRows[102X( [3XM[103X, [3XM2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YWith  one  argument  it  is  a  synonym  of  [2XReducedSyzygiesGeneratorsOfRows[102X
-  ([14X5.5-34[114X).    With    two   arguments   it   calls   [10XReducedBasisOfRowModule[110X(
-  [10XSyzygiesGeneratorsOfRows[110X(  [3XM[103X,  [3XM2[103X ) ). (--> [2XReducedBasisOfRowModule[102X ([14X5.5-32[114X)
-  and [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-30[114X))[133X
+  ([14X5.5-38[114X).    With    two   arguments   it   calls   [10XReducedBasisOfRowModule[110X(
+  [10XSyzygiesGeneratorsOfRows[110X(  [3XM[103X,  [3XM2[103X ) ). (--> [2XReducedBasisOfRowModule[102X ([14X5.5-36[114X)
+  and [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-34[114X))[133X
   
-  [1X5.5-46 ReducedSyzygiesOfColumns[101X
+  [1X5.5-50 ReducedSyzygiesOfColumns[101X
   
   [33X[1;0Y[29X[2XReducedSyzygiesOfColumns[102X( [3XM[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XReducedSyzygiesOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YWith  one  argument  it  is  a synonym of [2XReducedSyzygiesGeneratorsOfColumns[102X
-  ([14X5.5-35[114X).   With   two   arguments   it   calls  [10XReducedBasisOfColumnModule[110X(
+  ([14X5.5-39[114X).   With   two   arguments   it   calls  [10XReducedBasisOfColumnModule[110X(
   [10XSyzygiesGeneratorsOfColumns[110X(  [3XM[103X,  [3XM2[103X  )  ).  (--> [2XReducedBasisOfColumnModule[102X
-  ([14X5.5-33[114X) and [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-31[114X))[133X
+  ([14X5.5-37[114X) and [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-35[114X))[133X
   
-  [1X5.5-47 RightDivide[101X
+  [1X5.5-51 RightDivide[101X
   
   [33X[1;0Y[29X[2XRightDivide[102X( [3XB[103X, [3XA[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
@@ -1361,9 +1389,9 @@
   the  inhomogeneous (one sided) linear system of equations [22XX[3XA[103X=[3XB[103X[122X in case it is
   solvable. Otherwise [10Xfail[110X is returned. The name [10XRightDivide[110X suggests [21X[22XX=[3XB[103X[3XA[103X^-1[122X[121X.
   This  generalizes  [2XLeftInverse[102X  ([14X5.5-2[114X)  for  which  [3XB[103X  becomes the identity
-  matrix. (--> [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-28[114X))[133X
+  matrix. (--> [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-32[114X))[133X
   
-  [1X5.5-48 LeftDivide[101X
+  [1X5.5-52 LeftDivide[101X
   
   [33X[1;0Y[29X[2XLeftDivide[102X( [3XA[103X, [3XB[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
@@ -1373,9 +1401,9 @@
   inhomogeneous  (one  sided)  linear  system  of equations [22X[3XA[103XX=[3XB[103X[122X in case it is
   solvable.  Otherwise [10Xfail[110X is returned. The name [10XLeftDivide[110X suggests [21X[22XX=[3XA[103X^-1[3XB[103X[122X[121X.
   This  generalizes  [2XRightInverse[102X  ([14X5.5-3[114X)  for  which  [3XB[103X becomes the identity
-  matrix. (--> [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-29[114X))[133X
+  matrix. (--> [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-33[114X))[133X
   
-  [1X5.5-49 RightDivide[101X
+  [1X5.5-53 RightDivide[101X
   
   [33X[1;0Y[29X[2XRightDivide[102X( [3XB[103X, [3XA[103X, [3XL[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
@@ -1426,7 +1454,7 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1X5.5-50 LeftDivide[101X
+  [1X5.5-54 LeftDivide[101X
   
   [33X[1;0Y[29X[2XLeftDivide[102X( [3XA[103X, [3XB[103X, [3XL[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
@@ -1477,23 +1505,23 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1X5.5-51 GenerateSameRowModule[101X
+  [1X5.5-55 GenerateSameRowModule[101X
   
   [33X[1;0Y[29X[2XGenerateSameRowModule[102X( [3XM[103X, [3XN[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if  the  row span of [3XM[103X and of [3XN[103X are identical or not (--> [2XRightDivide[102X
-  ([14X5.5-47[114X)).[133X
+  ([14X5.5-51[114X)).[133X
   
-  [1X5.5-52 GenerateSameColumnModule[101X
+  [1X5.5-56 GenerateSameColumnModule[101X
   
   [33X[1;0Y[29X[2XGenerateSameColumnModule[102X( [3XM[103X, [3XN[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck  if the column span of [3XM[103X and of [3XN[103X are identical or not (--> [2XLeftDivide[102X
-  ([14X5.5-48[114X)).[133X
+  ([14X5.5-52[114X)).[133X
   
-  [1X5.5-53 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[101X
+  [1X5.5-57 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[101X
   
   [33X[1;0Y[29X[2XSimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list of 5 [5Xhomalg[105X matrices[133X
@@ -1503,7 +1531,7 @@
   inverses  [3XUI[103X,  [3XVI[103X,  respectively.  The idea is that the matrix [3XS[103X should look
   "simpler" than [3XM[103X.[133X
   
-  [1X5.5-54 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[101X
+  [1X5.5-58 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[101X
   
   [33X[1;0Y[29X[2XSimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list of 3 [5Xhomalg[105X matrices[133X
@@ -1512,7 +1540,7 @@
   [3XS[103X,  [3XT[103X, [3XTI[103X such that [3X T M = S[103X. Moreover, [3XT[103X is invertible with inverse [3XTI[103X. The
   idea is that the matrix [3XS[103X should look "simpler" than [3XM[103X.[133X
   
-  [1X5.5-55 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[101X
+  [1X5.5-59 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[101X
   
   [33X[1;0Y[29X[2XSimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list of 3 [5Xhomalg[105X matrices[133X
@@ -1521,7 +1549,7 @@
   [3XS[103X,  [3XT[103X, [3XTI[103X such that [3X M T = S[103X. Moreover, [3XT[103X is invertible with inverse [3XTI[103X. The
   idea is that the matrix [3XS[103X should look "simpler" than [3XM[103X.[133X
   
-  [1X5.5-56 CoefficientsWithGivenMonomials[101X
+  [1X5.5-60 CoefficientsWithGivenMonomials[101X
   
   [33X[1;0Y[29X[2XCoefficientsWithGivenMonomials[102X( [3XM[103X, [3Xmonomials[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X

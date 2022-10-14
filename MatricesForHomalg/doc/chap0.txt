@@ -6,10 +6,10 @@
                        [1X Matrices for the homalg project [101X
   
   
-                                   2022.10-04
+                                   2022.10-05
   
   
-                                10 October 2022
+                                14 October 2022
   
   
                                 Mohamed Barakat
@@ -275,51 +275,55 @@
       5.5-9 CertainColumns
       5.5-10 UnionOfRows
       5.5-11 UnionOfColumns
-      5.5-12 DiagMat
-      5.5-13 KroneckerMat
-      5.5-14 DualKroneckerMat
-      5.5-15 \*
-      5.5-16 \+
-      5.5-17 \-
-      5.5-18 \*
-      5.5-19 \=
-      5.5-20 GetColumnIndependentUnitPositions
-      5.5-21 GetRowIndependentUnitPositions
-      5.5-22 GetUnitPosition
-      5.5-23 Eliminate
-      5.5-24 BasisOfRowModule
-      5.5-25 BasisOfColumnModule
-      5.5-26 DecideZeroRows
-      5.5-27 DecideZeroColumns
-      5.5-28 SyzygiesGeneratorsOfRows
-      5.5-29 SyzygiesGeneratorsOfColumns
-      5.5-30 SyzygiesGeneratorsOfRows
-      5.5-31 SyzygiesGeneratorsOfColumns
-      5.5-32 ReducedBasisOfRowModule
-      5.5-33 ReducedBasisOfColumnModule
-      5.5-34 ReducedSyzygiesGeneratorsOfRows
-      5.5-35 ReducedSyzygiesGeneratorsOfColumns
-      5.5-36 BasisOfRowsCoeff
-      5.5-37 BasisOfColumnsCoeff
-      5.5-38 DecideZeroRowsEffectively
-      5.5-39 DecideZeroColumnsEffectively
-      5.5-40 BasisOfRows
-      5.5-41 BasisOfColumns
-      5.5-42 DecideZero
-      5.5-43 SyzygiesOfRows
-      5.5-44 SyzygiesOfColumns
-      5.5-45 ReducedSyzygiesOfRows
-      5.5-46 ReducedSyzygiesOfColumns
-      5.5-47 RightDivide
-      5.5-48 LeftDivide
-      5.5-49 RightDivide
-      5.5-50 LeftDivide
-      5.5-51 GenerateSameRowModule
-      5.5-52 GenerateSameColumnModule
-      5.5-53 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices
-      5.5-54 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix
-      5.5-55 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix
-      5.5-56 CoefficientsWithGivenMonomials
+      5.5-12 ConvertRowToMatrix
+      5.5-13 ConvertColumnToMatrix
+      5.5-14 ConvertMatrixToRow
+      5.5-15 ConvertMatrixToColumn
+      5.5-16 DiagMat
+      5.5-17 KroneckerMat
+      5.5-18 DualKroneckerMat
+      5.5-19 \*
+      5.5-20 \+
+      5.5-21 \-
+      5.5-22 \*
+      5.5-23 \=
+      5.5-24 GetColumnIndependentUnitPositions
+      5.5-25 GetRowIndependentUnitPositions
+      5.5-26 GetUnitPosition
+      5.5-27 Eliminate
+      5.5-28 BasisOfRowModule
+      5.5-29 BasisOfColumnModule
+      5.5-30 DecideZeroRows
+      5.5-31 DecideZeroColumns
+      5.5-32 SyzygiesGeneratorsOfRows
+      5.5-33 SyzygiesGeneratorsOfColumns
+      5.5-34 SyzygiesGeneratorsOfRows
+      5.5-35 SyzygiesGeneratorsOfColumns
+      5.5-36 ReducedBasisOfRowModule
+      5.5-37 ReducedBasisOfColumnModule
+      5.5-38 ReducedSyzygiesGeneratorsOfRows
+      5.5-39 ReducedSyzygiesGeneratorsOfColumns
+      5.5-40 BasisOfRowsCoeff
+      5.5-41 BasisOfColumnsCoeff
+      5.5-42 DecideZeroRowsEffectively
+      5.5-43 DecideZeroColumnsEffectively
+      5.5-44 BasisOfRows
+      5.5-45 BasisOfColumns
+      5.5-46 DecideZero
+      5.5-47 SyzygiesOfRows
+      5.5-48 SyzygiesOfColumns
+      5.5-49 ReducedSyzygiesOfRows
+      5.5-50 ReducedSyzygiesOfColumns
+      5.5-51 RightDivide
+      5.5-52 LeftDivide
+      5.5-53 RightDivide
+      5.5-54 LeftDivide
+      5.5-55 GenerateSameRowModule
+      5.5-56 GenerateSameColumnModule
+      5.5-57 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices
+      5.5-58 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix
+      5.5-59 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix
+      5.5-60 CoefficientsWithGivenMonomials
   6 [33X[0;0YRing Relations[133X
     6.1 [33X[0;0YRing Relations: Categories and Representations[133X
       6.1-1 IsHomalgRingRelations

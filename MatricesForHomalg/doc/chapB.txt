@@ -394,7 +394,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM1[103X )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XAreEqualMatrices[110X  is  bound  then the standard method for the
-  operation [2X\=[102X ([14X5.5-19[114X) shown below returns [22XRP[122X!.[10XAreEqualMatrices[110X[22X( [3XM1[103X, [3XM2[103X )[122X.[133X
+  operation [2X\=[102X ([14X5.5-23[114X) shown below returns [22XRP[122X!.[10XAreEqualMatrices[110X[22X( [3XM1[103X, [3XM2[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( \=,[104X
@@ -618,7 +618,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XGetColumnIndependentUnitPositions[110X  is bound then the standard
-  method  of  the  operation  [2XGetColumnIndependentUnitPositions[102X ([14X5.5-20[114X) shown
+  method  of  the  operation  [2XGetColumnIndependentUnitPositions[102X ([14X5.5-24[114X) shown
   below returns [22XRP[122X!.[10XGetColumnIndependentUnitPositions[110X[22X( [3XM[103X, [3Xposlist[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X
@@ -688,7 +688,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XGetRowIndependentUnitPositions[110X  is  bound  then  the standard
-  method  of the operation [2XGetRowIndependentUnitPositions[102X ([14X5.5-21[114X) shown below
+  method  of the operation [2XGetRowIndependentUnitPositions[102X ([14X5.5-25[114X) shown below
   returns [22XRP[122X!.[10XGetRowIndependentUnitPositions[110X[22X( [3XM[103X, [3Xposlist[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X
@@ -758,7 +758,7 @@
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
   component  [22XRP[122X!.[10XGetUnitPosition[110X  is  bound  then  the  standard method of the
-  operation  [2XGetUnitPosition[102X ([14X5.5-22[114X) shown below returns [22XRP[122X!.[10XGetUnitPosition[110X[22X(
+  operation  [2XGetUnitPosition[102X ([14X5.5-26[114X) shown below returns [22XRP[122X!.[10XGetUnitPosition[110X[22X(
   [3XM[103X, [3Xposlist[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X

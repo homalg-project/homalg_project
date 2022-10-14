@@ -7,44 +7,44 @@
   
   [1XA.1 [33X[0;0YMain[133X[101X
   
-  [30X    [33X[0;6Y[2XBasisOfRowModule[102X ([14X5.5-24[114X)[133X
+  [30X    [33X[0;6Y[2XBasisOfRowModule[102X ([14X5.5-28[114X)[133X
   
-  [30X    [33X[0;6Y[2XBasisOfColumnModule[102X ([14X5.5-25[114X)[133X
+  [30X    [33X[0;6Y[2XBasisOfColumnModule[102X ([14X5.5-29[114X)[133X
   
-  [30X    [33X[0;6Y[2XDecideZeroRows[102X ([14X5.5-26[114X)[133X
+  [30X    [33X[0;6Y[2XDecideZeroRows[102X ([14X5.5-30[114X)[133X
   
-  [30X    [33X[0;6Y[2XDecideZeroColumns[102X ([14X5.5-27[114X)[133X
+  [30X    [33X[0;6Y[2XDecideZeroColumns[102X ([14X5.5-31[114X)[133X
   
-  [30X    [33X[0;6Y[2XSyzygiesGeneratorsOfRows[102X ([14X5.5-28[114X)[133X
+  [30X    [33X[0;6Y[2XSyzygiesGeneratorsOfRows[102X ([14X5.5-32[114X)[133X
   
-  [30X    [33X[0;6Y[2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-29[114X)[133X
+  [30X    [33X[0;6Y[2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-33[114X)[133X
   
   
   [1XA.2 [33X[0;0YEffective[133X[101X
   
-  [30X    [33X[0;6Y[2XBasisOfRowsCoeff[102X ([14X5.5-36[114X)[133X
+  [30X    [33X[0;6Y[2XBasisOfRowsCoeff[102X ([14X5.5-40[114X)[133X
   
-  [30X    [33X[0;6Y[2XBasisOfColumnsCoeff[102X ([14X5.5-37[114X)[133X
+  [30X    [33X[0;6Y[2XBasisOfColumnsCoeff[102X ([14X5.5-41[114X)[133X
   
-  [30X    [33X[0;6Y[2XDecideZeroRowsEffectively[102X ([14X5.5-38[114X)[133X
+  [30X    [33X[0;6Y[2XDecideZeroRowsEffectively[102X ([14X5.5-42[114X)[133X
   
-  [30X    [33X[0;6Y[2XDecideZeroColumnsEffectively[102X ([14X5.5-39[114X)[133X
+  [30X    [33X[0;6Y[2XDecideZeroColumnsEffectively[102X ([14X5.5-43[114X)[133X
   
   
   [1XA.3 [33X[0;0YRelative[133X[101X
   
-  [30X    [33X[0;6Y[2XSyzygiesGeneratorsOfRows[102X ([14X5.5-30[114X)[133X
+  [30X    [33X[0;6Y[2XSyzygiesGeneratorsOfRows[102X ([14X5.5-34[114X)[133X
   
-  [30X    [33X[0;6Y[2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-31[114X)[133X
+  [30X    [33X[0;6Y[2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-35[114X)[133X
   
   
   [1XA.4 [33X[0;0YReduced[133X[101X
   
-  [30X    [33X[0;6Y[2XReducedBasisOfRowModule[102X ([14X5.5-32[114X)[133X
+  [30X    [33X[0;6Y[2XReducedBasisOfRowModule[102X ([14X5.5-36[114X)[133X
   
-  [30X    [33X[0;6Y[2XReducedBasisOfColumnModule[102X ([14X5.5-33[114X)[133X
+  [30X    [33X[0;6Y[2XReducedBasisOfColumnModule[102X ([14X5.5-37[114X)[133X
   
-  [30X    [33X[0;6Y[2XReducedSyzygiesGeneratorsOfRows[102X ([14X5.5-34[114X)[133X
+  [30X    [33X[0;6Y[2XReducedSyzygiesGeneratorsOfRows[102X ([14X5.5-38[114X)[133X
   
-  [30X    [33X[0;6Y[2XReducedSyzygiesGeneratorsOfColumns[102X ([14X5.5-35[114X)[133X
+  [30X    [33X[0;6Y[2XReducedSyzygiesGeneratorsOfColumns[102X ([14X5.5-39[114X)[133X
   

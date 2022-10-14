@@ -4,12 +4,12 @@
   
   [2X\*[102X, copy a matrix over a different ring 5.2-9 
       copy a matrix over a different ring (right) 5.2-9 
-      for composable matrices 5.5-18 
-      for ring elements and matrices 5.5-15 
-  [2X\+[102X, for matrices 5.5-16 
-  [2X\-[102X, for matrices 5.5-17 
+      for composable matrices 5.5-22 
+      for ring elements and matrices 5.5-19 
+  [2X\+[102X, for matrices 5.5-20 
+  [2X\-[102X, for matrices 5.5-21 
   [2X\/[102X, constructor for residue class rings 3.2-2 
-  [2X\=[102X, for matrices 5.5-19 
+  [2X\=[102X, for matrices 5.5-23 
   [2XAddMat[102X, homalgTable entry B.1-17 
       ResidueClassRing D.2-15 
   [2XAffineDegree[102X 5.4-21 
@@ -19,17 +19,17 @@
   [2XAreUnitsCentral[102X 3.3-54 
   [2XAssociatedGradedRing[102X 3.4-28 
   [2XBasisAlgorithmRespectsPrincipalIdeals[102X 3.3-53 
-  [2XBasisOfColumnModule[102X, for matrices 5.5-25 
+  [2XBasisOfColumnModule[102X, for matrices 5.5-29 
       ResidueClassRing D.1-2 
-  [2XBasisOfColumns[102X, for matrices 5.5-41 
-      for pairs of matrices 5.5-41 
-  [2XBasisOfColumnsCoeff[102X, for matrices 5.5-37 
+  [2XBasisOfColumns[102X, for matrices 5.5-45 
+      for pairs of matrices 5.5-45 
+  [2XBasisOfColumnsCoeff[102X, for matrices 5.5-41 
       ResidueClassRing D.1-8 
-  [2XBasisOfRowModule[102X, for matrices 5.5-24 
+  [2XBasisOfRowModule[102X, for matrices 5.5-28 
       ResidueClassRing D.1-1 
-  [2XBasisOfRows[102X, for matrices 5.5-40 
-      for pairs of matrices 5.5-40 
-  [2XBasisOfRowsCoeff[102X, for matrices 5.5-36 
+  [2XBasisOfRows[102X, for matrices 5.5-44 
+      for pairs of matrices 5.5-44 
+  [2XBasisOfRowsCoeff[102X, for matrices 5.5-40 
       ResidueClassRing D.1-7 
   [2XCanBeUsedToDecideZero[102X 6.3-1 
   [2XCertainColumns[102X, for matrices 5.5-9 
@@ -41,7 +41,7 @@
   [2XCoefficientsOfNumeratorOfHilbertPoincareSeries[102X 5.4-15 
   [2XCoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[102X 5.4-14 
   [2XCoefficientsRing[102X 3.4-20 
-  [2XCoefficientsWithGivenMonomials[102X, for two homalg matrices 5.5-56 
+  [2XCoefficientsWithGivenMonomials[102X, for two homalg matrices 5.5-60 
       homalgTable entry B.1-24 
   [2XCoercedMatrix[102X, copy a matrix over a different ring 5.2-10 
       copy a matrix over a different ring (convenience) 5.2-10 
@@ -51,28 +51,32 @@
   [2XConstantTermOfHilbertPolynomialn[102X 5.4-23 
   [2XConstructorForHomalgMatrices[102X 3.4-5 
   [2XContainsAField[102X 3.3-3 
+  [2XConvertColumnToMatrix[102X, for matrices 5.5-13 
+  [2XConvertMatrixToColumn[102X, for matrices 5.5-15 
+  [2XConvertMatrixToRow[102X, for matrices 5.5-14 
+  [2XConvertRowToMatrix[102X, for matrices 5.5-12 
   [2XCoordinateRingOfGraph[102X, for ring maps 4.4-4 
-  [2XDecideZero[102X, for matrices and relations 5.5-42 
-  [2XDecideZeroColumns[102X, for pairs of matrices 5.5-27 
+  [2XDecideZero[102X, for matrices and relations 5.5-46 
+  [2XDecideZeroColumns[102X, for pairs of matrices 5.5-31 
       ResidueClassRing D.1-4 
-  [2XDecideZeroColumnsEffectively[102X, for pairs of matrices 5.5-39 
+  [2XDecideZeroColumnsEffectively[102X, for pairs of matrices 5.5-43 
       ResidueClassRing D.1-10 
-  [2XDecideZeroRows[102X, for pairs of matrices 5.5-26 
+  [2XDecideZeroRows[102X, for pairs of matrices 5.5-30 
       ResidueClassRing D.1-3 
-  [2XDecideZeroRowsEffectively[102X, for pairs of matrices 5.5-38 
+  [2XDecideZeroRowsEffectively[102X, for pairs of matrices 5.5-42 
       ResidueClassRing D.1-9 
   [2XDegreeOfMorphism[102X, for ring maps 4.4-3 
   [2XDeterminant[102X, homalgTable entry B.1-23 
       ResidueClassRing D.2-21 
   [2XDeterminantMat[102X 5.4-3 
-  [2XDiagMat[102X, for a homalg ring and a list of homalg matrices 5.5-12 
+  [2XDiagMat[102X, for a homalg ring and a list of homalg matrices 5.5-16 
       homalgTable entry B.1-13 
       ResidueClassRing D.2-11 
-  [2XDualKroneckerMat[102X, for matrices 5.5-14 
+  [2XDualKroneckerMat[102X, for matrices 5.5-18 
       homalgTable entry B.1-15 
       ResidueClassRing D.2-13 
   [2XElementaryRank[102X 3.4-26 
-  [2XEliminate[102X 5.5-23 
+  [2XEliminate[102X 5.5-27 
   [2XEval[102X, for matrices created with AddMat C.4-18 
       for matrices created with CertainColumns C.4-11 
       for matrices created with CertainRows C.4-10 
@@ -95,13 +99,13 @@
       for matrices created with UnionOfColumns C.4-13 
       for matrices created with UnionOfRows C.4-12 
   [2XGeneralLinearRank[102X 3.4-25 
-  [2XGenerateSameColumnModule[102X, for pairs of matrices 5.5-52 
-  [2XGenerateSameRowModule[102X, for pairs of matrices 5.5-51 
-  [2XGetColumnIndependentUnitPositions[102X, for matrices 5.5-20 
+  [2XGenerateSameColumnModule[102X, for pairs of matrices 5.5-56 
+  [2XGenerateSameRowModule[102X, for pairs of matrices 5.5-55 
+  [2XGetColumnIndependentUnitPositions[102X, for matrices 5.5-24 
       homalgTable entry B.2-6 
-  [2XGetRowIndependentUnitPositions[102X, for matrices 5.5-21 
+  [2XGetRowIndependentUnitPositions[102X, for matrices 5.5-25 
       homalgTable entry B.2-7 
-  [2XGetUnitPosition[102X, for matrices 5.5-22 
+  [2XGetUnitPosition[102X, for matrices 5.5-26 
       homalgTable entry B.2-8 
   [2XGlobalDimension[102X 3.4-24 
   [2XHasInvariantBasisProperty[102X 3.3-21 
@@ -249,12 +253,12 @@
       for rings 3.3-1 
   [2XIsZeroMatrix[102X, homalgTable entry B.1-20 
       ResidueClassRing D.2-18 
-  [2XKroneckerMat[102X, for matrices 5.5-13 
+  [2XKroneckerMat[102X, for matrices 5.5-17 
       homalgTable entry B.1-14 
       ResidueClassRing D.2-12 
   [2XKrullDimension[102X 3.4-21 
-  [2XLeftDivide[102X, for pairs of matrices 5.5-48 
-      for triples of matrices 5.5-50 
+  [2XLeftDivide[102X, for pairs of matrices 5.5-52 
+      for triples of matrices 5.5-54 
   [2XLeftGlobalDimension[102X 3.4-22 
   [2XLeftInverse[102X 5.4-12 
       for matrices 5.5-2 
@@ -282,22 +286,22 @@
   [2XProjectiveDegree[102X 5.4-22 
   [2XRange[102X, for ring maps 4.4-2 
   [2XRationalParameters[102X 3.4-10 
-  [2XReducedBasisOfColumnModule[102X, for matrices 5.5-33 
-  [2XReducedBasisOfRowModule[102X, for matrices 5.5-32 
-  [2XReducedSyzygiesGeneratorsOfColumns[102X, for matrices 5.5-35 
-  [2XReducedSyzygiesGeneratorsOfRows[102X, for matrices 5.5-34 
-  [2XReducedSyzygiesOfColumns[102X, for matrices 5.5-46 
-      for pairs of matrices 5.5-46 
-  [2XReducedSyzygiesOfRows[102X, for matrices 5.5-45 
-      for pairs of matrices 5.5-45 
+  [2XReducedBasisOfColumnModule[102X, for matrices 5.5-37 
+  [2XReducedBasisOfRowModule[102X, for matrices 5.5-36 
+  [2XReducedSyzygiesGeneratorsOfColumns[102X, for matrices 5.5-39 
+  [2XReducedSyzygiesGeneratorsOfRows[102X, for matrices 5.5-38 
+  [2XReducedSyzygiesOfColumns[102X, for matrices 5.5-50 
+      for pairs of matrices 5.5-50 
+  [2XReducedSyzygiesOfRows[102X, for matrices 5.5-49 
+      for pairs of matrices 5.5-49 
   [2XRelativeIndeterminateAntiCommutingVariablesOfExteriorRing[102X 3.4-18 
   [2XRelativeIndeterminateCoordinatesOfRingOfDerivations[102X 3.4-14 
   [2XRelativeIndeterminateDerivationsOfRingOfDerivations[102X 3.4-16 
   [2XRelativeIndeterminatesOfPolynomialRing[102X 3.4-12 
   [2XRelativeSyzygiesGeneratorsOfColumns[102X, ResidueClassRing D.1-12 
   [2XRelativeSyzygiesGeneratorsOfRows[102X, ResidueClassRing D.1-11 
-  [2XRightDivide[102X, for pairs of matrices 5.5-47 
-      for triples of matrices 5.5-49 
+  [2XRightDivide[102X, for pairs of matrices 5.5-51 
+      for triples of matrices 5.5-53 
   [2XRightGlobalDimension[102X 3.4-23 
   [2XRightInverse[102X 5.4-13 
       for matrices 5.5-3 
@@ -305,23 +309,23 @@
   [2XRingElementConstructor[102X 3.4-3 
   [2XRingMap[102X, constructor for ring maps 4.2-1 
   [2XRowRankOfMatrix[102X 5.4-10 
-  [2XSimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[102X, for matrices 5.5-53 
-  [2XSimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-54 
-  [2XSimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-55 
+  [2XSimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[102X, for matrices 5.5-57 
+  [2XSimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-58 
+  [2XSimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-59 
   [2XSource[102X, for ring maps 4.4-1 
   [2XStableRank[102X 3.4-27 
   [2XSubMat[102X, homalgTable entry B.1-18 
       ResidueClassRing D.2-16 
-  [2XSyzygiesGeneratorsOfColumns[102X, for matrices 5.5-29 
-      for pairs of matrices 5.5-31 
+  [2XSyzygiesGeneratorsOfColumns[102X, for matrices 5.5-33 
+      for pairs of matrices 5.5-35 
       ResidueClassRing D.1-6 
-  [2XSyzygiesGeneratorsOfRows[102X, for matrices 5.5-28 
-      for pairs of matrices 5.5-30 
+  [2XSyzygiesGeneratorsOfRows[102X, for matrices 5.5-32 
+      for pairs of matrices 5.5-34 
       ResidueClassRing D.1-5 
-  [2XSyzygiesOfColumns[102X, for matrices 5.5-44 
-      for pairs of matrices 5.5-44 
-  [2XSyzygiesOfRows[102X, for matrices 5.5-43 
-      for pairs of matrices 5.5-43 
+  [2XSyzygiesOfColumns[102X, for matrices 5.5-48 
+      for pairs of matrices 5.5-48 
+  [2XSyzygiesOfRows[102X, for matrices 5.5-47 
+      for pairs of matrices 5.5-47 
   [2XTransposedMatrix[102X, for matrices 5.5-7 
       homalgTable entry B.1-6 
       ResidueClassRing D.2-6 

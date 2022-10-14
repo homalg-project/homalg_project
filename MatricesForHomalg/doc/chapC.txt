@@ -776,7 +776,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case  the  matrix  was  created  using  [2XDiagMat[102X ([14X5.5-12[114X) then the filter
+  [33X[0;0YIn  case  the  matrix  was  created  using  [2XDiagMat[102X ([14X5.5-16[114X) then the filter
   [10XHasEvalDiagMat[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X function [2XDiagMat[102X
   ([14XB.1-13[114X) will be used to set the attribute [10XEval[110X.[133X
   
@@ -846,7 +846,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case  the matrix was created using [2XKroneckerMat[102X ([14X5.5-13[114X) then the filter
+  [33X[0;0YIn  case  the matrix was created using [2XKroneckerMat[102X ([14X5.5-17[114X) then the filter
   [10XHasEvalKroneckerMat[110X  for  [3XC[103X  is  set  to  true  and the [10XhomalgTable[110X function
   [2XKroneckerMat[102X ([14XB.1-14[114X) will be used to set the attribute [10XEval[110X.[133X
   
@@ -895,7 +895,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case  the  matrix  was  created using [2XDualKroneckerMat[102X ([14X5.5-14[114X) then the
+  [33X[0;0YIn  case  the  matrix  was  created using [2XDualKroneckerMat[102X ([14X5.5-18[114X) then the
   filter  [10XHasEvalDualKroneckerMat[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X
   function [2XDualKroneckerMat[102X ([14XB.1-15[114X) will be used to set the attribute [10XEval[110X.[133X
   
@@ -958,7 +958,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-15[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-19[114X)  then  the  filter
   [10XHasEvalMulMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XMulMat[102X
   ([14XB.1-16[114X) will be used to set the attribute [10XEval[110X.[133X
   
@@ -1031,7 +1031,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\+[102X  ([14X5.5-16[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\+[102X  ([14X5.5-20[114X)  then  the  filter
   [10XHasEvalAddMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XAddMat[102X
   ([14XB.1-17[114X) will be used to set the attribute [10XEval[110X.[133X
   
@@ -1078,7 +1078,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\-[102X  ([14X5.5-17[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\-[102X  ([14X5.5-21[114X)  then  the  filter
   [10XHasEvalSubMat[110X  for  [3XC[103X  is  set  to  true and the [10XhomalgTable[110X function [2XSubMat[102X
   ([14XB.1-18[114X) will be used to set the attribute [10XEval[110X.[133X
   
@@ -1125,7 +1125,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-18[114X)  then  the  filter
+  [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-22[114X)  then  the  filter
   [10XHasEvalCompose[110X  for  [3XC[103X  is  set to true and the [10XhomalgTable[110X function [2XCompose[102X
   ([14XB.1-19[114X) will be used to set the attribute [10XEval[110X.[133X
   
@@ -1172,7 +1172,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn case the matrix was created using [2XCoefficientsWithGivenMonomials[102X ([14X5.5-56[114X)
+  [33X[0;0YIn case the matrix was created using [2XCoefficientsWithGivenMonomials[102X ([14X5.5-60[114X)
   then  the  filter [10XHasEvalCoefficientsWithGivenMonomials[110X for [3XC[103X is set to true
   and the [10XhomalgTable[110X function [2XCoefficientsWithGivenMonomials[102X ([14XB.1-24[114X) will be
   used to set the attribute [10XEval[110X.[133X
