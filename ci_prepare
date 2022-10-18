@@ -24,4 +24,8 @@ cd CddInterface
 ./install.sh $GAP_HOME
 cd ..
 
+cd ToricVarieties_project/TopcomInterface
+make install
+cd ../..
+
 cd homalg_project
