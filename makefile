@@ -19,8 +19,7 @@ ci-prepare:
 
 ci-test_homalg_packages: ci-test_4ti2Interface ci-test_Gauss ci-test_ExamplesForHomalg ci-test_GaussForHomalg ci-test_GradedModules ci-test_HomalgToCAS ci-test_GradedRingForHomalg ci-test_IO_ForHomalg ci-test_LocalizeRingForHomalg ci-test_MatricesForHomalg ci-test_RingsForHomalg ci-test_SCO ci-test_Modules ci-test_homalg
 
-ci-test_additional_packages: ci-test_alexander ci-test_CAP_project ci-test_D-Modules ci-test_Sheaves ci-test_VirtualCAS
-# ci-test_ToricVarieties: https://github.com/homalg-project/ToricVarieties_project/issues/200
+ci-test_additional_packages: ci-test_alexander ci-test_CAP_project ci-test_D-Modules ci-test_Sheaves ci-test_ToricVarieties ci-test_VirtualCAS
 
 ci-test: ci-test_LoadSheaves ci-test_homalg_packages ci-test_additional_packages
 	cd .. && homalg_project/gather_performance_data.py
