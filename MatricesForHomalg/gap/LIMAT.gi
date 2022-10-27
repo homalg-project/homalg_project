@@ -1369,7 +1369,7 @@ InstallMethod( KroneckerMat,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "KroneckerMat( IsOne(Matrix), IsHomalgMatrix )", "\033[0m" );
     
-    return DiagMat( ListWithIdenticalEntries( NrRows( A ), B ) );
+    return DiagMat( HomalgRing( A ), ListWithIdenticalEntries( NrRows( A ), B ) );
     
 end );
 
@@ -1496,7 +1496,7 @@ InstallMethod( DualKroneckerMat,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( IsHomalgMatrix, IsOne(Matrix) )", "\033[0m" );
     
-    return DiagMat( ListWithIdenticalEntries( NrRows( B ), A ) );
+    return DiagMat( HomalgRing( A ), ListWithIdenticalEntries( NrRows( B ), A ) );
     
 end );
 
