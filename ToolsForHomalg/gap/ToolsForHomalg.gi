@@ -1741,17 +1741,14 @@ end );
 ##
 InstallGlobalFunction( WriteFileForHomalg,
   function( path, string )
-    local fs;
+    local nr_bytes_written;
     
-    fs := IO_File( path, "w" );
-    if fs = fail then
-        Error( "unable to open the file ", path, " for writing\n" );
-    fi;
-    if IO_WriteFlush( fs, string ) = fail then
-        Error( "unable to write in the file ", path, "\n" );
-    fi;
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", path, "\n" );
+    nr_bytes_written := FileString( path, string );
+    
+    if nr_bytes_written = fail then
+        
+        Error( "could not write to file ", path );
+        
     fi;
     
 end );
@@ -1759,21 +1756,17 @@ end );
 ##
 InstallGlobalFunction( ReadFileForHomalg,
   function( path )
-    local fs, string;
+    local content;
     
-    fs := IO_File( path, "r" );
-    if fs = fail then
-        Error( "unable to open the file ", path, " for reading\n" );
-    fi;
-    string := IO_ReadUntilEOF( fs );
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", path, "\n" );
-    fi;
-    if string = fail then
-        Error( "unable to read lines from the file ", path, "\n" );
+    content := StringFile( path );
+    
+    if content = fail then
+        
+        Error( "could not read file ", path );
+        
     fi;
     
-    return string;
+    return content;
     
 end );
 
