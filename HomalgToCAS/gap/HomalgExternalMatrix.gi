@@ -370,12 +370,7 @@ InstallMethod( SaveHomalgMatrixToFile,
   function( filename, M )
     local fs;
     
-    fs := IO_File( filename, "r" );
-    
-    if fs <> fail then
-        if IO_Close( fs ) = fail then
-            Error( "unable to close the file ", filename, "\n" );
-        fi;
+    if IsExistingFile( filename ) then
         Error( "the file ", filename, " already exists, please delete it first and then type return; to continue\n" );
         return SaveHomalgMatrixToFile( filename, M );
     fi;
