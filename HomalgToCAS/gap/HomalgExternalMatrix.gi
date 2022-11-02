@@ -375,18 +375,6 @@ InstallMethod( SaveHomalgMatrixToFile,
         return SaveHomalgMatrixToFile( filename, M );
     fi;
     
-    fs := IO_File( filename, "w" );
-    
-    if fs = fail then
-        Error( "unable to open the file ", filename, " for writing\n" );
-    fi;
-    
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", filename, "\n" );
-    fi;
-    
-    Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
-    
     return SaveHomalgMatrixToFile( filename, M, HomalgRing( M ) );
     
 end );
