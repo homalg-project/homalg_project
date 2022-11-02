@@ -27,7 +27,7 @@ InstallValue( HOMALG_IO,
             ListOfAlternativeDirectoryForTemporaryFiles := [ "/tmp/", "/dev/shm/", "/var/tmp/", "./" ],
             FileNameCounter := 1,
             DeletePeriod := 500,
-            PID := IO_getpid(),
+            PID := (function() if IsBoundGlobal( "IO_getpid" ) then return ValueGlobal( "IO_getpid" )(); else return -1; fi; end)(),
             save_CAS_commands_to_file := false,
             suppress_CAS := false,
             suppress_PID := false,
@@ -837,10 +837,20 @@ InstallGlobalFunction( FingerprintOfGapProcess,
               BuildDateTime := GAPInfo.BuildDateTime,
               Architecture := GAPInfo.Architecture,
               SystemCommandLine := GAPInfo.SystemCommandLine,
-              Hostname :=IO_gethostname(),
-              PID := IO_getpid(),
               TimeOfDay := GetTimeOfDay()
               );
+    
+    if IsBoundGlobal( "IO_gethostname" ) then
+        f.Hostname := ValueGlobal( "IO_gethostname" )();
+    else
+        f.Hostname := "unknown";
+    fi;
+    
+    if IsBoundGlobal( "IO_getpid" ) then
+        f.PID := ValueGlobal( "IO_getpid" )();
+    else
+        f.PID := -1;
+    fi;
     
     if Length( arg ) > 0 then
         if Length( arg ) = 1 then

@@ -303,7 +303,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         fi;
         
         if not IsBound( HOMALG_IO.PID ) or not IsInt( HOMALG_IO.PID ) then
-            HOMALG_IO.PID := 99999; #this is not the real PID!
+            HOMALG_IO.PID := -1; #this is not the real PID!
         fi;
         
         pid := Concatenation( "_PID_", String( HOMALG_IO.PID ) );
