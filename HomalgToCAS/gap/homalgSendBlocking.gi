@@ -715,14 +715,8 @@ InstallGlobalFunction( homalgSendBlocking,
             fi;
         fi;
         
-        fs := IO_File( stream.CAS_commands_file, "a" );
-        
-        if IO_WriteFlush( fs, L ) = fail then
+        if FileString( stream.CAS_commands_file, L, true ) = fail then
             Error( "unable to write in the file ", stream.CAS_commands_file, "\n" );
-        fi;
-        
-        if IO_Close( fs ) = fail then
-            Error( "unable to close the file ", stream.CAS_commands_file, "\n" );
         fi;
     fi;
     

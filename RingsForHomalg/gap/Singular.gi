@@ -2911,16 +2911,9 @@ InstallMethod( LoadHomalgMatrixFromFile,
     fi;
     
     #read the file with GAP and parse it for better Singular reading:
-    fs := IO_File( filename, "r" );
-    if fs = fail then
-        Error( "unable to open the file ", filename, " for reading\n" );
-    fi;
-    str := IO_ReadUntilEOF( fs );
+    str := StringFile( filename );
     if str = fail then
         Error( "unable to read lines from the file ", filename, "\n" );
-    fi;
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", filename, "\n" );
     fi;
     
     str := Filtered( str, c -> not c in " []" );
@@ -2929,15 +2922,8 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
     fname := FigureOutAnAlternativeDirectoryForTemporaryFiles( fname, "with_filename" );
     
-    fs := IO_File( fname, "w" );
-    if fs = fail then
-        Error( "unable to open the file ", fname, " for writing\n" );
-    fi;
-    if IO_WriteFlush( fs, str ) = fail then
+    if FileString( fname, str ) = fail then
         Error( "unable to write in the file ", fname, "\n" );
-    fi;
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", fname, "\n" );
     fi;
     
     M := HomalgVoidMatrix( R );

@@ -397,7 +397,7 @@ InstallMethod( SaveHomalgMatrixToFile,
         [ IsString, IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( filename, M, R )
-    local mode, fs;
+    local mode;
     
     if not IsBound( M!.SaveAs ) then
         mode := "ListList";
@@ -407,18 +407,8 @@ InstallMethod( SaveHomalgMatrixToFile,
     
     if mode = "ListList" then
         
-        fs := IO_File( filename, "w" );
-        
-        if fs = fail then
-            Error( "unable to open the file ", filename, " for writing\n" );
-        fi;
-        
-        if IO_WriteFlush( fs, GetListListOfHomalgMatrixAsString( M ) ) = fail then
+        if FileString( filename, GetListListOfHomalgMatrixAsString( M ) ) = fail then
             Error( "unable to write in the file ", filename, "\n" );
-        fi;
-        
-        if IO_Close( fs ) = fail then
-            Error( "unable to close the file ", filename, "\n" );
         fi;
         
     fi;
@@ -433,7 +423,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
         [ IsString, IsHomalgInternalRingRep ],
         
   function( filename, R )
-    local mode, fs, str, z, M;
+    local mode, str, z, M;
     
     if not IsBound( R!.LoadAs ) then
         mode := "ListList";
@@ -443,20 +433,10 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
     if mode = "ListList" then
         
-        fs := IO_File( filename, "r" );
-        
-        if fs = fail then
-            Error( "unable to open the file ", filename, " for reading\n" );
-        fi;
-        
-        str := IO_ReadUntilEOF( fs );
+        str := StringFile( filename );
         
         if str = fail then
             Error( "unable to read lines from the file ", filename, "\n" );
-        fi;
-        
-        if IO_Close( fs ) = fail then
-            Error( "unable to close the file ", filename, "\n" );
         fi;
         
         if IsBound( R!.NameOfPrimitiveElement ) and
