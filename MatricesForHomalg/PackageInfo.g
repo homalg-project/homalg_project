@@ -114,7 +114,7 @@ Dependencies := rec(
   NeededOtherPackages := [
                    [ "ToolsForHomalg", ">= 2018.12.15" ],
                    [ "GAPDoc", ">= 1.0" ] ],
-  SuggestedOtherPackages := [ [ "utils", ">= 0.54" ] ],
+  SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       
 ),
