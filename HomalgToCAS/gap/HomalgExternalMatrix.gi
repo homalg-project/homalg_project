@@ -268,28 +268,12 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         
   function( M, RR )
     
-    local R, r, c, separator, directory, pointer, pid, file, filename, fs, remove, MM;
+    local R, r, c, separator, pointer, pid, file, filename, fs, remove, MM;
     
     R := HomalgRing( M ); # the source ring
     
     r := NrRows( M );
     c := NrColumns( M );
-    
-    ## figure out the directory separtor:
-    if IsBound( GAPInfo.UserHome ) then
-        separator := GAPInfo.UserHome[1];
-    else
-        separator := '/';
-    fi;
-    
-    if IsBound( HOMALG_IO.DirectoryForTemporaryFiles ) then
-        directory := HOMALG_IO.DirectoryForTemporaryFiles;
-        if directory[Length(directory)] <> separator then
-            directory[Length(directory) + 1] := separator;
-        fi;
-    else
-        directory := "";
-    fi;
     
     if IsHomalgExternalMatrixRep( M ) then
         pointer := homalgPointer( M );
@@ -312,31 +296,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     
     file := Concatenation( pointer, pid );
     
-    filename := Concatenation( directory, file );
-    
-    fs := IO_File( filename, "w" );
-    
-    if fs = fail then
-        if not ( IsBound( HOMALG_IO.DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles ) 
-                 and HOMALG_IO.DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles = true ) then
-            directory := FigureOutAnAlternativeDirectoryForTemporaryFiles( file );
-            if directory <> fail then
-                filename := Concatenation( directory, file );
-                fs := IO_File( filename, "w" );
-            else
-                Error( "unable to (find alternative directories to) open the file ", filename, " for writing\n" );
-            fi;
-        else
-            Error( "unable to open the file ", filename, " for writing\n" );
-        fi;
-        HOMALG_IO.DirectoryForTemporaryFiles := directory;
-    fi;
-    
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", filename, "\n" );
-    fi;
-    
-    Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
+    filename := Filename( HOMALG_IO.DirectoryForTemporaryFiles, file );
     
     remove := SaveHomalgMatrixToFile( filename, M );
     
