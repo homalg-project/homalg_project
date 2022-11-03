@@ -1,7 +1,7 @@
 name: MatricesForHomalg
-version: "2022.10-06"
+version: "2022.11-01"
 license: "GPL-2.0-or-later"
-date: 2022-10-27
+date: 2022-11-03
 description: |
     Matrices for the homalg project
 
@@ -29,22 +29,17 @@ needed-pkgs:
       version: ">= 1.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
-suggested-pkgs:
-    - name: "utils"
-      version: ">= 0.54"
-      url: "https://gap-packages.github.io/utils"
-
 www: https://homalg-project.github.io/pkg/MatricesForHomalg
 readme: README.md
 packageinfo: https://homalg-project.github.io/homalg_project/MatricesForHomalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2022.10-06/MatricesForHomalg-2022.10-06.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2022.11-01/MatricesForHomalg-2022.11-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2022.10-06/MatricesForHomalg-2022.10-06.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2022.11-01/MatricesForHomalg-2022.11-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2022.10-06/MatricesForHomalg-2022.10-06.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2022.11-01/MatricesForHomalg-2022.11-01.pdf
 
 abstract: |
     The <span class="pkgname">MatricesForHomalg</span> package provides lazy evaluated matrices with clever operations for the homalg project
@@ -58,7 +53,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BLLW22</span>]   <b class='BibAuthor'>Barakat, M., Lange-Hegermann, M., Leuner, M. and Wagh, V.</b>,
      <i class='BibTitle'>MatricesForHomalg, Matrices for the homalg project,
-             Version 2022.10-06</i>
+             Version 2022.11-01</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/MatricesForHomalg">https://homalg-project.github.io/pkg/MatricesForHomalg</a></span>.
@@ -66,12 +61,12 @@ citeas: |
     
 
 bibtex: |
-    @misc{ MatricesForHomalg2022.10-06,
+    @misc{ MatricesForHomalg2022.11-01,
       author =           {Barakat, M. and Lange-Hegermann, M. and Leuner, M. and
                           Wagh, V.},
       title =            {{MatricesForHomalg},  Matrices for the homalg project,
-                          {V}ersion 2022.10-06},
-      month =            {Oct},
+                          {V}ersion 2022.11-01},
+      month =            {Nov},
       year =             {2022},
       note =             {GAP package},
       howpublished =     {\href
