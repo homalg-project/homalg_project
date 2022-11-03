@@ -21,13 +21,11 @@ InstallValue( HOMALG_IO,
             InformAboutCASystemsWithoutActiveRings := true,
             SaveHomalgMaximumBackStream := false,
             color_display := false,
-            DirectoryForTemporaryFiles := "/tmp/",
-            DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles := false,
+            DirectoryForTemporaryFiles := DirectoryTemporary(),
             DoNotDeleteTemporaryFiles := false,
-            ListOfAlternativeDirectoryForTemporaryFiles := [ "/tmp/", "/dev/shm/", "/var/tmp/", "./" ],
             FileNameCounter := 1,
             DeletePeriod := 500,
-            PID := IO_getpid(),
+            PID := (function() if IsBoundGlobal( "IO_getpid" ) then return ValueGlobal( "IO_getpid" )(); else return -1; fi; end)(),
             save_CAS_commands_to_file := false,
             suppress_CAS := false,
             suppress_PID := false,
@@ -519,6 +517,10 @@ InstallValue( HOMALG_IO,
            )
 );
 
+if HOMALG_IO.DirectoryForTemporaryFiles = fail then
+    Display( "WARNING: GAP could not create a temporary directory. You may encounter errors." );
+fi;
+
 ####################################
 #
 # global functions and operations:
@@ -611,65 +613,6 @@ InstallGlobalFunction( homalgMemoryUsage,
     fi;
     
     return stream.memory_usage( stream, o );
-    
-end );
-
-##
-InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
-  function( arg )
-    local nargs, file, list, separator, pos_sep, l, directory, filename, fs;
-    
-    nargs := Length( arg );
-    
-    if nargs = 0 then
-        Error( "empty input" );
-    fi;
-    
-    file := arg[1];
-    
-    if IsBound( HOMALG_IO.ListOfAlternativeDirectoryForTemporaryFiles ) then
-        list := HOMALG_IO.ListOfAlternativeDirectoryForTemporaryFiles;
-    else
-        list := [ "/tmp/", "/dev/shm/", "/var/tmp/" ];
-    fi;
-    
-    ## figure out the directory separtor:
-    if IsBound( GAPInfo.UserHome ) then
-        separator := GAPInfo.UserHome[1];
-    else
-        separator := '/';
-    fi;
-    
-    if nargs > 1 then
-        pos_sep := PositionProperty( Reversed( file ), c -> c = separator );
-        if pos_sep <> fail then
-            l := Length( file );
-            file := file{[ l - pos_sep + 2 .. l ]};
-        fi;
-    fi;
-    
-    for directory in list do
-        
-        if directory[Length( directory )] <> separator then
-            filename := Concatenation( directory, [ separator ], file );
-        else
-            filename := Concatenation( directory, file );
-        fi;
-        
-        fs := IO_File( filename, "w" );
-        
-        if fs <> fail then
-            IO_Close( fs );
-            if nargs > 1 and arg[2] = "with_filename" then
-                return filename;
-            else
-                return directory;
-            fi;
-        fi;
-        
-    od;
-    
-    return fail;
     
 end );
 
@@ -837,10 +780,20 @@ InstallGlobalFunction( FingerprintOfGapProcess,
               BuildDateTime := GAPInfo.BuildDateTime,
               Architecture := GAPInfo.Architecture,
               SystemCommandLine := GAPInfo.SystemCommandLine,
-              Hostname :=IO_gethostname(),
-              PID := IO_getpid(),
               TimeOfDay := GetTimeOfDay()
               );
+    
+    if IsBoundGlobal( "IO_gethostname" ) then
+        f.Hostname := ValueGlobal( "IO_gethostname" )();
+    else
+        f.Hostname := "unknown";
+    fi;
+    
+    if IsBoundGlobal( "IO_getpid" ) then
+        f.PID := ValueGlobal( "IO_getpid" )();
+    else
+        f.PID := -1;
+    fi;
     
     if Length( arg ) > 0 then
         if Length( arg ) = 1 then

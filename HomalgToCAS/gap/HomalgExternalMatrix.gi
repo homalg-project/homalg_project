@@ -268,28 +268,12 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         
   function( M, RR )
     
-    local R, r, c, separator, directory, pointer, pid, file, filename, fs, remove, MM;
+    local R, r, c, separator, pointer, pid, file, filename, fs, remove, MM;
     
     R := HomalgRing( M ); # the source ring
     
     r := NrRows( M );
     c := NrColumns( M );
-    
-    ## figure out the directory separtor:
-    if IsBound( GAPInfo.UserHome ) then
-        separator := GAPInfo.UserHome[1];
-    else
-        separator := '/';
-    fi;
-    
-    if IsBound( HOMALG_IO.DirectoryForTemporaryFiles ) then
-        directory := HOMALG_IO.DirectoryForTemporaryFiles;
-        if directory[Length(directory)] <> separator then
-            directory[Length(directory) + 1] := separator;
-        fi;
-    else
-        directory := "";
-    fi;
     
     if IsHomalgExternalMatrixRep( M ) then
         pointer := homalgPointer( M );
@@ -303,7 +287,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         fi;
         
         if not IsBound( HOMALG_IO.PID ) or not IsInt( HOMALG_IO.PID ) then
-            HOMALG_IO.PID := 99999; #this is not the real PID!
+            HOMALG_IO.PID := -1; #this is not the real PID!
         fi;
         
         pid := Concatenation( "_PID_", String( HOMALG_IO.PID ) );
@@ -312,31 +296,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     
     file := Concatenation( pointer, pid );
     
-    filename := Concatenation( directory, file );
-    
-    fs := IO_File( filename, "w" );
-    
-    if fs = fail then
-        if not ( IsBound( HOMALG_IO.DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles ) 
-                 and HOMALG_IO.DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles = true ) then
-            directory := FigureOutAnAlternativeDirectoryForTemporaryFiles( file );
-            if directory <> fail then
-                filename := Concatenation( directory, file );
-                fs := IO_File( filename, "w" );
-            else
-                Error( "unable to (find alternative directories to) open the file ", filename, " for writing\n" );
-            fi;
-        else
-            Error( "unable to open the file ", filename, " for writing\n" );
-        fi;
-        HOMALG_IO.DirectoryForTemporaryFiles := directory;
-    fi;
-    
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", filename, "\n" );
-    fi;
-    
-    Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
+    filename := Filename( HOMALG_IO.DirectoryForTemporaryFiles, file );
     
     remove := SaveHomalgMatrixToFile( filename, M );
     
@@ -370,27 +330,10 @@ InstallMethod( SaveHomalgMatrixToFile,
   function( filename, M )
     local fs;
     
-    fs := IO_File( filename, "r" );
-    
-    if fs <> fail then
-        if IO_Close( fs ) = fail then
-            Error( "unable to close the file ", filename, "\n" );
-        fi;
+    if IsExistingFile( filename ) then
         Error( "the file ", filename, " already exists, please delete it first and then type return; to continue\n" );
         return SaveHomalgMatrixToFile( filename, M );
     fi;
-    
-    fs := IO_File( filename, "w" );
-    
-    if fs = fail then
-        Error( "unable to open the file ", filename, " for writing\n" );
-    fi;
-    
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", filename, "\n" );
-    fi;
-    
-    Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
     
     return SaveHomalgMatrixToFile( filename, M, HomalgRing( M ) );
     
@@ -402,7 +345,7 @@ InstallMethod( SaveHomalgMatrixToFile,
         [ IsString, IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( filename, M, R )
-    local mode, fs;
+    local mode;
     
     if not IsBound( M!.SaveAs ) then
         mode := "ListList";
@@ -412,18 +355,8 @@ InstallMethod( SaveHomalgMatrixToFile,
     
     if mode = "ListList" then
         
-        fs := IO_File( filename, "w" );
-        
-        if fs = fail then
-            Error( "unable to open the file ", filename, " for writing\n" );
-        fi;
-        
-        if IO_WriteFlush( fs, GetListListOfHomalgMatrixAsString( M ) ) = fail then
+        if FileString( filename, GetListListOfHomalgMatrixAsString( M ) ) = fail then
             Error( "unable to write in the file ", filename, "\n" );
-        fi;
-        
-        if IO_Close( fs ) = fail then
-            Error( "unable to close the file ", filename, "\n" );
         fi;
         
     fi;
@@ -438,7 +371,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
         [ IsString, IsHomalgInternalRingRep ],
         
   function( filename, R )
-    local mode, fs, str, z, M;
+    local mode, str, z, M;
     
     if not IsBound( R!.LoadAs ) then
         mode := "ListList";
@@ -448,20 +381,10 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
     if mode = "ListList" then
         
-        fs := IO_File( filename, "r" );
-        
-        if fs = fail then
-            Error( "unable to open the file ", filename, " for reading\n" );
-        fi;
-        
-        str := IO_ReadUntilEOF( fs );
+        str := StringFile( filename );
         
         if str = fail then
             Error( "unable to read lines from the file ", filename, "\n" );
-        fi;
-        
-        if IO_Close( fs ) = fail then
-            Error( "unable to close the file ", filename, "\n" );
         fi;
         
         if IsBound( R!.NameOfPrimitiveElement ) and

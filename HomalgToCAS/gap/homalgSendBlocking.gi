@@ -434,7 +434,7 @@ InstallGlobalFunction( homalgSendBlocking,
           pictogram, option, break_lists, R, ext_obj, stream, type, prefix,
           suffix, e, RP, CAS, PID, container, counter, homalg_variable,
           used_pointers, void_matrices, l, eoc, enter, statistics, statistics_summary,
-          fs, io_info_level, picto, void_matrix, o, max, display_color, esc;
+          io_info_level, picto, void_matrix, o, max, display_color, esc;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -706,23 +706,14 @@ InstallGlobalFunction( homalgSendBlocking,
        or IsBound( stream.CAS_commands_file ) then
         if not IsBound( stream.CAS_commands_file ) then
             stream.CAS_commands_file := Concatenation( "commands_file_of_", CAS, "_with_PID_", String( PID ) );
-            fs := IO_File( stream.CAS_commands_file, "w" );
-            if fs = fail then
-                Error( "unable to open the file ", stream.CAS_commands_file, " for writing\n" );
-            fi;
-            if IO_Close( fs ) = fail then
-                Error( "unable to close the file ", stream.CAS_commands_file, "\n" );
+            if IsExistingFile( stream.CAS_commands_file ) then
+                Error( "the file ", stream.CAS_commands_file, " already exists, type return; to overwrite it\n" );
+                FileString( stream.CAS_commands_file, "" );
             fi;
         fi;
         
-        fs := IO_File( stream.CAS_commands_file, "a" );
-        
-        if IO_WriteFlush( fs, L ) = fail then
+        if FileString( stream.CAS_commands_file, L, true ) = fail then
             Error( "unable to write in the file ", stream.CAS_commands_file, "\n" );
-        fi;
-        
-        if IO_Close( fs ) = fail then
-            Error( "unable to close the file ", stream.CAS_commands_file, "\n" );
         fi;
     fi;
     

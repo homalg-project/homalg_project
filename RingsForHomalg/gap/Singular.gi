@@ -2901,8 +2901,8 @@ InstallMethod( LoadHomalgMatrixFromFile,
         "for homalg external rings in Singular",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
-  function( filename, r, c, R )
-    local mode, fs, str, fname, v, command, M;
+  function( filepath, r, c, R )
+    local mode, str, separator, pos_sep, l, filename, fname, M, v, command;
     
     if not IsBound( R!.LoadAs ) then
         mode := "ListList";
@@ -2911,33 +2911,32 @@ InstallMethod( LoadHomalgMatrixFromFile,
     fi;
     
     #read the file with GAP and parse it for better Singular reading:
-    fs := IO_File( filename, "r" );
-    if fs = fail then
-        Error( "unable to open the file ", filename, " for reading\n" );
-    fi;
-    str := IO_ReadUntilEOF( fs );
+    str := StringFile( filepath );
     if str = fail then
-        Error( "unable to read lines from the file ", filename, "\n" );
-    fi;
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", filename, "\n" );
+        Error( "unable to read lines from the file ", filepath, "\n" );
     fi;
     
     str := Filtered( str, c -> not c in " []" );
     
-    fname := Concatenation( filename, "-singular" );
-    
-    fname := FigureOutAnAlternativeDirectoryForTemporaryFiles( fname, "with_filename" );
-    
-    fs := IO_File( fname, "w" );
-    if fs = fail then
-        Error( "unable to open the file ", fname, " for writing\n" );
+    # get basename of filepath
+    if IsBound( GAPInfo.UserHome ) then
+        separator := GAPInfo.UserHome[1];
+    else
+        separator := '/';
     fi;
-    if IO_WriteFlush( fs, str ) = fail then
+    
+    pos_sep := PositionProperty( Reversed( filepath ), c -> c = separator );
+    if pos_sep = fail then
+        filename := filepath;
+    else
+        l := Length( filepath );
+        filename := filepath{[ l - pos_sep + 2 .. l ]};
+    fi;
+    
+    fname := Filename( HOMALG_IO.DirectoryForTemporaryFiles, Concatenation( filename, "-singular" ) );
+    
+    if FileString( fname, str ) = fail then
         Error( "unable to write in the file ", fname, "\n" );
-    fi;
-    if IO_Close( fs ) = fail then
-        Error( "unable to close the file ", fname, "\n" );
     fi;
     
     M := HomalgVoidMatrix( R );
