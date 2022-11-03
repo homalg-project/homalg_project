@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "IO_ForHomalg",
 Subtitle := "IO capabilities for the homalg project",
-Version := "2022.09-01",
-Date := "06/09/2022",
+Version := "2022.11-01",
+Date := "03/11/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [

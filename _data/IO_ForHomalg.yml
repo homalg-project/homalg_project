@@ -1,7 +1,7 @@
 name: IO_ForHomalg
-version: "2022.09-01"
+version: "2022.11-01"
 license: "GPL-2.0-or-later"
-date: 2022-09-06
+date: 2022-11-03
 description: |
     IO capabilities for the homalg project
 
@@ -42,11 +42,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/IO_ForHomalg/Packag
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2022.09-01/IO_ForHomalg-2022.09-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2022.11-01/IO_ForHomalg-2022.11-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2022.09-01/IO_ForHomalg-2022.09-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2022.11-01/IO_ForHomalg-2022.11-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2022.09-01/IO_ForHomalg-2022.09-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2022.11-01/IO_ForHomalg-2022.11-01.pdf
 
 abstract: |
     The <span class="pkgname">IO_ForHomalg</span> package launches the command-line-interface of an external computer algebra system and connects it to <span class="pkgname">homalg</span> using an Input/Output stream
@@ -60,7 +60,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BBGNR22</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Gutsche, S., Neunhöffer, M. and Robertz, D.</b>,
      <i class='BibTitle'>IO_ForHomalg, IO capabilities for the homalg project,
-             Version 2022.09-01</i>
+             Version 2022.11-01</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/IO_ForHomalg">https://homalg-project.github.io/pkg/IO_ForHomalg</a></span>.
@@ -68,12 +68,12 @@ citeas: |
     
 
 bibtex: |
-    @misc{ IO_ForHomalg2022.09-01,
+    @misc{ IO_ForHomalg2022.11-01,
       author =           {B{\"a}chler,  T.  and  Barakat, M. and Gutsche, S. and
                           Neunh{\"o}ffer, M. and Robertz, D.},
       title =            {{IO{\textunderscore}ForHomalg},  IO  capabilities  for
-                          the homalg project, {V}ersion 2022.09-01},
-      month =            {Sep},
+                          the homalg project, {V}ersion 2022.11-01},
+      month =            {Nov},
       year =             {2022},
       note =             {GAP package},
       howpublished =     {\href
