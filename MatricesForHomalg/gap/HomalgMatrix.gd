@@ -1043,6 +1043,12 @@ DeclareOperation( "EntriesOfHomalgMatrixAsListList",
 DeclareOperation( "EntriesOfHomalgMatrix",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "EntriesOfHomalgRowVector",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "EntriesOfHomalgColumnVector",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "AreComparableMatrices",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
