@@ -852,6 +852,32 @@ InstallMethod( EntriesOfHomalgMatrix,
 end );
 
 ##
+InstallMethod( EntriesOfHomalgRowVector,
+        "for a homalg row vector",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    Assert( 0, NrRows( M ) = 1 );
+    
+    return EntriesOfHomalgMatrix( M );
+    
+end );
+
+##
+InstallMethod( EntriesOfHomalgColumnVector,
+        "for a homalg column vector",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    Assert( 0, NrColumns( M ) = 1 );
+    
+    return EntriesOfHomalgMatrix( M );
+    
+end );
+
+##
 InstallMethod( GetUnitPosition,
         "for homalg matrices",
         [ IsHomalgMatrix ],
