@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "Modules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
-Version := "2022.09-01",
-Date := "07/09/2022",
+Version := "2022.11-01",
+Date := "23/11/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [

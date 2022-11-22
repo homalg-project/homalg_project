@@ -3,8 +3,7 @@
   [1XReferences[101X
   
   [[20XBar09[120X]  [16XBarakat, M.[116X, [17XSpectral filtrations via generalized morphisms[117X (2009),
-  (submitted
-  (\href{http://arxiv.org/abs/0904.0240}{\texttt{arXiv:0904.0240}})).
+  ((\href{http://arxiv.org/abs/0904.0240}{\texttt{arXiv:0904.0240}})).
   
   [[20XBR06[120X]          [16XBarakat,         M.         and         Robertz,         D.[116X,
   [17X\hrefhttps://algebra.mathematik.uni-siegen.de/barakat/eaca/homalg_eaca06.pdfmathtthomalg:
