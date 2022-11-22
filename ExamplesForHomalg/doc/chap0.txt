@@ -6,10 +6,10 @@
                      [1X Examples for the [5XGAP[105X Package homalg [101X
   
   
-                                   2022.10-01
+                                   2022.11-01
   
   
-                                 6 October 2022
+                                23 November 2022
   
   
                                 Mohamed Barakat
