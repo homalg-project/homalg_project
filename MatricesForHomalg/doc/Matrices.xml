@@ -30,6 +30,8 @@
 <#Include Label="HomalgVoidMatrix">
 <#Include Label="HomalgMatrix">
 <#Include Label="HomalgMatrixListList">
+<#Include Label="HomalgRowVector">
+<#Include Label="HomalgColumnVector">
 <#Include Label="HomalgDiagonalMatrix">
 <#Include Label="\*:MatrixBaseChange">
 <#Include Label="CoercedMatrix">
