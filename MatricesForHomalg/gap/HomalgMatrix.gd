@@ -882,6 +882,8 @@ DeclareGlobalFunction( "homalgInternalMatrixHull" );
 
 DeclareGlobalFunction( "HomalgMatrix" );
 DeclareGlobalFunction( "HomalgMatrixListList" );
+DeclareGlobalFunction( "HomalgRowVector" );
+DeclareGlobalFunction( "HomalgColumnVector" );
 
 DeclareGlobalFunction( "HomalgMatrixWithAttributes" );
 
