@@ -2,8 +2,8 @@
   
   [1XIndex[101X
   
-  [2X\*[102X, copy a matrix over a different ring 5.2-9 
-      copy a matrix over a different ring (right) 5.2-9 
+  [2X\*[102X, copy a matrix over a different ring 5.2-11 
+      copy a matrix over a different ring (right) 5.2-11 
       for composable matrices 5.5-22 
       for ring elements and matrices 5.5-19 
   [2X\+[102X, for matrices 5.5-20 
@@ -43,8 +43,8 @@
   [2XCoefficientsRing[102X 3.4-20 
   [2XCoefficientsWithGivenMonomials[102X, for two homalg matrices 5.5-60 
       homalgTable entry B.1-24 
-  [2XCoercedMatrix[102X, copy a matrix over a different ring 5.2-10 
-      copy a matrix over a different ring (convenience) 5.2-10 
+  [2XCoercedMatrix[102X, copy a matrix over a different ring 5.2-12 
+      copy a matrix over a different ring (convenience) 5.2-12 
   [2XColumnRankOfMatrix[102X 5.4-11 
   [2XCompose[102X, homalgTable entry B.1-19 
       ResidueClassRing D.2-17 
@@ -111,7 +111,8 @@
   [2XHasInvariantBasisProperty[102X 3.3-21 
   [2XHilbertPoincareSeries[102X 5.4-18 
   [2XHilbertPolynomial[102X 5.4-19 
-  [2XHomalgDiagonalMatrix[102X, constructor for diagonal matrices 5.2-8 
+  [2XHomalgColumnVector[102X, constructor for matrices with a single column 5.2-9 
+  [2XHomalgDiagonalMatrix[102X, constructor for diagonal matrices 5.2-10 
   [2XHomalgIdentityMatrix[102X, constructor for identity matrices 5.2-4 
   [2XHomalgInitialIdentityMatrix[102X, constructor for initial quadratic matrices with ones on the diagonal 5.2-2 
   [2XHomalgInitialMatrix[102X, constructor for initial matrices filled with zeros 5.2-1 
@@ -125,6 +126,7 @@
   [2XHomalgRing[102X, for matrices 5.5-1 
   [2XHomalgRingOfIntegers[102X, constructor for the integers 3.2-1 
       constructor for the residue class rings of the integers 3.2-1 
+  [2XHomalgRowVector[102X, constructor for matrices with a single row 5.2-8 
   [2XhomalgTable[102X 3.4-2 
   [2XHomalgVoidMatrix[102X, constructor for void matrices 5.2-5 
   [2XHomalgZeroMatrix[102X, constructor for zero matrices 5.2-3 

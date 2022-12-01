@@ -41,9 +41,11 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D2E3472879E28AB">5.2-5 HomalgVoidMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X864ACCB08094F0B7">5.2-6 HomalgMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8246E1D17F96DAE7">5.2-7 HomalgMatrixListList</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X872D39C678D0C4AE">5.2-8 HomalgDiagonalMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81225377833C4644"><code>5.2-9 \*</code></a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7C4E49D287011DCD">5.2-10 CoercedMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B127B5584CD012D">5.2-8 HomalgRowVector</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X871AF271843FF2B5">5.2-9 HomalgColumnVector</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X872D39C678D0C4AE">5.2-10 HomalgDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81225377833C4644"><code>5.2-11 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7C4E49D287011DCD">5.2-12 CoercedMatrix</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7D92ECFC8030CF40">5.3 <span class="Heading">Matrices: Properties</span></a>
 </span>
@@ -441,9 +443,27 @@ Z
 
 <p>Special case of <code class="func">HomalgMatrix</code> (<a href="chap5_mj.html#X864ACCB08094F0B7"><span class="RefLink">5.2-6</span></a>).</p>
 
+<p><a id="X7B127B5584CD012D" name="X7B127B5584CD012D"></a></p>
+
+<h5>5.2-8 HomalgRowVector</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgRowVector</code>( <var class="Arg">entries</var>, <var class="Arg">nr_cols</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>Special case of <code class="func">HomalgMatrix</code> (<a href="chap5_mj.html#X864ACCB08094F0B7"><span class="RefLink">5.2-6</span></a>) for matrices with a single row. <var class="Arg">entries</var> must be a list of ring elements.</p>
+
+<p><a id="X871AF271843FF2B5" name="X871AF271843FF2B5"></a></p>
+
+<h5>5.2-9 HomalgColumnVector</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgColumnVector</code>( <var class="Arg">entries</var>, <var class="Arg">nr_rows</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>Special case of <code class="func">HomalgMatrix</code> (<a href="chap5_mj.html#X864ACCB08094F0B7"><span class="RefLink">5.2-6</span></a>) for matrices with a single column. <var class="Arg">entries</var> must be a list of ring elements.</p>
+
 <p><a id="X872D39C678D0C4AE" name="X872D39C678D0C4AE"></a></p>
 
-<h5>5.2-8 HomalgDiagonalMatrix</h5>
+<h5>5.2-10 HomalgDiagonalMatrix</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgDiagonalMatrix</code>( <var class="Arg">diag</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
@@ -466,7 +486,7 @@ Z
 
 <p><a id="X81225377833C4644" name="X81225377833C4644"></a></p>
 
-<h5><code>5.2-9 \*</code></h5>
+<h5><code>5.2-11 \*</code></h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">R</var>, <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">mat</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
@@ -506,7 +526,7 @@ modulo [ 4 ]
 
 <p><a id="X7C4E49D287011DCD" name="X7C4E49D287011DCD"></a></p>
 
-<h5>5.2-10 CoercedMatrix</h5>
+<h5>5.2-12 CoercedMatrix</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoercedMatrix</code>( <var class="Arg">ring_from</var>, <var class="Arg">ring_to</var>, <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoercedMatrix</code>( <var class="Arg">ring_to</var>, <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>

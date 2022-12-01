@@ -377,7 +377,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn  case the matrix was created using [2XCoercedMatrix[102X ([14X5.2-10[114X) then the filter
+  [33X[0;0YIn  case the matrix was created using [2XCoercedMatrix[102X ([14X5.2-12[114X) then the filter
   [10XHasEvalCoercedMatrix[110X  for  [3XC[103X  is set to true and the [10XEval[110X value of a copy of
   [10XEvalCoercedMatrix([110X[3XC[103X[10X)[110X  in  [10XHomalgRing([110X[3XC[103X[10X)[110X  will  be  used to set the attribute
   [10XEval[110X.[133X

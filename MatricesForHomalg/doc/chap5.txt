@@ -252,7 +252,23 @@
   
   [33X[0;0YSpecial case of [2XHomalgMatrix[102X ([14X5.2-6[114X).[133X
   
-  [1X5.2-8 HomalgDiagonalMatrix[101X
+  [1X5.2-8 HomalgRowVector[101X
+  
+  [33X[1;0Y[29X[2XHomalgRowVector[102X( [3Xentries[103X, [3Xnr_cols[103X, [3XR[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YSpecial case of [2XHomalgMatrix[102X ([14X5.2-6[114X) for matrices with a single row. [3Xentries[103X
+  must be a list of ring elements.[133X
+  
+  [1X5.2-9 HomalgColumnVector[101X
+  
+  [33X[1;0Y[29X[2XHomalgColumnVector[102X( [3Xentries[103X, [3Xnr_rows[103X, [3XR[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YSpecial  case  of  [2XHomalgMatrix[102X  ([14X5.2-6[114X)  for matrices with a single column.
+  [3Xentries[103X must be a list of ring elements.[133X
+  
+  [1X5.2-10 HomalgDiagonalMatrix[101X
   
   [33X[1;0Y[29X[2XHomalgDiagonalMatrix[102X( [3Xdiag[103X, [3XR[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
@@ -273,7 +289,7 @@
     [4X[28X<A diagonal 3 x 3 matrix over an internal ring>[128X[104X
   [4X[32X[104X
   
-  [1X5.2-9 \*[101X
+  [1X5.2-11 \*[101X
   
   [33X[1;0Y[29X[2X\*[102X( [3XR[103X, [3Xmat[103X ) [32X operation[133X
   [33X[1;0Y[29X[2X\*[102X( [3Xmat[103X, [3XR[103X ) [32X operation[133X
@@ -311,7 +327,7 @@
     [4X[28X<A non-zero 3 x 3 matrix over a residue class ring>[128X[104X
   [4X[32X[104X
   
-  [1X5.2-10 CoercedMatrix[101X
+  [1X5.2-12 CoercedMatrix[101X
   
   [33X[1;0Y[29X[2XCoercedMatrix[102X( [3Xring_from[103X, [3Xring_to[103X, [3Xmat[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XCoercedMatrix[102X( [3Xring_to[103X, [3Xmat[103X ) [32X operation[133X
