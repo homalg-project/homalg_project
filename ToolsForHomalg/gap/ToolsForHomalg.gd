@@ -537,3 +537,8 @@ DeclareGlobalFunction( "ListImpliedFilters" );
 #!   If a function <A>break_function</A> is given, it is executed before entering the break-loop.
 #! @Arguments name[, break_at[, break_function]]
 DeclareGlobalFunction( "Breakpoint" );
+
+#! @Description
+#!   Like <C>ReadPackage</C> but reads the file only once in the runnig GAP session.
+#! @Arguments name
+DeclareGlobalFunction( "ReadPackageOnce" );

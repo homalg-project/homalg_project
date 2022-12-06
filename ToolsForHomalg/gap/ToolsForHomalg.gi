@@ -122,6 +122,8 @@ InstallValue( HOMALG_TOOLS,
             
             minus_infinity := -999999,
             
+            ReadPackageOnce := [ ],
+            
             ## ContainersForWeakPointers "will be added below",
             
             )
@@ -2811,6 +2813,39 @@ InstallGlobalFunction( Breakpoint, function( name, args... )
         
         Print( "Breakpoint ", name, ": ", TOOLS_FOR_HOMALG_INTERNAL_BREAKPOINTS.(name), "\n" );
         
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( ReadPackageOnce,
+  function( arg... )
+    local pos, relpath, pkgname, namespace, filename;
+    
+    if Length( arg ) = 1 then
+        pos := Position( arg[1], '/' );
+        if pos = fail then
+            ErrorNoReturn( arg[1], " is not a filename in the form 'package/filepath'" );
+        fi;
+        relpath := arg[1]{[ pos + 1 .. Length( arg[1] ) ]};
+        pkgname := LowercaseString( arg[1]{[ 1 .. pos - 1 ]} );
+        namespace := GAPInfo.PackagesInfo.(pkgname)[1].PackageName;
+    elif Length( arg ) = 2 then
+        pkgname := LowercaseString( arg[1] );
+        namespace := GAPInfo.PackagesInfo.(pkgname)[1].PackageName;
+        relpath := arg[2];
+    else
+        Error( "expected 1 or 2 arguments" );
+    fi;
+    filename := Filename( DirectoriesPackageLibrary( pkgname, "" ), relpath );
+    if filename <> fail and IsReadableFile( filename ) then
+        if filename in HOMALG_TOOLS.ReadPackageOnce then
+            return true;
+        fi;
+        Add( HOMALG_TOOLS.ReadPackageOnce, filename );
+        return CallFuncList( ReadPackage, arg );
+    else
+        return false;
     fi;
     
 end );
