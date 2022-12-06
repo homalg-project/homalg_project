@@ -347,6 +347,12 @@
   number  of  times.  If  a  function  [3Xbreak_function[103X is given, it is executed
   before entering the break-loop.[133X
   
+  [1X8.1-53 ReadPackageOnce[101X
+  
+  [33X[1;0Y[29X[2XReadPackageOnce[102X( [3Xname[103X ) [32X function[133X
+  
+  [33X[0;0YLike [10XReadPackage[110X but reads the file only once in the runnig GAP session.[133X
+  
   
   [1X8.2 [33X[0;0YExample functions[133X[101X
   
