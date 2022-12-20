@@ -69,6 +69,9 @@ Obj FuncSYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS( Obj self, Obj a,
       j++;
       k++;
   }
+  if(k == 1) {
+    return NEW_PLIST(T_PLIST_EMPTY,0);
+  }
   SET_LEN_PLIST(c,k-1);
   SHRINK_PLIST(c,k-1);
   return c;
