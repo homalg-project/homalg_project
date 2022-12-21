@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "homalg",
 Subtitle := "A homological algebra meta-package for computable Abelian categories",
-Version := "2022.11-01",
-Date := "23/11/2022",
+Version := "2022.12-01",
+Date := "21/12/2022",
 License := "GPL-2.0-or-later",
 
 Persons := [
