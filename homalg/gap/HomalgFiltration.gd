@@ -135,7 +135,8 @@ DeclareOperation( "LowestDegreeMorphism",
 DeclareOperation( "HighestDegreeMorphism",
         [ IsHomalgFiltration ] );
 
-DeclareAttribute( "UnderlyingObject", IsHomalgFiltration );
+DeclareOperation( "UnderlyingObject",
+        [ IsHomalgFiltration ] );
 
 DeclareOperation( "IsomorphismOfFiltration",
         [ IsHomalgFiltration ] );
