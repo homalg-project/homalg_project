@@ -95,7 +95,8 @@ DeclareAttribute( "EpiOnFactorObject",
 DeclareOperation( "MorphismHavingSubobjectAsItsImage",
         [ IsHomalgObject ] );
 
-DeclareAttribute( "UnderlyingObject", IsHomalgObject );
+DeclareOperation( "UnderlyingObject",
+        [ IsHomalgObject ] );
 
 DeclareOperation( "IsSubset",
         [ IsStructureObjectOrObjectOrMorphism, IsStructureObjectOrObjectOrMorphism ] );
