@@ -100,6 +100,18 @@ DeclareOperation( "RightDivide",
 DeclareOperation( "LeftDivide",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "SafeRightDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "SafeLeftDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "UniqueRightDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "UniqueLeftDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 DeclareOperation( "GenerateSameRowModule",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 

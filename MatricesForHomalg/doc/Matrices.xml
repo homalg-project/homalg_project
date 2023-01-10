@@ -172,6 +172,10 @@
 <#Include Label="LeftDivide">
 <#Include Label="RelativeRightDivide">
 <#Include Label="RelativeLeftDivide">
+<#Include Label="SafeRightDivide">
+<#Include Label="SafeLeftDivide">
+<#Include Label="UniqueRightDivide">
+<#Include Label="UniqueLeftDivide">
 
 <#Include Label="GenerateSameRowModule">
 <#Include Label="GenerateSameColumnModule">
