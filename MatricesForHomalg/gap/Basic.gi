@@ -635,6 +635,104 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="SafeRightDivide">
+##  <ManSection>
+##    <Oper Arg="B, A" Name="SafeRightDivide" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Same as <Ref Oper="RightDivide" Label="for pairs of matrices"/>, but asserts that the result is not <C>fail</C>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( SafeRightDivide,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( B, A )
+    local T;
+    
+    T := RightDivide( B, A );
+    
+    Assert( 0, T <> fail );
+    
+    return T;
+    
+end );
+
+##  <#GAPDoc Label="SafeLeftDivide">
+##  <ManSection>
+##    <Oper Arg="A, B" Name="SafeLeftDivide" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Same as <Ref Oper="LeftDivide" Label="for pairs of matrices"/>, but asserts that the result is not <C>fail</C>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( SafeLeftDivide,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    local T;
+    
+    T := LeftDivide( A, B );
+    
+    Assert( 0, T <> fail );
+    
+    return T;
+    
+end );
+
+##  <#GAPDoc Label="UniqueRightDivide">
+##  <ManSection>
+##    <Oper Arg="B, A" Name="UniqueRightDivide" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Same as <Ref Oper="SafeRightDivide" Label="for pairs of matrices"/>, but asserts
+##      at assertion level 5 that the solution is unique.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( UniqueRightDivide,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( B, A )
+    
+    ## check uniqueness of the solution
+    Assert( 5, IsZero( SyzygiesOfRows( A ) ) );
+    
+    return SafeRightDivide( B, A );
+    
+end );
+
+##  <#GAPDoc Label="UniqueLeftDivide">
+##  <ManSection>
+##    <Oper Arg="A, B" Name="UniqueLeftDivide" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Same as <Ref Oper="SafeLeftDivide" Label="for pairs of matrices"/>, but asserts
+##      at assertion level 5 that the solution is unique.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( UniqueLeftDivide,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    ## check uniqueness of the solution
+    Assert( 5, IsZero( SyzygiesOfColumns( A ) ) );
+    
+    return SafeLeftDivide( A, B );
+    
+end );
+
 ##  <#GAPDoc Label="LeftInverse:method">
 ##  <ManSection>
 ##    <Meth Arg="RI" Name="LeftInverse" Label="for matrices"/>
