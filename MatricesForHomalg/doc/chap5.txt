@@ -1521,7 +1521,37 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1X5.5-55 GenerateSameRowModule[101X
+  [1X5.5-55 SafeRightDivide[101X
+  
+  [33X[1;0Y[29X[2XSafeRightDivide[102X( [3XB[103X, [3XA[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YSame as [2XRightDivide[102X ([14X5.5-51[114X), but asserts that the result is not [10Xfail[110X.[133X
+  
+  [1X5.5-56 SafeLeftDivide[101X
+  
+  [33X[1;0Y[29X[2XSafeLeftDivide[102X( [3XA[103X, [3XB[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YSame as [2XLeftDivide[102X ([14X5.5-52[114X), but asserts that the result is not [10Xfail[110X.[133X
+  
+  [1X5.5-57 UniqueRightDivide[101X
+  
+  [33X[1;0Y[29X[2XUniqueRightDivide[102X( [3XB[103X, [3XA[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YSame  as [2XSafeRightDivide[102X ([14X5.5-55[114X), but asserts at assertion level 5 that the
+  solution is unique.[133X
+  
+  [1X5.5-58 UniqueLeftDivide[101X
+  
+  [33X[1;0Y[29X[2XUniqueLeftDivide[102X( [3XA[103X, [3XB[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YSame  as  [2XSafeLeftDivide[102X ([14X5.5-56[114X), but asserts at assertion level 5 that the
+  solution is unique.[133X
+  
+  [1X5.5-59 GenerateSameRowModule[101X
   
   [33X[1;0Y[29X[2XGenerateSameRowModule[102X( [3XM[103X, [3XN[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
@@ -1529,7 +1559,7 @@
   [33X[0;0YCheck  if  the  row span of [3XM[103X and of [3XN[103X are identical or not (--> [2XRightDivide[102X
   ([14X5.5-51[114X)).[133X
   
-  [1X5.5-56 GenerateSameColumnModule[101X
+  [1X5.5-60 GenerateSameColumnModule[101X
   
   [33X[1;0Y[29X[2XGenerateSameColumnModule[102X( [3XM[103X, [3XN[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
@@ -1537,7 +1567,7 @@
   [33X[0;0YCheck  if the column span of [3XM[103X and of [3XN[103X are identical or not (--> [2XLeftDivide[102X
   ([14X5.5-52[114X)).[133X
   
-  [1X5.5-57 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[101X
+  [1X5.5-61 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[101X
   
   [33X[1;0Y[29X[2XSimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list of 5 [5Xhomalg[105X matrices[133X
@@ -1547,7 +1577,7 @@
   inverses  [3XUI[103X,  [3XVI[103X,  respectively.  The idea is that the matrix [3XS[103X should look
   "simpler" than [3XM[103X.[133X
   
-  [1X5.5-58 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[101X
+  [1X5.5-62 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[101X
   
   [33X[1;0Y[29X[2XSimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list of 3 [5Xhomalg[105X matrices[133X
@@ -1556,7 +1586,7 @@
   [3XS[103X,  [3XT[103X, [3XTI[103X such that [3X T M = S[103X. Moreover, [3XT[103X is invertible with inverse [3XTI[103X. The
   idea is that the matrix [3XS[103X should look "simpler" than [3XM[103X.[133X
   
-  [1X5.5-59 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[101X
+  [1X5.5-63 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[101X
   
   [33X[1;0Y[29X[2XSimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[102X( [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list of 3 [5Xhomalg[105X matrices[133X
@@ -1565,7 +1595,7 @@
   [3XS[103X,  [3XT[103X, [3XTI[103X such that [3X M T = S[103X. Moreover, [3XT[103X is invertible with inverse [3XTI[103X. The
   idea is that the matrix [3XS[103X should look "simpler" than [3XM[103X.[133X
   
-  [1X5.5-60 CoefficientsWithGivenMonomials[101X
+  [1X5.5-64 CoefficientsWithGivenMonomials[101X
   
   [33X[1;0Y[29X[2XCoefficientsWithGivenMonomials[102X( [3XM[103X, [3Xmonomials[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X

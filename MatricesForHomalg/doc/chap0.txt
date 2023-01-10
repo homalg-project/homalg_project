@@ -6,10 +6,10 @@
                        [1X Matrices for the homalg project [101X
   
   
-                                   2022.12-01
+                                   2023.01-01
   
   
-                                1 December 2022
+                                10 January 2023
   
   
                                 Mohamed Barakat
@@ -320,12 +320,16 @@
       5.5-52 LeftDivide
       5.5-53 RightDivide
       5.5-54 LeftDivide
-      5.5-55 GenerateSameRowModule
-      5.5-56 GenerateSameColumnModule
-      5.5-57 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices
-      5.5-58 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix
-      5.5-59 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix
-      5.5-60 CoefficientsWithGivenMonomials
+      5.5-55 SafeRightDivide
+      5.5-56 SafeLeftDivide
+      5.5-57 UniqueRightDivide
+      5.5-58 UniqueLeftDivide
+      5.5-59 GenerateSameRowModule
+      5.5-60 GenerateSameColumnModule
+      5.5-61 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices
+      5.5-62 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix
+      5.5-63 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix
+      5.5-64 CoefficientsWithGivenMonomials
   6 [33X[0;0YRing Relations[133X
     6.1 [33X[0;0YRing Relations: Categories and Representations[133X
       6.1-1 IsHomalgRingRelations

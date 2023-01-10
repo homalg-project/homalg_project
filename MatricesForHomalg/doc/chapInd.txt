@@ -41,7 +41,7 @@
   [2XCoefficientsOfNumeratorOfHilbertPoincareSeries[102X 5.4-15 
   [2XCoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[102X 5.4-14 
   [2XCoefficientsRing[102X 3.4-20 
-  [2XCoefficientsWithGivenMonomials[102X, for two homalg matrices 5.5-60 
+  [2XCoefficientsWithGivenMonomials[102X, for two homalg matrices 5.5-64 
       homalgTable entry B.1-24 
   [2XCoercedMatrix[102X, copy a matrix over a different ring 5.2-12 
       copy a matrix over a different ring (convenience) 5.2-12 
@@ -99,8 +99,8 @@
       for matrices created with UnionOfColumns C.4-13 
       for matrices created with UnionOfRows C.4-12 
   [2XGeneralLinearRank[102X 3.4-25 
-  [2XGenerateSameColumnModule[102X, for pairs of matrices 5.5-56 
-  [2XGenerateSameRowModule[102X, for pairs of matrices 5.5-55 
+  [2XGenerateSameColumnModule[102X, for pairs of matrices 5.5-60 
+  [2XGenerateSameRowModule[102X, for pairs of matrices 5.5-59 
   [2XGetColumnIndependentUnitPositions[102X, for matrices 5.5-24 
       homalgTable entry B.2-6 
   [2XGetRowIndependentUnitPositions[102X, for matrices 5.5-25 
@@ -311,9 +311,11 @@
   [2XRingElementConstructor[102X 3.4-3 
   [2XRingMap[102X, constructor for ring maps 4.2-1 
   [2XRowRankOfMatrix[102X 5.4-10 
-  [2XSimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[102X, for matrices 5.5-57 
-  [2XSimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-58 
-  [2XSimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-59 
+  [2XSafeLeftDivide[102X, for pairs of matrices 5.5-56 
+  [2XSafeRightDivide[102X, for pairs of matrices 5.5-55 
+  [2XSimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices[102X, for matrices 5.5-61 
+  [2XSimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-62 
+  [2XSimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix[102X, for matrices 5.5-63 
   [2XSource[102X, for ring maps 4.4-1 
   [2XStableRank[102X 3.4-27 
   [2XSubMat[102X, homalgTable entry B.1-18 
@@ -340,6 +342,8 @@
       homalgTable entry B.1-9 
       ResidueClassRing D.2-9 
   [2XUnionOfRowsPair[102X, homalgTable entry B.1-10 
+  [2XUniqueLeftDivide[102X, for pairs of matrices 5.5-58 
+  [2XUniqueRightDivide[102X, for pairs of matrices 5.5-57 
   [2XUnreducedNumeratorOfHilbertPoincareSeries[102X 5.4-16 
   [2XZero[102X, for homalg rings 3.4-6 
   [2XZeroColumns[102X 5.4-5 

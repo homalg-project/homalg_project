@@ -164,12 +164,16 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D0EAF527F8514E0">5.5-52 LeftDivide</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7A8546EA87E3AE67">5.5-53 RightDivide</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86CEB1FC7C358777">5.5-54 LeftDivide</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X82B2C4987D6D5BD3">5.5-55 GenerateSameRowModule</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X867A947682754A9A">5.5-56 GenerateSameColumnModule</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81CDBBBE878DC1E5">5.5-57 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X85DA10C07E7E5A3D">5.5-58 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X79C124318588F37F">5.5-59 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7EEFD7887E96714F">5.5-60 CoefficientsWithGivenMonomials</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86DFDD25824E2F35">5.5-55 SafeRightDivide</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X85B64BD47F0379C5">5.5-56 SafeLeftDivide</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7F6BAF8E7F2343EA">5.5-57 UniqueRightDivide</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8788CB987A8A18A7">5.5-58 UniqueLeftDivide</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X82B2C4987D6D5BD3">5.5-59 GenerateSameRowModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X867A947682754A9A">5.5-60 GenerateSameColumnModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81CDBBBE878DC1E5">5.5-61 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X85DA10C07E7E5A3D">5.5-62 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X79C124318588F37F">5.5-63 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7EEFD7887E96714F">5.5-64 CoefficientsWithGivenMonomials</a></span>
 </div></div>
 </div>
 
@@ -1803,9 +1807,45 @@ InstallMethod( LeftDivide,
 end );
 </pre></div>
 
+<p><a id="X86DFDD25824E2F35" name="X86DFDD25824E2F35"></a></p>
+
+<h5>5.5-55 SafeRightDivide</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SafeRightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>Same as <code class="func">RightDivide</code> (<a href="chap5_mj.html#X850AEC9C7C00AFF5"><span class="RefLink">5.5-51</span></a>), but asserts that the result is not <code class="code">fail</code>.</p>
+
+<p><a id="X85B64BD47F0379C5" name="X85B64BD47F0379C5"></a></p>
+
+<h5>5.5-56 SafeLeftDivide</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SafeLeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>Same as <code class="func">LeftDivide</code> (<a href="chap5_mj.html#X7D0EAF527F8514E0"><span class="RefLink">5.5-52</span></a>), but asserts that the result is not <code class="code">fail</code>.</p>
+
+<p><a id="X7F6BAF8E7F2343EA" name="X7F6BAF8E7F2343EA"></a></p>
+
+<h5>5.5-57 UniqueRightDivide</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UniqueRightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>Same as <code class="func">SafeRightDivide</code> (<a href="chap5_mj.html#X86DFDD25824E2F35"><span class="RefLink">5.5-55</span></a>), but asserts at assertion level 5 that the solution is unique.</p>
+
+<p><a id="X8788CB987A8A18A7" name="X8788CB987A8A18A7"></a></p>
+
+<h5>5.5-58 UniqueLeftDivide</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UniqueLeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>Same as <code class="func">SafeLeftDivide</code> (<a href="chap5_mj.html#X85B64BD47F0379C5"><span class="RefLink">5.5-56</span></a>), but asserts at assertion level 5 that the solution is unique.</p>
+
 <p><a id="X82B2C4987D6D5BD3" name="X82B2C4987D6D5BD3"></a></p>
 
-<h5>5.5-55 GenerateSameRowModule</h5>
+<h5>5.5-59 GenerateSameRowModule</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GenerateSameRowModule</code>( <var class="Arg">M</var>, <var class="Arg">N</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
@@ -1814,7 +1854,7 @@ end );
 
 <p><a id="X867A947682754A9A" name="X867A947682754A9A"></a></p>
 
-<h5>5.5-56 GenerateSameColumnModule</h5>
+<h5>5.5-60 GenerateSameColumnModule</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GenerateSameColumnModule</code>( <var class="Arg">M</var>, <var class="Arg">N</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
@@ -1823,7 +1863,7 @@ end );
 
 <p><a id="X81CDBBBE878DC1E5" name="X81CDBBBE878DC1E5"></a></p>
 
-<h5>5.5-57 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices</h5>
+<h5>5.5-61 SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a list of 5 <strong class="pkg">homalg</strong> matrices</p>
@@ -1832,7 +1872,7 @@ end );
 
 <p><a id="X85DA10C07E7E5A3D" name="X85DA10C07E7E5A3D"></a></p>
 
-<h5>5.5-58 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix</h5>
+<h5>5.5-62 SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a list of 3 <strong class="pkg">homalg</strong> matrices</p>
@@ -1841,7 +1881,7 @@ end );
 
 <p><a id="X79C124318588F37F" name="X79C124318588F37F"></a></p>
 
-<h5>5.5-59 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix</h5>
+<h5>5.5-63 SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a list of 3 <strong class="pkg">homalg</strong> matrices</p>
@@ -1850,7 +1890,7 @@ end );
 
 <p><a id="X7EEFD7887E96714F" name="X7EEFD7887E96714F"></a></p>
 
-<h5>5.5-60 CoefficientsWithGivenMonomials</h5>
+<h5>5.5-64 CoefficientsWithGivenMonomials</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsWithGivenMonomials</code>( <var class="Arg">M</var>, <var class="Arg">monomials</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>

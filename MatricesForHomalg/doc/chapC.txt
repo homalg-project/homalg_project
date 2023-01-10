@@ -1172,7 +1172,7 @@
   [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
-  [33X[0;0YIn case the matrix was created using [2XCoefficientsWithGivenMonomials[102X ([14X5.5-60[114X)
+  [33X[0;0YIn case the matrix was created using [2XCoefficientsWithGivenMonomials[102X ([14X5.5-64[114X)
   then  the  filter [10XHasEvalCoefficientsWithGivenMonomials[110X for [3XC[103X is set to true
   and the [10XhomalgTable[110X function [2XCoefficientsWithGivenMonomials[102X ([14XB.1-24[114X) will be
   used to set the attribute [10XEval[110X.[133X
