@@ -13,8 +13,8 @@ Obj FuncSYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS( Obj self, Obj a,
   Int i,j,k;
   Int x,y;
 
-  lena = LEN_PLIST(a);
-  lenb = LEN_PLIST(b);
+  lena = LEN_LIST(a);
+  lenb = LEN_LIST(b);
   len = lena+lenb;
   if (len == 0) {
       return NEW_PLIST(T_PLIST_EMPTY,0);
@@ -25,8 +25,8 @@ Obj FuncSYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS( Obj self, Obj a,
   j = 1;
   k = 1;
   if (i <= lena && j <= lenb) {
-      x = INT_INTOBJ(ELM_PLIST(a,i));
-      y = INT_INTOBJ(ELM_PLIST(b,j));
+      x = INT_INTOBJ(ELM_LIST(a,i));
+      y = INT_INTOBJ(ELM_LIST(b,j));
       while (1) {
           if (x < y) {
               SET_ELM_PLIST(c,k,INTOBJ_INT(x));
@@ -35,7 +35,7 @@ Obj FuncSYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS( Obj self, Obj a,
               if (i > lena) 
                   break;
               else
-                  x = INT_INTOBJ(ELM_PLIST(a,i));
+                  x = INT_INTOBJ(ELM_LIST(a,i));
           } else if (y < x) {
               SET_ELM_PLIST(c,k,INTOBJ_INT(y));
               k++;
@@ -43,29 +43,29 @@ Obj FuncSYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS( Obj self, Obj a,
               if (j > lenb)
                   break;
               else
-                  y = INT_INTOBJ(ELM_PLIST(b,j));
+                  y = INT_INTOBJ(ELM_LIST(b,j));
           } else {
               i++;
               j++;
               if (i > lena)
                   break;
               else
-                  x = INT_INTOBJ(ELM_PLIST(a,i));
+                  x = INT_INTOBJ(ELM_LIST(a,i));
               if (j > lenb)
                   break;
               else
-                  y = INT_INTOBJ(ELM_PLIST(b,j));
+                  y = INT_INTOBJ(ELM_LIST(b,j));
           }
       }
   }
   /* Only one of the following will happen: */
   while (i <= lena) {
-      SET_ELM_PLIST(c,k,ELM_PLIST(a,i));
+      SET_ELM_PLIST(c,k,ELM_LIST(a,i));
       i++;
       k++;
   }
   while (j <= lenb) {
-      SET_ELM_PLIST(c,k,ELM_PLIST(b,j));
+      SET_ELM_PLIST(c,k,ELM_LIST(b,j));
       j++;
       k++;
   }
