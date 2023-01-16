@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "4ti2Interface",
 Subtitle := "A link to 4ti2",
-Version := "2022.09-01",
-Date := "19/09/2022",
+Version := "2023.01-01",
+Date := "16/01/2023",
 License := "GPL-2.0-or-later",
 
 Persons := [
