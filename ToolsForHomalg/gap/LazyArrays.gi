@@ -196,7 +196,7 @@ InstallMethod( ListOp,
         
   function( L, g )
     
-    return LazyArray( [ 0 .. L!.length - 1 ], x -> g( L!.func( x ) ) );
+    return LazyArray( L!.length, x -> g( L!.func( x ) ) );
     
 end );
 
