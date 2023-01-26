@@ -6,10 +6,10 @@
                [1X Special methods and knowledge propagation tools [101X
   
   
-                                   2022.12-01
+                                   2023.01-01
   
   
-                                6 December 2022
+                                26 January 2023
   
   
                                 Mohamed Barakat
