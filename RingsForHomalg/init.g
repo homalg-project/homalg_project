@@ -15,6 +15,7 @@ ReadPackage( "RingsForHomalg", "gap/Sage.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMA.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalg.gd" );
 ReadPackage( "RingsForHomalg", "gap/Oscar.gd" );
+ReadPackage( "RingsForHomalg", "gap/LiE.gd" );
 
 ## GAP (using the GAP implementation of homalg)
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgBasic.gd" );

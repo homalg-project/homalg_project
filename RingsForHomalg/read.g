@@ -65,6 +65,7 @@ ReadPackage( "RingsForHomalg", "gap/Sage.gi" );
 ReadPackage( "RingsForHomalg", "gap/MAGMA.gi" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalg.gi" );
 ReadPackage( "RingsForHomalg", "gap/Oscar.gi" );
+ReadPackage( "RingsForHomalg", "gap/LiE.gi" );
 
 if IsBound( MakeThreadLocal ) then
     Perform(
@@ -105,6 +106,8 @@ if IsBound( MakeThreadLocal ) then
              "CommonHomalgTableForOscarBasic",
              "CommonHomalgTableForOscarBestBasis",
              "CommonHomalgTableForOscarTools",
+             "HOMALG_IO_LiE",
+             "LiEMacros",
              ],
             MakeThreadLocal );
 fi;
