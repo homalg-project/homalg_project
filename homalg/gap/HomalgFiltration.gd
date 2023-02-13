@@ -135,8 +135,11 @@ DeclareOperation( "LowestDegreeMorphism",
 DeclareOperation( "HighestDegreeMorphism",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "UnderlyingObject",
-        [ IsHomalgFiltration ] );
+if IsBoundGlobal( "UnderlyingObject" ) and not IsAttribute( ValueGlobal( "UnderlyingObject" ) ) then
+    DeclareOperation( "UnderlyingObject", [ IsHomalgFiltration ] );
+else
+    DeclareAttribute( "UnderlyingObject", IsHomalgFiltration );
+fi;
 
 DeclareOperation( "IsomorphismOfFiltration",
         [ IsHomalgFiltration ] );

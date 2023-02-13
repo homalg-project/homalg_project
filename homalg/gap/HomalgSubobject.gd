@@ -95,8 +95,11 @@ DeclareAttribute( "EpiOnFactorObject",
 DeclareOperation( "MorphismHavingSubobjectAsItsImage",
         [ IsHomalgObject ] );
 
-DeclareOperation( "UnderlyingObject",
-        [ IsHomalgObject ] );
+if IsBoundGlobal( "UnderlyingObject" ) and not IsAttribute( ValueGlobal( "UnderlyingObject" ) ) then
+    DeclareOperation( "UnderlyingObject", [ IsHomalgObject ] );
+else
+    DeclareAttribute( "UnderlyingObject", IsHomalgObject );
+fi;
 
 DeclareOperation( "IsSubset",
         [ IsStructureObjectOrObjectOrMorphism, IsStructureObjectOrObjectOrMorphism ] );
