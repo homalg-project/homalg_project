@@ -29,6 +29,8 @@ ReadPackage( "ToolsForHomalg", "gap/LazyHLists.gd" );
 
 ReadPackage( "ToolsForHomalg", "gap/ListsWithAttributes.gd" );
 
+ReadPackage( "ToolsForHomalg", "gap/ZFunctions.gd" );
+
 if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ) then
     ReadPackage( "ToolsForHomalg", "gap/Julia.gd" );
 fi;

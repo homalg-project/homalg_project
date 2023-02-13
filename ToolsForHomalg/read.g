@@ -24,6 +24,8 @@ ReadPackage( "ToolsForHomalg", "gap/LazyHLists.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/ListsWithAttributes.gi" );
 
+ReadPackage( "ToolsForHomalg", "gap/ZFunctions.gi" );
+
 ReadPackage( "ToolsForHomalg", "gap/GenericView.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/InstallViews.gi" );
