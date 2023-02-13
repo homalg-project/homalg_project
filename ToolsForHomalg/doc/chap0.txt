@@ -6,10 +6,10 @@
                [1X Special methods and knowledge propagation tools [101X
   
   
-                                   2023.01-01
+                                   2023.02-01
   
   
-                                26 January 2023
+                                13 February 2023
   
   
                                 Mohamed Barakat
@@ -222,6 +222,32 @@
       9.1-9 Add
       9.1-10 ContentListFromSentinelToHead
       9.1-11 PostOrder
+  10 [33X[0;0YZ-functions[133X
+    10.1 [33X[0;0YGap categories for Z functions[133X
+      10.1-1 IsZFunction
+      10.1-2 IsZFunctionWithInductiveSides
+    10.2 [33X[0;0YCreating Z-functions[133X
+      10.2-1 VoidZFunction
+      10.2-2 AsZFunction
+      10.2-3 UnderlyingFunction
+      10.2-4 ZFunctionValue
+      10.2-5 \[\]
+      10.2-6 ZFunctionWithInductiveSides
+      10.2-7 UpperFunction
+      10.2-8 StableUpperValue
+      10.2-9 IndexOfStableUpperValue
+      10.2-10 SetStableUpperValue
+      10.2-11 StableLowerValue
+      10.2-12 IndexOfStableLowerValue
+      10.2-13 SetStableLowerValue
+      10.2-14 Reflection
+      10.2-15 ApplyShift
+      10.2-16 ApplyMap
+      10.2-17 ApplyMap
+      10.2-18 BaseZFunctions
+      10.2-19 AppliedMap
+      10.2-20 CombineZFunctions
+      10.2-21 Replace
   
   
   [32X

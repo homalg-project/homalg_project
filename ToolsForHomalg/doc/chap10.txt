@@ -1,0 +1,275 @@
+  
+  [1X10 [33X[0;0YZ-functions[133X[101X
+  
+  
+  [1X10.1 [33X[0;0YGap categories for Z functions[133X[101X
+  
+  [33X[0;0YA  [23X\mathbb{Z}[123X-function  is  an  enumerated  collection  of  objects in which
+  repetitions  are allowed and order does matter. The reason behind calling it
+  a  [23X\mathbb{Z}[123X-function  rather  than simply a sequence, is to avoid possible
+  conflicts with other packages that use the terms [13XSequence[113X and [13XIsSequence[113X.[133X
+  
+  [1X10.1-1 IsZFunction[101X
+  
+  [33X[1;0Y[29X[2XIsZFunction[102X( [3Xarg[103X ) [32X filter[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
+  
+  [33X[0;0YGap-categories of [23X\mathbb{Z}[123X-functions[133X
+  
+  [1X10.1-2 IsZFunctionWithInductiveSides[101X
+  
+  [33X[1;0Y[29X[2XIsZFunctionWithInductiveSides[102X( [3Xarg[103X ) [32X filter[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
+  
+  [33X[0;0YGap-categories of inductive [23X\mathbb{Z}[123X-functions[133X
+  
+  
+  [1X10.2 [33X[0;0YCreating Z-functions[133X[101X
+  
+  [1X10.2-1 VoidZFunction[101X
+  
+  [33X[1;0Y[29X[2XVoidZFunction[102X( [3Xfunc[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YThe   global   function  has  no  arguments  and  the  output  is  an  empty
+  [23X\mathbb{Z}[123X-function. That means, it can not be evaluated yet.[133X
+  
+  [1X10.2-2 AsZFunction[101X
+  
+  [33X[1;0Y[29X[2XAsZFunction[102X( [3Xfunc[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe  argument is a function [3Xfunc[103X that can be applied on integers. The output
+  is  a  [23X\mathbb{Z}[123X-function  [10Xz_func[110X.  We  call [3Xfunc[103X the [10XUnderlyingFunction[110X of
+  [10Xz_func[110X.[133X
+  
+  [1X10.2-3 UnderlyingFunction[101X
+  
+  [33X[1;0Y[29X[2XUnderlyingFunction[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe  argument  is  a  [3Xz_func[103X. The output is its [10XUnderlyingFunction[110X function.
+  I.e.,  the  function  that  will  be  applied  on  index  [10Xi[110X whenever we call
+  [3Xz_func[103X[[10Xi[110X].[133X
+  
+  [1X10.2-4 ZFunctionValue[101X
+  
+  [33X[1;0Y[29X[2XZFunctionValue[102X( [3Xz_func[103X, [3Xi[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya Gap object[133X
+  
+  [33X[0;0YThe argument is a [23X\mathbb{Z}[123X-function [3Xz_func[103X and an integer [3Xi[103X. The output is
+  [3Xz_func[103X[[3Xi[103X].[133X
+  
+  [1X10.2-5 \[\][101X
+  
+  [33X[1;0Y[29X[2X\[\][102X( [3Xz_func[103X, [3Xi[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya Gap object[133X
+  
+  [33X[0;0YThe method delegates to [10XZFunctionValue[110X.[133X
+  
+  [1X10.2-6 ZFunctionWithInductiveSides[101X
+  
+  [33X[1;0Y[29X[2XZFunctionWithInductiveSides[102X( [3Xn[103X, [3Xval_n[103X, [3Xlower_func[103X, [3Xupper_func[103X, [3Xcompare_func[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function with inductive sides[133X
+  
+  [33X[0;0YThe arguments are an integer [3Xn[103X, a Gap object [3Xval_n[103X, a function [3Xlower_func[103X, a
+  function   [3Xupper_func[103X  and  a  function  [3Xcompare_func[103X.  The  output  is  the
+  [23X\mathbb{Z}[123X-function  [10Xz_func[110X  defined  as  follows:  [10Xz_func[110X[[10Xi[110X]  is  equal  to
+  [3Xlower_func[103X([10Xz_func[110X[[10Xi+1[110X])  if  [10Xi[110X[10X<[110X[3Xn[103X; and is equal to [3Xval_n[103X if [10Xi[110X=[3Xn[103X; and is equal
+  to  [3Xupper_func[103X([10Xz_func[110X[[10Xi-1[110X]) otherwise. At each call, the method compares the
+  computed  value to the previous or next value via the function [3Xcompare_func[103X;
+  and in the affermative case, the method sets a upper or lower stable values.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xf := function (i) Print( "Current i is ", i, "\n" ); return i^2; end;;[127X[104X
+    [4X[25Xgap>[125X [27Xseq := AsZFunction( f );[127X[104X
+    [4X[28X<ZFunction>[128X[104X
+    [4X[25Xgap>[125X [27Xseq[ 0 ];[127X[104X
+    [4X[28XCurrent i is 0[128X[104X
+    [4X[28X0[128X[104X
+    [4X[25Xgap>[125X [27Xseq[ 0 ];[127X[104X
+    [4X[28X0[128X[104X
+    [4X[25Xgap>[125X [27Xupper_func := function ( a )[127X[104X
+    [4X[25X>[125X [27X  if a[ 2 ] <> 0 then return [ a[ 2 ], a[ 1 ] mod a[ 2 ] ]; fi; return a; end;;[127X[104X
+    [4X[25Xgap>[125X [27Xlower_func := IdFunc;;[127X[104X
+    [4X[25Xgap>[125X [27Xgcd_seq := ZFunctionWithInductiveSides( 0, [ 111, 259 ],[127X[104X
+    [4X[25X>[125X [27X              lower_func, upper_func, \= );[127X[104X
+    [4X[28X<ZFunction>[128X[104X
+    [4X[25Xgap>[125X [27XHasStableLowerValue( gcd_seq );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27Xgcd_seq[ -1 ];[127X[104X
+    [4X[28X[ 111, 259 ][128X[104X
+    [4X[25Xgap>[125X [27XHasStableLowerValue( gcd_seq );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XStableLowerValue( gcd_seq );[127X[104X
+    [4X[28X[ 111, 259 ][128X[104X
+    [4X[25Xgap>[125X [27XIndexOfStableLowerValue( gcd_seq );[127X[104X
+    [4X[28X0[128X[104X
+    [4X[25Xgap>[125X [27Xgcd_seq[ 0 ];[127X[104X
+    [4X[28X[ 111, 259 ][128X[104X
+    [4X[25Xgap>[125X [27Xgcd_seq[ 1 ];[127X[104X
+    [4X[28X[ 259, 111 ][128X[104X
+    [4X[25Xgap>[125X [27Xgcd_seq[ 2 ];[127X[104X
+    [4X[28X[ 111, 37 ][128X[104X
+    [4X[25Xgap>[125X [27Xgcd_seq[ 3 ];[127X[104X
+    [4X[28X[ 37, 0 ][128X[104X
+    [4X[25Xgap>[125X [27XHasStableUpperValue( gcd_seq );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27Xgcd_seq[ 4 ];[127X[104X
+    [4X[28X[ 37, 0 ][128X[104X
+    [4X[25Xgap>[125X [27XHasStableUpperValue( gcd_seq );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XStableUpperValue( gcd_seq );[127X[104X
+    [4X[28X[ 37, 0 ][128X[104X
+    [4X[25Xgap>[125X [27XIndexOfStableUpperValue( gcd_seq );[127X[104X
+    [4X[28X3[128X[104X
+    [4X[25Xgap>[125X [27Xsum := ApplyMap( gcd_seq, Sum );[127X[104X
+    [4X[28X<ZFunction>[128X[104X
+    [4X[25Xgap>[125X [27Xsum[ 0 ];[127X[104X
+    [4X[28X370[128X[104X
+    [4X[25Xgap>[125X [27Xsum[ 100 ];[127X[104X
+    [4X[28X37[128X[104X
+    [4X[25Xgap>[125X [27Xc := CombineZFunctions( [ gcd_seq, sum ] );[127X[104X
+    [4X[28X<ZFunction>[128X[104X
+    [4X[25Xgap>[125X [27Xc[ 0 ];[127X[104X
+    [4X[28X[ [ 111, 259 ], 370 ][128X[104X
+  [4X[32X[104X
+  
+  [1X10.2-7 UpperFunction[101X
+  
+  [33X[1;0Y[29X[2XUpperFunction[102X( [3Xz_func[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XLowerFunction[102X( [3Xz_func[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XInitialIndex[102X( [3Xz_func[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XInitialValue[102X( [3Xz_func[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XCompareFunction[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya function[133X
+  
+  [33X[0;0YThey  are  the  attributes  that define a [23X\mathbb{Z}[123X-function with inductive
+  sides.[133X
+  
+  [1X10.2-8 StableUpperValue[101X
+  
+  [33X[1;0Y[29X[2XStableUpperValue[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya Gap object[133X
+  
+  [33X[0;0YThe  argument  is  a  [23X\mathbb{Z}[123X-function  [3Xz_func[103X.  We say that [3Xz_func[103X has a
+  stable  upper value [10Xval[110X, if there is an index [10Xn[110X such that [3Xz_func[103X[[10Xi[110X] is equal
+  to  [10Xval[110X  for all indices [10Xi[110X's greater or equal to [10Xn[110X. In that case, the output
+  is the value [10Xval[110X.[133X
+  
+  [1X10.2-9 IndexOfStableUpperValue[101X
+  
+  [33X[1;0Y[29X[2XIndexOfStableUpperValue[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YThe  argument is a [23X\mathbb{Z}[123X-function [3Xz_func[103X with a stable upper value [10Xval[110X.
+  The output is some index where [3Xz_func[103X starts to take values equal to [10Xval[110X.[133X
+  
+  [1X10.2-10 SetStableUpperValue[101X
+  
+  [33X[1;0Y[29X[2XSetStableUpperValue[102X( [3Xz_func[103X, [3Xn[103X, [3Xval[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThe  arguments  are a [23X\mathbb{Z}[123X-function [3Xz_func[103X, an integer [3Xn[103X and an object
+  [3Xval[103X.  The operation sets [3Xval[103X as a stable upper value for [3Xz_func[103X at the index
+  [3Xn[103X.[133X
+  
+  [1X10.2-11 StableLowerValue[101X
+  
+  [33X[1;0Y[29X[2XStableLowerValue[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya Gap object[133X
+  
+  [33X[0;0YThe  argument  is  a  [23X\mathbb{Z}[123X-function  [3Xz_func[103X.  We say that [3Xz_func[103X has a
+  stable  lower value [10Xval[110X, if there is an index [10Xn[110X such that [3Xz_func[103X[[10Xi[110X] is equal
+  to  [10Xval[110X  for all indices [10Xi[110X's less or equal to [10Xn[110X. In that case, the output is
+  the value [10Xval[110X.[133X
+  
+  [1X10.2-12 IndexOfStableLowerValue[101X
+  
+  [33X[1;0Y[29X[2XIndexOfStableLowerValue[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YThe  argument is a [23X\mathbb{Z}[123X-function [3Xz_func[103X with a stable lower value [10Xval[110X.
+  The output is some index where [3Xz_func[103X starts to take values equal to [10Xval[110X.[133X
+  
+  [1X10.2-13 SetStableLowerValue[101X
+  
+  [33X[1;0Y[29X[2XSetStableLowerValue[102X( [3Xz_func[103X, [3Xn[103X, [3Xval[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThe  arguments  are a [23X\mathbb{Z}[123X-function [3Xz_func[103X, an integer [3Xn[103X and an object
+  [3Xval[103X.  The operation sets [3Xval[103X as a stable lower value for [3Xz_func[103X at the index
+  [3Xn[103X.[133X
+  
+  [1X10.2-14 Reflection[101X
+  
+  [33X[1;0Y[29X[2XReflection[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe  argument  is  a  [23X\mathbb{Z}[123X-function  [3Xz_func[103X.  The  output  is  another
+  [23X\mathbb{Z}[123X-function   [10Xref_z_func[110X   such   that  [10Xref_z_func[110X[[10Xi[110X]  is  equal  to
+  [3Xz_func[103X[[10X-i[110X] for all [10Xi[110X's in [23X\mathbb{Z}[123X.[133X
+  
+  [1X10.2-15 ApplyShift[101X
+  
+  [33X[1;0Y[29X[2XApplyShift[102X( [3Xz_func[103X, [3Xn[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe argument is a [23X\mathbb{Z}[123X-function [3Xz_func[103X and an integer [3Xn[103X. The output is
+  another [23X\mathbb{Z}[123X-function [10Xm[110X such that [10Xm[110X[[10Xi[110X] is equal to [3Xz_func[103X[[10Xn+i[110X].[133X
+  
+  [1X10.2-16 ApplyMap[101X
+  
+  [33X[1;0Y[29X[2XApplyMap[102X( [3Xz_func[103X, [3XF[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe  arguments are a [23X\mathbb{Z}[123X-function [3Xz_func[103X and a function [3XF[103X that can be
+  applied  on  one  argument. The output is another [23X\mathbb{Z}[123X-function [10Xm[110X such
+  that [10Xm[110X[[10Xi[110X] is equal to [3XF[103X([3Xz_func[103X[[10Xi[110X]).[133X
+  
+  [1X10.2-17 ApplyMap[101X
+  
+  [33X[1;0Y[29X[2XApplyMap[102X( [3XL[103X, [3XF[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe  arguments  are  a  list of [23X\mathbb{Z}[123X-functions [3XL[103X and a function [3XF[103X with
+  [10XLength[110X([3XL[103X)  arguments.  The output is another [23X\mathbb{Z}[123X-function [10Xm[110X such that
+  [10Xm[110X[[10Xi[110X]  is  equal  to  [3XF[103X([3XL[103X[1][[10Xi[110X],..., [3XL[103X[[10XLength[110X([3XL[103X)][[10Xi[110X]). We call the list [3XL[103X the
+  [10XBaseZFunctions[110X of [10Xm[110X and [3XF[103X the [10XAppliedMap[110X.[133X
+  
+  [1X10.2-18 BaseZFunctions[101X
+  
+  [33X[1;0Y[29X[2XBaseZFunctions[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya list of [23X\mathbb{Z}[123X-functions[133X
+  
+  [33X[0;0YThe  argument  is  a  [23X\mathbb{Z}[123X-function  [3Xz_func[103X  that  has been defined by
+  applying a map [10XF[110X on a list [10XL[110X of [23X\mathbb{Z}[123X-functions. The output is the list
+  [10XL[110X.[133X
+  
+  [1X10.2-19 AppliedMap[101X
+  
+  [33X[1;0Y[29X[2XAppliedMap[102X( [3Xz_func[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe  argument  is  a  [23X\mathbb{Z}[123X-function  [3Xz_func[103X  that  has been defined by
+  applying  a  map  [10XF[110X  on  a list [10XL[110X of [23X\mathbb{Z}[123X-functions. The output is the
+  function [10XF[110X.[133X
+  
+  [1X10.2-20 CombineZFunctions[101X
+  
+  [33X[1;0Y[29X[2XCombineZFunctions[102X( [3XL[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe  argument  is  a  dense  list  [3XL[103X  of [23X\mathbb{Z}[123X-functions. The output is
+  another  [23X\mathbb{Z}[123X-function  [10Xm[110X  such  that  [10Xm[110X[[10Xi[110X]  is equal to [[3XL[103X[1][[10Xi[110X],...,
+  [3XL[103X[[10XLength[110X([3XL[103X)][[10Xi[110X]] for all indices [10Xi[110X's in [23X\mathbb{Z}[123X.[133X
+  
+  [1X10.2-21 Replace[101X
+  
+  [33X[1;0Y[29X[2XReplace[102X( [3Xz_func[103X, [3Xn[103X, [3XL[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ya [23X\mathbb{Z}[123X-function[133X
+  
+  [33X[0;0YThe  argument is a [23X\mathbb{Z}[123X-function [3Xz_func[103X, an integer [3Xn[103X and a dense list
+  [3XL[103X.  The  output  is  a  new  [23X\mathbb{Z}[123X-function  whose values between [3Xn[103X and
+  [3Xn[103X+[10XLength[110X([3XL[103X)-1 are the entries of [3XL[103X.[133X
+  
