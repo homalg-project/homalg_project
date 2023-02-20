@@ -1,7 +1,7 @@
 name: LocalizeRingForHomalg
-version: "2022.11-01"
+version: "2023.02-01"
 license: "GPL-2.0-or-later"
-date: 2022-11-23
+date: 2023-02-20
 description: |
     A Package for Localization of Polynomial Rings
 
@@ -17,7 +17,7 @@ maintainers:
     - name: Mohamed Barakat
       url: https://mohamed-barakat.github.io
 
-GAP: ">= 4.11.1"
+GAP: ">= 4.12.1"
 
 needed-pkgs:
     - name: "MatricesForHomalg"
@@ -39,11 +39,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/LocalizeRingForHoma
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2022.11-01/LocalizeRingForHomalg-2022.11-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2023.02-01/LocalizeRingForHomalg-2023.02-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2022.11-01/LocalizeRingForHomalg-2022.11-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2023.02-01/LocalizeRingForHomalg-2023.02-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2022.11-01/LocalizeRingForHomalg-2022.11-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2023.02-01/LocalizeRingForHomalg-2023.02-01.pdf
 
 abstract: |
     This package is part of the homalg-project and allows localization of a (computable) commutative ring at a (finitely generated) maximal ideal.
@@ -55,22 +55,22 @@ keywords: |
     homological algebra, local ring, submodule membership problem, syzygies, Mora.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BLW22</span>]   <b class='BibAuthor'>Barakat, M., Lange-Hegermann, M. and Wagh, V.</b>,
+    [<span class='BibKey'>BLW23</span>]   <b class='BibAuthor'>Barakat, M., Lange-Hegermann, M. and Wagh, V.</b>,
      <i class='BibTitle'>LocalizeRingForHomalg, A Package for Localization of Polynomial Rings,
-             Version 2022.11-01</i>
-     (<span class='BibYear'>2022</span>)<br />
+             Version 2023.02-01</i>
+     (<span class='BibYear'>2023</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/LocalizeRingForHomalg">https://homalg-project.github.io/pkg/LocalizeRingForHomalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ LocalizeRingForHomalg2022.11-01,
+    @misc{ LocalizeRingForHomalg2023.02-01,
       author =           {Barakat, M. and Lange-Hegermann, M. and Wagh, V.},
       title =            {{LocalizeRingForHomalg}, A Package for Localization of
-                          Polynomial Rings, {V}ersion 2022.11-01},
-      month =            {Nov},
-      year =             {2022},
+                          Polynomial Rings, {V}ersion 2023.02-01},
+      month =            {Feb},
+      year =             {2023},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/LocalizeRingForHomalg}
@@ -79,6 +79,6 @@ bibtex: |
                           {}{}{}\texttt{LocalizeRingForHomalg}}},
       keywords =         {homological  algebra; local ring; submodule membership
                           problem; syzygies; Mora},
-      printedkey =       {BLW22}
+      printedkey =       {BLW23}
     }
 
