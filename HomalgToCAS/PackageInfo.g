@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "HomalgToCAS",
 Subtitle := "A window to the outer world",
-Version := "2022.11-02",
-Date := "03/11/2022",
+Version := "2023.02-01",
+Date := "20/02/2023",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -158,7 +158,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">= 4.11.1",
+  GAP := ">= 4.12.1",
   NeededOtherPackages := [
                 [ "MatricesForHomalg", ">= 2019.09.01" ],
                 [ "GAPDoc", ">= 1.0" ]
