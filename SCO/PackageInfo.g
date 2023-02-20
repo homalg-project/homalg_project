@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "SCO",
 Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
-Version := "2022.09-01",
+Version := "2023.02-01",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 License := "GPL-2.0-or-later",
 
@@ -77,7 +77,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">= 4.11.1",
+  GAP := ">= 4.12.1",
   NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.08.10" ], [ "Modules", ">= 2011.06.29" ], [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
