@@ -3,46 +3,76 @@
 set -e
 
 # homalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/homalg" --webdir "$PWD/gh-pages/homalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of homalg"
+./dev/release-gap-package --srcdir "$PWD/homalg" --webdir "$PWD/gh-pages/homalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # 4ti2Interface
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/4ti2Interface" --webdir "$PWD/gh-pages/4ti2Interface" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of 4ti2Interface"
+./dev/release-gap-package --srcdir "$PWD/4ti2Interface" --webdir "$PWD/gh-pages/4ti2Interface" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # ExamplesForHomalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/ExamplesForHomalg" --webdir "$PWD/gh-pages/ExamplesForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of ExamplesForHomalg"
+./dev/release-gap-package --srcdir "$PWD/ExamplesForHomalg" --webdir "$PWD/gh-pages/ExamplesForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # Gauss
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/Gauss" --webdir "$PWD/gh-pages/Gauss" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of Gauss"
+./dev/release-gap-package --srcdir "$PWD/Gauss" --webdir "$PWD/gh-pages/Gauss" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # GaussForHomalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/GaussForHomalg" --webdir "$PWD/gh-pages/GaussForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of GaussForHomalg"
+./dev/release-gap-package --srcdir "$PWD/GaussForHomalg" --webdir "$PWD/gh-pages/GaussForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # GradedModules
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/GradedModules" --webdir "$PWD/gh-pages/GradedModules" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of GradedModules"
+./dev/release-gap-package --srcdir "$PWD/GradedModules" --webdir "$PWD/gh-pages/GradedModules" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # GradedRingForHomalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/GradedRingForHomalg" --webdir "$PWD/gh-pages/GradedRingForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of GradedRingForHomalg"
+./dev/release-gap-package --srcdir "$PWD/GradedRingForHomalg" --webdir "$PWD/gh-pages/GradedRingForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # HomalgToCAS
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/HomalgToCAS" --webdir "$PWD/gh-pages/HomalgToCAS" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of HomalgToCAS"
+./dev/release-gap-package --srcdir "$PWD/HomalgToCAS" --webdir "$PWD/gh-pages/HomalgToCAS" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # IO_ForHomalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/IO_ForHomalg" --webdir "$PWD/gh-pages/IO_ForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of IO_ForHomalg"
+./dev/release-gap-package --srcdir "$PWD/IO_ForHomalg" --webdir "$PWD/gh-pages/IO_ForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # LocalizeRingForHomalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/LocalizeRingForHomalg" --webdir "$PWD/gh-pages/LocalizeRingForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of LocalizeRingForHomalg"
+./dev/release-gap-package --srcdir "$PWD/LocalizeRingForHomalg" --webdir "$PWD/gh-pages/LocalizeRingForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # MatricesForHomalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/MatricesForHomalg" --webdir "$PWD/gh-pages/MatricesForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of MatricesForHomalg"
+./dev/release-gap-package --srcdir "$PWD/MatricesForHomalg" --webdir "$PWD/gh-pages/MatricesForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # Modules
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/Modules" --webdir "$PWD/gh-pages/Modules" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of Modules"
+./dev/release-gap-package --srcdir "$PWD/Modules" --webdir "$PWD/gh-pages/Modules" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # RingsForHomalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/RingsForHomalg" --webdir "$PWD/gh-pages/RingsForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of RingsForHomalg"
+./dev/release-gap-package --srcdir "$PWD/RingsForHomalg" --webdir "$PWD/gh-pages/RingsForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # SCO
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/SCO" --webdir "$PWD/gh-pages/SCO" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of SCO"
+./dev/release-gap-package --srcdir "$PWD/SCO" --webdir "$PWD/gh-pages/SCO" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
 
 # ToolsForHomalg
-./dev/release-gap-package --skip-existing-release --srcdir "$PWD/ToolsForHomalg" --webdir "$PWD/gh-pages/ToolsForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release"  --only-tarball
+echo "Simulate release of ToolsForHomalg"
+./dev/release-gap-package --srcdir "$PWD/ToolsForHomalg" --webdir "$PWD/gh-pages/ToolsForHomalg" --update-script "$PWD/gh-pages/update.g" --release-script "$PWD/dev/.release" --only-tarball
+echo ""
