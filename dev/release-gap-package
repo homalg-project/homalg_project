@@ -211,7 +211,7 @@ if [ "x$WEB_DIR" = x ] ; then
     WEB_DIR="$SRC_DIR/gh-pages"
 fi
 if [ ! -d "$WEB_DIR" ] ; then
-    error "could not find 'webdir' with clone of your gh-pages branch"
+    error "could not find webdir \"${WEB_DIR}\" with clone of your gh-pages branch"
 fi
 
 # Check for presence of the update script
@@ -463,7 +463,7 @@ rm -rf "${TMP_DIR:?}/$BASENAME"*
 umask 0022
 
 notice "Exporting repository content for tag '$TAG'"
-git archive --prefix="$BASENAME/" "$TAG" . | tar xf - -C "$TMP_DIR"
+git archive --prefix="$BASENAME/" HEAD . | tar xf - -C "$TMP_DIR"
 
 
 # Build the package documentation, run autoconf, etc.
