@@ -123,8 +123,8 @@ InstallMethod( ZFunctionWithInductiveSides,
     
     ObjectifyWithAttributes( z_function, TheTypeOfZFunctionsWithInductiveSides,
             UnderlyingFunction, func,
-            InitialIndex, N,
-            InitialValue, value_N,
+            StartingIndex, N,
+            StartingValue, value_N,
             UpperFunction, upper_func,
             LowerFunction, lower_func,
             CompareFunction, compare_func );

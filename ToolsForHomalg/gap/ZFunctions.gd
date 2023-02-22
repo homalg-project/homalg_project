@@ -84,10 +84,10 @@ DeclareAttribute( "UpperFunction", IsZFunctionWithInductiveSides );
 DeclareAttribute( "LowerFunction", IsZFunctionWithInductiveSides );
 #! @Arguments z_func
 #! @Returns an integer
-DeclareAttribute( "InitialIndex", IsZFunctionWithInductiveSides );
+DeclareAttribute( "StartingIndex", IsZFunctionWithInductiveSides );
 #! @Arguments z_func
 #! @Returns a Gap object
-DeclareAttribute( "InitialValue", IsZFunctionWithInductiveSides );
+DeclareAttribute( "StartingValue", IsZFunctionWithInductiveSides );
 #! @EndGroup
 #! @Group 9228
 #! @Arguments z_func
