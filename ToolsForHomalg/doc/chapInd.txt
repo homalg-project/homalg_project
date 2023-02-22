@@ -56,8 +56,6 @@
   [2XIncreaseExistingCounterInObjectWithTiming[102X 8.1-35 
   [2XIndexOfStableLowerValue[102X, for IsZFunction 10.2-12 
   [2XIndexOfStableUpperValue[102X, for IsZFunction 10.2-9 
-  [2XInitialIndex[102X, for IsZFunctionWithInductiveSides 10.2-7 
-  [2XInitialValue[102X, for IsZFunctionWithInductiveSides 10.2-7 
   [2XInstallImmediateMethodToConditionallyPullFalseProperty[102X 8.1-18 
   [2XInstallImmediateMethodToConditionallyPullPropertyOrAttribute[102X 8.1-10 
   [2XInstallImmediateMethodToConditionallyPullTrueProperty[102X 8.1-14 
@@ -143,6 +141,8 @@
   [2XSourcePart[102X, for IsToDoListEntry 5.2-2 
   [2XStableLowerValue[102X, for IsZFunction 10.2-11 
   [2XStableUpperValue[102X, for IsZFunction 10.2-8 
+  [2XStartingIndex[102X, for IsZFunctionWithInductiveSides 10.2-7 
+  [2XStartingValue[102X, for IsZFunctionWithInductiveSides 10.2-7 
   [2XStartTimer[102X 8.1-48 
   [2XStopTimer[102X 8.1-49 
   [2XTargetPart[102X, for IsToDoListEntry 5.2-3 

@@ -139,8 +139,8 @@
   
   [33X[1;0Y[29X[2XUpperFunction[102X( [3Xz_func[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XLowerFunction[102X( [3Xz_func[103X ) [32X attribute[133X
-  [33X[1;0Y[29X[2XInitialIndex[102X( [3Xz_func[103X ) [32X attribute[133X
-  [33X[1;0Y[29X[2XInitialValue[102X( [3Xz_func[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XStartingIndex[102X( [3Xz_func[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XStartingValue[102X( [3Xz_func[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XCompareFunction[102X( [3Xz_func[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya function[133X
   
