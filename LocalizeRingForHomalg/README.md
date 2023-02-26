@@ -25,7 +25,7 @@
 [tests-url]: https://github.com/homalg-project/homalg_project/actions/workflows/Tests.yml?query=branch%3Amaster
 
 [codecov-img]: https://codecov.io/gh/homalg-project/homalg_project/branch/master/graph/badge.svg?flag=LocalizeRingForHomalg
-[codecov-url]: https://codecov.io/gh/homalg-project/homalg_project/tree/master/LocalizeRingForHomalg
+[codecov-url]: https://app.codecov.io/gh/homalg-project/homalg_project/tree/master/LocalizeRingForHomalg
 
 [code-img]: https://img.shields.io/badge/-View%20code-blue?logo=github
 [code-url]: https://github.com/homalg-project/homalg_project/tree/master/LocalizeRingForHomalg#top

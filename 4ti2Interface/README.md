@@ -25,7 +25,7 @@
 [tests-url]: https://github.com/homalg-project/homalg_project/actions/workflows/Tests.yml?query=branch%3Amaster
 
 [codecov-img]: https://codecov.io/gh/homalg-project/homalg_project/branch/master/graph/badge.svg?flag=4ti2Interface
-[codecov-url]: https://codecov.io/gh/homalg-project/homalg_project/tree/master/4ti2Interface
+[codecov-url]: https://app.codecov.io/gh/homalg-project/homalg_project/tree/master/4ti2Interface
 
 [code-img]: https://img.shields.io/badge/-View%20code-blue?logo=github
 [code-url]: https://github.com/homalg-project/homalg_project/tree/master/4ti2Interface#top
