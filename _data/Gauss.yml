@@ -1,7 +1,7 @@
 name: Gauss
-version: "2023.02-01"
+version: "2023.02-02"
 license: "GPL-2.0-or-later"
-date: 2023-02-20
+date: 2023-02-26
 description: |
     Extended Gauss functionality for GAP
 
@@ -28,11 +28,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/Gauss/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-01/Gauss-2023.02-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-02/Gauss-2023.02-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-01/Gauss-2023.02-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-02/Gauss-2023.02-02.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-01/Gauss-2023.02-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-02/Gauss-2023.02-02.pdf
 
 abstract: |
     The <span class="pkgname">Gauss</span> package provideds extended Gauss functionality for <span class="pkgname">GAP</span>
@@ -46,7 +46,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>GBG23</span>]   <b class='BibAuthor'>Görtzen, S., Barakat, M. and Gutsche, S.</b>,
      <i class='BibTitle'>Gauss, Extended Gauss functionality for GAP,
-             Version 2023.02-01</i>
+             Version 2023.02-02</i>
      (<span class='BibYear'>2023</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/Gauss">https://homalg-project.github.io/pkg/Gauss</a></span>.
@@ -54,10 +54,10 @@ citeas: |
     
 
 bibtex: |
-    @misc{ Gauss2023.02-01,
+    @misc{ Gauss2023.02-02,
       author =           {G{\"o}rtzen, S. and Barakat, M. and Gutsche, S.},
       title =            {{Gauss},   Extended   Gauss   functionality  for  GAP,
-                          {V}ersion 2023.02-01},
+                          {V}ersion 2023.02-02},
       month =            {Feb},
       year =             {2023},
       note =             {GAP package},
