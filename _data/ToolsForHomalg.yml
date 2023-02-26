@@ -1,7 +1,7 @@
 name: ToolsForHomalg
-version: "2023.02-03"
+version: "2023.02-04"
 license: "GPL-2.0-or-later"
-date: 2023-02-22
+date: 2023-02-26
 description: |
     Special methods and knowledge propagation tools
 
@@ -29,11 +29,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/ToolsForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2023.02-03/ToolsForHomalg-2023.02-03.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2023.02-04/ToolsForHomalg-2023.02-04.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2023.02-03/ToolsForHomalg-2023.02-03.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2023.02-04/ToolsForHomalg-2023.02-04.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2023.02-03/ToolsForHomalg-2023.02-03.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2023.02-04/ToolsForHomalg-2023.02-04.pdf
 
 abstract: |
     The <span class="pkgname">ToolsForHomalg</span> package provides GAP extensions for the homalg project
@@ -45,7 +45,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BGL23</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S. and Lange-Hegermann, M.</b>,
      <i class='BibTitle'>ToolsForHomalg, Special methods and knowledge propagation tools,
-             Version 2023.02-03</i>
+             Version 2023.02-04</i>
      (<span class='BibYear'>2023</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/ToolsForHomalg">https://homalg-project.github.io/pkg/ToolsForHomalg</a></span>.
@@ -53,10 +53,10 @@ citeas: |
     
 
 bibtex: |
-    @misc{ ToolsForHomalg2023.02-03,
+    @misc{ ToolsForHomalg2023.02-04,
       author =           {Barakat, M. and Gutsche, S. and Lange-Hegermann, M.},
       title =            {{ToolsForHomalg},   Special   methods   and  knowledge
-                          propagation tools, {V}ersion 2023.02-03},
+                          propagation tools, {V}ersion 2023.02-04},
       month =            {Feb},
       year =             {2023},
       note =             {GAP package},
