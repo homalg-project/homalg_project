@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "LocalizeRingForHomalg",
 Subtitle := "A Package for Localization of Polynomial Rings",
-Version := "2023.02-01",
+Version := "2023.02-02",
 Date := Concatenation( "01/", ~.Version{[ 6, 7 ]}, "/", ~.Version{[ 1 .. 4 ]} ),
 License := "GPL-2.0-or-later",
 
