@@ -1,7 +1,7 @@
 name: SCO
-version: "2023.02-01"
+version: "2023.02-02"
 license: "GPL-2.0-or-later"
-date: 2023-02-20
+date: 2023-02-26
 description: |
     SCO - Simplicial Cohomology of Orbifolds
 
@@ -32,11 +32,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/SCO/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-01/SCO-2023.02-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-02/SCO-2023.02-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-01/SCO-2023.02-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-02/SCO-2023.02-02.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-01/SCO-2023.02-01.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-02/SCO-2023.02-02.pdf
 
 abstract: |
     The <span class="pkgname">SCO</span> package provides functionality to compute simplicial cohomology of orbifolds
@@ -50,7 +50,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>GB23</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
      <i class='BibTitle'>SCO, SCO - Simplicial Cohomology of Orbifolds,
-             Version 2023.02-01</i>
+             Version 2023.02-02</i>
      (<span class='BibYear'>2023</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/SCO">https://homalg-project.github.io/pkg/SCO</a></span>.
@@ -58,10 +58,10 @@ citeas: |
     
 
 bibtex: |
-    @misc{ SCO2023.02-01,
+    @misc{ SCO2023.02-02,
       author =           {G{\"o}rtzen, S. and Barakat, M.},
       title =            {{SCO},  SCO  -  Simplicial  Cohomology  of  Orbifolds,
-                          {V}ersion 2023.02-01},
+                          {V}ersion 2023.02-02},
       month =            {Feb},
       year =             {2023},
       note =             {GAP package},
