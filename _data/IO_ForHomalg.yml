@@ -1,7 +1,7 @@
 name: IO_ForHomalg
-version: "2023.02-02"
+version: "2023.02-03"
 license: "GPL-2.0-or-later"
-date: 2023-02-26
+date: 2023-02-27
 description: |
     IO capabilities for the homalg project
 
@@ -42,11 +42,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/IO_ForHomalg/Packag
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2023.02-02/IO_ForHomalg-2023.02-02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2023.02-03/IO_ForHomalg-2023.02-03.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2023.02-02/IO_ForHomalg-2023.02-02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2023.02-03/IO_ForHomalg-2023.02-03.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2023.02-02/IO_ForHomalg-2023.02-02.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2023.02-03/IO_ForHomalg-2023.02-03-manual.pdf
 
 abstract: |
     The <span class="pkgname">IO_ForHomalg</span> package launches the command-line-interface of an external computer algebra system and connects it to <span class="pkgname">homalg</span> using an Input/Output stream
@@ -58,23 +58,23 @@ keywords: |
     IO, streams.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BBGNR23</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Gutsche, S., Neunhöffer, M. and Robertz, D.</b>,
+    [<span class='BibKey'>BBGNR27</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Gutsche, S., Neunhöffer, M. and Robertz, D.</b>,
      <i class='BibTitle'>IO_ForHomalg, IO capabilities for the homalg project,
-             Version 2023.02-02</i>
-     (<span class='BibYear'>2023</span>)<br />
+             Version 2023.02-03</i>
+     (<span class='BibYear'>2-27</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/IO_ForHomalg">https://homalg-project.github.io/pkg/IO_ForHomalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ IO_ForHomalg2023.02-02,
+    @misc{ IO_ForHomalg2023.02-03,
       author =           {B{\"a}chler,  T.  and  Barakat, M. and Gutsche, S. and
                           Neunh{\"o}ffer, M. and Robertz, D.},
       title =            {{IO{\textunderscore}ForHomalg},  IO  capabilities  for
-                          the homalg project, {V}ersion 2023.02-02},
-      month =            {Feb},
-      year =             {2023},
+                          the homalg project, {V}ersion 2023.02-03},
+      month =            {3-},
+      year =             {2-27},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/IO_ForHomalg}
@@ -82,6 +82,6 @@ bibtex: |
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{IO{\textunderscore}ForHomalg}}},
       keywords =         {IO; streams},
-      printedkey =       {BBGNR23}
+      printedkey =       {BBGNR27}
     }
 
