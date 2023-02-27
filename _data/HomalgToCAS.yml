@@ -1,7 +1,7 @@
 name: HomalgToCAS
-version: "2023.02-02"
+version: "2023.02-03"
 license: "GPL-2.0-or-later"
-date: 2023-02-26
+date: 2023-02-27
 description: |
     A window to the outer world
 
@@ -48,11 +48,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/HomalgToCAS/Package
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2023.02-02/HomalgToCAS-2023.02-02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2023.02-03/HomalgToCAS-2023.02-03.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2023.02-02/HomalgToCAS-2023.02-02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2023.02-03/HomalgToCAS-2023.02-03.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2023.02-02/HomalgToCAS-2023.02-02.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2023.02-03/HomalgToCAS-2023.02-03-manual.pdf
 
 abstract: |
     The <span class="pkgname">HomalgToCAS</span> package provides the first layer of abstraction  needed for <span class="pkgname">homalg</span> to access external computer algebra systems
@@ -64,23 +64,23 @@ keywords: |
     homalgExternalObject, CreateHomalgExternalRing, HomalgExternalRingElement, IsHomalgExternalMatrixRep, LaunchCAS, TerminateCAS, homalgSendBlocking.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BBGGW23</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Görtzen, S., Gutsche, S. and Wagh, V.</b>,
+    [<span class='BibKey'>BBGGW27</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Görtzen, S., Gutsche, S. and Wagh, V.</b>,
      <i class='BibTitle'>HomalgToCAS, A window to the outer world,
-             Version 2023.02-02</i>
-     (<span class='BibYear'>2023</span>)<br />
+             Version 2023.02-03</i>
+     (<span class='BibYear'>2-27</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/HomalgToCAS">https://homalg-project.github.io/pkg/HomalgToCAS</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ HomalgToCAS2023.02-02,
+    @misc{ HomalgToCAS2023.02-03,
       author =           {B{\"a}chler,  T.  and  Barakat, M. and G{\"o}rtzen, S.
                           and Gutsche, S. and Wagh, V.},
       title =            {{HomalgToCAS},  A window to the outer world, {V}ersion
-                          2023.02-02},
-      month =            {Feb},
-      year =             {2023},
+                          2023.02-03},
+      month =            {3-},
+      year =             {2-27},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/HomalgToCAS}
@@ -90,6 +90,6 @@ bibtex: |
       keywords =         {homalgExternalObject;        CreateHomalgExternalRing;
                           HomalgExternalRingElement;  IsHomalgExternalMatrixRep;
                           LaunchCAS; TerminateCAS; homalgSendBlocking},
-      printedkey =       {BBGGW23}
+      printedkey =       {BBGGW27}
     }
 
