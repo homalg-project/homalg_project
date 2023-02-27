@@ -1,7 +1,7 @@
 name: 4ti2Interface
-version: "2023.02-02"
+version: "2023.02-03"
 license: "GPL-2.0-or-later"
-date: 2023-02-26
+date: 2023-02-27
 description: |
     A link to 4ti2
 
@@ -31,11 +31,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/4ti2Interface/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2023.02-02/4ti2Interface-2023.02-02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2023.02-03/4ti2Interface-2023.02-03.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2023.02-02/4ti2Interface-2023.02-02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2023.02-03/4ti2Interface-2023.02-03.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2023.02-02/4ti2Interface-2023.02-02.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2023.02-03/4ti2Interface-2023.02-03-manual.pdf
 
 abstract: |
     The <span class="pkgname">4ti2Interface</span> package provides an interface to 4ti2
@@ -45,21 +45,21 @@ doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>Gut23</span>]   <b class='BibAuthor'>Gutsche, S.</b>,
+    [<span class='BibKey'>Gut27</span>]   <b class='BibAuthor'>Gutsche, S.</b>,
      <i class='BibTitle'>4ti2Interface, A link to 4ti2,
-             Version 2023.02-02</i>
-     (<span class='BibYear'>2023</span>)<br />
+             Version 2023.02-03</i>
+     (<span class='BibYear'>2-27</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/4ti2Interface">https://homalg-project.github.io/pkg/4ti2Interface</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ 4ti2Interface2023.02-02,
+    @misc{ 4ti2Interface2023.02-03,
       author =           {Gutsche, S.},
-      title =            {{4ti2Interface}, A link to 4ti2, {V}ersion 2023.02-02},
-      month =            {Feb},
-      year =             {2023},
+      title =            {{4ti2Interface}, A link to 4ti2, {V}ersion 2023.02-03},
+      month =            {3-},
+      year =             {2-27},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/4ti2Interface}
@@ -67,6 +67,6 @@ bibtex: |
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{4ti2Interface}}},
       keywords =         {},
-      printedkey =       {Gut23}
+      printedkey =       {Gut27}
     }
 
