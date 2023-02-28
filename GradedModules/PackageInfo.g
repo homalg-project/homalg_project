@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "GradedModules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
-Version := "2023.02-03",
+Version := "2023.02-04",
 Date := (function ( ) if IsBound( GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE ) then return GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE; else return Concatenation( ~.Version{[ 1 .. 4 ]}, "-", ~.Version{[ 6, 7 ]}, "-01" ); fi; end)( ),
 License := "GPL-2.0-or-later",
 
