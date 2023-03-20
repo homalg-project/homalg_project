@@ -23,18 +23,63 @@ shasum -a 256 -c codecov.SHA256SUM
 
 # execute
 chmod +x codecov
-./codecov -Z -v -s ../ -F homalg || (sleep 60; ./codecov -Z -v -s ../ -F homalg || (sleep 60; ./codecov -Z -v -s ../ -F homalg))
-./codecov -Z -v -s ../ -F 4ti2Interface || (sleep 60; ./codecov -Z -v -s ../ -F 4ti2Interface || (sleep 60; ./codecov -Z -v -s ../ -F 4ti2Interface))
-./codecov -Z -v -s ../ -F ExamplesForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F ExamplesForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F ExamplesForHomalg))
-./codecov -Z -v -s ../ -F Gauss || (sleep 60; ./codecov -Z -v -s ../ -F Gauss || (sleep 60; ./codecov -Z -v -s ../ -F Gauss))
-./codecov -Z -v -s ../ -F GaussForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F GaussForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F GaussForHomalg))
-./codecov -Z -v -s ../ -F GradedModules || (sleep 60; ./codecov -Z -v -s ../ -F GradedModules || (sleep 60; ./codecov -Z -v -s ../ -F GradedModules))
-./codecov -Z -v -s ../ -F GradedRingForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F GradedRingForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F GradedRingForHomalg))
-./codecov -Z -v -s ../ -F HomalgToCAS || (sleep 60; ./codecov -Z -v -s ../ -F HomalgToCAS || (sleep 60; ./codecov -Z -v -s ../ -F HomalgToCAS))
-./codecov -Z -v -s ../ -F IO_ForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F IO_ForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F IO_ForHomalg))
-./codecov -Z -v -s ../ -F LocalizeRingForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F LocalizeRingForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F LocalizeRingForHomalg))
-./codecov -Z -v -s ../ -F MatricesForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F MatricesForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F MatricesForHomalg))
-./codecov -Z -v -s ../ -F Modules || (sleep 60; ./codecov -Z -v -s ../ -F Modules || (sleep 60; ./codecov -Z -v -s ../ -F Modules))
-./codecov -Z -v -s ../ -F RingsForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F RingsForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F RingsForHomalg))
-./codecov -Z -v -s ../ -F SCO || (sleep 60; ./codecov -Z -v -s ../ -F SCO || (sleep 60; ./codecov -Z -v -s ../ -F SCO))
-./codecov -Z -v -s ../ -F ToolsForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F ToolsForHomalg || (sleep 60; ./codecov -Z -v -s ../ -F ToolsForHomalg))
+while ! ./codecov -Z -v -s ../ -F homalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F 4ti2Interface; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F ExamplesForHomalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F Gauss; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F GaussForHomalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F GradedModules; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F GradedRingForHomalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F HomalgToCAS; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F IO_ForHomalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F LocalizeRingForHomalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F MatricesForHomalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F Modules; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F RingsForHomalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F SCO; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
+while ! ./codecov -Z -v -s ../ -F ToolsForHomalg; do
+    echo "Codecov upload failed, retrying in 60s"
+    sleep 60
+done
