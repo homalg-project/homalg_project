@@ -875,7 +875,7 @@ InstallMethod( StringMarkedGraphForStringMutable,
         
     fi;
     
-    string :=  "";
+    string := "";
     
     Append( string, string_to_start_with );
     
@@ -892,21 +892,21 @@ InstallMethod( StringMarkedGraphForStringMutable,
 end );
 
 ##
-InstallMethod( PrintMarkedGraphForViewObj,
+InstallMethod( StringMarkedGraphForViewObj,
                [ IsObject, IsAttributeDependencyGraphForPrinting ],
                
   function( object, graph )
     
-    Print( "<", StringMarkedGraphForStringMutable( object, graph ), ">" );
+    return Concatenation( "<", StringMarkedGraphForStringMutable( object, graph ), ">" );
     
 end );
 
 ##
-InstallMethod( PrintMarkedGraphForDisplay,
+InstallMethod( StringMarkedGraphForDisplay,
                [ IsObject, IsAttributeDependencyGraphForPrinting ],
                
     function( object, graph )
-    local current_node, current_type, print_string, string_to_start_with, obj_description;
+    local current_node, current_type, print_string, string_to_start_with, obj_description, string;
     
     print_string := BUILD_PRINTING_FOR_VIEW_AND_DISPLAY( object, graph, 2, [ ", ", ",\n" ] );
     
@@ -928,17 +928,21 @@ InstallMethod( PrintMarkedGraphForDisplay,
         
     fi;
     
-    Print( string_to_start_with );
+    string := "";
+    
+    Append( string, string_to_start_with );
     
     if print_string[ 2 ] <> "" then
         
-        Print( " which has the following properties:\n" );
+        Append( string, " which has the following properties:\n" );
         
-        Print( print_string[ 2 ] );
+        Append( string, print_string[ 2 ] );
         
     fi;
     
-    Print( ".\n" );
+    Append( string, ".\n" );
+    
+    return string;
     
 end );
 
@@ -1071,25 +1075,15 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
                [ IsAttributeDependencyGraphForPrinting, IsInt ],
                
   function( graph, rank )
-    local filter, install_view_obj, install_display, install_full_view, install_full_view_with_everything_computed, install_view_string,
+    local filter, install_full_view, install_full_view_with_everything_computed, install_view_string,
           install_display_string;
     
     filter := graph!.object_filter;
     
     ##get special instructions
-    install_view_obj := ValueOption( "InstallViewObj" );
-    if install_view_obj <> false then
-        install_view_obj := true;
-    fi;
-    
     install_view_string := ValueOption( "InstallViewString" );
     if install_view_string <> false then
         install_view_string := true;
-    fi;
-    
-    install_display := ValueOption( "InstallDisplay" );
-    if install_display <> false then
-        install_display := true;
     fi;
     
     install_display_string := ValueOption( "InstallDisplayString" );
@@ -1124,24 +1118,6 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
         
     end );
     
-    if install_view_obj = true then
-        
-        InstallMethod( ViewObj,
-                       [ filter ],
-                       rank,
-                       
-          function( obj )
-              
-              MarkGraphForPrinting( graph, obj, 1 );
-              
-              PrintMarkedGraphForViewObj( obj, graph );
-              
-              ResetGraph( graph );
-              
-        end );
-        
-    fi;
-    
     if install_view_string = true then
         
         InstallMethod( ViewString,
@@ -1153,29 +1129,32 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
               
               MarkGraphForPrinting( graph, obj, 1 );
               
-              string := StringMarkedGraphForStringMutable( obj, graph );
-              
-              return Concatenation( "<", string, ">" );
+              string := StringMarkedGraphForViewObj( obj, graph );
               
               ResetGraph( graph );
+              
+              return string;
               
         end );
         
     fi;
     
-    if install_display = true then
+    if install_display_string = true then
         
-        InstallMethod( Display,
+        InstallMethod( DisplayString,
                        [ filter ],
                        rank,
                        
           function( obj )
+            local string;
             
             MarkGraphForPrinting( graph, obj, 2 );
             
-            PrintMarkedGraphForDisplay( obj, graph );
+            string := StringMarkedGraphForDisplay( obj, graph );
             
             ResetGraph( graph );
+            
+            return string;
             
         end );
         
