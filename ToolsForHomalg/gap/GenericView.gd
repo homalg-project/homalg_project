@@ -128,10 +128,10 @@ DeclareGlobalFunction( "OBJECT_PRINT_STRING" );
 DeclareOperation( "StringMarkedGraphForStringMutable",
                   [ IsObject, IsAttributeDependencyGraphForPrinting ] );
 
-DeclareOperation( "PrintMarkedGraphForViewObj",
+DeclareOperation( "StringMarkedGraphForViewObj",
                   [ IsObject, IsAttributeDependencyGraphForPrinting ] );
 
-DeclareOperation( "PrintMarkedGraphForDisplay",
+DeclareOperation( "StringMarkedGraphForDisplay",
                   [ IsObject, IsAttributeDependencyGraphForPrinting ] );
 
 DeclareOperation( "PrintMarkedGraphFull",
