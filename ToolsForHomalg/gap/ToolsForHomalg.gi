@@ -617,7 +617,7 @@ InstallGlobalFunction( MatchPropertiesAndAttributes,
     attributesT := Intersection2( KnownAttributesOfObject( T ), attributes );
     
     ## for properties:
-    for p in propertiesS do	## also check if properties already set for both objects coincide
+    for p in propertiesS do ## also check if properties already set for both objects coincide
         Setter( ValueGlobal( p ) )( T, ValueGlobal( p )( S ) );
     od;
     
@@ -1633,7 +1633,7 @@ InstallGlobalFunction( ExecForHomalg,
     if ARCH_IS_WINDOWS() then
         # on Windows, we use the native shell such that behaviour does
         # not depend on whether cygwin is installed or not.
-	# cmd.exe is preferrable to old-style `command.com'
+        # cmd.exe is preferrable to old-style `command.com'
         shell := Filename( DirectoriesSystemPrograms(), "cmd.exe" );
         cs := "/C";
     else
@@ -1967,7 +1967,7 @@ InstallMethod( UpdateContainerOfWeakPointers,
     while i <= l_active do
         if ElmWPObj( weak_pointers, active[i] ) <> fail then
             i := i + 1;
-        else	## active[i] is no longer active
+        else ## active[i] is no longer active
             Remove( active, i );
             l_active := l_active - 1;
         fi;
@@ -2006,7 +2006,7 @@ InstallMethod( UpdateContainerOfWeakPointers,
         if ElmWPObj( weak_pointers, active[i] ) <> fail and
            ElmWPObj( weak_pointers_on_values, active[i] ) <> fail then
             i := i + 1;
-        else	## active[i] is no longer active
+        else ## active[i] is no longer active
             Remove( active, i );
             l_active := l_active - 1;
         fi;
@@ -2132,11 +2132,11 @@ InstallMethod( _ElmWPObj_ForHomalg,
                     break;
                 fi;
                 i := i + 1;
-            else	## active[i] is no longer active
+            else ## active[i] is no longer active
                 Remove( active, i );
                 l_active := l_active - 1;
             fi;
-        else	## active[i] is no longer active
+        else ## active[i] is no longer active
             Remove( active, i );
             l_active := l_active - 1;
         fi;
