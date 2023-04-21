@@ -64,7 +64,7 @@ jobs:
           if [ -d "CategoricalTowers/Toposes" ]; then make -C "CategoricalTowers/Toposes" doc; fi
       - name: Test homalg_project
         run: |
-          make -C homalg_project -j $(nproc) --output-sync ci-test
+          make -C homalg_project --trace -j $(nproc) --output-sync ci-test
       - name: Release package or simulate release
         run: |
           cd homalg_project
