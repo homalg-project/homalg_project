@@ -57,7 +57,7 @@ pipeline {
 		stage('test') {
 			steps {
 				dir('pkg/homalg_project') {
-					sh 'TERM=dumb make -j $(nproc) --output-sync ci-test'
+					sh 'TERM=dumb make --trace -j $(nproc) --output-sync ci-test'
 				}
 			}
 		}
