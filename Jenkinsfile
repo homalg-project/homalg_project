@@ -56,6 +56,28 @@ pipeline {
 	stages {
 		stage('test') {
 			steps {
+				dir('pkg') {
+					sh 'rm -rf alcove; git clone --depth 1 https://github.com/homalg-project/alcove.git'
+					sh 'rm -rf alexander; git clone --depth 1 https://github.com/homalg-project/alexander.git'
+					sh 'rm -rf CddInterface; git clone --depth 1 https://github.com/homalg-project/CddInterface.git'
+					sh 'rm -rf CAP_project; git clone --depth 1 https://github.com/homalg-project/CAP_project.git'
+					sh 'rm -rf D-Modules; git clone --depth 1 https://github.com/homalg-project/D-Modules.git'
+					sh 'rm -rf NConvex; git clone --depth 1 https://github.com/homalg-project/NConvex.git'
+					sh 'rm -rf Sheaves; git clone --depth 1 https://github.com/homalg-project/Sheaves.git'
+					sh 'rm -rf ToricVarieties_project; git clone --depth 1 https://github.com/homalg-project/ToricVarieties_project.git'
+					sh 'rm -rf VirtualCAS; git clone --depth 1 https://github.com/homalg-project/VirtualCAS.git'
+				}
+
+				dir('pkg') {
+					sh 'make -C "CAP_project/CAP" doc'
+					sh 'make -C "CAP_project/CompilerForCAP" doc'
+					sh 'make -C "CAP_project/MonoidalCategories" doc'
+					sh 'make -C "CAP_project/CartesianCategories" doc'
+					sh 'make -C "CAP_project/FreydCategoriesForCAP" doc'
+					sh 'make -C "homalg_project/homalg" doc'
+					sh 'make -C "homalg_project/Modules" doc'
+				}
+
 				dir('pkg/homalg_project') {
 					sh 'make --trace -j $(nproc) --output-sync ci-test'
 				}
