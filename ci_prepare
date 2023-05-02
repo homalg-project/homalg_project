@@ -2,24 +2,6 @@
 
 cd ..
 
-PACKAGES_TO_CLONE="
-alcove
-alexander
-CddInterface
-CAP_project
-D-Modules
-NConvex
-Sheaves
-ToricVarieties_project
-VirtualCAS
-"
-
-for PACKAGE in $PACKAGES_TO_CLONE; do
-	if [ ! -e $PACKAGE ]; then
-		git clone "https://github.com/homalg-project/$PACKAGE.git"
-	fi
-done
-
 cd CddInterface
 ./install.sh $GAP_HOME
 cd ..

@@ -49,6 +49,15 @@ jobs:
         run: |
           cp ./homalg_project/dev/ci_gaprc /home/gap/.gap/gaprc
           git clone --depth 1 -vv https://github.com/gap-packages/AutoDoc.git
+          git clone --depth 1 -vv https://github.com/homalg-project/alcove.git
+          git clone --depth 1 -vv https://github.com/homalg-project/alexander.git
+          git clone --depth 1 -vv https://github.com/homalg-project/CddInterface.git
+          git clone --depth 1 -vv https://github.com/homalg-project/CAP_project.git
+          git clone --depth 1 -vv https://github.com/homalg-project/D-Modules.git
+          git clone --depth 1 -vv https://github.com/homalg-project/NConvex.git
+          git clone --depth 1 -vv https://github.com/homalg-project/Sheaves.git
+          git clone --depth 1 -vv https://github.com/homalg-project/ToricVarieties_project.git
+          git clone --depth 1 -vv https://github.com/homalg-project/VirtualCAS.git
       - name: Build documentation of packages which we might want to reference
         run: |
           # keep this in sync with `dev/.release`
