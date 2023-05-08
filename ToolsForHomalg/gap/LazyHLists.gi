@@ -171,7 +171,7 @@ InstallMethod( \{\},
         
   function( L, l )
     
-    Error( "not implemented yet\n" );
+    return LazyHList( l, i -> L[i] );
     
 end );
 
