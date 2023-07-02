@@ -1,6 +1,6 @@
-homalgIOMode("d");
-
 LoadPackage( "RingsForHomalg" );
+
+homalgIOMode("d");
 
 Qxyz := HomalgFieldOfRationalsInOscar( ) * "x,y,z";
 
