@@ -15,7 +15,8 @@ build: build_Gauss
 ci-prepare:
 	./ci_prepare
 
-ci-test: doc ci-test_LoadSheaves ci-test_all_packages ci-test_alexander ci-test_CAP_project ci-test_D-Modules ci-test_Sheaves ci-test_ToricVarieties ci-test_VirtualCAS
+# ci-test_ToricVarieties: https://github.com/homalg-project/ToricVarieties_project/issues/205
+ci-test: doc ci-test_LoadSheaves ci-test_all_packages ci-test_alexander ci-test_CAP_project ci-test_D-Modules ci-test_Sheaves ci-test_VirtualCAS
 	cd .. && homalg_project/gather_performance_data.py
 
 ################################
