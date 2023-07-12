@@ -335,7 +335,8 @@
   
   [33X[1;0Y[29X[2XListImpliedFilters[102X( [3Xfilt[103X ) [32X function[133X
   
-  [33X[0;0YList the all filters implied by filter [3Xfilt[103X.[133X
+  [33X[0;0YThe input is a filter [3Xfilt[103X. The output is the list of all filters implied by
+  [3Xfilt[103X, including [3Xfilt[103X itself.[133X
   
   [1X8.1-52 Breakpoint[101X
   
