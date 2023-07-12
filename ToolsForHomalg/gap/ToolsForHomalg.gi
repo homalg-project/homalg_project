@@ -2737,7 +2737,7 @@ InstallGlobalFunction( ListImpliedFilters,
     od;
   end;
 
-  list := [ ];
+  list := [ NamesFilter( filter )[1] ];
   
   if SIZE_FLAGS(implied) > 0 then
       Append( list, NamesFilter( reduced( TRUES_FLAGS( implied ) ) ) );

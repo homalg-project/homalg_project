@@ -527,7 +527,8 @@ DeclareGlobalFunction( "StopTimer" );
 DeclareGlobalFunction( "DisplayTimer" );
 
 #! @Description
-#!   List the all filters implied by filter <A>filt</A>.
+#!   The input is a filter <A>filt</A>.
+#!   The output is the list of all filters implied by <A>filt</A>, including <A>filt</A> itself.
 #! @Arguments filt
 DeclareGlobalFunction( "ListImpliedFilters" );
 
