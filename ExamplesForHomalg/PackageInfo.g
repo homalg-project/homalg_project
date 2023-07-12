@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "ExamplesForHomalg",
 Subtitle := "Examples for the GAP Package homalg",
-Version := "2023.02-04",
-Date := "2023-02-28",
+Version := "2023.07-01",
+Date := "2023-07-12",
 License := "GPL-2.0-or-later",
 
 Persons := [
