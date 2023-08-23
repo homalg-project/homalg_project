@@ -21,7 +21,7 @@
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
     [4X      "unknown_number_of_rows",[104X
-    [4X      NrColumns( M ),[104X
+    [4X      NumberColumns( M ),[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
     [4X    [104X
@@ -61,7 +61,7 @@
     [4X    local N;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrRows( M ),[104X
+    [4X      NumberRows( M ),[104X
     [4X      "unknown_number_of_columns",[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
@@ -103,8 +103,8 @@
     [4X    local N;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrRows( A ),[104X
-    [4X      NrColumns( A ),[104X
+    [4X      NumberRows( A ),[104X
+    [4X      NumberColumns( A ),[104X
     [4X      HomalgRing( A )[104X
     [4X    );[104X
     [4X    [104X
@@ -146,8 +146,8 @@
     [4X    local N;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrRows( A ),[104X
-    [4X      NrColumns( A ),[104X
+    [4X      NumberRows( A ),[104X
+    [4X      NumberColumns( A ),[104X
     [4X      HomalgRing( A )[104X
     [4X    );[104X
     [4X    [104X
@@ -188,7 +188,7 @@
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
     [4X      "unknown_number_of_rows",[104X
-    [4X      NrRows( M ),[104X
+    [4X      NumberRows( M ),[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
     [4X    [104X
@@ -228,7 +228,7 @@
     [4X    local N;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrColumns( M ),[104X
+    [4X      NumberColumns( M ),[104X
     [4X      "unknown_number_of_columns",[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
@@ -272,7 +272,7 @@
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
     [4X      "unknown_number_of_rows",[104X
-    [4X      NrColumns( M ),[104X
+    [4X      NumberColumns( M ),[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
     [4X    [104X
@@ -320,7 +320,7 @@
     [4X    v := homalgStream( HomalgRing( M ) )!.variable_name;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrRows( M ),[104X
+    [4X      NumberRows( M ),[104X
     [4X      "unknown_number_of_columns",[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
@@ -367,8 +367,8 @@
     [4X    v := homalgStream( HomalgRing( A ) )!.variable_name;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrRows( A ),[104X
-    [4X      NrColumns( A ),[104X
+    [4X      NumberRows( A ),[104X
+    [4X      NumberColumns( A ),[104X
     [4X      HomalgRing( A )[104X
     [4X    );[104X
     [4X    [104X
@@ -416,8 +416,8 @@
     [4X    v := homalgStream( HomalgRing( A ) )!.variable_name;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrRows( A ),[104X
-    [4X      NrColumns( A ),[104X
+    [4X      NumberRows( A ),[104X
+    [4X      NumberColumns( A ),[104X
     [4X      HomalgRing( A )[104X
     [4X    );[104X
     [4X    [104X
@@ -462,7 +462,7 @@
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
     [4X      "unknown_number_of_rows",[104X
-    [4X      NrRows( M ),[104X
+    [4X      NumberRows( M ),[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
     [4X    [104X
@@ -503,7 +503,7 @@
     [4X    local N;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrColumns( M ),[104X
+    [4X      NumberColumns( M ),[104X
     [4X      "unknown_number_of_columns",[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
@@ -545,7 +545,7 @@
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
     [4X      "unknown_number_of_rows",[104X
-    [4X      NrRows( M ),[104X
+    [4X      NumberRows( M ),[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
     [4X    [104X
@@ -591,7 +591,7 @@
     [4X    local N;[104X
     [4X    [104X
     [4X    N := HomalgVoidMatrix([104X
-    [4X      NrColumns( M ),[104X
+    [4X      NumberColumns( M ),[104X
     [4X      "unknown_number_of_columns",[104X
     [4X      HomalgRing( M )[104X
     [4X    );[104X
