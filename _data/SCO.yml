@@ -1,7 +1,7 @@
 name: SCO
-version: "2023.02-04"
+version: "2023.08-01"
 license: "GPL-2.0-or-later"
-date: 2023-02-28
+date: 2023-08-23
 description: |
     SCO - Simplicial Cohomology of Orbifolds
 
@@ -16,15 +16,15 @@ maintainers:
 GAP: ">= 4.12.1"
 
 needed-pkgs:
+    - name: "GAPDoc"
+      version: ">= 1.0"
+      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
     - name: "MatricesForHomalg"
-      version: ">= 2011.08.10"
+      version: ">= 2023.08-01"
       url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
     - name: "Modules"
       version: ">= 2011.06.29"
       url: "https://homalg-project.github.io/pkg/Modules"
-    - name: "GAPDoc"
-      version: ">= 1.0"
-      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
 www: https://homalg-project.github.io/pkg/SCO
 readme: README.md
@@ -32,11 +32,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/SCO/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-04/SCO-2023.02-04.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.08-01/SCO-2023.08-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-04/SCO-2023.02-04.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.08-01/SCO-2023.08-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.02-04/SCO-2023.02-04-manual.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/SCO-2023.08-01/SCO-2023.08-01-manual.pdf
 
 abstract: |
     The <span class="pkgname">SCO</span> package provides functionality to compute simplicial cohomology of orbifolds
@@ -48,28 +48,28 @@ keywords: |
     homology, cohomology, orbifold, groupoid, simplicial, triangulation.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>GB28</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
+    [<span class='BibKey'>GB23</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
      <i class='BibTitle'>SCO, SCO - Simplicial Cohomology of Orbifolds,
-             Version 2023.02-04</i>
-     (<span class='BibYear'>2-28</span>)<br />
+             Version 2023.08-01</i>
+     (<span class='BibYear'>8-23</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/SCO">https://homalg-project.github.io/pkg/SCO</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ SCO2023.02-04,
+    @misc{ SCO2023.08-01,
       author =           {G{\"o}rtzen, S. and Barakat, M.},
       title =            {{SCO},  SCO  -  Simplicial  Cohomology  of  Orbifolds,
-                          {V}ersion 2023.02-04},
+                          {V}ersion 2023.08-01},
       month =            {3-},
-      year =             {2-28},
+      year =             {8-23},
       note =             {GAP package},
       howpublished =     {\href       {https://homalg-project.github.io/pkg/SCO}
                           {\texttt{https://homalg-project.github.io/}\discretionary
                           {}{}{}\texttt{pkg/}\discretionary {}{}{}\texttt{SCO}}},
       keywords =         {homology;  cohomology; orbifold; groupoid; simplicial;
                           triangulation},
-      printedkey =       {GB28}
+      printedkey =       {GB23}
     }
 
