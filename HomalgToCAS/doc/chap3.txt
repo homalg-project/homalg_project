@@ -399,10 +399,10 @@
     [4X  IsZeroMatrix                            := "A=0",[104X
     [4X  [104X
     [4X  ## number of rows:[104X
-    [4X  NrRows                                  := "#==",[104X
+    [4X  NumberRows                              := "#==",[104X
     [4X  [104X
     [4X  ## number of columns:[104X
-    [4X  NrColumns                               := "#||",[104X
+    [4X  NumberColumns                           := "#||",[104X
     [4X  [104X
     [4X  ## determinant of a matrix over a (commutative) ring:[104X
     [4X  Determinant                             := "det",[104X
