@@ -22,7 +22,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := BasisOfRowModule(", M, ")" ], "need_command", "BasisOfModule" );
                    
@@ -34,7 +34,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := BasisOfColumnModule(", M, ")" ], "need_command", "BasisOfModule" );
                    
@@ -48,7 +48,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), R );
                    
                    homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := BasisOfRowsCoeff(", M, T, ")" ], "need_command", "BasisCoeff" );
                    
@@ -62,7 +62,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
+                   N := HomalgVoidMatrix( NumberRows( M ), "unknown_number_of_columns", R );
                    
                    homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := BasisOfColumnsCoeff(", M, T, ")" ], "need_command", "BasisCoeff" );
                    
@@ -74,7 +74,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( A, B )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ N, " := DecideZeroRows(", A, B, ")" ], "need_command", "DecideZero" );
                    
@@ -86,7 +86,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( A, B )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ N, " := DecideZeroColumns(", A, B, ")" ], "need_command", "DecideZero" );
                    
@@ -100,7 +100,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), R );
                    
                    homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := DecideZeroRowsEffectively(", A, B, T, ")" ], "need_command", "DecideZeroEffectively" );
                    
@@ -114,7 +114,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), R );
                    
                    homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := DecideZeroColumnsEffectively(", A, B, T, ")" ], "need_command", "DecideZeroEffectively" );
                    
@@ -126,7 +126,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberRows( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfRows(", M, ")" ], "need_command", "SyzygiesGenerators" );
                    
@@ -138,7 +138,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", "SyzygiesGenerators" );
                    
@@ -150,7 +150,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M, M2 )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberRows( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfRows(", M, M2, ")" ], "need_command", "SyzygiesGenerators" );
                    
@@ -162,7 +162,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M, M2 )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfColumns(", M, M2, ")" ], "need_command", "SyzygiesGenerators" );
                    
@@ -174,7 +174,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := ReducedBasisOfRowModule(", M, ")" ], "need_command", "ReducedBasisOfModule" );
                    
@@ -186,7 +186,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := ReducedBasisOfColumnModule(", M, ")" ], "need_command", "ReducedBasisOfModule" );
                    
@@ -198,7 +198,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberRows( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := ReducedSyzygiesGeneratorsOfRows(", M, ")" ], "need_command", "ReducedSyzygiesGenerators" );
                    
@@ -210,7 +210,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgBasic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " := ReducedSyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", "ReducedSyzygiesGenerators" );
                    

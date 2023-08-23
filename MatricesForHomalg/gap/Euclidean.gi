@@ -84,7 +84,7 @@ InstallMethod( FullyDivideColumnTrafo,
     
     R := HomalgRing( col );
     
-    m := NrRows( col );
+    m := NumberRows( col );
     
     U := HomalgIdentityMatrix( m, R );
     
@@ -139,7 +139,7 @@ InstallMethod( FullyDivideMatrixTrafo,
     
     R := HomalgRing( mat );
     
-    U := HomalgIdentityMatrix( NrRows( mat ), R );
+    U := HomalgIdentityMatrix( NumberRows( mat ), R );
     
     NZC := NonZeroColumns( mat );
     
@@ -155,7 +155,7 @@ InstallMethod( FullyDivideMatrixTrafo,
         
         U := u * U;
         
-        mat := CertainRows( mat, [ 2 .. NrRows( mat ) ] );
+        mat := CertainRows( mat, [ 2 .. NumberRows( mat ) ] );
         
         i := i + 1;
         
@@ -176,7 +176,7 @@ InstallMethod( DivideColumnTrafo,
     
     R := HomalgRing( col );
     
-    m := NrRows( col );
+    m := NumberRows( col );
     
     U := HomalgIdentityMatrix( m, R );
     
@@ -319,8 +319,8 @@ InstallMethod( CreateHomalgTable,
                        U := arg[2];
                        
                        ResetFilterObj( U, IsVoidMatrix );
-                       SetNrRows( U, NrRows( M ) );
-                       SetNrColumns( U, NrRows( M ) );
+                       SetNumberRows( U, NumberRows( M ) );
+                       SetNumberColumns( U, NumberRows( M ) );
                        SetIsInvertibleMatrix( U, true );
                    fi;
                    

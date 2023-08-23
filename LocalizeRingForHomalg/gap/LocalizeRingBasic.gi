@@ -32,7 +32,7 @@ BasisOfRowModule :=
       InfoLocalizeRingForHomalg,
       2,
       "Start BasisOfRowModule with ",
-      NrRows( M ), "x", NrColumns( M )
+      NumberRows( M ), "x", NumberColumns( M )
     );
 
     return HomalgLocalMatrix( BasisOfRowModule( Numerator( M ) ), HomalgRing( M ) );
@@ -46,7 +46,7 @@ end,
 BasisOfColumnModule :=
   function( M )
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfColumnModule with ", NrRows( M ), "x", NrColumns( M ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfColumnModule with ", NumberRows( M ), "x", NumberColumns( M ) );
     
     return HomalgLocalMatrix( BasisOfColumnModule( Numerator( M ) ), HomalgRing( M ) );
     
@@ -56,7 +56,7 @@ BasisOfRowsCoeff :=
   function( M, T )
     local R, ComputationRing, TT, result;
 
-    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfRowsCoeff with ", NrRows( M ), "x", NrColumns( M ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfRowsCoeff with ", NumberRows( M ), "x", NumberColumns( M ) );
     
     R := HomalgRing( M );
     ComputationRing := AssociatedComputationRing( R );
@@ -83,7 +83,7 @@ BasisOfColumnsCoeff :=
   function( M, T )
     local R, ComputationRing, TT, result;
 
-    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfColumnsCoeff with ", NrRows( M ), "x", NrColumns( M ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfColumnsCoeff with ", NumberRows( M ), "x", NumberColumns( M ) );
     
     R := HomalgRing( M );
     ComputationRing := AssociatedComputationRing( R );
@@ -121,9 +121,9 @@ DecideZeroRows :=
       InfoLocalizeRingForHomalg,
       2,
       "Start DecideZeroRows with ",
-      NrRows( A ), "x", NrColumns( A ),
+      NumberRows( A ), "x", NumberColumns( A ),
       " and ",
-      NrRows( B ), "x", NrColumns( B )
+      NumberRows( B ), "x", NumberColumns( B )
     );
     
     R := HomalgRing( A );
@@ -144,7 +144,7 @@ DecideZeroColumns :=
   function( A, B )
     local R, ComputationRing, hook, result;
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumns with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumns with ", NumberRows( A ), "x", NumberColumns( A ), " and ", NumberRows( B ), "x", NumberColumns( B ) );
     
     R := HomalgRing( A );
     ComputationRing := AssociatedComputationRing( R );
@@ -160,7 +160,7 @@ DecideZeroRowsEffectively :=
   function( A, B, T )
     local R, T1, result, ComputationRing;
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroRowsEffectively with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroRowsEffectively with ", NumberRows( A ), "x", NumberColumns( A ), " and ", NumberRows( B ), "x", NumberColumns( B ) );
     
     R := HomalgRing( A );
     ComputationRing := AssociatedComputationRing( R );
@@ -188,7 +188,7 @@ DecideZeroColumnsEffectively :=
   function( A, B, T )
     local R, T1, result, ComputationRing;
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumnsEffectively with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumnsEffectively with ", NumberRows( A ), "x", NumberColumns( A ), " and ", NumberRows( B ), "x", NumberColumns( B ) );
     
     R := HomalgRing( A );
     ComputationRing := AssociatedComputationRing( R );
@@ -226,7 +226,7 @@ SyzygiesGeneratorsOfRows :=
       InfoLocalizeRingForHomalg,
       2,
       "Start SyzygiesGeneratorsOfRows with ",
-      NrRows( M ), "x", NrColumns( M )
+      NumberRows( M ), "x", NumberColumns( M )
     );
 
     return HomalgLocalMatrix(\
@@ -243,11 +243,11 @@ RelativeSyzygiesGeneratorsOfRows :=
   function( M, N )
     local CommonDenomMatrix, M2, N2;
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start RelativeSyzygiesGeneratorsOfRows with ", NrRows( M ), "x", NrColumns( M ), " and ", NrRows( N ), "x", NrColumns( N ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start RelativeSyzygiesGeneratorsOfRows with ", NumberRows( M ), "x", NumberColumns( M ), " and ", NumberRows( N ), "x", NumberColumns( N ) );
     
     CommonDenomMatrix := UnionOfRows( M, N );
-    M2 := CertainRows( CommonDenomMatrix, [ 1 .. NrRows( M ) ] );
-    N2 := CertainRows( CommonDenomMatrix, [ NrRows( M ) + 1 .. NrRows( CommonDenomMatrix ) ] );
+    M2 := CertainRows( CommonDenomMatrix, [ 1 .. NumberRows( M ) ] );
+    N2 := CertainRows( CommonDenomMatrix, [ NumberRows( M ) + 1 .. NumberRows( CommonDenomMatrix ) ] );
     
     return HomalgLocalMatrix( SyzygiesGeneratorsOfRows( Numerator( M2 ), Numerator( N2 ) ), HomalgRing( M ) );
     
@@ -256,7 +256,7 @@ RelativeSyzygiesGeneratorsOfRows :=
 SyzygiesGeneratorsOfColumns :=
   function( M )
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start SyzygiesGeneratorsOfColumns with ", NrRows( M ), "x", NrColumns( M ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start SyzygiesGeneratorsOfColumns with ", NumberRows( M ), "x", NumberColumns( M ) );
     return HomalgLocalMatrix( SyzygiesGeneratorsOfColumns( Numerator( M ) ), HomalgRing( M ) );
     
   end,
@@ -265,11 +265,11 @@ RelativeSyzygiesGeneratorsOfColumns :=
   function( M, N )
     local CommonDenomMatrix, M2, N2;
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start RelativeSyzygiesGeneratorsOfColumns with ", NrRows( M ), "x", NrColumns( M ), " and ", NrRows( N ), "x", NrColumns( N ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start RelativeSyzygiesGeneratorsOfColumns with ", NumberRows( M ), "x", NumberColumns( M ), " and ", NumberRows( N ), "x", NumberColumns( N ) );
     
     CommonDenomMatrix := UnionOfColumns( M, N );
-    M2 := CertainColumns( CommonDenomMatrix, [ 1 .. NrColumns( M ) ] );
-    N2 := CertainColumns( CommonDenomMatrix, [ NrColumns( M ) + 1 .. NrColumns( CommonDenomMatrix ) ] );
+    M2 := CertainColumns( CommonDenomMatrix, [ 1 .. NumberColumns( M ) ] );
+    N2 := CertainColumns( CommonDenomMatrix, [ NumberColumns( M ) + 1 .. NumberColumns( CommonDenomMatrix ) ] );
     
     return HomalgLocalMatrix( SyzygiesGeneratorsOfColumns( Numerator( M2 ), Numerator( N2 ) ), HomalgRing( M ) );
     
@@ -297,27 +297,27 @@ DecideZeroRows :=
        InfoLocalizeRingForHomalg,
        2,
        "Start DecideZeroRows with ",
-       NrRows( B ), "x", NrColumns( B ),
+       NumberRows( B ), "x", NumberColumns( B ),
        " and ",
-       NrRows( A ), "x", NrColumns( A ) 
+       NumberRows( A ), "x", NumberColumns( A ) 
     );
     
     R := HomalgRing( B );
     GlobalR := AssociatedComputationRing( R );
     T := HomalgVoidMatrix( R );
     gens := GeneratorsOfMaximalLeftIdeal( R );
-    n := NrRows( gens );
+    n := NumberRows( gens );
     one := One( GlobalR );
     
-    m := NrRows( A );
+    m := NumberRows( A );
     A1 := Numerator( A );
     
-    N := HomalgZeroMatrix( 0, NrColumns( B ), R );
+    N := HomalgZeroMatrix( 0, NumberColumns( B ), R );
     b := Eval( B );
     numB := b[1];
     denB := b[2];
     
-    for i in [ 1 .. NrRows( B ) ] do
+    for i in [ 1 .. NumberRows( B ) ] do
     
         #use global reduction as heuristic
         B1 := CertainRows( numB, [ i ] );
@@ -353,24 +353,24 @@ DecideZeroColumns :=
   function( B, A )
     local R, T, m, gens, n, GlobalR, one, N, b, numB, denB, i, B1, A1, B2, A2, B3;
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumns with ", NrRows( B ), "x", NrColumns( B ), " and ", NrRows( A ), "x", NrColumns( A ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumns with ", NumberRows( B ), "x", NumberColumns( B ), " and ", NumberRows( A ), "x", NumberColumns( A ) );
     
     R := HomalgRing( B );
     GlobalR := AssociatedComputationRing( R );
     T := HomalgVoidMatrix( R );
     gens := GeneratorsOfMaximalRightIdeal( R );
-    n := NrColumns( gens );
+    n := NumberColumns( gens );
     one := One( GlobalR );
 
-    m := NrColumns( A );
+    m := NumberColumns( A );
     A1 := Numerator( A );
     
-    N := HomalgZeroMatrix( NrRows( B ), 0, R );
+    N := HomalgZeroMatrix( NumberRows( B ), 0, R );
     b := Eval( B );
     numB := b[1];
     denB := b[2];
     
-    for i in [ 1 .. NrColumns( B ) ] do
+    for i in [ 1 .. NumberColumns( B ) ] do
     
         B1 := CertainColumns( numB, [ i ] );
         B2 := HomalgLocalMatrix( DecideZeroColumns( B1, A1 ), R );
@@ -400,16 +400,16 @@ DecideZeroRowsEffectively :=
   function( B, A, T )
     local R, m, gens, n, GlobalR, one, N, TT, b, numB, denB, a, numA, denA, i, B1, A1, B2, A2, S, S1, u, SS, B3;
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroRowsEffectively with ", NrRows( B ), "x", NrColumns( B ), " and ", NrRows( A ), "x", NrColumns( A ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroRowsEffectively with ", NumberRows( B ), "x", NumberColumns( B ), " and ", NumberRows( A ), "x", NumberColumns( A ) );
     
     R := HomalgRing( B );
     GlobalR := AssociatedComputationRing( R );
     gens := GeneratorsOfMaximalLeftIdeal( R );
     one := One( GlobalR );
     
-    m := NrRows( A );
-    n := NrRows( gens );
-    N := HomalgZeroMatrix( 0, NrColumns( B ), R );
+    m := NumberRows( A );
+    n := NumberRows( gens );
+    N := HomalgZeroMatrix( 0, NumberColumns( B ), R );
     TT := HomalgZeroMatrix( 0, m, R );
     
     b := Eval( B );
@@ -419,7 +419,7 @@ DecideZeroRowsEffectively :=
     numA := a[1];
     denA := a[2];
     
-    for i in [ 1 .. NrRows( B ) ] do
+    for i in [ 1 .. NumberRows( B ) ] do
     
         B1 := CertainRows( numB, [ i ] );
         A1 := numA;
@@ -479,16 +479,16 @@ DecideZeroColumnsEffectively :=
   function( B, A, T )
     local R, m, gens, n, GlobalR, one, N, TT, b, numB, denB, a, numA, denA, i, B1, A1, B2, A2, S, S1, u, SS, B3;
     
-    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumnsEffectively with ", NrRows( B ), "x", NrColumns( B ), " and ", NrRows( A ), "x", NrColumns( A ) );
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumnsEffectively with ", NumberRows( B ), "x", NumberColumns( B ), " and ", NumberRows( A ), "x", NumberColumns( A ) );
     
     R := HomalgRing( B );
     GlobalR := AssociatedComputationRing( R );
     gens := GeneratorsOfMaximalRightIdeal( R );
     one := One( GlobalR );
     
-    m := NrColumns( A );
-    n := NrColumns( gens );
-    N := HomalgZeroMatrix( NrRows( B ), 0, R );
+    m := NumberColumns( A );
+    n := NumberColumns( gens );
+    N := HomalgZeroMatrix( NumberRows( B ), 0, R );
     TT := HomalgZeroMatrix( m, 0, R );
   
     b := Eval( B );
@@ -498,7 +498,7 @@ DecideZeroColumnsEffectively :=
     numA := a[1];
     denA := a[2];
     
-    for i in [ 1 .. NrColumns( B ) ] do
+    for i in [ 1 .. NumberColumns( B ) ] do
     
         B1 := CertainColumns( numB, [ i ] );
         A1 := numA;

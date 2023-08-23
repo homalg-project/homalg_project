@@ -47,8 +47,8 @@ InstallMethod( CreateHomalgTable,
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
                        SetEval( arg[2], homalgInternalMatrixHull( N[2] ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetNumberRows( arg[2], NumberRows( M ) );
+                       SetNumberColumns( arg[2], NumberRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
@@ -56,8 +56,8 @@ InstallMethod( CreateHomalgTable,
                    if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
                        SetEval( arg[3], homalgInternalMatrixHull( N[3] ) );
                        ResetFilterObj( arg[3], IsVoidMatrix );
-                       SetNrRows( arg[3], NrColumns( M ) );
-                       SetNrColumns( arg[3], NrColumns( M ) );
+                       SetNumberRows( arg[3], NumberColumns( M ) );
+                       SetNumberColumns( arg[3], NumberColumns( M ) );
                        SetIsInvertibleMatrix( arg[3], true );
                    fi;
                    
@@ -67,8 +67,8 @@ InstallMethod( CreateHomalgTable,
                    
                    S := HomalgMatrix( N, R );
                    
-                   SetNrRows( S, NrRows( M ) );
-                   SetNrColumns( S, NrColumns( M ) );
+                   SetNumberRows( S, NumberRows( M ) );
+                   SetNumberColumns( S, NumberColumns( M ) );
                    SetIsDiagonalMatrix( S, true );
                    
                    return S;
@@ -90,7 +90,7 @@ InstallMethod( CreateHomalgTable,
                    
                    e := ElementaryDivisorsMat( Eval( M )!.matrix );
                    
-                   z := ListWithIdenticalEntries( NrColumns( M ), 0 );
+                   z := ListWithIdenticalEntries( NumberColumns( M ), 0 );
                    
                    z{ [ 1 .. Length( e ) ] } := e;
                    
@@ -118,8 +118,8 @@ InstallMethod( CreateHomalgTable,
                        # assign U:
                        SetEval( arg[2], homalgInternalMatrixHull( N[2] ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetNumberRows( arg[2], NumberRows( M ) );
+                       SetNumberColumns( arg[2], NumberRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
                    else
                        ## compute N only:
@@ -132,8 +132,8 @@ InstallMethod( CreateHomalgTable,
                    
                    H := HomalgMatrix( N, R );
                    
-                   SetNrRows( H, NrRows( M ) );
-                   SetNrColumns( H, NrColumns( M ) );
+                   SetNumberRows( H, NumberRows( M ) );
+                   SetNumberColumns( H, NumberColumns( M ) );
                    
                    SetIsUpperStairCaseMatrix( H, true );
                    

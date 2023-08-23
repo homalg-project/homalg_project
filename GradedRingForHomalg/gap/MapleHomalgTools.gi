@@ -142,7 +142,7 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    
                    L :=  StringToIntList( list_string );
                    
-                   return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                   return ListToListList( L, NumberRows( M ), NumberColumns( M ) );
                    
                  end,
                
@@ -164,7 +164,7 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    
                    L :=  StringToIntList( list_string );
                    
-                   return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                   return ListToListList( L, NumberRows( M ), NumberColumns( M ) );
                    
                  end,
                
@@ -174,11 +174,11 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition(`homalg/ReduceRingElements`(", M, R, "),", NrRows( M ), NrColumns( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition(`homalg/ReduceRingElements`(", M, R, "),", NumberRows( M ), NumberColumns( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrRows( M ) );
+                   return ListToListList( L, 2, NumberRows( M ) );
                    
                  end,
                
@@ -196,11 +196,11 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    
                    var := var{Filtered( [ 1 .. Length( var ) ], p -> weights[p] = 1 )};
                    
-                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRowWithColPosition(`homalg/ReduceRingElements`(", M, R, "),", NrRows( M ), NrColumns( M ), var, ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRowWithColPosition(`homalg/ReduceRingElements`(", M, R, "),", NumberRows( M ), NumberColumns( M ), var, ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrRows( M ) );
+                   return ListToListList( L, 2, NumberRows( M ) );
                    
                  end,
                
@@ -210,11 +210,11 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition(`homalg/ReduceRingElements`(", M, R, "),", NrRows( M ), NrColumns( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition(`homalg/ReduceRingElements`(", M, R, "),", NumberRows( M ), NumberColumns( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrColumns( M ) );
+                   return ListToListList( L, 2, NumberColumns( M ) );
                    
                  end,
                
@@ -232,11 +232,11 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    
                    var := var{Filtered( [ 1 .. Length( var ) ], p -> weights[p] = 1 )};
                    
-                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumnWithRowPosition(`homalg/ReduceRingElements`(", M, R, "),", NrRows( M ), NrColumns( M ), var, ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumnWithRowPosition(`homalg/ReduceRingElements`(", M, R, "),", NumberRows( M ), NumberColumns( M ), var, ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrColumns( M ) );
+                   return ListToListList( L, 2, NumberColumns( M ) );
                    
                  end,
                

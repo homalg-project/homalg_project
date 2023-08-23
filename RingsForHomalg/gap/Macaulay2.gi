@@ -732,8 +732,8 @@ InstallMethod( LoadHomalgMatrixFromFile,
         
     fi;
     
-    SetNrRows( M, r );
-    SetNrColumns( M, c );
+    SetNumberRows( M, r );
+    SetNumberColumns( M, c );
     
     return M;
     

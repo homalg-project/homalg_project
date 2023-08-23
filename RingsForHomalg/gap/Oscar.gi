@@ -2256,11 +2256,11 @@ InstallMethod( HomalgQRingInOscar,
         
   function( R, ring_rel )
     
-    if NrRows( ring_rel ) = 0 or NrColumns( ring_rel ) = 0  then
+    if NumberRows( ring_rel ) = 0 or NumberColumns( ring_rel ) = 0  then
         return R;
-    elif NrColumns( ring_rel ) = 1 then
+    elif NumberColumns( ring_rel ) = 1 then
         return HomalgQRingInOscar( R, HomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel ) );
-    elif NrRows( ring_rel ) = 1 then
+    elif NumberRows( ring_rel ) = 1 then
         return HomalgQRingInOscar( R, HomalgRingRelationsAsGeneratorsOfRightIdeal( ring_rel ) );
     fi;
     
@@ -2497,10 +2497,10 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
     v := homalgStream( R ).variable_name;
     
     command := [
-                "matrix ", v, "m[", NrColumns( M ),"][1]; ",
+                "matrix ", v, "m[", NumberColumns( M ),"][1]; ",
                 v, "s=\"[\"; ",
-                "for(int i=1;i<=", NrRows( M ), ";i++){",
-                v, "m=", M, "[1..", NrColumns( M ), ",i]; ", ## matrices are saved transposed in Oscar
+                "for(int i=1;i<=", NumberRows( M ), ";i++){",
+                v, "m=", M, "[1..", NumberColumns( M ), ",i]; ", ## matrices are saved transposed in Oscar
                 "if(i!=1){", v, "s=", v, "s+\",\";}; ",
                 v, "s=", v, "s+\"[\"+string(", v, "m)+\"]\";}; ",
                 v, "s=", v, "s+\"]\"; kill ", v, "m"
@@ -2589,8 +2589,8 @@ InstallMethod( LoadHomalgMatrixFromFile,
         
     fi;
     
-    SetNrRows( M, r );
-    SetNrColumns( M, c );
+    SetNumberRows( M, r );
+    SetNumberColumns( M, c );
     
     return M;
     

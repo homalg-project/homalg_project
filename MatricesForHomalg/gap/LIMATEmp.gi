@@ -6,11 +6,11 @@
 
 ##
 InstallImmediateMethod( IsOne,
-        IsHomalgMatrix and HasNrRows and HasNrColumns, 0,
+        IsHomalgMatrix and HasNumberRows and HasNumberColumns, 0,
         
   function( M )
     
-    if NrRows( M ) = 0 and NrColumns( M ) = 0 then
+    if NumberRows( M ) = 0 and NumberColumns( M ) = 0 then
         return true;
     fi;
     
@@ -20,11 +20,11 @@ end );
 
 ##
 InstallImmediateMethod( IsEmptyMatrix,
-        IsHomalgMatrix and HasNrRows and HasNrColumns, 0,
+        IsHomalgMatrix and HasNumberRows and HasNumberColumns, 0,
         
   function( M )
     
-    if NrRows( M ) = 0 or NrColumns( M ) = 0 then
+    if NumberRows( M ) = 0 or NumberColumns( M ) = 0 then
         return true;
     else
         return false;
@@ -45,11 +45,11 @@ end );
 
 ##
 InstallImmediateMethod( IsLeftInvertibleMatrix,
-        IsHomalgMatrix and HasNrColumns, 0,
+        IsHomalgMatrix and HasNumberColumns, 0,
         
   function( M )
     
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return true;
     fi;
     
@@ -60,22 +60,22 @@ end );
 
 ##
 InstallImmediateMethod( ZeroRows,
-        IsHomalgMatrix and IsEmptyMatrix and HasNrRows, 0,
+        IsHomalgMatrix and IsEmptyMatrix and HasNumberRows, 0,
         
   function( M )
     
-    return [ 1 .. NrRows( M ) ];
+    return [ 1 .. NumberRows( M ) ];
         
 end );
 
 
 ##
 InstallImmediateMethod( ZeroColumns,
-        IsHomalgMatrix and IsEmptyMatrix and HasNrColumns, 0,
+        IsHomalgMatrix and IsEmptyMatrix and HasNumberColumns, 0,
         
   function( M )
     
-    return [ 1 .. NrColumns( M ) ];
+    return [ 1 .. NumberColumns( M ) ];
         
 end );
 
@@ -105,7 +105,7 @@ InstallMethod( UnionOfRowsOp,
         Error( "the matrices are not defined over identically the same ring\n" );
     fi;
     
-    if not ForAll( L, x -> NrColumns( x ) = c ) then
+    if not ForAll( L, x -> NumberColumns( x ) = c ) then
         Error( "the matrices are not stackable, since they do not all have the same number of columns\n" );
     fi;
     
@@ -115,7 +115,7 @@ InstallMethod( UnionOfRowsOp,
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( [ empty matrices ] )", "\033[0m" );
         
-        return HomalgZeroMatrix( Sum( List( L, NrRows ) ), c, R );
+        return HomalgZeroMatrix( Sum( List( L, NumberRows ) ), c, R );
         
     elif Length( filtered_L ) <> Length( L ) then
         
@@ -168,7 +168,7 @@ InstallMethod( UnionOfColumnsOp,
         Error( "the matrices are not defined over identically the same ring\n" );
     fi;
     
-    if not ForAll( L, x -> NrRows( x ) = r ) then
+    if not ForAll( L, x -> NumberRows( x ) = r ) then
         Error( "the matrices are not augmentable, since they do not all have the same number of rows\n" );
     fi;
     
@@ -178,7 +178,7 @@ InstallMethod( UnionOfColumnsOp,
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( [ empty matrices ] )", "\033[0m" );
         
-        return HomalgZeroMatrix( r, Sum( List( L, NrColumns ) ), R );
+        return HomalgZeroMatrix( r, Sum( List( L, NumberColumns ) ), R );
         
     elif Length( filtered_L ) <> Length( L ) then
         
@@ -203,7 +203,7 @@ InstallMethod( DiagMat,
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DiagMat( [ zero matrices ] )", "\033[0m" );
         
-        return HomalgZeroMatrix( Sum( List( l, NrRows ) ), Sum( List( l, NrColumns ) ), R );
+        return HomalgZeroMatrix( Sum( List( l, NumberRows ) ), Sum( List( l, NumberColumns ) ), R );
         
     fi;
     
@@ -224,7 +224,7 @@ InstallMethod( KroneckerMat,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "KroneckerMat( IsZero(Matrix), IsHomalgMatrix )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
+    return HomalgZeroMatrix( NumberRows( A ) * NumberRows( B ), NumberColumns( A ) * NumberColumns( B ), R );
     
 end );
 
@@ -240,7 +240,7 @@ InstallMethod( KroneckerMat,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "KroneckerMat( IsHomalgMatrix, IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
+    return HomalgZeroMatrix( NumberRows( A ) * NumberRows( B ), NumberColumns( A ) * NumberColumns( B ), R );
     
 end );
 
@@ -256,7 +256,7 @@ InstallMethod( DualKroneckerMat,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( IsZero(Matrix), IsHomalgMatrix )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
+    return HomalgZeroMatrix( NumberRows( A ) * NumberRows( B ), NumberColumns( A ) * NumberColumns( B ), R );
     
 end );
 
@@ -272,7 +272,7 @@ InstallMethod( DualKroneckerMat,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DualKroneckerMat( IsHomalgMatrix, IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( A ) * NrRows( B ), NrColumns( A ) * NrColumns( B ), R );
+    return HomalgZeroMatrix( NumberRows( A ) * NumberRows( B ), NumberColumns( A ) * NumberColumns( B ), R );
     
 end );
 
@@ -296,7 +296,7 @@ InstallMethod( \+,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) + IsHomalgMatrix", "\033[0m", "  ", NrRows( A ), " x ", NrColumns( A ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) + IsHomalgMatrix", "\033[0m", "  ", NumberRows( A ), " x ", NumberColumns( A ) );
     
     return B;
     
@@ -309,7 +309,7 @@ InstallMethod( \+,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix + IsZero(Matrix)", "\033[0m", "  ", NrRows( A ), " x ", NrColumns( A ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix + IsZero(Matrix)", "\033[0m", "  ", NumberRows( A ), " x ", NumberColumns( A ) );
     
     return A;
     
@@ -337,7 +337,7 @@ InstallMethod( \-,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) - IsHomalgMatrix", "\033[0m", "  ", NrRows( A ), " x ", NrColumns( A ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) - IsHomalgMatrix", "\033[0m", "  ", NumberRows( A ), " x ", NumberColumns( A ) );
     
     return -B;
     
@@ -350,7 +350,7 @@ InstallMethod( \-,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix - IsZero(Matrix)", "\033[0m", "  ", NrRows( A ), " x ", NrColumns( A ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix - IsZero(Matrix)", "\033[0m", "  ", NumberRows( A ), " x ", NumberColumns( A ) );
     
     return A;
     
@@ -363,12 +363,12 @@ InstallMethod( \*,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) * IsHomalgMatrix", "\033[0m", "  ", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) * IsHomalgMatrix", "\033[0m", "  ", NumberRows( A ), " x ", NumberColumns( A ), " x ", NumberColumns( B ) );
     
-    if NrRows( B ) = NrColumns( B ) then
+    if NumberRows( B ) = NumberColumns( B ) then
         return A;
     else
-        return HomalgZeroMatrix( NrRows( A ), NrColumns( B ), HomalgRing( A ) );
+        return HomalgZeroMatrix( NumberRows( A ), NumberColumns( B ), HomalgRing( A ) );
     fi;
     
 end );
@@ -380,12 +380,12 @@ InstallMethod( \*,
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsZero(Matrix)", "\033[0m", "  ", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsZero(Matrix)", "\033[0m", "  ", NumberRows( A ), " x ", NumberColumns( A ), " x ", NumberColumns( B ) );
     
-    if NrRows( A ) = NrColumns( A ) then
+    if NumberRows( A ) = NumberColumns( A ) then
         return B;
     else
-        return HomalgZeroMatrix( NrRows( A ), NrColumns( B ), HomalgRing( B ) );
+        return HomalgZeroMatrix( NumberRows( A ), NumberColumns( B ), HomalgRing( B ) );
     fi;
     
 end );
@@ -399,7 +399,7 @@ InstallMethod( RightDivide,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsZero(Matrix), IsHomalgMatrix )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( B ), NrRows( A ), HomalgRing( B ) );
+    return HomalgZeroMatrix( NumberRows( B ), NumberRows( A ), HomalgRing( B ) );
     
 end );
 
@@ -412,7 +412,7 @@ InstallMethod( RightDivide,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsZero(Matrix), IsHomalgMatrix, IsHomalgMatrix )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( B ), NrRows( A ), HomalgRing( B ) );
+    return HomalgZeroMatrix( NumberRows( B ), NumberRows( A ), HomalgRing( B ) );
     
 end );
 
@@ -425,7 +425,7 @@ InstallMethod( LeftDivide,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsHomalgMatrix, IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrColumns( A ), NrColumns( B ), HomalgRing( B ) );
+    return HomalgZeroMatrix( NumberColumns( A ), NumberColumns( B ), HomalgRing( B ) );
     
 end );
 
@@ -438,7 +438,7 @@ InstallMethod( LeftDivide,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsHomalgMatrix, IsZero(Matrix), IsHomalgMatrix )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrColumns( A ), NrColumns( B ), HomalgRing( B ) );
+    return HomalgZeroMatrix( NumberColumns( A ), NumberColumns( B ), HomalgRing( B ) );
     
 end );
 
@@ -449,11 +449,11 @@ InstallMethod( LeftInverse,
         
   function( M )
     
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftInverse( ? x 0 -- IsZero(Matrix) )", "\033[0m" );
         
-        return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
+        return HomalgZeroMatrix( 0, NumberRows( M ), HomalgRing( M ) );
         
     else
         Error( "a zero matrix with positive number of columns has no left inverse!\n" );
@@ -468,11 +468,11 @@ InstallMethod( RightInverse,
         
   function( M )
     
-    if NrRows( M ) = 0 then
+    if NumberRows( M ) = 0 then
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightInverse( 0 x ? -- IsZero(Matrix) )", "\033[0m" );
         
-        return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
+        return HomalgZeroMatrix( NumberColumns( M ), 0, HomalgRing( M ) );
         
     else
         Error( "a zero matrix with positive number of rows has no left inverse!\n" );
@@ -489,7 +489,7 @@ InstallMethod( BasisOfRowModule,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "BasisOfRowModule( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgZeroMatrix( 0, NrColumns( M ), HomalgRing( M ) );
+    return HomalgZeroMatrix( 0, NumberColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -502,7 +502,7 @@ InstallMethod( BasisOfColumnModule,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "BasisOfColumnModule( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( M ), 0, HomalgRing( M ) );
+    return HomalgZeroMatrix( NumberRows( M ), 0, HomalgRing( M ) );
     
 end );
 
@@ -515,7 +515,7 @@ InstallMethod( ReducedBasisOfRowModule,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedBasisOfRowModule( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgZeroMatrix( 0, NrColumns( M ), HomalgRing( M ) );
+    return HomalgZeroMatrix( 0, NumberColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -528,7 +528,7 @@ InstallMethod( ReducedBasisOfColumnModule,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedBasisOfColumnModule( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( M ), 0, HomalgRing( M ) );
+    return HomalgZeroMatrix( NumberRows( M ), 0, HomalgRing( M ) );
     
 end );
 
@@ -544,9 +544,9 @@ InstallMethod( BasisOfRowsCoeff,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "BasisOfRowsCoeff( IsZero(Matrix), T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( 0, NrRows( M ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( 0, NumberRows( M ), R ) ); ResetFilterObj( T, IsVoidMatrix );
     
-    return HomalgZeroMatrix( 0, NrColumns( M ), R );
+    return HomalgZeroMatrix( 0, NumberColumns( M ), R );
     
 end );
 
@@ -562,9 +562,9 @@ InstallMethod( BasisOfColumnsCoeff,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "BasisOfColumnsCoeff( IsZero(Matrix), T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrColumns( M ), 0, R ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NumberColumns( M ), 0, R ) ); ResetFilterObj( T, IsVoidMatrix );
     
-    return HomalgZeroMatrix( NrRows( M ), 0, R );
+    return HomalgZeroMatrix( NumberRows( M ), 0, R );
     
 end );
 
@@ -635,7 +635,7 @@ InstallMethod( DecideZeroRowsEffectively,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsHomalgMatrix, IsZero(Matrix), T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrRows( A ), NrRows( B ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NumberRows( A ), NumberRows( B ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return A;
     
@@ -650,7 +650,7 @@ InstallMethod( DecideZeroRowsEffectively,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsZero(Matrix), IsHomalgMatrix, T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrRows( A ), NrRows( B ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NumberRows( A ), NumberRows( B ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return A;
     
@@ -665,7 +665,7 @@ InstallMethod( DecideZeroColumnsEffectively,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsHomalgMatrix, IsZero(Matrix), T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrColumns( B ), NrColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NumberColumns( B ), NumberColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return A;
     
@@ -680,7 +680,7 @@ InstallMethod( DecideZeroColumnsEffectively,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsZero(Matrix), IsHomalgMatrix, T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrColumns( B ), NrColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NumberColumns( B ), NumberColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return A;
     
@@ -689,13 +689,13 @@ end );
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
         "LIMAT: for homalg matrices (IsOne)",
-        [ IsHomalgMatrix and IsEmptyMatrix and HasNrRows and HasNrColumns, IsHomalgMatrix ],
+        [ IsHomalgMatrix and IsEmptyMatrix and HasNumberRows and HasNumberColumns, IsHomalgMatrix ],
         
   function( M1, M2 )
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows(IsOne(Matrix),IsHomalgMatrix)", "\033[0m" );
     
-    if NrRows( M1 ) = NrRows( M2 ) then
+    if NumberRows( M1 ) = NumberRows( M2 ) then
       return M2;
     fi;
     
@@ -725,7 +725,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    return HomalgIdentityMatrix( NumberRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -738,20 +738,20 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows(IsZero(Matrix),IsHomalgMatrix)", "\033[0m" );
     
-    return HomalgIdentityMatrix( NrRows( M1 ), HomalgRing( M1 ) );
+    return HomalgIdentityMatrix( NumberRows( M1 ), HomalgRing( M1 ) );
     
 end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
         "LIMAT: for homalg matrices (IsOne)",
-        [ IsHomalgMatrix and IsEmptyMatrix and HasNrRows and HasNrColumns, IsHomalgMatrix ],
+        [ IsHomalgMatrix and IsEmptyMatrix and HasNumberRows and HasNumberColumns, IsHomalgMatrix ],
         
   function( M1, M2 )
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns(IsOne(Matrix),IsHomalgMatrix)", "\033[0m" );
     
-    if NrRows( M1 ) = NrColumns( M1 ) then
+    if NumberRows( M1 ) = NumberColumns( M1 ) then
       return M2;
     fi;
     
@@ -781,7 +781,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgIdentityMatrix( NrColumns( M ), HomalgRing( M ) );
+    return HomalgIdentityMatrix( NumberColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -794,7 +794,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns(IsZero(Matrix),IsHomalgMatrix)", "\033[0m" );
     
-    return HomalgIdentityMatrix( NrColumns( M1 ), HomalgRing( M1 ) );
+    return HomalgIdentityMatrix( NumberColumns( M1 ), HomalgRing( M1 ) );
     
 end );
 
@@ -807,7 +807,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfRows( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    return HomalgIdentityMatrix( NumberRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -820,7 +820,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfColumns( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgIdentityMatrix( NrColumns( M ), HomalgRing( M ) );
+    return HomalgIdentityMatrix( NumberColumns( M ), HomalgRing( M ) );
     
 end );
 

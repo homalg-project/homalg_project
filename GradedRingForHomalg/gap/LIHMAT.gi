@@ -41,7 +41,7 @@ Add( HOMALG_MATRICES.matrix_logic_infolevels, InfoLIHMAT );
 ####################################
 
 ##
-InstallImmediateMethod( NrRows,
+InstallImmediateMethod( NumberRows,
         IsMatrixOverGradedRing and HasNonTrivialDegreePerRow, 0,
         
   function( M )
@@ -51,7 +51,7 @@ InstallImmediateMethod( NrRows,
 end );
 
 ##
-InstallImmediateMethod( NrColumns,
+InstallImmediateMethod( NumberColumns,
         IsMatrixOverGradedRing and HasNonTrivialDegreePerColumn, 0,
         
   function( M )
@@ -147,7 +147,7 @@ InstallMethod( NonTrivialDegreePerRow,
   function( C, col_degrees )
     local S, degs, col_pos, f;
     
-    if Length( col_degrees ) <> NrColumns( C ) then
+    if Length( col_degrees ) <> NumberColumns( C ) then
         Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
     fi;
     
@@ -155,9 +155,9 @@ InstallMethod( NonTrivialDegreePerRow,
         return col_degrees;
     elif IsEmptyMatrix( C ) then
         S := HomalgRing( C );
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NumberRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] ); ## this is not a mistake
+        return ListWithIdenticalEntries( NumberRows( C ), col_degrees[1] ); ## this is not a mistake
     fi;
     
     degs := NonTrivialDegreePerRow( C );
@@ -175,7 +175,7 @@ InstallMethod( NonTrivialDegreePerRow,
            fi;
        end;
     
-    return List( [ 1 .. NrRows( C ) ], f );
+    return List( [ 1 .. NumberRows( C ) ], f );
     
 end );
 
@@ -204,7 +204,7 @@ InstallMethod( NonTrivialDegreePerColumn,
   function( C, row_degrees )
     local S, degs, row_pos, f;
     
-    if Length( row_degrees ) <> NrRows( C ) then
+    if Length( row_degrees ) <> NumberRows( C ) then
         Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
     fi;
     
@@ -212,9 +212,9 @@ InstallMethod( NonTrivialDegreePerColumn,
         return row_degrees;
     elif IsEmptyMatrix( C ) then
         S := HomalgRing( C );
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NumberColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] ); ## this is not a mistake
+        return ListWithIdenticalEntries( NumberColumns( C ), row_degrees[1] ); ## this is not a mistake
     fi;
     
     degs := NonTrivialDegreePerColumn( C );
@@ -232,7 +232,7 @@ InstallMethod( NonTrivialDegreePerColumn,
            fi;
        end;
     
-    return List( [ 1 .. NrColumns( C ) ], f );
+    return List( [ 1 .. NumberColumns( C ) ], f );
     
 end );
 
@@ -309,7 +309,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
     
     Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "LinearSyzygiesGeneratorsOfRows( IsLeftRegular )", "\033[0m" );
     
-    return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
+    return HomalgZeroMatrix( 0, NumberRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -322,7 +322,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
     
     Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "LinearSyzygiesGeneratorsOfRows( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    return HomalgIdentityMatrix( NumberRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -339,7 +339,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfColumns,
     
     Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "LinearSyzygiesGeneratorsOfColumns( IsRightRegular )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
+    return HomalgZeroMatrix( NumberColumns( M ), 0, HomalgRing( M ) );
     
 end );
 
@@ -352,6 +352,6 @@ InstallMethod( LinearSyzygiesGeneratorsOfColumns,
     
     Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "LinearSyzygiesGeneratorsOfColumns( IsZero(Matrix) )", "\033[0m" );
     
-    return HomalgIdentityMatrix( NrColumns( M ), HomalgRing( M ) );
+    return HomalgIdentityMatrix( NumberColumns( M ), HomalgRing( M ) );
     
 end );

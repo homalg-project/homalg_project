@@ -84,12 +84,12 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    nz := NonZeroRows( bas );
                    
-                   SetEval( T, CertainRows( CertainColumns( TT, [ 1 .. NrRows( M ) ] ), nz ) );
+                   SetEval( T, CertainRows( CertainColumns( TT, [ 1 .. NumberRows( M ) ] ), nz ) );
                    
                    ResetFilterObj( T, IsVoidMatrix );
                    
                    ## the generic BasisOfRowsCoeff will assume that
-                   ## ( NrRows( B ) = 0 ) = IsZero( B )
+                   ## ( NumberRows( B ) = 0 ) = IsZero( B )
                    return CertainRows( bas, nz );
                    
                  end,
@@ -118,12 +118,12 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    nz := NonZeroColumns( bas );
                    
-                   SetEval( T, CertainColumns( CertainRows( TT, [ 1 .. NrColumns( M ) ] ), nz ) );
+                   SetEval( T, CertainColumns( CertainRows( TT, [ 1 .. NumberColumns( M ) ] ), nz ) );
                    
                    ResetFilterObj( T, IsVoidMatrix );
                    
                    ## the generic BasisOfColumnsCoeff will assume that
-                   ## ( NrColumns( B ) = 0 ) = IsZero( B )
+                   ## ( NumberColumns( B ) = 0 ) = IsZero( B )
                    return CertainColumns( bas, nz );
                    
                  end,
@@ -194,7 +194,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    red := DecideZeroRowsEffectively( Eval( A ), Brel, TT );
                    
-                   SetEval( T, CertainColumns( TT, [ 1 .. NrRows( B ) ] ) );
+                   SetEval( T, CertainColumns( TT, [ 1 .. NumberRows( B ) ] ) );
                    
                    ResetFilterObj( T, IsVoidMatrix );
                    
@@ -222,7 +222,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    red := DecideZeroColumnsEffectively( Eval( A ), Brel, TT );
                    
-                   SetEval( T, CertainRows( TT, [ 1 .. NrColumns( B ) ] ) );
+                   SetEval( T, CertainRows( TT, [ 1 .. NumberColumns( B ) ] ) );
                    
                    ResetFilterObj( T, IsVoidMatrix );
                    
@@ -254,7 +254,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                        rel := Involution( rel );
                    fi;
                    
-                   rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
+                   rel := DiagMat( ListWithIdenticalEntries( NumberColumns( M ), rel ) );
                    
                    S := SyzygiesGeneratorsOfRows( Eval( M ), rel );
                    
@@ -296,7 +296,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                        rel := Involution( rel );
                    fi;
                    
-                   rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
+                   rel := DiagMat( ListWithIdenticalEntries( NumberRows( M ), rel ) );
                    
                    S := SyzygiesGeneratorsOfColumns( Eval( M ), rel );
                    

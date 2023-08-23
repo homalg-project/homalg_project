@@ -260,7 +260,7 @@ end );
 InstallMethod( Eval,
         "for homalg matrices (IsInitialMatrix)",
         [ IsHomalgMatrix and IsInitialMatrix and
-          HasNrRows and HasNrColumns ],
+          HasNumberRows and HasNumberColumns ],
         
   function( C )
     local R, RP, z, zz;
@@ -286,9 +286,9 @@ InstallMethod( Eval,
     
     ResetFilterObj( C, IsInitialMatrix );
     
-    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    zz := ListWithIdenticalEntries( NumberColumns( C ), z );
     
-    SetEval( C, homalgInternalMatrixHull( List( [ 1 .. NrRows( C ) ], i -> ShallowCopy( zz ) ) ) );
+    SetEval( C, homalgInternalMatrixHull( List( [ 1 .. NumberRows( C ) ], i -> ShallowCopy( zz ) ) ) );
     
     return Eval( C );
     
@@ -325,7 +325,7 @@ end );
 InstallMethod( Eval,
         "for homalg matrices (IsInitialIdentityMatrix)",
         [ IsHomalgMatrix and IsInitialIdentityMatrix and
-          HasNrRows and HasNrColumns ],
+          HasNumberRows and HasNumberColumns ],
         
   function( C )
     local R, RP, o, z, zz, id;
@@ -352,9 +352,9 @@ InstallMethod( Eval,
     
     ResetFilterObj( C, IsInitialIdentityMatrix );
     
-    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    zz := ListWithIdenticalEntries( NumberColumns( C ), z );
     
-    id := List( [ 1 .. NrRows( C ) ],
+    id := List( [ 1 .. NumberRows( C ) ],
                 function(i)
                   local z;
                   z := ShallowCopy( zz ); z[i] := o; return z;
@@ -656,7 +656,7 @@ InstallMethod( Eval,
     #=====# can only work for homalg internal matrices #=====#
     
     return homalgInternalMatrixHull(
-                   Eval( M )!.matrix{[ 1 .. NrRows( M ) ]}{plist} );
+                   Eval( M )!.matrix{[ 1 .. NumberRows( M ) ]}{plist} );
     
 end );
 ##  ]]></Listing>
@@ -732,7 +732,7 @@ InstallMethod( Eval,
         
         if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
             
-            e[i] := HomalgZeroMatrix( NrRows( e[i] ) + NrRows( e[i+1] ), NrColumns( e[i] ), HomalgRing( e[i] ) );
+            e[i] := HomalgZeroMatrix( NumberRows( e[i] ) + NumberRows( e[i+1] ), NumberColumns( e[i] ), HomalgRing( e[i] ) );
             
             Remove( e, i + 1 );
             
@@ -782,7 +782,7 @@ InstallMethod( Eval,
             
             U := ShallowCopy( Eval( A )!.matrix );
             
-            U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;
+            U{ [ NumberRows( A ) + 1 .. NumberRows( A ) + NumberRows( B ) ] } := Eval( B )!.matrix;
             
             result := homalgInternalMatrixHull( U );
             
@@ -791,8 +791,8 @@ InstallMethod( Eval,
         return HomalgMatrixWithAttributes( [
                     Eval, result,
                     EvalUnionOfRows, [ A, B ],
-                    NrRows, NrRows( A ) + NrRows( B ),
-                    NrColumns, NrColumns( A ),
+                    NumberRows, NumberRows( A ) + NumberRows( B ),
+                    NumberColumns, NumberColumns( A ),
                     ], R );
         
     end;
@@ -901,7 +901,7 @@ InstallMethod( Eval,
         
         if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
             
-            e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );
+            e[i] := HomalgZeroMatrix( NumberRows( e[i] ), NumberColumns( e[i] ) + NumberColumns( e[i+1] ), HomalgRing( e[i] ) );
             
             Remove( e, i + 1 );
             
@@ -951,8 +951,8 @@ InstallMethod( Eval,
             
             U := List( Eval( A )!.matrix, ShallowCopy );
             
-            U{ [ 1 .. NrRows( A ) ] }
-              { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
+            U{ [ 1 .. NumberRows( A ) ] }
+              { [ NumberColumns( A ) + 1 .. NumberColumns( A ) + NumberColumns( B ) ] }
               := Eval( B )!.matrix;
             
             result := homalgInternalMatrixHull( U );
@@ -962,8 +962,8 @@ InstallMethod( Eval,
         return HomalgMatrixWithAttributes( [
                     Eval, result,
                     EvalUnionOfColumns, [ A, B ],
-                    NrRows, NrRows( A ),
-                    NrColumns, NrColumns( A ) + NrColumns( B )
+                    NumberRows, NumberRows( A ),
+                    NumberColumns, NumberColumns( A ) + NumberColumns( B )
                     ], R );
         
     end;
@@ -1057,7 +1057,7 @@ InstallMethod( Eval,
                                              if i = j then
                                                  return e[i];
                                              fi;
-                                             return HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[j] ), R );
+                                             return HomalgZeroMatrix( NumberRows( e[i] ), NumberColumns( e[j] ), R );
                                            end )
                                      )
                              )
@@ -1068,8 +1068,8 @@ InstallMethod( Eval,
     
     z := Zero( R );
     
-    m := Sum( List( e, NrRows ) );
-    n := Sum( List( e, NrColumns ) );
+    m := Sum( List( e, NumberRows ) );
+    n := Sum( List( e, NumberColumns ) );
     
     diag := List( [ 1 .. m ], a -> List( [ 1 .. n ], b -> z ) );
     
@@ -1077,11 +1077,11 @@ InstallMethod( Eval,
     n := 0;
     
     for mat in e do
-        diag{ [ m + 1 .. m + NrRows( mat ) ] }{ [ n + 1 .. n + NrColumns( mat ) ] }
+        diag{ [ m + 1 .. m + NumberRows( mat ) ] }{ [ n + 1 .. n + NumberColumns( mat ) ] }
           := Eval( mat )!.matrix;
         
-        m := m + NrRows( mat );
-        n := n + NrColumns( mat );
+        m := m + NumberRows( mat );
+        n := n + NumberColumns( mat );
     od;
     
     return homalgInternalMatrixHull( diag );
@@ -1553,7 +1553,7 @@ end );
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
         "for homalg matrices (IsOne)",
-        [ IsHomalgMatrix and IsOne and HasNrRows and HasNrColumns ], 10,
+        [ IsHomalgMatrix and IsOne and HasNumberRows and HasNumberColumns ], 10,
         
   function( C )
     local R, id, RP, o, z, zz;
@@ -1561,7 +1561,7 @@ InstallMethod( Eval,
     R := HomalgRing( C );
     
     if IsBound( R!.IdentityMatrices ) then
-        id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ) );
+        id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ) );
         if id <> fail then
             R!.IdentityMatrices!.cache_hits := R!.IdentityMatrices!.cache_hits + 1;
             return id;
@@ -1573,7 +1573,7 @@ InstallMethod( Eval,
     
     if IsBound( RP!.IdentityMatrix ) then
         id := RP!.IdentityMatrix( C );
-        SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );
+        SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ), id );
         R!.IdentityMatrices!.counter := R!.IdentityMatrices!.counter + 1;
         return id;
     fi;
@@ -1588,9 +1588,9 @@ InstallMethod( Eval,
     z := Zero( HomalgRing( C ) );
     o := One( HomalgRing( C ) );
     
-    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    zz := ListWithIdenticalEntries( NumberColumns( C ), z );
     
-    id := List( [ 1 .. NrRows( C ) ],
+    id := List( [ 1 .. NumberRows( C ) ],
                 function(i)
                   local z;
                   z := ShallowCopy( zz ); z[i] := o; return z;
@@ -1598,7 +1598,7 @@ InstallMethod( Eval,
     
     id := homalgInternalMatrixHull( id );
     
-    SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );
+    SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ), id );
     
     return id;
     
@@ -1634,7 +1634,7 @@ end );
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
         "for homalg matrices (IsZero)",
-        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 40,
+        [ IsHomalgMatrix and IsZero and HasNumberRows and HasNumberColumns ], 40,
         
   function( C )
     local R, RP, z;
@@ -1643,7 +1643,7 @@ InstallMethod( Eval,
     
     RP := homalgTable( R );
     
-    if ( NrRows( C ) = 0 or NrColumns( C ) = 0 ) and
+    if ( NumberRows( C ) = 0 or NumberColumns( C ) = 0 ) and
        not ( IsBound( R!.SafeToEvaluateEmptyMatrices ) and
              R!.SafeToEvaluateEmptyMatrices = true ) then
         Info( InfoWarning, 1, "\033[01m\033[5;31;47m",
@@ -1667,8 +1667,8 @@ InstallMethod( Eval,
     ## copying the rows saves memory;
     ## we assume that the entries are never modified!!!
     return homalgInternalMatrixHull(
-                   ListWithIdenticalEntries( NrRows( C ),
-                           ListWithIdenticalEntries( NrColumns( C ), z ) ) );
+                   ListWithIdenticalEntries( NumberRows( C ),
+                           ListWithIdenticalEntries( NumberColumns( C ), z ) ) );
     
 end );
 ##  ]]></Listing>
@@ -1689,17 +1689,17 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="NrRows:homalgTable_entry">
+##  <#GAPDoc Label="NumberRows:homalgTable_entry">
 ##  <ManSection>
-##    <Func Arg="C" Name="NrRows" Label="homalgTable entry"/>
+##    <Func Arg="C" Name="NumberRows" Label="homalgTable entry"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>NrRows</C> is bound then the standard method
-##      for the attribute <Ref Attr="NrRows"/> shown below returns
-##      <M>RP</M>!.<C>NrRows</C><M>( <A>C</A> )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>NumberRows</C> is bound then the standard method
+##      for the attribute <Ref Attr="NumberRows"/> shown below returns
+##      <M>RP</M>!.<C>NumberRows</C><M>( <A>C</A> )</M>.
 ##    <Listing Type="Code"><![CDATA[
-InstallMethod( NrRows,
+InstallMethod( NumberRows,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1710,12 +1710,12 @@ InstallMethod( NrRows,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.NrRows) then
-        return RP!.NrRows( C );
+    if IsBound(RP!.NumberRows) then
+        return RP!.NumberRows( C );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrRows ",
+        Error( "could not find a procedure called NumberRows ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
@@ -1729,17 +1729,17 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="NrColumns:homalgTable_entry">
+##  <#GAPDoc Label="NumberColumns:homalgTable_entry">
 ##  <ManSection>
-##    <Func Arg="C" Name="NrColumns" Label="homalgTable entry"/>
+##    <Func Arg="C" Name="NumberColumns" Label="homalgTable entry"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>NrColumns</C> is bound then the standard method
-##      for the attribute <Ref Attr="NrColumns"/> shown below returns
-##      <M>RP</M>!.<C>NrColumns</C><M>( <A>C</A> )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>NumberColumns</C> is bound then the standard method
+##      for the attribute <Ref Attr="NumberColumns"/> shown below returns
+##      <M>RP</M>!.<C>NumberColumns</C><M>( <A>C</A> )</M>.
 ##    <Listing Type="Code"><![CDATA[
-InstallMethod( NrColumns,
+InstallMethod( NumberColumns,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1750,12 +1750,12 @@ InstallMethod( NrColumns,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.NrColumns) then
-        return RP!.NrColumns( C );
+    if IsBound(RP!.NumberColumns) then
+        return RP!.NumberColumns( C );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrColumns ",
+        Error( "could not find a procedure called NumberColumns ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
@@ -1790,7 +1790,7 @@ InstallMethod( DeterminantMat,
     
     RP := homalgTable( R );
     
-    if NrRows( C ) <> NrColumns( C ) then
+    if NumberRows( C ) <> NumberColumns( C ) then
         Error( "the matrix is not a square matrix\n" );
     fi;
     
@@ -1943,9 +1943,9 @@ InstallMethod( ZeroRows,
     
     #=====# the fallback method #=====#
     
-    z := HomalgZeroMatrix( 1, NrColumns( C ), R );
+    z := HomalgZeroMatrix( 1, NumberColumns( C ), R );
     
-    return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( C, [ a ] ) = z );
+    return Filtered( [ 1 .. NumberRows( C ) ], a -> CertainRows( C, [ a ] ) = z );
     
 end );
 ##  ]]></Listing>
@@ -1980,9 +1980,9 @@ InstallMethod( ZeroColumns,
     
     #=====# the fallback method #=====#
     
-    z := HomalgZeroMatrix( NrRows( C ), 1, R );
+    z := HomalgZeroMatrix( NumberRows( C ), 1, R );
     
-    return Filtered( [ 1 .. NrColumns( C ) ], a -> CertainColumns( C, [ a ] ) = z );
+    return Filtered( [ 1 .. NumberColumns( C ) ], a -> CertainColumns( C, [ a ] ) = z );
     
 end );
 ##  ]]></Listing>
@@ -2004,8 +2004,8 @@ InstallMethod( GetRidOfObsoleteRows,
     
     if IsBound(RP!.GetRidOfObsoleteRows) then
         M := HomalgMatrix( RP!.GetRidOfObsoleteRows( C ), R );
-        if HasNrColumns( C ) then
-            SetNrColumns( M, NrColumns( C ) );
+        if HasNumberColumns( C ) then
+            SetNumberColumns( M, NumberColumns( C ) );
         fi;
         SetZeroRows( M, [ ] );
         return M;
@@ -2047,8 +2047,8 @@ InstallMethod( GetRidOfObsoleteColumns,
     
     if IsBound(RP!.GetRidOfObsoleteColumns) then
         M := HomalgMatrix( RP!.GetRidOfObsoleteColumns( C ), R );
-        if HasNrRows( C ) then
-            SetNrRows( M, NrRows( C ) );
+        if HasNumberRows( C ) then
+            SetNumberRows( M, NumberRows( C ) );
         fi;
         SetZeroColumns( M, [ ] );
         return M;
@@ -2181,7 +2181,7 @@ InstallMethod( IsOne,
   function( M )
     local R, RP;
     
-    if NrRows( M ) <> NrColumns( M ) then
+    if NumberRows( M ) <> NumberColumns( M ) then
         return false;
     fi;
     
@@ -2195,7 +2195,7 @@ InstallMethod( IsOne,
     
     #=====# the fallback method #=====#
     
-    return M = HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    return M = HomalgIdentityMatrix( NumberRows( M ), HomalgRing( M ) );
     
 end );
 ##  ]]></Listing>
@@ -2232,7 +2232,7 @@ InstallMethod( IsDiagonalMatrix,
     
     diag := DiagonalEntries( M );
     
-    return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );
+    return M = HomalgDiagonalMatrix( diag, NumberRows( M ), NumberColumns( M ), R );
     
 end );
 ##  ]]></Listing>
@@ -2299,11 +2299,11 @@ InstallMethod( GetColumnIndependentUnitPositions,
     
     #=====# the fallback method #=====#
     
-    rest := [ 1 .. NrColumns( M ) ];
+    rest := [ 1 .. NumberColumns( M ) ];
     
     pos := [ ];
     
-    for i in [ 1 .. NrRows( M ) ] do
+    for i in [ 1 .. NumberRows( M ) ] do
         for k in Reversed( rest ) do
             if not [ i, k ] in poslist and
                IsUnit( R, M[ i, k ] ) then
@@ -2388,11 +2388,11 @@ InstallMethod( GetRowIndependentUnitPositions,
     
     #=====# the fallback method #=====#
     
-    rest := [ 1 .. NrRows( M ) ];
+    rest := [ 1 .. NumberRows( M ) ];
     
     pos := [ ];
     
-    for j in [ 1 .. NrColumns( M ) ] do
+    for j in [ 1 .. NumberColumns( M ) ] do
         for k in Reversed( rest ) do
             if not [ j, k ] in poslist and
                IsUnit( R, M[ k, j ] ) then
@@ -2463,8 +2463,8 @@ InstallMethod( GetUnitPosition,
     
     #=====# the fallback method #=====#
     
-    m := NrRows( M );
-    n := NrColumns( M );
+    m := NumberRows( M );
+    n := NumberColumns( M );
     
     for i in [ 1 .. m ] do
         for j in [ 1 .. n ] do
@@ -2515,8 +2515,8 @@ InstallMethod( PositionOfFirstNonZeroEntryPerRow,
     
     entries := EntriesOfHomalgMatrix( M );
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     pos := ListWithIdenticalEntries( r, 0 );
     
@@ -2569,8 +2569,8 @@ InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
     
     entries := EntriesOfHomalgMatrix( M );
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     pos := ListWithIdenticalEntries( c, 0 );
     
@@ -2645,12 +2645,12 @@ InstallMethod( DivideRowByUnit,
             for a in [ 1 .. j - 1 ] do
                 DivideEntryByUnit( M, i, a, u );
             od;
-            for a in [ j + 1 .. NrColumns( M ) ] do
+            for a in [ j + 1 .. NumberColumns( M ) ] do
                 DivideEntryByUnit( M, i, a, u );
             od;
             M[ i, j ] := One( R );
         else
-            for a in [ 1 .. NrColumns( M ) ] do
+            for a in [ 1 .. NumberColumns( M ) ] do
                 DivideEntryByUnit( M, i, a, u );
             od;
         fi;
@@ -2662,8 +2662,8 @@ InstallMethod( DivideRowByUnit,
     ## a new homalg matrix object only containing Eval( M )
     mat := HomalgMatrixWithAttributes( [
                    Eval, Eval( M ),
-                   NrRows, NrRows( M ),
-                   NrColumns, NrColumns( M ),
+                   NumberRows, NumberRows( M ),
+                   NumberColumns, NumberColumns( M ),
                    ], R );
     
     if HasIsZero( M ) and not IsZero( M ) then
@@ -2701,12 +2701,12 @@ InstallMethod( DivideColumnByUnit,
             for a in [ 1 .. i - 1 ] do
                 DivideEntryByUnit( M, a, j, u );
             od;
-            for a in [ i + 1 .. NrRows( M ) ] do
+            for a in [ i + 1 .. NumberRows( M ) ] do
                 DivideEntryByUnit( M, a, j, u );
             od;
             M[ i, j ] := One( R );
         else
-            for a in [ 1 .. NrRows( M ) ] do
+            for a in [ 1 .. NumberRows( M ) ] do
                 DivideEntryByUnit( M, a, j, u );
             od;
         fi;
@@ -2718,8 +2718,8 @@ InstallMethod( DivideColumnByUnit,
     ## a new homalg matrix object only containing Eval( M )
     mat := HomalgMatrixWithAttributes( [
                    Eval, Eval( M ),
-                   NrRows, NrRows( M ),
-                   NrColumns, NrColumns( M ),
+                   NumberRows, NumberRows( M ),
+                   NumberColumns, NumberColumns( M ),
                    ], R );
     
     if HasIsZero( M ) and not IsZero( M ) then
@@ -2765,7 +2765,7 @@ InstallMethod( CopyRowToIdentityMatrix,
                     vi[ j, l ] := r;
                 fi;
             od;
-            for l in [ j + 1 .. NrColumns( M ) ] do
+            for l in [ j + 1 .. NumberColumns( M ) ] do
                 r := M[ i, l ];
                 if not IsZero( r ) then
                     v[ j, l ] := -r;
@@ -2778,7 +2778,7 @@ InstallMethod( CopyRowToIdentityMatrix,
                 r := M[ i, l ];
                 v[ j, l ] := -r;
             od;
-            for l in [ j + 1 .. NrColumns( M ) ] do
+            for l in [ j + 1 .. NumberColumns( M ) ] do
                 r := M[ i, l ];
                 v[ j, l ] := -r;
             od;
@@ -2788,7 +2788,7 @@ InstallMethod( CopyRowToIdentityMatrix,
                 r := M[ i, l ];
                 vi[ j, l ] := r;
             od;
-            for l in [ j + 1 .. NrColumns( M ) ] do
+            for l in [ j + 1 .. NumberColumns( M ) ] do
                 r := M[ i, l ];
                 vi[ j, l ] := r;
             od;
@@ -2833,7 +2833,7 @@ InstallMethod( CopyColumnToIdentityMatrix,
                     ui[ k, i ] := r;
                 fi;
             od;
-            for k in [ i + 1 .. NrRows( M ) ] do
+            for k in [ i + 1 .. NumberRows( M ) ] do
                 r := M[ k, j ];
                 if not IsZero( r ) then
                     u[ k, i ] := -r;
@@ -2846,7 +2846,7 @@ InstallMethod( CopyColumnToIdentityMatrix,
                 r := M[ k, j ];
                 u[ k, i ] := -r;
             od;
-            for k in [ i + 1 .. NrRows( M ) ] do
+            for k in [ i + 1 .. NumberRows( M ) ] do
                 r := M[ k, j ];
                 u[ k, i ] := -r;
             od;
@@ -2856,7 +2856,7 @@ InstallMethod( CopyColumnToIdentityMatrix,
                 r := M[ k, j ];
                 ui[ k, i ] := r;
             od;
-            for k in [ i + 1 .. NrRows( M ) ] do
+            for k in [ i + 1 .. NumberRows( M ) ] do
                 r := M[ k, j ];
                 ui[ k, i ] := r;
             od;
@@ -2891,7 +2891,7 @@ InstallMethod( SetColumnToZero,
             M[ k, j ] := zero;
         od;
         
-        for k in [ i + 1 .. NrRows( M ) ] do
+        for k in [ i + 1 .. NumberRows( M ) ] do
             M[ k, j ] := zero;
         od;
         
@@ -2902,8 +2902,8 @@ InstallMethod( SetColumnToZero,
     ## a new homalg matrix object only containing Eval( M )
     return HomalgMatrixWithAttributes( [
                  Eval, Eval( M ),
-                 NrRows, NrRows( M ),
-                 NrColumns, NrColumns( M ),
+                 NumberRows, NumberRows( M ),
+                 NumberColumns, NumberColumns( M ),
                  ], R );
     
 end );
@@ -2930,7 +2930,7 @@ InstallMethod( GetCleanRowsPositions,
     
     clean_rows := [ ];
     
-    m := NrRows( M );
+    m := NumberRows( M );
     
     for j in clean_columns do
         for i in [ 1 .. m ] do
@@ -3027,8 +3027,8 @@ InstallMethod( Eval,
     
     M := EvalConvertMatrixToRow( C );
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     R := HomalgRing( M );
     
@@ -3062,8 +3062,8 @@ InstallMethod( Eval,
     
     M := EvalConvertMatrixToColumn( C );
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     R := HomalgRing( M );
     
@@ -3095,7 +3095,7 @@ InstallMethod( ConvertRowToTransposedMatrix,
   function( M, r, c )
     local R, RP, ext_obj, l, j;
     
-    if NrRows( M ) <> 1 then
+    if NumberRows( M ) <> 1 then
         Error( "expecting a single row matrix as a first argument\n" );
     fi;
     
@@ -3138,7 +3138,7 @@ InstallMethod( ConvertColumnToTransposedMatrix,
   function( M, r, c )
     local R, RP, ext_obj;
     
-    if NrColumns( M ) <> 1 then
+    if NumberColumns( M ) <> 1 then
         Error( "expecting a single column matrix as a first argument\n" );
     fi;
     
@@ -3172,27 +3172,27 @@ InstallMethod( ConvertTransposedMatrixToRow,
   function( M )
     local R, RP, ext_obj, r, c, l, j;
     
-    if NrRows( M ) = 1 then
+    if NumberRows( M ) = 1 then
         return M;
     fi;
     
     R := HomalgRing( M );
     
     if IsZero( M ) then
-        return HomalgZeroMatrix( 1, NrRows( M ) * NrColumns( M ), R );
+        return HomalgZeroMatrix( 1, NumberRows( M ) * NumberColumns( M ), R );
     fi;
     
     RP := homalgTable( R );
     
     if IsBound(RP!.ConvertTransposedMatrixToRow) then
         ext_obj := RP!.ConvertTransposedMatrixToRow( M );
-        return HomalgMatrix( ext_obj, 1, NrRows( M ) * NrColumns( M ), R );
+        return HomalgMatrix( ext_obj, 1, NumberRows( M ) * NumberColumns( M ), R );
     fi;
     
     #=====# the fallback method #=====#
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     ## CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( "Transpose"( M ) ), 1, r * c, R )
     ## would require a Transpose operation,
@@ -3214,26 +3214,26 @@ InstallMethod( ConvertTransposedMatrixToColumn,
   function( M )
     local R, RP, ext_obj;
     
-    if NrColumns( M ) = 1 then
+    if NumberColumns( M ) = 1 then
         return M;
     fi;
     
     R := HomalgRing( M );
     
     if IsZero( M ) then
-        return HomalgZeroMatrix( NrRows( M ) * NrColumns( M ), 1, R );
+        return HomalgZeroMatrix( NumberRows( M ) * NumberColumns( M ), 1, R );
     fi;
     
     RP := homalgTable( R );
     
     if IsBound(RP!.ConvertTransposedMatrixToColumn) then
         ext_obj := RP!.ConvertTransposedMatrixToColumn( M );
-        return HomalgMatrix( ext_obj, NrColumns( M ) * NrRows( M ), 1, R );
+        return HomalgMatrix( ext_obj, NumberColumns( M ) * NumberRows( M ), 1, R );
     fi;
     
     #=====# the fallback method #=====#
     
-    return CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( M ), NrColumns( M ) * NrRows( M ), 1, R ); ## delicate
+    return CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( M ), NumberColumns( M ) * NumberRows( M ), 1, R ); ## delicate
     
 end );
 
@@ -3292,8 +3292,8 @@ InstallMethod( MaxDimensionalRadicalSubobjectOp,
         if IsZero( rad ) then
             return HomalgZeroMatrix( 0, 1, R );
         fi;
-        SetNrColumns( rad, 1 );
-        NrRows( rad );
+        SetNumberColumns( rad, 1 );
+        NumberRows( rad );
         IsOne( rad );
         M!.MaxDimensionalRadicalSubobjectOp := rad;
         rad!.MaxDimensionalRadicalSubobjectOp := rad;
@@ -3335,8 +3335,8 @@ InstallMethod( RadicalSubobjectOp,
         if IsZero( rad ) then
             rad := HomalgZeroMatrix( 0, 1, R );
         fi;
-        SetNrColumns( rad, 1 );
-        NrRows( rad );
+        SetNumberColumns( rad, 1 );
+        NumberRows( rad );
         IsOne( rad );
         if rad = M then
             rad := M;
@@ -3370,7 +3370,7 @@ InstallMethod( RadicalDecompositionOp,
     R := HomalgRing( M );
     
     if IsZero( M ) then
-        if NrColumns( M ) = 0 then
+        if NumberColumns( M ) = 0 then
             triv := HomalgZeroMatrix( 0, 0, R );
         else
             triv := HomalgZeroMatrix( 0, 1, R );
@@ -3410,7 +3410,7 @@ InstallMethod( EquiDimensionalDecompositionOp,
     R := HomalgRing( M );
     
     if IsZero( M ) then
-        if NrColumns( M ) = 0 then
+        if NumberColumns( M ) = 0 then
             triv := HomalgZeroMatrix( 0, 0, R );
         else
             triv := HomalgZeroMatrix( 0, 1, R );
@@ -3461,8 +3461,8 @@ InstallMethod( MaxDimensionalSubobjectOp,
         if IsZero( max ) then
             return HomalgZeroMatrix( 0, 1, R );
         fi;
-        SetNrColumns( max, 1 );
-        NrRows( max );
+        SetNumberColumns( max, 1 );
+        NumberRows( max );
         IsOne( max );
         M!.MaxDimensionalSubobjectOp := max;
         max!.MaxDimensionalSubobjectOp := max;
@@ -3493,7 +3493,7 @@ InstallMethod( PrimaryDecompositionOp,
     R := HomalgRing( M );
     
     if IsZero( M ) then
-        if NrColumns( M ) = 0 then
+        if NumberColumns( M ) = 0 then
             triv := HomalgZeroMatrix( 0, 0, R );
         else
             triv := HomalgZeroMatrix( 0, 1, R );
@@ -3555,8 +3555,8 @@ InstallMethod( Eliminate,
         if IsZero( elim ) then
             return HomalgZeroMatrix( 0, 1, R );
         fi;
-        SetNrColumns( elim, 1 );
-        NrRows( elim );
+        SetNumberColumns( elim, 1 );
+        NumberRows( elim );
         return elim;
     fi;
     
@@ -3768,7 +3768,7 @@ InstallMethod( Coefficients,
         both := RP!.CoefficientsMatrix( matrix, var ); ## the pair of external objects
         monomials := HomalgMatrix( both[1], R );
         monomials := EntriesOfHomalgMatrix( monomials );
-        coeffs := HomalgMatrix( both[2], Length( monomials ), NrRows( matrix ), R );
+        coeffs := HomalgMatrix( both[2], Length( monomials ), NumberRows( matrix ), R );
         coeffs!.monomials := MakeImmutable( monomials );
         return coeffs;
     fi;
@@ -4057,8 +4057,8 @@ InstallMethod( IndicatorMatrixOfNonZeroEntries,
         return RP!.IndicatorMatrixOfNonZeroEntries( mat );
     fi;
     
-    r := NrRows( mat );
-    c := NrColumns( mat );
+    r := NumberRows( mat );
+    c := NumberColumns( mat );
     
     result := List( [ 1 .. r ], a -> ListWithIdenticalEntries( c, 0 ) );
     
@@ -4111,8 +4111,8 @@ InstallMethod( Pullback,
         
     fi;
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     if IsZero( M ) then
         
@@ -4130,7 +4130,7 @@ InstallMethod( Pullback,
     
     if IsBound( RP!.Pullback ) then
         
-        return HomalgMatrix( RP!.Pullback( phi, M ), NrRows( M ), NrColumns( M ), T );
+        return HomalgMatrix( RP!.Pullback( phi, M ), NumberRows( M ), NumberColumns( M ), T );
         
     fi;
     
@@ -4308,9 +4308,9 @@ InstallMethod( MatrixOfSymbols,
     S := AssociatedGradedRing( R );
     
     if IsZero( mat ) then
-        return HomalgZeroMatrix( NrRows( mat ), NrColumns( mat ), S );
+        return HomalgZeroMatrix( NumberRows( mat ), NumberColumns( mat ), S );
     elif IsOne( mat ) then
-        return HomalgIdentityMatrix( NrRows( mat ), S );
+        return HomalgIdentityMatrix( NumberRows( mat ), S );
     fi;
     
     RP := homalgTable( R );
@@ -4322,7 +4322,7 @@ InstallMethod( MatrixOfSymbols,
     
     symb := RP!.MatrixOfSymbols( mat );
     
-    symb := S * HomalgMatrix( symb, NrRows( mat ), NrColumns( mat ), R );
+    symb := S * HomalgMatrix( symb, NumberRows( mat ), NumberColumns( mat ), R );
     
     ## TODO: add more properties and attributes to symb
     
@@ -4350,8 +4350,8 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
     
     RP := homalgTable( R );
     
-    rr := NrRows( M );
-    cc := NrColumns( M );
+    rr := NumberRows( M );
+    cc := NumberColumns( M );
     
     r := rr;
     c := cc;
@@ -4670,8 +4670,8 @@ InstallMethod( Value,
     R := HomalgRing( M );
     RP := homalgTable( R );
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     if IsBound( RP!.EvaluateMatrix ) then
         
@@ -4799,8 +4799,8 @@ InstallMethod( Value,
     
     #=====# the fallback method #=====#
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     MM := HomalgInitialMatrix( r, c, HomalgRing( M ) );
     
@@ -4860,7 +4860,7 @@ InstallMethod( MonomialMatrixWeighted,
     if IsBound(RP!.MonomialMatrix) then
         mon := RP!.MonomialMatrix( dd, vars, R );        ## the external object
         mon := HomalgMatrix( mon, R );
-        SetNrColumns( mon, 1 );
+        SetNumberColumns( mon, 1 );
         if d = 0 then
             IsOne( mon );
         fi;
@@ -5007,7 +5007,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModulesWeighted,
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
             mon := MonomialMatrixWeighted( degreesS[i] - degreesT[j], R, weights );
-            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
+            mon := ( R * HomalgMatrix( RandomMat( 1, NumberRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
             mon := mon[ 1, 1 ];
             rand[ ( i - 1 ) * c + j ] := mon;
         od;
@@ -5049,7 +5049,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModulesWeighted,
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
             mon := MonomialMatrixWeighted( degreesS[j] - degreesT[i], R, weights );
-            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
+            mon := ( R * HomalgMatrix( RandomMat( 1, NumberRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
             mon := mon[ 1, 1 ];
             rand[ ( i - 1 ) * c + j ] := mon;
         od;
@@ -5176,7 +5176,7 @@ InstallMethod( GeneralLinearCombination,
         
     od;
     
-    m := NrRows( mat );
+    m := NumberRows( mat );
     
     # todo: better names for the bi: use the corresponding degree of the monomial
     s := List( [ 1 .. n ], i -> Concatenation( "b_", String( i ), "_0..", String( m - 1 ) ) );
@@ -5253,8 +5253,8 @@ InstallMethod( GetMonic,
     
     M := newR * M;
     
-    m := NrRows( M );
-    n := NrColumns( M );
+    m := NumberRows( M );
+    n := NumberColumns( M );
     
     for p in [ 1 .. m ] do
         for q in [ 1 .. n ] do
@@ -5331,8 +5331,8 @@ InstallMethod( GetMonicUptoUnit,
     
     M := newR * M;
     
-    m := NrRows( M );
-    n := NrColumns( M );
+    m := NumberRows( M );
+    n := NumberColumns( M );
     
     for p in [ 1 .. m ] do
         for q in [ 1 .. n ] do
@@ -5401,7 +5401,7 @@ InstallMethod( Diff,
     if IsBound(RP!.Diff) then
         diff := RP!.Diff( D, N );
         if not IsHomalgMatrix( diff ) then
-            diff := HomalgMatrix( diff, NrRows( D ) * NrRows( N ), NrColumns( D ) * NrColumns( N ), R );
+            diff := HomalgMatrix( diff, NumberRows( D ) * NumberRows( N ), NumberColumns( D ) * NumberColumns( N ), R );
         fi;
         return diff;
     fi;
@@ -5456,9 +5456,9 @@ InstallMethod( TangentSpaceByEquationsAtPoint,
   function( M, x )
     local R, var, n, k, Tx, map, i, xi, Ri, m;
     
-    if not NrColumns( M ) = 1 then
+    if not NumberColumns( M ) = 1 then
         Error( "the number of columns of the first argument M is not 1\n" );
-    elif not NrColumns( M ) = 1 then
+    elif not NumberColumns( M ) = 1 then
         Error( "the number of columns of the second argument x is not 1\n" );
     fi;
     
@@ -5468,7 +5468,7 @@ InstallMethod( TangentSpaceByEquationsAtPoint,
     
     n := Length( var );
     
-    if not n = NrRows( x ) then
+    if not n = NumberRows( x ) then
         Error( "the number of rows of the second argument x is not the number of indeterminates ", n, "\n" );
     fi;
     
@@ -5478,7 +5478,7 @@ InstallMethod( TangentSpaceByEquationsAtPoint,
         Error( "the second argument is not a matrix over the coefficients ring ", k );
     fi;
     
-    Tx := HomalgZeroMatrix( NrRows( M ), 0, k );
+    Tx := HomalgZeroMatrix( NumberRows( M ), 0, k );
     
     for i in [ 1 .. n ] do
         
@@ -5673,8 +5673,8 @@ InstallMethod( ClearDenominatorsRowWise,
     
     RP := homalgTable( R );
     
-    m := NrRows( M );
-    n := NrColumns( M );
+    m := NumberRows( M );
+    n := NumberColumns( M );
     
     if IsBound(RP!.ClearDenominatorsRowWise) then
         return HomalgMatrix( RP!.ClearDenominatorsRowWise( M ), m, n, R ); ## the external object
@@ -5754,7 +5754,7 @@ InstallMethod( MaximalDegreePartOfColumnMatrix,
   function( M )
     local R;
     
-    if not NrColumns( M ) = 1 then
+    if not NumberColumns( M ) = 1 then
         Error( "the number of columns is not 1\n" );
     fi;
     
@@ -5788,7 +5788,7 @@ InstallMethod( LeadingModule,
     if IsBound(RP!.LeadingModule) then
         lead := RP!.LeadingModule( mat );
     elif IsBound(RP!.LeadingIdeal) then
-        if not NrColumns( mat ) = 1 then
+        if not NumberColumns( mat ) = 1 then
             Error( "the matrix of generators of the ideal should be a one column matrix\n" );
         fi;
         lead := RP!.LeadingIdeal( mat );
@@ -5797,7 +5797,7 @@ InstallMethod( LeadingModule,
                "in the homalgTable of the ring\n" );
     fi;
     
-    return HomalgMatrix( lead, NrRows( mat ), NrColumns( mat ), R );
+    return HomalgMatrix( lead, NumberRows( mat ), NumberColumns( mat ), R );
     
 end );
 
@@ -5893,7 +5893,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         M!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries := save;
     fi;
     
-    if NrColumns( M ) <> Length( degrees ) then
+    if NumberColumns( M ) <> Length( degrees ) then
         Error( "the number of columns must coincide with the number of degrees\n" );
     fi;
     
@@ -5904,7 +5904,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
     fi;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         save.(c) := [ [ ], [ ] ];
         return save.(c);
     fi;
@@ -5936,7 +5936,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         zero_cols := ZeroColumns( M );
         
         if zero_cols <> [ ] and
-           not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then ## avoid infinite loops
+           not ( IsZero( M ) and NumberRows( M ) = 1 and NumberColumns( M ) = 1 ) then ## avoid infinite loops
             ## take care of matrices with zero columns, especially of 0 x n matrices
             
             free := HomalgZeroMatrix( 1, 1, R );
@@ -6016,7 +6016,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
     local R, RP, free, r, hilb_free, hilb;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return [ ];
     fi;
     
@@ -6029,7 +6029,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         free := ZeroColumns( M );
         
         if free <> [ ] and
-           not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then ## avoid infinite loops
+           not ( IsZero( M ) and NumberRows( M ) = 1 and NumberColumns( M ) = 1 ) then ## avoid infinite loops
             ## take care of matrices with zero columns, especially of 0 x n matrices
             
             r := Length( free );
@@ -6050,7 +6050,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
             
         else
             
-            if not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then
+            if not ( IsZero( M ) and NumberRows( M ) = 1 and NumberColumns( M ) = 1 ) then
                 M := BasisOfRowModule( M );
             fi;
             
@@ -6154,7 +6154,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         M!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries := save;
     fi;
     
-    if NrColumns( M ) <> Length( degrees ) then
+    if NumberColumns( M ) <> Length( degrees ) then
         Error( "the number of columns must coincide with the number of degrees\n" );
     fi;
     
@@ -6165,7 +6165,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
     fi;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         save.(c) := [ [ ], [ ] ];
         return save.(c);
     fi;
@@ -6197,7 +6197,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         
         if IsZero( M ) then
             ## take care of zero matrices, especially of 0 x n matrices
-            free := HomalgZeroMatrix( 1, NrColumns( M ), R );
+            free := HomalgZeroMatrix( 1, NumberColumns( M ), R );
             hilb := RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries( free, weights, degrees );
         else
             hilb := RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries( M, weights, degrees );
@@ -6232,7 +6232,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
     local R, RP, free, hilb, lowest_coeff;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return [ ];
     fi;
     
@@ -6246,7 +6246,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
             ## take care of zero matrices, especially of 0 x n matrices
             free := HomalgZeroMatrix( 1, 1, R );
             hilb := RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( free );
-            return NrColumns( M ) * hilb;
+            return NumberColumns( M ) * hilb;
         else
             return RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
         fi;
@@ -6275,7 +6275,7 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
     local R, RP, t, hilb, range;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0 * lambda;
     fi;
     
@@ -6336,7 +6336,7 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
     local R, RP, hilb;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0 * lambda;
     fi;
     
@@ -6383,7 +6383,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
     local R, RP, t, hilb, range;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0 * lambda;
     fi;
     
@@ -6450,7 +6450,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
     local R, RP, hilb, lowest_coeff;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0 * lambda;
     fi;
     
@@ -6594,7 +6594,7 @@ InstallMethod( HilbertPoincareSeries,
     
     if HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R ) then
         
-        return ( NrColumns( M ) - RowRankOfMatrix( M ) ) * lambda^0;
+        return ( NumberColumns( M ) - RowRankOfMatrix( M ) ) * lambda^0;
         
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         
@@ -6616,7 +6616,7 @@ InstallMethod( HilbertPoincareSeries,
         
         weights := ListWithIdenticalEntries( Length( Indeterminates( R ) ), 1 );
         
-        degrees := ListWithIdenticalEntries( NrColumns( M ), 0 );
+        degrees := ListWithIdenticalEntries( NumberColumns( M ), 0 );
         
         return HilbertPoincareSeries( LeadingModule( M ), weights, degrees, lambda );
         
@@ -6767,7 +6767,7 @@ InstallMethod( HilbertPolynomial,
     local R, RP, t, hilb;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0 * lambda;
     fi;
     
@@ -6831,7 +6831,7 @@ InstallMethod( HilbertPolynomial,
     local R, RP, free, hilb, weights, degrees;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0 * lambda;
     fi;
     
@@ -6841,7 +6841,7 @@ InstallMethod( HilbertPolynomial,
     
     if HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R ) then
         
-        return ( NrColumns( M ) - RowRankOfMatrix( M ) ) * lambda^0;
+        return ( NumberColumns( M ) - RowRankOfMatrix( M ) ) * lambda^0;
         
     elif IsBound( RP!.CoefficientsOfHilbertPolynomial ) then
         
@@ -6849,7 +6849,7 @@ InstallMethod( HilbertPolynomial,
             ## take care of zero matrices, especially of 0 x n matrices
             free := HomalgZeroMatrix( 1, 1, R );
             hilb := RP!.CoefficientsOfHilbertPolynomial( free );
-            hilb := NrColumns( M ) * hilb;
+            hilb := NumberColumns( M ) * hilb;
         else
             hilb := RP!.CoefficientsOfHilbertPolynomial( M );
         fi;
@@ -6869,7 +6869,7 @@ InstallMethod( HilbertPolynomial,
         
         weights := ListWithIdenticalEntries( Length( Indeterminates( R ) ), 1 );
         
-        degrees := ListWithIdenticalEntries( NrColumns( M ), 0 );
+        degrees := ListWithIdenticalEntries( NumberColumns( M ), 0 );
         
         return HilbertPolynomial( LeadingModule( M ), weights, degrees, lambda );
         
@@ -6920,14 +6920,14 @@ InstallMethod( AffineDimension,
     
     R := HomalgRing( M );
     
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         ## take care of n x 0 matrices
         return HOMALG_MATRICES.DimensionOfZeroModules;
     elif ZeroColumns( M ) <> [ ] then
         ## take care of matrices with zero columns, especially of 0 x n matrices
         if HasKrullDimension( R ) then
             return KrullDimension( R ); ## this is not a mistake
-        elif not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then ## avoid infinite loops
+        elif not ( IsZero( M ) and NumberRows( M ) = 1 and NumberColumns( M ) = 1 ) then ## avoid infinite loops
             free := HomalgZeroMatrix( 1, 1, R );
             return AffineDimension( free, weights, degrees );
         fi;
@@ -6935,9 +6935,9 @@ InstallMethod( AffineDimension,
         
         M := BasisOfRowModule( M );
         
-        if IsZero( DecideZero( HomalgIdentityMatrix( NrColumns( M ), R ), M ) ) then
+        if IsZero( DecideZero( HomalgIdentityMatrix( NumberColumns( M ), R ), M ) ) then
             return HOMALG_MATRICES.DimensionOfZeroModules;
-        elif NrColumns( M ) - NrRows( M ) = 0 then
+        elif NumberColumns( M ) - NumberRows( M ) = 0 then
             return 0;
         fi;
         
@@ -6980,14 +6980,14 @@ InstallMethod( AffineDimension,
     
     R := HomalgRing( M );
     
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         ## take care of n x 0 matrices
         return HOMALG_MATRICES.DimensionOfZeroModules;
     elif ZeroColumns( M ) <> [ ] then
         ## take care of matrices with zero columns, especially of 0 x n matrices
         if HasKrullDimension( R ) then
             return KrullDimension( R ); ## this is not a mistake
-        elif not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then ## avoid infinite loops
+        elif not ( IsZero( M ) and NumberRows( M ) = 1 and NumberColumns( M ) = 1 ) then ## avoid infinite loops
             free := HomalgZeroMatrix( 1, 1, R );
             return AffineDimension( free );
         fi;
@@ -6996,9 +6996,9 @@ InstallMethod( AffineDimension,
         
         M := BasisOfRowModule( M );
         
-        if IsZero( DecideZero( HomalgIdentityMatrix( NrColumns( M ), R ), M ) ) then
+        if IsZero( DecideZero( HomalgIdentityMatrix( NumberColumns( M ), R ), M ) ) then
             return HOMALG_MATRICES.DimensionOfZeroModules;
-        elif NrColumns( M ) - NrRows( M ) = 0 then
+        elif NumberColumns( M ) - NumberRows( M ) = 0 then
             return 0;
         fi;
         
@@ -7036,7 +7036,7 @@ InstallMethod( AffineDimension,
         
         return d;
         
-    elif IsBound( RP!.AffineDimensionOfIdeal ) and NrColumns( M ) = 1 then
+    elif IsBound( RP!.AffineDimensionOfIdeal ) and NumberColumns( M ) = 1 then
         
         d := RP!.AffineDimensionOfIdeal( M );
         
@@ -7129,7 +7129,7 @@ InstallMethod( AffineDegree,
     local R, k, char, RP, hilb, weights, degrees;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0;
     fi;
     
@@ -7171,7 +7171,7 @@ InstallMethod( AffineDegree,
         
         weights := ListWithIdenticalEntries( Length( Indeterminates( R ) ), 1 );
         
-        degrees := ListWithIdenticalEntries( NrColumns( M ), 0 );
+        degrees := ListWithIdenticalEntries( NumberColumns( M ), 0 );
         
         return AffineDegree( LeadingModule( M ), weights, degrees );
         
@@ -7241,7 +7241,7 @@ InstallMethod( ProjectiveDegree,
     local R, RP, hilb;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0;
     fi;
     
@@ -7282,7 +7282,7 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
     local d, R, RP, t, hilb, range;
     
     ## take care of n x 0 matrices
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return 0;
     fi;
     
@@ -7338,12 +7338,12 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
   function( M )
     local R, RP, d, hilb;
     
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         ## take care of n x 0 matrices
         return 0;
     elif IsZero( M ) then
         ## take care of zero matrices, especially of 0 x n matrices
-        return NrColumns( M );
+        return NumberColumns( M );
     fi;
     
     d := AffineDimension( M );
@@ -7899,7 +7899,7 @@ InstallMethod( AMaximalIdealContaining,
         return HomalgMatrix( [ 2 ], 1, 1, R );
     fi;
     
-    if not NrRows( I ) = 1  then
+    if not NumberRows( I ) = 1  then
         Error( "Hermite normal form failed to produce the cyclic generator ",
                "of the principal ideal\n" );
     fi;
@@ -7972,9 +7972,9 @@ InstallOtherMethod( Saturate,
   function( mat, r )
     local mat_old;
     
-    if not NrColumns( mat ) = NrColumns( r ) then
+    if not NumberColumns( mat ) = NumberColumns( r ) then
         Error( "the matrices mat and r must have the same number of columns\n" );
-    elif not NrRows( r ) = NrColumns( r ) then
+    elif not NumberRows( r ) = NumberColumns( r ) then
         Error( "the matrix r is not a square matrix\n" );
     fi;
     
@@ -8093,7 +8093,7 @@ InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
     ## R = A / I
     I := MatrixOfRelations( R );
     
-    for i in [ 1 .. NrRows( I ) ] do
+    for i in [ 1 .. NumberRows( I ) ] do
         ## [ i, f/u ] where (u y_i - f) ∈ GB(I)
         img := IsolateIndeterminate( I[ i, 1 ] );
         if not img = fail then

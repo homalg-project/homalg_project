@@ -47,8 +47,8 @@ InstallMethod( CreateHomalgTable,
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
                        SetEval( arg[2], homalgInternalMatrixHull( N.rowtrans ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetNumberRows( arg[2], NumberRows( M ) );
+                       SetNumberColumns( arg[2], NumberRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
@@ -56,16 +56,16 @@ InstallMethod( CreateHomalgTable,
                    if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
                        SetEval( arg[3], homalgInternalMatrixHull( N.coltrans ) );
                        ResetFilterObj( arg[3], IsVoidMatrix );
-                       SetNrRows( arg[3], NrColumns( M ) );
-                       SetNrColumns( arg[3], NrColumns( M ) );
+                       SetNumberRows( arg[3], NumberColumns( M ) );
+                       SetNumberColumns( arg[3], NumberColumns( M ) );
                        SetIsInvertibleMatrix( arg[3], true );
                    fi;
                    
                    S := HomalgMatrix( N.normal, R );
                    
-                   SetNrRows( S, NrRows( M ) );
-                   SetNrColumns( S, NrColumns( M ) );
-                   SetZeroRows( S, [ N.rank + 1 .. NrRows( S ) ] );
+                   SetNumberRows( S, NumberRows( M ) );
+                   SetNumberColumns( S, NumberColumns( M ) );
+                   SetZeroRows( S, [ N.rank + 1 .. NumberRows( S ) ] );
                    SetIsDiagonalMatrix( S, true );
                    
                    return S;
@@ -110,7 +110,7 @@ InstallMethod( CreateHomalgTable,
                  function( mat )
                    local R, fac;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -129,7 +129,7 @@ InstallMethod( CreateHomalgTable,
                  function( mat )
                    local R, fac;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -148,7 +148,7 @@ InstallMethod( CreateHomalgTable,
                  function( mat )
                    local rad;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only radical of one-column matrices is supported\n" );
                    fi;
                    
@@ -187,8 +187,8 @@ InstallMethod( CreateHomalgTable,
                        # assign U:
                        SetEval( arg[2], homalgInternalMatrixHull( N.rowtrans ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetNumberRows( arg[2], NumberRows( M ) );
+                       SetNumberColumns( arg[2], NumberRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
                    else
                        ## compute N only: (0+2)
@@ -197,9 +197,9 @@ InstallMethod( CreateHomalgTable,
                    
                    H := HomalgMatrix( N.normal, R );
                    
-                   SetNrRows( H, NrRows( M ) );
-                   SetNrColumns( H, NrColumns( M ) );
-                   SetZeroRows( H, [ N.rank + 1 .. NrRows( H ) ] );
+                   SetNumberRows( H, NumberRows( M ) );
+                   SetNumberColumns( H, NumberColumns( M ) );
+                   SetZeroRows( H, [ N.rank + 1 .. NumberRows( H ) ] );
                    
                    SetIsUpperStairCaseMatrix( H, true );
                    

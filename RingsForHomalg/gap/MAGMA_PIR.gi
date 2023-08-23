@@ -58,13 +58,13 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
+                   N := HomalgVoidMatrix( NumberRows( M ), NumberColumns( M ), R );
                    
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not ReducedRowEchelonForm( M, "" )
                        # assign U:
                        U := arg[2];
-                       SetNrRows( U, NrRows( M ) );
-                       SetNrColumns( U, NrRows( M ) );
+                       SetNumberRows( U, NumberRows( M ) );
+                       SetNumberColumns( U, NumberRows( M ) );
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:

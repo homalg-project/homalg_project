@@ -63,7 +63,7 @@ InstallMethod( UnderlyingMatrixOverNonGradedRing,
     
     if not HasEval( A ) then
       
-      B := HomalgZeroMatrix( NrRows( A ), NrColumns( A ), UnderlyingNonGradedRing( HomalgRing( A ) ) );
+      B := HomalgZeroMatrix( NumberRows( A ), NumberColumns( A ), UnderlyingNonGradedRing( HomalgRing( A ) ) );
       
       SetEval( A, B );
     
@@ -108,7 +108,7 @@ InstallMethod( BlindlyCopyMatrixPropertiesToMatrixOverGradedRing, ## under const
   function( S, T )
     local c;
     
-    for c in [ NrRows, NrColumns ] do
+    for c in [ NumberRows, NumberColumns ] do
         if Tester( c )( S ) then
             Setter( c )( T, c( S ) );
         fi;
@@ -244,7 +244,7 @@ end );
 ##  gap> S := GradedRing( R );;
 ##  gap> m := MonomialMatrix( 2, S );
 ##  <A ? x 1 matrix over a graded ring>
-##  gap> NrRows( m );
+##  gap> NumberRows( m );
 ##  6
 ##  gap> m;
 ##  <A 6 x 1 matrix over a graded ring>
@@ -560,8 +560,8 @@ InstallMethod( DegreesOfEntries,
     
     if IsZero( C ) then
         
-        return ListWithIdenticalEntries( NrRows( C ),
-                       ListWithIdenticalEntries( NrColumns( C ),
+        return ListWithIdenticalEntries( NumberRows( C ),
+                       ListWithIdenticalEntries( NumberColumns( C ),
                                DegreeOfRingElement( Zero( S ) ) ) );
     fi;
     
@@ -578,9 +578,9 @@ InstallMethod( NonTrivialDegreePerRow,
     local degrees;
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );
+        return ListWithIdenticalEntries( NumberRows( C ), DegreeOfRingElement( One( S ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NumberRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     fi;
     
     ## CASHING ## 
@@ -617,16 +617,16 @@ InstallMethod( NonTrivialDegreePerRow,
   function( C, S, col_degrees )
     local degs, col_pos, f;
     
-    if Length( col_degrees ) <> NrColumns( C ) then
+    if Length( col_degrees ) <> NumberColumns( C ) then
         Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
     fi;
     
     if IsOne( C ) then
         return col_degrees;
     elif IsEmptyMatrix( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NumberRows( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] ); ## this is not a mistake
+        return ListWithIdenticalEntries( NumberRows( C ), col_degrees[1] ); ## this is not a mistake
     fi;
     
     degs := NonTrivialDegreePerRow( C, S );
@@ -644,7 +644,7 @@ InstallMethod( NonTrivialDegreePerRow,
            fi;
        end;
     
-    return List( [ 1 .. NrRows( C ) ], f );
+    return List( [ 1 .. NumberRows( C ) ], f );
     
 end );
 
@@ -657,9 +657,9 @@ InstallMethod( NonTrivialDegreePerColumn,
     local degrees;
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );
+        return ListWithIdenticalEntries( NumberColumns( C ), DegreeOfRingElement( One( S ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NumberColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     fi;
     
     if IsBound( C!.NonTrivialDegreePerColumn ) then
@@ -695,16 +695,16 @@ InstallMethod( NonTrivialDegreePerColumn,
   function( C, S, row_degrees )
     local degs, row_pos, f;
     
-    if Length( row_degrees ) <> NrRows( C ) then
+    if Length( row_degrees ) <> NumberRows( C ) then
         Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
     fi;
     
     if IsOne( C ) then
         return row_degrees;
     elif IsEmptyMatrix( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
+        return ListWithIdenticalEntries( NumberColumns( C ), DegreeOfRingElement( One( S ) ) ); ## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] ); ## this is not a mistake
+        return ListWithIdenticalEntries( NumberColumns( C ), row_degrees[1] ); ## this is not a mistake
     fi;
     
     degs := NonTrivialDegreePerColumn( C, S );
@@ -722,7 +722,7 @@ InstallMethod( NonTrivialDegreePerColumn,
            fi;
        end;
        
-    return List( [ 1 .. NrColumns( C ) ], f );
+    return List( [ 1 .. NumberColumns( C ) ], f );
     
 end );
 
@@ -731,13 +731,13 @@ InstallMethod( HomogeneousPartOfMatrix,
     function( M, L )
     local entries, degrees;
     
-    if IsZero( NrRows( M ) * NrCols( M ) ) then
+    if IsZero( NumberRows( M ) * NrCols( M ) ) then
       
       return M;
     
     fi;
     
-    if Length( L ) <> NrRows( M ) or Length( L[ 1 ] ) <> NrCols( M ) then
+    if Length( L ) <> NumberRows( M ) or Length( L[ 1 ] ) <> NrCols( M ) then
         
         Error( "wrong input\n" );
     
@@ -749,7 +749,7 @@ InstallMethod( HomogeneousPartOfMatrix,
     
     entries := ListN( entries, degrees, HomogeneousPartOfRingElement );
     
-    return HomalgMatrix( entries, NrRows( M ), NrCols( M ), HomalgRing( M ) );
+    return HomalgMatrix( entries, NumberRows( M ), NrCols( M ), HomalgRing( M ) );
     
 end );
 
@@ -773,7 +773,7 @@ InstallMethod( AffineDimension,
   function( M )
     
     if IsZero( M ) then
-        M := HomalgZeroMatrix( NrRows( M ), NrColumns( M ), UnderlyingNonGradedRing( M ) );
+        M := HomalgZeroMatrix( NumberRows( M ), NumberColumns( M ), UnderlyingNonGradedRing( M ) );
     else
         M := Eval( M );
     fi;

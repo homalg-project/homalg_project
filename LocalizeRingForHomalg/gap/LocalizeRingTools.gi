@@ -84,7 +84,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    R := AssociatedComputationRing( C );
                    
                    return [
-                     HomalgInitialMatrix( NrRows( C ), NrColumns( C ), R ),
+                     HomalgInitialMatrix( NumberRows( C ), NumberColumns( C ), R ),
                      One( R )
                    ];
                  end,
@@ -96,7 +96,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    R := AssociatedComputationRing( C );
                    
                    return [
-                     HomalgInitialIdentityMatrix( NrRows( C ), R ),
+                     HomalgInitialIdentityMatrix( NumberRows( C ), R ),
                      One( R )
                    ];
                  end,
@@ -108,7 +108,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    R := AssociatedComputationRing( C );
                    
                    return [
-                     HomalgZeroMatrix( NrRows( C ), NrColumns( C ), R ),
+                     HomalgZeroMatrix( NumberRows( C ), NumberColumns( C ), R ),
                      One( R )
                    ];
                  end,
@@ -120,7 +120,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    R := AssociatedComputationRing( C );
                    
                    return [
-                     HomalgIdentityMatrix( NrRows( C ), R ),
+                     HomalgIdentityMatrix( NumberRows( C ), R ),
                      One( R )
                    ];
                  end,
@@ -327,9 +327,9 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    ];
                  end,
                
-               NrRows := C -> NrRows( Numerator( C ) ),
+               NumberRows := C -> NumberRows( Numerator( C ) ),
                
-               NrColumns := C -> NrColumns( Numerator( C ) ),
+               NumberColumns := C -> NumberColumns( Numerator( C ) ),
                
                IsZeroMatrix := M -> IsZero( Numerator( M ) ),
                
@@ -365,10 +365,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
 #               GetRowIndependentUnitPositions :=
 #                  function( M, pos_list )
 #                  local rest, pos, j, l, k;
-#                   rest := [ 1 .. NrRows( M ) ];
+#                   rest := [ 1 .. NumberRows( M ) ];
 #                   pos := [ ];
-#                   for j in [ 1 .. NrColumns( M ) ] do
-#                     l := GetUnitPosition( CertainColumns( M, [ j ] ), List( Filtered( [ 1 .. NrRows( M ) ], a->not( a in rest )), b->[b,1] ) );
+#                   for j in [ 1 .. NumberColumns( M ) ] do
+#                     l := GetUnitPosition( CertainColumns( M, [ j ] ), List( Filtered( [ 1 .. NumberRows( M ) ], a->not( a in rest )), b->[b,1] ) );
 #                     if l <> fail then
 #                       k := l[1];
 #                       Add( pos, [ j, k ] );
@@ -406,10 +406,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                  function( M, pos_list )
                    local rest, pos, j, l, k;
                    
-                   rest := [ 1 .. NrRows( M ) ];
+                   rest := [ 1 .. NumberRows( M ) ];
                    pos := [ ];
-                   for j in [ 1 .. NrColumns( M ) ] do
-                     l := GetUnitPosition( CertainColumns( M, [ j ] ), List( Filtered( [ 1 .. NrRows( M ) ], a->not( a in rest )), b->[b,1] ) );
+                   for j in [ 1 .. NumberColumns( M ) ] do
+                     l := GetUnitPosition( CertainColumns( M, [ j ] ), List( Filtered( [ 1 .. NumberRows( M ) ], a->not( a in rest )), b->[b,1] ) );
                      if l <> fail then
                        k := l[1];
                        Add( pos, [ j, k ] );
@@ -434,7 +434,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    #our stuff
                    A := R * GeneratorsOfMaximalLeftIdeal( HomalgRing( M ) );
-                   for i in [ 1 .. NrColumns( M ) ] do
+                   for i in [ 1 .. NumberColumns( M ) ] do
                      if not i in pos_list then
                        N := CertainColumns( Numerator( M ) , [ i ] );
                        N := DecideZero( N, A );
@@ -501,7 +501,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
 #     if IsBound(RP!.Diff) then
 #         diff := RP!.Diff( D, N );
 #         if IshomalgExternalObjectRep( diff ) then
-#             diff := HomalgMatrix( diff, NrRows( D ) * NrRows( N ), NrColumns( D ) * NrColumns( N ), R );
+#             diff := HomalgMatrix( diff, NumberRows( D ) * NumberRows( N ), NumberColumns( D ) * NumberColumns( N ), R );
 #         fi;
 #         return diff;
 #     fi;

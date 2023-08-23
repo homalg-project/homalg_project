@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
-Version := "2023.02-05",
+Version := "2023.08-01",
 Date := (function ( ) if IsBound( GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE ) then return GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE; else return Concatenation( ~.Version{[ 1 .. 4 ]}, "-", ~.Version{[ 6, 7 ]}, "-01" ); fi; end)( ),
 License := "GPL-2.0-or-later",
 
@@ -207,9 +207,9 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.12.1",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2022.04-01" ],
-                   [ "HomalgToCAS", ">= 2022.10-01" ],
-                   [ "GaussForHomalg", ">= 2020.06.27" ],
+                   [ "MatricesForHomalg", ">= 2023.08-01" ],
+                   [ "HomalgToCAS", ">= 2023.08-01" ],
+                   [ "GaussForHomalg", ">= 2023.08-01" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],

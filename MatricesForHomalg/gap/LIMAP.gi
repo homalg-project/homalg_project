@@ -164,14 +164,14 @@ InstallMethod( DataOfCoordinateRingOfGraph,
     
     if HasRingRelations( S ) then
         relS := ST * MatrixOfRelations( S );
-        if not NrColumns( relS ) = 1 then
+        if not NumberColumns( relS ) = 1 then
             relS := Involution( relS );
         fi;
     fi;
     
     if HasRingRelations( T ) then
         relT := ST * MatrixOfRelations( T );
-        if not NrColumns( relT ) = 1 then
+        if not NumberColumns( relT ) = 1 then
             relT := Involution( relT );
         fi;
     fi;

@@ -72,7 +72,7 @@ InstallValue( GradedRingTableForOscarTools,
                    
                    L :=  StringToIntList( list_string );
                    
-                   return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                   return ListToListList( L, NumberRows( M ), NumberColumns( M ) );
                    
                  end,
                
@@ -84,7 +84,7 @@ InstallValue( GradedRingTableForOscarTools,
                      
                      L :=  StringToIntList( list_string );
                      
-                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     return ListToListList( L, NumberRows( M ), NumberColumns( M ) );
                      
                  end,
                  
@@ -92,8 +92,8 @@ InstallValue( GradedRingTableForOscarTools,
 #                  function( M, weights, R )
 #                    local nr_rows, nr_cols, i, j, deg_mat;
 #                    
-#                    nr_rows := NrRows( M );
-#                    nr_cols := NrColumns( M );
+#                    nr_rows := NumberRows( M );
+#                    nr_cols := NumberColumns( M );
 #                    
 #                    deg_mat := NullMat( nr_rows, nr_cols );
 #                    
@@ -115,7 +115,7 @@ InstallValue( GradedRingTableForOscarTools,
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrRows( M ) );
+                   return ListToListList( L, 2, NumberRows( M ) );
                    
                  end,
                
@@ -127,7 +127,7 @@ InstallValue( GradedRingTableForOscarTools,
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrRows( M ) );
+                   return ListToListList( L, 2, NumberRows( M ) );
                    
                  end,
                
@@ -139,7 +139,7 @@ InstallValue( GradedRingTableForOscarTools,
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrColumns( M ) );
+                   return ListToListList( L, 2, NumberColumns( M ) );
                    
                  end,
                
@@ -151,7 +151,7 @@ InstallValue( GradedRingTableForOscarTools,
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrColumns( M ) );
+                   return ListToListList( L, 2, NumberColumns( M ) );
                    
                  end,
                
@@ -161,7 +161,7 @@ InstallValue( GradedRingTableForOscarTools,
                    
                    N := HomalgVoidMatrix(
                                 "unknown_number_of_rows",
-                                NrRows( M ),
+                                NumberRows( M ),
                                 HomalgRing( M )
                                 );
                    
@@ -180,7 +180,7 @@ InstallValue( GradedRingTableForOscarTools,
                    local N;
                    
                    N := HomalgVoidMatrix(
-                                NrColumns( M ),
+                                NumberColumns( M ),
                                 "unknown_number_of_columns",
                                 HomalgRing( M )
                                 );

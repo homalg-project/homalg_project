@@ -89,7 +89,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                    
                    R := AssociatedComputationRing( C );
                    
-                   return HomalgInitialMatrix( NrRows( C ), NrColumns( C ), R );
+                   return HomalgInitialMatrix( NumberRows( C ), NumberColumns( C ), R );
                  end,
                
                InitialIdentityMatrix :=
@@ -98,7 +98,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                    
                    R := AssociatedComputationRing( C );
                    
-                   return HomalgInitialIdentityMatrix( NrRows( C ), R );
+                   return HomalgInitialIdentityMatrix( NumberRows( C ), R );
                  end,
                
                ZeroMatrix :=
@@ -107,7 +107,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                    
                    R := AssociatedComputationRing( C );
                    
-                   return HomalgZeroMatrix( NrRows( C ), NrColumns( C ), R );
+                   return HomalgZeroMatrix( NumberRows( C ), NumberColumns( C ), R );
                  end,
                
                IdentityMatrix :=
@@ -116,7 +116,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                    
                    R := AssociatedComputationRing( C );
                    
-                   return HomalgIdentityMatrix( NrRows( C ), R );
+                   return HomalgIdentityMatrix( NumberRows( C ), R );
                  end,
                
                AreEqualMatrices :=
@@ -198,9 +198,9 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                    return Eval( A ) * Eval( B );
                  end,
                
-               NrRows := C -> NrRows( Eval( C ) ),
+               NumberRows := C -> NumberRows( Eval( C ) ),
                
-               NrColumns := C -> NrColumns( Eval( C ) ),
+               NumberColumns := C -> NumberColumns( Eval( C ) ),
                
                IsZeroMatrix := M -> IsZero( Eval( M ) ),
                                         

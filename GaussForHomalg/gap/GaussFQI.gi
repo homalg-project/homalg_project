@@ -79,8 +79,8 @@ InstallMethod( CreateHomalgTable,
                        ## assign U:
                        SetMyEval( arg[2], union_of_rows( [ result.coeffs, result.relations ] ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetNumberRows( arg[2], NumberRows( M ) );
+                       SetNumberColumns( arg[2], NumberRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
                    else
                        ## compute N only:
@@ -88,15 +88,15 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    if N = [ ] then
-                       H := HomalgZeroMatrix( 0, NrColumns( M ), R );
+                       H := HomalgZeroMatrix( 0, NumberColumns( M ), R );
                    else
                        H := HomalgMatrix( N, R ); ## and since this is not i.g. triangular:
                    fi;
                    
-                   SetNrColumns( H, NrColumns( M ) );
+                   SetNumberColumns( H, NumberColumns( M ) );
                    
                    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
-                       SetRowRankOfMatrix( H, NrRows( H ) );
+                       SetRowRankOfMatrix( H, NumberRows( H ) );
                    fi;
                    
                    SetZeroRows( H, [] );

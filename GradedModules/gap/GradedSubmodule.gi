@@ -180,12 +180,12 @@ InstallMethod( Subobject,
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        if NrColumns( gen ) <> NrGenerators( M ) then
-            Error( "the first argument is matrix with ", NrColumns( gen )," columns while the second argument is a module on ", NrGenerators( M ), " generators\n" );
+        if NumberColumns( gen ) <> NrGenerators( M ) then
+            Error( "the first argument is matrix with ", NumberColumns( gen )," columns while the second argument is a module on ", NrGenerators( M ), " generators\n" );
         fi;
     else
-        if NrRows( gen ) <> NrGenerators( M ) then
-            Error( "the first argument is matrix with ", NrRows( gen )," rows while the second argument is a module on ", NrGenerators( M ), " generators\n" );
+        if NumberRows( gen ) <> NrGenerators( M ) then
+            Error( "the first argument is matrix with ", NumberRows( gen )," rows while the second argument is a module on ", NrGenerators( M ), " generators\n" );
         fi;
     fi;
     
@@ -282,7 +282,7 @@ InstallMethod( GradedLeftSubmodule,
     
     S := HomalgRing( gen );
     
-    return Subobject( gen, ( NrColumns( gen ) * S )^0 );
+    return Subobject( gen, ( NumberColumns( gen ) * S )^0 );
     
 end );
 
@@ -387,7 +387,7 @@ InstallMethod( GradedRightSubmodule,
     
     R := HomalgRing( gen );
     
-    return Subobject( gen, ( R * NrRows( gen ) )^0 );
+    return Subobject( gen, ( R * NumberRows( gen ) )^0 );
     
 end );
 

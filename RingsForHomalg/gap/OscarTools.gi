@@ -138,14 +138,14 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "ZeroMatrixForHomalg(", HomalgRing( C ), NrColumns( C ), NrRows( C ), ")" ], "ZeroMatrix" );
+                   return homalgSendBlocking( [ "ZeroMatrixForHomalg(", HomalgRing( C ), NumberColumns( C ), NumberRows( C ), ")" ], "ZeroMatrix" );
                    
                  end,
                
                IdentityMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "IdentityMatrixForHomalg(", HomalgRing( C ), NrRows( C ), ")" ], "IdentityMatrix" );
+                   return homalgSendBlocking( [ "IdentityMatrixForHomalg(", HomalgRing( C ), NumberRows( C ), ")" ], "IdentityMatrix" );
                    
                  end,
                
@@ -262,17 +262,17 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    
                  end,
                
-               NrRows :=
+               NumberRows :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output", "NrRows" ) );
+                   return StringToInt( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output", "NumberRows" ) );
                    
                  end,
                
-               NrColumns :=
+               NumberColumns :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "nrows(", C, ")" ], "need_output", "NrColumns" ) );
+                   return StringToInt( homalgSendBlocking( [ "nrows(", C, ")" ], "need_output", "NumberColumns" ) );
                    
                  end,
                
@@ -375,7 +375,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberRows( M ), L[1] );
                    fi;
                    
                    return L;
@@ -391,7 +391,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberColumns( M ), L[1] );
                    fi;
                    
                    return L;
@@ -411,7 +411,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    
                    v := homalgStream( HomalgRing( M ) )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", M, "[", v, "k,", v, "i]=", M, "[", v, "k,", v, "i]/", u, ";};if(", v, "j>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", "DivideRowByUnit" );
+                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NumberColumns( M ), ";", v, "k=", v, "k+1){", M, "[", v, "k,", v, "i]=", M, "[", v, "k,", v, "i]/", u, ";};if(", v, "j>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", "DivideRowByUnit" );
                    
                  end,
                
@@ -421,7 +421,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    
                    v := homalgStream( HomalgRing( M ) )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=", M, "[", v, "j,", v, "k]/", u, ";};if(", v, "i>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", "DivideColumnByUnit" );
+                   homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=", M, "[", v, "j,", v, "k]/", u, ";};if(", v, "i>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", "DivideColumnByUnit" );
                    
                  end,
                
@@ -434,11 +434,11 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    l := Length( L );
                    
                    if l > 1 and ForAll( L, IsHomalgMatrix ) then
-                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[1], "[", v, "j,", v, "j]=1;", L[2], "[", v, "j,", v, "j]=1" ], "need_command", "CopyRowToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NumberColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[1], "[", v, "j,", v, "j]=1;", L[2], "[", v, "j,", v, "j]=1" ], "need_command", "CopyRowToIdentityMatrix" );
                    elif l > 0 and IsHomalgMatrix( L[1] ) then
-                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];};", L[1], "[", v, "j,", v, "j]=1;" ], "need_command", "CopyRowToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NumberColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];};", L[1], "[", v, "j,", v, "j]=1;" ], "need_command", "CopyRowToIdentityMatrix" );
                    elif l > 1 and IsHomalgMatrix( L[2] ) then
-                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[2], "[", v, "j,", v, "j]=1" ], "need_command", "CopyRowToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NumberColumns( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[2], "[", v, "j,", v, "j]=1" ], "need_command", "CopyRowToIdentityMatrix" );
                    fi;
                    
                  end,
@@ -452,11 +452,11 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    l := Length( L );
                    
                    if l > 1 and ForAll( L, IsHomalgMatrix ) then
-                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[1], "[", v, "i,", v, "i]=1;", L[2], "[", v, "i,", v, "i]=1" ], "need_command", "CopyColumnToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[1], "[", v, "i,", v, "i]=1;", L[2], "[", v, "i,", v, "i]=1" ], "need_command", "CopyColumnToIdentityMatrix" );
                    elif l > 0 and IsHomalgMatrix( L[1] ) then
-                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];};", L[1], "[", v, "i,", v, "i]=1;" ], "need_command", "CopyColumnToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];};", L[1], "[", v, "i,", v, "i]=1;" ], "need_command", "CopyColumnToIdentityMatrix" );
                    elif l > 1 and IsHomalgMatrix( L[2] ) then
-                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[2], "[", v, "i,", v, "i]=1" ], "need_command", "CopyColumnToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[2], "[", v, "i,", v, "i]=1" ], "need_command", "CopyColumnToIdentityMatrix" );
                    fi;
                    
                  end,
@@ -467,7 +467,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    
                    v := homalgStream( HomalgRing( M ) )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<", v, "i;", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;};for(", v, "k=", v, "i+1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;}" ], "need_command", "SetColumnToZero" );
+                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<", v, "i;", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;};for(", v, "k=", v, "i+1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;}" ], "need_command", "SetColumnToZero" );
                    
                  end,
                
@@ -500,7 +500,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                  function( mat )
                    
                    if ZeroColumns( mat ) <> [ ] then
-                       if not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                       if not ( IsZero( mat ) and NumberRows( mat ) = 1 and NumberColumns( mat ) = 1 ) then
                            Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                        fi;
                        ## the only case of a free direct summand we are allowed to send to Singular (<= 3-1-3)
@@ -516,7 +516,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    local hilb;
                    
                    if ZeroColumns( mat ) <> [ ] then
-                       if not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                       if not ( IsZero( mat ) and NumberRows( mat ) = 1 and NumberColumns( mat ) = 1 ) then
                            Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                        fi;
                        ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
@@ -543,7 +543,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                #    
                #    if ZeroColumns( mat ) <> [ ] and
                #       ## the only case of a free direct summand we can to send to Singular (<= 3-1-3)
-               #       not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+               #       not ( IsZero( mat ) and NumberRows( mat ) = 1 and NumberColumns( mat ) = 1 ) then
                #        Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                #    fi;
                #    
@@ -569,7 +569,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    
                    if ZeroColumns( mat ) <> [ ] and
                       ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
-                      not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                      not ( IsZero( mat ) and NumberRows( mat ) = 1 and NumberColumns( mat ) = 1 ) then
                        Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                    fi;
                    
@@ -588,7 +588,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                MaxDimensionalRadicalSubobject :=
                  function( mat )
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only maximal dimensional radical subobjects of one-column matrices is supported\n" );
                    fi;
                    
@@ -599,7 +599,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                RadicalSubobject :=
                  function( mat )
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only radical of one-column matrices is supported\n" );
                    fi;
                    
@@ -610,7 +610,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                RadicalSubobject_Z :=
                  function( mat )
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only radical of one-column matrices is supported\n" );
                    fi;
                    
@@ -622,7 +622,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -654,7 +654,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -685,7 +685,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                MaxDimensionalSubobject :=
                  function( mat )
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only maximal dimensional subobjects of one-column matrices is supported\n" );
                    fi;
                    
@@ -697,7 +697,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -729,7 +729,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -763,7 +763,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -841,7 +841,7 @@ BindGlobal( "CommonHomalgTableForOscarTools",
                    
                    l := StringToIntList( homalgSendBlocking( [ "IndicatorMatrixOfNonZeroEntries(", mat, ")" ], "need_output", "IndicatorMatrixOfNonZeroEntries" ) );
                    
-                   return ListToListList( l, NrRows( mat ), NrColumns( mat ) );
+                   return ListToListList( l, NumberRows( mat ), NumberColumns( mat ) );
                    
                  end,
                

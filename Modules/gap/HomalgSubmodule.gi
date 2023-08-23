@@ -482,12 +482,12 @@ InstallMethod( Subobject,
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        if NrColumns( gen ) <> NrGenerators( M ) then
-            Error( "the first argument is matrix with ", NrColumns( gen )," columns while the second argument is a module on ", NrGenerators( M ), " generators\n" );
+        if NumberColumns( gen ) <> NrGenerators( M ) then
+            Error( "the first argument is matrix with ", NumberColumns( gen )," columns while the second argument is a module on ", NrGenerators( M ), " generators\n" );
         fi;
     else
-        if NrRows( gen ) <> NrGenerators( M ) then
-            Error( "the first argument is matrix with ", NrRows( gen )," rows while the second argument is a module on ", NrGenerators( M ), " generators\n" );
+        if NumberRows( gen ) <> NrGenerators( M ) then
+            Error( "the first argument is matrix with ", NumberRows( gen )," rows while the second argument is a module on ", NrGenerators( M ), " generators\n" );
         fi;
     fi;
     
@@ -591,7 +591,7 @@ InstallMethod( LeftSubmodule,
     
     R := HomalgRing( gen );
     
-    return Subobject( gen, NrColumns( gen ) * R );
+    return Subobject( gen, NumberColumns( gen ) * R );
     
 end );
 ##  ]]></Listing>
@@ -733,7 +733,7 @@ InstallMethod( RightSubmodule,
     
     R := HomalgRing( gen );
     
-    return Subobject( gen, R * NrRows( gen ) );
+    return Subobject( gen, R * NumberRows( gen ) );
     
 end );
 ##  ]]></Listing>
@@ -1132,7 +1132,7 @@ InstallMethod( Display,
     Print( "\nA" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        l := NrRows( gen );
+        l := NumberRows( gen );
         if ConstructedAsAnIdeal( M ) then
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 if IsBound( HOMALG.SuppressParityInViewObjForCommutativeStructureObjects )
@@ -1160,7 +1160,7 @@ InstallMethod( Display,
         fi;
         Print( " of the above matrix\n" );
     else
-        l := NrColumns( gen );
+        l := NumberColumns( gen );
         if ConstructedAsAnIdeal( M ) then
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 if IsBound( HOMALG.SuppressParityInViewObjForCommutativeStructureObjects )

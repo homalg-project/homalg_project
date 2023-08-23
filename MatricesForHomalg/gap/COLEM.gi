@@ -379,14 +379,14 @@ InstallImmediateMethod( IsSubidentityMatrix,
     
     if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
         
-        if HasNrRows( mat ) and HasNrColumns( mat )
-           and NrRows( mat ) <= NrColumns( mat ) then
+        if HasNumberRows( mat ) and HasNumberColumns( mat )
+           and NumberRows( mat ) <= NumberColumns( mat ) then
             
             return IsDuplicateFree( plist );
             
         fi;
         
-        if HasPositionOfFirstNonZeroEntryPerRow( mat ) and HasNrColumns( mat ) then
+        if HasPositionOfFirstNonZeroEntryPerRow( mat ) and HasNumberColumns( mat ) then
             
             pos := PositionOfFirstNonZeroEntryPerRow( mat );
             
@@ -398,8 +398,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return false;
             fi;
             
-            if not 0 in pos                                  ## NrRows( M ) <= NrColumns( M )
-               or  Length( pos_non_zero ) = NrColumns( mat ) ## NrColumns( M ) <= NrRows( M )
+            if not 0 in pos                                  ## NumberRows( M ) <= NumberColumns( M )
+               or  Length( pos_non_zero ) = NumberColumns( mat ) ## NumberColumns( M ) <= NumberRows( M )
                then
                 return true;
             fi;
@@ -427,14 +427,14 @@ InstallImmediateMethod( IsSubidentityMatrix,
     
     if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
         
-        if HasNrRows( mat ) and HasNrColumns( mat )
-           and NrRows( mat ) <= NrColumns( mat ) then
+        if HasNumberRows( mat ) and HasNumberColumns( mat )
+           and NumberRows( mat ) <= NumberColumns( mat ) then
             
             return IsDuplicateFree( plist );
             
         fi;
         
-        if HasPositionOfFirstNonZeroEntryPerColumn( mat ) and HasNrColumns( mat ) then
+        if HasPositionOfFirstNonZeroEntryPerColumn( mat ) and HasNumberColumns( mat ) then
             
             pos := PositionOfFirstNonZeroEntryPerColumn( mat );
             
@@ -446,8 +446,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return false;
             fi;
             
-            if not 0 in plist                                 ## NrRows( M ) <= NrColumns( M )
-               or Length( plist_non_zero ) = NrColumns( mat ) ## NrColumns( M ) <= NrRows( M )
+            if not 0 in plist                                 ## NumberRows( M ) <= NumberColumns( M )
+               or Length( plist_non_zero ) = NumberColumns( mat ) ## NumberColumns( M ) <= NumberRows( M )
                then
                 return true;
             fi;
@@ -476,14 +476,14 @@ InstallImmediateMethod( IsSubidentityMatrix,
     
     if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
         
-        if HasNrColumns( mat ) and HasNrRows( mat )
-           and NrColumns( mat ) <= NrRows( mat ) then
+        if HasNumberColumns( mat ) and HasNumberRows( mat )
+           and NumberColumns( mat ) <= NumberRows( mat ) then
             
             return IsDuplicateFree( plist );
             
         fi;
         
-        if HasPositionOfFirstNonZeroEntryPerColumn( mat ) and HasNrRows( mat ) then
+        if HasPositionOfFirstNonZeroEntryPerColumn( mat ) and HasNumberRows( mat ) then
             
             pos := PositionOfFirstNonZeroEntryPerColumn( mat );
             
@@ -495,8 +495,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return false;
             fi;
             
-            if not 0 in pos                               ## NrColumns( M ) <= NrRows( M )
-               or  Length( pos_non_zero ) = NrRows( mat ) ## NrRows( M ) <= NrColumns( M )
+            if not 0 in pos                               ## NumberColumns( M ) <= NumberRows( M )
+               or  Length( pos_non_zero ) = NumberRows( mat ) ## NumberRows( M ) <= NumberColumns( M )
                then
                 return true;
             fi;
@@ -524,14 +524,14 @@ InstallImmediateMethod( IsSubidentityMatrix,
     
     if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
         
-        if HasNrColumns( mat ) and HasNrRows( mat )
-           and NrColumns( mat ) <= NrRows( mat ) then
+        if HasNumberColumns( mat ) and HasNumberRows( mat )
+           and NumberColumns( mat ) <= NumberRows( mat ) then
             
             return IsDuplicateFree( plist );
             
         fi;
         
-        if HasPositionOfFirstNonZeroEntryPerRow( mat ) and HasNrRows( mat ) then
+        if HasPositionOfFirstNonZeroEntryPerRow( mat ) and HasNumberRows( mat ) then
             
             pos := PositionOfFirstNonZeroEntryPerRow( mat );
             
@@ -543,8 +543,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return false;
             fi;
             
-            if not 0 in plist                              ## NrColumns( M ) <= NrRows( M )
-               or Length( plist_non_zero ) = NrRows( mat ) ## NrRows( M ) <= NrColumns( M )
+            if not 0 in plist                              ## NumberColumns( M ) <= NumberRows( M )
+               or Length( plist_non_zero ) = NumberRows( mat ) ## NumberRows( M ) <= NumberColumns( M )
                then
                 return true;
             fi;
@@ -776,7 +776,7 @@ InstallImmediateMethod( IsUpperTriangularMatrix,
     C := C[1];
     
     if HasIsUpperTriangularMatrix( C ) and IsUpperTriangularMatrix( C ) and
-       ( plist = NrRows( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
+       ( plist = NumberRows( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
         return true;
     fi;
     
@@ -848,7 +848,7 @@ InstallImmediateMethod( IsLowerTriangularMatrix,
     C := C[1];
     
     if HasIsLowerTriangularMatrix( C ) and IsLowerTriangularMatrix( C ) and
-       ( plist = NrColumns( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
+       ( plist = NumberColumns( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
         return true;
     fi;
     
@@ -920,7 +920,7 @@ InstallImmediateMethod( IsUpperStairCaseMatrix,
     C := C[1];
     
     if HasIsUpperStairCaseMatrix( C ) and IsUpperStairCaseMatrix( C ) and
-       ( plist = NrRows( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
+       ( plist = NumberRows( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
         return true;
     fi;
     
@@ -992,7 +992,7 @@ InstallImmediateMethod( IsLowerStairCaseMatrix,
     C := C[1];
     
     if HasIsLowerStairCaseMatrix( C ) and IsLowerStairCaseMatrix( C ) and
-       ( plist = NrColumns( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
+       ( plist = NumberColumns( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
         return true;
     fi;
     
@@ -1168,7 +1168,7 @@ end );
 ####################################
 
 ##
-InstallImmediateMethod( NrRows,
+InstallImmediateMethod( NumberRows,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
@@ -1176,8 +1176,8 @@ InstallImmediateMethod( NrRows,
     
     e := PreEval( M );
     
-    if HasNrRows( e ) then
-        return NrRows( e );
+    if HasNumberRows( e ) then
+        return NumberRows( e );
     fi;
     
     TryNextMethod( );
@@ -1185,7 +1185,7 @@ InstallImmediateMethod( NrRows,
 end );
 
 ##
-InstallImmediateMethod( NrColumns,
+InstallImmediateMethod( NumberColumns,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
@@ -1193,8 +1193,8 @@ InstallImmediateMethod( NrColumns,
     
     e := PreEval( M );
     
-    if HasNrColumns( e ) then
-        return NrColumns( e );
+    if HasNumberColumns( e ) then
+        return NumberColumns( e );
     fi;
     
     TryNextMethod( );
@@ -1289,8 +1289,8 @@ InstallImmediateMethod( RowRankOfMatrix,
     fi;
     
     for A in e do
-        if HasRowRankOfMatrix( A ) and RowRankOfMatrix( A ) = NrColumns( A ) then
-            return NrColumns( A );
+        if HasRowRankOfMatrix( A ) and RowRankOfMatrix( A ) = NumberColumns( A ) then
+            return NumberColumns( A );
         fi;
     od;
     
@@ -1403,8 +1403,8 @@ InstallImmediateMethod( ColumnRankOfMatrix,
     fi;
     
     for A in e do
-        if HasColumnRankOfMatrix( A ) and ColumnRankOfMatrix( A ) = NrRows( A ) then
-            return NrRows( A );
+        if HasColumnRankOfMatrix( A ) and ColumnRankOfMatrix( A ) = NumberRows( A ) then
+            return NumberRows( A );
         fi;
     od;
     
@@ -1509,7 +1509,7 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
         
             result := ListN( result, p[i], function( a, b ) return Minimum( a, b + c ); end );
         
-            c := c + NrColumns( e[i] );
+            c := c + NumberColumns( e[i] );
         
         od;
         
@@ -1601,7 +1601,7 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
         
             result := ListN( result, p[i], function( a, b ) return Minimum( a, b + r ); end );
         
-            r := r + NrRows( e[i] );
+            r := r + NumberRows( e[i] );
         
         od;
         
@@ -2007,7 +2007,7 @@ InstallMethod( PositionOfFirstNonZeroEntryPerRow,
         
         result := ListN( result, p[i], function( a, b ) return Minimum( a, b + c ); end );
        
-        c := c + NrColumns( e[i] );
+        c := c + NumberColumns( e[i] );
       
     od;
         
@@ -2079,7 +2079,7 @@ InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
     
         result := ListN( result, p[i], function( a, b ) return Minimum( a, b + r ); end );
     
-        r := r + NrRows( e[i] );
+        r := r + NumberRows( e[i] );
     
     od;
     
@@ -2249,7 +2249,7 @@ InstallMethod( CertainRows,
         plistA := A[2];
         A := A[1];
         
-        if Length( plist ) * NrColumns( A ) < Length( plistA ) * NrRows( A ) then
+        if Length( plist ) * NumberColumns( A ) < Length( plistA ) * NumberRows( A ) then
             
             Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( CertainColumns )", "\033[0m" );
             
@@ -2278,10 +2278,10 @@ end );
 #    A := e[1];
 #    B := e[2];
 #    
-#    a := NrRows( A );
+#    a := NumberRows( A );
 #    
 #    rowsA := [ 1 .. a ];
-#    rowsB := [ 1 .. NrRows( B ) ];
+#    rowsB := [ 1 .. NumberRows( B ) ];
 #    
 #    plistA := Filtered( plist, x -> x in rowsA );     ## CAUTION: don't use Intersection(2)
 #    plistB := Filtered( plist - a, x -> x in rowsB ); ## CAUTION: don't use Intersection(2)
@@ -2339,7 +2339,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     
     ## forgetting M may save memory
-    return HomalgZeroMatrix( 0, NrColumns( M ), HomalgRing( M ) );
+    return HomalgZeroMatrix( 0, NumberColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -2403,7 +2403,7 @@ InstallMethod( CertainColumns,
         plistA := A[2];
         A := A[1];
         
-        if Length( plist ) * NrRows( A ) < Length( plistA ) * NrColumns( A ) then
+        if Length( plist ) * NumberRows( A ) < Length( plistA ) * NumberColumns( A ) then
             
             Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( CertainRows )", "\033[0m" );
             
@@ -2432,10 +2432,10 @@ end );
 #    A := e[1];
 #    B := e[2];
 #    
-#    a := NrColumns( A );
+#    a := NumberColumns( A );
 #    
 #    columnsA := [ 1 .. a ];
-#    columnsB := [ 1 .. NrColumns( B ) ];
+#    columnsB := [ 1 .. NumberColumns( B ) ];
 #    
 #    plistA := Filtered( plist, x -> x in columnsA );     ## CAUTION: don't use Intersection(2)
 #    plistB := Filtered( plist - a, x -> x in columnsB ); ## CAUTION: don't use Intersection(2)
@@ -2493,7 +2493,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     
     ## forgetting M may save memory
-    return HomalgZeroMatrix( NrRows( M ), 0, HomalgRing( M ) );
+    return HomalgZeroMatrix( NumberRows( M ), 0, HomalgRing( M ) );
     
 end );
 
@@ -2513,27 +2513,27 @@ InstallMethod( DiagMat,
     
     if pos <> fail then
         
-        r := NrRows( l[pos] );
-        c := NrColumns( l[pos] );
+        r := NumberRows( l[pos] );
+        c := NumberColumns( l[pos] );
         
         len := Length( l ); ## we can assume l >= 2, since other methods would then apply
         
         if pos = 1 then
             L := l{[ 2 .. len ]};
             if r = 0 then
-                k := Sum( List( L, NrRows ) );
+                k := Sum( List( L, NumberRows ) );
                 diag := UnionOfColumns( HomalgZeroMatrix( k, c, R ), DiagMat( R, L ) );
             else
-                k := Sum( List( L, NrColumns ) );
+                k := Sum( List( L, NumberColumns ) );
                 diag := UnionOfRows( HomalgZeroMatrix( r, k, R ), DiagMat( R, L ) );
             fi;
         elif pos = len then
             L := l{[ 1 .. len - 1 ]};
             if r = 0 then
-                k := Sum( List( L, NrRows ) );
+                k := Sum( List( L, NumberRows ) );
                 diag := UnionOfColumns( DiagMat( R, L ), HomalgZeroMatrix( k, c, R ) );
             else
-                k := Sum( List( L, NrColumns ) );
+                k := Sum( List( L, NumberColumns ) );
                 diag := UnionOfRows( DiagMat( R, L ), HomalgZeroMatrix( r, k, R ) );
             fi;
         else
@@ -3009,7 +3009,7 @@ InstallMethod( \*,
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfColumns( IsZero .. mat, IsOne .. IsZero ) * IsHomalgMatrix", "\033[0m" );
     
-    c := List( e, NrColumns );
+    c := List( e, NumberColumns );
     
     result := e[1] * CertainRows( B, [ 1 .. c[1] ] );
     
@@ -3047,7 +3047,7 @@ InstallMethod( \*,
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfRows( IsZero .. mat, IsOne .. IsZero )", "\033[0m" );
     
-    r := List( e, NrRows );
+    r := List( e, NumberRows );
     
     result := CertainColumns( A, [ 1 .. r[1] ] ) * e[1];
     
@@ -3112,7 +3112,7 @@ InstallMethod( \*,
         
   function( A, B )
     
-    if NrRows( A ) <= NrColumns( A ) and HasPositionOfFirstNonZeroEntryPerRow( A ) then
+    if NumberRows( A ) <= NumberColumns( A ) and HasPositionOfFirstNonZeroEntryPerRow( A ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsSubidentityMatrix * IsHomalgMatrix", "\033[0m" );
         
@@ -3132,13 +3132,13 @@ InstallMethod( \*,
   function( A, B )
     local pos, plist;
     
-    if NrColumns( B ) <= NrRows( B ) and HasPositionOfFirstNonZeroEntryPerRow( B ) then
+    if NumberColumns( B ) <= NumberRows( B ) and HasPositionOfFirstNonZeroEntryPerRow( B ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * IsSubidentityMatrix", "\033[0m" );
         
         pos := PositionOfFirstNonZeroEntryPerRow( B );
         
-        plist := List( [ 1 .. NrColumns( B ) ], i -> Position( pos, i ) );
+        plist := List( [ 1 .. NumberColumns( B ) ], i -> Position( pos, i ) );
         
         return CertainColumns( A, plist );
         
@@ -3159,7 +3159,7 @@ InstallMethod( \*,
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "(its LeftInverse) * IsHomalgMatrix", "\033[0m" );
         
-        return HomalgIdentityMatrix( NrColumns( B ), HomalgRing( A ) );
+        return HomalgIdentityMatrix( NumberColumns( B ), HomalgRing( A ) );
         
     fi;
     
@@ -3178,7 +3178,7 @@ InstallMethod( \*,
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * (its RightInverse)", "\033[0m" );
         
-        return HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) );
+        return HomalgIdentityMatrix( NumberRows( A ), HomalgRing( A ) );
         
     fi;
     
@@ -3205,7 +3205,7 @@ InstallMethod( \*,
             
             Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "(its LeftInverse) * CertainColumns( IsHomalgMatrix )", "\033[0m" );
             
-            return HomalgIdentityMatrix( NrColumns( B ), HomalgRing( A ) );
+            return HomalgIdentityMatrix( NumberColumns( B ), HomalgRing( A ) );
             
         fi;
         
@@ -3235,7 +3235,7 @@ InstallMethod( \*,
         
             Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( IsHomalgMatrix ) * (its RightInverse)", "\033[0m" );
             
-            return HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) );
+            return HomalgIdentityMatrix( NumberRows( A ), HomalgRing( A ) );
             
         fi;
         

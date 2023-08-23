@@ -272,8 +272,8 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     
     R := HomalgRing( M ); # the source ring
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     if IsHomalgExternalMatrixRep( M ) then
         pointer := homalgPointer( M );
@@ -428,7 +428,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
     return LoadHomalgMatrixFromFile( filename, R );
     
-    ## do not set NrRows and NrColumns for safety reasons
+    ## do not set NumberRows and NumberColumns for safety reasons
     
 end );
 

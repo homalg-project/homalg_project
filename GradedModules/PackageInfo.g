@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "GradedModules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
-Version := "2023.02-04",
+Version := "2023.08-01",
 Date := (function ( ) if IsBound( GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE ) then return GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE; else return Concatenation( ~.Version{[ 1 .. 4 ]}, "-", ~.Version{[ 6, 7 ]}, "-01" ); fi; end)( ),
 License := "GPL-2.0-or-later",
 
@@ -144,11 +144,11 @@ Dependencies := rec(
   GAP := ">= 4.12.1",
   NeededOtherPackages := [
                    [ "ToolsForHomalg", ">= 2014.12.08" ],
-                   [ "MatricesForHomalg", ">= 2022.02-01" ],
-                   [ "HomalgToCAS", ">= 2011.10.05" ],
-                   [ "RingsForHomalg", ">= 2020.04.17" ],
-                   [ "GradedRingForHomalg", ">= 2021.03-01" ],
-                   [ "Modules", ">= 2022.02-01" ],
+                   [ "MatricesForHomalg", ">= 2023.08-01" ],
+                   [ "HomalgToCAS", ">= 2023.08-01" ],
+                   [ "RingsForHomalg", ">= 2023.08-01" ],
+                   [ "GradedRingForHomalg", ">= 2023.08-01" ],
+                   [ "Modules", ">= 2023.08-01" ],
                    [ "homalg", ">= 2022.02-01" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],

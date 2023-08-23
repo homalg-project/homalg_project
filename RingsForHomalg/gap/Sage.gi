@@ -366,7 +366,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output", "GetListListOfHomalgMatrixAsString" );
+    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NumberRows( M ), ")]" ], "need_output", "GetListListOfHomalgMatrixAsString" );
     
 end );
 
@@ -377,7 +377,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M , R )
     
-    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output", "GetSparseListOfHomalgMatrixAsString" );
+    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NumberRows(M), ") for c in range(", NumberColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output", "GetSparseListOfHomalgMatrixAsString" );
     
 end );
 
@@ -397,7 +397,7 @@ InstallMethod( SaveHomalgMatrixToFile,
     
     if mode = "ListList" then
         command := [ "_fs = open('", filename, "','w'); ",
-                     "_fs.write(str( [", M, "[x].list() for x in range(", NrRows( M ), ")] )); ",
+                     "_fs.write(str( [", M, "[x].list() for x in range(", NumberRows( M ), ")] )); ",
                      "_fs.close()" ];
                 
         homalgSendBlocking( command, "need_command", "SaveHomalgMatrixToFile" );

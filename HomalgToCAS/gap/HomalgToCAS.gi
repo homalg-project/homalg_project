@@ -239,10 +239,10 @@ InstallValue( HOMALG_IO,
                 IsZeroMatrix                            := "A=0",
                 
                 ## number of rows:
-                NrRows                                  := "#==",
+                NumberRows                              := "#==",
                 
                 ## number of columns:
-                NrColumns                               := "#||",
+                NumberColumns                           := "#||",
                 
                 ## determinant of a matrix over a (commutative) ring:
                 Determinant                             := "det",

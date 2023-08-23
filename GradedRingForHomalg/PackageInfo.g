@@ -10,7 +10,7 @@ SetPackageInfo( rec(
 
 PackageName := "GradedRingForHomalg",
 Subtitle := "Endow Commutative Rings with an Abelian Grading",
-Version := "2023.02-04",
+Version := "2023.08-01",
 Date := (function ( ) if IsBound( GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE ) then return GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE; else return Concatenation( ~.Version{[ 1 .. 4 ]}, "-", ~.Version{[ 6, 7 ]}, "-01" ); fi; end)( ),
 License := "GPL-2.0-or-later",
 
@@ -143,10 +143,10 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.12.1",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2020.06.27" ],
-                   [ "HomalgToCAS", ">= 2022.07-01" ],
-                   [ "RingsForHomalg", ">= 2022.07-01" ],
-                   [ "Modules", ">= 2018.02.04" ],
+                   [ "MatricesForHomalg", ">= 2023.08-01" ],
+                   [ "HomalgToCAS", ">= 2023.08-01" ],
+                   [ "RingsForHomalg", ">= 2023.08-01" ],
+                   [ "Modules", ">= 2023.08-01" ],
                    [ "homalg", ">=2011.08.16" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [

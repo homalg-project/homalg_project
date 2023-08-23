@@ -42,8 +42,8 @@ specifically designed for &GaussForHomalg;.
 <#Include Label="KroneckerMat">
 <#Include Label="DualKroneckerMat">
 <#Include Label="Compose">
-<#Include Label="NrRows">
-<#Include Label="NrColumns">
+<#Include Label="NumberRows">
+<#Include Label="NumberColumns">
 <#Include Label="IsZeroMatrix">
 <#Include Label="IsDiagonalMatrix">
 <#Include Label="ZeroRows">

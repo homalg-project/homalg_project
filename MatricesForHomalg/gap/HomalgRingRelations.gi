@@ -158,7 +158,7 @@ InstallMethod( HasNrRelations,
   function( rel )
     
     if HasEvaluatedMatrixOfRingRelations( rel ) then
-        return HasNrColumns( MatrixOfRelations( rel ) );
+        return HasNumberColumns( MatrixOfRelations( rel ) );
     fi;
     
     return false;
@@ -173,7 +173,7 @@ InstallMethod( HasNrRelations,
   function( rel )
     
     if HasEvaluatedMatrixOfRingRelations( rel ) then
-        return HasNrRows( MatrixOfRelations( rel ) );
+        return HasNumberRows( MatrixOfRelations( rel ) );
     fi;
     
     return false;
@@ -187,7 +187,7 @@ InstallMethod( NrRelations, ### defines: NrRelations (NumberOfRows)
         
   function( rel )
     
-    return NrColumns( MatrixOfRelations( rel ) );
+    return NumberColumns( MatrixOfRelations( rel ) );
     
 end );
 
@@ -198,7 +198,7 @@ InstallMethod( NrRelations, ### defines: NrRelations (NumberOfRows)
         
   function( rel )
     
-    return NrRows( MatrixOfRelations( rel ) );
+    return NumberRows( MatrixOfRelations( rel ) );
     
 end );
 

@@ -84,9 +84,9 @@ InstallMethod( DecideZero,
     
     r := HomalgMatrix( [ r ], 1, 1, HomalgRing( rel ) );
     
-    if NrColumns( rel ) = 1 then
+    if NumberColumns( rel ) = 1 then
         red := DecideZeroRows( r, rel );
-    elif NrRows( rel ) = 1 then
+    elif NumberRows( rel ) = 1 then
         red := DecideZeroColumns( r, rel );
     else
         Error( "either the number of columns or the number of rows of the matrix of relations must be 1\n" );
@@ -118,11 +118,11 @@ InstallMethod( DecideZero,
         return M;
     fi;
     
-    if NrColumns( rel ) = 1 then
-        rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
+    if NumberColumns( rel ) = 1 then
+        rel := DiagMat( ListWithIdenticalEntries( NumberColumns( M ), rel ) );
         return DecideZeroRows( M, rel );
-    elif NrRows( rel ) = 1 then
-        rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
+    elif NumberRows( rel ) = 1 then
+        rel := DiagMat( ListWithIdenticalEntries( NumberRows( M ), rel ) );
         return DecideZeroColumns( M, rel );
     fi;
     
@@ -212,7 +212,7 @@ InstallMethod( LazySyzygiesOfRows,
     
     return HomalgMatrixWithAttributes( [
                    EvalSyzygiesOfRows, [ M, N ],
-                   NrColumns, NrRows( M )
+                   NumberColumns, NumberRows( M )
                    ], HomalgRing( M ) );
     
 end );
@@ -286,7 +286,7 @@ InstallMethod( LazySyzygiesOfColumns,
     
     return HomalgMatrixWithAttributes( [
                    EvalSyzygiesOfColumns, [ M, N ],
-                   NrRows, NrColumns( M )
+                   NumberRows, NumberColumns( M )
                    ], HomalgRing( M ) );
     
 end );
@@ -570,7 +570,7 @@ InstallMethod( RightDivide,
         return fail;
     fi;
     
-    T := CertainColumns( T, [ 1 .. NrRows( A ) ] );
+    T := CertainColumns( T, [ 1 .. NumberRows( A ) ] );
     
     ## check assertion
     Assert( 5, IsZero( DecideZeroRows( B + T * A, BL ) ) );
@@ -622,7 +622,7 @@ InstallMethod( LeftDivide,
         return fail;
     fi;
     
-    T := CertainRows( T, [ 1 .. NrColumns( A ) ] );
+    T := CertainRows( T, [ 1 .. NumberColumns( A ) ] );
     
     ## check assertion
     Assert( 5, IsZero( DecideZeroColumns( B + A * T, BL ) ) );
@@ -749,7 +749,7 @@ InstallMethod( LeftInverse,
   function( RI )
     local Id, LI;
     
-    Id := HomalgIdentityMatrix( NrColumns( RI ), HomalgRing( RI ) );
+    Id := HomalgIdentityMatrix( NumberColumns( RI ), HomalgRing( RI ) );
     
     LI := RightDivide( Id, RI ); ## ( cf. [BR08, Subsection 3.1.3] )
     
@@ -770,9 +770,9 @@ InstallMethod( LeftInverse,
     
     SetRightInverse( LI, RI );
     
-    SetNrColumns( LI, NrRows( RI ) );
+    SetNumberColumns( LI, NumberRows( RI ) );
     
-    if NrRows( RI ) = NrColumns( RI ) then
+    if NumberRows( RI ) = NumberColumns( RI ) then
         ## a left inverse of a ring element is unique
         ## and coincides with the right inverse
         SetRightInverse( RI, LI );
@@ -803,7 +803,7 @@ InstallMethod( RightInverse,
   function( LI )
     local Id, RI;
     
-    Id := HomalgIdentityMatrix( NrRows( LI ), HomalgRing( LI ) );
+    Id := HomalgIdentityMatrix( NumberRows( LI ), HomalgRing( LI ) );
     
     RI := LeftDivide( LI, Id ); ## ( cf. [BR08, Subsection 3.1.3] )
     
@@ -824,9 +824,9 @@ InstallMethod( RightInverse,
     
     SetLeftInverse( RI, LI );
     
-    SetNrRows( RI, NrColumns( LI ) );
+    SetNumberRows( RI, NumberColumns( LI ) );
     
-    if NrRows( LI ) = NrColumns( LI ) then
+    if NumberRows( LI ) = NumberColumns( LI ) then
         ## a right inverse of a ring element is unique
         ## and coincides with the left inverse
         SetLeftInverse( LI, RI );
@@ -996,8 +996,8 @@ InstallGlobalFunction( BestBasis, ### defines: BestBasis
         
         nargs := Length( arg );
         
-        m := NrRows( M );
-        n := NrColumns( M );
+        m := NumberRows( M );
+        n := NumberColumns( M );
         
         if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
             B := ReducedRowEchelonForm( M, arg[2] );
@@ -1011,14 +1011,14 @@ InstallGlobalFunction( BestBasis, ### defines: BestBasis
             B := ReducedColumnEchelonForm( B );
         fi;
         
-        if m - NrRows( B ) = 0 and n - NrColumns( B ) = 0 then
+        if m - NumberRows( B ) = 0 and n - NumberColumns( B ) = 0 then
             return B;
-        elif m - NrRows( B ) = 0 and n - NrColumns( B ) > 0 then
-            return UnionOfColumns( B, HomalgZeroMatrix( m, n - NrColumns( B ), R ) );
-        elif m - NrRows( B ) > 0 and n - NrColumns( B ) = 0 then
-            return UnionOfRows( B, HomalgZeroMatrix( m - NrRows( B ), n, R ) );
+        elif m - NumberRows( B ) = 0 and n - NumberColumns( B ) > 0 then
+            return UnionOfColumns( B, HomalgZeroMatrix( m, n - NumberColumns( B ), R ) );
+        elif m - NumberRows( B ) > 0 and n - NumberColumns( B ) = 0 then
+            return UnionOfRows( B, HomalgZeroMatrix( m - NumberRows( B ), n, R ) );
         else
-            return DiagMat( [ B, HomalgZeroMatrix( m - NrRows( B ), n - NrColumns( B ), R ) ] );
+            return DiagMat( [ B, HomalgZeroMatrix( m - NumberRows( B ), n - NumberColumns( B ), R ) ] );
         fi;
         
     fi;
@@ -1121,8 +1121,8 @@ InstallGlobalFunction( SimplerEquivalentMatrix, ### defines: SimplerEquivalentMa
         Error( "Wrong input!\n" );
     fi;
     
-    m := NrRows( M );
-    n := NrColumns( M );
+    m := NumberRows( M );
+    n := NumberColumns( M );
     
     finished := false;
     
@@ -1255,8 +1255,8 @@ InstallGlobalFunction( SimplerEquivalentMatrix, ### defines: SimplerEquivalentMa
         
         M := MM;
         
-        m := NrRows( M );
-        n := NrColumns( M );
+        m := NumberRows( M );
+        n := NumberColumns( M );
         
         if compute_U then
             U := HomalgInitialIdentityMatrix( m, R );
@@ -1357,13 +1357,13 @@ InstallGlobalFunction( SimplerEquivalentMatrix, ### defines: SimplerEquivalentMa
                 ## cleanup the j-th column
                 
                 if compute_U then
-                    u := HomalgInitialIdentityMatrix( NrRows( U ), R );
+                    u := HomalgInitialIdentityMatrix( NumberRows( U ), R );
                 else
                     u := "";
                 fi;
                 
                 if compute_UI then
-                    ui := HomalgInitialIdentityMatrix( NrColumns( UI ), R );
+                    ui := HomalgInitialIdentityMatrix( NumberColumns( UI ), R );
                 else
                     ui := "";
                 fi;
@@ -1420,8 +1420,8 @@ InstallGlobalFunction( SimplerEquivalentMatrix, ### defines: SimplerEquivalentMa
             ## don't compute a "basis" here, since it is not clear if to do it for rows or for columns!
             ## this differs from the Maple code, where we only worked with left modules
             
-            m := NrRows( M );
-            n := NrColumns( M );
+            m := NumberRows( M );
+            n := NumberColumns( M );
             
             ## eliminate_units alters unit_free
             eliminate_units();
@@ -1457,7 +1457,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix, ### defines: SimplerEquivalentMa
     
     if compute_UI then
         if not IsBound( UI ) then
-            UI := HomalgIdentityMatrix( NrRows( M ), R );
+            UI := HomalgIdentityMatrix( NumberRows( M ), R );
         fi;
         SetPreEval( arg[nar_UI], UI );
         ResetFilterObj( arg[nar_UI], IsVoidMatrix );
@@ -1466,7 +1466,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix, ### defines: SimplerEquivalentMa
     
     if compute_VI then
         if not IsBound( VI ) then
-            VI := HomalgIdentityMatrix( NrColumns( M ), R );
+            VI := HomalgIdentityMatrix( NumberColumns( M ), R );
         fi;
         SetPreEval( arg[nar_VI], VI );
         ResetFilterObj( arg[nar_VI], IsVoidMatrix );
@@ -1545,7 +1545,7 @@ InstallMethod( SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix,
             
         else
             
-            T := HomalgIdentityMatrix( NrRows( M ), R );
+            T := HomalgIdentityMatrix( NumberRows( M ), R );
             
             S := M;
             
@@ -1587,7 +1587,7 @@ InstallMethod( SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix,
             
         else
             
-            T := HomalgIdentityMatrix( NrColumns( M ), R );
+            T := HomalgIdentityMatrix( NumberColumns( M ), R );
             
             S := M;
             

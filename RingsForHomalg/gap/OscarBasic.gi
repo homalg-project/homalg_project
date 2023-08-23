@@ -28,7 +28,7 @@ RowEchelonForm :=
     
     N := HomalgVoidMatrix(
       "unknown_number_of_rows",
-      NrColumns( M ),
+      NumberColumns( M ),
       HomalgRing( M )
     );
     
@@ -47,7 +47,7 @@ ColumnEchelonForm :=
     local N;
     
     N := HomalgVoidMatrix(
-      NrRows( M ),
+      NumberRows( M ),
       "unknown_number_of_rows",
       HomalgRing( M )
     );
@@ -72,7 +72,7 @@ ReducedRowEchelonForm :=
     
     nargs := Length( arg );
     
-    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
+    N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), R );
     
     if nargs > 1 and IsHomalgMatrix( arg[2] ) then
         
@@ -110,7 +110,7 @@ ReducedColumnEchelonForm :=
     
     nargs := Length( arg );
     
-    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_rows", R );
+    N := HomalgVoidMatrix( NumberRows( M ), "unknown_number_of_rows", R );
     
     if nargs > 1 and IsHomalgMatrix( arg[2] ) then
         
@@ -149,7 +149,7 @@ BasisOfRowModule :=
     
     N := HomalgVoidMatrix(
       "unknown_number_of_rows",
-      NrColumns( M ),
+      NumberColumns( M ),
       HomalgRing( M )
     );
     
@@ -179,7 +179,7 @@ BasisOfColumnModule :=
     local N;
     
     N := HomalgVoidMatrix(
-      NrRows( M ),
+      NumberRows( M ),
       "unknown_number_of_columns",
       HomalgRing( M )
     );
@@ -211,7 +211,7 @@ BasisOfRowsCoeff :=
     
     N := HomalgVoidMatrix(
       "unknown_number_of_rows",
-      NrColumns( M ),
+      NumberColumns( M ),
       HomalgRing( M )
     );
     
@@ -241,7 +241,7 @@ BasisOfColumnsCoeff :=
     local N;
     
     N := HomalgVoidMatrix(
-      NrRows( M ),
+      NumberRows( M ),
       "unknown_number_of_columns",
       HomalgRing( M )
     );
@@ -272,8 +272,8 @@ DecideZeroRows :=
     local N;
     
     N := HomalgVoidMatrix(
-      NrRows( A ),
-      NrColumns( A ),
+      NumberRows( A ),
+      NumberColumns( A ),
       HomalgRing( A )
     );
     
@@ -303,8 +303,8 @@ DecideZeroColumns :=
     local N;
     
     N := HomalgVoidMatrix(
-      NrRows( A ),
-      NrColumns( A ),
+      NumberRows( A ),
+      NumberColumns( A ),
       HomalgRing( A )
     );
     
@@ -336,8 +336,8 @@ DecideZeroRowsEffectively :=
     v := homalgStream( HomalgRing( A ) )!.variable_name;
     
     N := HomalgVoidMatrix(
-      NrRows( A ),
-      NrColumns( A ),
+      NumberRows( A ),
+      NumberColumns( A ),
       HomalgRing( A )
     );
     
@@ -369,8 +369,8 @@ DecideZeroColumnsEffectively :=
     v := homalgStream( HomalgRing( A ) )!.variable_name;
     
     N := HomalgVoidMatrix(
-      NrRows( A ),
-      NrColumns( A ),
+      NumberRows( A ),
+      NumberColumns( A ),
       HomalgRing( A )
     );
     
@@ -401,7 +401,7 @@ SyzygiesGeneratorsOfRows :=
     
     N := HomalgVoidMatrix(
       "unknown_number_of_rows",
-      NrRows( M ),
+      NumberRows( M ),
       HomalgRing( M )
     );
     
@@ -431,7 +431,7 @@ SyzygiesGeneratorsOfColumns :=
     local N;
     
     N := HomalgVoidMatrix(
-      NrColumns( M ),
+      NumberColumns( M ),
       "unknown_number_of_columns",
       HomalgRing( M )
     );
@@ -463,7 +463,7 @@ RelativeSyzygiesGeneratorsOfRows :=
     
     N := HomalgVoidMatrix(
       "unknown_number_of_rows",
-      NrRows( M ),
+      NumberRows( M ),
       HomalgRing( M )
     );
     
@@ -493,7 +493,7 @@ RelativeSyzygiesGeneratorsOfColumns :=
     local N;
     
     N := HomalgVoidMatrix(
-      NrColumns( M ),
+      NumberColumns( M ),
       "unknown_number_of_columns",
       HomalgRing( M )
     );
@@ -517,7 +517,7 @@ X_PartiallyReducedBasisOfRowModule :=
   function( M )
     local N;
     
-    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
+    N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), HomalgRing( M ) );
     
     homalgSendBlocking( [ N, " = PartiallyReducedBasisOfRowModule(", M, ")" ], "need_command", "ReducedBasisOfModule" );
     
@@ -530,7 +530,7 @@ X_PartiallyReducedBasisOfColumnModule :=
   function( M )
     local N;
     
-    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
+    N := HomalgVoidMatrix( NumberRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
     
     homalgSendBlocking( [ N, " = PartiallyReducedBasisOfColumnModule(", M, ")" ], "need_command", "ReducedBasisOfModule" );
     
@@ -551,7 +551,7 @@ X_ReducedSyzygiesGeneratorsOfRows :=
     
     N := HomalgVoidMatrix(
       "unknown_number_of_rows",
-      NrRows( M ),
+      NumberRows( M ),
       HomalgRing( M )
     );
     
@@ -581,7 +581,7 @@ X_ReducedSyzygiesGeneratorsOfColumns :=
     local N;
     
     N := HomalgVoidMatrix(
-      NrColumns( M ),
+      NumberColumns( M ),
       "unknown_number_of_columns",
       HomalgRing( M )
     );

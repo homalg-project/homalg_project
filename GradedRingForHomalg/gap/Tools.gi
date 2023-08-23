@@ -190,7 +190,7 @@ InstallMethod( DegreesOfEntriesFunction,
         
         e := List( e, deg_func );
         
-        return ListToListList( e, NrRows( C ), NrColumns( C ) );
+        return ListToListList( e, NumberRows( C ), NumberColumns( C ) );
         
     end;
     
@@ -324,7 +324,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
         e := PositionOfFirstNonZeroEntryPerRow( C );
         
         return
-          List( [ 1 .. NrRows( C ) ],
+          List( [ 1 .. NumberRows( C ) ],
                 function( r )
                   if e[r] = 0 then
                       return deg0;
@@ -427,7 +427,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
         e := PositionOfFirstNonZeroEntryPerColumn( C );
         
         return
-          List( [ 1 .. NrColumns( C ) ],
+          List( [ 1 .. NumberColumns( C ) ],
                 function( c )
                   if e[c] = 0 then
                       return deg0;
@@ -459,7 +459,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "LinearSyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "LinearSyzygiesGeneratorsOfRows", NumberRows( M ), " x ", NumberColumns( M ) );
     
     if IsBound(RP!.LinearSyzygiesGeneratorsOfRows) then
         
@@ -467,17 +467,17 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            C := HomalgZeroMatrix( 0, NrRows( M ), R ); ## most of the computer algebra systems cannot handle degenerated matrices
+            C := HomalgZeroMatrix( 0, NumberRows( M ), R ); ## most of the computer algebra systems cannot handle degenerated matrices
             
         else
             
-            SetNrColumns( C, NrRows( M ) );
+            SetNumberColumns( C, NumberRows( M ) );
             
         fi;
         
         M!.LinearSyzygiesGeneratorsOfRows := C;
         
-        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NrRows( C ) );
+        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NumberRows( C ) );
         
         IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfRows" );
         
@@ -489,17 +489,17 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            C := HomalgZeroMatrix( 0, NrRows( M ), R ); ## most of the computer algebra systems cannot handle degenerated matrices
+            C := HomalgZeroMatrix( 0, NumberRows( M ), R ); ## most of the computer algebra systems cannot handle degenerated matrices
             
         else
             
-            SetNrColumns( C, NrRows( M ) );
+            SetNumberColumns( C, NumberRows( M ) );
             
         fi;
         
         M!.LinearSyzygiesGeneratorsOfRows := C;
         
-        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NrRows( C ) );
+        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NumberRows( C ) );
         
         DecreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfRows" );
         
@@ -521,13 +521,13 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
     
     if IsZero( C ) then
         
-        C := HomalgZeroMatrix( 0, NrRows( M ), R );
+        C := HomalgZeroMatrix( 0, NumberRows( M ), R );
         
     fi;
     
     M!.LinearSyzygiesGeneratorsOfRows := C;
     
-    ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NrRows( C ) );
+    ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NumberRows( C ) );
     
     IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfRows" );
     
@@ -553,7 +553,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfColumns,
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "LinearSyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "LinearSyzygiesGeneratorsOfColumns", NumberRows( M ), " x ", NumberColumns( M ) );
     
     if IsBound(RP!.LinearSyzygiesGeneratorsOfColumns) then
         
@@ -561,17 +561,17 @@ InstallMethod( LinearSyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            C := HomalgZeroMatrix( NumberColumns( M ), 0, R );
             
         else
             
-            SetNrRows( C, NrColumns( M ) );
+            SetNumberRows( C, NumberColumns( M ) );
             
         fi;
         
         M!.LinearSyzygiesGeneratorsOfColumns := C;
         
-        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NrColumns( C ) );
+        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NumberColumns( C ) );
         
         IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfColumns" );
         
@@ -583,17 +583,17 @@ InstallMethod( LinearSyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            C := HomalgZeroMatrix( NumberColumns( M ), 0, R );
             
         else
             
-            SetNrRows( C, NrColumns( M ) );
+            SetNumberRows( C, NumberColumns( M ) );
             
         fi;
         
         M!.LinearSyzygiesGeneratorsOfColumns := C;
         
-        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NrColumns( C ) );
+        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NumberColumns( C ) );
         
         DecreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfColumns" );
         
@@ -615,13 +615,13 @@ InstallMethod( LinearSyzygiesGeneratorsOfColumns,
     
     if IsZero( C ) then
         
-        C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+        C := HomalgZeroMatrix( NumberColumns( M ), 0, R );
         
     fi;
     
     M!.LinearSyzygiesGeneratorsOfColumns := C;
     
-    ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NrColumns( C ) );
+    ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NumberColumns( C ) );
     
     IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfColumns" );
     
@@ -674,7 +674,7 @@ InstallMethod( PolynomialsWithoutRelativeIndeterminates,
   function( M )
     local R, B, base, var, S, weights, M_sub;
     
-    if not NrColumns( M ) = 1 then
+    if not NumberColumns( M ) = 1 then
         Error( "the number of columns must be one\n" );
     fi;
     
@@ -718,7 +718,7 @@ InstallMethod( PolynomialsWithoutRelativeIndeterminates,
   function( M )
     local S, B;
     
-    if not NrColumns( M ) = 1 then
+    if not NumberColumns( M ) = 1 then
         Error( "the number of columns must be one\n" );
     fi;
     
@@ -780,7 +780,7 @@ InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
     
     relations := SyzygiesOfRows( generators_of_semigroup );
     
-    if NrRows( relations ) = 0 then
+    if NumberRows( relations ) = 0 then
         return [ ];
     fi;
     
@@ -790,7 +790,7 @@ InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
         HOMALG_RINGS.DefaultCAS_GF2 := HomalgRingOfIntegersInDefaultCAS( 2 );
     fi;
     
-    s := NrRows( generators_of_semigroup );
+    s := NumberRows( generators_of_semigroup );
     
     R := HOMALG_RINGS.DefaultCAS_GF2 * Concatenation( "t1..", String( s ) );
     
@@ -824,7 +824,7 @@ InstallMethod( ExponentsOfGeneratorsOfToricIdeal,
     
     I := MatrixOfSubobjectGenerators( I );
     
-    if NrRows( I ) = 0 then
+    if NumberRows( I ) = 0 then
         return [ ];
     fi;
     

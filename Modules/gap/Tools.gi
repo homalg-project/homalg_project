@@ -73,7 +73,7 @@ InstallMethod( EliminateOverBaseRing,
     local R, B, indets, L, N, n, monoms, monomStr, monomS, m,
           MonomsL, monomsL, monomSL, posL, coeffs, coeffsL;
     
-    if not NrColumns( M ) = 1 then
+    if not NumberColumns( M ) = 1 then
         Error( "the number of columns must be 1\n" );
     fi;
     
@@ -264,9 +264,9 @@ InstallMethod( DefiningIdeal,
     
     m := MatrixOfRelations( R );
     
-    if NrColumns( m ) = 1 then
+    if NumberColumns( m ) = 1 then
         ideal := LeftSubmodule;
-    elif NrRows( m ) = 1 then
+    elif NumberRows( m ) = 1 then
         ideal := RightSubmodule;
     else
         Error( "the matrix of relations m of the residue class ring R has a weird shape\n" );

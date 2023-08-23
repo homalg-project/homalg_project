@@ -14,7 +14,7 @@ m := HomalgMatrix( "[ \
 
 d := Indeterminates( R )[1];
 
-M := LeftPresentation( m - HomalgScalarMatrix( d, NrRows( m ) ) );
+M := LeftPresentation( m - HomalgScalarMatrix( d, NumberRows( m ) ) );
 
 n := HomalgMatrix( "[ \
  3, 4, 3, \
@@ -24,5 +24,5 @@ n := HomalgMatrix( "[ \
 
 d := Indeterminates( R )[1];
 
-N := LeftPresentation( n - HomalgScalarMatrix( d, NrRows( n ) ) );
+N := LeftPresentation( n - HomalgScalarMatrix( d, NumberRows( n ) ) );
 

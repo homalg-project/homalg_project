@@ -225,7 +225,7 @@ InstallMethod( HasNrGenerators,
         
   function( gen )
     
-    return HasNrColumns( MatrixOfGenerators( gen ) );
+    return HasNumberColumns( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -236,7 +236,7 @@ InstallMethod( HasNrGenerators,
         
   function( gen )
     
-    return HasNrRows( MatrixOfGenerators( gen ) );
+    return HasNumberRows( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -247,7 +247,7 @@ InstallMethod( NrGenerators, ### defines: NrGenerators (NumberOfGenerators)
         
   function( gen )
     
-    return NrColumns( MatrixOfGenerators( gen ) );
+    return NumberColumns( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -258,7 +258,7 @@ InstallMethod( NrGenerators, ### defines: NrGenerators (NumberOfGenerators)
         
   function( gen )
     
-    return NrRows( MatrixOfGenerators( gen ) );
+    return NumberRows( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -681,7 +681,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
     
     if not IsBound( relations_of_hullmodule ) then
         relations_of_hullmodule :=
-          HomalgRelationsForLeftModule( HomalgZeroMatrix( 0, NrColumns( generators ), R ) );
+          HomalgRelationsForLeftModule( HomalgZeroMatrix( 0, NumberColumns( generators ), R ) );
     fi;
     
     gen := rec( generators := generators,
@@ -746,7 +746,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
     
     if not IsBound( relations_of_hullmodule ) then
         relations_of_hullmodule :=
-          HomalgRelationsForRightModule( HomalgZeroMatrix( NrRows( generators ), 0, R ) );
+          HomalgRelationsForRightModule( HomalgZeroMatrix( NumberRows( generators ), 0, R ) );
     fi;
     
     gen := rec( generators := generators,

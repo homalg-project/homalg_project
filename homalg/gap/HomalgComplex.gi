@@ -411,11 +411,11 @@ end );
 ##    <M>psi</M>, created according to the following rules:
 ##    In case <A>C</A> is a chain complex, the highest degree left (resp. right) object <M>C_d</M> in <A>C</A>
 ##    is declared as the target of <M>psi</M>, while its source is taken to be a free left (resp. right) object of rank
-##    equal to <C>NrRows</C>(<A>mat</A>) (resp. <C>NrColumns</C>(<A>mat</A>)). For this <C>NrColumns</C>(<A>mat</A>)
-##    (resp. <C>NrRows</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C_d</M>).
+##    equal to <C>NumberRows</C>(<A>mat</A>) (resp. <C>NumberColumns</C>(<A>mat</A>)). For this <C>NumberColumns</C>(<A>mat</A>)
+##    (resp. <C>NumberRows</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C_d</M>).
 ##    In case <A>C</A> is a <E>co</E>chain complex, the highest degree left (resp. right) object <M>C^d</M> in <A>C</A>
 ##    is declared as the source of <M>psi</M>, while its target is taken to be a free left (resp. right) object of rank
-##    equal to <C>NrColumns</C>(<A>mat</A>) (resp. <C>NrRows</C>(<A>mat</A>)). For this <C>NrRows</C>(<A>mat</A>)
+##    equal to <C>NumberColumns</C>(<A>mat</A>) (resp. <C>NumberRows</C>(<A>mat</A>)). For this <C>NumberRows</C>(<A>mat</A>)
 ##    (resp. <C>Columns</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C^d</M>).
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );

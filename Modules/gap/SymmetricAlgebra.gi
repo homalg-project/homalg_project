@@ -79,8 +79,8 @@ InstallMethod( SymmetricPowerOfPresentationMorphism,
     one := One( R );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( T ) then
-        g := NrColumns( mat );
-        r := NrRows( mat );
+        g := NumberColumns( mat );
+        r := NumberRows( mat );
         
         bg := Binomial( g + k - 1, k );
         
@@ -93,8 +93,8 @@ InstallMethod( SymmetricPowerOfPresentationMorphism,
         union_of_rels := UnionOfRows;
         
     else
-        g := NrRows( mat );
-        r := NrColumns( mat );
+        g := NumberRows( mat );
+        r := NumberColumns( mat );
         
         bg := Binomial( g + k - 1, k );
         

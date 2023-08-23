@@ -607,8 +607,8 @@ InstallMethod( PushPresentationByIsomorphism,
     
     T := HomalgMatrix( HomalgRing( TI ) );
     
-    SetNrRows( T, NrColumns( TI ) );
-    SetNrColumns( T, NrRows( TI ) );
+    SetNumberRows( T, NumberColumns( TI ) );
+    SetNumberColumns( T, NumberRows( TI ) );
 
     SetEvalMatrixOperation( T, [ a -> Eval( MatrixOfMap( a^-1, pos[2], pos[1] ) ), [ iso ] ] );
     
@@ -683,9 +683,9 @@ InstallMethod( Annihilator,
     local syz;
     
     if IsHomalgRelationsOfLeftModule( rel ) then
-        syz := List( [ 1 .. NrRows( mat ) ], i -> CertainRows( mat, [ i ] ) );
+        syz := List( [ 1 .. NumberRows( mat ) ], i -> CertainRows( mat, [ i ] ) );
     else
-        syz := List( [ 1 .. NrColumns( mat ) ], j -> CertainColumns( mat, [ j ] ) );
+        syz := List( [ 1 .. NumberColumns( mat ) ], j -> CertainColumns( mat, [ j ] ) );
     fi;
     
     syz := List( syz, r -> ReducedSyzygiesGenerators( r, rel ) );
@@ -787,10 +787,10 @@ InstallOtherMethod( SubobjectQuotient,
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         R := 1 * R;
-        mapJ := List( [ 1 .. NrRows( mapJ ) ], i -> CertainRows( mapJ, [ i ] ) );
+        mapJ := List( [ 1 .. NumberRows( mapJ ) ], i -> CertainRows( mapJ, [ i ] ) );
     else
         R := R * 1;
-        mapJ := List( [ 1 .. NrColumns( mapJ ) ], i -> CertainColumns( mapJ, [ i ] ) );
+        mapJ := List( [ 1 .. NumberColumns( mapJ ) ], i -> CertainColumns( mapJ, [ i ] ) );
     fi;
     
     if NrGenerators( MmodK ) > 0 then

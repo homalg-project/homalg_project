@@ -62,7 +62,7 @@ BindGlobal( "TheTypeHomalgInternalMatrix",
 InstallMethod( Length,
         [ IsHomalgMatrix ], 0,
 
-  NrColumns );
+  NumberColumns );
 
 ####################################
 #
@@ -134,12 +134,12 @@ InstallMethod( BlindlyCopyMatrixProperties, ## under construction
     ## if the new ring only interprets the 1x1 submatrices as elements
     ## then it is safe to at least copy the following attributes
     
-    if HasNrRows( S ) then
-        SetNrRows( T, NrRows( S ) );
+    if HasNumberRows( S ) then
+        SetNumberRows( T, NumberRows( S ) );
     fi;
     
-    if HasNrColumns( S ) then
-        SetNrColumns( T, NrColumns( S ) );
+    if HasNumberColumns( S ) then
+        SetNumberColumns( T, NumberColumns( S ) );
     fi;
     
 end );
@@ -159,8 +159,8 @@ InstallMethod( ShallowCopy,
         
         MM := HomalgMatrixWithAttributes( [
                       Eval, RP!.ShallowCopy( M ),
-                      NrRows, NrRows( M ),
-                      NrColumns, NrColumns( M ),
+                      NumberRows, NumberRows( M ),
+                      NumberColumns, NumberColumns( M ),
                       ], R );
         
         MatchPropertiesAndAttributes( M, MM,
@@ -193,8 +193,8 @@ InstallMethod( MutableCopyMat,
         
         MM := HomalgMatrixWithAttributes( [
                       Eval, RP!.ShallowCopy( M ),
-                      NrRows, NrRows( M ),
-                      NrColumns, NrColumns( M ),
+                      NumberRows, NumberRows( M ),
+                      NumberColumns, NumberColumns( M ),
                       ], R );
         
         SetIsMutableMatrix( MM, true );
@@ -222,8 +222,8 @@ InstallMethod( ShallowCopy,
         
         MM := HomalgMatrixWithAttributes( [
                       Eval, RP!.ShallowCopy( M ),
-                      NrRows, NrRows( M ),
-                      NrColumns, NrColumns( M ),
+                      NumberRows, NumberRows( M ),
+                      NumberColumns, NumberColumns( M ),
                       ], R );
         
         if not IsIdenticalObj( Eval( M ), Eval( MM ) ) then
@@ -244,7 +244,7 @@ InstallMethod( ShallowCopy,
         TryNextMethod( );
     fi;
     
-    return HomalgMatrix( One( R ) * Eval( M )!.matrix, NrRows( M ), NrColumns( M ), R );
+    return HomalgMatrix( One( R ) * Eval( M )!.matrix, NumberRows( M ), NumberColumns( M ), R );
     
 end );
 
@@ -263,8 +263,8 @@ InstallMethod( MutableCopyMat,
         
         MM := HomalgMatrixWithAttributes( [
                       Eval, RP!.ShallowCopy( M ),
-                      NrRows, NrRows( M ),
-                      NrColumns, NrColumns( M ),
+                      NumberRows, NumberRows( M ),
+                      NumberColumns, NumberColumns( M ),
                       ], R );
         
         if not IsIdenticalObj( Eval( M ), Eval( MM ) ) then
@@ -280,7 +280,7 @@ InstallMethod( MutableCopyMat,
         TryNextMethod( );
     fi;
     
-    MM := HomalgMatrix( One( R ) * Eval( M )!.matrix, NrRows( M ), NrColumns( M ), R );
+    MM := HomalgMatrix( One( R ) * Eval( M )!.matrix, NumberRows( M ), NumberColumns( M ), R );
     
     SetIsMutableMatrix( MM, true );
     
@@ -295,7 +295,7 @@ InstallMethod( ShallowCopy,
         
   function( M )
     
-    return HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    return HomalgIdentityMatrix( NumberRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -308,7 +308,7 @@ InstallMethod( MutableCopyMat,
     
     ## do not use HomalgIdentityMatrix since
     ## we might want to alter the result
-    return HomalgInitialIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    return HomalgInitialIdentityMatrix( NumberRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -319,7 +319,7 @@ InstallMethod( ShallowCopy,
         
   function( M )
     
-    return HomalgZeroMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    return HomalgZeroMatrix( NumberRows( M ), NumberColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -332,7 +332,7 @@ InstallMethod( MutableCopyMat,
     
     ## do not use HomalgZeroMatrix since
     ## we might want to alter the result
-    return HomalgInitialMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    return HomalgInitialMatrix( NumberRows( M ), NumberColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -629,9 +629,9 @@ InstallMethod( GetListOfHomalgMatrixAsString,
   function( M, R )
     local c, s;
     
-    c := NrColumns( M );
+    c := NumberColumns( M );
     
-    s := List( [ 1 .. NrRows( M ) ], i -> List( [ 1 .. c ], j -> MatElmAsString( M, i, j ) ) );
+    s := List( [ 1 .. NumberRows( M ) ], i -> List( [ 1 .. c ], j -> MatElmAsString( M, i, j ) ) );
     
     s := JoinStringsWithSeparator( Concatenation( s ) );
     
@@ -691,9 +691,9 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
   function( M, R )
     local c, s;
     
-    c := NrColumns( M );
+    c := NumberColumns( M );
     
-    s := List( [ 1 .. NrRows( M ) ], i -> List( [ 1 .. c ], j -> MatElmAsString( M, i, j ) ) );
+    s := List( [ 1 .. NumberRows( M ) ], i -> List( [ 1 .. c ], j -> MatElmAsString( M, i, j ) ) );
     
     s := JoinStringsWithSeparator( List( s, JoinStringsWithSeparator ), "],[" );
     
@@ -738,11 +738,11 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
   function( M, R )
     local c, s, i, j, e;
     
-    c := NrColumns( M );
+    c := NumberColumns( M );
     
     s := [ ];
     
-    for i in [ 1 .. NrRows( M ) ] do
+    for i in [ 1 .. NumberRows( M ) ] do
         for j in [ 1 .. c ] do
             e := M[ i, j ];
             if not IsZero( e ) then
@@ -782,8 +782,8 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         fi;
     fi;
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     z := Zero( R );
     
     s := List( [ 1 .. r ], a -> Filtered( List( [ 1 .. c ], function( b ) if s[a][b] <> z then return [ a, b, s[a][b] ]; else return 0; fi; end ), x -> x <> 0 ) );
@@ -806,9 +806,9 @@ InstallMethod( EntriesOfHomalgMatrixAsListList,
   function( M )
     local cols;
     
-    cols := [ 1 .. NrColumns( M ) ];
+    cols := [ 1 .. NumberColumns( M ) ];
     
-    return List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> M[ r, c ] ) );
+    return List( [ 1 .. NumberRows( M ) ], r -> List( cols, c -> M[ r, c ] ) );
     
 end );
 
@@ -858,7 +858,7 @@ InstallMethod( EntriesOfHomalgRowVector,
         
   function( M )
     
-    Assert( 0, NrRows( M ) = 1 );
+    Assert( 0, NumberRows( M ) = 1 );
     
     return EntriesOfHomalgMatrix( M );
     
@@ -871,7 +871,7 @@ InstallMethod( EntriesOfHomalgColumnVector,
         
   function( M )
     
-    Assert( 0, NrColumns( M ) = 1 );
+    Assert( 0, NumberColumns( M ) = 1 );
     
     return EntriesOfHomalgMatrix( M );
     
@@ -895,7 +895,7 @@ InstallMethod( GetCleanRowsPositions,
         
   function( M )
     
-    return GetCleanRowsPositions( M, [ 1 .. NrColumns( M ) ] );
+    return GetCleanRowsPositions( M, [ 1 .. NumberColumns( M ) ] );
     
 end );
 
@@ -928,12 +928,12 @@ InstallMethod( AreComparableMatrices,
         
   function( M1, M2 )
     
-    if HasNrRows( M1 ) or HasNrRows( M2 ) then ## trigger as few as possible operations
+    if HasNumberRows( M1 ) or HasNumberRows( M2 ) then ## trigger as few as possible operations
         return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) )
-               and NrRows( M1 ) = NrRows( M2 ) and NrColumns( M1 ) = NrColumns( M2 );
+               and NumberRows( M1 ) = NumberRows( M2 ) and NumberColumns( M1 ) = NumberColumns( M2 );
     else ## no other choice
         return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) )
-               and NrColumns( M1 ) = NrColumns( M2 ) and NrRows( M1 ) = NrRows( M2 );
+               and NumberColumns( M1 ) = NumberColumns( M2 ) and NumberRows( M1 ) = NumberRows( M2 );
     fi;
     
 end );
@@ -1057,7 +1057,7 @@ InstallMethod( ZeroMutable,
         
   function( M )
     
-    return HomalgZeroMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    return HomalgZeroMatrix( NumberRows( M ), NumberColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -1081,8 +1081,8 @@ InstallMethod( Involution,
     
     C := HomalgMatrixWithAttributes( [
                  EvalInvolution, M,
-                 NrRows, NrColumns( M ),
-                 NrColumns, NrRows( M ),
+                 NumberRows, NumberColumns( M ),
+                 NumberColumns, NumberRows( M ),
                  ], HomalgRing( M ) );
     
     SetItsInvolution( M, C );
@@ -1123,8 +1123,8 @@ InstallMethod( TransposedMatrix,
     
     C := HomalgMatrixWithAttributes( [
                  EvalTransposedMatrix, M,
-                 NrRows, NrColumns( M ),
-                 NrColumns, NrRows( M ),
+                 NumberRows, NumberColumns( M ),
+                 NumberColumns, NumberRows( M ),
                  ], HomalgRing( M ) );
     
     SetItsTransposedMatrix( M, C );
@@ -1168,8 +1168,8 @@ InstallMethod( CertainRows,
     
     return HomalgMatrixWithAttributes( [
                    EvalCertainRows, [ M, plist ],
-                   NrRows, Length( plist ),
-                   NrColumns, NrColumns( M )
+                   NumberRows, Length( plist ),
+                   NumberColumns, NumberColumns( M )
                    ], HomalgRing( M ) );
     
 end );
@@ -1215,8 +1215,8 @@ InstallMethod( CertainColumns,
     
     return HomalgMatrixWithAttributes( [
                    EvalCertainColumns, [ M, plist ],
-                   NrColumns, Length( plist ),
-                   NrRows, NrRows( M )
+                   NumberColumns, Length( plist ),
+                   NumberRows, NumberRows( M )
                    ], HomalgRing( M ) );
     
 end );
@@ -1244,7 +1244,7 @@ function( arg )
         # UnionOfRows( mat1, mat2, ... )
         list := arg;
         R := HomalgRing( list[1] );
-        nr_cols := NrColumns( list[1] );
+        nr_cols := NumberColumns( list[1] );
     elif Length( arg ) = 1 and IsList( arg[1] )  then
         # UnionOfRows( [ mat1, mat2, ... ] )
         if IsEmpty( arg[1] )  then
@@ -1252,7 +1252,7 @@ function( arg )
         fi;
         list := arg[1];
         R := HomalgRing( list[1] );
-        nr_cols := NrColumns( list[1] );
+        nr_cols := NumberColumns( list[1] );
     elif Length( arg ) = 3 and IsHomalgRing( arg[1] ) and IsInt( arg[2] ) and IsList( arg[3] ) then
         # UnionOfRows( ring, nr_cols, [ mat1, mat2, ... ] )
         R := arg[1];
@@ -1276,8 +1276,8 @@ InstallMethod( UnionOfRowsOp,
     
     result := HomalgMatrixWithAttributes( [
          EvalUnionOfRows, L,
-         NrRows, Sum( List( L, NrRows ) ),
-         NrColumns, nr_cols
+         NumberRows, Sum( List( L, NumberRows ) ),
+         NumberColumns, nr_cols
          ], R );
     
     if IsBound( HOMALG_MATRICES.UnionOfRowsEager ) and HOMALG_MATRICES.UnionOfRowsEager = true then
@@ -1318,8 +1318,8 @@ InstallMethod( UnionOfRowsEagerOp,
     
     result := HomalgMatrixWithAttributes( [
          EvalUnionOfRows, L,
-         NrRows, Sum( List( L, NrRows ) ),
-         NrColumns, NrColumns( L[1] )
+         NumberRows, Sum( List( L, NumberRows ) ),
+         NumberColumns, NumberColumns( L[1] )
          ], HomalgRing( L[1] ) );
     
     Eval( result );
@@ -1351,7 +1351,7 @@ function( arg )
         # UnionOfColumns( mat1, mat2, ... )
         list := arg;
         R := HomalgRing( list[1] );
-        nr_rows := NrRows( list[1] );
+        nr_rows := NumberRows( list[1] );
     elif Length( arg ) = 1 and IsList( arg[1] )  then
         # UnionOfColumns( [ mat1, mat2, ... ] )
         if IsEmpty( arg[1] )  then
@@ -1359,7 +1359,7 @@ function( arg )
         fi;
         list := arg[1];
         R := HomalgRing( list[1] );
-        nr_rows := NrRows( list[1] );
+        nr_rows := NumberRows( list[1] );
     elif Length( arg ) = 3 and IsHomalgRing( arg[1] ) and IsInt( arg[2] ) and IsList( arg[3] ) then
         # UnionOfColumns( ring, nr_rows, [ mat1, mat2, ... ] )
         R := arg[1];
@@ -1383,8 +1383,8 @@ InstallMethod( UnionOfColumnsOp,
     
     result := HomalgMatrixWithAttributes( [
          EvalUnionOfColumns, L,
-         NrRows, nr_rows,
-         NrColumns, Sum( List( L, NrColumns ) )
+         NumberRows, nr_rows,
+         NumberColumns, Sum( List( L, NumberColumns ) )
          ], R );
     
     if IsBound( HOMALG_MATRICES.UnionOfColumnsEager ) and HOMALG_MATRICES.UnionOfColumnsEager = true then
@@ -1425,8 +1425,8 @@ InstallMethod( UnionOfColumnsEagerOp,
     
     result := HomalgMatrixWithAttributes( [
          EvalUnionOfColumns, L,
-         NrRows, NrRows( L[1] ),
-         NrColumns, Sum( List( L, NrColumns ) )
+         NumberRows, NumberRows( L[1] ),
+         NumberColumns, Sum( List( L, NumberColumns ) )
          ], HomalgRing( L[1] ) );
     
     Eval( result );
@@ -1452,11 +1452,11 @@ InstallMethod( ConvertRowToMatrix,
   function( M, r, c )
     local R, C;
     
-    if NrRows( M ) <> 1 then
+    if NumberRows( M ) <> 1 then
         Error( "expecting a single row matrix as a first argument\n" );
     fi;
     
-    if NrColumns( M ) <> r * c then
+    if NumberColumns( M ) <> r * c then
         Error( "the row has not the expected length\n" );
     fi;
     
@@ -1470,8 +1470,8 @@ InstallMethod( ConvertRowToMatrix,
     
     C := HomalgMatrixWithAttributes( [
                  EvalConvertRowToMatrix, [ M, r, c ],
-                 NrRows, r,
-                 NrColumns, c,
+                 NumberRows, r,
+                 NumberColumns, c,
                  ], R );
     
     return C;
@@ -1495,11 +1495,11 @@ InstallMethod( ConvertColumnToMatrix,
   function( M, r, c )
     local R, C;
     
-    if NrColumns( M ) <> 1 then
+    if NumberColumns( M ) <> 1 then
         Error( "expecting a single column matrix as a first argument\n" );
     fi;
     
-    if NrRows( M ) <> r * c then
+    if NumberRows( M ) <> r * c then
         Error( "the column has not the expected height\n" );
     fi;
     
@@ -1513,8 +1513,8 @@ InstallMethod( ConvertColumnToMatrix,
     
     C := HomalgMatrixWithAttributes( [
                  EvalConvertColumnToMatrix, [ M, r, c ],
-                 NrRows, r,
-                 NrColumns, c,
+                 NumberRows, r,
+                 NumberColumns, c,
                  ], R );
     
     return C;
@@ -1538,13 +1538,13 @@ InstallMethod( ConvertMatrixToRow,
   function( M )
     local r, c, R, C;
     
-    r := NrRows( M );
+    r := NumberRows( M );
     
     if r = 1 then
         return M;
     fi;
     
-    c := NrColumns( M );
+    c := NumberColumns( M );
     
     R := HomalgRing( M );
     
@@ -1554,8 +1554,8 @@ InstallMethod( ConvertMatrixToRow,
     
     C := HomalgMatrixWithAttributes( [
                  EvalConvertMatrixToRow, M,
-                 NrRows, 1,
-                 NrColumns, r * c,
+                 NumberRows, 1,
+                 NumberColumns, r * c,
                  ], R );
     
     return C;
@@ -1579,13 +1579,13 @@ InstallMethod( ConvertMatrixToColumn,
   function( M )
     local c, r, R, C;
     
-    c := NrColumns( M );
+    c := NumberColumns( M );
     
     if c = 1 then
         return M;
     fi;
     
-    r := NrRows( M );
+    r := NumberRows( M );
     
     R := HomalgRing( M );
     
@@ -1595,8 +1595,8 @@ InstallMethod( ConvertMatrixToColumn,
     
     C := HomalgMatrixWithAttributes( [
                  EvalConvertMatrixToColumn, M,
-                 NrRows, r * c,
-                 NrColumns, 1,
+                 NumberRows, r * c,
+                 NumberColumns, 1,
                  ], R );
     
     return C;
@@ -1624,8 +1624,8 @@ InstallMethod( DiagMat,
     
     return HomalgMatrixWithAttributes( [
                    EvalDiagMat, list,
-                   NrRows, Sum( List( list, NrRows ) ),
-                   NrColumns, Sum( List( list, NrColumns ) )
+                   NumberRows, Sum( List( list, NumberRows ) ),
+                   NumberColumns, Sum( List( list, NumberColumns ) )
                    ], R );
     
 end );
@@ -1665,8 +1665,8 @@ InstallMethod( KroneckerMat,
     
     return HomalgMatrixWithAttributes( [
                    EvalKroneckerMat, [ A, B ],
-                   NrRows, NrRows( A ) * NrRows( B ),
-                   NrColumns, NrColumns( A ) * NrColumns ( B )
+                   NumberRows, NumberRows( A ) * NumberRows( B ),
+                   NumberColumns, NumberColumns( A ) * NumberColumns ( B )
                    ], HomalgRing( A ) );
     
 end );
@@ -1690,8 +1690,8 @@ InstallMethod( DualKroneckerMat,
     
     return HomalgMatrixWithAttributes( [
                    EvalDualKroneckerMat, [ A, B ],
-                   NrRows, NrRows( A ) * NrRows( B ),
-                   NrColumns, NrColumns( A ) * NrColumns ( B )
+                   NumberRows, NumberRows( A ) * NumberRows( B ),
+                   NumberColumns, NumberColumns( A ) * NumberColumns ( B )
                    ], HomalgRing( A ) );
     
 end );
@@ -1726,8 +1726,8 @@ InstallMethod( \*,
     
     return HomalgMatrixWithAttributes( [
                    EvalMulMatRight, [ A, a ],
-                   NrRows, NrRows( A ),
-                   NrColumns, NrColumns( A )
+                   NumberRows, NumberRows( A ),
+                   NumberColumns, NumberColumns( A )
                    ], HomalgRing( A ) );
     
 end );
@@ -1741,8 +1741,8 @@ InstallMethod( \*,
     
     return HomalgMatrixWithAttributes( [
                    EvalMulMat, [ a, A ],
-                   NrRows, NrRows( A ),
-                   NrColumns, NrColumns( A )
+                   NumberRows, NumberRows( A ),
+                   NumberColumns, NumberColumns( A )
                    ], HomalgRing( A ) );
     
 end );
@@ -1777,8 +1777,8 @@ InstallMethod( \+,
     
     return HomalgMatrixWithAttributes( [
                    EvalAddMat, [ A, B ],
-                   NrRows, NrRows( A ),
-                   NrColumns, NrColumns( A )
+                   NumberRows, NumberRows( A ),
+                   NumberColumns, NumberColumns( A )
                    ], HomalgRing( A ) );
     
 end );
@@ -1855,8 +1855,8 @@ InstallMethod( \-,
     
     return HomalgMatrixWithAttributes( [
                    EvalSubMat, [ A, B ],
-                   NrRows, NrRows( A ),
-                   NrColumns, NrColumns( A )
+                   NumberRows, NumberRows( A ),
+                   NumberColumns, NumberColumns( A )
                    ], HomalgRing( A ) );
     
 end );
@@ -1891,8 +1891,8 @@ InstallMethod( \*,
     
     return HomalgMatrixWithAttributes( [
                    EvalCompose, [ A, B ],
-                   NrRows, NrRows( A ),
-                   NrColumns, NrColumns( B )
+                   NumberRows, NumberRows( A ),
+                   NumberColumns, NumberColumns( B )
                    ], HomalgRing( A ) );
     
 end );
@@ -1905,7 +1905,7 @@ InstallMethod( \^,
   function( A, pow )
     local R;
     
-    if NrRows( A ) <> NrColumns( A ) then
+    if NumberRows( A ) <> NumberColumns( A ) then
         Error( "the matrix is not quadratic\n" );
     fi;
     
@@ -1917,7 +1917,7 @@ InstallMethod( \^,
         
     elif pow = 0 then
         
-        return HomalgIdentityMatrix( NrRows( A ), R );
+        return HomalgIdentityMatrix( NumberRows( A ), R );
         
     elif pow = 1 then
         
@@ -1941,7 +1941,7 @@ InstallMethod( NonZeroRows,
     
     zero_rows := ZeroRows( C );
     
-    return Filtered( [ 1 .. NrRows( C ) ], x -> not x in zero_rows );
+    return Filtered( [ 1 .. NumberRows( C ) ], x -> not x in zero_rows );
     
 end );
 
@@ -1955,7 +1955,7 @@ InstallMethod( NonZeroColumns,
     
     zero_columns := ZeroColumns( C );
     
-    return Filtered( [ 1 .. NrColumns( C ) ], x -> not x in zero_columns );
+    return Filtered( [ 1 .. NumberColumns( C ) ], x -> not x in zero_columns );
     
 end );
 
@@ -1975,10 +1975,10 @@ InstallMethod( AdjunctMatrix,
         Error( "the ring is not commutative\n" );
     fi;
     
-    m := NrRows( C );
+    m := NumberRows( C );
     
-    if not m = NrColumns( C ) then
-        Error( "the input ", m, "x", NrColumns( C ), "-matrix is not quadratic\n" );
+    if not m = NumberColumns( C ) then
+        Error( "the input ", m, "x", NumberColumns( C ), "-matrix is not quadratic\n" );
     fi;
     
     m := [ 1 .. m ];
@@ -2011,8 +2011,8 @@ InstallMethod( LeftInverseLazy,
     ## we assume the LeftInverse exists
     C := HomalgMatrixWithAttributes( [
                  EvalLeftInverse, M,
-                 NrRows, NrColumns( M ),
-                 NrColumns, NrRows( M )
+                 NumberRows, NumberColumns( M ),
+                 NumberColumns, NumberRows( M )
                  ], HomalgRing( M ) );
     
     ## check assertion
@@ -2046,8 +2046,8 @@ InstallMethod( RightInverseLazy,
     ## we assume the RightInverse exists
     C := HomalgMatrixWithAttributes( [
                  EvalRightInverse, M,
-                 NrColumns, NrRows( M ),
-                 NrRows, NrColumns( M )
+                 NumberColumns, NumberRows( M ),
+                 NumberRows, NumberColumns( M )
                  ], HomalgRing( M ) );
     
     ## check assertion
@@ -2067,7 +2067,7 @@ InstallMethod( DiagonalEntries,
   function( M )
     local m;
     
-    m := Minimum( NrRows( M ), NrColumns( M ) );
+    m := Minimum( NumberRows( M ), NumberColumns( M ) );
     
     return List( [ 1 .. m ], a -> M[ a, a ] );
     
@@ -2093,8 +2093,8 @@ InstallMethod( Minors,
         return [ One( R ) ];
     fi;
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     if d > Minimum( r, c ) then
         return [ Zero( R ) ];
@@ -2119,7 +2119,7 @@ InstallMethod( MaximalMinors,
         
   function( M )
     
-    return Minors( Minimum( NrRows( M ), NrColumns( M ) ), M );
+    return Minors( Minimum( NumberRows( M ), NumberColumns( M ) ), M );
     
 end );
 
@@ -2206,8 +2206,8 @@ InstallMethod( Iterator,
              function( i )
                local mat;
                mat := HomalgMatrix( NextIterator( i!.iter ), 1, i!.rank, i!.GF );
-               SetNrRows( mat, 1 );          ## should be obsolete
-               SetNrColumns( mat, i!.rank ); ## should be obsolete
+               SetNumberRows( mat, 1 );          ## should be obsolete
+               SetNumberColumns( mat, i!.rank ); ## should be obsolete
                return ( i!.ring * mat ) * i!.matrix;
              end,
              
@@ -2320,8 +2320,8 @@ InstallMethod( ConvertHomalgMatrixViaListString,
   function( M, R )
     local r, c, s;
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     s := GetListOfHomalgMatrixAsString( M );
     
@@ -2351,8 +2351,8 @@ InstallMethod( ConvertHomalgMatrixViaSparseString,
   function( M, R )
     local r, c, s;
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     s := GetSparseListOfHomalgMatrixAsString( M );
     
@@ -2710,8 +2710,8 @@ InstallGlobalFunction( HomalgMatrix,
             ## Objectify:
             ObjectifyWithAttributes(
                     matrix, type,
-                    NrRows, Length( M ),
-                    NrColumns, Length( M[1] ),
+                    NumberRows, Length( M ),
+                    NumberColumns, Length( M[1] ),
                     Eval, homalgInternalMatrixHull( M ) );
         elif IsList( M ) then
             ## Objectify:
@@ -2719,11 +2719,11 @@ InstallGlobalFunction( HomalgMatrix,
                     matrix, type,
                     Eval, homalgInternalMatrixHull( M ) );
             if M = [ ] then
-                SetNrRows( matrix, 0 );
-                SetNrColumns( matrix, 0 );
+                SetNumberRows( matrix, 0 );
+                SetNumberColumns( matrix, 0 );
             elif M[1] = [] then
-                SetNrRows( matrix, Length( M ) );
-                SetNrColumns( matrix, 0 );
+                SetNumberRows( matrix, Length( M ) );
+                SetNumberColumns( matrix, 0 );
             fi;
         else
             if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
@@ -2742,8 +2742,8 @@ InstallGlobalFunction( HomalgMatrix,
                 ## Objectify:
                 ObjectifyWithAttributes(
                         matrix, type,
-                        NrRows, arg[2],
-                        NrColumns, arg[3],
+                        NumberRows, arg[2],
+                        NumberColumns, arg[3],
                         Eval, M );
             else
                 ## Objectify:
@@ -2752,11 +2752,11 @@ InstallGlobalFunction( HomalgMatrix,
                         Eval, M );
                 
                 if nr_rows then
-                    SetNrRows( matrix, arg[2] );
+                    SetNumberRows( matrix, arg[2] );
                 fi;
                 
                 if nr_columns then
-                    SetNrColumns( matrix, arg[3] );
+                    SetNumberColumns( matrix, arg[3] );
                 fi;
             fi;
         fi;
@@ -2779,8 +2779,8 @@ InstallGlobalFunction( HomalgMatrix,
             ## Objectify:
             ObjectifyWithAttributes(
                     matrix, type,
-                    NrRows, arg[2],
-                    NrColumns, arg[3],
+                    NumberRows, arg[2],
+                    NumberColumns, arg[3],
                     Eval, M );
         else
             ## Objectify:
@@ -2789,11 +2789,11 @@ InstallGlobalFunction( HomalgMatrix,
                     Eval, M );
             
             if nr_rows then
-                SetNrRows( matrix, arg[2] );
+                SetNumberRows( matrix, arg[2] );
             fi;
             
             if nr_columns then
-                SetNrColumns( matrix, arg[3] );
+                SetNumberColumns( matrix, arg[3] );
             fi;
         fi;
         
@@ -2953,8 +2953,8 @@ InstallGlobalFunction( HomalgZeroMatrix,
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                NrRows, arg[1],
-                NrColumns, arg[2],
+                NumberRows, arg[1],
+                NumberColumns, arg[2],
                 IsZero, true );
     else
         ## Objectify:
@@ -2963,11 +2963,11 @@ InstallGlobalFunction( HomalgZeroMatrix,
                 IsZero, true );
         
         if nr_rows then
-            SetNrRows( matrix, arg[1] );
+            SetNumberRows( matrix, arg[1] );
         fi;
         
         if nr_columns then
-            SetNrColumns( matrix, arg[2] );
+            SetNumberColumns( matrix, arg[2] );
         fi;
     fi;
     
@@ -3021,8 +3021,8 @@ InstallGlobalFunction( HomalgIdentityMatrix,
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                NrRows, arg[1],
-                NrColumns, arg[1],
+                NumberRows, arg[1],
+                NumberColumns, arg[1],
                 IsOne, true );
     else
         ## Objectify:
@@ -3116,8 +3116,8 @@ InstallGlobalFunction( HomalgInitialMatrix,
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                NrRows, arg[1],
-                NrColumns, arg[2],
+                NumberRows, arg[1],
+                NumberColumns, arg[2],
                 IsInitialMatrix, true );
     else
         ## Objectify:
@@ -3126,11 +3126,11 @@ InstallGlobalFunction( HomalgInitialMatrix,
                 IsInitialMatrix, true );
         
         if nr_rows then
-            SetNrRows( matrix, arg[1] );
+            SetNumberRows( matrix, arg[1] );
         fi;
         
         if nr_columns then
-            SetNrColumns( matrix, arg[2] );
+            SetNumberColumns( matrix, arg[2] );
         fi;
     fi;
     
@@ -3210,8 +3210,8 @@ InstallGlobalFunction( HomalgInitialIdentityMatrix,
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                NrRows, arg[1],
-                NrColumns, arg[1],
+                NumberRows, arg[1],
+                NumberColumns, arg[1],
                 IsInitialIdentityMatrix, true );
     else
         ## Objectify:
@@ -3272,8 +3272,8 @@ InstallGlobalFunction( HomalgVoidMatrix,
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                NrRows, arg[1],
-                NrColumns, arg[2],
+                NumberRows, arg[1],
+                NumberColumns, arg[2],
                 IsVoidMatrix, true );
     else
         ## Objectify:
@@ -3282,11 +3282,11 @@ InstallGlobalFunction( HomalgVoidMatrix,
                 IsVoidMatrix, true );
         
         if nr_rows then
-            SetNrRows( matrix, arg[1] );
+            SetNumberRows( matrix, arg[1] );
         fi;
         
         if nr_columns then
-            SetNrColumns( matrix, arg[2] );
+            SetNumberColumns( matrix, arg[2] );
         fi;
     fi;
     
@@ -3367,7 +3367,7 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
     
     if nargs > 2 and IsInt( arg[3] ) then
         if arg[3] > d then
-            M := UnionOfColumns( M, HomalgZeroMatrix( NrRows( M ), arg[3] - d, R ) );
+            M := UnionOfColumns( M, HomalgZeroMatrix( NumberRows( M ), arg[3] - d, R ) );
         elif arg[3] < d then
             M := CertainColumns( M, [ 1 .. arg[3] ] );
         fi;
@@ -3534,7 +3534,7 @@ InstallMethod( \*,
         
   function( R, m )
     
-    return HomalgZeroMatrix( NrRows( m ), NrColumns( m ), R );
+    return HomalgZeroMatrix( NumberRows( m ), NumberColumns( m ), R );
     
 end );
 
@@ -3545,7 +3545,7 @@ InstallMethod( \*,
         
   function( R, m )
     
-    return HomalgIdentityMatrix( NrRows( m ), R );
+    return HomalgIdentityMatrix( NumberRows( m ), R );
     
 end );
 
@@ -3638,7 +3638,7 @@ InstallMethod( CoefficientsWithGivenMonomials,
   function( M, monomials )
     local R;
     
-    if NrColumns( monomials ) <> NrColumns( M ) then
+    if NumberColumns( monomials ) <> NumberColumns( M ) then
         
         Error( "the given matrices must have the same number of columns" );
         
@@ -3648,8 +3648,8 @@ InstallMethod( CoefficientsWithGivenMonomials,
     
     return HomalgMatrixWithAttributes( [
                 EvalCoefficientsWithGivenMonomials, [ M, monomials ],
-                NrRows, NrRows( M ),
-                NrColumns, NrRows( monomials )
+                NumberRows, NumberRows( M ),
+                NumberColumns, NumberRows( monomials )
                 ], R );
     
 end );
@@ -3748,9 +3748,9 @@ InstallMethod( ViewString,
         first_attribute := true;
     fi;
     
-    not_row_or_column_matrix := not ( ( HasNrRows( o ) and NrRows( o ) = 1 ) or ( HasNrColumns( o ) and NrColumns( o ) = 1 ) );
+    not_row_or_column_matrix := not ( ( HasNumberRows( o ) and NumberRows( o ) = 1 ) or ( HasNumberColumns( o ) and NumberColumns( o ) = 1 ) );
     
-    if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
+    if not ( HasNumberRows( o ) and NumberRows( o ) = 1 and HasNumberColumns( o ) and NumberColumns( o ) = 1 ) then
         if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
             Append( str, " diagonal" );
         elif HasIsUpperStairCaseMatrix( o ) and IsUpperStairCaseMatrix( o ) and not_row_or_column_matrix then
@@ -3765,13 +3765,13 @@ InstallMethod( ViewString,
             Append( str, " lower staircase" );
         elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
             Append( str, " strict lower triangular" );
-        elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) and not ( HasNrRows( o ) and NrRows( o ) = 1 ) then
+        elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) and not ( HasNumberRows( o ) and NumberRows( o ) = 1 ) then
             if not first_attribute then
                 Append( str, "n upper triangular" );
             else
                 Append( str, " upper triangular" );
             fi;
-        elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) and not ( HasNrColumns( o ) and NrColumns( o ) = 1 ) then
+        elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) and not ( HasNumberColumns( o ) and NumberColumns( o ) = 1 ) then
             Append( str, " lower triangular" );
         elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) and not_row_or_column_matrix then
             Append( str, " triangular" );
@@ -3810,18 +3810,18 @@ InstallMethod( ViewString,
         Append( str, " sub-identity" );
     fi;
     
-    if HasNrRows( o ) then
-        Append( str, Concatenation( " ", String( NrRows( o ) ), " " ) );
-        if not HasNrColumns( o ) then
+    if HasNumberRows( o ) then
+        Append( str, Concatenation( " ", String( NumberRows( o ) ), " " ) );
+        if not HasNumberColumns( o ) then
             Append( str, "x ?" );
         fi;
     fi;
     
-    if HasNrColumns( o ) then
-        if not HasNrRows( o ) then
+    if HasNumberColumns( o ) then
+        if not HasNumberRows( o ) then
             Append( str, " ? " );
         fi;
-        Append( str, Concatenation( "x ", String( NrColumns( o ) ) ) );
+        Append( str, Concatenation( "x ", String( NumberColumns( o ) ) ) );
     fi;
     
     if IsMutable( o ) and HasEval( o ) then
@@ -3858,18 +3858,18 @@ InstallMethod( ViewString,
         Append( str, "<An unevaluated " );
     fi;
     
-    if HasNrRows( o ) then
-        Append( str, Concatenation( String( NrRows( o ) ), " " ) );
-        if not HasNrColumns( o ) then
+    if HasNumberRows( o ) then
+        Append( str, Concatenation( String( NumberRows( o ) ), " " ) );
+        if not HasNumberColumns( o ) then
             Append( str, "x ?" );
         fi;
     fi;
     
-    if HasNrColumns( o ) then
-        if not HasNrRows( o ) then
+    if HasNumberColumns( o ) then
+        if not HasNumberRows( o ) then
             Append( str, "? " );
         fi;
-        Append( str, Concatenation( "x ", String( NrColumns( o ) ) ) );
+        Append( str, Concatenation( "x ", String( NumberColumns( o ) ) ) );
     fi;
     
     Append( str, " permutation matrix over a" );
@@ -3904,18 +3904,18 @@ InstallMethod( ViewString,
         Append( str, "<An unevaluated " );
     fi;
     
-    if HasNrRows( o ) then
-        Append( str, Concatenation( String( NrRows( o ) ), " " ) );
-        if not HasNrColumns( o ) then
+    if HasNumberRows( o ) then
+        Append( str, Concatenation( String( NumberRows( o ) ), " " ) );
+        if not HasNumberColumns( o ) then
             Append( str, "x ?" );
         fi;
     fi;
     
-    if HasNrColumns( o ) then
-        if not HasNrRows( o ) then
+    if HasNumberColumns( o ) then
+        if not HasNumberRows( o ) then
             Append( str, "? " );
         fi;
-        Append( str, Concatenation( "x ", String( NrColumns( o ) ) ) );
+        Append( str, Concatenation( "x ", String( NumberColumns( o ) ) ) );
     fi;
     
     Append( str, " identity matrix over a" );
@@ -3950,18 +3950,18 @@ InstallMethod( ViewString,
         Append( str, "<An unevaluated " );
     fi;
     
-    if HasNrRows( o ) then
-        Append( str, Concatenation( String( NrRows( o ) ), " " ) );
-        if not HasNrColumns( o ) then
+    if HasNumberRows( o ) then
+        Append( str, Concatenation( String( NumberRows( o ) ), " " ) );
+        if not HasNumberColumns( o ) then
             Append( str, "x ?" );
         fi;
     fi;
     
-    if HasNrColumns( o ) then
-        if not HasNrRows( o ) then
+    if HasNumberColumns( o ) then
+        if not HasNumberRows( o ) then
             Append( str, "? " );
         fi;
-        Append( str, Concatenation( "x ", String( NrColumns( o ) ) ) );
+        Append( str, Concatenation( "x ", String( NumberColumns( o ) ) ) );
     fi;
     
     Append( str, " zero matrix over a" );
@@ -3995,8 +3995,8 @@ InstallMethod( LaTeXOutput,
   function( m )
     local r, c, l, i, j, e;
     
-    r := NrRows( m );
-    c := NrColumns( m );
+    r := NumberRows( m );
+    c := NumberColumns( m );
     
     if IsEmptyMatrix( m ) then
         return Concatenation( "()_{", String( r ), " \\times ", String( c ), "}" );
@@ -4062,7 +4062,7 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( "(an empty ", NrRows( o ), " x ", NrColumns( o ), " matrix)\n" );
+    Print( "(an empty ", NumberRows( o ), " x ", NumberColumns( o ), " matrix)\n" );
     
 end );
 
@@ -4074,7 +4074,7 @@ InstallMethod( Trace ,
   function( C )
     local R;
     
-    if NrRows( C ) <> NrColumns( C ) then
+    if NumberRows( C ) <> NumberColumns( C ) then
       Error( "the matrix is not a square matrix\n" );
     fi;
     
@@ -4083,9 +4083,9 @@ InstallMethod( Trace ,
     if IsZero( C ) then
       return Zero( R );
     elif IsOne( C ) then
-      return NrRows( C ) * One( R );
+      return NumberRows( C ) * One( R );
     fi;
     
-    return Sum( [ 1 .. NrRows( C ) ], i -> C[ i, i ] );
+    return Sum( [ 1 .. NumberRows( C ) ], i -> C[ i, i ] );
     
 end );

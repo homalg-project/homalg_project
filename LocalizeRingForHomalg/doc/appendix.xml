@@ -93,8 +93,8 @@
         <Item>AddMat</Item>
         <Item>SubMat</Item>
         <Item>Compose</Item>
-        <Item>NrRows</Item>
-        <Item>NrColumns</Item>
+        <Item>NumberRows</Item>
+        <Item>NumberColumns</Item>
         <Item>IsZeroMatrix</Item>
         <Item>IsDiagonalMatrix</Item>
         <Item>ZeroRows</Item>
