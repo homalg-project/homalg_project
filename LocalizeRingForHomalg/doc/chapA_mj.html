@@ -72,7 +72,7 @@ BasisOfRowModule :=
       InfoLocalizeRingForHomalg,
       2,
       "Start BasisOfRowModule with ",
-      NrRows( M ), "x", NrColumns( M )
+      NumberRows( M ), "x", NumberColumns( M )
     );
 
     return HomalgLocalMatrix( BasisOfRowModule( Numerator( M ) ), HomalgRing( M ) );
@@ -103,9 +103,9 @@ DecideZeroRows :=
       InfoLocalizeRingForHomalg,
       2,
       "Start DecideZeroRows with ",
-      NrRows( A ), "x", NrColumns( A ),
+      NumberRows( A ), "x", NumberColumns( A ),
       " and ",
-      NrRows( B ), "x", NrColumns( B )
+      NumberRows( B ), "x", NumberColumns( B )
     );
     
     R := HomalgRing( A );
@@ -137,7 +137,7 @@ SyzygiesGeneratorsOfRows :=
       InfoLocalizeRingForHomalg,
       2,
       "Start SyzygiesGeneratorsOfRows with ",
-      NrRows( M ), "x", NrColumns( M )
+      NumberRows( M ), "x", NumberColumns( M )
     );
 
     return HomalgLocalMatrix(\
@@ -170,27 +170,27 @@ DecideZeroRows :=
        InfoLocalizeRingForHomalg,
        2,
        "Start DecideZeroRows with ",
-       NrRows( B ), "x", NrColumns( B ),
+       NumberRows( B ), "x", NumberColumns( B ),
        " and ",
-       NrRows( A ), "x", NrColumns( A ) 
+       NumberRows( A ), "x", NumberColumns( A ) 
     );
     
     R := HomalgRing( B );
     GlobalR := AssociatedComputationRing( R );
     T := HomalgVoidMatrix( R );
     gens := GeneratorsOfMaximalLeftIdeal( R );
-    n := NrRows( gens );
+    n := NumberRows( gens );
     one := One( GlobalR );
     
-    m := NrRows( A );
+    m := NumberRows( A );
     A1 := Numerator( A );
     
-    N := HomalgZeroMatrix( 0, NrColumns( B ), R );
+    N := HomalgZeroMatrix( 0, NumberColumns( B ), R );
     b := Eval( B );
     numB := b[1];
     denB := b[2];
     
-    for i in [ 1 .. NrRows( B ) ] do
+    for i in [ 1 .. NumberRows( B ) ] do
     
         #use global reduction as heuristic
         B1 := CertainRows( numB, [ i ] );
@@ -296,10 +296,10 @@ DecideZeroRows :=
 <li><p>Compose</p>
 
 </li>
-<li><p>NrRows</p>
+<li><p>NumberRows</p>
 
 </li>
-<li><p>NrColumns</p>
+<li><p>NumberColumns</p>
 
 </li>
 <li><p>IsZeroMatrix</p>

@@ -42,7 +42,7 @@
     [4X      InfoLocalizeRingForHomalg,[104X
     [4X      2,[104X
     [4X      "Start BasisOfRowModule with ",[104X
-    [4X      NrRows( M ), "x", NrColumns( M )[104X
+    [4X      NumberRows( M ), "x", NumberColumns( M )[104X
     [4X    );[104X
     [4X[104X
     [4X    return HomalgLocalMatrix( BasisOfRowModule( Numerator( M ) ), HomalgRing( M ) );[104X
@@ -74,9 +74,9 @@
     [4X      InfoLocalizeRingForHomalg,[104X
     [4X      2,[104X
     [4X      "Start DecideZeroRows with ",[104X
-    [4X      NrRows( A ), "x", NrColumns( A ),[104X
+    [4X      NumberRows( A ), "x", NumberColumns( A ),[104X
     [4X      " and ",[104X
-    [4X      NrRows( B ), "x", NrColumns( B )[104X
+    [4X      NumberRows( B ), "x", NumberColumns( B )[104X
     [4X    );[104X
     [4X    [104X
     [4X    R := HomalgRing( A );[104X
@@ -108,7 +108,7 @@
     [4X      InfoLocalizeRingForHomalg,[104X
     [4X      2,[104X
     [4X      "Start SyzygiesGeneratorsOfRows with ",[104X
-    [4X      NrRows( M ), "x", NrColumns( M )[104X
+    [4X      NumberRows( M ), "x", NumberColumns( M )[104X
     [4X    );[104X
     [4X[104X
     [4X    return HomalgLocalMatrix(\[104X
@@ -144,27 +144,27 @@
     [4X       InfoLocalizeRingForHomalg,[104X
     [4X       2,[104X
     [4X       "Start DecideZeroRows with ",[104X
-    [4X       NrRows( B ), "x", NrColumns( B ),[104X
+    [4X       NumberRows( B ), "x", NumberColumns( B ),[104X
     [4X       " and ",[104X
-    [4X       NrRows( A ), "x", NrColumns( A ) [104X
+    [4X       NumberRows( A ), "x", NumberColumns( A ) [104X
     [4X    );[104X
     [4X    [104X
     [4X    R := HomalgRing( B );[104X
     [4X    GlobalR := AssociatedComputationRing( R );[104X
     [4X    T := HomalgVoidMatrix( R );[104X
     [4X    gens := GeneratorsOfMaximalLeftIdeal( R );[104X
-    [4X    n := NrRows( gens );[104X
+    [4X    n := NumberRows( gens );[104X
     [4X    one := One( GlobalR );[104X
     [4X    [104X
-    [4X    m := NrRows( A );[104X
+    [4X    m := NumberRows( A );[104X
     [4X    A1 := Numerator( A );[104X
     [4X    [104X
-    [4X    N := HomalgZeroMatrix( 0, NrColumns( B ), R );[104X
+    [4X    N := HomalgZeroMatrix( 0, NumberColumns( B ), R );[104X
     [4X    b := Eval( B );[104X
     [4X    numB := b[1];[104X
     [4X    denB := b[2];[104X
     [4X    [104X
-    [4X    for i in [ 1 .. NrRows( B ) ] do[104X
+    [4X    for i in [ 1 .. NumberRows( B ) ] do[104X
     [4X    [104X
     [4X        #use global reduction as heuristic[104X
     [4X        B1 := CertainRows( numB, [ i ] );[104X
@@ -249,9 +249,9 @@
   
   [30X    [33X[0;6YCompose[133X
   
-  [30X    [33X[0;6YNrRows[133X
+  [30X    [33X[0;6YNumberRows[133X
   
-  [30X    [33X[0;6YNrColumns[133X
+  [30X    [33X[0;6YNumberColumns[133X
   
   [30X    [33X[0;6YIsZeroMatrix[133X
   
