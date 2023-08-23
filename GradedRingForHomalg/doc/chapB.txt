@@ -116,9 +116,9 @@
   
   [30X    [33X[0;6YCompose[133X
   
-  [30X    [33X[0;6YNrRows[133X
+  [30X    [33X[0;6YNumberRows[133X
   
-  [30X    [33X[0;6YNrColumns[133X
+  [30X    [33X[0;6YNumberColumns[133X
   
   [30X    [33X[0;6YIsZeroMatrix[133X
   
