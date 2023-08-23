@@ -384,7 +384,7 @@
     [4X    [104X
     [4X    R := HomalgRing( gen );[104X
     [4X    [104X
-    [4X    return Subobject( gen, NrColumns( gen ) * R );[104X
+    [4X    return Subobject( gen, NumberColumns( gen ) * R );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -421,7 +421,7 @@
     [4X    [104X
     [4X    R := HomalgRing( gen );[104X
     [4X    [104X
-    [4X    return Subobject( gen, R * NrRows( gen ) );[104X
+    [4X    return Subobject( gen, R * NumberRows( gen ) );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
