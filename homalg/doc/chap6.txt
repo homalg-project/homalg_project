@@ -295,13 +295,14 @@
   [13Xhighest[113X  degree  morphism  [22Xpsi[122X, created according to the following rules: In
   case  [3XC[103X is a chain complex, the highest degree left (resp. right) object [22XC_d[122X
   in  [3XC[103X  is  declared  as the target of [22Xpsi[122X, while its source is taken to be a
-  free  left  (resp.  right)  object  of  rank  equal  to  [10XNrRows[110X([3Xmat[103X)  (resp.
-  [10XNrColumns[110X([3Xmat[103X)).  For  this [10XNrColumns[110X([3Xmat[103X) (resp. [10XNrRows[110X([3Xmat[103X)) must coincide
-  with  the  [10XNrGenerators[110X([22XC_d[122X).  In  case  [3XC[103X is a [13Xco[113Xchain complex, the highest
-  degree  left (resp. right) object [22XC^d[122X in [3XC[103X is declared as the source of [22Xpsi[122X,
-  while  its  target  is  taken to be a free left (resp. right) object of rank
-  equal  to  [10XNrColumns[110X([3Xmat[103X)  (resp.  [10XNrRows[110X([3Xmat[103X)). For this [10XNrRows[110X([3Xmat[103X) (resp.
-  [10XColumns[110X([3Xmat[103X)) must coincide with the [10XNrGenerators[110X([22XC^d[122X).[133X
+  free  left  (resp.  right)  object  of  rank equal to [10XNumberRows[110X([3Xmat[103X) (resp.
+  [10XNumberColumns[110X([3Xmat[103X)).  For  this  [10XNumberColumns[110X([3Xmat[103X)  (resp. [10XNumberRows[110X([3Xmat[103X))
+  must  coincide  with  the [10XNrGenerators[110X([22XC_d[122X). In case [3XC[103X is a [13Xco[113Xchain complex,
+  the  highest  degree  left  (resp. right) object [22XC^d[122X in [3XC[103X is declared as the
+  source  of  [22Xpsi[122X,  while  its target is taken to be a free left (resp. right)
+  object of rank equal to [10XNumberColumns[110X([3Xmat[103X) (resp. [10XNumberRows[110X([3Xmat[103X)). For this
+  [10XNumberRows[110X([3Xmat[103X)    (resp.    [10XColumns[110X([3Xmat[103X))    must    coincide    with   the
+  [10XNrGenerators[110X([22XC^d[122X).[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
