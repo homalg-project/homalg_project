@@ -129,17 +129,17 @@
   [33X[0;0YThis  returns  the  matrix product of the sparse matrices stored in the [10XEval[110X
   attributes of the [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
   
-  [1X3.2-14 NrRows[101X
+  [1X3.2-14 NumberRows[101X
   
-  [33X[1;0Y[29X[2XNrRows[102X( [3XC[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XNumberRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Yan integer[133X
   
   [33X[0;0YThis  returns  the  number  of  rows of the sparse matrix stored in the [10XEval[110X
   attribute of the [5Xhomalg[105X matrix [3XC[103X.[133X
   
-  [1X3.2-15 NrColumns[101X
+  [1X3.2-15 NumberColumns[101X
   
-  [33X[1;0Y[29X[2XNrColumns[102X( [3XC[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XNumberColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Yan integer[133X
   
   [33X[0;0YThis  returns  the number of columns of the sparse matrix stored in the [10XEval[110X

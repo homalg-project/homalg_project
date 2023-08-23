@@ -6,10 +6,10 @@
                   [1X Gauss functionality for the homalg project [101X
   
   
-                                   2023.02-04
+                                   2023.08-01
   
   
-                                28 February 2023
+                                 23 August 2023
   
   
                                  Simon Görtzen
@@ -79,8 +79,8 @@
       3.2-11 KroneckerMat
       3.2-12 DualKroneckerMat
       3.2-13 Compose
-      3.2-14 NrRows
-      3.2-15 NrColumns
+      3.2-14 NumberRows
+      3.2-15 NumberColumns
       3.2-16 IsZeroMatrix
       3.2-17 IsDiagonalMatrix
       3.2-18 ZeroRows

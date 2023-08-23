@@ -19,8 +19,8 @@
   [2XIsZeroMatrix[102X 3.2-16 
   [2XKroneckerMat[102X 3.2-11 
   [2XMatElm[102X 3.4-1 
-  [2XNrColumns[102X 3.2-15 
-  [2XNrRows[102X 3.2-14 
+  [2XNumberColumns[102X 3.2-15 
+  [2XNumberRows[102X 3.2-14 
   [2XReducedRowEchelonForm[102X 3.3-1 
   [2XSetMatElm[102X 3.4-2 
   [2XUnionOfColumns[102X 3.2-9 
