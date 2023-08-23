@@ -393,7 +393,7 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix, ## under construction
   function( S, T )
     local c;
     
-    for c in [ NrRows, NrColumns ] do
+    for c in [ NumberRows, NumberColumns ] do
         if Tester( c )( S ) then
             Setter( c )( T, c( S ) );
         fi;
@@ -428,7 +428,7 @@ InstallMethod( SetMatElm,
     cR := AssociatedComputationRing( R );
     
     #Create a new matrix with only the one entry
-    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), cR );
+    N := HomalgInitialMatrix( NumberRows( M ), NumberColumns( M ), cR );
     N[ r, c ] := Numerator( s );
     ResetFilterObj( N, IsInitialMatrix );
     N := HomalgLocalMatrix( N, Denominator( s ), R );
@@ -464,7 +464,7 @@ InstallMethod( AddToMatElm,
     local N, e;
     
     #create a matrix with just one entry (i,j), which is s
-    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), AssociatedComputationRing( R ) );
+    N := HomalgInitialMatrix( NumberRows( M ), NumberColumns( M ), AssociatedComputationRing( R ) );
     N[ r, c ] := Numerator( s );
     ResetFilterObj( N, IsInitialIdentityMatrix );
     N := HomalgLocalMatrix( N, Denominator( s ), R );

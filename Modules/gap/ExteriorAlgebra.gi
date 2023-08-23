@@ -88,8 +88,8 @@ InstallMethod( ExteriorPower,
         return mat;
     fi;
     
-    r := NrRows( mat );
-    c := NrColumns( mat );
+    r := NumberRows( mat );
+    c := NumberColumns( mat );
     
     br := Binomial( r, k );
     bc := Binomial( c, k );
@@ -163,8 +163,8 @@ InstallMethod( ExteriorPowerOfPresentationMorphism,
     one := One( R );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( T ) then
-        g := NrColumns( mat );
-        r := NrRows( mat );
+        g := NumberColumns( mat );
+        r := NumberRows( mat );
         
         bg := Binomial( g, k );
         
@@ -177,8 +177,8 @@ InstallMethod( ExteriorPowerOfPresentationMorphism,
         union_of_rels := UnionOfRows;
         
     else
-        g := NrRows( mat );
-        r := NrColumns( mat );
+        g := NumberRows( mat );
+        r := NumberColumns( mat );
         
         bg := Binomial( g, k );
         

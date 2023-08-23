@@ -94,28 +94,28 @@ BindGlobal( "CommonHomalgTableForGAPHomalgTools",
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "HomalgZeroMatrix(", NrRows( C ), NrColumns( C ), HomalgRing( C ), ")" ], "ZeroMatrix" );
+                   return homalgSendBlocking( [ "HomalgZeroMatrix(", NumberRows( C ), NumberColumns( C ), HomalgRing( C ), ")" ], "ZeroMatrix" );
                    
                  end,
                
                IdentityMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "HomalgIdentityMatrix(", NrRows( C ), HomalgRing( C ), ")" ], "IdentityMatrix" );
+                   return homalgSendBlocking( [ "HomalgIdentityMatrix(", NumberRows( C ), HomalgRing( C ), ")" ], "IdentityMatrix" );
                    
                  end,
                
                InitialMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "HomalgInitialMatrix(", NrRows( C ), NrColumns( C ), HomalgRing( C ), ")" ], "ZeroMatrix" );
+                   return homalgSendBlocking( [ "HomalgInitialMatrix(", NumberRows( C ), NumberColumns( C ), HomalgRing( C ), ")" ], "ZeroMatrix" );
                    
                  end,
                
                InitialIdentityMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "HomalgInitialIdentityMatrix(", NrRows( C ), HomalgRing( C ), ")" ], "IdentityMatrix" );
+                   return homalgSendBlocking( [ "HomalgInitialIdentityMatrix(", NumberRows( C ), HomalgRing( C ), ")" ], "IdentityMatrix" );
                    
                  end,
                
@@ -223,17 +223,17 @@ BindGlobal( "CommonHomalgTableForGAPHomalgTools",
                    
                  end,
                
-               NrRows :=
+               NumberRows :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "NrRows(", C, ")" ], "need_output", "NrRows" ) );
+                   return StringToInt( homalgSendBlocking( [ "NumberRows(", C, ")" ], "need_output", "NumberRows" ) );
                    
                  end,
                
-               NrColumns :=
+               NumberColumns :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "NrColumns(", C, ")" ], "need_output", "NrColumns" ) );
+                   return StringToInt( homalgSendBlocking( [ "NumberColumns(", C, ")" ], "need_output", "NumberColumns" ) );
                    
                  end,
                
@@ -322,7 +322,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgTools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberRows( M ), L[1] );
                    fi;
                    
                    return L;
@@ -338,7 +338,7 @@ BindGlobal( "CommonHomalgTableForGAPHomalgTools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberColumns( M ), L[1] );
                    fi;
                    
                    return L;

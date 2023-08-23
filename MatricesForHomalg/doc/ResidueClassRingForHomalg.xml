@@ -56,8 +56,8 @@ fallback method.
 <#Include Label="Compose:ResidueClassRing">
 
 <#Include Label="IsZeroMatrix:ResidueClassRing">
-<#Include Label="NrRows:ResidueClassRing">
-<#Include Label="NrColumns:ResidueClassRing">
+<#Include Label="NumberRows:ResidueClassRing">
+<#Include Label="NumberColumns:ResidueClassRing">
 <#Include Label="Determinant:ResidueClassRing">
 
 </Section>

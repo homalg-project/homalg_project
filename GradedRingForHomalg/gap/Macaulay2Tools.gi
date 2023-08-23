@@ -139,7 +139,7 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                      
                      L := StringToIntList( list_string );
                      
-                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     return ListToListList( L, NumberRows( M ), NumberColumns( M ) );
                      
                  end,
                
@@ -151,7 +151,7 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                      
                      L := StringToIntList( list_string );
                      
-                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     return ListToListList( L, NumberRows( M ), NumberColumns( M ) );
                      
                  end,
                
@@ -187,7 +187,7 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberRows( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = LinearSyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.LinearSyzygiesGenerators );
                    
@@ -199,7 +199,7 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = LinearSyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.LinearSyzygiesGenerators );
                    

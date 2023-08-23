@@ -761,11 +761,11 @@ InstallImmediateMethod( RankOfObject,
         
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
             if HasIsLeftRegular( m ) and IsLeftRegular( m ) then
-                return NrColumns( m ) - NrRows( m );
+                return NumberColumns( m ) - NumberRows( m );
             fi;
         else
             if HasIsRightRegular( m ) and IsRightRegular( m ) then
-                return NrRows( m ) - NrColumns( m );
+                return NumberRows( m ) - NumberColumns( m );
             fi;
         fi;
         
@@ -1296,10 +1296,10 @@ InstallMethod( IsFree,
             ## can be used to decide if an ideal is principal or not
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
                 img := BasisOfRows( img );
-                free := NrRows( img ) <= 1;
+                free := NumberRows( img ) <= 1;
             else
                 img := BasisOfColumns( img );
-                free := NrColumns( img ) <= 1;
+                free := NumberColumns( img ) <= 1;
             fi;
             
             if free then
@@ -1628,11 +1628,11 @@ InstallMethod( RankOfObject,
         if IsHomalgMatrix( m ) then
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
                 if IsLeftRegular( m ) then
-                    return NrColumns( m ) - NrRows( m );
+                    return NumberColumns( m ) - NumberRows( m );
                 fi;
             else
                 if IsRightRegular( m ) then
-                    return NrRows( m ) - NrColumns( m );
+                    return NumberRows( m ) - NumberColumns( m );
                 fi;
             fi;
         fi;
@@ -2224,7 +2224,7 @@ InstallMethod( SymmetricAlgebra,
   function( M, gvar )
     local n, Sym, rel;
     
-    n := NrColumns( M );
+    n := NumberColumns( M );
     
     if not n = Length( gvar ) then
         Error( "the length of the list of variables is ",
@@ -2349,7 +2349,7 @@ InstallMethod( ExteriorAlgebra,
   function( M, gvar )
     local n, A, rel;
     
-    n := NrColumns( M );
+    n := NumberColumns( M );
     
     if not n = Length( gvar ) then
         Error( "the length of the list of variables is ",

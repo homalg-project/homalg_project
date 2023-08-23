@@ -58,7 +58,7 @@ InstallValue( CommonHomalgTableForGaussBasic,
     #this uses ReduceMat from the Gauss Package to reduce A with B
     DecideZeroRows :=
       function( A, B )
-        return HomalgMatrix( ReduceMat( MyEval( A ), MyEval( B ) ).reduced_matrix, NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+        return HomalgMatrix( ReduceMat( MyEval( A ), MyEval( B ) ).reduced_matrix, NumberRows( A ), NumberColumns( A ), HomalgRing( A ) );
       end,
       
 ##  <#GAPDoc Label="DecideZeroRowsEffectively">
@@ -80,7 +80,7 @@ InstallValue( CommonHomalgTableForGaussBasic,
         RMT := ReduceMatTransformation( MyEval( A ), MyEval( B ) );
         SetMyEval( T, RMT.transformation );
         ResetFilterObj( T, IsVoidMatrix );
-        return HomalgMatrix( RMT.reduced_matrix, NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+        return HomalgMatrix( RMT.reduced_matrix, NumberRows( A ), NumberColumns( A ), HomalgRing( A ) );
       end,
     
 ##  <#GAPDoc Label="SyzygiesGeneratorsOfRows">
@@ -98,7 +98,7 @@ InstallValue( CommonHomalgTableForGaussBasic,
       function( M )
         local syz;
         syz := KernelMat( MyEval( M ) ).relations;
-        return HomalgMatrix( syz, Nrows( syz ), NrRows( M ), HomalgRing( M ) );
+        return HomalgMatrix( syz, Nrows( syz ), NumberRows( M ), HomalgRing( M ) );
       end,
     
 ##  <#GAPDoc Label="RelativeSyzygiesGeneratorsOfRows">
@@ -116,8 +116,8 @@ InstallValue( CommonHomalgTableForGaussBasic,
     RelativeSyzygiesGeneratorsOfRows :=
       function( M, N )
         local syz;
-        syz := KernelMat( MyEval( UnionOfRows( M, N ) ), [ 1 .. NrRows( M ) ] ).relations;
-        return HomalgMatrix( syz, Nrows( syz ), NrRows( M ), HomalgRing( M ) );
+        syz := KernelMat( MyEval( UnionOfRows( M, N ) ), [ 1 .. NumberRows( M ) ] ).relations;
+        return HomalgMatrix( syz, Nrows( syz ), NumberRows( M ), HomalgRing( M ) );
       end,
     
   )

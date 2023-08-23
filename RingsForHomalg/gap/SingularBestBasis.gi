@@ -41,8 +41,8 @@ BindGlobal( "CommonHomalgTableForSingularBestBasis",
                         # assign U:
                         if IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
                            U := arg[2];
-                           SetNrRows( U, NrRows( M ) );
-                           SetNrColumns( U, NrRows( M ) );
+                           SetNumberRows( U, NumberRows( M ) );
+                           SetNumberColumns( U, NumberRows( M ) );
                            SetIsInvertibleMatrix( U, true );
                         else
                            U := HomalgVoidMatrix( R );
@@ -51,8 +51,8 @@ BindGlobal( "CommonHomalgTableForSingularBestBasis",
                         # assign V:
                         if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
                            V := arg[3];
-                           SetNrRows( V, NrColumns( M ) );
-                           SetNrColumns( V, NrColumns( M ) );
+                           SetNumberRows( V, NumberColumns( M ) );
+                           SetNumberColumns( V, NumberColumns( M ) );
                            SetIsInvertibleMatrix( V, true );
                         else
                            V := HomalgVoidMatrix( R );

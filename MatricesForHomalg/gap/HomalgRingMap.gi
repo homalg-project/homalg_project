@@ -123,9 +123,9 @@ InstallMethod( RingMap,
   function( images, S, T )
     local c, map, type;
     
-    c := NrColumns( images );
+    c := NumberColumns( images );
     
-    if not ( c = 1 or NrRows( images ) = 1 ) then
+    if not ( c = 1 or NumberRows( images ) = 1 ) then
         Error( "the matrix must either has one row or one column\n" );
     fi;
     
@@ -182,9 +182,9 @@ InstallMethod( RingMap,
   function( mat, R )
     local r, indets;
     
-    r := NrRows( mat );
+    r := NumberRows( mat );
     
-    if NrColumns( mat ) <> r then
+    if NumberColumns( mat ) <> r then
         Error( "the matrix is not quadratic\n" );
     fi;
     

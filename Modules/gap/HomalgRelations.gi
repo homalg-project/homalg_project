@@ -126,13 +126,13 @@ end );
 InstallImmediateMethod( NrRelationsForRelations,
         IsHomalgRelationsOfRightModule and HasEvaluatedMatrixOfRelations, 0,
         
-  rel -> NrColumns( MatrixOfRelations( rel ) ) );
+  rel -> NumberColumns( MatrixOfRelations( rel ) ) );
 
 ##
 InstallImmediateMethod( NrRelationsForRelations,
         IsHomalgRelationsOfLeftModule and HasEvaluatedMatrixOfRelations, 0,
         
-  rel -> NrRows( MatrixOfRelations( rel ) ) );
+  rel -> NumberRows( MatrixOfRelations( rel ) ) );
 
 ####################################
 #
@@ -221,7 +221,7 @@ InstallMethod( HasNrGenerators,
         
   function( rel )
     
-    return HasNrRows( MatrixOfRelations( rel ) );
+    return HasNumberRows( MatrixOfRelations( rel ) );
     
 end );
 
@@ -238,12 +238,12 @@ InstallMethod( HasNrGenerators,
     if IsIdenticalObj( func_arg[1], SyzygiesGeneratorsOfColumns ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return HasNrColumns( ar[1] );
+            return HasNumberColumns( ar[1] );
         fi;
     elif IsIdenticalObj( func_arg[1], \^ ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return HasNrRows( ar[2] );
+            return HasNumberRows( ar[2] );
         fi;
     fi;
     
@@ -258,7 +258,7 @@ InstallMethod( HasNrGenerators,
         
   function( rel )
     
-    return HasNrColumns( MatrixOfRelations( rel ) );
+    return HasNumberColumns( MatrixOfRelations( rel ) );
     
 end );
 
@@ -275,12 +275,12 @@ InstallMethod( HasNrGenerators,
     if IsIdenticalObj( func_arg[1], SyzygiesGeneratorsOfRows ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return HasNrRows( ar[1] );
+            return HasNumberRows( ar[1] );
         fi;
     elif IsIdenticalObj( func_arg[1], \^ ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return HasNrColumns( ar[2] );
+            return HasNumberColumns( ar[2] );
         fi;
     fi;
     
@@ -295,7 +295,7 @@ InstallMethod( NrGeneratorsForRelations, ### defines: NrGenerators (NumberOfGene
         
   function( rel )
     
-    return NrRows( MatrixOfRelations( rel ) );
+    return NumberRows( MatrixOfRelations( rel ) );
     
 end );
 
@@ -312,12 +312,12 @@ InstallMethod( NrGeneratorsForRelations,
     if IsIdenticalObj( func_arg[1], SyzygiesGeneratorsOfColumns ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return NrColumns( ar[1] );
+            return NumberColumns( ar[1] );
         fi;
     elif IsIdenticalObj( func_arg[1], \^ ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return NrRows( ar[2] );
+            return NumberRows( ar[2] );
         fi;
     fi;
     
@@ -332,7 +332,7 @@ InstallMethod( NrGeneratorsForRelations, ### defines: NrGenerators (NumberOfGene
         
   function( rel )
     
-    return NrColumns( MatrixOfRelations( rel ) );
+    return NumberColumns( MatrixOfRelations( rel ) );
     
 end );
 
@@ -349,12 +349,12 @@ InstallMethod( NrGeneratorsForRelations,
     if IsIdenticalObj( func_arg[1], SyzygiesGeneratorsOfRows ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return NrRows( ar[1] );
+            return NumberRows( ar[1] );
         fi;
     elif IsIdenticalObj( func_arg[1], \^ ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return NrColumns( ar[2] );
+            return NumberColumns( ar[2] );
         fi;
     fi;
     
@@ -377,7 +377,7 @@ InstallMethod( HasNrRelations,
   function( rel )
     
     if HasEvaluatedMatrixOfRelations( rel ) then
-        return HasNrColumns( MatrixOfRelations( rel ) );
+        return HasNumberColumns( MatrixOfRelations( rel ) );
     fi;
     
     return false;
@@ -392,7 +392,7 @@ InstallMethod( HasNrRelations,
   function( rel )
     
     if HasEvaluatedMatrixOfRelations( rel ) then
-        return HasNrRows( MatrixOfRelations( rel ) );
+        return HasNumberRows( MatrixOfRelations( rel ) );
     fi;
     
     return false;
@@ -406,7 +406,7 @@ InstallMethod( NrRelationsForRelations, ### defines: NrRelations (NumberOfColumn
         
   function( rel )
     
-    return NrColumns( MatrixOfRelations( rel ) );
+    return NumberColumns( MatrixOfRelations( rel ) );
     
 end );
 
@@ -417,7 +417,7 @@ InstallMethod( NrRelationsForRelations, ### defines: NrRelations (NumberOfRows)
         
   function( rel )
     
-    return NrRows( MatrixOfRelations( rel ) );
+    return NumberRows( MatrixOfRelations( rel ) );
     
 end );
 

@@ -50,7 +50,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                    local R;
                    R := HomalgRing( C );
                    
-                   return SparseZeroMatrix( NrRows( C ), NrColumns( C ), R!.ring );
+                   return SparseZeroMatrix( NumberRows( C ), NumberColumns( C ), R!.ring );
                    
                  end,
 ##  <#GAPDoc Label="IdentityMatrix">
@@ -69,7 +69,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                    local R;
                    R := HomalgRing( C );
                    
-                   return SparseIdentityMatrix( NrRows( C ), R!.ring );
+                   return SparseIdentityMatrix( NumberRows( C ), R!.ring );
                    
                  end,
 ##  <#GAPDoc Label="CopyMatrix">
@@ -272,9 +272,9 @@ InstallValue( CommonHomalgTableForGaussTools,
                    return Eval( A ) * Eval( B );
                    
                  end,
-##  <#GAPDoc Label="NrRows">
+##  <#GAPDoc Label="NumberRows">
 ##  <ManSection>
-##  <Func Arg="C" Name="NrRows"/>
+##  <Func Arg="C" Name="NumberRows"/>
 ##  <Returns>an integer</Returns>
 ##  <Description>
 ##  This returns the number of rows of the sparse matrix stored in the
@@ -282,15 +282,15 @@ InstallValue( CommonHomalgTableForGaussTools,
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>               
-               NrRows :=
+               NumberRows :=
                  function( C )
                    
                    return Nrows( Eval( C ) );
                    
                  end,
-##  <#GAPDoc Label="NrColumns">
+##  <#GAPDoc Label="NumberColumns">
 ##  <ManSection>
-##  <Func Arg="C" Name="NrColumns"/>
+##  <Func Arg="C" Name="NumberColumns"/>
 ##  <Returns>an integer</Returns>
 ##  <Description>
 ##  This returns the number of columns of the sparse matrix stored in the
@@ -298,7 +298,7 @@ InstallValue( CommonHomalgTableForGaussTools,
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>               
-               NrColumns :=
+               NumberColumns :=
                  function( C )
                    
                    return Ncols( Eval( C ) );

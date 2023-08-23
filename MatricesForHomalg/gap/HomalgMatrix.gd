@@ -528,38 +528,39 @@ DeclareAttribute( "EvalInverse",
 DeclareAttribute( "PreEval",
         IsHomalgMatrix );
 
-##  <#GAPDoc Label="NrRows">
+##  <#GAPDoc Label="NumberRows">
 ##  <ManSection>
-##    <Attr Arg="A" Name="NrRows"/>
+##    <Attr Arg="A" Name="NumberRows"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      The number of rows of the matrix <A>A</A>.<P/>
-##      (for the installed standard method see <Ref Meth="NrRows" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="NumberRows" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-if not IsBound( NrRows ) then
-DeclareAttribute( "NrRows",
+if false then
+DeclareAttribute( "NumberRows",
         IsHomalgMatrix );
 fi;
 
-##  <#GAPDoc Label="NrColumns">
+##  <#GAPDoc Label="NumberColumns">
 ##  <ManSection>
-##    <Attr Arg="A" Name="NrColumns"/>
+##    <Attr Arg="A" Name="NumberColumns"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      The number of columns of the matrix <A>A</A>.<P/>
-##      (for the installed standard method see <Ref Meth="NrColumns" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="NumberColumns" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-if not IsBound( NrCols ) then
-DeclareAttribute( "NrCols",
+if false then
+DeclareAttribute( "NumberColumns",
         IsHomalgMatrix );
 fi;
-DeclareSynonymAttr( "NrColumns", NrCols );
+
+DeclareSynonymAttr( "NrColumns", NumberColumns );
 
 ##  <#GAPDoc Label="DeterminantMat">
 ##  <ManSection>

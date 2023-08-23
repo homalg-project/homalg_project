@@ -46,8 +46,8 @@ entries.
 <#Include Label="Compose:homalgTable_entry">
 
 <#Include Label="IsZeroMatrix:homalgTable_entry">
-<#Include Label="NrRows:homalgTable_entry">
-<#Include Label="NrColumns:homalgTable_entry">
+<#Include Label="NumberRows:homalgTable_entry">
+<#Include Label="NumberColumns:homalgTable_entry">
 <#Include Label="Determinant:homalgTable_entry">
 <#Include Label="CoefficientsWithGivenMonomials:homalgTable_entry">
 

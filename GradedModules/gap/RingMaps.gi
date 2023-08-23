@@ -93,7 +93,7 @@ InstallMethod( SegreMap,
     
     segre := MonomialMatrix( ListWithIdenticalEntries( l, 1 ), R );
     
-    N := NrRows( segre );
+    N := NumberRows( segre );
     
     S := Concatenation( s, String( 0 ), "..", s, String( N - 1 ) );
     
@@ -183,7 +183,7 @@ InstallMethod( VeroneseMap,
     
     veronese := MonomialMatrix( d, R );
     
-    S := PolynomialRing( A, Concatenation( s, String( 0 ), "..", s, String( NrRows( veronese ) - 1 ) ) );
+    S := PolynomialRing( A, Concatenation( s, String( 0 ), "..", s, String( NumberRows( veronese ) - 1 ) ) );
     
     veronese := EntriesOfHomalgMatrix( veronese );
     

@@ -22,7 +22,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = BasisOfRowModule(", M, ")" ], "need_command", "BasisOfModule" );
                    
@@ -34,7 +34,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = BasisOfColumnModule(", M, ")" ], "need_command", "BasisOfModule" );
                    
@@ -46,7 +46,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( M, T )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ "(", N, T, ") = BasisOfRowsCoeff(", M, ")" ], "need_command", "BasisCoeff" );
                    
@@ -58,7 +58,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( M, T )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ "(", N, T, ") = BasisOfColumnsCoeff(", M, ")" ], "need_command", "BasisCoeff" );
                    
@@ -70,7 +70,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( A, B )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ N, " = DecideZeroRows(", A, B, ")" ], "need_command", "DecideZero" );
                                       
@@ -82,7 +82,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( A, B )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ N, " = DecideZeroColumns(", A, B, ")" ], "need_command", "DecideZero" );
                    
@@ -94,7 +94,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( A, B, T )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ "(", N, T, ") = DecideZeroRowsEffectively(", A, B, ")" ], "need_command", "DecideZeroEffectively" );
                    
@@ -106,7 +106,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( A, B, T )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ "(", N, T, ") = DecideZeroColumnsEffectively(", A, B, ")" ], "need_command", "DecideZeroEffectively" );
                    
@@ -118,7 +118,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberRows( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = SyzygiesGeneratorsOfRows(", M, ")" ], "need_command", "SyzygiesGenerators" );
                    
@@ -130,7 +130,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( M )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = SyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", "SyzygiesGenerators" );
                    
@@ -142,7 +142,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( M, M2 )
                    local N;
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberRows( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = RelativeSyzygiesGeneratorsOfRows(", M, M2, ")" ], "need_command", "SyzygiesGenerators" );
                    
@@ -154,7 +154,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Basic",
                  function( M, M2 )
                    local N;
                    
-                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   N := HomalgVoidMatrix( NumberColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = RelativeSyzygiesGeneratorsOfColumns(", M, M2, ")" ], "need_command", "SyzygiesGenerators" );
                    

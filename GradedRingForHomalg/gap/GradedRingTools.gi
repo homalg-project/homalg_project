@@ -58,22 +58,22 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         InitialMatrix :=
           function( C )
-            return HomalgInitialMatrix( NrRows( C ), NrColumns( C ), UnderlyingNonGradedRing( C ) );
+            return HomalgInitialMatrix( NumberRows( C ), NumberColumns( C ), UnderlyingNonGradedRing( C ) );
           end,
         
         InitialIdentityMatrix :=
           function( C )
-            return HomalgInitialIdentityMatrix( NrRows( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
+            return HomalgInitialIdentityMatrix( NumberRows( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
           end,
         
         ZeroMatrix :=
           function( C )
-            return HomalgZeroMatrix( NrRows( C ), NrColumns( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
+            return HomalgZeroMatrix( NumberRows( C ), NumberColumns( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
           end,
         
         IdentityMatrix :=
           function( C )
-            return HomalgIdentityMatrix( NrRows( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
+            return HomalgIdentityMatrix( NumberRows( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
           end,
         
         AreEqualMatrices :=
@@ -151,9 +151,9 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             return UnderlyingMatrixOverNonGradedRing( A ) * UnderlyingMatrixOverNonGradedRing( B );
           end,
         
-        NrRows := C -> NrRows( UnderlyingMatrixOverNonGradedRing( C ) ),
+        NumberRows := C -> NumberRows( UnderlyingMatrixOverNonGradedRing( C ) ),
         
-        NrColumns := C -> NrColumns( UnderlyingMatrixOverNonGradedRing( C ) ),
+        NumberColumns := C -> NumberColumns( UnderlyingMatrixOverNonGradedRing( C ) ),
         
         IsZeroMatrix := M -> IsZero( UnderlyingMatrixOverNonGradedRing( M ) ),
         

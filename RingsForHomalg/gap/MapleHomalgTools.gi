@@ -105,7 +105,7 @@ BindGlobal( "CommonHomalgTableForMapleHomalgTools",
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "`homalg/ZeroMap`(", NrRows( C ), NrColumns( C ), R, ")" ], "ZeroMatrix" );
+                   return homalgSendBlocking( [ "`homalg/ZeroMap`(", NumberRows( C ), NumberColumns( C ), R, ")" ], "ZeroMatrix" );
                    
                  end,
                
@@ -115,7 +115,7 @@ BindGlobal( "CommonHomalgTableForMapleHomalgTools",
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "`homalg/IdentityMap`(", NrRows( C ), R, ")" ], "IdentityMatrix" );
+                   return homalgSendBlocking( [ "`homalg/IdentityMap`(", NumberRows( C ), R, ")" ], "IdentityMatrix" );
                    
                  end,
                
@@ -241,23 +241,23 @@ BindGlobal( "CommonHomalgTableForMapleHomalgTools",
                    
                  end,
                
-               NrRows :=
+               NumberRows :=
                  function( C )
                    local R;
                    
                    R := HomalgRing( C );
                    
-                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfRows](", C, ")" ], "need_output", "NrRows" ) );
+                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfRows](", C, ")" ], "need_output", "NumberRows" ) );
                    
                  end,
                
-               NrColumns :=
+               NumberColumns :=
                  function( C )
                    local R;
                    
                    R := HomalgRing( C );
                    
-                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfGenerators](", C, ")" ], "need_output", "NrColumns" ) );
+                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfGenerators](", C, ")" ], "need_output", "NumberColumns" ) );
                    
                  end,
                
@@ -402,7 +402,7 @@ BindGlobal( "CommonHomalgTableForMapleHomalgTools",
                                         function( v, w ) return Concatenation( String( v ), "=", String( w ) ); end );
                    
                    Append( var_string,
-                           ListN( [ 1 .. NrColumns( mat ) ], degrees,
+                           ListN( [ 1 .. NumberColumns( mat ) ], degrees,
                                   function( i, d ) return Concatenation( String( i ), "=", String( d ) ); end ) );
                    
                    var_string := JoinStringsWithSeparator( var_string );

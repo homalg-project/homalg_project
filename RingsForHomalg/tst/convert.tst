@@ -7,9 +7,9 @@ gap> ReadPackage( "RingsForHomalg", "examples/homalg.g" );;
 gap> LoadPackage( "HomalgToCAS", false );
 true
 gap> b := true;;
-gap> nr := NrRows( imat );
+gap> nr := NumberRows( imat );
 5
-gap> nc := NrColumns( imat );
+gap> nc := NumberColumns( imat );
 4
 
 ##

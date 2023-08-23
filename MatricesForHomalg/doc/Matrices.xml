@@ -75,8 +75,8 @@
 <Section Label="Matrices:Attributes">
 <Heading>Matrices: Attributes</Heading>
 
-<#Include Label="NrRows">
-<#Include Label="NrColumns">
+<#Include Label="NumberRows">
+<#Include Label="NumberColumns">
 <#Include Label="DeterminantMat">
 <#Include Label="ZeroRows">
 <#Include Label="ZeroColumns">

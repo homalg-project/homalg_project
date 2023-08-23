@@ -1420,7 +1420,7 @@ InstallMethod( SymmetricAlgebra,
   function( M, gvar )
     local n, R, Sym, weights, rel;
     
-    n := NrColumns( M );
+    n := NumberColumns( M );
     
     if not n = Length( gvar ) then
         Error( "the length of the list of variables is ",
@@ -1457,7 +1457,7 @@ InstallMethod( ExteriorAlgebra,
   function( M, gvar )
     local n, R, S, weights, A, rel;
     
-    n := NrColumns( M );
+    n := NumberColumns( M );
     
     if not n = Length( gvar ) then
         Error( "the length of the list of variables is ",

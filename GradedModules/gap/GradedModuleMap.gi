@@ -196,9 +196,9 @@ InstallMethod( NormalizeGradedMorphism,
     m := BasisOfColumnsCoeff( m, T1 );
     Tr := UnionOfColumns( T1, T2 );
     
-    rank := NrRows( m );
+    rank := NumberRows( m );
     
-    Assert( 5, rank = NrColumns( m ) );
+    Assert( 5, rank = NumberColumns( m ) );
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( phi );
     
@@ -396,11 +396,11 @@ InstallMethod( GradedMap,
     
     #set nr of generators of both modules
     if left then
-      nr_gen_s := NrRows( matrix );
-      nr_gen_t := NrColumns( matrix );
+      nr_gen_s := NumberRows( matrix );
+      nr_gen_t := NumberColumns( matrix );
     else
-      nr_gen_t := NrRows( matrix );
-      nr_gen_s := NrColumns( matrix );
+      nr_gen_t := NumberRows( matrix );
+      nr_gen_s := NumberColumns( matrix );
     fi;
 
     #source from input
@@ -436,10 +436,10 @@ InstallMethod( GradedMap,
       fi;
     elif IsInt( source ) then
       if left then
-        degrees_s := ListWithIdenticalEntries( NrRows( matrix ), source );
+        degrees_s := ListWithIdenticalEntries( NumberRows( matrix ), source );
         source2 := FreeLeftModuleWithDegrees( degrees_s, S );
       else
-        degrees_s := ListWithIdenticalEntries( NrColumns( matrix ), source );
+        degrees_s := ListWithIdenticalEntries( NumberColumns( matrix ), source );
         source2 := FreeRightModuleWithDegrees( degrees_s, S );
       fi;
     elif IsHomalgGradedModule( source ) then
@@ -481,10 +481,10 @@ InstallMethod( GradedMap,
       fi;
     elif IsInt( target ) then
       if left then
-        degrees_t := ListWithIdenticalEntries( NrColumns( matrix ), target );
+        degrees_t := ListWithIdenticalEntries( NumberColumns( matrix ), target );
         target2 := FreeLeftModuleWithDegrees( degrees_s, S );
       else
-        degrees_t := ListWithIdenticalEntries( NrRows( matrix ), target );
+        degrees_t := ListWithIdenticalEntries( NumberRows( matrix ), target );
         target2 := FreeRightModuleWithDegrees( degrees_s, S );
       fi;
     elif IsHomalgGradedModule( target ) then
@@ -642,9 +642,9 @@ InstallMethod( GradedMap,
     # create target as a free module from input
     if C = "free" then
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
-        c := FreeLeftModuleWithDegrees( NrColumns( A ), S );
+        c := FreeLeftModuleWithDegrees( NumberColumns( A ), S );
       else
-        c := FreeRightModuleWithDegrees( NrRows( A ), S );
+        c := FreeRightModuleWithDegrees( NumberRows( A ), S );
       fi;
     # create target from the target of the non-graded map by computing degrees
     # needed for AnyParametrization

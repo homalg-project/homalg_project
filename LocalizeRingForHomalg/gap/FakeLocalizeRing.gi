@@ -344,7 +344,7 @@ InstallMethod( BlindlyCopyMatrixPropertiesToFakeLocalMatrix, ## under constructi
   function( S, T )
     local c;
     
-    for c in [ NrRows, NrColumns ] do
+    for c in [ NumberRows, NumberColumns ] do
         if Tester( c )( S ) then
             Setter( c )( T, c( S ) );
         fi;
@@ -386,7 +386,7 @@ InstallMethod( AddToMatElm,
     local N, e;
     
     #create a matrix with just one entry (i,j), which is s
-    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), AssociatedComputationRing( R ) );
+    N := HomalgInitialMatrix( NumberRows( M ), NumberColumns( M ), AssociatedComputationRing( R ) );
     N[ r, c ] := EvalRingElement( s );
     ResetFilterObj( N, IsInitialIdentityMatrix );
     

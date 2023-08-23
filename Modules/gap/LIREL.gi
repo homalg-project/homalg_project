@@ -41,11 +41,11 @@ InstallMethod( RightDivide,
         
   function( B, A, L )
     
-    if NrColumns( A ) <> NrColumns( B ) then
+    if NumberColumns( A ) <> NumberColumns( B ) then
         Error( "the first and the second matrix must have the same number of columns\n" );
     fi;
     
-    if NrColumns( A ) <> NrGenerators( L ) then
+    if NumberColumns( A ) <> NrGenerators( L ) then
         Error( "the number of columns of the first matrix and the number of generators of the last argment do not coincide\n" );
     fi;
     
@@ -75,7 +75,7 @@ InstallMethod( RightDivide,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIREL\033[0m ", LIMAT.color, "RightDivide( IsZero(Matrix), IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrRows( B ), NrRows( A ), HomalgRing( B ) );
+    return HomalgZeroMatrix( NumberRows( B ), NumberRows( A ), HomalgRing( B ) );
     
 end );
 
@@ -90,11 +90,11 @@ InstallMethod( LeftDivide,
         
   function( A, B, L )
     
-    if NrRows( A ) <> NrRows( B ) then
+    if NumberRows( A ) <> NumberRows( B ) then
         Error( "the first and the second matrix must have the same number of rows\n" );
     fi;
     
-    if NrRows( A ) <> NrGenerators( L ) then
+    if NumberRows( A ) <> NrGenerators( L ) then
         Error( "the number of rows of the first matrix and the number of generators of the last argment do not coincide\n" );
     fi;
     
@@ -124,7 +124,7 @@ InstallMethod( LeftDivide,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIREL\033[0m ", LIMAT.color, "LeftDivide( IsHomalgMatrix, IsZero(Matrix), IsHomalgRelations )", "\033[0m" );
     
-    return HomalgZeroMatrix( NrColumns( A ), NrColumns( B ), HomalgRing( B ) );
+    return HomalgZeroMatrix( NumberColumns( A ), NumberColumns( B ), HomalgRing( B ) );
     
 end );
 

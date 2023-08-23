@@ -473,9 +473,9 @@ InstallMethod( GeneratingElements,
     gens := MatrixOfGenerators( N );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
-        gens := List( [ 1 .. NrRows( gens ) ], i -> CertainRows( gens, [ i ] ) );
+        gens := List( [ 1 .. NumberRows( gens ) ], i -> CertainRows( gens, [ i ] ) );
     else
-        gens := List( [ 1 .. NrColumns( gens ) ], i -> CertainColumns( gens, [ i ] ) );
+        gens := List( [ 1 .. NumberColumns( gens ) ], i -> CertainColumns( gens, [ i ] ) );
     fi;
     
     M := SuperObject( N );

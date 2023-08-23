@@ -1023,7 +1023,7 @@ InstallMethod( SaveHomalgMatrixToFile,
     fi;
     
     if mode = "ListList" then
-        command := [ "_str := [ Sprint( RowSequence(", M, ")[x]) : x in [1..", NrRows( M ), "]]; ",
+        command := [ "_str := [ Sprint( RowSequence(", M, ")[x]) : x in [1..", NumberRows( M ), "]]; ",
                      "_fs := Open(\"", filename, "\",\"w\"); ",
                      "Put( _fs, Sprint(_str) ); Flush( _fs ); delete( _fs )" ];
         

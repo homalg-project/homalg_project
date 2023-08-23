@@ -487,8 +487,8 @@ InstallMethod( PreInverse,
     Ib := MatrixOfMap( TheIdentityMorphism( S ) );
     Ic := MatrixOfMap( TheIdentityMorphism( T ) );
     
-    b := NrRows( Ib );
-    c := NrRows( Ic );
+    b := NumberRows( Ib );
+    c := NumberRows( Ic );
     
     P := ReducedBasisOfModule( T );
     
@@ -963,10 +963,10 @@ InstallGlobalFunction( _HomalgMap,
                 mat := arg[1];
             fi;
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[3] ) then
-                nr_rows := NrRows( mat );
+                nr_rows := NumberRows( mat );
                 source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[3] ) );
             else
-                nr_columns := NrColumns( mat );
+                nr_columns := NumberColumns( mat );
                 source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[3] ) );
             fi;
             pos_s := PositionOfTheDefaultPresentation( source );
@@ -1005,12 +1005,12 @@ InstallGlobalFunction( _HomalgMap,
         fi;
         
         if left then
-            source := HomalgFreeLeftModule( NrRows( matrix ), R );
-            target := HomalgFreeLeftModule( NrColumns( matrix ), R );
+            source := HomalgFreeLeftModule( NumberRows( matrix ), R );
+            target := HomalgFreeLeftModule( NumberColumns( matrix ), R );
             type := TheTypeHomalgMapOfLeftModules;
         else
-            source := HomalgFreeRightModule( NrColumns( matrix ), R );
-            target := HomalgFreeRightModule( NrRows( matrix ), R );
+            source := HomalgFreeRightModule( NumberColumns( matrix ), R );
+            target := HomalgFreeRightModule( NumberRows( matrix ), R );
             type := TheTypeHomalgMapOfRightModules;
         fi;
         
@@ -1053,16 +1053,16 @@ InstallGlobalFunction( _HomalgMap,
           and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( source ) then
                 if IsHomalgMatrix( arg[1] ) then
-                    nr_columns := NrColumns( arg[1] );
+                    nr_columns := NumberColumns( arg[1] );
                 elif IsHomalgRelations( arg[1] ) then
-                    nr_columns := NrColumns( MatrixOfRelations( arg[1] ) );
+                    nr_columns := NumberColumns( MatrixOfRelations( arg[1] ) );
                 fi;
                 target := HomalgFreeLeftModule( nr_columns, HomalgRing( arg[1] ) );
             else
                 if IsHomalgMatrix( arg[1] ) then
-                    nr_rows := NrRows( arg[1] );
+                    nr_rows := NumberRows( arg[1] );
                 elif IsHomalgRelations( arg[1] ) then
-                    nr_rows := NrRows( MatrixOfRelations( arg[1] ) );
+                    nr_rows := NumberRows( MatrixOfRelations( arg[1] ) );
                 fi;
                 target := HomalgFreeRightModule( nr_rows, HomalgRing( arg[1] ) );
             fi;
@@ -1234,12 +1234,12 @@ InstallGlobalFunction( _HomalgMap,
         fi;
         
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( source )
-           and ( NrGenerators( source, pos_s ) <> NrRows( matrix )
-                 or NrGenerators( target, pos_t ) <> NrColumns( matrix ) ) then
+           and ( NrGenerators( source, pos_s ) <> NumberRows( matrix )
+                 or NrGenerators( target, pos_t ) <> NumberColumns( matrix ) ) then
             Error( "the dimensions of the matrix do not match the numbers of generators of the modules\n" );
         elif IsHomalgRightObjectOrMorphismOfRightObjects( source )
-           and ( NrGenerators( source, pos_s ) <> NrColumns( matrix )
-                 or NrGenerators( target, pos_t ) <> NrRows( matrix ) ) then
+           and ( NrGenerators( source, pos_s ) <> NumberColumns( matrix )
+                 or NrGenerators( target, pos_t ) <> NumberRows( matrix ) ) then
             Error( "the dimensions of the matrix do not match the numbers of generators of the modules\n" );
         fi;
         
@@ -1601,9 +1601,9 @@ InstallMethod( Display,
     Display( mat );
     
     if extra_information <> "" then
-        Print( "\nthe ", extra_information, " map is currently represented by the above ", NrRows( mat ), " x ", NrColumns( mat ), " matrix\n" );
+        Print( "\nthe ", extra_information, " map is currently represented by the above ", NumberRows( mat ), " x ", NumberColumns( mat ), " matrix\n" );
     else
-        Print( "\nthe map is currently represented by the above ", NrRows( mat ), " x ", NrColumns( mat ), " matrix\n" );
+        Print( "\nthe map is currently represented by the above ", NumberRows( mat ), " x ", NumberColumns( mat ), " matrix\n" );
     fi;
     
 end );

@@ -227,7 +227,7 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
         Print( "Starting rank computation ...\n" );
         L := [];
         for i in [ 1 .. Length( M ) ] do
-            L[i] :=[ NrRows(  M[i] ), NrColumns( M[i] ) ];
+            L[i] :=[ NumberRows(  M[i] ), NumberColumns( M[i] ) ];
             Print( "# ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
             t := Runtimes().user_time;
             L[i][3] := RowRankOfMatrix( M[i] );
@@ -253,7 +253,7 @@ elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
         Print( "Starting rank computation ...\n" );
         L := [];
         for i in [ 1 .. Length( M ) ] do
-            L[i] :=[ NrRows(  M[i] ), NrColumns( M[i] ) ];
+            L[i] :=[ NumberRows(  M[i] ), NumberColumns( M[i] ) ];
             Print( "# ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
             t := Runtimes().user_time;
             L[i][3] := RowRankOfMatrix( M[i] );

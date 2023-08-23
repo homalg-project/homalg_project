@@ -130,14 +130,14 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "0" ] , [ "matrix" ] , [ "[", NrColumns( C ), "][", NrRows( C ), "]" ], C, "ZeroMatrix" );
+                   return homalgSendBlocking( [ "0" ] , [ "matrix" ] , [ "[", NumberColumns( C ), "][", NumberRows( C ), "]" ], C, "ZeroMatrix" );
                    
                  end,
                
                IdentityMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "unitmat(", NrRows(C), ")" ] , [ "matrix" ] , [ "[", NrRows(C), "][", NrRows(C), "]"], C, "IdentityMatrix" );
+                   return homalgSendBlocking( [ "unitmat(", NumberRows(C), ")" ] , [ "matrix" ] , [ "[", NumberRows(C), "][", NumberRows(C), "]"], C, "IdentityMatrix" );
                    
                  end,
                
@@ -166,10 +166,10 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  function( M, plist )
                    
                    if Length( plist ) > 1 and IsRangeRep( plist ) and Length( plist ) = AbsInt( plist[Length( plist )] - plist[1] ) + 1 then
-                       return homalgSendBlocking( [ "submat(", M, ",1..", NrColumns( M ), ",", plist[1] , "..", plist[Length( plist )], ")" ], [ "matrix" ], "CertainRows" );
+                       return homalgSendBlocking( [ "submat(", M, ",1..", NumberColumns( M ), ",", plist[1] , "..", plist[Length( plist )], ")" ], [ "matrix" ], "CertainRows" );
                    fi;
                    
-                   return homalgSendBlocking( [ "submat(", M, ",1..", NrColumns( M ), ",intvec(", plist, "))" ], [ "matrix" ], "CertainRows" );
+                   return homalgSendBlocking( [ "submat(", M, ",1..", NumberColumns( M ), ",intvec(", plist, "))" ], [ "matrix" ], "CertainRows" );
                    
                  end,
                
@@ -177,10 +177,10 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  function( M, plist )
                    
                    if Length( plist ) > 1 and IsRangeRep( plist ) and Length( plist ) = AbsInt( plist[Length( plist )] - plist[1] ) + 1 then
-                       return homalgSendBlocking( [ "submat(", M, ",", plist[1] , "..", plist[Length( plist )], ",1..", NrRows( M ), ")" ], [ "matrix" ], "CertainColumns" );
+                       return homalgSendBlocking( [ "submat(", M, ",", plist[1] , "..", plist[Length( plist )], ",1..", NumberRows( M ), ")" ], [ "matrix" ], "CertainColumns" );
                    fi;
                    
-                   return homalgSendBlocking( [ "submat(", M, ",intvec(", plist, "),1..", NrRows( M ), ")" ], [ "matrix" ], "CertainColumns" );
+                   return homalgSendBlocking( [ "submat(", M, ",intvec(", plist, "),1..", NumberRows( M ), ")" ], [ "matrix" ], "CertainColumns" );
                    
                  end,
                
@@ -190,14 +190,14 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    
                    f := Concatenation( [ "concat(" ], L, [ ")" ] );
                    
-                   return homalgSendBlocking( f, [ "matrix" ], [ "[", NrColumns(L[1]), "][", Sum( List( L, NrRows ) ), "]" ], "UnionOfRows" );
+                   return homalgSendBlocking( f, [ "matrix" ], [ "[", NumberColumns(L[1]), "][", Sum( List( L, NumberRows ) ), "]" ], "UnionOfRows" );
                    
                  end,
                
                UnionOfColumns :=
                  function( L )
                    
-                   return homalgSendBlocking( L, [ "matrix" ], [ "[", Sum( List( L, NrColumns ) ), "][", NrRows(L[1]), "]" ], "UnionOfColumns" );
+                   return homalgSendBlocking( L, [ "matrix" ], [ "[", Sum( List( L, NumberColumns ) ), "][", NumberRows(L[1]), "]" ], "UnionOfColumns" );
                    
                  end,
                
@@ -207,21 +207,21 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    
                    f := Concatenation( [ "dsum(" ], e, [ ")" ] );
                    
-                   return homalgSendBlocking( f, [ "matrix" ], [ "[", Sum( List( e, NrColumns ) ), "][", Sum( List( e, NrRows ) ), "]" ], "DiagMat" );
+                   return homalgSendBlocking( f, [ "matrix" ], [ "[", Sum( List( e, NumberColumns ) ), "][", Sum( List( e, NumberRows ) ), "]" ], "DiagMat" );
                    
                  end,
                
                KroneckerMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "tensor(", A, B, ")" ], [ "matrix" ], [ "[", NrColumns( A ) * NrColumns( B ), "][", NrRows( A ) * NrRows( B ), "]" ], "KroneckerMat" );
+                   return homalgSendBlocking( [ "tensor(", A, B, ")" ], [ "matrix" ], [ "[", NumberColumns( A ) * NumberColumns( B ), "][", NumberRows( A ) * NumberRows( B ), "]" ], "KroneckerMat" );
                    
                  end,
                
                DualKroneckerMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "DualKroneckerMat(", A, B, ")" ], [ "matrix" ], [ "[", NrColumns( A ) * NrColumns( B ), "][", NrRows( A ) * NrRows( B ), "]" ], "DualKroneckerMat" );
+                   return homalgSendBlocking( [ "DualKroneckerMat(", A, B, ")" ], [ "matrix" ], [ "[", NumberColumns( A ) * NumberColumns( B ), "][", NumberRows( A ) * NumberRows( B ), "]" ], "DualKroneckerMat" );
                    
                  end,
                
@@ -260,17 +260,17 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    
                  end,
                
-               NrRows :=
+               NumberRows :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output", "NrRows" ) );
+                   return StringToInt( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output", "NumberRows" ) );
                    
                  end,
                
-               NrColumns :=
+               NumberColumns :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "nrows(", C, ")" ], "need_output", "NrColumns" ) );
+                   return StringToInt( homalgSendBlocking( [ "nrows(", C, ")" ], "need_output", "NumberColumns" ) );
                    
                  end,
                
@@ -431,7 +431,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberRows( M ), L[1] );
                    fi;
                    
                    return L;
@@ -447,7 +447,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberColumns( M ), L[1] );
                    fi;
                    
                    return L;
@@ -467,7 +467,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    
                    v := homalgStream( HomalgRing( M ) )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", M, "[", v, "k,", v, "i]=", M, "[", v, "k,", v, "i]/", u, ";};if(", v, "j>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", "DivideRowByUnit" );
+                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NumberColumns( M ), ";", v, "k=", v, "k+1){", M, "[", v, "k,", v, "i]=", M, "[", v, "k,", v, "i]/", u, ";};if(", v, "j>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", "DivideRowByUnit" );
                    
                  end,
                
@@ -477,7 +477,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    
                    v := homalgStream( HomalgRing( M ) )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=", M, "[", v, "j,", v, "k]/", u, ";};if(", v, "i>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", "DivideColumnByUnit" );
+                   homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=", M, "[", v, "j,", v, "k]/", u, ";};if(", v, "i>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", "DivideColumnByUnit" );
                    
                  end,
                
@@ -490,11 +490,11 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    l := Length( L );
                    
                    if l > 1 and ForAll( L, IsHomalgMatrix ) then
-                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[1], "[", v, "j,", v, "j]=1;", L[2], "[", v, "j,", v, "j]=1" ], "need_command", "CopyRowToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NumberColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[1], "[", v, "j,", v, "j]=1;", L[2], "[", v, "j,", v, "j]=1" ], "need_command", "CopyRowToIdentityMatrix" );
                    elif l > 0 and IsHomalgMatrix( L[1] ) then
-                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];};", L[1], "[", v, "j,", v, "j]=1;" ], "need_command", "CopyRowToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NumberColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];};", L[1], "[", v, "j,", v, "j]=1;" ], "need_command", "CopyRowToIdentityMatrix" );
                    elif l > 1 and IsHomalgMatrix( L[2] ) then
-                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[2], "[", v, "j,", v, "j]=1" ], "need_command", "CopyRowToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NumberColumns( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[2], "[", v, "j,", v, "j]=1" ], "need_command", "CopyRowToIdentityMatrix" );
                    fi;
                    
                  end,
@@ -508,11 +508,11 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    l := Length( L );
                    
                    if l > 1 and ForAll( L, IsHomalgMatrix ) then
-                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[1], "[", v, "i,", v, "i]=1;", L[2], "[", v, "i,", v, "i]=1" ], "need_command", "CopyColumnToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[1], "[", v, "i,", v, "i]=1;", L[2], "[", v, "i,", v, "i]=1" ], "need_command", "CopyColumnToIdentityMatrix" );
                    elif l > 0 and IsHomalgMatrix( L[1] ) then
-                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];};", L[1], "[", v, "i,", v, "i]=1;" ], "need_command", "CopyColumnToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];};", L[1], "[", v, "i,", v, "i]=1;" ], "need_command", "CopyColumnToIdentityMatrix" );
                    elif l > 1 and IsHomalgMatrix( L[2] ) then
-                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[2], "[", v, "i,", v, "i]=1" ], "need_command", "CopyColumnToIdentityMatrix" );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[2], "[", v, "i,", v, "i]=1" ], "need_command", "CopyColumnToIdentityMatrix" );
                    fi;
                    
                  end,
@@ -523,7 +523,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    
                    v := homalgStream( HomalgRing( M ) )!.variable_name;
                    
-                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<", v, "i;", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;};for(", v, "k=", v, "i+1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;}" ], "need_command", "SetColumnToZero" );
+                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<", v, "i;", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;};for(", v, "k=", v, "i+1;", v, "k<=", NumberRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;}" ], "need_command", "SetColumnToZero" );
                    
                  end,
                
@@ -556,7 +556,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  function( mat )
                    
                    if ZeroColumns( mat ) <> [ ] then
-                       if not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                       if not ( IsZero( mat ) and NumberRows( mat ) = 1 and NumberColumns( mat ) = 1 ) then
                            Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                        fi;
                        ## the only case of a free direct summand we are allowed to send to Singular (<= 3-1-3)
@@ -572,7 +572,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    local hilb;
                    
                    if ZeroColumns( mat ) <> [ ] then
-                       if not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                       if not ( IsZero( mat ) and NumberRows( mat ) = 1 and NumberColumns( mat ) = 1 ) then
                            Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                        fi;
                        ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
@@ -599,7 +599,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                #    
                #    if ZeroColumns( mat ) <> [ ] and
                #       ## the only case of a free direct summand we can to send to Singular (<= 3-1-3)
-               #       not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+               #       not ( IsZero( mat ) and NumberRows( mat ) = 1 and NumberColumns( mat ) = 1 ) then
                #        Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                #    fi;
                #    
@@ -625,7 +625,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    
                    if ZeroColumns( mat ) <> [ ] and
                       ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
-                      not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                      not ( IsZero( mat ) and NumberRows( mat ) = 1 and NumberColumns( mat ) = 1 ) then
                        Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                    fi;
                    
@@ -644,7 +644,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                MaxDimensionalRadicalSubobject :=
                  function( mat )
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only maximal dimensional radical subobjects of one-column matrices is supported\n" );
                    fi;
                    
@@ -655,7 +655,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                RadicalSubobject :=
                  function( mat )
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only radical of one-column matrices is supported\n" );
                    fi;
                    
@@ -666,7 +666,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                RadicalSubobject_Z :=
                  function( mat )
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only radical of one-column matrices is supported\n" );
                    fi;
                    
@@ -678,7 +678,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -710,7 +710,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -741,7 +741,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                MaxDimensionalSubobject :=
                  function( mat )
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only maximal dimensional subobjects of one-column matrices is supported\n" );
                    fi;
                    
@@ -753,7 +753,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -785,7 +785,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -819,7 +819,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                  function( mat )
                    local R, v, c;
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only primary decomposition of one-column matrices is supported\n" );
                    fi;
                    
@@ -908,7 +908,7 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                    
                    l := StringToIntList( homalgSendBlocking( [ "IndicatorMatrixOfNonZeroEntries(", mat, ")" ], "need_output", "IndicatorMatrixOfNonZeroEntries" ) );
                    
-                   return ListToListList( l, NrRows( mat ), NrColumns( mat ) );
+                   return ListToListList( l, NumberRows( mat ), NumberColumns( mat ) );
                    
                  end,
                

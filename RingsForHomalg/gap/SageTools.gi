@@ -44,7 +44,7 @@ BindGlobal( "CommonHomalgTableForSageTools",
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "matrix(", HomalgRing( C ), NrRows( C ), NrColumns( C ), ")" ], "ZeroMatrix" );
+                   return homalgSendBlocking( [ "matrix(", HomalgRing( C ), NumberRows( C ), NumberColumns( C ), ")" ], "ZeroMatrix" );
                    
                  end,
                
@@ -54,7 +54,7 @@ BindGlobal( "CommonHomalgTableForSageTools",
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "identity_matrix(", R, NrRows( C ), ")" ], "IdentityMatrix" );
+                   return homalgSendBlocking( [ "identity_matrix(", R, NumberRows( C ), ")" ], "IdentityMatrix" );
                    
                  end,
                
@@ -148,17 +148,17 @@ BindGlobal( "CommonHomalgTableForSageTools",
                    
                  end,
                
-               NrRows :=
+               NumberRows :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ C, ".nrows()" ], "need_output", "NrRows" ) );
+                   return StringToInt( homalgSendBlocking( [ C, ".nrows()" ], "need_output", "NumberRows" ) );
                    
                  end,
                  
-               NrColumns :=
+               NumberColumns :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ C, ".ncols()" ], "need_output", "NrColumns" ) );
+                   return StringToInt( homalgSendBlocking( [ C, ".ncols()" ], "need_output", "NumberColumns" ) );
                    
                  end,
                  

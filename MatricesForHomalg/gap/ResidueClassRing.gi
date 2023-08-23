@@ -197,7 +197,7 @@ InstallMethod( BlindlyCopyMatrixPropertiesToResidueClassMatrix,
   function( S, T )
     local c;
     
-    for c in [ NrRows, NrColumns ] do
+    for c in [ NumberRows, NumberColumns ] do
         if Tester( c )( S ) then
             Setter( c )( T, c( S ) );
         fi;
@@ -296,7 +296,7 @@ InstallMethod( StackedRelations,
   function( M, ring_rel )
     local R, rel;
     
-    if NrColumns( M ) = 0 then
+    if NumberColumns( M ) = 0 then
         return Eval( M );
     fi;
     
@@ -312,7 +312,7 @@ InstallMethod( StackedRelations,
         rel := Involution( rel );
     fi;
     
-    rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
+    rel := DiagMat( ListWithIdenticalEntries( NumberColumns( M ), rel ) );
     
     return UnionOfRows( Eval( M ), rel );
     
@@ -337,7 +337,7 @@ InstallMethod( AugmentedRelations,
   function( M, ring_rel )
     local R, rel;
     
-    if NrRows( M ) = 0 then
+    if NumberRows( M ) = 0 then
         return Eval( M );
     fi;
     
@@ -353,7 +353,7 @@ InstallMethod( AugmentedRelations,
         rel := Involution( rel );
     fi;
     
-    rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
+    rel := DiagMat( ListWithIdenticalEntries( NumberRows( M ), rel ) );
     
     return UnionOfColumns( Eval( M ), rel );
     
@@ -708,11 +708,11 @@ InstallOtherMethod( \/,
         
   function( R, ring_rel )
     
-    if NrRows( ring_rel ) = 0 or NrColumns( ring_rel ) = 0  then
+    if NumberRows( ring_rel ) = 0 or NumberColumns( ring_rel ) = 0  then
         return R;
-    elif NrColumns( ring_rel ) = 1 then
+    elif NumberColumns( ring_rel ) = 1 then
         return R / HomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel );
-    elif NrRows( ring_rel ) = 1 then
+    elif NumberRows( ring_rel ) = 1 then
         return R / HomalgRingRelationsAsGeneratorsOfRightIdeal( ring_rel );
     fi;
     

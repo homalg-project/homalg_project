@@ -110,14 +110,14 @@ BindGlobal( "CommonHomalgTableForMAGMATools",
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "ZeroMatrix(", HomalgRing( C ), NrRows( C ), NrColumns( C ), ")" ], "ZeroMatrix" );
+                   return homalgSendBlocking( [ "ZeroMatrix(", HomalgRing( C ), NumberRows( C ), NumberColumns( C ), ")" ], "ZeroMatrix" );
                    
                  end,
                
                IdentityMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "ScalarMatrix(", HomalgRing( C ), NrRows( C ), ",1)" ], "IdentityMatrix" );
+                   return homalgSendBlocking( [ "ScalarMatrix(", HomalgRing( C ), NumberRows( C ), ",1)" ], "IdentityMatrix" );
                    
                  end,
                
@@ -212,17 +212,17 @@ BindGlobal( "CommonHomalgTableForMAGMATools",
                    
                  end,
                
-               NrRows :=
+               NumberRows :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "NumberOfRows(", C, ")" ], "need_output", "NrRows" ) );
+                   return StringToInt( homalgSendBlocking( [ "NumberOfRows(", C, ")" ], "need_output", "NumberRows" ) );
                    
                  end,
                
-               NrColumns :=
+               NumberColumns :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "NumberOfColumns(", C, ")" ], "need_output", "NrColumns" ) );
+                   return StringToInt( homalgSendBlocking( [ "NumberOfColumns(", C, ")" ], "need_output", "NumberColumns" ) );
                    
                  end,
                
@@ -311,7 +311,7 @@ BindGlobal( "CommonHomalgTableForMAGMATools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberRows( M ), L[1] );
                    fi;
                    
                    return L;
@@ -327,7 +327,7 @@ BindGlobal( "CommonHomalgTableForMAGMATools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberColumns( M ), L[1] );
                    fi;
                    
                    return L;
@@ -444,7 +444,7 @@ BindGlobal( "CommonHomalgTableForMAGMATools",
                    
                    R := HomalgRing( mat );
                    
-                   if not NrColumns( mat ) = 1 then
+                   if not NumberColumns( mat ) = 1 then
                        Error( "only radical of one-column matrices is supported\n" );
                    fi;
                    

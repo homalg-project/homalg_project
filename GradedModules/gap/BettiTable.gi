@@ -100,8 +100,8 @@ InstallGlobalFunction( HomalgBettiTable,
     ## Objectify:
     ObjectifyWithAttributes(
             diagram, TheTypeBettiTable,
-            NrRows, nr_rows,
-            NrColumns, nr_cols
+            NumberRows, nr_rows,
+            NumberColumns, nr_cols
             );
     
     return diagram;
@@ -174,8 +174,8 @@ InstallMethod( homalgCreateDisplayString,
     ## read the row range upside down?
     reverse := o!.reverse;
     
-    nr_rows := NrRows( o );
-    nr_cols := NrColumns( o );
+    nr_rows := NumberRows( o );
+    nr_cols := NumberColumns( o );
     
     ## now prepare constructing the display string
     

@@ -117,7 +117,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##    (&see; <Ref Meth="InitialMatrix" Label="homalgTable entry for initial matrices"/>)
                ##    <Listing Type="Code"><![CDATA[
                InitialMatrix := C -> HomalgInitialMatrix(
-                                     NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),
+                                     NumberRows( C ), NumberColumns( C ), AmbientRing( HomalgRing( C ) ) ),
                ##  ]]></Listing>
                ##    </Description>
                ##  </ManSection>
@@ -131,7 +131,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##    (&see; <Ref Meth="InitialIdentityMatrix" Label="homalgTable entry for initial identity matrices"/>)
                ##    <Listing Type="Code"><![CDATA[
                InitialIdentityMatrix := C -> HomalgInitialIdentityMatrix(
-                       NrRows( C ), AmbientRing( HomalgRing( C ) ) ),
+                       NumberRows( C ), AmbientRing( HomalgRing( C ) ) ),
                ##  ]]></Listing>
                ##    </Description>
                ##  </ManSection>
@@ -145,7 +145,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##    (&see; <Ref Meth="ZeroMatrix" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
                ZeroMatrix := C -> HomalgZeroMatrix(
-                                     NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),
+                                     NumberRows( C ), NumberColumns( C ), AmbientRing( HomalgRing( C ) ) ),
                ##  ]]></Listing>
                ##    </Description>
                ##  </ManSection>
@@ -159,7 +159,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##    (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
                IdentityMatrix := C -> HomalgIdentityMatrix(
-                       NrRows( C ), AmbientRing( HomalgRing( C ) ) ),
+                       NumberRows( C ), AmbientRing( HomalgRing( C ) ) ),
                ##  ]]></Listing>
                ##    </Description>
                ##  </ManSection>
@@ -519,27 +519,27 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##  </ManSection>
                ##  <#/GAPDoc>
                
-               ##  <#GAPDoc Label="NrRows:ResidueClassRing">
+               ##  <#GAPDoc Label="NumberRows:ResidueClassRing">
                ##  <ManSection>
-               ##    <Func Arg="C" Name="NrRows" Label="ResidueClassRing"/>
+               ##    <Func Arg="C" Name="NumberRows" Label="ResidueClassRing"/>
                ##    <Returns>a nonnegative integer</Returns>
                ##    <Description>
-               ##    (&see; <Ref Meth="NrRows" Label="homalgTable entry"/>)
+               ##    (&see; <Ref Meth="NumberRows" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
-               NrRows := C -> NrRows( Eval( C ) ),
+               NumberRows := C -> NumberRows( Eval( C ) ),
                ##  ]]></Listing>
                ##    </Description>
                ##  </ManSection>
                ##  <#/GAPDoc>
                
-               ##  <#GAPDoc Label="NrColumns:ResidueClassRing">
+               ##  <#GAPDoc Label="NumberColumns:ResidueClassRing">
                ##  <ManSection>
-               ##    <Func Arg="C" Name="NrColumns" Label="ResidueClassRing"/>
+               ##    <Func Arg="C" Name="NumberColumns" Label="ResidueClassRing"/>
                ##    <Returns>a nonnegative integer</Returns>
                ##    <Description>
-               ##    (&see; <Ref Meth="NrColumns" Label="homalgTable entry"/>)
+               ##    (&see; <Ref Meth="NumberColumns" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
-               NrColumns := C -> NrColumns( Eval( C ) ),
+               NumberColumns := C -> NumberColumns( Eval( C ) ),
                ##  ]]></Listing>
                ##    </Description>
                ##  </ManSection>
@@ -681,7 +681,7 @@ InstallMethod( PrimaryDecompositionOp,
     R := HomalgRing( M );
     
     if IsZero( M ) then
-        if NrColumns( M ) = 0 then
+        if NumberColumns( M ) = 0 then
             triv := HomalgIdentityMatrix( 1, R );
         else
             triv := HomalgZeroMatrix( 0, 1, R );
@@ -692,7 +692,7 @@ InstallMethod( PrimaryDecompositionOp,
     
     rel := RingRelations( R );
     rel := MatrixOfRelations( rel );
-    rel := ListWithIdenticalEntries( NrColumns( M ), rel );
+    rel := ListWithIdenticalEntries( NumberColumns( M ), rel );
     rel := DiagMat( rel );
     
     m := UnionOfRows( Eval( M ), rel );

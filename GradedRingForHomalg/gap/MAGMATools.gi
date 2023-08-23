@@ -72,7 +72,7 @@ InstallValue( GradedRingTableForMAGMATools,
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrRows( M ) );
+                   return ListToListList( L, 2, NumberRows( M ) );
                    
                  end,
                
@@ -84,7 +84,7 @@ InstallValue( GradedRingTableForMAGMATools,
                    
                    L := StringToIntList( L );
                    
-                   return ListToListList( L, 2, NrColumns( M ) );
+                   return ListToListList( L, 2, NumberColumns( M ) );
                    
                  end,
                

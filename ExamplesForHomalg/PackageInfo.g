@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "ExamplesForHomalg",
 Subtitle := "Examples for the GAP Package homalg",
-Version := "2023.07-01",
+Version := "2023.08-01",
 Date := (function ( ) if IsBound( GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE ) then return GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE; else return Concatenation( ~.Version{[ 1 .. 4 ]}, "-", ~.Version{[ 6, 7 ]}, "-01" ); fi; end)( ),
 License := "GPL-2.0-or-later",
 
@@ -96,12 +96,12 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.12.1",
   NeededOtherPackages := [
-                [ "MatricesForHomalg", ">= 2020.05.09" ],
-                [ "HomalgToCAS", ">= 2011.08.25" ],
-                [ "RingsForHomalg", ">= 2021.10-01" ],
-                [ "Modules", ">= 2020.05.09" ],
+                [ "MatricesForHomalg", ">= 2023.08-01" ],
+                [ "HomalgToCAS", ">= 2023.08-01" ],
+                [ "RingsForHomalg", ">= 2023.08-01" ],
+                [ "Modules", ">= 2023.08-01" ],
                 [ "homalg", ">= 2015.06.01" ],
-                [ "GaussForHomalg", ">=2019.09.01" ],
+                [ "GaussForHomalg", ">=2023.08-01" ],
                 [ "GAPDoc", ">= 1.1" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []

@@ -774,7 +774,7 @@ InstallMethod( LeftPresentationWithDegrees,
   function( mat, degrees, S )
     local M;
     
-    if Length( degrees ) <> NrColumns( mat ) then
+    if Length( degrees ) <> NumberColumns( mat ) then
         Error( "the number of degrees must coincide with the number of columns\n" );
     fi;
     
@@ -819,7 +819,7 @@ InstallMethod( LeftPresentationWithDegrees,
         
     fi;
     
-    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), degree * gens ), S );
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NumberColumns( mat ), degree * gens ), S );
     
 end );
 
@@ -830,7 +830,7 @@ InstallMethod( LeftPresentationWithDegrees,
         
   function( mat, degree, S )
     
-    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), degree ), S );
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NumberColumns( mat ), degree ), S );
     
 end );
 
@@ -878,7 +878,7 @@ InstallMethod( LeftPresentationWithDegrees,
         
   function( mat, S )
     
-    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), TheZeroElement( DegreeGroup( S ) ) ), S );
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NumberColumns( mat ), TheZeroElement( DegreeGroup( S ) ) ), S );
     
 end );
 
@@ -901,7 +901,7 @@ InstallMethod( RightPresentationWithDegrees,
   function( mat, degrees, S )
     local M;
     
-    if Length( degrees ) <> NrRows( mat ) then
+    if Length( degrees ) <> NumberRows( mat ) then
         Error( "the number of degrees must coincide with the number of rows\n" );
     fi;
     
@@ -946,7 +946,7 @@ InstallMethod( RightPresentationWithDegrees,
         
     fi;
     
-    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), degree * gens ), S );
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NumberRows( mat ), degree * gens ), S );
     
 end );
 
@@ -957,7 +957,7 @@ InstallMethod( RightPresentationWithDegrees,
         
   function( mat, degree, S )
     
-    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), degree ), S );
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NumberRows( mat ), degree ), S );
     
 end );
 
@@ -979,7 +979,7 @@ InstallMethod( RightPresentationWithDegrees,
         
   function( mat, S )
     
-    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), TheZeroElement( DegreeGroup( S ) ) ), S );
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NumberRows( mat ), TheZeroElement( DegreeGroup( S ) ) ), S );
     
 end );
 

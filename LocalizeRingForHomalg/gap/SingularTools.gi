@@ -429,7 +429,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), R );
                    
                    homalgSendBlocking( [ "list l=BasisOfRowsCoeffMora(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
@@ -445,7 +445,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
+                   N := HomalgVoidMatrix( NumberRows( M ), "unknown_number_of_columns", R );
                    
                    homalgSendBlocking( [ "list l=BasisOfColumnsCoeffMora(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
@@ -461,7 +461,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), R );
                    
                    homalgSendBlocking( [ "list l = DecideZeroRowsMora(", A , B , "); matrix ", N, "=l[1]" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
@@ -477,7 +477,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), R );
                    
                    homalgSendBlocking( [ "list l = DecideZeroColumnsMora(",  A , B , "); matrix ", N, "=l[1]" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
@@ -493,7 +493,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), R );
                    
                    homalgSendBlocking( [ "list l=DecideZeroRowsEffectivelyMora(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
@@ -511,7 +511,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NumberRows( A ), NumberColumns( A ), R );
                    
                    homalgSendBlocking( [ "list l=DecideZeroColumnsEffectivelyMora(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    

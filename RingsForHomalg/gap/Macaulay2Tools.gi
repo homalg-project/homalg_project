@@ -97,14 +97,14 @@ BindGlobal( "CommonHomalgTableForMacaulay2Tools",
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "map(", R, "^", NrRows( C ), R, "^", NrColumns( C ), ",0)" ], "ZeroMatrix" );
+                   return homalgSendBlocking( [ "map(", R, "^", NumberRows( C ), R, "^", NumberColumns( C ), ",0)" ], "ZeroMatrix" );
                    
                  end,
                
                IdentityMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "id_(", HomalgRing( C ), "^", NrRows( C ), ")" ], "IdentityMatrix" );
+                   return homalgSendBlocking( [ "id_(", HomalgRing( C ), "^", NumberRows( C ), ")" ], "IdentityMatrix" );
                    
                  end,
                
@@ -207,17 +207,17 @@ BindGlobal( "CommonHomalgTableForMacaulay2Tools",
                    
                  end,
                
-               NrRows :=
+               NumberRows :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "numgens(target(", C, "))" ], "need_output", "NrRows" ) );
+                   return StringToInt( homalgSendBlocking( [ "numgens(target(", C, "))" ], "need_output", "NumberRows" ) );
                    
                  end,
                
-               NrColumns :=
+               NumberColumns :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "numgens(source(", C, "))" ], "need_output", "NrColumns" ) );
+                   return StringToInt( homalgSendBlocking( [ "numgens(source(", C, "))" ], "need_output", "NumberColumns" ) );
                    
                  end,
                
@@ -306,7 +306,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Tools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberRows( M ), L[1] );
                    fi;
                    
                    return L;
@@ -322,7 +322,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Tools",
                    L := StringToIntList( L );
                    
                    if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
+                       return ListWithIdenticalEntries( NumberColumns( M ), L[1] );
                    fi;
                    
                    return L;
@@ -472,7 +472,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Tools",
                    
                    R := HomalgRing( mat );
                    
-                   hilb := homalgSendBlocking( [ "CoefficientsOfLaurentPolynomial numerator hilbertSeries coker map(", R, "^{", -degrees, "},", R, "^", NrColumns( mat ), mat, ")" ], "break_lists", "need_output", "HilbertPoincareSeries" );
+                   hilb := homalgSendBlocking( [ "CoefficientsOfLaurentPolynomial numerator hilbertSeries coker map(", R, "^{", -degrees, "},", R, "^", NumberColumns( mat ), mat, ")" ], "break_lists", "need_output", "HilbertPoincareSeries" );
                    
                    hilb := StringToIntList( hilb );
                    
@@ -530,7 +530,7 @@ BindGlobal( "CommonHomalgTableForMacaulay2Tools",
                    
                    R := HomalgRing( D );
                    
-                   return homalgSendBlocking( [ "map(", R, "^", NrRows( D ) * NrRows( N ), ",", R, "^", NrColumns( D ) * NrColumns( N ), ",diff(", D, N, "))" ], "Diff" );
+                   return homalgSendBlocking( [ "map(", R, "^", NumberRows( D ) * NumberRows( N ), ",", R, "^", NumberColumns( D ) * NumberColumns( N ), ",diff(", D, N, "))" ], "Diff" );
                    
                  end,
                
