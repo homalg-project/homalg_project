@@ -34,10 +34,10 @@
     [4Xasserts :=[104X
     [4X  rec([104X
     [4X      BasisOfRowModule :=[104X
-    [4X        function( B ) return ( NrRows( B ) = 0 ) = IsZero( B ); end,[104X
+    [4X        function( B ) return ( NumberRows( B ) = 0 ) = IsZero( B ); end,[104X
     [4X      [104X
     [4X      BasisOfColumnModule :=[104X
-    [4X        function( B ) return ( NrColumns( B ) = 0 ) = IsZero( B ); end,[104X
+    [4X        function( B ) return ( NumberColumns( B ) = 0 ) = IsZero( B ); end,[104X
     [4X      [104X
     [4X      BasisOfRowsCoeff :=[104X
     [4X        function( B, T, M ) return B = T * M; end,[104X

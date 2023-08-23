@@ -238,17 +238,17 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XB.1-21 NrRows[101X
+  [1XB.1-21 NumberRows[101X
   
-  [33X[1;0Y[29X[2XNrRows[102X( [3XC[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XNumberRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XNrRows[110X  is  bound  then the standard method for the attribute
-  [2XNrRows[102X ([14X5.4-1[114X) shown below returns [22XRP[122X!.[10XNrRows[110X[22X( [3XC[103X )[122X.[133X
+  component [22XRP[122X!.[10XNumberRows[110X is bound then the standard method for the attribute
+  [2XNumberRows[102X ([14X5.4-1[114X) shown below returns [22XRP[122X!.[10XNumberRows[110X[22X( [3XC[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X
-    [4XInstallMethod( NrRows,[104X
+    [4XInstallMethod( NumberRows,[104X
     [4X        "for homalg matrices",[104X
     [4X        [ IsHomalgMatrix ],[104X
     [4X        [104X
@@ -259,12 +259,12 @@
     [4X    [104X
     [4X    RP := homalgTable( R );[104X
     [4X    [104X
-    [4X    if IsBound(RP!.NrRows) then[104X
-    [4X        return RP!.NrRows( C );[104X
+    [4X    if IsBound(RP!.NumberRows) then[104X
+    [4X        return RP!.NumberRows( C );[104X
     [4X    fi;[104X
     [4X    [104X
     [4X    if not IsHomalgInternalMatrixRep( C ) then[104X
-    [4X        Error( "could not find a procedure called NrRows ",[104X
+    [4X        Error( "could not find a procedure called NumberRows ",[104X
     [4X               "in the homalgTable of the non-internal ring\n" );[104X
     [4X    fi;[104X
     [4X    [104X
@@ -275,17 +275,17 @@
     [4Xend );[104X
   [4X[32X[104X
   
-  [1XB.1-22 NrColumns[101X
+  [1XB.1-22 NumberColumns[101X
   
-  [33X[1;0Y[29X[2XNrColumns[102X( [3XC[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XNumberColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
-  component  [22XRP[122X!.[10XNrColumns[110X is bound then the standard method for the attribute
-  [2XNrColumns[102X ([14X5.4-2[114X) shown below returns [22XRP[122X!.[10XNrColumns[110X[22X( [3XC[103X )[122X.[133X
+  component  [22XRP[122X!.[10XNumberColumns[110X  is  bound  then  the  standard  method for the
+  attribute [2XNumberColumns[102X ([14X5.4-2[114X) shown below returns [22XRP[122X!.[10XNumberColumns[110X[22X( [3XC[103X )[122X.[133X
   
   [4X[32X  Code  [32X[104X
-    [4XInstallMethod( NrColumns,[104X
+    [4XInstallMethod( NumberColumns,[104X
     [4X        "for homalg matrices",[104X
     [4X        [ IsHomalgMatrix ],[104X
     [4X        [104X
@@ -296,12 +296,12 @@
     [4X    [104X
     [4X    RP := homalgTable( R );[104X
     [4X    [104X
-    [4X    if IsBound(RP!.NrColumns) then[104X
-    [4X        return RP!.NrColumns( C );[104X
+    [4X    if IsBound(RP!.NumberColumns) then[104X
+    [4X        return RP!.NumberColumns( C );[104X
     [4X    fi;[104X
     [4X    [104X
     [4X    if not IsHomalgInternalMatrixRep( C ) then[104X
-    [4X        Error( "could not find a procedure called NrColumns ",[104X
+    [4X        Error( "could not find a procedure called NumberColumns ",[104X
     [4X               "in the homalgTable of the non-internal ring\n" );[104X
     [4X    fi;[104X
     [4X    [104X
@@ -333,7 +333,7 @@
     [4X    [104X
     [4X    RP := homalgTable( R );[104X
     [4X    [104X
-    [4X    if NrRows( C ) <> NrColumns( C ) then[104X
+    [4X    if NumberRows( C ) <> NumberColumns( C ) then[104X
     [4X        Error( "the matrix is not a square matrix\n" );[104X
     [4X    fi;[104X
     [4X    [104X
@@ -489,7 +489,7 @@
     [4X  function( M )[104X
     [4X    local R, RP;[104X
     [4X    [104X
-    [4X    if NrRows( M ) <> NrColumns( M ) then[104X
+    [4X    if NumberRows( M ) <> NumberColumns( M ) then[104X
     [4X        return false;[104X
     [4X    fi;[104X
     [4X    [104X
@@ -503,7 +503,7 @@
     [4X    [104X
     [4X    #=====# the fallback method #=====#[104X
     [4X    [104X
-    [4X    return M = HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );[104X
+    [4X    return M = HomalgIdentityMatrix( NumberRows( M ), HomalgRing( M ) );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -538,7 +538,7 @@
     [4X    [104X
     [4X    diag := DiagonalEntries( M );[104X
     [4X    [104X
-    [4X    return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );[104X
+    [4X    return M = HomalgDiagonalMatrix( diag, NumberRows( M ), NumberColumns( M ), R );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -570,9 +570,9 @@
     [4X    [104X
     [4X    #=====# the fallback method #=====#[104X
     [4X    [104X
-    [4X    z := HomalgZeroMatrix( 1, NrColumns( C ), R );[104X
+    [4X    z := HomalgZeroMatrix( 1, NumberColumns( C ), R );[104X
     [4X    [104X
-    [4X    return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( C, [ a ] ) = z );[104X
+    [4X    return Filtered( [ 1 .. NumberRows( C ) ], a -> CertainRows( C, [ a ] ) = z );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -604,9 +604,9 @@
     [4X    [104X
     [4X    #=====# the fallback method #=====#[104X
     [4X    [104X
-    [4X    z := HomalgZeroMatrix( NrRows( C ), 1, R );[104X
+    [4X    z := HomalgZeroMatrix( NumberRows( C ), 1, R );[104X
     [4X    [104X
-    [4X    return Filtered( [ 1 .. NrColumns( C ) ], a -> CertainColumns( C, [ a ] ) = z );[104X
+    [4X    return Filtered( [ 1 .. NumberColumns( C ) ], a -> CertainColumns( C, [ a ] ) = z );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -654,11 +654,11 @@
     [4X    [104X
     [4X    #=====# the fallback method #=====#[104X
     [4X    [104X
-    [4X    rest := [ 1 .. NrColumns( M ) ];[104X
+    [4X    rest := [ 1 .. NumberColumns( M ) ];[104X
     [4X    [104X
     [4X    pos := [ ];[104X
     [4X    [104X
-    [4X    for i in [ 1 .. NrRows( M ) ] do[104X
+    [4X    for i in [ 1 .. NumberRows( M ) ] do[104X
     [4X        for k in Reversed( rest ) do[104X
     [4X            if not [ i, k ] in poslist and[104X
     [4X               IsUnit( R, M[ i, k ] ) then[104X
@@ -724,11 +724,11 @@
     [4X    [104X
     [4X    #=====# the fallback method #=====#[104X
     [4X    [104X
-    [4X    rest := [ 1 .. NrRows( M ) ];[104X
+    [4X    rest := [ 1 .. NumberRows( M ) ];[104X
     [4X    [104X
     [4X    pos := [ ];[104X
     [4X    [104X
-    [4X    for j in [ 1 .. NrColumns( M ) ] do[104X
+    [4X    for j in [ 1 .. NumberColumns( M ) ] do[104X
     [4X        for k in Reversed( rest ) do[104X
     [4X            if not [ j, k ] in poslist and[104X
     [4X               IsUnit( R, M[ k, j ] ) then[104X
@@ -783,8 +783,8 @@
     [4X    [104X
     [4X    #=====# the fallback method #=====#[104X
     [4X    [104X
-    [4X    m := NrRows( M );[104X
-    [4X    n := NrColumns( M );[104X
+    [4X    m := NumberRows( M );[104X
+    [4X    n := NumberColumns( M );[104X
     [4X    [104X
     [4X    for i in [ 1 .. m ] do[104X
     [4X        for j in [ 1 .. n ] do[104X
@@ -833,8 +833,8 @@
     [4X    [104X
     [4X    entries := EntriesOfHomalgMatrix( M );[104X
     [4X    [104X
-    [4X    r := NrRows( M );[104X
-    [4X    c := NrColumns( M );[104X
+    [4X    r := NumberRows( M );[104X
+    [4X    c := NumberColumns( M );[104X
     [4X    [104X
     [4X    pos := ListWithIdenticalEntries( r, 0 );[104X
     [4X    [104X
@@ -885,8 +885,8 @@
     [4X    [104X
     [4X    entries := EntriesOfHomalgMatrix( M );[104X
     [4X    [104X
-    [4X    r := NrRows( M );[104X
-    [4X    c := NrColumns( M );[104X
+    [4X    r := NumberRows( M );[104X
+    [4X    c := NumberColumns( M );[104X
     [4X    [104X
     [4X    pos := ListWithIdenticalEntries( c, 0 );[104X
     [4X    [104X

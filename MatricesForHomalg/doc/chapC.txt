@@ -32,7 +32,7 @@
     [4XInstallMethod( Eval,[104X
     [4X        "for homalg matrices (IsInitialMatrix)",[104X
     [4X        [ IsHomalgMatrix and IsInitialMatrix and[104X
-    [4X          HasNrRows and HasNrColumns ],[104X
+    [4X          HasNumberRows and HasNumberColumns ],[104X
     [4X        [104X
     [4X  function( C )[104X
     [4X    local R, RP, z, zz;[104X
@@ -58,9 +58,9 @@
     [4X    [104X
     [4X    ResetFilterObj( C, IsInitialMatrix );[104X
     [4X    [104X
-    [4X    zz := ListWithIdenticalEntries( NrColumns( C ), z );[104X
+    [4X    zz := ListWithIdenticalEntries( NumberColumns( C ), z );[104X
     [4X    [104X
-    [4X    SetEval( C, homalgInternalMatrixHull( List( [ 1 .. NrRows( C ) ], i -> ShallowCopy( zz ) ) ) );[104X
+    [4X    SetEval( C, homalgInternalMatrixHull( List( [ 1 .. NumberRows( C ) ], i -> ShallowCopy( zz ) ) ) );[104X
     [4X    [104X
     [4X    return Eval( C );[104X
     [4X    [104X
@@ -81,7 +81,7 @@
     [4XInstallMethod( Eval,[104X
     [4X        "for homalg matrices (IsInitialIdentityMatrix)",[104X
     [4X        [ IsHomalgMatrix and IsInitialIdentityMatrix and[104X
-    [4X          HasNrRows and HasNrColumns ],[104X
+    [4X          HasNumberRows and HasNumberColumns ],[104X
     [4X        [104X
     [4X  function( C )[104X
     [4X    local R, RP, o, z, zz, id;[104X
@@ -108,9 +108,9 @@
     [4X    [104X
     [4X    ResetFilterObj( C, IsInitialIdentityMatrix );[104X
     [4X    [104X
-    [4X    zz := ListWithIdenticalEntries( NrColumns( C ), z );[104X
+    [4X    zz := ListWithIdenticalEntries( NumberColumns( C ), z );[104X
     [4X    [104X
-    [4X    id := List( [ 1 .. NrRows( C ) ],[104X
+    [4X    id := List( [ 1 .. NumberRows( C ) ],[104X
     [4X                function(i)[104X
     [4X                  local z;[104X
     [4X                  z := ShallowCopy( zz ); z[i] := o; return z;[104X
@@ -135,7 +135,7 @@
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
     [4X        "for homalg matrices (IsZero)",[104X
-    [4X        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 40,[104X
+    [4X        [ IsHomalgMatrix and IsZero and HasNumberRows and HasNumberColumns ], 40,[104X
     [4X        [104X
     [4X  function( C )[104X
     [4X    local R, RP, z;[104X
@@ -144,7 +144,7 @@
     [4X    [104X
     [4X    RP := homalgTable( R );[104X
     [4X    [104X
-    [4X    if ( NrRows( C ) = 0 or NrColumns( C ) = 0 ) and[104X
+    [4X    if ( NumberRows( C ) = 0 or NumberColumns( C ) = 0 ) and[104X
     [4X       not ( IsBound( R!.SafeToEvaluateEmptyMatrices ) and[104X
     [4X             R!.SafeToEvaluateEmptyMatrices = true ) then[104X
     [4X        Info( InfoWarning, 1, "\033[01m\033[5;31;47m",[104X
@@ -168,8 +168,8 @@
     [4X    ## copying the rows saves memory;[104X
     [4X    ## we assume that the entries are never modified!!![104X
     [4X    return homalgInternalMatrixHull([104X
-    [4X                   ListWithIdenticalEntries( NrRows( C ),[104X
-    [4X                           ListWithIdenticalEntries( NrColumns( C ), z ) ) );[104X
+    [4X                   ListWithIdenticalEntries( NumberRows( C ),[104X
+    [4X                           ListWithIdenticalEntries( NumberColumns( C ), z ) ) );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -186,7 +186,7 @@
   [4X[32X  Code  [32X[104X
     [4XInstallMethod( Eval,[104X
     [4X        "for homalg matrices (IsOne)",[104X
-    [4X        [ IsHomalgMatrix and IsOne and HasNrRows and HasNrColumns ], 10,[104X
+    [4X        [ IsHomalgMatrix and IsOne and HasNumberRows and HasNumberColumns ], 10,[104X
     [4X        [104X
     [4X  function( C )[104X
     [4X    local R, id, RP, o, z, zz;[104X
@@ -194,7 +194,7 @@
     [4X    R := HomalgRing( C );[104X
     [4X    [104X
     [4X    if IsBound( R!.IdentityMatrices ) then[104X
-    [4X        id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ) );[104X
+    [4X        id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ) );[104X
     [4X        if id <> fail then[104X
     [4X            R!.IdentityMatrices!.cache_hits := R!.IdentityMatrices!.cache_hits + 1;[104X
     [4X            return id;[104X
@@ -206,7 +206,7 @@
     [4X    [104X
     [4X    if IsBound( RP!.IdentityMatrix ) then[104X
     [4X        id := RP!.IdentityMatrix( C );[104X
-    [4X        SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );[104X
+    [4X        SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ), id );[104X
     [4X        R!.IdentityMatrices!.counter := R!.IdentityMatrices!.counter + 1;[104X
     [4X        return id;[104X
     [4X    fi;[104X
@@ -221,9 +221,9 @@
     [4X    z := Zero( HomalgRing( C ) );[104X
     [4X    o := One( HomalgRing( C ) );[104X
     [4X    [104X
-    [4X    zz := ListWithIdenticalEntries( NrColumns( C ), z );[104X
+    [4X    zz := ListWithIdenticalEntries( NumberColumns( C ), z );[104X
     [4X    [104X
-    [4X    id := List( [ 1 .. NrRows( C ) ],[104X
+    [4X    id := List( [ 1 .. NumberRows( C ) ],[104X
     [4X                function(i)[104X
     [4X                  local z;[104X
     [4X                  z := ShallowCopy( zz ); z[i] := o; return z;[104X
@@ -231,7 +231,7 @@
     [4X    [104X
     [4X    id := homalgInternalMatrixHull( id );[104X
     [4X    [104X
-    [4X    SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );[104X
+    [4X    SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ), id );[104X
     [4X    [104X
     [4X    return id;[104X
     [4X    [104X
@@ -492,7 +492,7 @@
     [4X    #=====# can only work for homalg internal matrices #=====#[104X
     [4X    [104X
     [4X    return homalgInternalMatrixHull([104X
-    [4X                   Eval( M )!.matrix{[ 1 .. NrRows( M ) ]}{plist} );[104X
+    [4X                   Eval( M )!.matrix{[ 1 .. NumberRows( M ) ]}{plist} );[104X
     [4X    [104X
     [4Xend );[104X
   [4X[32X[104X
@@ -550,7 +550,7 @@
     [4X        [104X
     [4X        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then[104X
     [4X            [104X
-    [4X            e[i] := HomalgZeroMatrix( NrRows( e[i] ) + NrRows( e[i+1] ), NrColumns( e[i] ), HomalgRing( e[i] ) );[104X
+    [4X            e[i] := HomalgZeroMatrix( NumberRows( e[i] ) + NumberRows( e[i+1] ), NumberColumns( e[i] ), HomalgRing( e[i] ) );[104X
     [4X            [104X
     [4X            Remove( e, i + 1 );[104X
     [4X            [104X
@@ -600,7 +600,7 @@
     [4X            [104X
     [4X            U := ShallowCopy( Eval( A )!.matrix );[104X
     [4X            [104X
-    [4X            U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;[104X
+    [4X            U{ [ NumberRows( A ) + 1 .. NumberRows( A ) + NumberRows( B ) ] } := Eval( B )!.matrix;[104X
     [4X            [104X
     [4X            result := homalgInternalMatrixHull( U );[104X
     [4X            [104X
@@ -609,8 +609,8 @@
     [4X        return HomalgMatrixWithAttributes( [[104X
     [4X                    Eval, result,[104X
     [4X                    EvalUnionOfRows, [ A, B ],[104X
-    [4X                    NrRows, NrRows( A ) + NrRows( B ),[104X
-    [4X                    NrColumns, NrColumns( A ),[104X
+    [4X                    NumberRows, NumberRows( A ) + NumberRows( B ),[104X
+    [4X                    NumberColumns, NumberColumns( A ),[104X
     [4X                    ], R );[104X
     [4X        [104X
     [4X    end;[104X
@@ -686,7 +686,7 @@
     [4X        [104X
     [4X        if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then[104X
     [4X            [104X
-    [4X            e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );[104X
+    [4X            e[i] := HomalgZeroMatrix( NumberRows( e[i] ), NumberColumns( e[i] ) + NumberColumns( e[i+1] ), HomalgRing( e[i] ) );[104X
     [4X            [104X
     [4X            Remove( e, i + 1 );[104X
     [4X            [104X
@@ -736,8 +736,8 @@
     [4X            [104X
     [4X            U := List( Eval( A )!.matrix, ShallowCopy );[104X
     [4X            [104X
-    [4X            U{ [ 1 .. NrRows( A ) ] }[104X
-    [4X              { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }[104X
+    [4X            U{ [ 1 .. NumberRows( A ) ] }[104X
+    [4X              { [ NumberColumns( A ) + 1 .. NumberColumns( A ) + NumberColumns( B ) ] }[104X
     [4X              := Eval( B )!.matrix;[104X
     [4X            [104X
     [4X            result := homalgInternalMatrixHull( U );[104X
@@ -747,8 +747,8 @@
     [4X        return HomalgMatrixWithAttributes( [[104X
     [4X                    Eval, result,[104X
     [4X                    EvalUnionOfColumns, [ A, B ],[104X
-    [4X                    NrRows, NrRows( A ),[104X
-    [4X                    NrColumns, NrColumns( A ) + NrColumns( B )[104X
+    [4X                    NumberRows, NumberRows( A ),[104X
+    [4X                    NumberColumns, NumberColumns( A ) + NumberColumns( B )[104X
     [4X                    ], R );[104X
     [4X        [104X
     [4X    end;[104X
@@ -809,7 +809,7 @@
     [4X                                             if i = j then[104X
     [4X                                                 return e[i];[104X
     [4X                                             fi;[104X
-    [4X                                             return HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[j] ), R );[104X
+    [4X                                             return HomalgZeroMatrix( NumberRows( e[i] ), NumberColumns( e[j] ), R );[104X
     [4X                                           end )[104X
     [4X                                     )[104X
     [4X                             )[104X
@@ -820,8 +820,8 @@
     [4X    [104X
     [4X    z := Zero( R );[104X
     [4X    [104X
-    [4X    m := Sum( List( e, NrRows ) );[104X
-    [4X    n := Sum( List( e, NrColumns ) );[104X
+    [4X    m := Sum( List( e, NumberRows ) );[104X
+    [4X    n := Sum( List( e, NumberColumns ) );[104X
     [4X    [104X
     [4X    diag := List( [ 1 .. m ], a -> List( [ 1 .. n ], b -> z ) );[104X
     [4X    [104X
@@ -829,11 +829,11 @@
     [4X    n := 0;[104X
     [4X    [104X
     [4X    for mat in e do[104X
-    [4X        diag{ [ m + 1 .. m + NrRows( mat ) ] }{ [ n + 1 .. n + NrColumns( mat ) ] }[104X
+    [4X        diag{ [ m + 1 .. m + NumberRows( mat ) ] }{ [ n + 1 .. n + NumberColumns( mat ) ] }[104X
     [4X          := Eval( mat )!.matrix;[104X
     [4X        [104X
-    [4X        m := m + NrRows( mat );[104X
-    [4X        n := n + NrColumns( mat );[104X
+    [4X        m := m + NumberRows( mat );[104X
+    [4X        n := n + NumberColumns( mat );[104X
     [4X    od;[104X
     [4X    [104X
     [4X    return homalgInternalMatrixHull( diag );[104X

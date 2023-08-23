@@ -92,7 +92,7 @@
 InstallMethod( Eval,
         "for homalg matrices (IsInitialMatrix)",
         [ IsHomalgMatrix and IsInitialMatrix and
-          HasNrRows and HasNrColumns ],
+          HasNumberRows and HasNumberColumns ],
         
   function( C )
     local R, RP, z, zz;
@@ -118,9 +118,9 @@ InstallMethod( Eval,
     
     ResetFilterObj( C, IsInitialMatrix );
     
-    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    zz := ListWithIdenticalEntries( NumberColumns( C ), z );
     
-    SetEval( C, homalgInternalMatrixHull( List( [ 1 .. NrRows( C ) ], i -&gt; ShallowCopy( zz ) ) ) );
+    SetEval( C, homalgInternalMatrixHull( List( [ 1 .. NumberRows( C ) ], i -&gt; ShallowCopy( zz ) ) ) );
     
     return Eval( C );
     
@@ -141,7 +141,7 @@ end );
 InstallMethod( Eval,
         "for homalg matrices (IsInitialIdentityMatrix)",
         [ IsHomalgMatrix and IsInitialIdentityMatrix and
-          HasNrRows and HasNrColumns ],
+          HasNumberRows and HasNumberColumns ],
         
   function( C )
     local R, RP, o, z, zz, id;
@@ -168,9 +168,9 @@ InstallMethod( Eval,
     
     ResetFilterObj( C, IsInitialIdentityMatrix );
     
-    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    zz := ListWithIdenticalEntries( NumberColumns( C ), z );
     
-    id := List( [ 1 .. NrRows( C ) ],
+    id := List( [ 1 .. NumberRows( C ) ],
                 function(i)
                   local z;
                   z := ShallowCopy( zz ); z[i] := o; return z;
@@ -196,7 +196,7 @@ end );
 <div class="example"><pre>
 InstallMethod( Eval,
         "for homalg matrices (IsZero)",
-        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 40,
+        [ IsHomalgMatrix and IsZero and HasNumberRows and HasNumberColumns ], 40,
         
   function( C )
     local R, RP, z;
@@ -205,7 +205,7 @@ InstallMethod( Eval,
     
     RP := homalgTable( R );
     
-    if ( NrRows( C ) = 0 or NrColumns( C ) = 0 ) and
+    if ( NumberRows( C ) = 0 or NumberColumns( C ) = 0 ) and
        not ( IsBound( R!.SafeToEvaluateEmptyMatrices ) and
              R!.SafeToEvaluateEmptyMatrices = true ) then
         Info( InfoWarning, 1, "\033[01m\033[5;31;47m",
@@ -229,8 +229,8 @@ InstallMethod( Eval,
     ## copying the rows saves memory;
     ## we assume that the entries are never modified!!!
     return homalgInternalMatrixHull(
-                   ListWithIdenticalEntries( NrRows( C ),
-                           ListWithIdenticalEntries( NrColumns( C ), z ) ) );
+                   ListWithIdenticalEntries( NumberRows( C ),
+                           ListWithIdenticalEntries( NumberColumns( C ), z ) ) );
     
 end );
 </pre></div>
@@ -248,7 +248,7 @@ end );
 <div class="example"><pre>
 InstallMethod( Eval,
         "for homalg matrices (IsOne)",
-        [ IsHomalgMatrix and IsOne and HasNrRows and HasNrColumns ], 10,
+        [ IsHomalgMatrix and IsOne and HasNumberRows and HasNumberColumns ], 10,
         
   function( C )
     local R, id, RP, o, z, zz;
@@ -256,7 +256,7 @@ InstallMethod( Eval,
     R := HomalgRing( C );
     
     if IsBound( R!.IdentityMatrices ) then
-        id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ) );
+        id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ) );
         if id &lt;&gt; fail then
             R!.IdentityMatrices!.cache_hits := R!.IdentityMatrices!.cache_hits + 1;
             return id;
@@ -268,7 +268,7 @@ InstallMethod( Eval,
     
     if IsBound( RP!.IdentityMatrix ) then
         id := RP!.IdentityMatrix( C );
-        SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );
+        SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ), id );
         R!.IdentityMatrices!.counter := R!.IdentityMatrices!.counter + 1;
         return id;
     fi;
@@ -283,9 +283,9 @@ InstallMethod( Eval,
     z := Zero( HomalgRing( C ) );
     o := One( HomalgRing( C ) );
     
-    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    zz := ListWithIdenticalEntries( NumberColumns( C ), z );
     
-    id := List( [ 1 .. NrRows( C ) ],
+    id := List( [ 1 .. NumberRows( C ) ],
                 function(i)
                   local z;
                   z := ShallowCopy( zz ); z[i] := o; return z;
@@ -293,7 +293,7 @@ InstallMethod( Eval,
     
     id := homalgInternalMatrixHull( id );
     
-    SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );
+    SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NumberColumns( C ), id );
     
     return id;
     
@@ -560,7 +560,7 @@ InstallMethod( Eval,
     #=====# can only work for homalg internal matrices #=====#
     
     return homalgInternalMatrixHull(
-                   Eval( M )!.matrix{[ 1 .. NrRows( M ) ]}{plist} );
+                   Eval( M )!.matrix{[ 1 .. NumberRows( M ) ]}{plist} );
     
 end );
 </pre></div>
@@ -618,7 +618,7 @@ InstallMethod( Eval,
         
         if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
             
-            e[i] := HomalgZeroMatrix( NrRows( e[i] ) + NrRows( e[i+1] ), NrColumns( e[i] ), HomalgRing( e[i] ) );
+            e[i] := HomalgZeroMatrix( NumberRows( e[i] ) + NumberRows( e[i+1] ), NumberColumns( e[i] ), HomalgRing( e[i] ) );
             
             Remove( e, i + 1 );
             
@@ -668,7 +668,7 @@ InstallMethod( Eval,
             
             U := ShallowCopy( Eval( A )!.matrix );
             
-            U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;
+            U{ [ NumberRows( A ) + 1 .. NumberRows( A ) + NumberRows( B ) ] } := Eval( B )!.matrix;
             
             result := homalgInternalMatrixHull( U );
             
@@ -677,8 +677,8 @@ InstallMethod( Eval,
         return HomalgMatrixWithAttributes( [
                     Eval, result,
                     EvalUnionOfRows, [ A, B ],
-                    NrRows, NrRows( A ) + NrRows( B ),
-                    NrColumns, NrColumns( A ),
+                    NumberRows, NumberRows( A ) + NumberRows( B ),
+                    NumberColumns, NumberColumns( A ),
                     ], R );
         
     end;
@@ -754,7 +754,7 @@ InstallMethod( Eval,
         
         if HasIsZero( e[i] ) and IsZero( e[i] ) and HasIsZero( e[i+1] ) and IsZero( e[i+1] ) then
             
-            e[i] := HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[i] ) + NrColumns( e[i+1] ), HomalgRing( e[i] ) );
+            e[i] := HomalgZeroMatrix( NumberRows( e[i] ), NumberColumns( e[i] ) + NumberColumns( e[i+1] ), HomalgRing( e[i] ) );
             
             Remove( e, i + 1 );
             
@@ -804,8 +804,8 @@ InstallMethod( Eval,
             
             U := List( Eval( A )!.matrix, ShallowCopy );
             
-            U{ [ 1 .. NrRows( A ) ] }
-              { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
+            U{ [ 1 .. NumberRows( A ) ] }
+              { [ NumberColumns( A ) + 1 .. NumberColumns( A ) + NumberColumns( B ) ] }
               := Eval( B )!.matrix;
             
             result := homalgInternalMatrixHull( U );
@@ -815,8 +815,8 @@ InstallMethod( Eval,
         return HomalgMatrixWithAttributes( [
                     Eval, result,
                     EvalUnionOfColumns, [ A, B ],
-                    NrRows, NrRows( A ),
-                    NrColumns, NrColumns( A ) + NrColumns( B )
+                    NumberRows, NumberRows( A ),
+                    NumberColumns, NumberColumns( A ) + NumberColumns( B )
                     ], R );
         
     end;
@@ -878,7 +878,7 @@ InstallMethod( Eval,
                                              if i = j then
                                                  return e[i];
                                              fi;
-                                             return HomalgZeroMatrix( NrRows( e[i] ), NrColumns( e[j] ), R );
+                                             return HomalgZeroMatrix( NumberRows( e[i] ), NumberColumns( e[j] ), R );
                                            end )
                                      )
                              )
@@ -889,8 +889,8 @@ InstallMethod( Eval,
     
     z := Zero( R );
     
-    m := Sum( List( e, NrRows ) );
-    n := Sum( List( e, NrColumns ) );
+    m := Sum( List( e, NumberRows ) );
+    n := Sum( List( e, NumberColumns ) );
     
     diag := List( [ 1 .. m ], a -&gt; List( [ 1 .. n ], b -&gt; z ) );
     
@@ -898,11 +898,11 @@ InstallMethod( Eval,
     n := 0;
     
     for mat in e do
-        diag{ [ m + 1 .. m + NrRows( mat ) ] }{ [ n + 1 .. n + NrColumns( mat ) ] }
+        diag{ [ m + 1 .. m + NumberRows( mat ) ] }{ [ n + 1 .. n + NumberColumns( mat ) ] }
           := Eval( mat )!.matrix;
         
-        m := m + NrRows( mat );
-        n := n + NrColumns( mat );
+        m := m + NumberRows( mat );
+        n := n + NumberColumns( mat );
     od;
     
     return homalgInternalMatrixHull( diag );

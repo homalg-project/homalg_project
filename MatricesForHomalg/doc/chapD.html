@@ -59,8 +59,8 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD.html#X79A1C9297BE0C09A">D.2-16 SubMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD.html#X875447A686949D59">D.2-17 Compose</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD.html#X78D7BABE806B82FA">D.2-18 IsZeroMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD.html#X78BBB7CE7D6C1CAD">D.2-19 NrRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD.html#X7B5809EA8236F9F4">D.2-20 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD.html#X85CE26418598FACE">D.2-19 NumberRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD.html#X79A76B1A7CB57518">D.2-20 NumberColumns</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD.html#X80831B287AB565BA">D.2-21 Determinant</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapD.html#X7A537DB185A0F67C">D.3 <span class="Heading">Some of the Recommended Tool Operations</span></a>
@@ -195,7 +195,7 @@ SyzygiesGeneratorsOfRows :=
         rel := Involution( rel );
     fi;
     
-    rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
+    rel := DiagMat( ListWithIdenticalEntries( NumberColumns( M ), rel ) );
     
     S := SyzygiesGeneratorsOfRows( Eval( M ), rel );
     
@@ -237,7 +237,7 @@ SyzygiesGeneratorsOfColumns :=
         rel := Involution( rel );
     fi;
     
-    rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
+    rel := DiagMat( ListWithIdenticalEntries( NumberRows( M ), rel ) );
     
     S := SyzygiesGeneratorsOfColumns( Eval( M ), rel );
     
@@ -279,12 +279,12 @@ BasisOfRowsCoeff :=
     
     nz := NonZeroRows( bas );
     
-    SetEval( T, CertainRows( CertainColumns( TT, [ 1 .. NrRows( M ) ] ), nz ) );
+    SetEval( T, CertainRows( CertainColumns( TT, [ 1 .. NumberRows( M ) ] ), nz ) );
     
     ResetFilterObj( T, IsVoidMatrix );
     
     ## the generic BasisOfRowsCoeff will assume that
-    ## ( NrRows( B ) = 0 ) = IsZero( B )
+    ## ( NumberRows( B ) = 0 ) = IsZero( B )
     return CertainRows( bas, nz );
     
   end,
@@ -313,12 +313,12 @@ BasisOfColumnsCoeff :=
     
     nz := NonZeroColumns( bas );
     
-    SetEval( T, CertainColumns( CertainRows( TT, [ 1 .. NrColumns( M ) ] ), nz ) );
+    SetEval( T, CertainColumns( CertainRows( TT, [ 1 .. NumberColumns( M ) ] ), nz ) );
     
     ResetFilterObj( T, IsVoidMatrix );
     
     ## the generic BasisOfColumnsCoeff will assume that
-    ## ( NrColumns( B ) = 0 ) = IsZero( B )
+    ## ( NumberColumns( B ) = 0 ) = IsZero( B )
     return CertainColumns( bas, nz );
     
   end,
@@ -343,7 +343,7 @@ DecideZeroRowsEffectively :=
     
     red := DecideZeroRowsEffectively( Eval( A ), Brel, TT );
     
-    SetEval( T, CertainColumns( TT, [ 1 .. NrRows( B ) ] ) );
+    SetEval( T, CertainColumns( TT, [ 1 .. NumberRows( B ) ] ) );
     
     ResetFilterObj( T, IsVoidMatrix );
     
@@ -371,7 +371,7 @@ DecideZeroColumnsEffectively :=
     
     red := DecideZeroColumnsEffectively( Eval( A ), Brel, TT );
     
-    SetEval( T, CertainRows( TT, [ 1 .. NrColumns( B ) ] ) );
+    SetEval( T, CertainRows( TT, [ 1 .. NumberColumns( B ) ] ) );
     
     ResetFilterObj( T, IsVoidMatrix );
     
@@ -462,7 +462,7 @@ RelativeSyzygiesGeneratorsOfColumns :=
 
 <div class="example"><pre>
 InitialMatrix := C -&gt; HomalgInitialMatrix(
-                      NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),
+                      NumberRows( C ), NumberColumns( C ), AmbientRing( HomalgRing( C ) ) ),
 </pre></div>
 
 <p><a id="X7D0F99857E280142" name="X7D0F99857E280142"></a></p>
@@ -477,7 +477,7 @@ InitialMatrix := C -&gt; HomalgInitialMatrix(
 
 <div class="example"><pre>
 InitialIdentityMatrix := C -&gt; HomalgInitialIdentityMatrix(
-        NrRows( C ), AmbientRing( HomalgRing( C ) ) ),
+        NumberRows( C ), AmbientRing( HomalgRing( C ) ) ),
 </pre></div>
 
 <p><a id="X80393225841391E7" name="X80393225841391E7"></a></p>
@@ -492,7 +492,7 @@ InitialIdentityMatrix := C -&gt; HomalgInitialIdentityMatrix(
 
 <div class="example"><pre>
 ZeroMatrix := C -&gt; HomalgZeroMatrix(
-                      NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),
+                      NumberRows( C ), NumberColumns( C ), AmbientRing( HomalgRing( C ) ) ),
 </pre></div>
 
 <p><a id="X811B306C81435D87" name="X811B306C81435D87"></a></p>
@@ -507,7 +507,7 @@ ZeroMatrix := C -&gt; HomalgZeroMatrix(
 
 <div class="example"><pre>
 IdentityMatrix := C -&gt; HomalgIdentityMatrix(
-        NrRows( C ), AmbientRing( HomalgRing( C ) ) ),
+        NumberRows( C ), AmbientRing( HomalgRing( C ) ) ),
 </pre></div>
 
 <p><a id="X7B322C637FC26E2D" name="X7B322C637FC26E2D"></a></p>
@@ -873,32 +873,32 @@ Compose :=
 IsZeroMatrix := M -&gt; IsZero( DecideZero( Eval( M ), HomalgRing( M ) ) ),
 </pre></div>
 
-<p><a id="X78BBB7CE7D6C1CAD" name="X78BBB7CE7D6C1CAD"></a></p>
+<p><a id="X85CE26418598FACE" name="X85CE26418598FACE"></a></p>
 
-<h5>D.2-19 NrRows</h5>
+<h5>D.2-19 NumberRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
-<p>(--&gt; <code class="func">NrRows</code> (<a href="chapB.html#X7AE057CF7C6B0EE0"><span class="RefLink">B.1-21</span></a>))</p>
+<p>(--&gt; <code class="func">NumberRows</code> (<a href="chapB.html#X7F4D7FAF821DA1C2"><span class="RefLink">B.1-21</span></a>))</p>
 
 
 <div class="example"><pre>
-NrRows := C -&gt; NrRows( Eval( C ) ),
+NumberRows := C -&gt; NumberRows( Eval( C ) ),
 </pre></div>
 
-<p><a id="X7B5809EA8236F9F4" name="X7B5809EA8236F9F4"></a></p>
+<p><a id="X79A76B1A7CB57518" name="X79A76B1A7CB57518"></a></p>
 
-<h5>D.2-20 NrColumns</h5>
+<h5>D.2-20 NumberColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
-<p>(--&gt; <code class="func">NrColumns</code> (<a href="chapB.html#X7D8E706887116F30"><span class="RefLink">B.1-22</span></a>))</p>
+<p>(--&gt; <code class="func">NumberColumns</code> (<a href="chapB.html#X7DFA534B7AFA2E17"><span class="RefLink">B.1-22</span></a>))</p>
 
 
 <div class="example"><pre>
-NrColumns := C -&gt; NrColumns( Eval( C ) ),
+NumberColumns := C -&gt; NumberColumns( Eval( C ) ),
 </pre></div>
 
 <p><a id="X80831B287AB565BA" name="X80831B287AB565BA"></a></p>

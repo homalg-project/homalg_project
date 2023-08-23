@@ -272,10 +272,10 @@
       ResidueClassRing D.2-14 
   [2XNonZeroColumns[102X 5.4-7 
   [2XNonZeroRows[102X 5.4-6 
-  [2XNrColumns[102X 5.4-2 
+  [2XNumberColumns[102X 5.4-2 
       homalgTable entry B.1-22 
       ResidueClassRing D.2-20 
-  [2XNrRows[102X 5.4-1 
+  [2XNumberRows[102X 5.4-1 
       homalgTable entry B.1-21 
       ResidueClassRing D.2-19 
   [2XNumeratorOfHilbertPoincareSeries[102X 5.4-17 

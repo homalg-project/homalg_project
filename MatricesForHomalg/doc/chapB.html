@@ -45,8 +45,8 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7FE11AA27AE7D2D7">B.1-18 SubMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7D491D957E63C3A4">B.1-19 Compose</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X849BB912798A01EB">B.1-20 IsZeroMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7AE057CF7C6B0EE0">B.1-21 NrRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7D8E706887116F30">B.1-22 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7F4D7FAF821DA1C2">B.1-21 NumberRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7DFA534B7AFA2E17">B.1-22 NumberColumns</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X80A573257D7F2E1A">B.1-23 Determinant</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X8450E904787CBD35">B.1-24 CoefficientsWithGivenMonomials</a></span>
 </div></div>
@@ -286,18 +286,18 @@ InstallMethod( IsZero,
 end );
 </pre></div>
 
-<p><a id="X7AE057CF7C6B0EE0" name="X7AE057CF7C6B0EE0"></a></p>
+<p><a id="X7F4D7FAF821DA1C2" name="X7F4D7FAF821DA1C2"></a></p>
 
-<h5>B.1-21 NrRows</h5>
+<h5>B.1-21 NumberRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
-<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">NrRows</code> is bound then the standard method for the attribute <code class="func">NrRows</code> (<a href="chap5.html#X7AAEA5B1875BEE2D"><span class="RefLink">5.4-1</span></a>) shown below returns <span class="SimpleMath">RP</span>!.<code class="code">NrRows</code><span class="SimpleMath">( <var class="Arg">C</var> )</span>.</p>
+<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">NumberRows</code> is bound then the standard method for the attribute <code class="func">NumberRows</code> (<a href="chap5.html#X7C72971F7D0CA3C8"><span class="RefLink">5.4-1</span></a>) shown below returns <span class="SimpleMath">RP</span>!.<code class="code">NumberRows</code><span class="SimpleMath">( <var class="Arg">C</var> )</span>.</p>
 
 
 <div class="example"><pre>
-InstallMethod( NrRows,
+InstallMethod( NumberRows,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -308,12 +308,12 @@ InstallMethod( NrRows,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.NrRows) then
-        return RP!.NrRows( C );
+    if IsBound(RP!.NumberRows) then
+        return RP!.NumberRows( C );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrRows ",
+        Error( "could not find a procedure called NumberRows ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
@@ -324,18 +324,18 @@ InstallMethod( NrRows,
 end );
 </pre></div>
 
-<p><a id="X7D8E706887116F30" name="X7D8E706887116F30"></a></p>
+<p><a id="X7DFA534B7AFA2E17" name="X7DFA534B7AFA2E17"></a></p>
 
-<h5>B.1-22 NrColumns</h5>
+<h5>B.1-22 NumberColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
-<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">NrColumns</code> is bound then the standard method for the attribute <code class="func">NrColumns</code> (<a href="chap5.html#X781766A47B5D41AD"><span class="RefLink">5.4-2</span></a>) shown below returns <span class="SimpleMath">RP</span>!.<code class="code">NrColumns</code><span class="SimpleMath">( <var class="Arg">C</var> )</span>.</p>
+<p>Let <span class="SimpleMath">R :=</span> <code class="code">HomalgRing</code><span class="SimpleMath">( <var class="Arg">C</var> )</span> and <span class="SimpleMath">RP :=</span> <code class="code">homalgTable</code><span class="SimpleMath">( R )</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">RP</span>!.<code class="code">NumberColumns</code> is bound then the standard method for the attribute <code class="func">NumberColumns</code> (<a href="chap5.html#X847D45BF7F2BC67C"><span class="RefLink">5.4-2</span></a>) shown below returns <span class="SimpleMath">RP</span>!.<code class="code">NumberColumns</code><span class="SimpleMath">( <var class="Arg">C</var> )</span>.</p>
 
 
 <div class="example"><pre>
-InstallMethod( NrColumns,
+InstallMethod( NumberColumns,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -346,12 +346,12 @@ InstallMethod( NrColumns,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.NrColumns) then
-        return RP!.NrColumns( C );
+    if IsBound(RP!.NumberColumns) then
+        return RP!.NumberColumns( C );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrColumns ",
+        Error( "could not find a procedure called NumberColumns ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
@@ -384,7 +384,7 @@ InstallMethod( DeterminantMat,
     
     RP := homalgTable( R );
     
-    if NrRows( C ) &lt;&gt; NrColumns( C ) then
+    if NumberRows( C ) &lt;&gt; NumberColumns( C ) then
         Error( "the matrix is not a square matrix\n" );
     fi;
     
@@ -540,7 +540,7 @@ InstallMethod( IsOne,
   function( M )
     local R, RP;
     
-    if NrRows( M ) &lt;&gt; NrColumns( M ) then
+    if NumberRows( M ) &lt;&gt; NumberColumns( M ) then
         return false;
     fi;
     
@@ -554,7 +554,7 @@ InstallMethod( IsOne,
     
     #=====# the fallback method #=====#
     
-    return M = HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    return M = HomalgIdentityMatrix( NumberRows( M ), HomalgRing( M ) );
     
 end );
 </pre></div>
@@ -589,7 +589,7 @@ InstallMethod( IsDiagonalMatrix,
     
     diag := DiagonalEntries( M );
     
-    return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );
+    return M = HomalgDiagonalMatrix( diag, NumberRows( M ), NumberColumns( M ), R );
     
 end );
 </pre></div>
@@ -622,9 +622,9 @@ InstallMethod( ZeroRows,
     
     #=====# the fallback method #=====#
     
-    z := HomalgZeroMatrix( 1, NrColumns( C ), R );
+    z := HomalgZeroMatrix( 1, NumberColumns( C ), R );
     
-    return Filtered( [ 1 .. NrRows( C ) ], a -&gt; CertainRows( C, [ a ] ) = z );
+    return Filtered( [ 1 .. NumberRows( C ) ], a -&gt; CertainRows( C, [ a ] ) = z );
     
 end );
 </pre></div>
@@ -657,9 +657,9 @@ InstallMethod( ZeroColumns,
     
     #=====# the fallback method #=====#
     
-    z := HomalgZeroMatrix( NrRows( C ), 1, R );
+    z := HomalgZeroMatrix( NumberRows( C ), 1, R );
     
-    return Filtered( [ 1 .. NrColumns( C ) ], a -&gt; CertainColumns( C, [ a ] ) = z );
+    return Filtered( [ 1 .. NumberColumns( C ) ], a -&gt; CertainColumns( C, [ a ] ) = z );
     
 end );
 </pre></div>
@@ -707,11 +707,11 @@ InstallMethod( GetColumnIndependentUnitPositions,
     
     #=====# the fallback method #=====#
     
-    rest := [ 1 .. NrColumns( M ) ];
+    rest := [ 1 .. NumberColumns( M ) ];
     
     pos := [ ];
     
-    for i in [ 1 .. NrRows( M ) ] do
+    for i in [ 1 .. NumberRows( M ) ] do
         for k in Reversed( rest ) do
             if not [ i, k ] in poslist and
                IsUnit( R, M[ i, k ] ) then
@@ -777,11 +777,11 @@ InstallMethod( GetRowIndependentUnitPositions,
     
     #=====# the fallback method #=====#
     
-    rest := [ 1 .. NrRows( M ) ];
+    rest := [ 1 .. NumberRows( M ) ];
     
     pos := [ ];
     
-    for j in [ 1 .. NrColumns( M ) ] do
+    for j in [ 1 .. NumberColumns( M ) ] do
         for k in Reversed( rest ) do
             if not [ j, k ] in poslist and
                IsUnit( R, M[ k, j ] ) then
@@ -836,8 +836,8 @@ InstallMethod( GetUnitPosition,
     
     #=====# the fallback method #=====#
     
-    m := NrRows( M );
-    n := NrColumns( M );
+    m := NumberRows( M );
+    n := NumberColumns( M );
     
     for i in [ 1 .. m ] do
         for j in [ 1 .. n ] do
@@ -886,8 +886,8 @@ InstallMethod( PositionOfFirstNonZeroEntryPerRow,
     
     entries := EntriesOfHomalgMatrix( M );
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     pos := ListWithIdenticalEntries( r, 0 );
     
@@ -938,8 +938,8 @@ InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
     
     entries := EntriesOfHomalgMatrix( M );
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    r := NumberRows( M );
+    c := NumberColumns( M );
     
     pos := ListWithIdenticalEntries( c, 0 );
     

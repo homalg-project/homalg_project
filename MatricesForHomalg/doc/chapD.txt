@@ -104,7 +104,7 @@
     [4X        rel := Involution( rel );[104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );[104X
+    [4X    rel := DiagMat( ListWithIdenticalEntries( NumberColumns( M ), rel ) );[104X
     [4X    [104X
     [4X    S := SyzygiesGeneratorsOfRows( Eval( M ), rel );[104X
     [4X    [104X
@@ -143,7 +143,7 @@
     [4X        rel := Involution( rel );[104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );[104X
+    [4X    rel := DiagMat( ListWithIdenticalEntries( NumberRows( M ), rel ) );[104X
     [4X    [104X
     [4X    S := SyzygiesGeneratorsOfColumns( Eval( M ), rel );[104X
     [4X    [104X
@@ -182,12 +182,12 @@
     [4X    [104X
     [4X    nz := NonZeroRows( bas );[104X
     [4X    [104X
-    [4X    SetEval( T, CertainRows( CertainColumns( TT, [ 1 .. NrRows( M ) ] ), nz ) );[104X
+    [4X    SetEval( T, CertainRows( CertainColumns( TT, [ 1 .. NumberRows( M ) ] ), nz ) );[104X
     [4X    [104X
     [4X    ResetFilterObj( T, IsVoidMatrix );[104X
     [4X    [104X
     [4X    ## the generic BasisOfRowsCoeff will assume that[104X
-    [4X    ## ( NrRows( B ) = 0 ) = IsZero( B )[104X
+    [4X    ## ( NumberRows( B ) = 0 ) = IsZero( B )[104X
     [4X    return CertainRows( bas, nz );[104X
     [4X    [104X
     [4X  end,[104X
@@ -213,12 +213,12 @@
     [4X    [104X
     [4X    nz := NonZeroColumns( bas );[104X
     [4X    [104X
-    [4X    SetEval( T, CertainColumns( CertainRows( TT, [ 1 .. NrColumns( M ) ] ), nz ) );[104X
+    [4X    SetEval( T, CertainColumns( CertainRows( TT, [ 1 .. NumberColumns( M ) ] ), nz ) );[104X
     [4X    [104X
     [4X    ResetFilterObj( T, IsVoidMatrix );[104X
     [4X    [104X
     [4X    ## the generic BasisOfColumnsCoeff will assume that[104X
-    [4X    ## ( NrColumns( B ) = 0 ) = IsZero( B )[104X
+    [4X    ## ( NumberColumns( B ) = 0 ) = IsZero( B )[104X
     [4X    return CertainColumns( bas, nz );[104X
     [4X    [104X
     [4X  end,[104X
@@ -240,7 +240,7 @@
     [4X    [104X
     [4X    red := DecideZeroRowsEffectively( Eval( A ), Brel, TT );[104X
     [4X    [104X
-    [4X    SetEval( T, CertainColumns( TT, [ 1 .. NrRows( B ) ] ) );[104X
+    [4X    SetEval( T, CertainColumns( TT, [ 1 .. NumberRows( B ) ] ) );[104X
     [4X    [104X
     [4X    ResetFilterObj( T, IsVoidMatrix );[104X
     [4X    [104X
@@ -265,7 +265,7 @@
     [4X    [104X
     [4X    red := DecideZeroColumnsEffectively( Eval( A ), Brel, TT );[104X
     [4X    [104X
-    [4X    SetEval( T, CertainRows( TT, [ 1 .. NrColumns( B ) ] ) );[104X
+    [4X    SetEval( T, CertainRows( TT, [ 1 .. NumberColumns( B ) ] ) );[104X
     [4X    [104X
     [4X    ResetFilterObj( T, IsVoidMatrix );[104X
     [4X    [104X
@@ -347,7 +347,7 @@
   
   [4X[32X  Code  [32X[104X
     [4XInitialMatrix := C -> HomalgInitialMatrix([104X
-    [4X                      NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),[104X
+    [4X                      NumberRows( C ), NumberColumns( C ), AmbientRing( HomalgRing( C ) ) ),[104X
   [4X[32X[104X
   
   [1XD.2-2 InitialIdentityMatrix[101X
@@ -359,7 +359,7 @@
   
   [4X[32X  Code  [32X[104X
     [4XInitialIdentityMatrix := C -> HomalgInitialIdentityMatrix([104X
-    [4X        NrRows( C ), AmbientRing( HomalgRing( C ) ) ),[104X
+    [4X        NumberRows( C ), AmbientRing( HomalgRing( C ) ) ),[104X
   [4X[32X[104X
   
   [1XD.2-3 ZeroMatrix[101X
@@ -371,7 +371,7 @@
   
   [4X[32X  Code  [32X[104X
     [4XZeroMatrix := C -> HomalgZeroMatrix([104X
-    [4X                      NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),[104X
+    [4X                      NumberRows( C ), NumberColumns( C ), AmbientRing( HomalgRing( C ) ) ),[104X
   [4X[32X[104X
   
   [1XD.2-4 IdentityMatrix[101X
@@ -383,7 +383,7 @@
   
   [4X[32X  Code  [32X[104X
     [4XIdentityMatrix := C -> HomalgIdentityMatrix([104X
-    [4X        NrRows( C ), AmbientRing( HomalgRing( C ) ) ),[104X
+    [4X        NumberRows( C ), AmbientRing( HomalgRing( C ) ) ),[104X
   [4X[32X[104X
   
   [1XD.2-5 Involution[101X
@@ -707,26 +707,26 @@
     [4XIsZeroMatrix := M -> IsZero( DecideZero( Eval( M ), HomalgRing( M ) ) ),[104X
   [4X[32X[104X
   
-  [1XD.2-19 NrRows[101X
+  [1XD.2-19 NumberRows[101X
   
-  [33X[1;0Y[29X[2XNrRows[102X( [3XC[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XNumberRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
-  [33X[0;0Y(--> [2XNrRows[102X ([14XB.1-21[114X))[133X
+  [33X[0;0Y(--> [2XNumberRows[102X ([14XB.1-21[114X))[133X
   
   [4X[32X  Code  [32X[104X
-    [4XNrRows := C -> NrRows( Eval( C ) ),[104X
+    [4XNumberRows := C -> NumberRows( Eval( C ) ),[104X
   [4X[32X[104X
   
-  [1XD.2-20 NrColumns[101X
+  [1XD.2-20 NumberColumns[101X
   
-  [33X[1;0Y[29X[2XNrColumns[102X( [3XC[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XNumberColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
-  [33X[0;0Y(--> [2XNrColumns[102X ([14XB.1-22[114X))[133X
+  [33X[0;0Y(--> [2XNumberColumns[102X ([14XB.1-22[114X))[133X
   
   [4X[32X  Code  [32X[104X
-    [4XNrColumns := C -> NrColumns( Eval( C ) ),[104X
+    [4XNumberColumns := C -> NumberColumns( Eval( C ) ),[104X
   [4X[32X[104X
   
   [1XD.2-21 Determinant[101X

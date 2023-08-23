@@ -6,10 +6,10 @@
                        [1X Matrices for the homalg project [101X
   
   
-                                   2023.02-04
+                                   2023.08-01
   
   
-                                28 February 2023
+                                 23 August 2023
   
   
                                 Mohamed Barakat
@@ -241,8 +241,8 @@
       5.3-27 IsInitialIdentityMatrix
       5.3-28 IsVoidMatrix
     5.4 [33X[0;0YMatrices: Attributes[133X
-      5.4-1 NrRows
-      5.4-2 NrColumns
+      5.4-1 NumberRows
+      5.4-2 NumberColumns
       5.4-3 DeterminantMat
       5.4-4 ZeroRows
       5.4-5 ZeroColumns
@@ -369,8 +369,8 @@
       B.1-18 SubMat
       B.1-19 Compose
       B.1-20 IsZeroMatrix
-      B.1-21 NrRows
-      B.1-22 NrColumns
+      B.1-21 NumberRows
+      B.1-22 NumberColumns
       B.1-23 Determinant
       B.1-24 CoefficientsWithGivenMonomials
     B.2 [33X[0;0YThe Tool Operations with a Fallback Method[133X
@@ -443,8 +443,8 @@
       D.2-16 SubMat
       D.2-17 Compose
       D.2-18 IsZeroMatrix
-      D.2-19 NrRows
-      D.2-20 NrColumns
+      D.2-19 NumberRows
+      D.2-20 NumberColumns
       D.2-21 Determinant
     D.3 [33X[0;0YSome of the Recommended Tool Operations[133X
       D.3-1 AreEqualMatrices

@@ -566,23 +566,23 @@
   
   [1X5.4 [33X[0;0YMatrices: Attributes[133X[101X
   
-  [1X5.4-1 NrRows[101X
+  [1X5.4-1 NumberRows[101X
   
-  [33X[1;0Y[29X[2XNrRows[102X( [3XA[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XNumberRows[102X( [3XA[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
   [33X[0;0YThe number of rows of the matrix [3XA[103X.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XNrRows[102X ([14XB.1-21[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XNumberRows[102X ([14XB.1-21[114X))[133X
   
-  [1X5.4-2 NrColumns[101X
+  [1X5.4-2 NumberColumns[101X
   
-  [33X[1;0Y[29X[2XNrColumns[102X( [3XA[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XNumberColumns[102X( [3XA[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
   [33X[0;0YThe number of columns of the matrix [3XA[103X.[133X
   
-  [33X[0;0Y(for the installed standard method see [2XNrColumns[102X ([14XB.1-22[114X))[133X
+  [33X[0;0Y(for the installed standard method see [2XNumberColumns[102X ([14XB.1-22[114X))[133X
   
   [1X5.4-3 DeterminantMat[101X
   
@@ -791,7 +791,7 @@
     [4X  function( RI )[104X
     [4X    local Id, LI;[104X
     [4X    [104X
-    [4X    Id := HomalgIdentityMatrix( NrColumns( RI ), HomalgRing( RI ) );[104X
+    [4X    Id := HomalgIdentityMatrix( NumberColumns( RI ), HomalgRing( RI ) );[104X
     [4X    [104X
     [4X    LI := RightDivide( Id, RI ); ## ( cf. [BR08, Subsection 3.1.3] )[104X
     [4X    [104X
@@ -812,9 +812,9 @@
     [4X    [104X
     [4X    SetRightInverse( LI, RI );[104X
     [4X    [104X
-    [4X    SetNrColumns( LI, NrRows( RI ) );[104X
+    [4X    SetNumberColumns( LI, NumberRows( RI ) );[104X
     [4X    [104X
-    [4X    if NrRows( RI ) = NrColumns( RI ) then[104X
+    [4X    if NumberRows( RI ) = NumberColumns( RI ) then[104X
     [4X        ## a left inverse of a ring element is unique[104X
     [4X        ## and coincides with the right inverse[104X
     [4X        SetRightInverse( RI, LI );[104X
@@ -842,7 +842,7 @@
     [4X  function( LI )[104X
     [4X    local Id, RI;[104X
     [4X    [104X
-    [4X    Id := HomalgIdentityMatrix( NrRows( LI ), HomalgRing( LI ) );[104X
+    [4X    Id := HomalgIdentityMatrix( NumberRows( LI ), HomalgRing( LI ) );[104X
     [4X    [104X
     [4X    RI := LeftDivide( LI, Id ); ## ( cf. [BR08, Subsection 3.1.3] )[104X
     [4X    [104X
@@ -863,9 +863,9 @@
     [4X    [104X
     [4X    SetLeftInverse( RI, LI );[104X
     [4X    [104X
-    [4X    SetNrRows( RI, NrColumns( LI ) );[104X
+    [4X    SetNumberRows( RI, NumberColumns( LI ) );[104X
     [4X    [104X
-    [4X    if NrRows( LI ) = NrColumns( LI ) then[104X
+    [4X    if NumberRows( LI ) = NumberColumns( LI ) then[104X
     [4X        ## a right inverse of a ring element is unique[104X
     [4X        ## and coincides with the left inverse[104X
     [4X        SetLeftInverse( LI, RI );[104X
@@ -1146,13 +1146,13 @@
   
   [33X[0;0YLet  [22XR[122X be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )) and [22XS[122X be the
   row  span  of  [3XM[103X,  i.e.  the  [22XR[122X-submodule  of  the  free  left module [22XR^(1 ×
-  NrColumns(  [3XM[103X  ))[122X  spanned  by  the  rows  of [3XM[103X. A solution to the [21Xsubmodule
+  NumberColumns(  [3XM[103X  ))[122X  spanned by the rows of [3XM[103X. A solution to the [21Xsubmodule
   membership  problem[121X is an algorithm which can decide if an element [22Xm[122X in [22XR^(1
-  ×  NrColumns(  [3XM[103X  ))[122X is contained in [22XS[122X or not. And exactly like the Gaussian
-  (resp.  Hermite) normal form when [22XR[122X is a field (resp. principal ideal ring),
-  the  row  span of the resulting matrix [22XB[122X coincides with the row span [22XS[122X of [3XM[103X,
-  and  computing  [22XB[122X  is  typically  the  first step of such an algorithm. (-->
-  Appendix [14XA[114X)[133X
+  ×  NumberColumns(  [3XM[103X  ))[122X  is  contained  in  [22XS[122X  or not. And exactly like the
+  Gaussian  (resp.  Hermite)  normal  form  when [22XR[122X is a field (resp. principal
+  ideal  ring),  the row span of the resulting matrix [22XB[122X coincides with the row
+  span  [22XS[122X  of  [3XM[103X,  and  computing  [22XB[122X  is  typically  the first step of such an
+  algorithm. (--> Appendix [14XA[114X)[133X
   
   [1X5.5-29 BasisOfColumnModule[101X
   
@@ -1160,14 +1160,14 @@
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
   
   [33X[0;0YLet  [22XR[122X be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )) and [22XS[122X be the
-  column span of [3XM[103X, i.e. the [22XR[122X-submodule of the free right module [22XR^(NrRows( [3XM[103X
-  )  ×  1)[122X spanned by the columns of [3XM[103X. A solution to the [21Xsubmodule membership
-  problem[121X is an algorithm which can decide if an element [22Xm[122X in [22XR^(NrRows( [3XM[103X ) ×
-  1)[122X  is  contained in [22XS[122X or not. And exactly like the Gaussian (resp. Hermite)
-  normal  form when [22XR[122X is a field (resp. principal ideal ring), the column span
-  of  the  resulting  matrix  [22XB[122X  coincides  with  the  column span [22XS[122X of [3XM[103X, and
-  computing  [22XB[122X is typically the first step of such an algorithm. (--> Appendix
-  [14XA[114X)[133X
+  column   span   of  [3XM[103X,  i.e.  the  [22XR[122X-submodule  of  the  free  right  module
+  [22XR^(NumberRows(  [3XM[103X  )  ×  1)[122X  spanned  by the columns of [3XM[103X. A solution to the
+  [21Xsubmodule  membership problem[121X is an algorithm which can decide if an element
+  [22Xm[122X  in [22XR^(NumberRows( [3XM[103X ) × 1)[122X is contained in [22XS[122X or not. And exactly like the
+  Gaussian  (resp.  Hermite)  normal  form  when [22XR[122X is a field (resp. principal
+  ideal  ring),  the  column span of the resulting matrix [22XB[122X coincides with the
+  column  span  [22XS[122X of [3XM[103X, and computing [22XB[122X is typically the first step of such an
+  algorithm. (--> Appendix [14XA[114X)[133X
   
   [1X5.5-30 DecideZeroRows[101X
   
@@ -1176,9 +1176,9 @@
   
   [33X[0;0YLet  [3XA[103X  and [3XB[103X be matrices having the same number of columns and defined over
   the  same  ring  [22XR[122X  ([22X:=[122X[10XHomalgRing[110X( [3XA[103X )) and [22XS[122X be the row span of [3XB[103X, i.e. the
-  [22XR[122X-submodule  of  the  free left module [22XR^(1 × NrColumns( [3XB[103X ))[122X spanned by the
-  rows  of  [3XB[103X.  The result is a matrix [22XC[122X having the same shape as [3XA[103X, for which
-  the  [22Xi[122X-th  row  [22X[3XC[103X^i[122X  is  equivalent  to the [22Xi[122X-th row [22X[3XA[103X^i[122X of [3XA[103X modulo [22XS[122X, i.e.
+  [22XR[122X-submodule  of  the  free left module [22XR^(1 × NumberColumns( [3XB[103X ))[122X spanned by
+  the  rows  of  [3XB[103X.  The  result is a matrix [22XC[122X having the same shape as [3XA[103X, for
+  which the [22Xi[122X-th row [22X[3XC[103X^i[122X is equivalent to the [22Xi[122X-th row [22X[3XA[103X^i[122X of [3XA[103X modulo [22XS[122X, i.e.
   [22X[3XC[103X^i-[3XA[103X^i[122X is an element of the row span [22XS[122X of [3XB[103X. Moreover, the row [22X[3XC[103X^i[122X is zero,
   if  and  only  if  the row [22X[3XA[103X^i[122X is an element of [22XS[122X. So [10XDecideZeroRows[110X decides
   which rows of [3XA[103X are zero modulo the rows of [3XB[103X. (--> Appendix [14XA[114X)[133X
@@ -1190,7 +1190,7 @@
   
   [33X[0;0YLet  [3XA[103X and [3XB[103X be matrices having the same number of rows and defined over the
   same  ring  [22XR[122X  ([22X:=[122X[10XHomalgRing[110X(  [3XA[103X  )) and [22XS[122X be the column span of [3XB[103X, i.e. the
-  [22XR[122X-submodule  of  the  free  right  module [22XR^(NrRows( [3XB[103X ) × 1)[122X spanned by the
+  [22XR[122X-submodule  of the free right module [22XR^(NumberRows( [3XB[103X ) × 1)[122X spanned by the
   columns of [3XB[103X. The result is a matrix [22XC[122X having the same shape as [3XA[103X, for which
   the [22Xi[122X-th column [22X[3XC[103X_i[122X is equivalent to the [22Xi[122X-th column [22X[3XA[103X_i[122X of [3XA[103X modulo [22XS[122X, i.e.
   [22X[3XC[103X_i-[3XA[103X_i[122X is an element of the column span [22XS[122X of [3XB[103X. Moreover, the column [22X[3XC[103X_i[122X is
@@ -1206,7 +1206,7 @@
   [33X[0;0YLet  [22XR[122X  be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )). The matrix
   of  row  syzygies  [10XSyzygiesGeneratorsOfRows[110X( [3XM[103X ) is a matrix whose rows span
   the  left  kernel  of [3XM[103X, i.e. the [22XR[122X-submodule of the free left module [22XR^(1 ×
-  NrRows( [3XM[103X ))[122X consisting of all rows [22XX[122X satisfying [22XX[3XM[103X=0[122X. (--> Appendix [14XA[114X)[133X
+  NumberRows( [3XM[103X ))[122X consisting of all rows [22XX[122X satisfying [22XX[3XM[103X=0[122X. (--> Appendix [14XA[114X)[133X
   
   [1X5.5-33 SyzygiesGeneratorsOfColumns[101X
   
@@ -1216,8 +1216,8 @@
   [33X[0;0YLet  [22XR[122X  be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )). The matrix
   of  column  syzygies  [10XSyzygiesGeneratorsOfColumns[110X(  [3XM[103X  )  is  a matrix whose
   columns  span  the right kernel of [3XM[103X, i.e. the [22XR[122X-submodule of the free right
-  module  [22XR^(NrColumns(  [3XM[103X ) × 1)[122X consisting of all columns [22XX[122X satisfying [22X[3XM[103XX=0[122X.
-  (--> Appendix [14XA[114X)[133X
+  module  [22XR^(NumberColumns(  [3XM[103X  )  × 1)[122X consisting of all columns [22XX[122X satisfying
+  [22X[3XM[103XX=0[122X. (--> Appendix [14XA[114X)[133X
   
   [1X5.5-34 SyzygiesGeneratorsOfRows[101X
   
@@ -1227,8 +1227,8 @@
   [33X[0;0YLet  [22XR[122X  be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )). The matrix
   of [13Xrelative[113X row syzygies [10XSyzygiesGeneratorsOfRows[110X( [3XM[103X, [3XM2[103X ) is a matrix whose
   rows  span  the left kernel of [3XM[103X modulo [3XM2[103X, i.e. the [22XR[122X-submodule of the free
-  left module [22XR^(1 × NrRows( [3XM[103X ))[122X consisting of all rows [22XX[122X satisfying [22XX[3XM[103X+Y[3XM2[103X=0[122X
-  for some row [22XY ∈ R^(1 × NrRows( [3XM2[103X ))[122X. (--> Appendix [14XA[114X)[133X
+  left  module  [22XR^(1  ×  NumberRows(  [3XM[103X ))[122X consisting of all rows [22XX[122X satisfying
+  [22XX[3XM[103X+Y[3XM2[103X=0[122X for some row [22XY ∈ R^(1 × NumberRows( [3XM2[103X ))[122X. (--> Appendix [14XA[114X)[133X
   
   [1X5.5-35 SyzygiesGeneratorsOfColumns[101X
   
@@ -1238,8 +1238,8 @@
   [33X[0;0YLet  [22XR[122X  be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )). The matrix
   of [13Xrelative[113X column syzygies [10XSyzygiesGeneratorsOfColumns[110X( [3XM[103X, [3XM2[103X ) is a matrix
   whose  columns span the right kernel of [3XM[103X modulo [3XM2[103X, i.e. the [22XR[122X-submodule of
-  the  free  right  module  [22XR^(NrColumns( [3XM[103X ) × 1)[122X consisting of all columns [22XX[122X
-  satisfying  [22X[3XM[103XX+[3XM2[103XY=0[122X  for  some  column  [22XY  ∈  R^(NrColumns( [3XM2[103X ) × 1)[122X. (-->
+  the free right module [22XR^(NumberColumns( [3XM[103X ) × 1)[122X consisting of all columns [22XX[122X
+  satisfying  [22X[3XM[103XX+[3XM2[103XY=0[122X  for  some column [22XY ∈ R^(NumberColumns( [3XM2[103X ) × 1)[122X. (-->
   Appendix [14XA[114X)[133X
   
   [1X5.5-36 ReducedBasisOfRowModule[101X
@@ -1460,7 +1460,7 @@
     [4X        return fail;[104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    T := CertainColumns( T, [ 1 .. NrRows( A ) ] );[104X
+    [4X    T := CertainColumns( T, [ 1 .. NumberRows( A ) ] );[104X
     [4X    [104X
     [4X    ## check assertion[104X
     [4X    Assert( 5, IsZero( DecideZeroRows( B + T * A, BL ) ) );[104X
@@ -1511,7 +1511,7 @@
     [4X        return fail;[104X
     [4X    fi;[104X
     [4X    [104X
-    [4X    T := CertainRows( T, [ 1 .. NrColumns( A ) ] );[104X
+    [4X    T := CertainRows( T, [ 1 .. NumberColumns( A ) ] );[104X
     [4X    [104X
     [4X    ## check assertion[104X
     [4X    Assert( 5, IsZero( DecideZeroColumns( B + A * T, BL ) ) );[104X
