@@ -13,11 +13,11 @@
 ##  M=&ZZ;/2^5&ZZ; \stackrel{\alpha_2}{\longrightarrow} \_M=&ZZ;/2^3&ZZ; \longrightarrow 0</Math></Alt>
 ##  <Alt Only="Text,HTML"><M>0 -> M_=&ZZ;/2^2&ZZ; --alpha_1--> M=&ZZ;/2^5&ZZ; --alpha_2--> \_M=&ZZ;/2^3&ZZ; -> 0</M></Alt>.
 ##  <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> Display( ZZ );
+##  gap> Display( zz );
 ##  <An internal ring>
-##  gap> R := ZZ / 2^8;
+##  gap> R := zz / 2^8;
 ##  <A residue class ring>
 ##  gap> Display( R );
 ##  Z/( 256 )
@@ -236,8 +236,8 @@
 LoadPackage( "Modules" );
 LoadPackage( "Modules" );
 
-ZZ := HomalgRingOfIntegers( );
-R := ZZ / 2^8;
+zz := HomalgRingOfIntegers( );
+R := zz / 2^8;
 
 M := LeftPresentation( [ 2^5 ], R );
 _M := LeftPresentation( [ 2^3 ], R );

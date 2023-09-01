@@ -857,9 +857,9 @@ InstallMethod( FieldOfFractions,
         "for homalg rings in Maple",
         [ IsHomalgExternalRingInMapleRep and IsIntegersForHomalg ],
         
-  function( ZZ )
+  function( zz )
     
-    return HomalgFieldOfRationalsInMaple( ZZ );
+    return HomalgFieldOfRationalsInMaple( zz );
     
 end );
 

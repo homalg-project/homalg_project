@@ -1,6 +1,6 @@
 ReadPackage( "RingsForHomalg", "examples/homalg.g" );
 LoadPackage( "RingsForHomalg" );
-ZZ := HomalgRingOfIntegersInExternalGAP( );
-Display( ZZ );
-wmat := imat * ZZ;
+zz := HomalgRingOfIntegersInExternalGAP( );
+Display( zz );
+wmat := imat * zz;
 W := LeftPresentation( wmat );

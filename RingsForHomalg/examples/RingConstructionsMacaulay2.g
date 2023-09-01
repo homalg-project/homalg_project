@@ -3,11 +3,11 @@
 ##  <Heading>&Macaulay2;</Heading>
 ##  <Example><![CDATA[
 ##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )
-##  gap> ZZ := HomalgRingOfIntegersInMacaulay2( );
+##  gap> zz := HomalgRingOfIntegersInMacaulay2( );
 ##  Z
-##  gap> Display( ZZ );
+##  gap> Display( zz );
 ##  <An external ring residing in the CAS Macaulay2>
-##  gap> F2 := HomalgRingOfIntegersInMacaulay2( 2, ZZ );
+##  gap> F2 := HomalgRingOfIntegersInMacaulay2( 2, zz );
 ##  GF(2)
 ##  gap> Display( F2 );
 ##  <An external ring residing in the CAS Macaulay2>
@@ -16,11 +16,11 @@
 ##  <C>F2 := HomalgRingOfIntegersInMacaulay2( 2 )</C> would launch another Macaulay2.
 ##  <Example><![CDATA[
 ##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )
-##  gap> Z_4 := HomalgRingOfIntegersInMacaulay2( ZZ ) / 4;
+##  gap> Z_4 := HomalgRingOfIntegersInMacaulay2( zz ) / 4;
 ##  Z/( 4 )
 ##  gap> Display( Z_4 );
 ##  <A residue class ring>
-##  gap> Q := HomalgFieldOfRationalsInMacaulay2( ZZ );
+##  gap> Q := HomalgFieldOfRationalsInMacaulay2( zz );
 ##  Q
 ##  gap> Display( Q );
 ##  <An external ring residing in the CAS Macaulay2>
@@ -50,16 +50,16 @@ LoadPackage( "RingsForHomalg" );
 Print( "~~~~~~~~~~~\n\n" );
 Print( "Macaulay2\n\n" );
 
-ZZ := HomalgRingOfIntegersInMacaulay2( );
-Display( ZZ );
+zz := HomalgRingOfIntegersInMacaulay2( );
+Display( zz );
 
-F2 := HomalgRingOfIntegersInMacaulay2( 2, ZZ );
+F2 := HomalgRingOfIntegersInMacaulay2( 2, zz );
 Display( F2 );
 
-Z_4 := HomalgRingOfIntegersInMacaulay2( ZZ ) / 4;
+Z_4 := HomalgRingOfIntegersInMacaulay2( zz ) / 4;
 Display( Z_4 );
 
-Q := HomalgFieldOfRationalsInMacaulay2( ZZ );
+Q := HomalgFieldOfRationalsInMacaulay2( zz );
 Display( Q );
 
 F2xyz := F2 * "x,y,z";

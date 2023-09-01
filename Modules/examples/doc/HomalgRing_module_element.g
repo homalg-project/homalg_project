@@ -1,16 +1,16 @@
 ##  <#GAPDoc Label="HomalgRing:module_element:example">
 ##  <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );
+##  gap> a := HomalgElement( HomalgMap( "[[2]]", 1 * zz, 1 * zz ) );
 ##  2
-##  gap> IsIdenticalObj( ZZ, HomalgRing( a ) );
+##  gap> IsIdenticalObj( zz, HomalgRing( a ) );
 ##  true
 ##  ]]></Example>
 ##  <#/GAPDoc>
 
 LoadPackage( "Modules" );
 
-ZZ := HomalgRingOfIntegers( );
-a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );
-Assert( 0, IsIdenticalObj( ZZ, HomalgRing( a ) ) );
+zz := HomalgRingOfIntegers( );
+a := HomalgElement( HomalgMap( "[[2]]", 1 * zz, 1 * zz ) );
+Assert( 0, IsIdenticalObj( zz, HomalgRing( a ) ) );

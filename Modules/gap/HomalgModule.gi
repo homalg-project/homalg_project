@@ -1580,11 +1580,11 @@ end );
 ##      Use different strategies to reduce the presentation of the given &homalg; module <A>M</A>.
 ##      This method performs side effects on its argument <A>M</A> and returns it.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> zz := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ \
 ##  > 2, 3, 4, \
 ##  > 5, 6, 7  \
-##  > ]", 2, 3, ZZ );
+##  > ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
@@ -2234,11 +2234,11 @@ end );
 ##      This constructor returns the finitely presented left module with relations given by the
 ##      rows of the &homalg; matrix <A>mat</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> zz := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ \
 ##  > 2, 3, 4, \
 ##  > 5, 6, 7  \
-##  > ]", 2, 3, ZZ );
+##  > ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
@@ -2366,11 +2366,11 @@ end );
 ##      This constructor returns the finitely presented right module with relations given by the
 ##      columns of the &homalg; matrix <A>mat</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> zz := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ \
 ##  > 2, 3, 4, \
 ##  > 5, 6, 7  \
-##  > ]", 2, 3, ZZ );
+##  > ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := RightPresentation( M );
 ##  <A right module on 2 generators satisfying 3 relations>
@@ -2400,14 +2400,14 @@ end );
 ##    <Description>
 ##      This constructor returns a free left module of rank <A>r</A> over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> F := HomalgFreeLeftModule( 1, ZZ );
+##  gap> zz := HomalgRingOfIntegers( );;
+##  gap> F := HomalgFreeLeftModule( 1, zz );
 ##  <A free left module of rank 1 on a free generator>
-##  gap> 1 * ZZ;
+##  gap> 1 * zz;
 ##  <The free left module of rank 1 on a free generator>
-##  gap> F := HomalgFreeLeftModule( 2, ZZ );
+##  gap> F := HomalgFreeLeftModule( 2, zz );
 ##  <A free left module of rank 2 on free generators>
-##  gap> 2 * ZZ;
+##  gap> 2 * zz;
 ##  <A free left module of rank 2 on free generators>
 ##  ]]></Example>
 ##    </Description>
@@ -2431,14 +2431,14 @@ end );
 ##    <Description>
 ##      This constructor returns a free right module of rank <A>r</A> over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> F := HomalgFreeRightModule( 1, ZZ );
+##  gap> zz := HomalgRingOfIntegers( );;
+##  gap> F := HomalgFreeRightModule( 1, zz );
 ##  <A free right module of rank 1 on a free generator>
-##  gap> ZZ * 1;
+##  gap> zz * 1;
 ##  <The free right module of rank 1 on a free generator>
-##  gap> F := HomalgFreeRightModule( 2, ZZ );
+##  gap> F := HomalgFreeRightModule( 2, zz );
 ##  <A free right module of rank 2 on free generators>
-##  gap> ZZ * 2;
+##  gap> zz * 2;
 ##  <A free right module of rank 2 on free generators>
 ##  ]]></Example>
 ##    </Description>
@@ -2462,10 +2462,10 @@ end );
 ##    <Description>
 ##      This constructor returns a zero left module of rank <A>r</A> over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> F := HomalgZeroLeftModule( ZZ );
+##  gap> zz := HomalgRingOfIntegers( );;
+##  gap> F := HomalgZeroLeftModule( zz );
 ##  <A zero left module>
-##  gap> 0 * ZZ;
+##  gap> 0 * zz;
 ##  <The zero left module>
 ##  ]]></Example>
 ##    </Description>
@@ -2489,10 +2489,10 @@ end );
 ##    <Description>
 ##      This constructor returns a zero right module of rank <A>r</A> over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> F := HomalgZeroRightModule( ZZ );
+##  gap> zz := HomalgRingOfIntegers( );;
+##  gap> F := HomalgZeroRightModule( zz );
 ##  <A zero right module>
-##  gap> ZZ * 0;
+##  gap> zz * 0;
 ##  <The zero right module>
 ##  ]]></Example>
 ##    </Description>

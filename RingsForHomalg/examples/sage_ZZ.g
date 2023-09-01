@@ -1,6 +1,6 @@
 ReadPackage( "RingsForHomalg", "examples/homalg.g" );
 LoadPackage( "RingsForHomalg" );
-ZZ := HomalgRingOfIntegersInSage( );
-Display( ZZ );
-wmat := imat * ZZ;
+zz := HomalgRingOfIntegersInSage( );
+Display( zz );
+wmat := imat * zz;
 W := LeftPresentation( wmat );

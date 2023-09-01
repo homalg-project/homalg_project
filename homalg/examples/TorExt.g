@@ -3,7 +3,7 @@
 ##  <Heading>TorExt</Heading>
 ##  This corresponds to Example B.6 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
 ##  gap> imat := HomalgMatrix( "[ \
 ##  >   262,  -33,   75,  -40, \
@@ -11,7 +11,7 @@
 ##  >  1186, -151,  341, -180, \
 ##  > -1932,  248, -556,  292, \
 ##  >  1018, -127,  293, -156  \
-##  > ]", 5, 4, ZZ );
+##  > ]", 5, 4, zz );
 ##  <A 5 x 4 matrix over an internal ring>
 ##  gap> M := LeftPresentation( imat );
 ##  <A left module presented by 5 relations for 4 generators>

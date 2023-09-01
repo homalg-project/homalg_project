@@ -539,11 +539,11 @@ end );
 ##      If <A>ring_rel</A> is not a set of relations, a <E>left</E> set of relations is constructed. <P/>
 ##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> Display( ZZ );
+##  gap> Display( zz );
 ##  <An internal ring>
-##  gap> Z256 := ZZ / 2^8;
+##  gap> Z256 := zz / 2^8;
 ##  Z/( 256 )
 ##  gap> Display( Z256 );
 ##  <A residue class ring>

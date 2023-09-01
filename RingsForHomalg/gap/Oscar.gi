@@ -873,9 +873,9 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInOscar,
   function( arg )
-    local ZZ, nargs, c, d, param, minimal_polynomial, r, R, RP;
+    local zz, nargs, c, d, param, minimal_polynomial, r, R, RP;
     
-    ZZ := "Singular.ZZ";
+    zz := "Singular.ZZ";
     
     nargs := Length( arg );
     
@@ -933,10 +933,10 @@ InstallGlobalFunction( HomalgRingOfIntegersInOscar,
     else
         
         if not IsZero( c ) then
-            ZZ := Concatenation( "Singular.FiniteField(", String( c ), ", 1, \"Zc_1\")[1]" );
+            zz := Concatenation( "Singular.FiniteField(", String( c ), ", 1, \"Zc_1\")[1]" );
         fi;
         
-        R := Concatenation( "Singular.PolynomialRing(", ZZ, ", [\"dummy_variable\"])" );
+        R := Concatenation( "Singular.PolynomialRing(", zz, ", [\"dummy_variable\"])" );
         R := Concatenation( [ R ], [ [ "" ] ], [ [ ", dummy_variable" ] ], [ IsPrincipalIdealRing ], arg );
     
     fi;
@@ -963,7 +963,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInOscar,
     
     R := CallFuncList( RingForHomalgInOscar, R );
     
-    R!.RingWithoutDummyVariable := ZZ;
+    R!.RingWithoutDummyVariable := zz;
     
     if IsBound( param ) then
         
@@ -1112,9 +1112,9 @@ InstallMethod( FieldOfFractions,
         "for homalg rings in Oscar",
         [ IsHomalgExternalRingInOscarRep and IsIntegersForHomalg ],
         
-  function( ZZ )
+  function( zz )
     
-    return HomalgFieldOfRationalsInOscar( ZZ );
+    return HomalgFieldOfRationalsInOscar( zz );
     
 end );
 

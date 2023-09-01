@@ -3,7 +3,7 @@
 ##  <Heading>ExtExt</Heading>
 ##  This corresponds to Example B.2 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
 ##  gap> imat := HomalgMatrix( "[ \
 ##  >   262,  -33,   75,  -40, \
@@ -11,15 +11,15 @@
 ##  >  1186, -151,  341, -180, \
 ##  > -1932,  248, -556,  292, \
 ##  >  1018, -127,  293, -156  \
-##  > ]", 5, 4, ZZ );
+##  > ]", 5, 4, zz );
 ##  <A 5 x 4 matrix over an internal ring>
 ##  gap> M := LeftPresentation( imat );
 ##  <A left module presented by 5 relations for 4 generators>
-##  gap> N := Hom( ZZ, M );
+##  gap> N := Hom( zz, M );
 ##  <A rank 1 right module on 4 generators satisfying yet unknown relations>
 ##  gap> F := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, N, "TensorN" );
 ##  <The functor TensorN for f.p. modules and their maps over computable rings>
-##  gap> G := LeftDualizingFunctor( ZZ );;
+##  gap> G := LeftDualizingFunctor( zz );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, M );
 ##  <A stable homological spectral sequence with sheets at levels 
 ##  [ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x

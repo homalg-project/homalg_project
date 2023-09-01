@@ -1,18 +1,18 @@
 LoadPackage( "Modules" );
 
-ZZ := HomalgRingOfIntegers( );
+zz := HomalgRingOfIntegers( );
 
-C0 := HomalgComplex( 3 * ZZ );
+C0 := HomalgComplex( 3 * zz );
 
-Add( C0, HomalgMatrix( "[ 0, 1, 0,   0, 0, 1,   0, 0, 0,   0, 0, 0 ]", 4, 3, ZZ ) );
+Add( C0, HomalgMatrix( "[ 0, 1, 0,   0, 0, 1,   0, 0, 0,   0, 0, 0 ]", 4, 3, zz ) );
 
-C1 := HomalgComplex( 0 * ZZ );
+C1 := HomalgComplex( 0 * zz );
 
-Add( C1, 2 * ZZ );
+Add( C1, 2 * zz );
 
-cm := HomalgChainMorphism( HomalgZeroMatrix( 3, 0, ZZ ), C0, C1 );
+cm := HomalgChainMorphism( HomalgZeroMatrix( 3, 0, zz ), C0, C1 );
 
-Add( cm, HomalgMatrix( "[ -1, 0,   0, -1,   2, 0,   0, 12 ]", 4, 2, ZZ ) );
+Add( cm, HomalgMatrix( "[ -1, 0,   0, -1,   2, 0,   0, 12 ]", 4, 2, zz ) );
 
 C := HomalgCocomplex( cm );
 

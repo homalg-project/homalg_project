@@ -94,9 +94,9 @@ DeclareAttribute( "OperationOfFunctor",
 ##  ]]></Example></Item>
 ##        <Item> <C>InsertObjectInMultiFunctor</C>:
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> LeftDualizingFunctor( ZZ, "ZZ_Hom" );
+##  gap> LeftDualizingFunctor( zz, "ZZ_Hom" );
 ##  <The functor ZZ_Hom for f.p. modules and their maps over computable rings>
 ##  gap> Functor_ZZ_Hom_for_fp_modules; ## got automatically defined
 ##  <The functor ZZ_Hom for f.p. modules and their maps over computable rings>
@@ -106,7 +106,7 @@ DeclareAttribute( "OperationOfFunctor",
 ##  [ "InsertObjectInMultiFunctor",
 ##    <The functor Hom for f.p. modules and their maps over computable rings>, 2,
 ##    <The free left module of rank 1 on a free generator> ]
-##  gap> 1 * ZZ;
+##  gap> 1 * zz;
 ##  <The free left module of rank 1 on a free generator>
 ##  ]]></Example></Item>
 ##        <Item> <C>LeftDerivedFunctor</C>:

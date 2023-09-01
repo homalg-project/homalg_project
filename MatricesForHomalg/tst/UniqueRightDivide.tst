@@ -5,9 +5,9 @@ gap> LoadPackage( "MatricesForHomalg", false : OnlyNeeded );
 true
 gap> old_assertion_level := AssertionLevel( );;
 gap> SetAssertionLevel( 5 );
-gap> ZZ := HomalgRingOfIntegers( );;
-gap> A := HomalgMatrix( [ [ 3 ] ], 1, 1, ZZ );;
-gap> B := HomalgMatrix( [ [ 6 ] ], 1, 1, ZZ );;
+gap> zz := HomalgRingOfIntegers( );;
+gap> A := HomalgMatrix( [ [ 3 ] ], 1, 1, zz );;
+gap> B := HomalgMatrix( [ [ 6 ] ], 1, 1, zz );;
 gap> T := UniqueRightDivide( B, A );;
 gap> Display( T );
 [ [  2 ] ]

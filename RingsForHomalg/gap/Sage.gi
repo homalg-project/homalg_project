@@ -212,9 +212,9 @@ InstallMethod( FieldOfFractions,
         "for homalg rings in Sage",
         [ IsHomalgExternalRingInSageRep and IsIntegersForHomalg ],
         
-  function( ZZ )
+  function( zz )
     
-    return HomalgFieldOfRationalsInSage( ZZ );
+    return HomalgFieldOfRationalsInSage( zz );
     
 end );
 

@@ -90,11 +90,11 @@ DeclareFilter( "IsVoidMatrix",
 ##      Check if the &homalg; matrix <A>A</A> is a zero matrix, taking possible ring relations into account.<P/>
 ##      (for the installed standard method see <Ref Meth="IsZeroMatrix" Label="homalgTable entry"/>)
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> A := HomalgMatrix( "[ 2 ]", ZZ );
+##  gap> A := HomalgMatrix( "[ 2 ]", zz );
 ##  <A 1 x 1 matrix over an internal ring>
-##  gap> Z2 := ZZ / 2;
+##  gap> Z2 := zz / 2;
 ##  Z/( 2 )
 ##  gap> A := Z2 * A;
 ##  <A 1 x 1 matrix over a residue class ring>

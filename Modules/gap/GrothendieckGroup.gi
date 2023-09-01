@@ -1223,15 +1223,15 @@ InstallMethod( CreateElementOfGrothendieckGroupOfProjectiveSpace,
         [ IsList, IsInt ],
         
   function( C, dim )
-    local ZZ, K_0;
+    local zz, K_0;
     
     if dim < 0 then
         dim := Length( C ) - 1;
     fi;
     
-    ZZ := HOMALG_MATRICES.ZZ;
+    zz := HOMALG_MATRICES.ZZ;
     
-    K_0 := ( dim + 1 ) * ZZ;
+    K_0 := ( dim + 1 ) * zz;
     
     LockObjectOnCertainPresentation( K_0 );
     

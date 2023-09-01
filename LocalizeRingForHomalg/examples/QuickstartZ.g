@@ -14,9 +14,9 @@
 ##  <Example>
 ##    <![CDATA[
 ##  gap> LoadPackage( "LocalizeRingForHomalg" );;
-##  gap> ZZ := HomalgRingOfIntegers(  );
+##  gap> zz := HomalgRingOfIntegers(  );
 ##  Z
-##  gap> R := LocalizeAt( ZZ , [ 2 ] );
+##  gap> R := LocalizeAt( zz , [ 2 ] );
 ##  Z_< 2 >
 ##  gap> Display( R );
 ##  <A local ring>
@@ -49,8 +49,8 @@
 ##  <#/GAPDoc>
 
 LoadPackage( "LocalizeRingForHomalg" );;
-ZZ := HomalgRingOfIntegers(  );;
-R := LocalizeAt( ZZ , [ 2 ] );
+zz := HomalgRingOfIntegers(  );;
+R := LocalizeAt( zz , [ 2 ] );
 
 LoadPackage( "Modules" );
 M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );

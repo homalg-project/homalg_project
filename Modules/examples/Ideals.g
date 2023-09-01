@@ -1,9 +1,9 @@
 LoadPackage( "Modules" );
 
-ZZ := HomalgRingOfIntegers( );
+zz := HomalgRingOfIntegers( );
 
-I := RightSubmodule( "4", ZZ ); ## or I := RightSubmodule( HomalgMatrix( "[ 4 ]", 1, 1, ZZ ) );
-J := RightSubmodule( "6", ZZ ); ## or J := RightSubmodule( HomalgMatrix( "[ 6 ]", 1, 1, ZZ ) );
+I := RightSubmodule( "4", zz ); ## or I := RightSubmodule( HomalgMatrix( "[ 4 ]", 1, 1, zz ) );
+J := RightSubmodule( "6", zz ); ## or J := RightSubmodule( HomalgMatrix( "[ 6 ]", 1, 1, zz ) );
 
 IpJ := I + J;
 

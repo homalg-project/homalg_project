@@ -1,11 +1,11 @@
 LoadPackage( "MatricesForHomalg" );
 
-ZZ := HomalgRingOfIntegers( );
+zz := HomalgRingOfIntegers( );
 
 m := HomalgMatrix( "[ \
 2,  0, 0, \
 0, 12, 0  \
-]", 2, 3, ZZ );
+]", 2, 3, zz );
 
 Assert( 0, Minors( -1, m ) = [ 1 ] );
 Assert( 0, Minors( 0, m ) = [ 1 ] );
