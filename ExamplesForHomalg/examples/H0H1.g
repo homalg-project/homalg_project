@@ -2,12 +2,12 @@ LoadPackage( "RingsForHomalg" );
 
 LoadPackage( "Modules" );
 
-ZZ := HomalgRingOfIntegersInDefaultCAS( );
+zz := HomalgRingOfIntegersInDefaultCAS( );
 
 ## the line
-deltaL := HomalgMap( [[1,-1]], ZZ );
+deltaL := HomalgMap( [[1,-1]], zz );
 ## the 1-sphere
-deltaS := HomalgMap( [[0,-1,1],[1,0,-1],[-1,1,0]], ZZ );
+deltaS := HomalgMap( [[0,-1,1],[1,0,-1],[-1,1,0]], zz );
 
 ## the 0-th homology of L:
 H0_L := Cokernel( deltaL );

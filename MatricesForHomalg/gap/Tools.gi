@@ -7781,7 +7781,7 @@ InstallMethod( AMaximalIdealContaining,
         [ IsHomalgMatrix ],
         
   function( I )
-    local R, ZZ, one, indets, S, gens, gens0, lcm, p, Fp;
+    local R, zz, one, indets, S, gens, gens0, lcm, p, Fp;
     
     R := HomalgRing( I );
     
@@ -7789,15 +7789,15 @@ InstallMethod( AMaximalIdealContaining,
         TryNextMethod( );
     fi;
     
-    ZZ := CoefficientsRing( R );
+    zz := CoefficientsRing( R );
     
-    if not ( HasIsIntegersForHomalg( ZZ ) and IsIntegersForHomalg( ZZ ) ) then
+    if not ( HasIsIntegersForHomalg( zz ) and IsIntegersForHomalg( zz ) ) then
         TryNextMethod( );
     fi;
     
     indets := Indeterminates( R );
     
-    S := ZZ * indets;
+    S := zz * indets;
     
     I := S * I;
     
@@ -7839,7 +7839,7 @@ InstallMethod( AMaximalIdealContaining,
     
     Assert( 4, not ( p / S ) in I );
     
-    Fp := HomalgRingOfIntegersInUnderlyingCAS( p, ZZ );
+    Fp := HomalgRingOfIntegersInUnderlyingCAS( p, zz );
     S := Fp * indets;
     I := S * I;
     

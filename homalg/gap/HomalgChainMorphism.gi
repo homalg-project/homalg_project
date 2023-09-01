@@ -1138,25 +1138,25 @@ end );
 ##      The following examples shows a chain morphism that induces the zero morphism on homology, but is itself <E>not</E> zero
 ##      in the derived category:
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> M := 1 * ZZ;
+##  gap> M := 1 * zz;
 ##  <The free left module of rank 1 on a free generator>
 ##  gap> Display( M );
 ##  Z^(1 x 1)
-##  gap> N := HomalgMatrix( "[3]", 1, 1, ZZ );;
+##  gap> N := HomalgMatrix( "[3]", 1, 1, zz );;
 ##  gap> N := LeftPresentation( N );
 ##  <A cyclic torsion left module presented by 1 relation for
 ##   a cyclic generator>
 ##  gap> Display( N );
 ##  Z/< 3 >
-##  gap> a := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, M );
+##  gap> a := HomalgMap( HomalgMatrix( "[2]", 1, 1, zz ), M, M );
 ##  <An endomorphism of a left module>
-##  gap> c := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, N );
+##  gap> c := HomalgMap( HomalgMatrix( "[2]", 1, 1, zz ), M, N );
 ##  <A homomorphism of left modules>
-##  gap> b := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, M );
+##  gap> b := HomalgMap( HomalgMatrix( "[1]", 1, 1, zz ), M, M );
 ##  <An endomorphism of a left module>
-##  gap> d := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, N );
+##  gap> d := HomalgMap( HomalgMatrix( "[1]", 1, 1, zz ), M, N );
 ##  <A homomorphism of left modules>
 ##  gap> C1 := HomalgComplex( a );
 ##  <A non-zero acyclic complex containing a single morphism of left modules at de\

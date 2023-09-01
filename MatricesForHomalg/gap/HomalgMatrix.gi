@@ -94,13 +94,13 @@ end );
 ##    <Description>
 ##      The &homalg; ring of the &homalg; matrix <A>mat</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
+##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], zz );
 ##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> R := HomalgRing( d );
 ##  Z
-##  gap> IsIdenticalObj( R, ZZ );
+##  gap> IsIdenticalObj( R, zz );
 ##  true
 ##  ]]></Example>
 ##    </Description>
@@ -962,13 +962,13 @@ end );
 ##      taking possible ring relations into account.<P/>
 ##      (for the installed standard method see <Ref Meth="AreEqualMatrices" Label="homalgTable entry"/>)
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> A := HomalgMatrix( "[ 1 ]", ZZ );
+##  gap> A := HomalgMatrix( "[ 1 ]", zz );
 ##  <A 1 x 1 matrix over an internal ring>
-##  gap> B := HomalgMatrix( "[ 3 ]", ZZ );
+##  gap> B := HomalgMatrix( "[ 3 ]", zz );
 ##  <A 1 x 1 matrix over an internal ring>
-##  gap> Z2 := ZZ / 2;
+##  gap> Z2 := zz / 2;
 ##  Z/( 2 )
 ##  gap> A := Z2 * A;
 ##  <A 1 x 1 matrix over a residue class ring>
@@ -2548,37 +2548,37 @@ end );
 ##    <Description>
 ##      An immutable evaluated <M><A>m</A> \times <A>n</A></M> &homalg; matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], ZZ );
+##  gap> m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      <Example><![CDATA[
-##  gap> m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, ZZ );
+##  gap> m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      <Example><![CDATA[
-##  gap> m := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, ZZ );
+##  gap> m := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      <Example><![CDATA[
-##  gap> m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", ZZ );
+##  gap> m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      <Example><![CDATA[
-##  gap> m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, ZZ );
+##  gap> m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
@@ -2589,7 +2589,7 @@ end );
 ##      (&see; <Ref Label="Whitespaces" BookName="Ref"/>) are ignored,
 ##      they can be used as optical delimiters:
 ##      <Example><![CDATA[
-##  gap> m := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, ZZ );
+##  gap> m := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
@@ -2600,7 +2600,7 @@ end );
 ##  gap> m := HomalgMatrix( "[ \
 ##  > 1, 2, 3, \
 ##  > 4, 5, 6  \
-##  > ]", 2, 3, ZZ );
+##  > ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
@@ -2893,9 +2893,9 @@ end );
 ##    <Description>
 ##      An immutable unevaluated <M><A>m</A> \times <A>n</A></M> &homalg; zero matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> z := HomalgZeroMatrix( 2, 3, ZZ );
+##  gap> z := HomalgZeroMatrix( 2, 3, zz );
 ##  <An unevaluated 2 x 3 zero matrix over an internal ring>
 ##  gap> Display( z );
 ##  [ [  0,  0,  0 ],
@@ -2982,9 +2982,9 @@ end );
 ##    <Description>
 ##      An immutable unevaluated <M><A>m</A> \times <A>m</A></M> &homalg; identity matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> id := HomalgIdentityMatrix( 3, ZZ );
+##  gap> id := HomalgIdentityMatrix( 3, zz );
 ##  <An unevaluated 3 x 3 identity matrix over an internal ring>
 ##  gap> Display( id );
 ##  [ [  1,  0,  0 ],
@@ -3048,9 +3048,9 @@ end );
 ##      until the matrix is explicitly made immutable using (&see; <Ref Func="MakeImmutable"
 ##      BookName="Reference" Style="Number"/>).
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> z := HomalgInitialMatrix( 2, 3, ZZ );
+##  gap> z := HomalgInitialMatrix( 2, 3, zz );
 ##  <An initial 2 x 3 matrix over an internal ring>
 ##  gap> HasIsZero( z );
 ##  false
@@ -3062,7 +3062,7 @@ end );
 ##  false
 ##  ]]></Example>
 ##      <Example><![CDATA[
-##  gap> n := HomalgInitialMatrix( 2, 3, ZZ );
+##  gap> n := HomalgInitialMatrix( 2, 3, zz );
 ##  <An initial 2 x 3 matrix over an internal ring>
 ##  gap> n[ 1, 1 ] := "1";;
 ##  gap> n[ 2, 3 ] := "1";;
@@ -3153,9 +3153,9 @@ end );
 ##      until the matrix is explicitly made immutable using (&see; <Ref Func="MakeImmutable"
 ##      BookName="Reference" Style="Number"/>).
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> id := HomalgInitialIdentityMatrix( 3, ZZ );
+##  gap> id := HomalgInitialIdentityMatrix( 3, zz );
 ##  <An initial identity 3 x 3 matrix over an internal ring>
 ##  gap> HasIsOne( id );
 ##  false
@@ -3167,7 +3167,7 @@ end );
 ##  false
 ##  ]]></Example>
 ##      <Example><![CDATA[
-##  gap> e := HomalgInitialIdentityMatrix( 3, ZZ );
+##  gap> e := HomalgInitialIdentityMatrix( 3, zz );
 ##  <An initial identity 3 x 3 matrix over an internal ring>
 ##  gap> e[ 1, 2 ] := "1";;
 ##  gap> e[ 2, 1 ] := "-1";;
@@ -3302,9 +3302,9 @@ end );
 ##      An immutable unevaluated diagonal &homalg; matrix over the &homalg; ring <A>R</A>. The diagonal
 ##      consists of the entries of the list <A>diag</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> d := HomalgDiagonalMatrix( [ 1, 2, 3 ], ZZ );
+##  gap> d := HomalgDiagonalMatrix( [ 1, 2, 3 ], zz );
 ##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> Display( d );
 ##  [ [  1,  0,  0 ],
@@ -3385,9 +3385,9 @@ end );
 ##      An immutable unevaluated <M><A>n</A> \times <A>n</A></M> scalar &homalg; matrix over the &homalg; ring <A>R</A> with
 ##      the ring element <A>r</A> as diagonal scalar.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> d := HomalgScalarMatrix( 2, 3, ZZ );
+##  gap> d := HomalgScalarMatrix( 2, 3, zz );
 ##  <An unevaluated scalar 3 x 3 matrix over an internal ring>
 ##  gap> Display( d );
 ##  [ [  2,  0,  0 ],
@@ -3469,13 +3469,13 @@ end );
 ##      An immutable evaluated &homalg; matrix over the &homalg; ring <A>R</A> having the
 ##      same entries as the matrix <A>mat</A>. Syntax: <A>R</A> <C>*</C> <A>mat</A> or <A>mat</A> <C>*</C> <A>R</A>
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> Z4 := ZZ / 4;
+##  gap> Z4 := zz / 4;
 ##  Z/( 4 )
 ##  gap> Display( Z4 );
 ##  <A residue class ring>
-##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
+##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], zz );
 ##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> d2 := Z4 * d; ## or d2 := d * Z4;
 ##  <A 3 x 3 matrix over a residue class ring>

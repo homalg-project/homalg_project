@@ -1432,9 +1432,9 @@ InstallMethod( FieldOfFractions,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep and IsIntegersForHomalg ],
         
-  function( ZZ )
+  function( zz )
     
-    return HomalgFieldOfRationalsInSingular( ZZ );
+    return HomalgFieldOfRationalsInSingular( zz );
     
 end );
 

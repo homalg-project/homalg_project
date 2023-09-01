@@ -12,7 +12,7 @@ N := LeftInverse( M );
 
 Id := HomalgIdentityMatrix( 3, R );
 
-ZZ := HomalgZeroMatrix( 3, 3, R );
+zz := HomalgZeroMatrix( 3, 3, R );
 
 A := UnionOfColumns( Id, -M );
 

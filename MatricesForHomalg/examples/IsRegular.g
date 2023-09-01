@@ -1,7 +1,7 @@
 LoadPackage( "homalg" );
 
-ZZ := HomalgRingOfIntegers( );
-R := ZZ / 2^8;
+zz := HomalgRingOfIntegers( );
+R := zz / 2^8;
 
 r := 3 * One( R );
 

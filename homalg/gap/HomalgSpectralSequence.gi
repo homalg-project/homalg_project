@@ -727,9 +727,9 @@ end );
 ##    <P/>
 ##    The following example demonstrates the computation of a <M>Tor-Ext</M> spectral sequence:
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> dM := Resolution( M );

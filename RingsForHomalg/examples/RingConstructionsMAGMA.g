@@ -3,11 +3,11 @@
 ##  <Heading>&MAGMA;</Heading>
 ##  <Example><![CDATA[
 ##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )
-##  gap> ZZ := HomalgRingOfIntegersInMAGMA( );
+##  gap> zz := HomalgRingOfIntegersInMAGMA( );
 ##  Z
-##  gap> Display( ZZ );
+##  gap> Display( zz );
 ##  <An external ring residing in the CAS MAGMA>
-##  gap> F2 := HomalgRingOfIntegersInMAGMA( 2, ZZ );
+##  gap> F2 := HomalgRingOfIntegersInMAGMA( 2, zz );
 ##  GF(2)
 ##  gap> Display( F2 );
 ##  <An external ring residing in the CAS MAGMA>
@@ -16,11 +16,11 @@
 ##  <C>F2 := HomalgRingOfIntegersInMAGMA( 2 )</C> would launch another MAGMA.
 ##  <Example><![CDATA[
 ##  #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )
-##  gap> Z_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;
+##  gap> Z_4 := HomalgRingOfIntegersInMAGMA( zz ) / 4;
 ##  Z/( 4 )
 ##  gap> Display( Z_4 );
 ##  <A residue class ring>
-##  gap> Q := HomalgFieldOfRationalsInMAGMA( ZZ );
+##  gap> Q := HomalgFieldOfRationalsInMAGMA( zz );
 ##  Q
 ##  gap> Display( Q );
 ##  <An external ring residing in the CAS MAGMA>
@@ -46,16 +46,16 @@ LoadPackage( "RingsForHomalg" );
 Print( "~~~~~~~~~~~\n\n" );
 Print( "MAGMA\n\n" );
 
-ZZ := HomalgRingOfIntegersInMAGMA( );
-Display( ZZ );
+zz := HomalgRingOfIntegersInMAGMA( );
+Display( zz );
 
-F2 := HomalgRingOfIntegersInMAGMA( 2, ZZ );
+F2 := HomalgRingOfIntegersInMAGMA( 2, zz );
 Display( F2 );
 
-Z_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;
+Z_4 := HomalgRingOfIntegersInMAGMA( zz ) / 4;
 Display( Z_4 );
 
-Q := HomalgFieldOfRationalsInMAGMA( ZZ );
+Q := HomalgFieldOfRationalsInMAGMA( zz );
 Display( Q );
 
 F2xyz := F2 * "x,y,z";

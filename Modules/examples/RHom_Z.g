@@ -1,15 +1,15 @@
 ##  <#GAPDoc Label="RHom_Z">
 ##    <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;
+##  gap> m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], zz );;
 ##  gap> M := LeftPresentation( m );
 ##  <A left module presented by 2 relations for 2 generators>
 ##  gap> Display( M );
 ##  Z/< 8 > + Z/< 2 >
 ##  gap> M;
 ##  <A torsion left module presented by 2 relations for 2 generators>
-##  gap> a := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;
+##  gap> a := HomalgMatrix( [ [ 2, 0 ] ], zz );;
 ##  gap> alpha := HomalgMap( a, "free", M );
 ##  <A homomorphism of left modules>
 ##  gap> pi := CokernelEpi( alpha );
@@ -117,10 +117,10 @@
 ##  <#/GAPDoc>
 
 LoadPackage( "Modules" );
-ZZ := HomalgRingOfIntegers( );
-m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );
+zz := HomalgRingOfIntegers( );
+m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], zz );
 M := LeftPresentation( m );
-a := HomalgMatrix( [ [ 2, 0 ] ], ZZ );
+a := HomalgMatrix( [ [ 2, 0 ] ], zz );
 alpha := HomalgMap( a, "free", M );
 pi := CokernelEpi( alpha );
 iota := KernelEmb( pi );

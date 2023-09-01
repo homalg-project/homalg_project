@@ -1,11 +1,11 @@
 LoadPackage( "Modules" );
 
-ZZ := HomalgRingOfIntegers( );
+zz := HomalgRingOfIntegers( );
 
-F := 1 * ZZ;
-T := 0 * ZZ;
+F := 1 * zz;
+T := 0 * zz;
 
-lambda := HomalgMatrix( "[ 2 ]", 1, 1, ZZ );
+lambda := HomalgMatrix( "[ 2 ]", 1, 1, zz );
 lambda := HomalgMap( lambda, F, F );
 id := HomalgIdentityMap( F, F );
 zz := HomalgZeroMap( T, T );

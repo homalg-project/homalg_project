@@ -418,9 +418,9 @@ end );
 ##    equal to <C>NumberColumns</C>(<A>mat</A>) (resp. <C>NumberRows</C>(<A>mat</A>)). For this <C>NumberRows</C>(<A>mat</A>)
 ##    (resp. <C>Columns</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C^d</M>).
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> mat := HomalgMatrix( "[ 0, 1,   0, 0 ]", 2, 2, ZZ );
+##  gap> mat := HomalgMatrix( "[ 0, 1,   0, 0 ]", 2, 2, zz );
 ##  <A 2 x 2 matrix over an internal ring>
 ##  gap> phi := HomalgMap( mat );
 ##  <A homomorphism of left modules>
@@ -1422,13 +1422,13 @@ end );
 ##  ]]></Listing>
 ##      This method performs side effects on its argument <A>C</A> and returns it.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );
 ##  <A 2 x 4 matrix over an internal ring>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-torsion left module presented by 2 relations for 4 generators>
@@ -1436,7 +1436,7 @@ end );
 ##  > 0, 3, 6, 9, \
 ##  > 0, 2, 4, 6, \
 ##  > 0, 3, 6, 9  \
-##  > ]", 3, 4, ZZ );
+##  > ]", 3, 4, zz );
 ##  <A 3 x 4 matrix over an internal ring>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>
@@ -1546,13 +1546,13 @@ end );
 ##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
 ##      To add a morphism (resp. (co)chain morphism) to a complex use <Ref Oper="Add" Label="to complexes given a morphism"/>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );
 ##  <A 2 x 4 matrix over an internal ring>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-torsion left module presented by 2 relations for 4 generators>
@@ -1560,7 +1560,7 @@ end );
 ##  > 0, 3, 6, 9, \
 ##  > 0, 2, 4, 6, \
 ##  > 0, 3, 6, 9  \
-##  > ]", 3, 4, ZZ );
+##  > ]", 3, 4, zz );
 ##  <A 3 x 4 matrix over an internal ring>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>
@@ -1712,13 +1712,13 @@ end );
 ##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
 ##      To add a morphism (resp. (co)chain morphism) to a cocomplex use <Ref Oper="Add" Label="to complexes given a morphism"/>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := RightPresentation( Involution( M ) );
 ##  <A non-torsion right module on 3 generators satisfying 2 relations>
-##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );
 ##  <A 2 x 4 matrix over an internal ring>
 ##  gap> N := RightPresentation( Involution( N ) );
 ##  <A non-torsion right module on 4 generators satisfying 2 relations>
@@ -1726,7 +1726,7 @@ end );
 ##  > 0, 3, 6, 9, \
 ##  > 0, 2, 4, 6, \
 ##  > 0, 3, 6, 9  \
-##  > ]", 3, 4, ZZ );
+##  > ]", 3, 4, zz );
 ##  <A 3 x 4 matrix over an internal ring>
 ##  gap> phi := HomalgMap( Involution( mat ), M, N );
 ##  <A "homomorphism" of right modules>

@@ -695,9 +695,9 @@ InstallMethod( FieldOfFractions,
         "for homalg rings in MAGMA",
         [ IsHomalgExternalRingInMAGMARep and IsIntegersForHomalg ],
         
-  function( ZZ )
+  function( zz )
     
-    return HomalgFieldOfRationalsInMAGMA( ZZ );
+    return HomalgFieldOfRationalsInMAGMA( zz );
     
 end );
 

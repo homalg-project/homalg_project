@@ -425,9 +425,9 @@ InstallMethod( FieldOfFractions,
         "for homalg rings in Macaulay2",
         [ IsHomalgExternalRingInMacaulay2Rep and IsIntegersForHomalg ],
         
-  function( ZZ )
+  function( zz )
     
-    return HomalgFieldOfRationalsInMacaulay2( ZZ );
+    return HomalgFieldOfRationalsInMacaulay2( zz );
     
 end );
 

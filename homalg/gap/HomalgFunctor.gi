@@ -6377,11 +6377,11 @@ end );
 ##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> which installs several necessary operations
 ##      under the name <A>H</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> ZZ * 1;
+##  gap> zz * 1;
 ##  <The free right module of rank 1 on a free generator>
-##  gap> InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, ZZ * 1, "Hom_ZZ" );
+##  gap> InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, zz * 1, "Hom_ZZ" );
 ##  <The functor Hom_ZZ for f.p. modules and their maps over computable rings>
 ##  gap> Functor_Hom_ZZ_for_fp_modules; ## got automatically defined
 ##  <The functor Hom_ZZ for f.p. modules and their maps over computable rings>

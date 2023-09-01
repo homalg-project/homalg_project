@@ -1,8 +1,8 @@
 LoadPackage( "Modules" );
 
-ZZ := HomalgRingOfIntegers( );
+zz := HomalgRingOfIntegers( );
 
-I := RightSubmodule( "4", ZZ );
+I := RightSubmodule( "4", zz );
 
-J := Subobject( HomalgMatrix( "[ 6 ]", 1, 1, ZZ ), UnderlyingObject( I ) );
+J := Subobject( HomalgMatrix( "[ 6 ]", 1, 1, zz ), UnderlyingObject( I ) );
 

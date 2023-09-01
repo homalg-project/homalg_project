@@ -967,8 +967,8 @@ DeclareProperty( "IsIrreducibleHomalgRingElement",
 ##    <Description>
 ##    The inverse of the &homalg; ring element <A>r</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> R := ZZ / 2^8;
+##  gap> zz := HomalgRingOfIntegers( );;
+##  gap> R := zz / 2^8;
 ##  Z/( 256 )
 ##  gap> r := (1/3*One(R)+1/5)+3/7;
 ##  |[ 157 ]|

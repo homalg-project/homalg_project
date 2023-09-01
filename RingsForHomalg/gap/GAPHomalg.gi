@@ -221,9 +221,9 @@ InstallMethod( FieldOfFractions,
         "for homalg rings in GAP",
         [ IsHomalgExternalRingInGAPRep and IsIntegersForHomalg ],
         
-  function( ZZ )
+  function( zz )
     
-    return HomalgFieldOfRationalsInExternalGAP( ZZ );
+    return HomalgFieldOfRationalsInExternalGAP( zz );
     
 end );
 

@@ -91,13 +91,13 @@ BindGlobal( "TheTypeHomalgSelfMapOfRightModules",
 ##    <Description>
 ##      The &homalg; ring of the &homalg; map <A>phi</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
+##  gap> zz := HomalgRingOfIntegers( );
 ##  Z
-##  gap> phi := HomalgIdentityMap( 2 * ZZ );
+##  gap> phi := HomalgIdentityMap( 2 * zz );
 ##  <The identity morphism of a non-zero left module>
 ##  gap> R := HomalgRing( phi );
 ##  Z
-##  gap> IsIdenticalObj( R, ZZ );
+##  gap> IsIdenticalObj( R, zz );
 ##  true
 ##  ]]></Example>
 ##    </Description>
@@ -855,12 +855,12 @@ end );
 ##      &homalg; uses the so-called <E>associative</E> convention for maps. This means that maps of left modules are
 ##      applied from the right, whereas maps of right modules from the left.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> zz := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );
 ##  <A 2 x 4 matrix over an internal ring>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-torsion left module presented by 2 relations for 4 generators>
@@ -868,7 +868,7 @@ end );
 ##  > 1, 0, -2, -4, \
 ##  > 0, 1,  4,  7, \
 ##  > 1, 0, -2, -4  \
-##  > ]", 3, 4, ZZ );
+##  > ]", 3, 4, zz );
 ##  <A 3 x 4 matrix over an internal ring>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>
@@ -1312,12 +1312,12 @@ InstallMethod( HomalgMap,
 ##      The constructor returns the zero map between the source &homalg; module <A>M</A>
 ##      and the target &homalg; module <A>N</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> zz := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );
 ##  <A 2 x 4 matrix over an internal ring>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-torsion left module presented by 2 relations for 4 generators>
@@ -1342,8 +1342,8 @@ end );
 ##    <Description>
 ##      The constructor returns the identity map of the &homalg; module <A>M</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> zz := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
