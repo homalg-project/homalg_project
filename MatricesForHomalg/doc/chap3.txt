@@ -139,11 +139,11 @@
   properties.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An internal ring>[128X[104X
-    [4X[25Xgap>[125X [27XZ256 := ZZ / 2^8;[127X[104X
+    [4X[25Xgap>[125X [27XZ256 := zz / 2^8;[127X[104X
     [4X[28XZ/( 256 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z256 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
@@ -617,8 +617,8 @@
   [33X[0;0YThe inverse of the [5Xhomalg[105X ring element [3Xr[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
-    [4X[25Xgap>[125X [27XR := ZZ / 2^8;[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XR := zz / 2^8;[127X[104X
     [4X[28XZ/( 256 )[128X[104X
     [4X[25Xgap>[125X [27Xr := (1/3*One(R)+1/5)+3/7;[127X[104X
     [4X[28X|[ 157 ]|[128X[104X

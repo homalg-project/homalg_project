@@ -225,9 +225,9 @@ DeclareCategory( "IsHomalgMatrix",
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := HomalgInitialMatrix( 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := HomalgInitialMatrix( 2, 3, zz );</span>
 &lt;An initial 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasIsZero( z );</span>
 false
@@ -241,7 +241,7 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := HomalgInitialMatrix( 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := HomalgInitialMatrix( 2, 3, zz );</span>
 &lt;An initial 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n[ 1, 1 ] := "1";;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n[ 2, 3 ] := "1";;</span>
@@ -267,9 +267,9 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id := HomalgInitialIdentityMatrix( 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id := HomalgInitialIdentityMatrix( 3, zz );</span>
 &lt;An initial identity 3 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasIsOne( id );</span>
 false
@@ -283,7 +283,7 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := HomalgInitialIdentityMatrix( 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := HomalgInitialIdentityMatrix( 3, zz );</span>
 &lt;An initial identity 3 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e[ 1, 2 ] := "1";;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e[ 2, 1 ] := "-1";;</span>
@@ -310,9 +310,9 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := HomalgZeroMatrix( 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := HomalgZeroMatrix( 2, 3, zz );</span>
 &lt;An unevaluated 2 x 3 zero matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( z );</span>
 [ [  0,  0,  0 ],
@@ -332,9 +332,9 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id := HomalgIdentityMatrix( 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id := HomalgIdentityMatrix( 3, zz );</span>
 &lt;An unevaluated 3 x 3 identity matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( id );</span>
 [ [  1,  0,  0 ],
@@ -368,9 +368,9 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
 [ [  1,  2,  3 ],
@@ -379,7 +379,7 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
 [ [  1,  2,  3 ],
@@ -388,7 +388,7 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
 [ [  1,  2,  3 ],
@@ -397,7 +397,7 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
 [ [  1,  2,  3 ],
@@ -406,7 +406,7 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
 [ [  1,  2,  3 ],
@@ -417,7 +417,7 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
 [ [  1,  2,  3 ],
@@ -431,7 +431,7 @@ Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 2, 3, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">4, 5, 6  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
 [ [  1,  2,  3 ],
@@ -476,9 +476,9 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := HomalgDiagonalMatrix( [ 1, 2, 3 ], ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := HomalgDiagonalMatrix( [ 1, 2, 3 ], zz );</span>
 &lt;An unevaluated diagonal 3 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( d );</span>
 [ [  1,  0,  0 ],
@@ -500,13 +500,13 @@ Z
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := ZZ / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := zz / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z4 );</span>
 &lt;A residue class ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := HomalgDiagonalMatrix( [ 2 .. 4 ], zz );</span>
 &lt;An unevaluated diagonal 3 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d2 := Z4 * d; ## or d2 := d * Z4;</span>
 &lt;A 3 x 3 matrix over a residue class ring&gt;
@@ -557,11 +557,11 @@ modulo [ 4 ]
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := HomalgMatrix( "[ 2 ]", ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := HomalgMatrix( "[ 2 ]", zz );</span>
 &lt;A 1 x 1 matrix over an internal ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z2 := ZZ / 2;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z2 := zz / 2;</span>
 Z/( 2 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := Z2 * A;</span>
 &lt;A 1 x 1 matrix over a residue class ring&gt;
@@ -1071,13 +1071,13 @@ true
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := HomalgDiagonalMatrix( [ 2 .. 4 ], zz );</span>
 &lt;An unevaluated diagonal 3 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRing( d );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( R, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( R, zz );</span>
 true
 </pre></div>
 
@@ -1401,13 +1401,13 @@ end );
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := HomalgMatrix( "[ 1 ]", ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := HomalgMatrix( "[ 1 ]", zz );</span>
 &lt;A 1 x 1 matrix over an internal ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := HomalgMatrix( "[ 3 ]", ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := HomalgMatrix( "[ 3 ]", zz );</span>
 &lt;A 1 x 1 matrix over an internal ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z2 := ZZ / 2;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z2 := zz / 2;</span>
 Z/( 2 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := Z2 * A;</span>
 &lt;A 1 x 1 matrix over a residue class ring&gt;

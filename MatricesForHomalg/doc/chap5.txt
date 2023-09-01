@@ -43,9 +43,9 @@
   MakeImmutable[114X)).[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xz := HomalgInitialMatrix( 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xz := HomalgInitialMatrix( 2, 3, zz );[127X[104X
     [4X[28X<An initial 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XHasIsZero( z );[127X[104X
     [4X[28Xfalse[128X[104X
@@ -58,7 +58,7 @@
   [4X[32X[104X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xn := HomalgInitialMatrix( 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xn := HomalgInitialMatrix( 2, 3, zz );[127X[104X
     [4X[28X<An initial 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27Xn[ 1, 1 ] := "1";;[127X[104X
     [4X[25Xgap>[125X [27Xn[ 2, 3 ] := "1";;[127X[104X
@@ -87,9 +87,9 @@
   [2XMakeImmutable[102X ([14XReference: MakeImmutable[114X)).[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xid := HomalgInitialIdentityMatrix( 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xid := HomalgInitialIdentityMatrix( 3, zz );[127X[104X
     [4X[28X<An initial identity 3 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XHasIsOne( id );[127X[104X
     [4X[28Xfalse[128X[104X
@@ -102,7 +102,7 @@
   [4X[32X[104X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xe := HomalgInitialIdentityMatrix( 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xe := HomalgInitialIdentityMatrix( 3, zz );[127X[104X
     [4X[28X<An initial identity 3 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27Xe[ 1, 2 ] := "1";;[127X[104X
     [4X[25Xgap>[125X [27Xe[ 2, 1 ] := "-1";;[127X[104X
@@ -126,9 +126,9 @@
   [33X[0;0YAn immutable unevaluated [22X[3Xm[103X × [3Xn[103X[122X [5Xhomalg[105X zero matrix over the [5Xhomalg[105X ring [3XR[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xz := HomalgZeroMatrix( 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xz := HomalgZeroMatrix( 2, 3, zz );[127X[104X
     [4X[28X<An unevaluated 2 x 3 zero matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( z );[127X[104X
     [4X[28X[ [  0,  0,  0 ],[128X[104X
@@ -146,9 +146,9 @@
   [3XR[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xid := HomalgIdentityMatrix( 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xid := HomalgIdentityMatrix( 3, zz );[127X[104X
     [4X[28X<An unevaluated 3 x 3 identity matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( id );[127X[104X
     [4X[28X[ [  1,  0,  0 ],[128X[104X
@@ -177,9 +177,9 @@
   [33X[0;0YAn immutable evaluated [22X[3Xm[103X × [3Xn[103X[122X [5Xhomalg[105X matrix over the [5Xhomalg[105X ring [3XR[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
     [4X[28X[ [  1,  2,  3 ],[128X[104X
@@ -187,7 +187,7 @@
   [4X[32X[104X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
     [4X[28X[ [  1,  2,  3 ],[128X[104X
@@ -195,7 +195,7 @@
   [4X[32X[104X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
     [4X[28X[ [  1,  2,  3 ],[128X[104X
@@ -203,7 +203,7 @@
   [4X[32X[104X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
     [4X[28X[ [  1,  2,  3 ],[128X[104X
@@ -211,7 +211,7 @@
   [4X[32X[104X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
     [4X[28X[ [  1,  2,  3 ],[128X[104X
@@ -224,7 +224,7 @@
   optical delimiters:[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
     [4X[28X[ [  1,  2,  3 ],[128X[104X
@@ -238,7 +238,7 @@
     [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X1, 2, 3, \[127X[104X
     [4X[25X>[125X [27X4, 5, 6  \[127X[104X
-    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
     [4X[28X[ [  1,  2,  3 ],[128X[104X
@@ -277,9 +277,9 @@
   diagonal consists of the entries of the list [3Xdiag[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 1, 2, 3 ], ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 1, 2, 3 ], zz );[127X[104X
     [4X[28X<An unevaluated diagonal 3 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( d );[127X[104X
     [4X[28X[ [  1,  0,  0 ],[128X[104X
@@ -299,13 +299,13 @@
   entries as the matrix [3Xmat[103X. Syntax: [3XR[103X [10X*[110X [3Xmat[103X or [3Xmat[103X [10X*[110X [3XR[103X[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XZ4 := ZZ / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ4 := zz / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
-    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 2 .. 4 ], zz );[127X[104X
     [4X[28X<An unevaluated diagonal 3 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27Xd2 := Z4 * d; ## or d2 := d * Z4;[127X[104X
     [4X[28X<A 3 x 3 matrix over a residue class ring>[128X[104X
@@ -352,11 +352,11 @@
   [33X[0;0Y(for the installed standard method see [2XIsZeroMatrix[102X ([14XB.1-20[114X))[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XA := HomalgMatrix( "[ 2 ]", ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XA := HomalgMatrix( "[ 2 ]", zz );[127X[104X
     [4X[28X<A 1 x 1 matrix over an internal ring>[128X[104X
-    [4X[25Xgap>[125X [27XZ2 := ZZ / 2;[127X[104X
+    [4X[25Xgap>[125X [27XZ2 := zz / 2;[127X[104X
     [4X[28XZ/( 2 )[128X[104X
     [4X[25Xgap>[125X [27XA := Z2 * A;[127X[104X
     [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
@@ -765,13 +765,13 @@
   [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X matrix [3Xmat[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 2 .. 4 ], zz );[127X[104X
     [4X[28X<An unevaluated diagonal 3 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XR := HomalgRing( d );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( R, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( R, zz );[127X[104X
     [4X[28Xtrue[128X[104X
   [4X[32X[104X
   
@@ -1061,13 +1061,13 @@
   [33X[0;0Y(for the installed standard method see [2XAreEqualMatrices[102X ([14XB.2-1[114X))[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XA := HomalgMatrix( "[ 1 ]", ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XA := HomalgMatrix( "[ 1 ]", zz );[127X[104X
     [4X[28X<A 1 x 1 matrix over an internal ring>[128X[104X
-    [4X[25Xgap>[125X [27XB := HomalgMatrix( "[ 3 ]", ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XB := HomalgMatrix( "[ 3 ]", zz );[127X[104X
     [4X[28X<A 1 x 1 matrix over an internal ring>[128X[104X
-    [4X[25Xgap>[125X [27XZ2 := ZZ / 2;[127X[104X
+    [4X[25Xgap>[125X [27XZ2 := zz / 2;[127X[104X
     [4X[28XZ/( 2 )[128X[104X
     [4X[25Xgap>[125X [27XA := Z2 * A;[127X[104X
     [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
