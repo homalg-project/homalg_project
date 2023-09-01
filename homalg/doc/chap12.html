@@ -46,7 +46,7 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imat := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">  262,  -33,   75,  -40, \</span>
@@ -54,15 +54,15 @@ Z
 <span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1186, -151,  341, -180, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">-1932,  248, -556,  292, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1018, -127,  293, -156  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, zz );</span>
 &lt;A 5 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( imat );</span>
 &lt;A left module presented by 5 relations for 4 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Hom( ZZ, M );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Hom( zz, M );</span>
 &lt;A rank 1 right module on 4 generators satisfying yet unknown relations&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, N, "TensorN" );</span>
 &lt;The functor TensorN for f.p. modules and their maps over computable rings&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := LeftDualizingFunctor( ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := LeftDualizingFunctor( zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := GrothendieckSpectralSequence( F, G, M );</span>
 &lt;A stable homological spectral sequence with sheets at levels 
 [ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
@@ -131,7 +131,7 @@ of
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imat := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">  262,  -33,   75,  -40, \</span>
@@ -139,7 +139,7 @@ Z
 <span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1186, -151,  341, -180, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">-1932,  248, -556,  292, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1018, -127,  293, -156  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, zz );</span>
 &lt;A 5 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( imat );</span>
 &lt;A left module presented by 5 relations for 4 generators&gt;
@@ -228,7 +228,7 @@ Z/&lt; 2 &gt; + Z/&lt; 12 &gt;
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imat := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">  262,  -33,   75,  -40, \</span>
@@ -236,13 +236,13 @@ Z
 <span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1186, -151,  341, -180, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">-1932,  248, -556,  292, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1018, -127,  293, -156  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, zz );</span>
 &lt;A 5 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( imat );</span>
 &lt;A left module presented by 5 relations for 4 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, M, "TensorM" );</span>
 &lt;The functor TensorM for f.p. modules and their maps over computable rings&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := LeftDualizingFunctor( ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := LeftDualizingFunctor( zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := GrothendieckSpectralSequence( F, G, M );</span>
 &lt;A stable cohomological spectral sequence with sheets at levels 
 [ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
@@ -316,7 +316,7 @@ of
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imat := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">  262,  -33,   75,  -40, \</span>
@@ -324,7 +324,7 @@ Z
 <span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1186, -151,  341, -180, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">-1932,  248, -556,  292, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1018, -127,  293, -156  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, zz );</span>
 &lt;A 5 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( imat );</span>
 &lt;A left module presented by 5 relations for 4 generators&gt;

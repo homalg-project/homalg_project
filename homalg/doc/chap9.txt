@@ -76,9 +76,9 @@
   [3XB[103X forgetting the morphisms.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
     [4X[25Xgap>[125X [27Xd := Resolution( M );;[127X[104X
@@ -135,9 +135,9 @@
   level. Of course, a zero object (at a spot [22X(p,q)[122X) is always stable.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
     [4X[25Xgap>[125X [27Xd := Resolution( M );;[127X[104X

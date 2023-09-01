@@ -159,11 +159,11 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ * 1;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz * 1;</span>
 &lt;The free right module of rank 1 on a free generator&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, ZZ * 1, "Hom_ZZ" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, zz * 1, "Hom_ZZ" );</span>
 &lt;The functor Hom_ZZ for f.p. modules and their maps over computable rings&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_Hom_ZZ_for_fp_modules; ## got automatically defined</span>
 &lt;The functor Hom_ZZ for f.p. modules and their maps over computable rings&gt;
@@ -316,9 +316,9 @@ Ext
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftDualizingFunctor( ZZ, "ZZ_Hom" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftDualizingFunctor( zz, "ZZ_Hom" );</span>
 &lt;The functor ZZ_Hom for f.p. modules and their maps over computable rings&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_ZZ_Hom_for_fp_modules; ## got automatically defined</span>
 &lt;The functor ZZ_Hom for f.p. modules and their maps over computable rings&gt;
@@ -328,7 +328,7 @@ Z
 [ "InsertObjectInMultiFunctor",
   &lt;The functor Hom for f.p. modules and their maps over computable rings&gt;, 2,
   &lt;The free left module of rank 1 on a free generator&gt; ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 * ZZ;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 * zz;</span>
 &lt;The free left module of rank 1 on a free generator&gt;
 </pre></div>
 

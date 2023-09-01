@@ -108,11 +108,11 @@
   several necessary operations under the name [3XH[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XZZ * 1;[127X[104X
+    [4X[25Xgap>[125X [27Xzz * 1;[127X[104X
     [4X[28X<The free right module of rank 1 on a free generator>[128X[104X
-    [4X[25Xgap>[125X [27XInsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, ZZ * 1, "Hom_ZZ" );[127X[104X
+    [4X[25Xgap>[125X [27XInsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, zz * 1, "Hom_ZZ" );[127X[104X
     [4X[28X<The functor Hom_ZZ for f.p. modules and their maps over computable rings>[128X[104X
     [4X[25Xgap>[125X [27XFunctor_Hom_ZZ_for_fp_modules; ## got automatically defined[127X[104X
     [4X[28X<The functor Hom_ZZ for f.p. modules and their maps over computable rings>[128X[104X
@@ -281,9 +281,9 @@
   [30X    [33X[0;6Y[10XInsertObjectInMultiFunctor[110X:[133X
   
   [4X      [32X  Example  [32X[104X
-          [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+          [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
           [4X[28XZ[128X[104X
-          [4X[25Xgap>[125X [27XLeftDualizingFunctor( ZZ, "ZZ_Hom" );[127X[104X
+          [4X[25Xgap>[125X [27XLeftDualizingFunctor( zz, "ZZ_Hom" );[127X[104X
           [4X[28X<The functor ZZ_Hom for f.p. modules and their maps over computable rings>[128X[104X
           [4X[25Xgap>[125X [27XFunctor_ZZ_Hom_for_fp_modules; ## got automatically defined[127X[104X
           [4X[28X<The functor ZZ_Hom for f.p. modules and their maps over computable rings>[128X[104X
@@ -293,7 +293,7 @@
           [4X[28X[ "InsertObjectInMultiFunctor",[128X[104X
           [4X[28X  <The functor Hom for f.p. modules and their maps over computable rings>, 2,[128X[104X
           [4X[28X  <The free left module of rank 1 on a free generator> ][128X[104X
-          [4X[25Xgap>[125X [27X1 * ZZ;[127X[104X
+          [4X[25Xgap>[125X [27X1 * zz;[127X[104X
           [4X[28X<The free left module of rank 1 on a free generator>[128X[104X
         [4X[32X[104X
   

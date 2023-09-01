@@ -76,15 +76,15 @@
   element [3Xm[103X of [22XM[122X factor over the subobject morphism [3XN[103X[22X-> M[122X?[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := 2 * ZZ;[127X[104X
+    [4X[25Xgap>[125X [27XM := 2 * zz;[127X[104X
     [4X[28X<A free left module of rank 2 on free generators>[128X[104X
     [4X[25Xgap>[125X [27Xa := HomalgModuleElement( "[ 6, 0 ]", M );[127X[104X
     [4X[28X( 6, 0 )[128X[104X
-    [4X[25Xgap>[125X [27XN := Subobject( HomalgMap( "[ 2, 0 ]", 1 * ZZ, M ) );[127X[104X
+    [4X[25Xgap>[125X [27XN := Subobject( HomalgMap( "[ 2, 0 ]", 1 * zz, M ) );[127X[104X
     [4X[28X<A free left submodule given by a cyclic generator>[128X[104X
-    [4X[25Xgap>[125X [27XK := Subobject( HomalgMap( "[ 4, 0 ]", 1 * ZZ, M ) );[127X[104X
+    [4X[25Xgap>[125X [27XK := Subobject( HomalgMap( "[ 4, 0 ]", 1 * zz, M ) );[127X[104X
     [4X[28X<A free left submodule given by a cyclic generator>[128X[104X
     [4X[25Xgap>[125X [27Xa in M;[127X[104X
     [4X[28Xtrue[128X[104X
@@ -96,7 +96,7 @@
     [4X[28Xfalse[128X[104X
     [4X[25Xgap>[125X [27Xa in UnderlyingObject( K );[127X[104X
     [4X[28Xfalse[128X[104X
-    [4X[25Xgap>[125X [27Xa in 3 * ZZ;[127X[104X
+    [4X[25Xgap>[125X [27Xa in 3 * zz;[127X[104X
     [4X[28Xfalse [128X[104X
   [4X[32X[104X
   

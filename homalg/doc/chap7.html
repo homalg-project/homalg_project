@@ -133,25 +133,25 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := 1 * ZZ;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := 1 * zz;</span>
 &lt;The free left module of rank 1 on a free generator&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
 Z^(1 x 1)
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[3]", 1, 1, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[3]", 1, 1, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A cyclic torsion left module presented by 1 relation for
  a cyclic generator&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( N );</span>
 Z/&lt; 3 &gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, M );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgMap( HomalgMatrix( "[2]", 1, 1, zz ), M, M );</span>
 &lt;An endomorphism of a left module&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, N );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c := HomalgMap( HomalgMatrix( "[2]", 1, 1, zz ), M, N );</span>
 &lt;A homomorphism of left modules&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, M );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := HomalgMap( HomalgMatrix( "[1]", 1, 1, zz ), M, M );</span>
 &lt;An endomorphism of a left module&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, N );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := HomalgMap( HomalgMatrix( "[1]", 1, 1, zz ), M, N );</span>
 &lt;A homomorphism of left modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 := HomalgComplex( a );</span>
 &lt;A non-zero acyclic complex containing a single morphism of left modules at de\

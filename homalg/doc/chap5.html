@@ -141,15 +141,15 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := 2 * ZZ;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := 2 * zz;</span>
 &lt;A free left module of rank 2 on free generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgModuleElement( "[ 6, 0 ]", M );</span>
 ( 6, 0 )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Subobject( HomalgMap( "[ 2, 0 ]", 1 * ZZ, M ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Subobject( HomalgMap( "[ 2, 0 ]", 1 * zz, M ) );</span>
 &lt;A free left submodule given by a cyclic generator&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K := Subobject( HomalgMap( "[ 4, 0 ]", 1 * ZZ, M ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K := Subobject( HomalgMap( "[ 4, 0 ]", 1 * zz, M ) );</span>
 &lt;A free left submodule given by a cyclic generator&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a in M;</span>
 true
@@ -161,7 +161,7 @@ true
 false
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a in UnderlyingObject( K );</span>
 false
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a in 3 * ZZ;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a in 3 * zz;</span>
 false 
 </pre></div>
 

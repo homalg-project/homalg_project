@@ -67,25 +67,25 @@
   on homology, but is itself [13Xnot[113X zero in the derived category:[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := 1 * ZZ;[127X[104X
+    [4X[25Xgap>[125X [27XM := 1 * zz;[127X[104X
     [4X[28X<The free left module of rank 1 on a free generator>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
     [4X[28XZ^(1 x 1)[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[3]", 1, 1, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[3]", 1, 1, zz );;[127X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A cyclic torsion left module presented by 1 relation for[128X[104X
     [4X[28X a cyclic generator>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( N );[127X[104X
     [4X[28XZ/< 3 >[128X[104X
-    [4X[25Xgap>[125X [27Xa := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, M );[127X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgMap( HomalgMatrix( "[2]", 1, 1, zz ), M, M );[127X[104X
     [4X[28X<An endomorphism of a left module>[128X[104X
-    [4X[25Xgap>[125X [27Xc := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, N );[127X[104X
+    [4X[25Xgap>[125X [27Xc := HomalgMap( HomalgMatrix( "[2]", 1, 1, zz ), M, N );[127X[104X
     [4X[28X<A homomorphism of left modules>[128X[104X
-    [4X[25Xgap>[125X [27Xb := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, M );[127X[104X
+    [4X[25Xgap>[125X [27Xb := HomalgMap( HomalgMatrix( "[1]", 1, 1, zz ), M, M );[127X[104X
     [4X[28X<An endomorphism of a left module>[128X[104X
-    [4X[25Xgap>[125X [27Xd := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, N );[127X[104X
+    [4X[25Xgap>[125X [27Xd := HomalgMap( HomalgMatrix( "[1]", 1, 1, zz ), M, N );[127X[104X
     [4X[28X<A homomorphism of left modules>[128X[104X
     [4X[25Xgap>[125X [27XC1 := HomalgComplex( a );[127X[104X
     [4X[28X<A non-zero acyclic complex containing a single morphism of left modules at de\[128X[104X
