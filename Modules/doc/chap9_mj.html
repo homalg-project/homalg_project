@@ -96,13 +96,13 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgElement( HomalgMap( "[[2]]", 1 * zz, 1 * zz ) );</span>
 2
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsElementOfIntegers( a );</span>
 true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := ZZ / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := zz / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := HomalgElement( HomalgMap( "[[-1]]", 1 * Z4, 1 * Z4 ) );</span>
 |[ 3 ]|
@@ -129,11 +129,11 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgElement( HomalgMap( "[[2]]", 1 * zz, 1 * zz ) );</span>
 2
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( ZZ, HomalgRing( a ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( zz, HomalgRing( a ) );</span>
 true
 </pre></div>
 

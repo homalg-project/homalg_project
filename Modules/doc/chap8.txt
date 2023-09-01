@@ -85,12 +85,12 @@
   maps of right modules from the left.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );[127X[104X
     [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
@@ -98,7 +98,7 @@
     [4X[25X>[125X [27X1, 0, -2, -4, \[127X[104X
     [4X[25X>[125X [27X0, 1,  4,  7, \[127X[104X
     [4X[25X>[125X [27X1, 0, -2, -4  \[127X[104X
-    [4X[25X>[125X [27X]", 3, 4, ZZ );[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, zz );[127X[104X
     [4X[28X<A 3 x 4 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );[127X[104X
     [4X[28X<A "homomorphism" of left modules>[128X[104X
@@ -184,12 +184,12 @@
   the target [5Xhomalg[105X module [3XN[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );[127X[104X
     [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
@@ -205,8 +205,8 @@
   [33X[0;0YThe constructor returns the identity map of the [5Xhomalg[105X module [3XM[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
@@ -231,13 +231,13 @@
   [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X map [3Xphi[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xphi := HomalgIdentityMap( 2 * ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgIdentityMap( 2 * zz );[127X[104X
     [4X[28X<The identity morphism of a non-zero left module>[128X[104X
     [4X[25Xgap>[125X [27XR := HomalgRing( phi );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( R, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( R, zz );[127X[104X
     [4X[28Xtrue[128X[104X
   [4X[32X[104X
   

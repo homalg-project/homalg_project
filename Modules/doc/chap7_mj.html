@@ -205,11 +205,11 @@ DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">2, 3, 4, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">5, 6, 7  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
@@ -239,11 +239,11 @@ Z/&lt; 3 &gt; + Z^(1 x 1)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">2, 3, 4, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">5, 6, 7  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := RightPresentation( M );</span>
 &lt;A right module on 2 generators satisfying 3 relations&gt;
@@ -264,14 +264,14 @@ Z/&lt; 3 &gt;
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeLeftModule( 1, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeLeftModule( 1, zz );</span>
 &lt;A free left module of rank 1 on a free generator&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 * ZZ;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 * zz;</span>
 &lt;The free left module of rank 1 on a free generator&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeLeftModule( 2, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeLeftModule( 2, zz );</span>
 &lt;A free left module of rank 2 on free generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2 * ZZ;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2 * zz;</span>
 &lt;A free left module of rank 2 on free generators&gt;
 </pre></div>
 
@@ -286,14 +286,14 @@ Z/&lt; 3 &gt;
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeRightModule( 1, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeRightModule( 1, zz );</span>
 &lt;A free right module of rank 1 on a free generator&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ * 1;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz * 1;</span>
 &lt;The free right module of rank 1 on a free generator&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeRightModule( 2, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeRightModule( 2, zz );</span>
 &lt;A free right module of rank 2 on free generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ * 2;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz * 2;</span>
 &lt;A free right module of rank 2 on free generators&gt;
 </pre></div>
 
@@ -308,10 +308,10 @@ Z/&lt; 3 &gt;
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgZeroLeftModule( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgZeroLeftModule( zz );</span>
 &lt;A zero left module&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">0 * ZZ;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">0 * zz;</span>
 &lt;The zero left module&gt;
 </pre></div>
 
@@ -326,10 +326,10 @@ Z/&lt; 3 &gt;
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgZeroRightModule( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgZeroRightModule( zz );</span>
 &lt;A zero right module&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ * 0;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz * 0;</span>
 &lt;The zero right module&gt;
 </pre></div>
 
@@ -358,15 +358,15 @@ Z/&lt; 3 &gt;
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zz );</span>
 &lt;An internal ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := ZZ / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := zz / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z4 );</span>
 &lt;A residue class ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgDiagonalMatrix( [ 2 .. 4 ], zz );</span>
 &lt;An unevaluated diagonal 3 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A torsion left module presented by 3 relations for 3 generators&gt;
@@ -386,16 +386,16 @@ Z/( 4 )/&lt; |[ 2 ]| &gt; + Z/( 4 )^(1 x 1)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">2, 3, 4, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">5, 6, 7  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := ZZ / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := zz / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z4 );</span>
 &lt;A residue class ring&gt;
@@ -421,7 +421,7 @@ currently represented by the above matrix
 &lt;A cocomplex containing 2 morphisms of right complexes at degrees [ 0 .. 2 ]&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Hom( DD, Z4 );</span>
 &lt;A complex containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := ZZ * D;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := zz * D;</span>
 &lt;A "complex" containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LowestDegreeObject( C );</span>
 &lt;A "cocomplex" containing 2 morphisms of left modules at degrees [ 0 .. 2 ]&gt;
@@ -799,13 +799,13 @@ r&gt;
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := ZZ * 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := zz * 4;</span>
 &lt;A free right module of rank 4 on free generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRing( M );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( R, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( R, zz );</span>
 true
 </pre></div>
 
@@ -820,11 +820,11 @@ true
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">2, 3, 4, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">5, 6, 7  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;

@@ -40,13 +40,13 @@
   [33X[0;0YCheck if the [3Xm[103X is an element of the integers viewed as a module over itself.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xa := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );[127X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgElement( HomalgMap( "[[2]]", 1 * zz, 1 * zz ) );[127X[104X
     [4X[28X2[128X[104X
     [4X[25Xgap>[125X [27XIsElementOfIntegers( a );[127X[104X
     [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XZ4 := ZZ / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ4 := zz / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27Xb := HomalgElement( HomalgMap( "[[-1]]", 1 * Z4, 1 * Z4 ) );[127X[104X
     [4X[28X|[ 3 ]|[128X[104X
@@ -68,11 +68,11 @@
   [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X module element [3Xm[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xa := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );[127X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgElement( HomalgMap( "[[2]]", 1 * zz, 1 * zz ) );[127X[104X
     [4X[28X2[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( ZZ, HomalgRing( a ) );[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( zz, HomalgRing( a ) );[127X[104X
     [4X[28Xtrue[128X[104X
   [4X[32X[104X
   

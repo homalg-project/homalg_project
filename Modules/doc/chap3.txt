@@ -50,11 +50,11 @@
   [33X[0;0Y[22X0 -> M_=ℤ/2^2ℤ --alpha_1--> M=ℤ/2^5ℤ --alpha_2--> _M=ℤ/2^3ℤ -> 0[122X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An internal ring>[128X[104X
-    [4X[25Xgap>[125X [27XR := ZZ / 2^8;[127X[104X
+    [4X[25Xgap>[125X [27XR := zz / 2^8;[127X[104X
     [4X[28XZ/( 256 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( R );[127X[104X
     [4X[28X<A residue class ring>[128X[104X

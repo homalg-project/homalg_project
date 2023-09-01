@@ -118,19 +118,19 @@ InstallValue( functor_Cokernel_for_fp_modules,
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
 true
@@ -198,19 +198,19 @@ InstallValue( functor_ImageObject_for_fp_modules,
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
 true
@@ -237,19 +237,19 @@ true
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
 true
@@ -293,12 +293,12 @@ fail
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
@@ -306,7 +306,7 @@ Z
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 3, 10, 17, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 3,  3,  3, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 0,  0,  0  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 4, 4, ZZ );;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 4, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
 true
@@ -316,9 +316,9 @@ true
 &lt;A monomorphism of left modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefectOfExactness( iota, phi );</span>
 &lt;A zero left module&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_iota := Hom( iota ); ## a shorthand for Hom( iota, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_iota := Hom( iota ); ## a shorthand for Hom( iota, zz );</span>
 &lt;A homomorphism of right modules&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_phi := Hom( phi ); ## a shorthand for Hom( phi, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_phi := Hom( phi ); ## a shorthand for Hom( phi, zz );</span>
 &lt;A homomorphism of right modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefectOfExactness( hom_iota, hom_phi );</span>
 &lt;A cyclic right module on a cyclic generator satisfying yet unknown relations&gt;
@@ -363,19 +363,19 @@ InstallValue( Functor_Hom_for_fp_modules,
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
 true
@@ -620,13 +620,13 @@ InstallValue( Functor_TensorProduct_for_fp_modules,
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );</span>
 &lt;A 2 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
@@ -634,7 +634,7 @@ Z
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, zz );</span>
 &lt;A 3 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );</span>
 &lt;A "homomorphism" of left modules&gt;
@@ -642,7 +642,7 @@ Z
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi;</span>
 &lt;A homomorphism of left modules&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := Hom( ZZ, M );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := Hom( zz, M );</span>
 &lt;A rank 1 right module on 3 generators satisfying yet unknown relations&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( L );</span>
 &lt;A rank 1 right module on 2 generators satisfying 1 relation&gt;
@@ -788,9 +788,9 @@ RightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := TorsionObject( M );</span>
@@ -845,9 +845,9 @@ LeftSatelliteOfFunctor( Functor_TensorProduct_for_fp_modules, "Tor" );
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := TorsionObject( M );</span>
@@ -918,16 +918,16 @@ RightDerivedCofunctor( Functor_Hom_for_fp_modules );
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( m );</span>
 &lt;A left module presented by 2 relations for 2 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
 Z/&lt; 8 &gt; + Z/&lt; 2 &gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
 &lt;A torsion left module presented by 2 relations for 2 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgMatrix( [ [ 2, 0 ] ], zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">alpha := HomalgMap( a, "free", M );</span>
 &lt;A homomorphism of left modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pi := CokernelEpi( alpha );</span>
@@ -1072,16 +1072,16 @@ LeftDerivedFunctor( Functor_TensorProduct_for_fp_modules );
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( m );</span>
 &lt;A left module presented by 2 relations for 2 generators&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
 Z/&lt; 8 &gt; + Z/&lt; 2 &gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
 &lt;A torsion left module presented by 2 relations for 2 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgMatrix( [ [ 2, 0 ] ], zz );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">alpha := HomalgMap( a, "free", M );</span>
 &lt;A homomorphism of left modules&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pi := CokernelEpi( alpha );</span>

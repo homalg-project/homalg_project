@@ -44,19 +44,19 @@
   [10XCokernelEpi[110X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
     [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
     [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
-    [4X[25X>[125X [27X]", 3, 4, ZZ );;[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
     [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
     [4X[28Xtrue[128X[104X
@@ -121,19 +121,19 @@
   [10XImageObjectEpi[110X and [10XImageObjectEmb[110X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
     [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
     [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
-    [4X[25X>[125X [27X]", 3, 4, ZZ );;[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
     [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
     [4X[28Xtrue[128X[104X
@@ -159,19 +159,19 @@
   [10XKernelEmb[110X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
     [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
     [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
-    [4X[25X>[125X [27X]", 3, 4, ZZ );;[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
     [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
     [4X[28Xtrue[128X[104X
@@ -216,12 +216,12 @@
   [10XKernelEmb[110X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
     [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
@@ -229,7 +229,7 @@
     [4X[25X>[125X [27X0, 3, 10, 17, \[127X[104X
     [4X[25X>[125X [27X1, 3,  3,  3, \[127X[104X
     [4X[25X>[125X [27X0, 0,  0,  0  \[127X[104X
-    [4X[25X>[125X [27X]", 4, 4, ZZ );;[127X[104X
+    [4X[25X>[125X [27X]", 4, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
     [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
     [4X[28Xtrue[128X[104X
@@ -239,9 +239,9 @@
     [4X[28X<A monomorphism of left modules>[128X[104X
     [4X[25Xgap>[125X [27XDefectOfExactness( iota, phi );[127X[104X
     [4X[28X<A zero left module>[128X[104X
-    [4X[25Xgap>[125X [27Xhom_iota := Hom( iota ); ## a shorthand for Hom( iota, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xhom_iota := Hom( iota ); ## a shorthand for Hom( iota, zz );[127X[104X
     [4X[28X<A homomorphism of right modules>[128X[104X
-    [4X[25Xgap>[125X [27Xhom_phi := Hom( phi ); ## a shorthand for Hom( phi, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xhom_phi := Hom( phi ); ## a shorthand for Hom( phi, zz );[127X[104X
     [4X[28X<A homomorphism of right modules>[128X[104X
     [4X[25Xgap>[125X [27XDefectOfExactness( hom_iota, hom_phi );[127X[104X
     [4X[28X<A cyclic right module on a cyclic generator satisfying yet unknown relations>[128X[104X
@@ -284,19 +284,19 @@
   appropriate dimensions.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
     [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
     [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
-    [4X[25X>[125X [27X]", 3, 4, ZZ );;[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, zz );;[127X[104X
     [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
     [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
     [4X[28Xtrue[128X[104X
@@ -539,13 +539,13 @@
   [10XTensorProduct[110X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );[127X[104X
     [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
@@ -553,7 +553,7 @@
     [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
     [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
     [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
-    [4X[25X>[125X [27X]", 3, 4, ZZ );[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, zz );[127X[104X
     [4X[28X<A 3 x 4 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );[127X[104X
     [4X[28X<A "homomorphism" of left modules>[128X[104X
@@ -561,7 +561,7 @@
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27Xphi;[127X[104X
     [4X[28X<A homomorphism of left modules>[128X[104X
-    [4X[25Xgap>[125X [27XL := Hom( ZZ, M );[127X[104X
+    [4X[25Xgap>[125X [27XL := Hom( zz, M );[127X[104X
     [4X[28X<A rank 1 right module on 3 generators satisfying yet unknown relations>[128X[104X
     [4X[25Xgap>[125X [27XByASmallerPresentation( L );[127X[104X
     [4X[28X<A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
@@ -710,9 +710,9 @@
   appropriate dimensions.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
     [4X[25Xgap>[125X [27XN := TorsionObject( M );[127X[104X
@@ -770,9 +770,9 @@
   internally computed free resolution of [3Xo1[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
     [4X[25Xgap>[125X [27XN := TorsionObject( M );[127X[104X
@@ -842,16 +842,16 @@
   of appropriate dimensions.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( m );[127X[104X
     [4X[28X<A left module presented by 2 relations for 2 generators>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
     [4X[28XZ/< 8 > + Z/< 2 >[128X[104X
     [4X[25Xgap>[125X [27XM;[127X[104X
     [4X[28X<A torsion left module presented by 2 relations for 2 generators>[128X[104X
-    [4X[25Xgap>[125X [27Xa := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgMatrix( [ [ 2, 0 ] ], zz );;[127X[104X
     [4X[25Xgap>[125X [27Xalpha := HomalgMap( a, "free", M );[127X[104X
     [4X[28X<A homomorphism of left modules>[128X[104X
     [4X[25Xgap>[125X [27Xpi := CokernelEpi( alpha );[127X[104X
@@ -996,16 +996,16 @@
   of appropriate dimensions.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], zz );;[127X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( m );[127X[104X
     [4X[28X<A left module presented by 2 relations for 2 generators>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
     [4X[28XZ/< 8 > + Z/< 2 >[128X[104X
     [4X[25Xgap>[125X [27XM;[127X[104X
     [4X[28X<A torsion left module presented by 2 relations for 2 generators>[128X[104X
-    [4X[25Xgap>[125X [27Xa := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgMatrix( [ [ 2, 0 ] ], zz );;[127X[104X
     [4X[25Xgap>[125X [27Xalpha := HomalgMap( a, "free", M );[127X[104X
     [4X[28X<A homomorphism of left modules>[128X[104X
     [4X[25Xgap>[125X [27Xpi := CokernelEpi( alpha );[127X[104X

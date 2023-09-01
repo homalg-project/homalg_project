@@ -124,12 +124,12 @@ DeclareCategory( "IsHomalgSelfMap",
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );</span>
 &lt;A 2 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
@@ -137,7 +137,7 @@ DeclareCategory( "IsHomalgSelfMap",
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -2, -4, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  4,  7, \</span>
 <span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -2, -4  \</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, zz );</span>
 &lt;A 3 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );</span>
 &lt;A "homomorphism" of left modules&gt;
@@ -228,12 +228,12 @@ the map is currently represented by the above 2 x 3 matrix
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, zz );</span>
 &lt;A 2 x 4 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
 &lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
@@ -252,8 +252,8 @@ the map is currently represented by the above 2 x 3 matrix
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, zz );</span>
 &lt;A 2 x 3 matrix over an internal ring&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
 &lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
@@ -284,13 +284,13 @@ the map is currently represented by the above 2 x 3 matrix
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegers( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgIdentityMap( 2 * ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgIdentityMap( 2 * zz );</span>
 &lt;The identity morphism of a non-zero left module&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRing( phi );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( R, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( R, zz );</span>
 true
 </pre></div>
 

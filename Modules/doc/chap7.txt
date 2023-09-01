@@ -121,11 +121,11 @@
   given by the rows of the [5Xhomalg[105X matrix [3Xmat[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
     [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X2, 3, 4, \[127X[104X
     [4X[25X>[125X [27X5, 6, 7  \[127X[104X
-    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
@@ -153,11 +153,11 @@
   given by the columns of the [5Xhomalg[105X matrix [3Xmat[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
     [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X2, 3, 4, \[127X[104X
     [4X[25X>[125X [27X5, 6, 7  \[127X[104X
-    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := RightPresentation( M );[127X[104X
     [4X[28X<A right module on 2 generators satisfying 3 relations>[128X[104X
@@ -176,14 +176,14 @@
   [3XR[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
-    [4X[25Xgap>[125X [27XF := HomalgFreeLeftModule( 1, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgFreeLeftModule( 1, zz );[127X[104X
     [4X[28X<A free left module of rank 1 on a free generator>[128X[104X
-    [4X[25Xgap>[125X [27X1 * ZZ;[127X[104X
+    [4X[25Xgap>[125X [27X1 * zz;[127X[104X
     [4X[28X<The free left module of rank 1 on a free generator>[128X[104X
-    [4X[25Xgap>[125X [27XF := HomalgFreeLeftModule( 2, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgFreeLeftModule( 2, zz );[127X[104X
     [4X[28X<A free left module of rank 2 on free generators>[128X[104X
-    [4X[25Xgap>[125X [27X2 * ZZ;[127X[104X
+    [4X[25Xgap>[125X [27X2 * zz;[127X[104X
     [4X[28X<A free left module of rank 2 on free generators>[128X[104X
   [4X[32X[104X
   
@@ -196,14 +196,14 @@
   [3XR[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
-    [4X[25Xgap>[125X [27XF := HomalgFreeRightModule( 1, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgFreeRightModule( 1, zz );[127X[104X
     [4X[28X<A free right module of rank 1 on a free generator>[128X[104X
-    [4X[25Xgap>[125X [27XZZ * 1;[127X[104X
+    [4X[25Xgap>[125X [27Xzz * 1;[127X[104X
     [4X[28X<The free right module of rank 1 on a free generator>[128X[104X
-    [4X[25Xgap>[125X [27XF := HomalgFreeRightModule( 2, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgFreeRightModule( 2, zz );[127X[104X
     [4X[28X<A free right module of rank 2 on free generators>[128X[104X
-    [4X[25Xgap>[125X [27XZZ * 2;[127X[104X
+    [4X[25Xgap>[125X [27Xzz * 2;[127X[104X
     [4X[28X<A free right module of rank 2 on free generators>[128X[104X
   [4X[32X[104X
   
@@ -216,10 +216,10 @@
   [3XR[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
-    [4X[25Xgap>[125X [27XF := HomalgZeroLeftModule( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgZeroLeftModule( zz );[127X[104X
     [4X[28X<A zero left module>[128X[104X
-    [4X[25Xgap>[125X [27X0 * ZZ;[127X[104X
+    [4X[25Xgap>[125X [27X0 * zz;[127X[104X
     [4X[28X<The zero left module>[128X[104X
   [4X[32X[104X
   
@@ -232,10 +232,10 @@
   [3XR[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
-    [4X[25Xgap>[125X [27XF := HomalgZeroRightModule( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgZeroRightModule( zz );[127X[104X
     [4X[28X<A zero right module>[128X[104X
-    [4X[25Xgap>[125X [27XZZ * 0;[127X[104X
+    [4X[25Xgap>[125X [27Xzz * 0;[127X[104X
     [4X[28X<The zero right module>[128X[104X
   [4X[32X[104X
   
@@ -258,15 +258,15 @@
   [33X[0;0YCAUTION: So it is not suited for general base change.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An internal ring>[128X[104X
-    [4X[25Xgap>[125X [27XZ4 := ZZ / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ4 := zz / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
-    [4X[25Xgap>[125X [27XM := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgDiagonalMatrix( [ 2 .. 4 ], zz );[127X[104X
     [4X[28X<An unevaluated diagonal 3 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A torsion left module presented by 3 relations for 3 generators>[128X[104X
@@ -285,16 +285,16 @@
   [4X[32X[104X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
     [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X2, 3, 4, \[127X[104X
     [4X[25X>[125X [27X5, 6, 7  \[127X[104X
-    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
-    [4X[25Xgap>[125X [27XZ4 := ZZ / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ4 := zz / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
@@ -320,7 +320,7 @@
     [4X[28X<A cocomplex containing 2 morphisms of right complexes at degrees [ 0 .. 2 ]>[128X[104X
     [4X[25Xgap>[125X [27XD := Hom( DD, Z4 );[127X[104X
     [4X[28X<A complex containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]>[128X[104X
-    [4X[25Xgap>[125X [27XC := ZZ * D;[127X[104X
+    [4X[25Xgap>[125X [27XC := zz * D;[127X[104X
     [4X[28X<A "complex" containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]>[128X[104X
     [4X[25Xgap>[125X [27XLowestDegreeObject( C );[127X[104X
     [4X[28X<A "cocomplex" containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>[128X[104X
@@ -646,13 +646,13 @@
   [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X module [3XM[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XM := ZZ * 4;[127X[104X
+    [4X[25Xgap>[125X [27XM := zz * 4;[127X[104X
     [4X[28X<A free right module of rank 4 on free generators>[128X[104X
     [4X[25Xgap>[125X [27XR := HomalgRing( M );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XIsIdenticalObj( R, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( R, zz );[127X[104X
     [4X[28Xtrue[128X[104X
   [4X[32X[104X
   
@@ -666,11 +666,11 @@
   it.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegers( );;[127X[104X
     [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ \[127X[104X
     [4X[25X>[125X [27X2, 3, 4, \[127X[104X
     [4X[25X>[125X [27X5, 6, 7  \[127X[104X
-    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, zz );[127X[104X
     [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
     [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
