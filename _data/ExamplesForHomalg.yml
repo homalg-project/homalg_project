@@ -1,7 +1,7 @@
 name: ExamplesForHomalg
-version: "2023.08-01"
+version: "2023.08-02"
 license: "GPL-2.0-or-later"
-date: 2023-08-23
+date: 2023-09-01
 description: |
     Examples for the GAP Package homalg
 
@@ -48,11 +48,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/ExamplesForHomalg/P
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2023.08-01/ExamplesForHomalg-2023.08-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2023.08-02/ExamplesForHomalg-2023.08-02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2023.08-01/ExamplesForHomalg-2023.08-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2023.08-02/ExamplesForHomalg-2023.08-02.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2023.08-01/ExamplesForHomalg-2023.08-01-manual.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2023.08-02/ExamplesForHomalg-2023.08-02-manual.pdf
 
 abstract: |
     The <span class="pkgname">ExamplesForHomalg</span> package provides example scripts for the <span class="pkgname">homalg</span> package that can be used with several computer algebra systems
@@ -64,23 +64,23 @@ keywords: |
     examples, homalg.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BGL23</span>]   <b class='BibAuthor'>Barakat, M., Görtzen, S. and Lange-Hegermann, M.</b>,
+    [<span class='BibKey'>BGL01</span>]   <b class='BibAuthor'>Barakat, M., Görtzen, S. and Lange-Hegermann, M.</b>,
      <i class='BibTitle'>ExamplesForHomalg, Examples for the GAP Package homalg,
-             Version 2023.08-01</i>
-     (<span class='BibYear'>8-23</span>)<br />
+             Version 2023.08-02</i>
+     (<span class='BibYear'>9-01</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/ExamplesForHomalg">https://homalg-project.github.io/pkg/ExamplesForHomalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ ExamplesForHomalg2023.08-01,
+    @misc{ ExamplesForHomalg2023.08-02,
       author =           {Barakat,  M.  and G{\"o}rtzen, S. and Lange-Hegermann,
                           M.},
       title =            {{ExamplesForHomalg},  Examples  for  the  GAP  Package
-                          homalg, {V}ersion 2023.08-01},
+                          homalg, {V}ersion 2023.08-02},
       month =            {3-},
-      year =             {8-23},
+      year =             {9-01},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/ExamplesForHomalg}
@@ -88,6 +88,6 @@ bibtex: |
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{ExamplesForHomalg}}},
       keywords =         {examples; homalg},
-      printedkey =       {BGL23}
+      printedkey =       {BGL01}
     }
 
