@@ -13,11 +13,11 @@
   [1X1.1-1 [33X[0;0Yexternal [5XGAP[105X[101X[1X[133X[101X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInExternalGAP( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegersInExternalGAP( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An external ring residing in the CAS GAP>[128X[104X
-    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInExternalGAP( 2, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInExternalGAP( 2, zz );[127X[104X
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS GAP>[128X[104X
@@ -26,15 +26,15 @@
   [33X[0;0Y[10XF2 := HomalgRingOfIntegersInExternalGAP( 2 )[110X would launch another GAP.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegersInExternalGAP( 4, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegersInExternalGAP( 4, zz );[127X[104X
     [4X[28XZ/4Z[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
     [4X[28X<An external ring residing in the CAS GAP>[128X[104X
-    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInExternalGAP( ZZ ) / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInExternalGAP( zz ) / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
-    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInExternalGAP( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInExternalGAP( zz );[127X[104X
     [4X[28XQ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
     [4X[28X<An external ring residing in the CAS GAP>[128X[104X
@@ -53,9 +53,9 @@
     [4X[28XGF(2)(s)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2s );[127X[104X
     [4X[28X<An external ring residing in the CAS Singular>[128X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInSingular( F2 );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegersInSingular( F2 );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An external ring residing in the CAS Singular>[128X[104X
     [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( F2 );[127X[104X
     [4X[28XQ[128X[104X
@@ -92,13 +92,13 @@
     [4X[28XGF(2)(s)[x,y,z][w][128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2sxyzw );[127X[104X
     [4X[28X<An external ring residing in the CAS Singular>[128X[104X
-    [4X[25Xgap>[125X [27XZZxyz := ZZ * "x,y,z";[127X[104X
+    [4X[25Xgap>[125X [27Xzzxyz := zz * "x,y,z";[127X[104X
     [4X[28XZ[x,y,z][128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZxyz );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zzxyz );[127X[104X
     [4X[28X<An external ring residing in the CAS Singular>[128X[104X
-    [4X[25Xgap>[125X [27XZZxyzw := ZZxyz * "w";[127X[104X
+    [4X[25Xgap>[125X [27Xzzxyzw := zzxyz * "w";[127X[104X
     [4X[28XZ[x,y,z][w][128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZxyzw );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zzxyzw );[127X[104X
     [4X[28X<An external ring residing in the CAS Singular>[128X[104X
     [4X[25Xgap>[125X [27XQxyz := Q * "x,y,z";[127X[104X
     [4X[28XQ[x,y,z][128X[104X
@@ -158,11 +158,11 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )[128X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMAGMA( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegersInMAGMA( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
-    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMAGMA( 2, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMAGMA( 2, zz );[127X[104X
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
@@ -173,11 +173,11 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )[128X[104X
-    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMAGMA( zz ) / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
-    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMAGMA( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMAGMA( zz );[127X[104X
     [4X[28XQ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
     [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
@@ -201,11 +201,11 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )[128X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMacaulay2( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegersInMacaulay2( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
-    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMacaulay2( 2, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMacaulay2( 2, zz );[127X[104X
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
@@ -216,11 +216,11 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )[128X[104X
-    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMacaulay2( ZZ ) / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMacaulay2( zz ) / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
-    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMacaulay2( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMacaulay2( zz );[127X[104X
     [4X[28XQ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
     [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
@@ -248,11 +248,11 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )[128X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInSage( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegersInSage( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An external ring residing in the CAS Sage>[128X[104X
-    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInSage( 2, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInSage( 2, zz );[127X[104X
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS Sage>[128X[104X
@@ -263,11 +263,11 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )[128X[104X
-    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInSage( ZZ ) / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInSage( zz ) / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
-    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSage( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSage( zz );[127X[104X
     [4X[28XQ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
     [4X[28X<An external ring residing in the CAS Sage>[128X[104X
@@ -287,11 +287,11 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )[128X[104X
-    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMaple( );[127X[104X
+    [4X[25Xgap>[125X [27Xzz := HomalgRingOfIntegersInMaple( );[127X[104X
     [4X[28XZ[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( zz );[127X[104X
     [4X[28X<An external ring residing in the CAS Maple>[128X[104X
-    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMaple( 2, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMaple( 2, zz );[127X[104X
     [4X[28XGF(2)[128X[104X
     [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
     [4X[28X<An external ring residing in the CAS Maple>[128X[104X
@@ -302,15 +302,15 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X#@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )[128X[104X
-    [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegersInMaple( 4, ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegersInMaple( 4, zz );[127X[104X
     [4X[28XZ/4Z[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
     [4X[28X<An external ring residing in the CAS Maple>[128X[104X
-    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMaple( ZZ ) / 4;[127X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMaple( zz ) / 4;[127X[104X
     [4X[28XZ/( 4 )[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
     [4X[28X<A residue class ring>[128X[104X
-    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMaple( ZZ );[127X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMaple( zz );[127X[104X
     [4X[28XQ[128X[104X
     [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
     [4X[28X<An external ring residing in the CAS Maple>[128X[104X

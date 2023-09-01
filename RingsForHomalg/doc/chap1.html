@@ -56,11 +56,11 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInExternalGAP( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegersInExternalGAP( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zz );</span>
 &lt;An external ring residing in the CAS GAP&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInExternalGAP( 2, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInExternalGAP( 2, zz );</span>
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS GAP&gt;
@@ -70,15 +70,15 @@ GF(2)
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := HomalgRingOfIntegersInExternalGAP( 4, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := HomalgRingOfIntegersInExternalGAP( 4, zz );</span>
 Z/4Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z4 );</span>
 &lt;An external ring residing in the CAS GAP&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInExternalGAP( ZZ ) / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInExternalGAP( zz ) / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z_4 );</span>
 &lt;A residue class ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInExternalGAP( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInExternalGAP( zz );</span>
 Q
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Q );</span>
 &lt;An external ring residing in the CAS GAP&gt;
@@ -99,9 +99,9 @@ GF(2)
 GF(2)(s)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2s );</span>
 &lt;An external ring residing in the CAS Singular&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInSingular( F2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegersInSingular( F2 );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zz );</span>
 &lt;An external ring residing in the CAS Singular&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInSingular( F2 );</span>
 Q
@@ -139,13 +139,13 @@ GF(2)[x,y,z][w]
 GF(2)(s)[x,y,z][w]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2sxyzw );</span>
 &lt;An external ring residing in the CAS Singular&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZxyz := ZZ * "x,y,z";</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zzxyz := zz * "x,y,z";</span>
 Z[x,y,z]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZxyz );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zzxyz );</span>
 &lt;An external ring residing in the CAS Singular&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZxyzw := ZZxyz * "w";</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zzxyzw := zzxyz * "w";</span>
 Z[x,y,z][w]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZxyzw );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zzxyzw );</span>
 &lt;An external ring residing in the CAS Singular&gt;
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Qxyz := Q * "x,y,z";</span>
 Q[x,y,z]
@@ -207,11 +207,11 @@ true
 
 <div class="example"><pre>
 #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInMAGMA( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegersInMAGMA( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zz );</span>
 &lt;An external ring residing in the CAS MAGMA&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInMAGMA( 2, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInMAGMA( 2, zz );</span>
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS MAGMA&gt;
@@ -223,11 +223,11 @@ GF(2)
 
 <div class="example"><pre>
 #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_MAGMA ).stdout )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInMAGMA( zz ) / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z_4 );</span>
 &lt;A residue class ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInMAGMA( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInMAGMA( zz );</span>
 Q
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Q );</span>
 &lt;An external ring residing in the CAS MAGMA&gt;
@@ -253,11 +253,11 @@ Q{e,f,g}
 
 <div class="example"><pre>
 #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInMacaulay2( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegersInMacaulay2( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zz );</span>
 &lt;An external ring residing in the CAS Macaulay2&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInMacaulay2( 2, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInMacaulay2( 2, zz );</span>
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS Macaulay2&gt;
@@ -269,11 +269,11 @@ GF(2)
 
 <div class="example"><pre>
 #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Macaulay2 ).stdout )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInMacaulay2( ZZ ) / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInMacaulay2( zz ) / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z_4 );</span>
 &lt;A residue class ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInMacaulay2( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInMacaulay2( zz );</span>
 Q
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Q );</span>
 &lt;An external ring residing in the CAS Macaulay2&gt;
@@ -303,11 +303,11 @@ Q{e,f,g}
 
 <div class="example"><pre>
 #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInSage( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegersInSage( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zz );</span>
 &lt;An external ring residing in the CAS Sage&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInSage( 2, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInSage( 2, zz );</span>
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS Sage&gt;
@@ -319,11 +319,11 @@ GF(2)
 
 <div class="example"><pre>
 #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Sage ).stdout )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInSage( ZZ ) / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInSage( zz ) / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z_4 );</span>
 &lt;A residue class ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInSage( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInSage( zz );</span>
 Q
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Q );</span>
 &lt;An external ring residing in the CAS Sage&gt;
@@ -345,11 +345,11 @@ Q[x]
 
 <div class="example"><pre>
 #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegersInMaple( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zz := HomalgRingOfIntegersInMaple( );</span>
 Z
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( zz );</span>
 &lt;An external ring residing in the CAS Maple&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInMaple( 2, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := HomalgRingOfIntegersInMaple( 2, zz );</span>
 GF(2)
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( F2 );</span>
 &lt;An external ring residing in the CAS Maple&gt;
@@ -361,15 +361,15 @@ GF(2)
 
 <div class="example"><pre>
 #@if IsBound( TryLaunchCAS_IO_ForHomalg( HOMALG_IO_Maple ).stdout )
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := HomalgRingOfIntegersInMaple( 4, ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := HomalgRingOfIntegersInMaple( 4, zz );</span>
 Z/4Z
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z4 );</span>
 &lt;An external ring residing in the CAS Maple&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInMaple( ZZ ) / 4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z_4 := HomalgRingOfIntegersInMaple( zz ) / 4;</span>
 Z/( 4 )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z_4 );</span>
 &lt;A residue class ring&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInMaple( ZZ );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := HomalgFieldOfRationalsInMaple( zz );</span>
 Q
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Q );</span>
 &lt;An external ring residing in the CAS Maple&gt;
