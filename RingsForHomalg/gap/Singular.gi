@@ -803,7 +803,7 @@ proc SyzygiesGeneratorsOfColumns (matrix M)\n\
     RelativeSyzygiesGeneratorsOfRows := "\n\
 proc RelativeSyzygiesGeneratorsOfRows (matrix M1, matrix M2)\n\
 {\n\
-  return(BasisOfRowModule(modulo(M1, M2)));\n\
+  return(modulo(M1, M2));\n\
 }\n\n",
 ##  ]]></Listing>
 ##    </Description>

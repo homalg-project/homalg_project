@@ -33,21 +33,20 @@
 ##  gap> N := UnderlyingObject( n );
 ##  <A graded left module presented by yet unknown relations for 7 generators>
 ##  gap> Display( N );
-##  0, 0, z,0,    0,  0,0,   
-##  0, z, 0,0,    0,  0,0,   
-##  z, 0, 0,0,    0,  0,0,   
-##  0, 0, 0,0,    -z, y,0,   
-##  0, 0, 0,-z,   0,  x,0,   
-##  0, 0, 0,-y,   x,  0,0,   
-##  0, -y,x,0,    0,  0,0,   
-##  -y,x, 0,0,    0,  0,0,   
-##  x, 0, 0,0,    y,  0,z,   
-##  0, 0, 0,0,    y*z,0,z^2, 
-##  0, 0, 0,y^2*z,0,  0,x*z^2
+## 0, 0, z,0, 0,  0,0,
+## 0, z, 0,0, 0,  0,0,
+## z, 0, 0,0, 0,  0,0,
+## 0, 0, 0,0, -z, y,0,
+## 0, 0, 0,-z,0,  x,0,
+## 0, 0, 0,-y,x,  0,0,
+## 0, -y,x,0, 0,  0,0,
+## -y,x, 0,0, 0,  0,0,
+## x, 0, 0,0, y,  0,z,
+## 0, 0, 0,0, y*z,0,z^2
 ##  
 ##  Cokernel of the map
 ##  
-##  Q[x,y,z]^(1x11) --> Q[x,y,z]^(1x7),
+##  Q[x,y,z]^(1x10) --> Q[x,y,z]^(1x7),
 ##  
 ##  currently represented by the above matrix
 ##  
