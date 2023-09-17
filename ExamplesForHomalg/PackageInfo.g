@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "ExamplesForHomalg",
 Subtitle := "Examples for the GAP Package homalg",
-Version := "2023.08-02",
-Date := "2023-09-01",
+Version := "2023.09-01",
+Date := "2023-09-17",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -98,7 +98,7 @@ Dependencies := rec(
   NeededOtherPackages := [
                 [ "MatricesForHomalg", ">= 2023.08-01" ],
                 [ "HomalgToCAS", ">= 2023.08-01" ],
-                [ "RingsForHomalg", ">= 2023.08-01" ],
+                [ "RingsForHomalg", ">= 2023.09-01" ],
                 [ "Modules", ">= 2023.08-01" ],
                 [ "homalg", ">= 2015.06.01" ],
                 [ "GaussForHomalg", ">=2023.08-01" ],
