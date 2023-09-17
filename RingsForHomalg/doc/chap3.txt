@@ -485,7 +485,7 @@
     [4X    RelativeSyzygiesGeneratorsOfRows := "\n\[104X
     [4Xproc RelativeSyzygiesGeneratorsOfRows (matrix M1, matrix M2)\n\[104X
     [4X{\n\[104X
-    [4X  return(BasisOfRowModule(modulo(M1, M2)));\n\[104X
+    [4X  return(modulo(M1, M2));\n\[104X
     [4X}\n\n",[104X
   [4X[32X[104X
   
