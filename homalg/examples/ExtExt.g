@@ -67,9 +67,9 @@
 ##  gap> filt := FiltrationBySpectralSequence( II_E, 0 );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##     0:   <A non-torsion left module presented by 3 relations for 4 generators>
-##    -1:   <A non-zero left module presented by 33 relations for 8 generators>
+##    -1:   <A non-zero left module presented by 21 relations for 8 generators>
 ##  of
-##  <A non-zero left module presented by 27 relations for 19 generators>>
+##  <A non-zero left module presented by 31 relations for 19 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##     0:   <A rank 1 left module presented by 2 relations for 3 generators>

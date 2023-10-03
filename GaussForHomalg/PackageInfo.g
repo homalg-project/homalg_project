@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "GaussForHomalg",
 Subtitle := "Gauss functionality for the homalg project",
-Version := "2023.08-01",
+Version := "2023.10-01",
 Date := (function ( ) if IsBound( GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE ) then return GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE; else return Concatenation( ~.Version{[ 1 .. 4 ]}, "-", ~.Version{[ 6, 7 ]}, "-01" ); fi; end)( ),
 License := "GPL-2.0-or-later",
 
@@ -81,7 +81,7 @@ Dependencies := rec(
   GAP := ">= 4.12.1",
   NeededOtherPackages := [
                 [ "Gauss", ">= 2021.04-01" ],
-                [ "MatricesForHomalg", ">= 2023.08-01" ],
+                [ "MatricesForHomalg", ">= 2023.10-01" ],
                 [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []

@@ -351,7 +351,7 @@ InstallMethod( ReducedSyzygiesOfRows,
     
     ## a priori computing a basis of the syzygies matrix
     ## causes obsolete computations, at least in general
-    return ReducedBasisOfRowModule( SyzygiesGeneratorsOfRows( M, M2 ) );
+    return ReducedBasisOfRowModule( BasisOfRowModule( SyzygiesGeneratorsOfRows( M, M2 ) ) );
     
 end );
 
@@ -387,7 +387,7 @@ InstallMethod( ReducedSyzygiesOfColumns,
     
     ## a priori computing a basis of the syzygies matrix
     ## causes obsolete computations, at least in general
-    return ReducedBasisOfColumnModule( SyzygiesGeneratorsOfColumns( M, M2 ) );
+    return ReducedBasisOfColumnModule( BasisOfColumnModule( SyzygiesGeneratorsOfColumns( M, M2 ) ) );
     
 end );
 

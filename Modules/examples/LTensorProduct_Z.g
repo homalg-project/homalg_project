@@ -70,7 +70,7 @@
 ##  at homology degree: 5
 ##  Z/< 4 >
 ##  -------------------------
-##  [ [  1,  3 ] ]
+##  [ [  0,  3 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
 ##  ------------v------------
@@ -78,7 +78,7 @@
 ##  Z/< 2 > + Z/< 4 >
 ##  -------------------------
 ##  [ [  0,  1 ],
-##    [  0,  1 ] ]
+##    [  0,  0 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
 ##  ------------v------------
