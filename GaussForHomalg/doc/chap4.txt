@@ -14,7 +14,7 @@
   [33X[0;0Y[22X0 -> M_=ℤ/2^2ℤ --alpha_1--> M=ℤ/2^5ℤ --alpha_2--> _M=ℤ/2^3ℤ -> 0[122X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XLoadPackage( "Modules" );[127X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "Modules", ">= 2023.10-01" );[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XR := HomalgRingOfIntegers( 2^8 );[127X[104X
     [4X[28XZ/256Z[128X[104X
@@ -63,7 +63,7 @@
     [4X[28Xat homology degree: 2[128X[104X
     [4X[28XZ/256Z/< ZmodnZObj(4,256) > [128X[104X
     [4X[28X-------------------------[128X[104X
-    [4X[28X  24[128X[104X
+    [4X[28X   8[128X[104X
     [4X[28X[128X[104X
     [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
     [4X[28X------------v------------[128X[104X
@@ -107,7 +107,7 @@
     [4X[28Xat homology degree: 13[128X[104X
     [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
     [4X[28X-------------------------[128X[104X
-    [4X[28X   6[128X[104X
+    [4X[28X   2[128X[104X
     [4X[28X[128X[104X
     [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
     [4X[28X------------v------------[128X[104X
@@ -128,7 +128,7 @@
     [4X[28Xat homology degree: 10[128X[104X
     [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
     [4X[28X-------------------------[128X[104X
-    [4X[28X   6[128X[104X
+    [4X[28X   2[128X[104X
     [4X[28X[128X[104X
     [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
     [4X[28X------------v------------[128X[104X
@@ -149,7 +149,7 @@
     [4X[28Xat homology degree: 7[128X[104X
     [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
     [4X[28X-------------------------[128X[104X
-    [4X[28X   6[128X[104X
+    [4X[28X   2[128X[104X
     [4X[28X[128X[104X
     [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
     [4X[28X------------v------------[128X[104X
@@ -170,7 +170,7 @@
     [4X[28Xat homology degree: 4[128X[104X
     [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
     [4X[28X-------------------------[128X[104X
-    [4X[28X   6[128X[104X
+    [4X[28X   2[128X[104X
     [4X[28X[128X[104X
     [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
     [4X[28X------------v------------[128X[104X

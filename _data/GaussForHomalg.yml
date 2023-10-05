@@ -1,7 +1,7 @@
 name: GaussForHomalg
-version: "2023.08-01"
+version: "2023.10-01"
 license: "GPL-2.0-or-later"
-date: 2023-08-23
+date: 2023-10-05
 description: |
     Gauss functionality for the homalg project
 
@@ -20,7 +20,7 @@ needed-pkgs:
       version: ">= 2021.04-01"
       url: "https://homalg-project.github.io/pkg/Gauss"
     - name: "MatricesForHomalg"
-      version: ">= 2023.08-01"
+      version: ">= 2023.10-01"
       url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
     - name: "GAPDoc"
       version: ">= 1.0"
@@ -32,11 +32,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/GaussForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2023.08-01/GaussForHomalg-2023.08-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2023.10-01/GaussForHomalg-2023.10-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2023.08-01/GaussForHomalg-2023.08-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2023.10-01/GaussForHomalg-2023.10-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2023.08-01/GaussForHomalg-2023.08-01-manual.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2023.10-01/GaussForHomalg-2023.10-01-manual.pdf
 
 abstract: |
     The <span class="pkgname">GaussForHomalg</span> package provides Gauss functionality for <span class="pkgname">homalg</span> using the package <span class="pkgname">Gauss</span>
@@ -48,22 +48,22 @@ keywords: |
     GaussForHomalg, homalg, Gauss.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>GB23</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
+    [<span class='BibKey'>GB05</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
      <i class='BibTitle'>GaussForHomalg, Gauss functionality for the homalg project,
-             Version 2023.08-01</i>
-     (<span class='BibYear'>8-23</span>)<br />
+             Version 2023.10-01</i>
+     (<span class='BibYear'>0-05</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/GaussForHomalg">https://homalg-project.github.io/pkg/GaussForHomalg</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ GaussForHomalg2023.08-01,
+    @misc{ GaussForHomalg2023.10-01,
       author =           {G{\"o}rtzen, S. and Barakat, M.},
       title =            {{GaussForHomalg},  Gauss  functionality for the homalg
-                          project, {V}ersion 2023.08-01},
+                          project, {V}ersion 2023.10-01},
       month =            {3-},
-      year =             {8-23},
+      year =             {0-05},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/GaussForHomalg}
@@ -71,6 +71,6 @@ bibtex: |
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{GaussForHomalg}}},
       keywords =         {GaussForHomalg; homalg; Gauss},
-      printedkey =       {GB23}
+      printedkey =       {GB05}
     }
 
