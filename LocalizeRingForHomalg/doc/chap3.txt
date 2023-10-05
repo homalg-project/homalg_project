@@ -44,7 +44,7 @@
     [4X[25Xgap>[125X [27XDisplay( M_ );[127X[104X
     [4X[28XZ_< 2 >/< -4/1 >[128X[104X
     [4X[25Xgap>[125X [27XDisplay( alpha1 );[127X[104X
-    [4X[28X[ [  24 ] ][128X[104X
+    [4X[28X[ [  8 ] ][128X[104X
     [4X[28X/ 1[128X[104X
     [4X[28X[128X[104X
     [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
