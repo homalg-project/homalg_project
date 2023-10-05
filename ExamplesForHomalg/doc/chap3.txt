@@ -106,10 +106,10 @@
     [4X[28X0:   <A non-zero left module presented by yet unknown relations for 23 generator\[128X[104X
     [4X[28Xs>[128X[104X
     [4X[28X  -1:   <A non-zero left module presented by 37 relations for 22 generators>[128X[104X
-    [4X[28X  -2:   <A non-zero left module presented by 32 relations for 10 generators>[128X[104X
+    [4X[28X  -2:   <A non-zero left module presented by 31 relations for 10 generators>[128X[104X
     [4X[28X  -3:   <A non-zero left module presented by 33 relations for 5 generators>[128X[104X
     [4X[28Xof[128X[104X
-    [4X[28X<A non-zero left module presented by 96 relations for 37 generators>>[128X[104X
+    [4X[28X<A non-zero left module presented by 102 relations for 37 generators>>[128X[104X
     [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
     [4X[28X<An ascending filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
     [4X[28X   0:   <A non-zero left module presented by 26 relations for 16 generators>[128X[104X
@@ -117,7 +117,7 @@
     [4X[28X  -2:   <A non-zero left module presented by 18 relations for 7 generators>[128X[104X
     [4X[28X  -3:   <A non-zero left module presented by 12 relations for 4 generators>[128X[104X
     [4X[28Xof[128X[104X
-    [4X[28X<A non-zero left module presented by 52 relations for 20 generators>>[128X[104X
+    [4X[28X<A non-zero left module presented by 48 relations for 20 generators>>[128X[104X
     [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
     [4X[28X<A non-zero isomorphism of left modules>[128X[104X
   [4X[32X[104X
@@ -539,10 +539,10 @@
     [4X[28X-3:   <A non-zero cyclic torsion left module presented by yet unknown relations \[128X[104X
     [4X[28Xfor a cyclic generator>[128X[104X
     [4X[28X  -2:   <A non-zero left module presented by 17 relations for 6 generators>[128X[104X
-    [4X[28X  -1:   <A non-zero left module presented by 27 relations for 13 generators>[128X[104X
+    [4X[28X  -1:   <A non-zero left module presented by 27 relations for 12 generators>[128X[104X
     [4X[28X   0:   <A non-zero left module presented by 13 relations for 10 generators>[128X[104X
     [4X[28Xof[128X[104X
-    [4X[28X<A left module presented by yet unknown relations for 50 generators>>[128X[104X
+    [4X[28X<A left module presented by yet unknown relations for 49 generators>>[128X[104X
     [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
     [4X[28X<A descending filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
     [4X[28X[128X[104X
@@ -552,7 +552,7 @@
     [4X[28X  -1:   <A non-zero left module presented by 21 relations for 8 generators>[128X[104X
     [4X[28X   0:   <A non-zero left module presented by 11 relations for 10 generators>[128X[104X
     [4X[28Xof[128X[104X
-    [4X[28X<A non-zero left module presented by 23 relations for 12 generators>>[128X[104X
+    [4X[28X<A non-zero left module presented by 27 relations for 14 generators>>[128X[104X
     [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
     [4X[28X<A non-zero isomorphism of left modules>[128X[104X
   [4X[32X[104X
@@ -663,7 +663,7 @@
     [4X[28X-3:   <A non-zero cyclic torsion left module presented by yet unknown relations \[128X[104X
     [4X[28Xfor a cyclic generator>[128X[104X
     [4X[28X  -2:   <A non-zero left module presented by 15 relations for 6 generators>[128X[104X
-    [4X[28X  -1:   <A non-zero left module presented by 27 relations for 12 generators>[128X[104X
+    [4X[28X  -1:   <A non-zero left module presented by 27 relations for 13 generators>[128X[104X
     [4X[28X   0:   <A non-zero left module presented by 13 relations for 10 generators>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A left module presented by yet unknown relations for 31 generators>>[128X[104X
@@ -673,7 +673,7 @@
     [4X[28X-3:   <A non-zero cyclic torsion left module presented by 3 relations for a cycl\[128X[104X
     [4X[28Xic generator>[128X[104X
     [4X[28X  -2:   <A non-zero left module presented by 11 relations for 4 generators>[128X[104X
-    [4X[28X  -1:   <A non-zero left module presented by 24 relations for 8 generators>[128X[104X
+    [4X[28X  -1:   <A non-zero left module presented by 23 relations for 9 generators>[128X[104X
     [4X[28X   0:   <A non-zero left module presented by 11 relations for 10 generators>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A non-zero left module presented by 24 relations for 12 generators>>[128X[104X
@@ -928,7 +928,7 @@
     [4X[28Xat homology degree: 2[128X[104X
     [4X[28XZ/( 256 )/< |[ 4 ]| > [128X[104X
     [4X[28X-------------------------[128X[104X
-    [4X[28X[ [  24 ] ][128X[104X
+    [4X[28X[ [  8 ] ][128X[104X
     [4X[28X[128X[104X
     [4X[28Xmodulo [ 256 ][128X[104X
     [4X[28X[128X[104X
