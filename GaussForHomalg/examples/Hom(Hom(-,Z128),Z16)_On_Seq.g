@@ -10,7 +10,7 @@
 ##  M=&ZZ;/2^5&ZZ; \stackrel{\alpha_2}{\longrightarrow} \_M=&ZZ;/2^3&ZZ; \longrightarrow 0</Math></Alt>
 ##  <Alt Only="Text,HTML"><M>0 -> M_=&ZZ;/2^2&ZZ; --alpha_1--> M=&ZZ;/2^5&ZZ; --alpha_2--> \_M=&ZZ;/2^3&ZZ; -> 0</M></Alt>.
 ##  <Example><![CDATA[
-##  gap> LoadPackage( "Modules" );
+##  gap> LoadPackage( "Modules", ">= 2023.10-01" );
 ##  true
 ##  gap> R := HomalgRingOfIntegers( 2^8 );
 ##  Z/256Z
@@ -59,7 +59,7 @@
 ##  at homology degree: 2
 ##  Z/256Z/< ZmodnZObj(4,256) > 
 ##  -------------------------
-##    24
+##     8
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
@@ -103,7 +103,7 @@
 ##  at homology degree: 13
 ##  Z/256Z/< ZmodnZObj(8,256) > 
 ##  -------------------------
-##     6
+##     2
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
@@ -124,7 +124,7 @@
 ##  at homology degree: 10
 ##  Z/256Z/< ZmodnZObj(8,256) > 
 ##  -------------------------
-##     6
+##     2
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
@@ -145,7 +145,7 @@
 ##  at homology degree: 7
 ##  Z/256Z/< ZmodnZObj(8,256) > 
 ##  -------------------------
-##     6
+##     2
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
@@ -166,7 +166,7 @@
 ##  at homology degree: 4
 ##  Z/256Z/< ZmodnZObj(8,256) > 
 ##  -------------------------
-##     6
+##     2
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------

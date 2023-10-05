@@ -36,7 +36,7 @@
 ##  gap> Display( M_ );
 ##  Z_< 2 >/< -4/1 >
 ##  gap> Display( alpha1 );
-##  [ [  24 ] ]
+##  [ [  8 ] ]
 ##  / 1
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix

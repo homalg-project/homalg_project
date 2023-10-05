@@ -1077,7 +1077,7 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  gap> iota := KernelEmb( phi );
 ##  <A monomorphism of left modules>
 ##  gap> Display( iota );
-##  [ [  0,  2,  4 ] ]
+##  [ [  0,  1,  2 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 3 matrix
 ##  gap> DefectOfExactness( iota, phi );
@@ -1085,11 +1085,11 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  gap> ByASmallerPresentation( iota );
 ##  <A non-zero monomorphism of left modules>
 ##  gap> Display( iota );
-##  [ [  2,  0 ] ]
+##  [ [  1,  0 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
 ##  gap> PostInverse( iota );
-##  fail
+##  <A non-zero split epimorphism of left modules>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -1193,9 +1193,9 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  gap> ByASmallerPresentation( psi );
 ##  <A non-zero homomorphism of right modules>
 ##  gap> Display( psi );
-##  [ [   1,   1,   0,   1 ],
+##  [ [   1,   1,   1,   0 ],
 ##    [   2,   2,   0,   0 ],
-##    [   0,   0,   6,  10 ] ]
+##    [   0,   0,  -2,   0 ] ]
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> homNM := Source( psi );
@@ -1229,9 +1229,9 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  
 ##  the map is currently represented by the above 3 x 3 matrix
 ##  
-##  [ [   0,   1,   3 ],
-##    [   0,   0,  -2 ],
-##    [   0,   1,   3 ] ]
+##  [ [   0,   0,   1 ],
+##    [   0,   2,   2 ],
+##    [   0,   0,   1 ] ]
 ##  
 ##  the map is currently represented by the above 3 x 3 matrix
 ##  
@@ -1253,17 +1253,17 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  
 ##  the map is currently represented by the above 4 x 3 matrix
 ##  
-##  [ [   0,   0,  -3 ],
-##    [   0,   0,   7 ],
-##    [   0,   0,  -5 ],
-##    [   0,   0,   1 ] ]
+##  [ [   0,   0,   1 ],
+##    [   0,   1,  -1 ],
+##    [   0,   1,   5 ],
+##    [   0,   1,   1 ] ]
 ##  
 ##  the map is currently represented by the above 4 x 3 matrix
 ##  
-##  [ [   0,   1,  -3 ],
-##    [   0,   0,  12 ],
-##    [   0,   0,  -9 ],
-##    [   0,   2,   6 ] ]
+##  [ [   0,   0,   0 ],
+##    [   0,   0,   1 ],
+##    [   0,   0,  -2 ],
+##    [   0,   0,   1 ] ]
 ##  
 ##  the map is currently represented by the above 4 x 3 matrix
 ##  
@@ -1288,15 +1288,15 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  
 ##  the map is currently represented by the above 3 x 3 matrix
 ##  
-##  [ [   0,   0,   0 ],
-##    [   0,   0,  -5 ],
-##    [   0,   0,   1 ] ]
+##  [ [   0,   9,  18 ],
+##    [   0,   1,   5 ],
+##    [   0,   1,   1 ] ]
 ##  
 ##  the map is currently represented by the above 3 x 3 matrix
 ##  
-##  [ [   0,   9,  18 ],
-##    [   0,   0,  -9 ],
-##    [   0,   2,   6 ] ]
+##  [ [   0,   0,   0 ],
+##    [   0,   0,  -2 ],
+##    [   0,   0,   1 ] ]
 ##  
 ##  the map is currently represented by the above 3 x 3 matrix
 ##  
@@ -1535,7 +1535,7 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##     0:   <A rank 1 left module presented by 1 relation for 2 generators>
 ##    -1:   <A non-zero left module presented by 2 relations for 2 generators>
 ##  of
-##  <A non-zero left module presented by 10 relations for 6 generators>>
+##  <A non-zero left module presented by 4 relations for 4 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##     0:   <A rank 1 left module presented by 1 relation for 2 generators>
@@ -1758,7 +1758,7 @@ RightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );
 ##  gap> ByASmallerPresentation( psi );
 ##  <A non-zero homomorphism of right modules>
 ##  gap> Display( psi );
-##  [ [  2 ] ]
+##  [ [  1 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  gap> extNN := Range( psi );
