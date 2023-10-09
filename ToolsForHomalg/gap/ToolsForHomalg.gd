@@ -454,6 +454,7 @@ DeclareOperation( "ShaSum",
 DeclareGlobalFunction( "GetTimeOfDay" );
 
 DeclareGlobalFunction( "CallFuncListWithTime" );
+DeclareGlobalFunction( "CallFuncListWithUserTime" );
 
 #! @Description
 #!  returns  a new list that contains for each element <A>elm</A> of the list <A>list</A> a list of length two,

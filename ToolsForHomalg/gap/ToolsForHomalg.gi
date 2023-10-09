@@ -1704,6 +1704,29 @@ InstallGlobalFunction( CallFuncListWithTime,
 end );
 
 ##
+InstallGlobalFunction( CallFuncListWithUserTime,
+  function( func, arguments )
+    local output, t0, t1;
+    
+    if not IsList( arguments ) then
+        
+        return CallFuncListWithUserTime( func, [ arguments ] );
+        
+    fi;
+    
+    t0 := Runtime( );
+    
+    output := CallFuncList( func, arguments );
+    
+    t1 := Runtime( );
+    
+    Print( t1 - t0, " ms\n" );
+    
+    return output;
+    
+end );
+
+##
 InstallGlobalFunction( CollectEntries,
   function( list )
     local comparing_func, o, n;
