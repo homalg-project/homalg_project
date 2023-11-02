@@ -172,7 +172,9 @@ InstallMethod( RowEchelonForm,
         
         B := RP!.RowEchelonForm( M );
         
-        ColoredInfoForService( t, "RowEchelonForm", Length( NonZeroRows( B ) ) );
+        B := CertainRows( B, NonZeroRows( B ) );
+        
+        ColoredInfoForService( t, "RowEchelonForm", NumberRows( B ) );
         
         return B;
         
@@ -180,7 +182,9 @@ InstallMethod( RowEchelonForm,
         
         B := Involution( RP!.ColumnEchelonForm( Involution( M ) ) );
         
-        ColoredInfoForService( t, "RowEchelonForm", Length( NonZeroRows( B ) ) );
+        B := CertainRows( B, NonZeroRows( B ) );
+        
+        ColoredInfoForService( t, "RowEchelonForm", NumberRows( B ) );
         
         return B;
         
@@ -252,7 +256,9 @@ InstallMethod( ColumnEchelonForm,
         
         B := RP!.ColumnEchelonForm( M );
         
-        ColoredInfoForService( t, "ColumnEchelonForm", Length( NonZeroColumns( B ) ) );
+        B := CertainColumns( B, NonZeroColumns( B ) );
+        
+        ColoredInfoForService( t, "ColumnEchelonForm", NumberColumns( B ) );
         
         return B;
         
