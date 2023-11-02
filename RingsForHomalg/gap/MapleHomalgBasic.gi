@@ -19,6 +19,20 @@ BindGlobal( "CommonHomalgTableForMapleHomalgBasic",
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
+               RowEchelonForm :=
+                 function( M )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), R );
+                   
+                   homalgSendBlocking( [ N, " := ", R, "[-1][matrix](LinearAlgebra[GaussianElimination](Matrix(", M, "), 'method' = 'FractionFree'))" ], "need_command", "ReducedEchelonForm" );
+                   
+                   return N;
+                   
+                 end,
+               
                BasisOfRowModule :=
                  function( M )
                    local R, N;
