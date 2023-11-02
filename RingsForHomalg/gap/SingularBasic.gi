@@ -18,6 +18,30 @@ BindGlobal( "CommonHomalgTableForSingularBasic",
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
 
+               RowEchelonForm :=
+                 function( M )
+                   local R, v, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   v := homalgStream( R ).variable_name;
+                   
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), R );
+                   
+                   homalgSendBlocking( [ "intvec ", v, "option = option(get); option(none); option(prompt); option(intStrategy)" ], R, "need_command", "initialize" );
+                   
+                   homalgSendBlocking(
+                           [ "matrix ", N, " = BasisOfRowModule(", M, ")" ],
+                           "need_command",
+                           "ReducedEchelonForm"
+                           );
+                   
+                   homalgSendBlocking( [ "option(set,", v, "option)" ], R, "need_command", "initialize" );
+                   
+                   return CertainRows( N, Reversed( [ 1 .. NumberRows( N ) ] ) );
+                   
+                 end,
+               
 ##  <#GAPDoc Label="BasisOfRowModule:Singular">
 ##  <ManSection>
 ##    <Func Arg="M" Name="BasisOfRowModule" Label="in the homalg table for Singular"/>
