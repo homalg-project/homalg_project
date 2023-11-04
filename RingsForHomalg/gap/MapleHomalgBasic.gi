@@ -27,7 +27,7 @@ BindGlobal( "CommonHomalgTableForMapleHomalgBasic",
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NumberColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := ", R, "[-1][matrix](LinearAlgebra[GaussianElimination](Matrix(", M, "), 'method' = 'FractionFree'))" ], "need_command", "ReducedEchelonForm" );
+                   homalgSendBlocking( [ N, " := ", R, "[-1][matrix](LinearAlgebra[GaussianElimination](Matrix(", M, ")))" ], "need_command", "ReducedEchelonForm" );
                    
                    return N;
                    
