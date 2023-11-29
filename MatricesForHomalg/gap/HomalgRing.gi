@@ -2078,6 +2078,8 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     if nargs = 0 or arg[1] = 0 then
         c := 0;
         R := CreateHomalgRing( Integers );
+        SetRingFilter( R, IsHomalgRing );
+        SetRingElementFilter( R, IsInt );
     elif IsInt( arg[1] ) then
         c := arg[1];
         if Length( Collected( FactorsInt( c ) ) ) = 1 and IsPackageMarkedForLoading( "GaussForHomalg", ">= 2018.09.20") then
