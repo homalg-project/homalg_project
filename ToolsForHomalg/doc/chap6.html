@@ -36,6 +36,12 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7D2734947FBEB2EF">6.2-4 IsStructureObjectMorphism</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8346DBCF876C70F7">6.2-5 IsHomalgRingOrModule</a></span>
 </div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7C701DBF7BAE649A">6.3 <span class="Heading">Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X791768BD7815B343">6.3-1 RingFilter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7CB137BC842F454F">6.3-2 RingElementFilter</a></span>
+</div></div>
 </div>
 
 <h3>6 <span class="Heading">Basics</span></h3>
@@ -99,6 +105,24 @@
 <p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
 <p>this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule:</p>
+
+<p><a id="X7C701DBF7BAE649A" name="X7C701DBF7BAE649A"></a></p>
+
+<h4>6.3 <span class="Heading">Attributes</span></h4>
+
+<p><a id="X791768BD7815B343" name="X791768BD7815B343"></a></p>
+
+<h5>6.3-1 RingFilter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingFilter</code>( <var class="Arg">ring</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>A filter inheriting from <code class="code">IsRing</code> which uniquely identifies the ring <var class="Arg">ring</var>. For example, the ring <code class="code">Integers</code> is identified by <code class="code">IsIntegers</code>. If no filter uniquely identifying the ring exists, the most special filter available should be chosen.</p>
+
+<p><a id="X7CB137BC842F454F" name="X7CB137BC842F454F"></a></p>
+
+<h5>6.3-2 RingElementFilter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingElementFilter</code>( <var class="Arg">ring</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>A filter inheriting from <code class="code">IsRingElement</code> which uniquely identifies elements of the ring <var class="Arg">ring</var>. For example, the elements of the ring <code class="code">Integers</code> are identified by <code class="code">IsInt</code>. If no filter uniquely identifying the elements of the ring exists, the most special filter available should be chosen.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>

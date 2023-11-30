@@ -55,3 +55,24 @@
   [33X[0;0Ythis  is  the  super  GAP-category  which  will  include  the GAP-categories
   IsHomalgRing, IsHomalgModule:[133X
   
+  
+  [1X6.3 [33X[0;0YAttributes[133X[101X
+  
+  [1X6.3-1 RingFilter[101X
+  
+  [33X[1;0Y[29X[2XRingFilter[102X( [3Xring[103X ) [32X attribute[133X
+  
+  [33X[0;0YA filter inheriting from [10XIsRing[110X which uniquely identifies the ring [3Xring[103X. For
+  example,  the  ring  [10XIntegers[110X  is  identified  by  [10XIsIntegers[110X.  If no filter
+  uniquely  identifying  the  ring  exists,  the most special filter available
+  should be chosen.[133X
+  
+  [1X6.3-2 RingElementFilter[101X
+  
+  [33X[1;0Y[29X[2XRingElementFilter[102X( [3Xring[103X ) [32X attribute[133X
+  
+  [33X[0;0YA filter inheriting from [10XIsRingElement[110X which uniquely identifies elements of
+  the ring [3Xring[103X. For example, the elements of the ring [10XIntegers[110X are identified
+  by [10XIsInt[110X. If no filter uniquely identifying the elements of the ring exists,
+  the most special filter available should be chosen.[133X
+  
