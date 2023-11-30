@@ -78,6 +78,35 @@ DeclareCategory( "IsContainerForPointers",
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+#! @Section Attributes
+
+#! @Description
+#! A filter inheriting from `IsRing` which uniquely identifies the ring <A>ring</A>.
+#! For example, the ring `Integers` is identified by `IsIntegers`.
+#! If no filter uniquely identifying the ring exists,
+#! the most special filter available should be chosen.
+#! @Arguments ring
+DeclareAttribute( "RingFilter",
+                  IsRing );
+
+#! @Description
+#! A filter inheriting from `IsRingElement` which uniquely identifies elements of the ring <A>ring</A>.
+#! For example, the elements of the ring `Integers` are identified by `IsInt`.
+#! If no filter uniquely identifying the elements of the ring exists,
+#! the most special filter available should be chosen.
+#! @Arguments ring
+DeclareAttribute( "RingElementFilter",
+                  IsRing );
+
+SetRingFilter( Integers, IsIntegers );
+SetRingElementFilter( Integers, IsInt );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################

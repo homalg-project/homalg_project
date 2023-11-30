@@ -501,6 +501,9 @@ InstallGlobalFunction( CreateHomalgExternalRing,
     ## create the external ring
     R :=  CallFuncList( CreateHomalgRing, ar );
     
+    SetRingFilter( R, IsHomalgRing );
+    SetRingElementFilter( R, IsHomalgRingElement );
+    
     ## for the view methods:
     ## <A matrix over an external ring>
     R!.description := "n external";
