@@ -410,7 +410,7 @@ ings&gt;, 1 ]
 
 
 <div class="example"><pre>
-InstallValue( functor_Kernel,
+BindGlobal( "functor_Kernel",
         CreateHomalgFunctor(
                 [ "name", "Kernel" ],
                 [ "category", HOMALG.category ],
@@ -435,7 +435,7 @@ InstallValue( functor_Kernel,
 
 
 <div class="example"><pre>
-InstallValue( functor_DefectOfExactness,
+BindGlobal( "functor_DefectOfExactness",
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
                 [ "category", HOMALG.category ],

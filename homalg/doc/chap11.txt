@@ -361,7 +361,7 @@
   [33X[0;0YThe functor that associates to a map its kernel.[133X
   
   [4X[32X  Code  [32X[104X
-    [4XInstallValue( functor_Kernel,[104X
+    [4XBindGlobal( "functor_Kernel",[104X
     [4X        CreateHomalgFunctor([104X
     [4X                [ "name", "Kernel" ],[104X
     [4X                [ "category", HOMALG.category ],[104X
@@ -386,7 +386,7 @@
   the image of the inner map.[133X
   
   [4X[32X  Code  [32X[104X
-    [4XInstallValue( functor_DefectOfExactness,[104X
+    [4XBindGlobal( "functor_DefectOfExactness",[104X
     [4X        CreateHomalgFunctor([104X
     [4X                [ "name", "DefectOfExactness" ],[104X
     [4X                [ "category", HOMALG.category ],[104X
