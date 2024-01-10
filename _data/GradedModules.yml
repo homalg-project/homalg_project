@@ -1,7 +1,7 @@
 name: GradedModules
-version: "2023.09-01"
+version: "2024.01-01"
 license: "GPL-2.0-or-later"
-date: 2023-09-18
+date: 2024-01-10
 description: |
     A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
 
@@ -59,11 +59,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/GradedModules/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2023.09-01/GradedModules-2023.09-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2024.01-01/GradedModules-2024.01-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2023.09-01/GradedModules-2023.09-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2024.01-01/GradedModules-2024.01-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2023.09-01/GradedModules-2023.09-01-manual.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2024.01-01/GradedModules-2024.01-01-manual.pdf
 
 abstract: |
     This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring
@@ -75,24 +75,24 @@ keywords: |
     modules, graded modules, graduation, multi-graded modules, Tate resolution.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BGJLLM18</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S., Jambor, S., Lange-Hegermann, M., Lorenz, A. and Motsak, O.</b>,
+    [<span class='BibKey'>BGJLLM10</span>]   <b class='BibAuthor'>Barakat, M., Gutsche, S., Jambor, S., Lange-Hegermann, M., Lorenz, A. and Motsak, O.</b>,
      <i class='BibTitle'>GradedModules, A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings,
-             Version 2023.09-01</i>
-     (<span class='BibYear'>9-18</span>)<br />
+             Version 2024.01-01</i>
+     (<span class='BibYear'>1-10</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/GradedModules">https://homalg-project.github.io/pkg/GradedModules</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ GradedModules2023.09-01,
+    @misc{ GradedModules2024.01-01,
       author =           {Barakat,  M.  and  Gutsche,  S.  and  Jambor,  S.  and
                           Lange-Hegermann, M. and Lorenz, A. and Motsak, O.},
       title =            {{GradedModules},   A  homalg  based  package  for  the
                           Abelian  category of finitely presented graded modules
-                          over computable graded rings, {V}ersion 2023.09-01},
-      month =            {3-},
-      year =             {9-18},
+                          over computable graded rings, {V}ersion 2024.01-01},
+      month =            {4-},
+      year =             {1-10},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/GradedModules}
@@ -101,6 +101,6 @@ bibtex: |
                           {}{}{}\texttt{GradedModules}}},
       keywords =         {modules;   graded  modules;  graduation;  multi-graded
                           modules; Tate resolution},
-      printedkey =       {BGJLLM18}
+      printedkey =       {BGJLLM10}
     }
 
