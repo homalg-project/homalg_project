@@ -16,7 +16,7 @@
 ## AsATwoSequence
 ##
 
-InstallGlobalFunction( _Functor_AsATwoSequence_OnObjects, ### defines: AsATwoSequence
+BindGlobal( "_Functor_AsATwoSequence_OnObjects", ### defines: AsATwoSequence
   function( phi, psi )
     local pre, post, C;
     
@@ -54,7 +54,7 @@ InstallGlobalFunction( _Functor_AsATwoSequence_OnObjects, ### defines: AsATwoSeq
     
 end );
 
-InstallValue( functor_AsATwoSequence,
+BindGlobal( "functor_AsATwoSequence",
         CreateHomalgFunctor(
                 [ "name", "AsATwoSequence" ],
                 [ "category", HOMALG.category ],
@@ -159,7 +159,7 @@ end );
 #   v                v
 #   B_ --(beta1)---> B
 
-InstallGlobalFunction( _Functor_AsChainMorphismForPullback_OnObjects, ### defines: AsChainMorphismForPullback
+BindGlobal( "_Functor_AsChainMorphismForPullback_OnObjects", ### defines: AsChainMorphismForPullback
   function( phi, beta1 )
     local S, T, c;
     
@@ -182,7 +182,7 @@ InstallGlobalFunction( _Functor_AsChainMorphismForPullback_OnObjects, ### define
     
 end );
 
-InstallValue( functor_AsChainMorphismForPullback,
+BindGlobal( "functor_AsChainMorphismForPullback",
         CreateHomalgFunctor(
                 [ "name", "AsChainMorphismForPullback" ],
                 [ "category", HOMALG.category ],
@@ -207,7 +207,7 @@ functor_AsChainMorphismForPullback!.ContainerForWeakPointersOnComputedBasicObjec
 #   v                v
 #   B_ ----<?>-----> ?
 
-InstallGlobalFunction( _Functor_AsChainMorphismForPushout_OnObjects, ### defines: AsChainMorphismForPushout
+BindGlobal( "_Functor_AsChainMorphismForPushout_OnObjects", ### defines: AsChainMorphismForPushout
   function( alpha1, psi )
     local S, T, c;
     
@@ -230,7 +230,7 @@ InstallGlobalFunction( _Functor_AsChainMorphismForPushout_OnObjects, ### defines
     
 end );
 
-InstallValue( functor_AsChainMorphismForPushout,
+BindGlobal( "functor_AsChainMorphismForPushout",
         CreateHomalgFunctor(
                 [ "name", "AsChainMorphismForPushout" ],
                 [ "category", HOMALG.category ],
@@ -407,7 +407,7 @@ end );
 ## PreDivide
 ##
 
-InstallGlobalFunction( _Functor_PreDivide_OnMorphisms, ### defines: PreDivide
+BindGlobal( "_Functor_PreDivide_OnMorphisms", ### defines: PreDivide
   function( epsilon, eta )
     local gen_iso, eta0;
     
@@ -438,7 +438,7 @@ InstallGlobalFunction( _Functor_PreDivide_OnMorphisms, ### defines: PreDivide
     
 end );
 
-InstallValue( functor_PreDivide,
+BindGlobal( "functor_PreDivide",
         CreateHomalgFunctor(
                 [ "name", "PreDivide" ],
                 [ "category", HOMALG.category ],

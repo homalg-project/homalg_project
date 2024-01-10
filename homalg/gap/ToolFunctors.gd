@@ -12,30 +12,6 @@
 #
 ####################################
 
-## AsATwoSequence
-DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
-
-DeclareGlobalVariable( "functor_AsATwoSequence" );
-
-## PreCompose
-DeclareGlobalFunction( "_Functor_PreCompose_OnObjects" );
-
-DeclareGlobalVariable( "functor_PreCompose" );
-
-## AsChainMorphismForPullback
-DeclareGlobalFunction( "_Functor_AsChainMorphismForPullback_OnObjects" );
-
-DeclareGlobalVariable( "functor_AsChainMorphismForPullback" );
-
-## AsChainMorphismForPushout
-DeclareGlobalFunction( "_Functor_AsChainMorphismForPushout_OnObjects" );
-
-DeclareGlobalVariable( "functor_AsChainMorphismForPushout" );
-
-## PreDivide
-DeclareGlobalFunction( "_Functor_PreDivide_OnMorphisms" );
-
-DeclareGlobalVariable( "functor_PreDivide" );
 
 ####################################
 #

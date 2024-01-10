@@ -17,7 +17,7 @@
 ##
 
 ##
-InstallGlobalFunction( _Functor_Cokernel_OnModules, ### defines: Cokernel(Epi)
+BindGlobal( "_Functor_Cokernel_OnModules", ### defines: Cokernel(Epi)
   function( phi )
     local R, T, p, rel, gen, coker, id, epi, gen_iso, img_emb, emb;
     
@@ -106,7 +106,7 @@ end );
 
 ##  <#GAPDoc Label="functor_Cokernel:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_Cokernel_for_fp_modules,
+BindGlobal( "functor_Cokernel_for_fp_modules",
         CreateHomalgFunctor(
                 [ "name", "Cokernel" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -129,7 +129,7 @@ functor_Cokernel_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphism
 ## ImageObject
 ##
 
-InstallGlobalFunction( _Functor_ImageObject_OnModules, ### defines: ImageObject(Emb)
+BindGlobal( "_Functor_ImageObject_OnModules", ### defines: ImageObject(Emb)
   function( phi )
     local T, p, img, emb, coker_epi, img_submodule;
     
@@ -191,7 +191,7 @@ end );
 
 ##  <#GAPDoc Label="functor_ImageObject:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_ImageObject_for_fp_modules,
+BindGlobal( "functor_ImageObject_for_fp_modules",
         CreateHomalgFunctor(
                 [ "name", "ImageObject for modules" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -213,7 +213,7 @@ functor_ImageObject_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorph
 ## Hom
 ##
 
-InstallGlobalFunction( _Functor_Hom_OnModules, ### defines: Hom (object part)
+BindGlobal( "_Functor_Hom_OnModules", ### defines: Hom (object part)
   function( M, N )
     local s, t, dM, dN, P1, l0, l1, _l0, matM, matN, R, HP0N, HP1N, r, c, idN,
           alpha, hom, gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
@@ -374,7 +374,7 @@ InstallGlobalFunction( _Functor_Hom_OnModules, ### defines: Hom (object part)
 end );
 
 ##
-InstallGlobalFunction( _Functor_Hom_OnMaps, ### defines: Hom (morphism part)
+BindGlobal( "_Functor_Hom_OnMaps", ### defines: Hom (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local R, L, idL, hull_phi, covariant, emb_source, emb_target, mor;
     
@@ -472,7 +472,7 @@ end );
 
 ##  <#GAPDoc Label="Functor_Hom:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( Functor_Hom_for_fp_modules,
+BindGlobal( "Functor_Hom_for_fp_modules",
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -600,7 +600,7 @@ InstallMethod( Dualize,
 ## TensorProduct
 ##
 
-InstallGlobalFunction( _Functor_TensorProduct_OnModules, ### defines: TensorProduct (object part)
+BindGlobal( "_Functor_TensorProduct_OnModules", ### defines: TensorProduct (object part)
   function( M, N )
     local R, rl, l0, _l0, matM, matN, idM, idN, MN,
           F, gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
@@ -658,7 +658,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules, ### defines: TensorProd
 end );
 
 ##
-InstallGlobalFunction( _Functor_TensorProduct_OnMaps, ### defines: TensorProduct (morphism part)
+BindGlobal( "_Functor_TensorProduct_OnMaps", ### defines: TensorProduct (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local R, L, M_or_mor, N_or_mor, rl, idL, hull_phi,
           emb_source, emb_target, mor;
@@ -772,7 +772,7 @@ end );
 
 ##  <#GAPDoc Label="Functor_TensorProduct:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( Functor_TensorProduct_for_fp_modules,
+BindGlobal( "Functor_TensorProduct_for_fp_modules",
         CreateHomalgFunctor(
                 [ "name", "TensorProduct" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -797,7 +797,7 @@ Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMor
 ##
 
 ##
-InstallGlobalFunction( _functor_BaseChange_OnModules, ### defines: BaseChange (object part)
+BindGlobal( "_functor_BaseChange_OnModules", ### defines: BaseChange (object part)
   function( _R, M )
     local R, S, lift, mat, left, distinguished, N;
     
@@ -886,7 +886,7 @@ InstallOtherMethod( BaseChange,
     
 end );
 
-InstallValue( functor_BaseChange_for_fp_modules,
+BindGlobal( "functor_BaseChange_for_fp_modules",
         CreateHomalgFunctor(
                 [ "name", "BaseChange" ],
                 [ "category", HOMALG_MODULES.category ],

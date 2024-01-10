@@ -12,30 +12,7 @@
 #
 ####################################
 
-## TorsionFreeFactor
-DeclareGlobalFunction( "_Functor_TorsionFreeFactor_OnObjects" );
-
-DeclareGlobalVariable( "Functor_TorsionFreeFactor" );
-
-## TorsionObject
-DeclareGlobalFunction( "_Functor_TorsionObject_OnObjects" );
-
-DeclareGlobalVariable( "Functor_TorsionObject" );
-
-## Pullback
-DeclareGlobalFunction( "_Functor_Pullback_OnObjects" );
-
-DeclareGlobalVariable( "functor_Pullback" );
-
-## Pushout
-DeclareGlobalFunction( "_Functor_Pushout_OnObjects" );
-
-DeclareGlobalVariable( "functor_Pushout" );
-
-## AuslanderDual
-DeclareGlobalFunction( "_Functor_AuslanderDual_OnObjects" );
-
-DeclareGlobalVariable( "functor_AuslanderDual" );
+DeclareGlobalName( "functor_Pushout" );
 
 ####################################
 #

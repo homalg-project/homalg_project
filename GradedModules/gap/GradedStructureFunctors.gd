@@ -20,12 +20,6 @@ DeclareOperation( "RepresentationMapOfRingElement",
 DeclareOperation( "RepresentationMapOfRingElement",
         [ IsRingElement, IsHomalgModule, IsHomalgElement ] );
 
-DeclareGlobalFunction( "_Functor_RepresentationMapOfRingElement_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_RepresentationMapOfRingElement_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_RepresentationMapOfRingElement_ForGradedModules" );
-
 ## SubmoduleGeneratedByHomogeneousPart
 
 DeclareOperation( "SubmoduleGeneratedByHomogeneousPart",
@@ -33,12 +27,6 @@ DeclareOperation( "SubmoduleGeneratedByHomogeneousPart",
 
 DeclareOperation( "SubmoduleGeneratedByHomogeneousPart",
         [ IsHomalgElement, IsHomalgModule ] );
-
-DeclareGlobalFunction( "_Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules" );
 
 DeclareOperation( "SubmoduleGeneratedByHomogeneousPartEmbed",
         [ IsInt, IsHomalgModule ] );
@@ -51,10 +39,6 @@ DeclareAttribute( "EmbeddingOfTruncatedModuleInSuperModule",
 
 ## TruncatedSubmoduleEmbed
 
-DeclareGlobalFunction( "_Functor_TruncatedModule_OnGradedModules" );
-
-DeclareGlobalVariable( "Functor_TruncatedModule_ForGradedModules" );
-
 DeclareOperation( "TruncatedSubmoduleEmbed",
         [ IsInt, IsHomalgModule ] );
 
@@ -73,17 +57,7 @@ DeclareOperation( "TruncatedModule",
 DeclareOperation( "TruncatedModule",
         [ IsHomalgElement, IsHomalgModule ] );
 
-# DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedModules" );
-# 
-# DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedMaps" );
-# 
-# DeclareGlobalVariable( "Functor_TruncatedSubmoduleEmbed_ForGradedModules" );
-
-DeclareGlobalFunction( "_Functor_TruncatedSubmodule_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_TruncatedSubmodule_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_TruncatedSubmodule_ForGradedModules" );
+DeclareGlobalName( "Functor_TruncatedSubmodule_ForGradedModules" );
 
 ## TruncatedSubmoduleRecursiveEmbed
 
@@ -92,12 +66,6 @@ DeclareOperation( "TruncatedSubmoduleRecursiveEmbed",
 
 DeclareOperation( "TruncatedSubmoduleRecursiveEmbed",
         [ IsHomalgElement, IsHomalgModule ] );
-
-DeclareGlobalFunction( "_Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules" );
 
 ## HomogeneousPartOverCoefficientsRing
 
@@ -122,11 +90,7 @@ DeclareOperation( "HomogeneousPartOverCoefficientsRing",
 DeclareOperation( "HomogeneousPartOverCoefficientsRing",
         [ IsHomalgElement, IsHomalgGradedModule ] );
 
-DeclareGlobalFunction( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules" );
+DeclareGlobalName( "Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules" );
 
 ## HomogeneousPartOfDegreeZeroOverCoefficientsRing
 
@@ -136,8 +100,4 @@ DeclareOperation( "HomogeneousPartOfDegreeZeroOverCoefficientsRing",
 DeclareOperation( "HomogeneousPartOfDegreeZeroOverCoefficientsRing",
         [ IsHomalgGradedModule ] );
 
-DeclareGlobalFunction( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules" );
+DeclareGlobalName( "Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules" );

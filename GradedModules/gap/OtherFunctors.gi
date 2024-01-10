@@ -16,7 +16,7 @@
 ## DirectSum
 ##
 
-InstallGlobalFunction( _Functor_DirectSum_OnGradedModules, ### defines: DirectSum
+BindGlobal( "_Functor_DirectSum_OnGradedModules", ### defines: DirectSum
   function( M, N )
     local S, degMN, sum, iotaM, iotaN, piM, piN, natural, phi;
     
@@ -71,7 +71,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules, ### defines: DirectSu
     
 end );
 
-InstallValue( Functor_DirectSum_for_graded_modules,
+BindGlobal( "Functor_DirectSum_for_graded_modules",
         CreateHomalgFunctor(
                 [ "name", "DirectSum" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -99,13 +99,13 @@ InstallFunctor( Functor_DirectSum_for_graded_modules );
 ##
 ## (cf. Eisenbud, Floystad, Schreyer: Sheaf Cohomology and Free Resolutions over Exterior Algebras)
 
-InstallGlobalFunction( _Functor_LinearPart_OnGradedModules,    ### defines: LinearPart (object part)
+BindGlobal( "_Functor_LinearPart_OnGradedModules",    ### defines: LinearPart (object part)
   function( M )
     return M;
 end );
 
 ##
-InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart (morphism part)
+BindGlobal( "_Functor_LinearPart_OnGradedMaps", ### defines: LinearPart (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local deg_s, deg_t, S, zero, mat, deg, i, j, result;
     
@@ -154,7 +154,7 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
     
 end );
 
-InstallValue( Functor_LinearPart_ForGradedModules,
+BindGlobal( "Functor_LinearPart_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "LinearPart" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -176,7 +176,7 @@ InstallFunctor( Functor_LinearPart_ForGradedModules );
 ## ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree
 ##
 
-InstallGlobalFunction( _Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_OnGradedModules,
+BindGlobal( "_Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_OnGradedModules",
   function( d, M )
   local S, deg, l, mat, pi;
     
@@ -211,7 +211,7 @@ InstallGlobalFunction( _Functor_ProjectionToDirectSummandOfGradedFreeModuleGener
     
 end );
 
-InstallValue( Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules,
+BindGlobal( "Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -295,7 +295,7 @@ end );
 ## GeneralizedLinearStrand
 ##
 
-InstallGlobalFunction( _Functor_GeneralizedLinearStrand_OnFreeCocomplexes,
+BindGlobal( "_Functor_GeneralizedLinearStrand_OnFreeCocomplexes",
   function( f, T )
   local i, alpha, alpha2, T2;
     
@@ -320,7 +320,7 @@ InstallGlobalFunction( _Functor_GeneralizedLinearStrand_OnFreeCocomplexes,
     
 end );
 
-InstallGlobalFunction( _Functor_GeneralizedLinearStrand_OnCochainMaps,
+BindGlobal( "_Functor_GeneralizedLinearStrand_OnCochainMaps",
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local f, i, alpha, f_i, alpha2, psi;
     
@@ -347,7 +347,7 @@ InstallGlobalFunction( _Functor_GeneralizedLinearStrand_OnCochainMaps,
 end );
   
 
-InstallValue( Functor_GeneralizedLinearStrand_ForGradedModules,
+BindGlobal( "Functor_GeneralizedLinearStrand_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "GeneralizedLinearStrand" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -374,14 +374,14 @@ InstallFunctorOnMorphisms( Functor_GeneralizedLinearStrand_ForGradedModules );
 # returns the subcomplex of a free complex,
 # where cohomological degree + shift = internal degree
 
-InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,
+BindGlobal( "_Functor_LinearStrand_OnFreeCocomplexes",
   function( shift, T )
     
     return GeneralizedLinearStrand( function( i ) return i + shift; end, T );
     
 end );
 
-InstallGlobalFunction( _Functor_LinearStrand_OnCochainMaps,
+BindGlobal( "_Functor_LinearStrand_OnCochainMaps",
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     
     return _Functor_GeneralizedLinearStrand_OnCochainMaps( F_source, F_target, [ function( i ) return i + arg_before_pos[1]; end ], phi, arg_behind_pos );
@@ -389,7 +389,7 @@ InstallGlobalFunction( _Functor_LinearStrand_OnCochainMaps,
 end );
   
 
-InstallValue( Functor_LinearStrand_ForGradedModules,
+BindGlobal( "Functor_LinearStrand_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "LinearStrand" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -424,14 +424,14 @@ end );
 ## ConstantStrand
 ##
 
-InstallGlobalFunction( _Functor_ConstantStrand_OnFreeCocomplexes,
+BindGlobal( "_Functor_ConstantStrand_OnFreeCocomplexes",
   function( d, T )
     
     return GeneralizedLinearStrand( function( i ) return d; end, T );
     
 end );
 
-InstallGlobalFunction( _Functor_ConstantStrand_OnCochainMaps,
+BindGlobal( "_Functor_ConstantStrand_OnCochainMaps",
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     
     return _Functor_GeneralizedLinearStrand_OnCochainMaps( F_source, F_target, [ function( i ) return arg_before_pos[1]; end ], phi, arg_behind_pos );
@@ -439,7 +439,7 @@ InstallGlobalFunction( _Functor_ConstantStrand_OnCochainMaps,
 end );
   
 
-InstallValue( Functor_ConstantStrand_ForGradedModules,
+BindGlobal( "Functor_ConstantStrand_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "ConstantStrand" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -700,7 +700,7 @@ InstallMethod( CompareArgumentsForLinearFreeComplexOverExteriorAlgebraToModuleOn
       
 end );
 
-InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnGradedModules,
+BindGlobal( "_Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnGradedModules",
   function( reg_sheaf, lin_tate )
       local i, deg, A, n, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, lower_bound, jj, j, tate_morphism, psi,
       extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, isos, source_emb, map, certain_deg, t1, t2, phi, chain_phi, pos, Rresult, iso;
@@ -1108,7 +1108,7 @@ end );
 # Now we inductively construct maps from the submodules generated by a certain degree of F_source and F_target.
 # Since F_{>=j} = F_{>=j+1} \oplus <F_j> we have the map starting from the direct sum and finally
 # also from the factor of this direct sum.
-InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnGradedMaps,
+BindGlobal( "_Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnGradedMaps",
   function( F_source, F_target, arg_before_pos, lin_tate, arg_behind_pos )
     local reg_sheaf, lower_bound, A, S, j, object, jj, RF_source, RF_target,
           lin_tate_source, lin_tate_target, nat_source, nat_target, alpha,
@@ -1178,7 +1178,7 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
       
 end );
 
-InstallValue( Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModules,
+BindGlobal( "Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "LinearFreeComplexOverExteriorAlgebraToModule" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -1204,7 +1204,7 @@ InstallFunctor( Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedMo
 ##
 ## (cf. Eisenbud, Floystad, Schreyer: Sheaf Cohomology and Free Resolutions over Exterior Algebras)
 
-InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_OnGradedModules,
+BindGlobal( "_Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_OnGradedModules",
   function( truncation_bound, M )
     local V2, map, UM, SOUM, C, reg, tate, B, reg_sheaf, t1, t2, psi, RM, id_old, phi, lin_tate, fit, HM, ii, i, hom_part;
       
@@ -1340,7 +1340,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
 end );
 
 ##
-InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_OnGradedMaps,
+BindGlobal( "_Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_OnGradedMaps",
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
       local truncation_bound, source, target, nat_source, nat_target, reg, lin_tate, reg_sheaf, H_mor;
       
@@ -1538,7 +1538,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
     
 end );
 
-InstallValue( Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules,
+BindGlobal( "Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "ModuleOfGlobalSectionsTruncatedAtCertainDegree" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -1595,17 +1595,17 @@ end );
 ## ModuleOfGlobalSections
 ##
 
-InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,
+BindGlobal( "_Functor_ModuleOfGlobalSections_OnGradedModules",
   function( M )
       return ModuleOfGlobalSectionsTruncatedAtCertainDegree( HOMALG_GRADED_MODULES!.LowerTruncationBound, M );
 end );
 
-InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedMaps,
+BindGlobal( "_Functor_ModuleOfGlobalSections_OnGradedMaps",
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
       return ModuleOfGlobalSectionsTruncatedAtCertainDegree( HOMALG_GRADED_MODULES!.LowerTruncationBound, mor );
 end );
 
-InstallValue( Functor_ModuleOfGlobalSections_ForGradedModules,
+BindGlobal( "Functor_ModuleOfGlobalSections_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "ModuleOfGlobalSections" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -1672,7 +1672,7 @@ InstallMethod( GuessModuleOfGlobalSectionsFromATateMap,
     
 end );
 
-InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGradedMaps, ### defines: GuessModuleOfGlobalSectionsFromATateMap (object part)
+BindGlobal( "_Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGradedMaps", ### defines: GuessModuleOfGlobalSectionsFromATateMap (object part)
         
   function( steps, phi )
     local A, n, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;
@@ -1737,7 +1737,7 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
     
 end );
 
-InstallValue( Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps,
+BindGlobal( "Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps",
         CreateHomalgFunctor(
                 [ "name", "GuessModuleOfGlobalSectionsFromATateMap" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],

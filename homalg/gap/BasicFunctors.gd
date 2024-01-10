@@ -12,19 +12,6 @@
 #
 ####################################
 
-## Kernel
-DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
-
-DeclareGlobalVariable( "functor_Kernel" );
-
-## DefectOfExactness
-DeclareGlobalFunction( "_Functor_DefectOfExactness_OnObjects" );
-
-DeclareGlobalVariable( "functor_DefectOfExactness" );
-
-## Dualize
-DeclareGlobalVariable( "Functor_Dualize" );
-
 ####################################
 #
 # attributes:
