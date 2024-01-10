@@ -157,7 +157,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules, ### defines: RepresentationMapOfRingElement (object part)
+BindGlobal( "_Functor_RepresentationMapOfRingElement_OnGradedModules", ### defines: RepresentationMapOfRingElement (object part)
         
   function( l, M )
     local S, R, r, d, bd, bdp1, r_mult;
@@ -220,7 +220,7 @@ InstallMethod( RepresentationMapOfRingElement,
     
 end );
 
-InstallValue( Functor_RepresentationMapOfRingElement_ForGradedModules,
+BindGlobal( "Functor_RepresentationMapOfRingElement_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "RepresentationMapOfRingElement" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -255,7 +255,7 @@ InstallFunctor( Functor_RepresentationMapOfRingElement_ForGradedModules );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModules, ### defines: SubmoduleGeneratedByHomogeneousPart (object part)
+BindGlobal( "_Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModules", ### defines: SubmoduleGeneratedByHomogeneousPart (object part)
         
   function( d, M )
     local deg, submodule;
@@ -277,7 +277,7 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModu
 end );
 
 ##
-InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedMaps, ### defines: SubmoduleGeneratedByHomogeneousPart (morphism part)
+BindGlobal( "_Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedMaps", ### defines: SubmoduleGeneratedByHomogeneousPart (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local result;
     
@@ -342,7 +342,7 @@ InstallMethod( SubmoduleGeneratedByHomogeneousPartEmbed,
     
 end );
 
-InstallValue( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules,
+BindGlobal( "Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "SubmoduleGeneratedByHomogeneousPart" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -377,7 +377,7 @@ end );
 ##
 
 ##
-InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules,
+BindGlobal( "_Functor_TruncatedSubmodule_OnGradedModules",
         
   function( d, M )
     local deg, certain_deg1, certain_part, certain_deg2, mat, phi1, phi2, phi, M2;
@@ -426,7 +426,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules,
 end );
 
 ##
-InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedMaps,
+BindGlobal( "_Functor_TruncatedSubmodule_OnGradedMaps",
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local truncated_source_embedding, truncated_range_embedding;
     
@@ -438,7 +438,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedMaps,
 
 end );
 
-InstallValue( Functor_TruncatedSubmodule_ForGradedModules,
+BindGlobal( "Functor_TruncatedSubmodule_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "TruncatedSubmodule" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -484,7 +484,7 @@ end );
 ##
 
 ##
-InstallGlobalFunction( _Functor_TruncatedModule_OnGradedModules,
+BindGlobal( "_Functor_TruncatedModule_OnGradedModules",
         
   function( d, M )
   
@@ -492,7 +492,7 @@ InstallGlobalFunction( _Functor_TruncatedModule_OnGradedModules,
     
 end );
 
-InstallValue( Functor_TruncatedModule_ForGradedModules,
+BindGlobal( "Functor_TruncatedModule_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "TruncatedModule" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -526,7 +526,7 @@ end );
 ##
 
 ##
-InstallGlobalFunction( _Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules, ### defines: TruncatedSubmoduleRecursiveEmbed (object part)
+BindGlobal( "_Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules", ### defines: TruncatedSubmoduleRecursiveEmbed (object part)
         
   function( d, M )
     
@@ -534,7 +534,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules
     
 end );
 
-InstallValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules,
+BindGlobal( "Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "TruncatedSubmoduleRecursiveEmbed" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -618,7 +618,7 @@ InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
     
 end );
 
-InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules, ### defines: HomogeneousPartOverCoefficientsRing (object part)
+BindGlobal( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules", ### defines: HomogeneousPartOverCoefficientsRing (object part)
         
   function( d, M )
     local S, k_graded, k, deg, emb, mat, map_having_submodule_as_its_image,
@@ -738,7 +738,7 @@ end );
 
 
 ##
-InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOverCoefficientsRing (morphism part)
+BindGlobal( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps", ### defines: HomogeneousPartOverCoefficientsRing (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local S, k, d, mat, result;
     
@@ -765,7 +765,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     
 end );
 
-InstallValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
+BindGlobal( "Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "HomogeneousPartOverCoefficientsRing" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -810,7 +810,7 @@ end );
 ## HomogeneousPartOfDegreeZeroOverCoefficientsRing
 ##
 
-InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules, ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (object part)
+BindGlobal( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules", ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (object part)
         
   function( M )
     
@@ -820,14 +820,14 @@ end );
 
 
 ##
-InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (morphism part)
+BindGlobal( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps", ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     
     return HomogeneousPartOverCoefficientsRing( 0, phi );
     
 end );
 
-InstallValue( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules,
+BindGlobal( "Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "HomogeneousPartOfDegreeZeroOverCoefficientsRing" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],

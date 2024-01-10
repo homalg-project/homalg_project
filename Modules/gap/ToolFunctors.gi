@@ -16,14 +16,14 @@
 ## TheZeroMorphism
 ##
 
-InstallGlobalFunction( _Functor_TheZeroMorphism_OnModules, ### defines: TheZeroMorphism
+BindGlobal( "_Functor_TheZeroMorphism_OnModules", ### defines: TheZeroMorphism
   function( M, N )
     
     return HomalgZeroMap( M, N );
     
 end );
 
-InstallValue( functor_TheZeroMorphism_for_fp_modules,
+BindGlobal( "functor_TheZeroMorphism_for_fp_modules",
         CreateHomalgFunctor(
                 [ "name", "TheZeroMorphism" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -41,7 +41,7 @@ InstallValue( functor_TheZeroMorphism_for_fp_modules,
 ## MulMorphism
 ##
 
-InstallGlobalFunction( _Functor_MulMorphism_OnMaps, ### defines: MulMorphism
+BindGlobal( "_Functor_MulMorphism_OnMaps", ### defines: MulMorphism
   function( a, phi )
     local a_phi;
     
@@ -51,7 +51,7 @@ InstallGlobalFunction( _Functor_MulMorphism_OnMaps, ### defines: MulMorphism
     
 end );
 
-InstallValue( functor_MulMorphism_for_maps_of_fg_modules,
+BindGlobal( "functor_MulMorphism_for_maps_of_fg_modules",
         CreateHomalgFunctor(
                 [ "name", "MulMorphism" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -80,7 +80,7 @@ end );
 ## AddMorphisms
 ##
 
-InstallGlobalFunction( _Functor_AddMorphisms_OnMaps, ### defines: AddMorphisms
+BindGlobal( "_Functor_AddMorphisms_OnMaps", ### defines: AddMorphisms
   function( phi1, phi2 )
     local phi;
     
@@ -94,7 +94,7 @@ InstallGlobalFunction( _Functor_AddMorphisms_OnMaps, ### defines: AddMorphisms
     
 end );
 
-InstallValue( functor_AddMorphisms_for_maps_of_fg_modules,
+BindGlobal( "functor_AddMorphisms_for_maps_of_fg_modules",
         CreateHomalgFunctor(
                 [ "name", "+" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -113,7 +113,7 @@ functor_AddMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedB
 ## SubMorphisms
 ##
 
-InstallGlobalFunction( _Functor_SubMorphisms_OnMaps, ### defines: SubMorphisms
+BindGlobal( "_Functor_SubMorphisms_OnMaps", ### defines: SubMorphisms
   function( phi1, phi2 )
     local phi;
     
@@ -127,7 +127,7 @@ InstallGlobalFunction( _Functor_SubMorphisms_OnMaps, ### defines: SubMorphisms
     
 end );
 
-InstallValue( functor_SubMorphisms_for_maps_of_fg_modules,
+BindGlobal( "functor_SubMorphisms_for_maps_of_fg_modules",
         CreateHomalgFunctor(
                 [ "name", "-" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -146,7 +146,7 @@ functor_SubMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedB
 ## PreCompose
 ##
 
-InstallGlobalFunction( _Functor_PreCompose_OnMaps, ### defines: PreCompose
+BindGlobal( "_Functor_PreCompose_OnMaps", ### defines: PreCompose
   function( pre, post )
     local S, T, phi;
    
@@ -167,7 +167,7 @@ InstallGlobalFunction( _Functor_PreCompose_OnMaps, ### defines: PreCompose
     
 end );
 
-InstallValue( functor_PreCompose_for_maps_of_fg_modules,
+BindGlobal( "functor_PreCompose_for_maps_of_fg_modules",
         CreateHomalgFunctor(
                 [ "name", "PreCompose" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -185,7 +185,7 @@ InstallValue( functor_PreCompose_for_maps_of_fg_modules,
 ## CoproductMorphism
 ##
 
-InstallGlobalFunction( _Functor_CoproductMorphism_OnMaps, ### defines: CoproductMorphism
+BindGlobal( "_Functor_CoproductMorphism_OnMaps", ### defines: CoproductMorphism
   function( phi, psi )
     local T, phi_psi, SpS, p;
     
@@ -212,7 +212,7 @@ InstallGlobalFunction( _Functor_CoproductMorphism_OnMaps, ### defines: Coproduct
     
 end );
 
-InstallValue( functor_CoproductMorphism_for_maps_of_fg_modules,
+BindGlobal( "functor_CoproductMorphism_for_maps_of_fg_modules",
         CreateHomalgFunctor(
                 [ "name", "CoproductMorphism" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -230,7 +230,7 @@ InstallValue( functor_CoproductMorphism_for_maps_of_fg_modules,
 ## ProductMorphism
 ##
 
-InstallGlobalFunction( _Functor_ProductMorphism_OnMaps, ### defines: ProductMorphism
+BindGlobal( "_Functor_ProductMorphism_OnMaps", ### defines: ProductMorphism
   function( phi, psi )
     local S, phi_psi, TpT, p;
     
@@ -257,7 +257,7 @@ InstallGlobalFunction( _Functor_ProductMorphism_OnMaps, ### defines: ProductMorp
     
 end );
 
-InstallValue( functor_ProductMorphism_for_maps_of_fg_modules,
+BindGlobal( "functor_ProductMorphism_for_maps_of_fg_modules",
         CreateHomalgFunctor(
                 [ "name", "ProductMorphism" ],
                 [ "category", HOMALG_MODULES.category ],
@@ -292,7 +292,7 @@ InstallValue( functor_ProductMorphism_for_maps_of_fg_modules,
 ## PostDivide
 ##
 
-InstallGlobalFunction( _Functor_PostDivide_OnMaps,  ### defines: PostDivide
+BindGlobal( "_Functor_PostDivide_OnMaps",  ### defines: PostDivide
   function( gamma, beta )
     local N, psi, M_;
     
@@ -334,7 +334,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,  ### defines: PostDivide
     
 end );
 
-InstallValue( functor_PostDivide_for_maps_of_fg_modules,
+BindGlobal( "functor_PostDivide_for_maps_of_fg_modules",
         CreateHomalgFunctor(
                 [ "name", "PostDivide" ],
                 [ "category", HOMALG_MODULES.category ],

@@ -17,7 +17,7 @@
 ##
 
 ##
-InstallGlobalFunction( _Functor_Cokernel_OnGradedModules, ### defines: Cokernel(Epi)
+BindGlobal( "_Functor_Cokernel_OnGradedModules", ### defines: Cokernel(Epi)
   function( phi )
     local S, R, U_phi, epi, positions, p2, p, coker_U_phi, coker, gen_iso, img_emb, emb;
     
@@ -118,7 +118,7 @@ end );
 
 ##  <#GAPDoc Label="functor_Cokernel:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_Cokernel_ForGradedModules,
+BindGlobal( "functor_Cokernel_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "Cokernel" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -141,7 +141,7 @@ functor_Cokernel_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphi
 ## ImageObject
 ##
 
-InstallGlobalFunction( _Functor_ImageObject_OnGradedModules, ### defines: ImageObject(Emb)
+BindGlobal( "_Functor_ImageObject_OnGradedModules", ### defines: ImageObject(Emb)
   function( phi )
     local S, emb, img, coker_epi, img_submodule;
     
@@ -203,7 +203,7 @@ end );
 
 ##  <#GAPDoc Label="functor_ImageObject:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_ImageObject_ForGradedModules,
+BindGlobal( "functor_ImageObject_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "ImageObject" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -230,7 +230,7 @@ functor_ImageObject_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMor
 ## GradedHom
 ##
 
-InstallGlobalFunction( _Functor_GradedHom_OnGradedModules, ### defines: GradedHom (object part)
+BindGlobal( "_Functor_GradedHom_OnGradedModules", ### defines: GradedHom (object part)
   function( M, N )
     local S, hom, emb, degHP0N, p, HP0N;
     
@@ -269,7 +269,7 @@ InstallGlobalFunction( _Functor_GradedHom_OnGradedModules, ### defines: GradedHo
 end );
 
 ##
-InstallGlobalFunction( _Functor_GradedHom_OnGradedMaps,     ### defines: GradedHom (morphism part)
+BindGlobal( "_Functor_GradedHom_OnGradedMaps",     ### defines: GradedHom (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local psi;
 
@@ -296,7 +296,7 @@ end );
 
 ##  <#GAPDoc Label="Functor_Hom:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( Functor_GradedHom_ForGradedModules,
+BindGlobal( "Functor_GradedHom_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "GradedHom" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -419,7 +419,7 @@ RightDerivedCofunctor( Functor_GradedHom_ForGradedModules );
 ## TensorProduct
 ##
 
-InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules, ### defines: TensorProduct (object part)
+BindGlobal( "_Functor_TensorProduct_OnGradedModules", ### defines: TensorProduct (object part)
   function( M, N )
     local S, degM, degN, degMN, T, alpha, p;
     
@@ -463,7 +463,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules, ### defines: Tens
 end );
 
 ##
-InstallGlobalFunction( _Functor_TensorProduct_OnGradedMaps, ### defines: TensorProduct (morphism part)
+BindGlobal( "_Functor_TensorProduct_OnGradedMaps", ### defines: TensorProduct (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local psi;
     
@@ -490,7 +490,7 @@ end );
 
 ##  <#GAPDoc Label="Functor_TensorProduct:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( Functor_TensorProduct_ForGradedModules,
+BindGlobal( "Functor_TensorProduct_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "TensorProduct" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -544,7 +544,7 @@ fi;
 ##
 
 ##
-InstallGlobalFunction( _functor_BaseChange_OnGradedModules, ### defines: BaseChange (object part)
+BindGlobal( "_functor_BaseChange_OnGradedModules", ### defines: BaseChange (object part)
   function( _R, M )
     local R, S, N, p;
     
@@ -608,7 +608,7 @@ InstallOtherMethod( BaseChange,
     
 end );
 
-InstallValue( functor_BaseChange_ForGradedModules,
+BindGlobal( "functor_BaseChange_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "BaseChange" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],

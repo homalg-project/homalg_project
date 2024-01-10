@@ -32,7 +32,7 @@ InstallMethod( TorsionObject,
 end );
 
 ##
-InstallGlobalFunction( _Functor_TorsionObject_OnObjects, ### defines: TorsionObject(Emb)
+BindGlobal( "_Functor_TorsionObject_OnObjects", ### defines: TorsionObject(Emb)
   function( M )
     local tor_subobject, tor, emb;
     
@@ -52,7 +52,7 @@ InstallGlobalFunction( _Functor_TorsionObject_OnObjects, ### defines: TorsionObj
     
 end );
 
-InstallValue( Functor_TorsionObject,
+BindGlobal( "Functor_TorsionObject",
         CreateHomalgFunctor(
                 [ "name", "TorsionObject" ],
                 [ "category", HOMALG.category ],
@@ -71,7 +71,7 @@ Functor_TorsionObject!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## TorsionFreeFactor
 ##
 
-InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects, ### defines: TorsionFreeFactor(Epi)
+BindGlobal( "_Functor_TorsionFreeFactor_OnObjects", ### defines: TorsionFreeFactor(Epi)
   function( M )
     local emb, epi, M0, N0;
     
@@ -106,7 +106,7 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects, ### defines: Torsio
     
 end );
 
-InstallValue( Functor_TorsionFreeFactor,
+BindGlobal( "Functor_TorsionFreeFactor",
         CreateHomalgFunctor(
                 [ "name", "TorsionFreeFactor" ],
                 [ "category", HOMALG.category ],
@@ -300,7 +300,7 @@ fi;
 #   v                v
 #   B_ --(beta1)---> B
 
-InstallGlobalFunction( _Functor_Pullback_OnObjects, ### defines: Pullback(PairOfMaps)
+BindGlobal( "_Functor_Pullback_OnObjects", ### defines: Pullback(PairOfMaps)
   function( chm_phi_beta1 )
     local phi, beta1, phi_beta1, ApB_, emb, pb, S, pair;
     
@@ -358,7 +358,7 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects, ### defines: Pullback(PairOf
     
 end );
 
-InstallValue( functor_Pullback,
+BindGlobal( "functor_Pullback",
         CreateHomalgFunctor(
                 [ "name", "Pullback" ],
                 [ "category", HOMALG.category ],
@@ -394,7 +394,7 @@ end );
 #   v                v
 #   B_ ----<?>-----> ?
 
-InstallGlobalFunction( _Functor_Pushout_OnObjects, ### defines: Pushout(PairOfMaps)
+BindGlobal( "_Functor_Pushout_OnObjects", ### defines: Pushout(PairOfMaps)
   function( chm_alpha1_psi )
     local psi, alpha1, alpha1_psi, epi, po, T, pair;
     
@@ -455,7 +455,7 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects, ### defines: Pushout(PairOfMa
     
 end );
 
-InstallValue( functor_Pushout,
+BindGlobal( "functor_Pushout",
         CreateHomalgFunctor(
                 [ "name", "Pushout" ],
                 [ "category", HOMALG.category ],
@@ -540,7 +540,7 @@ end );
 ## AuslanderDual
 ##
 
-InstallGlobalFunction( _Functor_AuslanderDual_OnObjects, ### defines: AuslanderDual
+BindGlobal( "_Functor_AuslanderDual_OnObjects", ### defines: AuslanderDual
   function( M )
     local d0;
     
@@ -550,7 +550,7 @@ InstallGlobalFunction( _Functor_AuslanderDual_OnObjects, ### defines: AuslanderD
     
 end );
 
-InstallValue( functor_AuslanderDual,
+BindGlobal( "functor_AuslanderDual",
         CreateHomalgFunctor(
                 [ "name", "AuslanderDual" ],
                 [ "category", HOMALG.category ],

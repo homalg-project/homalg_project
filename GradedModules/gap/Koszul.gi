@@ -116,7 +116,7 @@ end );
 #
 # RepresentationObjectOfKoszulId
 #
-InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules, ### defines: RepresentationObjectOfKoszulId (object part)
+BindGlobal( "_Functor_RepresentationObjectOfKoszulId_OnGradedModules", ### defines: RepresentationObjectOfKoszulId (object part)
         
   function( d, M )
     local S, A, Base, n, omega_A, V, AM_d, socle, phi;
@@ -160,7 +160,7 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules, 
     
 end );
 
-InstallValue( Functor_RepresentationObjectOfKoszulId_ForGradedModules,
+BindGlobal( "Functor_RepresentationObjectOfKoszulId_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "RepresentationObjectOfKoszulId" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -527,7 +527,7 @@ end );
 ## KoszulRightAdjoint
 ##
 
-InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedModules, ### defines: KoszulRightAdjoint (object part)
+BindGlobal( "_Functor_KoszulRightAdjoint_OnGradedModules", ### defines: KoszulRightAdjoint (object part)
         
   function( l, M )
     local A, degree_lowest, degree_highest;
@@ -553,7 +553,7 @@ end );
 
 
 ##
-InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedMaps, ### defines: KoszulRightAdjoint (morphism part)
+BindGlobal( "_Functor_KoszulRightAdjoint_OnGradedMaps", ### defines: KoszulRightAdjoint (morphism part)
   function( l, phi )
     local A, degree_lowest, degree_highest;
     
@@ -576,7 +576,7 @@ InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedMaps, ### defines: Ko
     
 end );
 
-InstallValue( Functor_KoszulRightAdjoint_ForGradedModules,
+BindGlobal( "Functor_KoszulRightAdjoint_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "KoszulRightAdjoint" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -731,7 +731,7 @@ end );
 ## KoszulLeftAdjoint
 ##
 
-InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedModules, ### defines: KoszulLeftAdjoint (object part)
+BindGlobal( "_Functor_KoszulLeftAdjoint_OnGradedModules", ### defines: KoszulLeftAdjoint (object part)
         
   function( l, M )
     local A, degree_lowest, degree_highest;
@@ -757,7 +757,7 @@ end );
 
 
 ##
-InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedMaps, ### defines: KoszulLeftAdjoint (morphism part)
+BindGlobal( "_Functor_KoszulLeftAdjoint_OnGradedMaps", ### defines: KoszulLeftAdjoint (morphism part)
   function( l, phi )
     local A, degree_lowest, degree_highest;
     
@@ -780,7 +780,7 @@ InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedMaps, ### defines: Kos
     
 end );
 
-InstallValue( Functor_KoszulLeftAdjoint_ForGradedModules,
+BindGlobal( "Functor_KoszulLeftAdjoint_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "KoszulLeftAdjoint" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],

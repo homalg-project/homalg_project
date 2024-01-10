@@ -26,11 +26,7 @@ DeclareOperation( "RepresentationMatrixOfKoszulId",
 DeclareOperation( "RepresentationMatrixOfKoszulId",
         [ IsHomalgElement, IsHomalgModule ] );
 
-DeclareGlobalFunction( "_Functor_RepresentationObjectOfKoszulId_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_RepresentationObjectOfKoszulId_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_RepresentationObjectOfKoszulId_ForGradedModules" );
+DeclareGlobalName( "Functor_RepresentationObjectOfKoszulId_ForGradedModules" );
 
 DeclareOperation( "RepresentationObjectOfKoszulId",
         [ IsList, IsStructureObjectOrObject ] );
@@ -80,12 +76,6 @@ DeclareOperation( "KoszulAdjointOnMorphisms",
 #
 ####################################
 
-DeclareGlobalFunction( "_Functor_KoszulRightAdjoint_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_KoszulRightAdjoint_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_KoszulRightAdjoint_ForGradedModules" );
-
 DeclareOperation( "KoszulRightAdjoint",
         [ IsStructureObjectOrObject, IsHomalgRing, IsObject, IsObject ] );
 
@@ -97,12 +87,6 @@ DeclareOperation( "KoszulRightAdjoint",
 
 DeclareOperation( "KoszulRightAdjoint",
         [ IsHomalgGradedMap, IsObject, IsObject ] );
-
-DeclareGlobalFunction( "_Functor_KoszulLeftAdjoint_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_KoszulLeftAdjoint_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_KoszulLeftAdjoint_ForGradedModules" );
 
 DeclareOperation( "KoszulLeftAdjoint",
         [ IsStructureObjectOrObject, IsHomalgRing, IsObject, IsObject ] );

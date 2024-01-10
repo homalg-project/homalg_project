@@ -117,7 +117,7 @@ InstallMethod( Kernel,
 end );
 
 ##
-InstallGlobalFunction( _Functor_Kernel_OnObjects, ### defines: Kernel(Emb)
+BindGlobal( "_Functor_Kernel_OnObjects", ### defines: Kernel(Emb)
   function( psi )
     local S, ker_subobject, ker, emb, img_epi, T, coker, im;
     
@@ -196,7 +196,7 @@ end );
 
 ##  <#GAPDoc Label="functor_Kernel:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_Kernel,
+BindGlobal( "functor_Kernel",
         CreateHomalgFunctor(
                 [ "name", "Kernel" ],
                 [ "category", HOMALG.category ],
@@ -220,7 +220,7 @@ functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## DefectOfExactness
 ##
 
-InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects, ### defines: DefectOfExactness (DefectOfHoms)
+BindGlobal( "_Functor_DefectOfExactness_OnObjects", ### defines: DefectOfExactness (DefectOfHoms)
   function( phi, psi )
     local pre, post;
     
@@ -250,7 +250,7 @@ end );
 
 ##  <#GAPDoc Label="Functor_DefectOfExactness:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_DefectOfExactness,
+BindGlobal( "functor_DefectOfExactness",
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
                 [ "category", HOMALG.category ],
@@ -361,7 +361,7 @@ end );
 
 ##  <#GAPDoc Label="Functor_Dualize:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( Functor_Dualize,
+BindGlobal( "Functor_Dualize",
         CreateHomalgFunctor(
                 [ "name", "Dualize" ],
                 [ "category", HOMALG.category ],
