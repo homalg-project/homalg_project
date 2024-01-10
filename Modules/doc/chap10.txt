@@ -20,7 +20,7 @@
   [33X[0;0YThe functor that associates to a map its cokernel.[133X
   
   [4X[32X  Code  [32X[104X
-    [4XInstallValue( functor_Cokernel_for_fp_modules,[104X
+    [4XBindGlobal( "functor_Cokernel_for_fp_modules",[104X
     [4X        CreateHomalgFunctor([104X
     [4X                [ "name", "Cokernel" ],[104X
     [4X                [ "category", HOMALG_MODULES.category ],[104X
@@ -98,7 +98,7 @@
   [33X[0;0YThe functor that associates to a map its image.[133X
   
   [4X[32X  Code  [32X[104X
-    [4XInstallValue( functor_ImageObject_for_fp_modules,[104X
+    [4XBindGlobal( "functor_ImageObject_for_fp_modules",[104X
     [4X        CreateHomalgFunctor([104X
     [4X                [ "name", "ImageObject for modules" ],[104X
     [4X                [ "category", HOMALG_MODULES.category ],[104X
@@ -258,7 +258,7 @@
   [33X[0;0YThe bifunctor [10XHom[110X.[133X
   
   [4X[32X  Code  [32X[104X
-    [4XInstallValue( Functor_Hom_for_fp_modules,[104X
+    [4XBindGlobal( "Functor_Hom_for_fp_modules",[104X
     [4X        CreateHomalgFunctor([104X
     [4X                [ "name", "Hom" ],[104X
     [4X                [ "category", HOMALG_MODULES.category ],[104X
@@ -511,7 +511,7 @@
   [33X[0;0YThe tensor product bifunctor.[133X
   
   [4X[32X  Code  [32X[104X
-    [4XInstallValue( Functor_TensorProduct_for_fp_modules,[104X
+    [4XBindGlobal( "Functor_TensorProduct_for_fp_modules",[104X
     [4X        CreateHomalgFunctor([104X
     [4X                [ "name", "TensorProduct" ],[104X
     [4X                [ "category", HOMALG_MODULES.category ],[104X
