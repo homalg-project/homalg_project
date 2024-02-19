@@ -258,7 +258,7 @@ fi;
 
 ##  <#GAPDoc Label="IsScalarMatrix">
 ##  <ManSection>
-##    <Prop Arg="A" Name="IsScalarlMatrix"/>
+##    <Prop Arg="A" Name="IsScalarMatrix"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
