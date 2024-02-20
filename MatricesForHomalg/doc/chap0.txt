@@ -6,10 +6,10 @@
                        [1X Matrices for the homalg project [101X
   
   
-                                   2023.11-02
+                                   2024.02-01
   
   
-                                30 November 2023
+                                20 February 2024
   
   
                                 Mohamed Barakat
@@ -225,7 +225,7 @@
       5.3-11 IsRightInvertibleMatrix
       5.3-12 IsEmptyMatrix
       5.3-13 IsDiagonalMatrix
-      5.3-14 IsScalarlMatrix
+      5.3-14 IsScalarMatrix
       5.3-15 IsUpperTriangularMatrix
       5.3-16 IsLowerTriangularMatrix
       5.3-17 IsStrictUpperTriangularMatrix
