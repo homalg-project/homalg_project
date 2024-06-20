@@ -26,7 +26,7 @@
       Singular macro 3.1-24 
   [2XRelativeSyzygiesGeneratorsOfRows[102X, in the homalg table for Singular 3.1-21 
       Singular macro 3.1-22 
-  [5XRingsForHomalg[105X .-2 
+  [5XRingsForHomalg[105X 0.0-2 
   [2XSyzygiesGeneratorsOfColumns[102X, in the homalg table for Singular 3.1-11 
       Singular macro 3.1-12 
   [2XSyzygiesGeneratorsOfRows[102X, in the homalg table for Singular 3.1-9 
