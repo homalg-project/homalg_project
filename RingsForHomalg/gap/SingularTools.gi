@@ -576,9 +576,9 @@ BindGlobal( "CommonHomalgTableForSingularTools",
                            Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                        fi;
                        ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
-                       hilb := homalgSendBlocking( [ "hilb(std(", mat, "),1)" ], "need_output", "HilbertPoincareSeries" );
+                       hilb := homalgSendBlocking( [ "string(hilb(std(", mat, "),1))" ], "need_output", "HilbertPoincareSeries" );
                    else
-                       hilb := homalgSendBlocking( [ "hilb(", mat, ",1)" ], "need_output", "HilbertPoincareSeries" );
+                       hilb := homalgSendBlocking( [ "string(hilb(", mat, ",1))" ], "need_output", "HilbertPoincareSeries" );
                    fi;
                    
                    hilb := StringToIntList( hilb );
