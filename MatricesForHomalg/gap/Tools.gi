@@ -8106,18 +8106,18 @@ InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
     fi;
     
     A := AmbientRing( R );
-
+    
     ## [ y_1, ..., y_{i-1}, y_i, y_{i+1}, ..., y_s ]
     indets := ShallowCopy( Indeterminates( A ) );
     
     new_indets := List( indets, String );
-
+    
     ## [ y_1, ..., y_{i-1}, y_{i+1}, ..., y_s ]
     Remove( new_indets, img[1] );
-
+    
     ## k[y_1, ..., y_{i-1}, y_{i+1}, ..., y_s]
     S := CoefficientsRing( A ) * new_indets;
-
+    
     ## [ y_1, ..., y_{i-1}, f/u y_{i+1}, ..., y_s ]
     indets[img[1]] := img[2];
     
