@@ -8155,14 +8155,13 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRing,
     pi := RingMapOntoRewrittenResidueClassRing( R ); # replace pi: A -> R = A / I by pi: A -> R_1 := A_1 / I_1
     
     while true do
-
+        
         ## construct the surjective morphism psi: A_i -> A_{i+1} / I_{i+1} =: R_{i+1}
         psi := RingMapOntoSimplifiedOnceResidueClassRing( Range( pi ) );
         
         if HasIsOne( psi ) and IsOne( psi ) then
             break;
         fi;
-
         
         ## compose A -pi-> A_i / I_i -psi-> A_{i+1} / I_{i+1},
         ## where we understand the above psi as the isomorphism psi: A_i / I_i -psi-> A_{i+1} / I_{i+1}
