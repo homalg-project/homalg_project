@@ -8078,7 +8078,7 @@ end );
 
 ##
 InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
-        "for a homalg ringx",
+        "for a homalg ring",
         [ IsHomalgRing ],
         
   function( R )
@@ -8145,7 +8145,7 @@ end );
 
 ##
 InstallMethod( RingMapOntoSimplifiedResidueClassRing,
-        "for a homalg ringx",
+        "for a homalg ring",
         [ IsHomalgRing ],
         
   function( R )
