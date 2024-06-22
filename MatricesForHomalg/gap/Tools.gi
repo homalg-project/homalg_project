@@ -8078,7 +8078,7 @@ end );
 
 ##
 InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
-        "for a homalg ringx",
+        "for a homalg ring",
         [ IsHomalgRing ],
         
   function( R )
@@ -8094,7 +8094,7 @@ InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
     I := MatrixOfRelations( R );
     
     for i in [ 1 .. NumberRows( I ) ] do
-        ## [ i, f/u ] where (u y_i - f) ∈ GB(I)
+        ## [ j, f/u ] where (u y_j - f) ∈ GB(I)
         img := IsolateIndeterminate( I[ i, 1 ] );
         if not img = fail then
             break;
@@ -8106,18 +8106,18 @@ InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
     fi;
     
     A := AmbientRing( R );
-
+    
     ## [ y_1, ..., y_{i-1}, y_i, y_{i+1}, ..., y_s ]
     indets := ShallowCopy( Indeterminates( A ) );
     
     new_indets := List( indets, String );
-
+    
     ## [ y_1, ..., y_{i-1}, y_{i+1}, ..., y_s ]
     Remove( new_indets, img[1] );
-
+    
     ## k[y_1, ..., y_{i-1}, y_{i+1}, ..., y_s]
     S := CoefficientsRing( A ) * new_indets;
-
+    
     ## [ y_1, ..., y_{i-1}, f/u y_{i+1}, ..., y_s ]
     indets[img[1]] := img[2];
     
@@ -8145,7 +8145,7 @@ end );
 
 ##
 InstallMethod( RingMapOntoSimplifiedResidueClassRing,
-        "for a homalg ringx",
+        "for a homalg ring",
         [ IsHomalgRing ],
         
   function( R )
@@ -8171,5 +8171,59 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRing,
     od;
     
     return pi;
+    
+end );
+
+##
+InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
+        "for a homalg ring",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local id, I, L, A, S, pi, P, J, T, psi, epi;
+    
+    id := RingMap( R );
+    
+    if not HasAmbientRing( R ) then
+        return id;
+    fi;
+    
+    ## R = A / I
+    I := MatrixOfRelations( R );
+    
+    L := Filtered( EntriesOfHomalgMatrix( I ), e -> Degree( e ) = 1 );
+    
+    if L = [ ] then
+        return id;
+    fi;
+    
+    A := AmbientRing( R );
+    
+    L := HomalgMatrix( L, Length( L ), 1, A );
+    
+    L := BasisOfRows( L );
+    
+    S := A / L;
+    
+    pi := RingMapOntoSimplifiedResidueClassRing( S );
+    
+    P := Range( pi );
+    
+    Assert( 0, not HasAmbientRing( P ) );
+    
+    J := Pullback( pi, I );
+    
+    J := CertainRows( J, NonZeroRows( J ) );
+    
+    T := P / J;
+    
+    psi := RingMap( List( Indeterminates( P ), a -> a / T ), P, T );
+    
+    epi := PreCompose( pi, psi );
+    
+    SetIsMorphism( epi, true );
+    SetIsEpimorphism( epi, true );
+    
+    return epi;
     
 end );
