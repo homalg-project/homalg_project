@@ -235,6 +235,9 @@ DeclareOperation( "RingMapOntoSimplifiedOnceResidueClassRing",
 DeclareOperation( "RingMapOntoSimplifiedResidueClassRing",
         [ IsHomalgRing ] );
 
+DeclareOperation( "RingMapOntoSimplifiedOnceResidueClassRingByLinearEquations",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "RingMapOntoSimplifiedResidueClassRingByLinearEquations",
         [ IsHomalgRing ] );
 
