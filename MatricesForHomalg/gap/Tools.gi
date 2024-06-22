@@ -8094,7 +8094,7 @@ InstallMethod( RingMapOntoSimplifiedOnceResidueClassRing,
     I := MatrixOfRelations( R );
     
     for i in [ 1 .. NumberRows( I ) ] do
-        ## [ i, f/u ] where (u y_i - f) ∈ GB(I)
+        ## [ j, f/u ] where (u y_j - f) ∈ GB(I)
         img := IsolateIndeterminate( I[ i, 1 ] );
         if not img = fail then
             break;
