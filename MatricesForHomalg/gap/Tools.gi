@@ -8192,11 +8192,7 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
     ## R = A / I
     I := MatrixOfRelations( R );
     
-    L := Filtered( EntriesOfHomalgMatrix( I ), e -> Degree( e ) = 1 );
-    
-    if L = [ ] then
-        return id;
-    fi;
+    L := Filtered( EntriesOfHomalgMatrix( I ), e -> Degree( e ) <= 1 );
     
     A := AmbientRing( R );
     
@@ -8204,13 +8200,17 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
     
     L := BasisOfRows( L );
     
+    if IsZero( L ) then
+        return id;
+    fi;
+    
     S := A / L;
     
     pi := RingMapOntoSimplifiedResidueClassRing( S );
     
     P := Range( pi );
     
-    Assert( 0, not HasAmbientRing( P ) );
+    Assert( 0, ( HasIsZero( P ) and IsZero( P ) ) or not HasAmbientRing( P ) );
     
     J := Pullback( pi, I );
     
