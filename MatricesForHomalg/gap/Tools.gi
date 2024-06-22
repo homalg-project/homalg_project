@@ -8173,3 +8173,57 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRing,
     return pi;
     
 end );
+
+##
+InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
+        "for a homalg ring",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local id, I, L, A, S, pi, P, J, T, psi, epi;
+    
+    id := RingMap( R );
+    
+    if not HasAmbientRing( R ) then
+        return id;
+    fi;
+    
+    ## R = A / I
+    I := MatrixOfRelations( R );
+    
+    L := Filtered( EntriesOfHomalgMatrix( I ), e -> Degree( e ) = 1 );
+    
+    if L = [ ] then
+        return id;
+    fi;
+    
+    A := AmbientRing( R );
+    
+    L := HomalgMatrix( L, Length( L ), 1, A );
+    
+    L := BasisOfRows( L );
+    
+    S := A / L;
+    
+    pi := RingMapOntoSimplifiedResidueClassRing( S );
+    
+    P := Range( pi );
+    
+    Assert( 0, not HasAmbientRing( P ) );
+    
+    J := Pullback( pi, I );
+    
+    J := CertainRows( J, NonZeroRows( J ) );
+    
+    T := P / J;
+    
+    psi := RingMap( List( Indeterminates( P ), a -> a / T ), P, T );
+    
+    epi := PreCompose( pi, psi );
+    
+    SetIsMorphism( epi, true );
+    SetIsEpimorphism( epi, true );
+    
+    return epi;
+    
+end );
