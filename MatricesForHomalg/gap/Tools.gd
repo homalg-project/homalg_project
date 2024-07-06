@@ -235,7 +235,10 @@ DeclareOperation( "RingMapOntoSimplifiedOnceResidueClassRing",
 DeclareOperation( "RingMapOntoSimplifiedResidueClassRing",
         [ IsHomalgRing ] );
 
-DeclareOperation( "RingMapOntoSimplifiedResidueClassRingByLinearEquations",
+DeclareOperation( "RingMapOntoSimplifiedOnceResidueClassRingUsingLinearEquations",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "RingMapOntoSimplifiedResidueClassRingUsingLinearEquations",
         [ IsHomalgRing ] );
 
 ## This is a dummy declaration for a function actually installed
