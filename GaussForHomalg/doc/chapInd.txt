@@ -10,7 +10,7 @@
   [2XCreateHomalgTable[102X 3.3-2 
   [2XDiagMat[102X 3.2-10 
   [2XDualKroneckerMat[102X 3.2-12 
-  [5XGaussForHomalg[105X .-4 
+  [5XGaussForHomalg[105X 0.0-4 
   [2XHomalgFieldOfRationals[102X, constructor for the field of rationals 3.1-1 
   [2XIdentityMatrix[102X 3.2-2 
   [2XImportMatrix[102X 3.2-4 
