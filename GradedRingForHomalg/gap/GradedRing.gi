@@ -779,6 +779,10 @@ InstallMethod( GradedRing,
     
     ## create the graded ring
     S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgMatrixOverGradedRing" ) ], GradedRingElement, RP );
+    
+    SetRingFilter( S, IsHomalgGradedRingRep );
+    SetRingElementFilter( S, IsHomalgGradedRingElementRep );
+    
     SetConstructorForHomalgMatrices( S,
       function( arg )
         local nargs, mat, R, l;

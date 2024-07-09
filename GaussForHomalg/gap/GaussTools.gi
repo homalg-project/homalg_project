@@ -406,11 +406,18 @@ InstallGlobalFunction( HOMALG_RING_OF_INTEGERS_PRIME_POWER_HELPER,
             d := 1;
         fi;
         R := CreateHomalgRing( GF( c, d ) );
+        
+        SetRingFilter( R, IsHomalgRing );
+        SetRingElementFilter( R, IsFFE );
+        
         R!.NameOfPrimitiveElement := Concatenation( "Z", String( c ), "_", String( d ) );
         SetIsFieldForHomalg( R, true );
         SetRingProperties( R, c, d );
     else
         R := CreateHomalgRing( ZmodnZ( c ) );
+        
+        SetRingFilter( R, IsHomalgRing );
+        SetRingElementFilter( R, IsZmodnZObj );
     fi;
     return R;
 end );
