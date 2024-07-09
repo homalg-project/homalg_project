@@ -105,6 +105,9 @@ DeclareAttribute( "RingElementFilter",
 SetRingFilter( Integers, IsIntegers );
 SetRingElementFilter( Integers, IsInt );
 
+SetRingFilter( Rationals, IsRationals );
+SetRingElementFilter( Rationals, IsRat );
+
 ####################################
 #
 # global functions and operations:
