@@ -9,7 +9,7 @@
   [2XDegreeGroup[102X 3.3-1 
   [2XDegreesOfEntries[102X 4.3-1 
   [2XDiff[102X A.2-4 
-  [5XGradedRingForHomalg[105X .-1 
+  [5XGradedRingForHomalg[105X 0.0-1 
   [2XHomalgGradedRingElement[102X, constructor for graded ring elements using a given numerator and one as denominator 3.2-1 
       constructor for graded ring elements using numerator and denominator 3.2-1 
   [2XHomogeneousPartOfMatrix[102X, for matrices over graded rings and listlist of degrees 4.3-4 
