@@ -413,6 +413,21 @@ InstallMethod( BaseRing,
         
   CoefficientsRing );
 
+##
+InstallMethod( PrimitiveElement,
+        "for homalg fields",
+        [ IsFieldForHomalg ],
+        
+  function( R )
+    
+    if not IsBound( R!.NameOfPrimitiveElement ) then
+        TryNextMethod( );
+    fi;
+    
+    return R!.NameOfPrimitiveElement / R;
+    
+end );
+
 ####################################
 #
 # methods for operations:
