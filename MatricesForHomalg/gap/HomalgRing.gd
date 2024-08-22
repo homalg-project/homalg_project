@@ -1604,6 +1604,19 @@ DeclareAttribute( "AssociatedGradedRing",
 DeclareAttribute( "AssociatedPolynomialRing",
         IsHomalgRing );
 
+##  <#GAPDoc Label="PrimitiveElement">
+##  <ManSection>
+##    <Attr Arg="R" Name="PrimitiveElement"/>
+##    <Returns>a homalg ring element</Returns>
+##    <Description>
+##      The primitive element of the &homalg; field <A>R</A>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "PrimitiveElement",
+        IsHomalgRing );
+
 ####################################
 #
 # global functions and operations:
