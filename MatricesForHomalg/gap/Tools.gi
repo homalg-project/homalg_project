@@ -8174,7 +8174,7 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRing,
 end );
 
 ##
-InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
+InstallMethod( RingMapOntoSimplifiedOnceResidueClassRingUsingLinearEquations,
         "for a homalg ring",
         [ IsHomalgRing ],
         
