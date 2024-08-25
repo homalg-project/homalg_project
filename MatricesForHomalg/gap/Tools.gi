@@ -8155,14 +8155,13 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRing,
     pi := RingMapOntoRewrittenResidueClassRing( R ); # replace pi: A -> R = A / I by pi: A -> R_1 := A_1 / I_1
     
     while true do
-
+        
         ## construct the surjective morphism psi: A_i -> A_{i+1} / I_{i+1} =: R_{i+1}
         psi := RingMapOntoSimplifiedOnceResidueClassRing( Range( pi ) );
         
         if HasIsOne( psi ) and IsOne( psi ) then
             break;
         fi;
-
         
         ## compose A -pi-> A_i / I_i -psi-> A_{i+1} / I_{i+1},
         ## where we understand the above psi as the isomorphism psi: A_i / I_i -psi-> A_{i+1} / I_{i+1}
@@ -8175,7 +8174,7 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRing,
 end );
 
 ##
-InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
+InstallMethod( RingMapOntoSimplifiedOnceResidueClassRingUsingLinearEquations,
         "for a homalg ring",
         [ IsHomalgRing ],
         
@@ -8186,16 +8185,14 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
     
     if not HasAmbientRing( R ) then
         return id;
+    elif HasIsZero( R ) and IsZero( R ) then
+        return id;
     fi;
     
     ## R = A / I
     I := MatrixOfRelations( R );
     
-    L := Filtered( EntriesOfHomalgMatrix( I ), e -> Degree( e ) = 1 );
-    
-    if L = [ ] then
-        return id;
-    fi;
+    L := Filtered( EntriesOfHomalgMatrix( I ), e -> Degree( e ) <= 1 );
     
     A := AmbientRing( R );
     
@@ -8203,13 +8200,17 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
     
     L := BasisOfRows( L );
     
+    if IsZero( L ) then
+        return id;
+    fi;
+    
     S := A / L;
     
     pi := RingMapOntoSimplifiedResidueClassRing( S );
     
     P := Range( pi );
     
-    Assert( 0, not HasAmbientRing( P ) );
+    Assert( 0, ( HasIsZero( P ) and IsZero( P ) ) or not HasAmbientRing( P ) );
     
     J := Pullback( pi, I );
     
@@ -8225,5 +8226,44 @@ InstallMethod( RingMapOntoSimplifiedResidueClassRingByLinearEquations,
     SetIsEpimorphism( epi, true );
     
     return epi;
+    
+end );
+
+##
+InstallMethod( RingMapOntoSimplifiedResidueClassRingUsingLinearEquations,
+        "for a homalg ring",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local id, pi, psi;
+    
+    id := RingMap( R );
+    
+    if not HasAmbientRing( R ) then
+        return id;
+    fi;
+    
+    # R = A / I
+    pi := RingMap( Indeterminates( R ), AmbientRing( R ), R );
+    
+    SetIsMorphism( pi, true );
+    SetIsEpimorphism( pi, true );
+    
+    while true do
+        
+        ## construct the surjective morphism psi: A_i -> A_{i+1} / I_{i+1} =: R_{i+1}
+        psi := RingMapOntoSimplifiedOnceResidueClassRingUsingLinearEquations( Range( pi ) );
+        
+        if ( HasIsOne( psi ) and IsOne( psi ) ) or ( HasIsZero( Range( psi ) ) and IsZero( Range( psi ) ) ) then
+            break;
+        fi;
+        
+        ## compose A -pi-> A_i / I_i -psi-> A_{i+1} / I_{i+1},
+        ## where we understand the above psi as the isomorphism psi: A_i / I_i -psi-> A_{i+1} / I_{i+1}
+        pi := PreCompose( pi, psi );
+        
+    od;
+    
+    return pi;
     
 end );
