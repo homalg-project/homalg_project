@@ -1,7 +1,7 @@
 name: Gauss
-version: "2023.02-04"
+version: "2023.08-01"
 license: "GPL-2.0-or-later"
-date: 2023-02-28
+date: 2024-08-27
 description: |
     Extended Gauss functionality for GAP
 
@@ -20,7 +20,7 @@ GAP: ">= 4.12.1"
 suggested-pkgs:
     - name: "GAPDoc"
       version: ">= 1.0"
-      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
+      url: "https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
 www: https://homalg-project.github.io/pkg/Gauss
 readme: README.md
@@ -28,11 +28,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/Gauss/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-04/Gauss-2023.02-04.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.08-01/Gauss-2023.08-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-04/Gauss-2023.02-04.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.08-01/Gauss-2023.08-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.02-04/Gauss-2023.02-04-manual.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2023.08-01/Gauss-2023.08-01-manual.pdf
 
 abstract: |
     The <span class="pkgname">Gauss</span> package provideds extended Gauss functionality for <span class="pkgname">GAP</span>
@@ -44,28 +44,28 @@ keywords: |
     Gauss, RREF, sparse.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>GBG28</span>]   <b class='BibAuthor'>Görtzen, S., Barakat, M. and Gutsche, S.</b>,
+    [<span class='BibKey'>GBG27</span>]   <b class='BibAuthor'>Görtzen, S., Barakat, M. and Gutsche, S.</b>,
      <i class='BibTitle'>Gauss, Extended Gauss functionality for GAP,
-             Version 2023.02-04</i>
-     (<span class='BibYear'>2-28</span>)<br />
+             Version 2023.08-01</i>
+     (<span class='BibYear'>8-27</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/Gauss">https://homalg-project.github.io/pkg/Gauss</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ Gauss2023.02-04,
+    @misc{ Gauss,
       author =           {G{\"o}rtzen, S. and Barakat, M. and Gutsche, S.},
       title =            {{Gauss},   Extended   Gauss   functionality  for  GAP,
-                          {V}ersion 2023.02-04},
-      month =            {3-},
-      year =             {2-28},
+                          {V}ersion 2023.08\texttt{\symbol{45}}01},
+      month =            {4\texttt{\symbol{45}}},
+      year =             {8\texttt{\symbol{45}}27},
       note =             {GAP package},
       howpublished =     {\href     {https://homalg-project.github.io/pkg/Gauss}
-                          {\texttt{https://homalg-project.github.io/}\discretionary
+                          {\texttt{https://homalg\texttt{\symbol{45}}project.github.io/}\discretionary
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{Gauss}}},
       keywords =         {Gauss; RREF; sparse},
-      printedkey =       {GBG28}
+      printedkey =       {GBG27}
     }
 

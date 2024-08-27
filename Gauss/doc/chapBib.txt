@@ -6,7 +6,7 @@
   computable             Abelian            categories[117X            (2007-2020),
   (https://homalg-project.github.io/pkg/homalg).
   
-  [[20XBGKLH08[120X]  [16XBarakat,  M., Görtzen, S., Kirschmer, M. and Lange-Hegermann, M.[116X,
+  [[20XBGKL08[120X]  [16XBarakat,  M.,  Görtzen, S., Kirschmer, M. and Lange-Hegermann, M.[116X,
   [17XRingsForHomalg    --    Dictionaries    of   external   rings[117X   (2007-2008),
   (https://homalg-project.github.io/pkg/RingsForHomalg/).
   

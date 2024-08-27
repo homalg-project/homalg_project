@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "Gauss",
 Subtitle := "Extended Gauss functionality for GAP",
-Version := "2023.02-04",
-Date := "2023-02-28",
+Version := "2023.08-01",
+Date := "2024-08-27",
 License := "GPL-2.0-or-later",
 
 Persons := [
