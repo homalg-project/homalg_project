@@ -8,14 +8,7 @@
 # First look after our C part: #
 ################################
 
-# load kernel function if it is installed:
-if (not IsBound(SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS)) and ("gauss" in SHOW_STAT()) then
-  # try static module
-  LoadStaticModule("gauss");
-elif (not IsBound(SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS)) and
-   (Filename(DirectoriesPackagePrograms("gauss"), "gauss.so") <> fail) then
-  LoadDynamicModule(Filename(DirectoriesPackagePrograms("gauss"), "gauss.so"));
-else
+if LoadKernelExtension("gauss", "gauss") = false then
   ReadPackage( "Gauss", "gap/SymmetricDifference.gd" );
   ReadPackage( "Gauss", "gap/SymmetricDifference.gi" );
 fi;
