@@ -555,6 +555,11 @@ DeclareGlobalFunction( "StartTimer" );
 DeclareGlobalFunction( "StopTimer" );
 
 #! @Description
+#!   Resets a timer with the given name.
+#! @Arguments name
+DeclareGlobalFunction( "ResetTimer" );
+
+#! @Description
 #!   Displays the current value of the timer with the given name.
 #! @Arguments name
 DeclareGlobalFunction( "DisplayTimer" );

@@ -2686,6 +2686,27 @@ InstallGlobalFunction( StopTimer, function( name )
 end );
 
 ##
+InstallGlobalFunction( ResetTimer, function( name )
+    
+    if not IsString( name ) then
+        
+        Error( "<name> must be a string" );
+        return;
+        
+    fi;
+    
+    if not IsBound( TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name) ) then
+        
+        Error( "Timer with name ", name, " was never started." );
+        return;
+        
+    fi;
+    
+    Unbind( TOOLS_FOR_HOMALG_INTERNAL_TIMERS.(name) );
+    
+end );
+
+##
 InstallGlobalFunction( DisplayTimer, function( name )
   local current_time, elapsed_time, state, execs;
     
