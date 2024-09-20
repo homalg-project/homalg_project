@@ -22,7 +22,7 @@
   [2XApplyShift[102X, for IsZFunction, IsInt 10.2-15 
   [2XAsZFunction[102X, for IsFunction 10.2-2 
   [2XBaseZFunctions[102X, for IsZFunction 10.2-18 
-  [2XBreakpoint[102X 8.1-52 
+  [2XBreakpoint[102X 8.1-53 
   [2XCacheValue[102X, for IsCachingObject, IsObject 1.2-1 
   [2XCachingObject[102X 1.1-1 
       for IsObject 1.1-1 
@@ -42,7 +42,7 @@
   [2XDeactivateWhereInfosInEntries[102X 5.8-6 
   [2XDeclareAttributeWithCustomGetter[102X 8.1-31 
   [2XDescriptionOfImplication[102X, for IsToDoListEntry 5.2-10 
-  [2XDisplayTimer[102X 8.1-50 
+  [2XDisplayTimer[102X 8.1-51 
   [2XExamplesForHomalg[102X 8.2-1 
       for IsInt 8.2-2 
   [2XFunctionWithCache[102X 1.4-4 
@@ -106,7 +106,7 @@
   [2XLazyInterval[102X 2.2-1 
   [2XLazyStandardInterval[102X 2.2-1 
   [2XLeftRightAttributesForHomalg[102X 8.1-6 
-  [2XListImpliedFilters[102X 8.1-51 
+  [2XListImpliedFilters[102X 8.1-52 
   [2XListOfSentinels[102X, for IsTree 9.1-5 
   [2XListOfSuccessors[102X, for IsTree 9.1-3 
   [2XListWithAttributes[102X 4.2-2 
@@ -126,11 +126,12 @@
   [2XProcess_A_ToDo_List_Entry[102X 5.5-1 
   [2XProcessAToDoListEntry[102X, for IsToDoListEntry 5.2-4 
   [2XProcessToDoList[102X, for IsObject 5.5-2 
-  [2XReadPackageOnce[102X 8.1-53 
+  [2XReadPackageOnce[102X 8.1-54 
   [2XReflection[102X, for IsZFunction 10.2-14 
   [2XRemoveHead[102X, for IsTree 9.1-6 
   [2XReplace[102X, for IsZFunction, IsInt, IsDenseList 10.2-21 
   [2XReplacedStringViaRecord[102X 8.1-47 
+  [2XResetTimer[102X 8.1-50 
   [2XRingElementFilter[102X, for IsRing 6.3-2 
   [2XRingFilter[102X, for IsRing 6.3-1 
   [2XSetCacheValue[102X, for IsCachingObject, IsObject, IsObject 1.2-2 

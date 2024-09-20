@@ -325,20 +325,26 @@
   
   [33X[0;0YStops a timer with the given name.[133X
   
-  [1X8.1-50 DisplayTimer[101X
+  [1X8.1-50 ResetTimer[101X
+  
+  [33X[1;0Y[29X[2XResetTimer[102X( [3Xname[103X ) [32X function[133X
+  
+  [33X[0;0YResets a timer with the given name.[133X
+  
+  [1X8.1-51 DisplayTimer[101X
   
   [33X[1;0Y[29X[2XDisplayTimer[102X( [3Xname[103X ) [32X function[133X
   
   [33X[0;0YDisplays the current value of the timer with the given name.[133X
   
-  [1X8.1-51 ListImpliedFilters[101X
+  [1X8.1-52 ListImpliedFilters[101X
   
   [33X[1;0Y[29X[2XListImpliedFilters[102X( [3Xfilt[103X ) [32X function[133X
   
   [33X[0;0YThe input is a filter [3Xfilt[103X. The output is the list of all filters implied by
   [3Xfilt[103X, including [3Xfilt[103X itself.[133X
   
-  [1X8.1-52 Breakpoint[101X
+  [1X8.1-53 Breakpoint[101X
   
   [33X[1;0Y[29X[2XBreakpoint[102X( [3Xname[103X[, [3Xbreak_at[103X[, [3Xbreak_function[103X]] ) [32X function[133X
   
@@ -348,7 +354,7 @@
   number  of  times.  If  a  function  [3Xbreak_function[103X is given, it is executed
   before entering the break-loop.[133X
   
-  [1X8.1-53 ReadPackageOnce[101X
+  [1X8.1-54 ReadPackageOnce[101X
   
   [33X[1;0Y[29X[2XReadPackageOnce[102X( [3Xname[103X ) [32X function[133X
   

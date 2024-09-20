@@ -6,10 +6,10 @@
                [1X Special methods and knowledge propagation tools [101X
   
   
-                                   2024.07-01
+                                   2024.09-01
   
   
-                                  9 July 2024
+                               20 September 2024
   
   
                                 Mohamed Barakat
@@ -205,10 +205,11 @@
       8.1-47 ReplacedStringViaRecord
       8.1-48 StartTimer
       8.1-49 StopTimer
-      8.1-50 DisplayTimer
-      8.1-51 ListImpliedFilters
-      8.1-52 Breakpoint
-      8.1-53 ReadPackageOnce
+      8.1-50 ResetTimer
+      8.1-51 DisplayTimer
+      8.1-52 ListImpliedFilters
+      8.1-53 Breakpoint
+      8.1-54 ReadPackageOnce
     8.2 [33X[0;0YExample functions[133X
       8.2-1 ExamplesForHomalg
       8.2-2 ExamplesForHomalg

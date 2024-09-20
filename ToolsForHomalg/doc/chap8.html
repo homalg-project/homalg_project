@@ -74,10 +74,11 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7EF0700882F21FD8">8.1-47 ReplacedStringViaRecord</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7FED6864832055C4">8.1-48 StartTimer</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F11AC1E7EF7D799">8.1-49 StopTimer</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X796292DF861A07AE">8.1-50 DisplayTimer</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F6543E78601EC4A">8.1-51 ListImpliedFilters</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7B82900C85ABA1C8">8.1-52 Breakpoint</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X87CE4AC7811FC3E5">8.1-53 ReadPackageOnce</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X836482F57C4B757F">8.1-50 ResetTimer</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X796292DF861A07AE">8.1-51 DisplayTimer</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F6543E78601EC4A">8.1-52 ListImpliedFilters</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7B82900C85ABA1C8">8.1-53 Breakpoint</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X87CE4AC7811FC3E5">8.1-54 ReadPackageOnce</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X86F60B7B826FA61E">8.2 <span class="Heading">Example functions</span></a>
 </span>
@@ -442,30 +443,37 @@
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StopTimer</code>( <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Stops a timer with the given name.</p>
 
+<p><a id="X836482F57C4B757F" name="X836482F57C4B757F"></a></p>
+
+<h5>8.1-50 ResetTimer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResetTimer</code>( <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Resets a timer with the given name.</p>
+
 <p><a id="X796292DF861A07AE" name="X796292DF861A07AE"></a></p>
 
-<h5>8.1-50 DisplayTimer</h5>
+<h5>8.1-51 DisplayTimer</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayTimer</code>( <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Displays the current value of the timer with the given name.</p>
 
 <p><a id="X7F6543E78601EC4A" name="X7F6543E78601EC4A"></a></p>
 
-<h5>8.1-51 ListImpliedFilters</h5>
+<h5>8.1-52 ListImpliedFilters</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListImpliedFilters</code>( <var class="Arg">filt</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>The input is a filter <var class="Arg">filt</var>. The output is the list of all filters implied by <var class="Arg">filt</var>, including <var class="Arg">filt</var> itself.</p>
 
 <p><a id="X7B82900C85ABA1C8" name="X7B82900C85ABA1C8"></a></p>
 
-<h5>8.1-52 Breakpoint</h5>
+<h5>8.1-53 Breakpoint</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Breakpoint</code>( <var class="Arg">name</var>[, <var class="Arg">break_at</var>[, <var class="Arg">break_function</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>If only a string <var class="Arg">name</var> is given, displays an incrementing number every time a breakpoint with this name is visited. If additionally an integer <var class="Arg">break_at</var> is given, enters a break-loop if the breakpoint has been visited the specified number of times. If a function <var class="Arg">break_function</var> is given, it is executed before entering the break-loop.</p>
 
 <p><a id="X87CE4AC7811FC3E5" name="X87CE4AC7811FC3E5"></a></p>
 
-<h5>8.1-53 ReadPackageOnce</h5>
+<h5>8.1-54 ReadPackageOnce</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReadPackageOnce</code>( <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Like <code class="code">ReadPackage</code> but reads the file only once in the runnig GAP session.</p>
