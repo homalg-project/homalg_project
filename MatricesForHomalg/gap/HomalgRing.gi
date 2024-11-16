@@ -103,6 +103,20 @@ InstallValue( CommonHomalgTableForRings,
                     
                     brackets := [ "{", "}" ];
                     
+                ## the pseudo shift algebra:
+                elif HasIndeterminateShiftsOfShiftAlgebra( R ) then
+                    
+                    var := IndeterminateShiftsOfShiftAlgebra( R );
+                    
+                    brackets := [ "<", ">" ];
+                    
+                ## the pseudo shift algebra:
+                elif HasIndeterminateShiftsOfRationalShiftAlgebra( R ) then
+                    
+                    var := IndeterminateShiftsOfRationalShiftAlgebra( R );
+                    
+                    brackets := [ "<", ">" ];
+                    
                 ## the pseudo double-shift algebra:
                 elif HasIndeterminateShiftsOfPseudoDoubleShiftAlgebra( R ) then
                     
@@ -570,6 +584,21 @@ InstallMethod( Indeterminates,
       Concatenation(
               IndeterminateCoordinatesOfRingOfDerivations( R ),
               IndeterminateDerivationsOfRingOfDerivations( R )
+              );
+    
+end );
+
+##
+InstallMethod( Indeterminates,
+        "for homalg rings",
+        [ IsHomalgRing and HasIndeterminateCoordinatesOfShiftAlgebra ],
+        
+  function( R )
+    
+    return
+      Concatenation(
+              IndeterminateCoordinatesOfShiftAlgebra( R ),
+              IndeterminateShiftsOfShiftAlgebra( R )
               );
     
 end );
@@ -1361,6 +1390,144 @@ InstallMethod( SetRingProperties,
     SetBasisAlgorithmRespectsPrincipalIdeals( A, true );
     
     SetAreUnitsCentral( S, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "for homalg rings",
+        [ IsHomalgRing and IsShiftAlgebra, IsHomalgRing and IsFreePolynomialRing, IsList ],
+        
+  function( S, R, shift )
+    local r, b, param, paramS, var, d;
+    
+    r := CoefficientsRing( R );
+    
+    if HasBaseRing( R ) then
+        b := BaseRing( R );
+    else
+        b := r;
+    fi;
+    
+    var := IndeterminatesOfPolynomialRing( R );
+    var := List( var, a -> a / S );
+    
+    d := Length( var );
+    
+    if d > 0 then
+        SetIsFinite( S, false );
+    fi;
+    
+    SetCoefficientsRing( S, r );
+    
+    if HasRationalParameters( r ) then
+        param := RationalParameters( r );
+        paramS := List( param, a -> a / S );
+        Perform( [ 1 .. Length( param ) ], function( i ) SetName( paramS[i], Name( param[i] ) ); end );
+        SetRationalParameters( S, paramS );
+    fi;
+    
+    SetCharacteristic( S, Characteristic( R ) );
+    
+    SetIsCommutative( S, shift = [ ] );
+    
+    SetIndeterminateCoordinatesOfShiftAlgebra( S, var );
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        SetRelativeIndeterminateCoordinatesOfShiftAlgebra(
+                S, RelativeIndeterminatesOfPolynomialRing( R ) );
+    fi;
+    
+    SetIndeterminateShiftsOfShiftAlgebra( S, shift );
+    
+    if d > 0 then
+        SetIsLeftArtinian( S, false );
+        SetIsRightArtinian( S, false );
+    fi;
+    
+    SetIsLeftNoetherian( S, true );
+    SetIsRightNoetherian( S, true );
+    
+    if HasIsIntegralDomain( r ) and IsIntegralDomain( r ) then
+        SetIsIntegralDomain( S, true );
+    fi;
+    
+    if d > 0 then
+        SetIsLeftPrincipalIdealRing( S, false );
+        SetIsRightPrincipalIdealRing( S, false );
+        SetIsPrincipalIdealRing( S, false );
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "for homalg rings",
+        [ IsHomalgRing and IsRationalShiftAlgebra, IsHomalgRing and IsFreePolynomialRing, IsList ],
+        
+  function( S, R, shift )
+    local r, b, param, paramS, var, d;
+    
+    r := CoefficientsRing( R );
+    
+    if HasBaseRing( R ) then
+        b := BaseRing( R );
+    else
+        b := r;
+    fi;
+    
+    var := IndeterminatesOfPolynomialRing( R );
+    var := List( var, a -> a / S );
+    
+    d := Length( var );
+    
+    if d > 0 then
+        SetIsFinite( S, false );
+    fi;
+    
+    SetCoefficientsRing( S, r );
+    
+    if HasRationalParameters( r ) then
+        param := RationalParameters( r );
+        paramS := List( param, a -> a / S );
+        Perform( [ 1 .. Length( param ) ], function( i ) SetName( paramS[i], Name( param[i] ) ); end );
+        SetRationalParameters( S, paramS );
+    fi;
+    
+    SetCharacteristic( S, Characteristic( R ) );
+    
+    SetIsCommutative( S, shift = [ ] );
+    
+    SetParametersOfRationalShiftAlgebra( S, var );
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        SetRelativeParametersOfRationalShiftAlgebra(
+                S, RelativeIndeterminatesOfPolynomialRing( R ) );
+    fi;
+    
+    SetIndeterminateShiftsOfRationalShiftAlgebra( S, shift );
+    
+    if d > 0 then
+        SetIsLeftArtinian( S, false );
+        SetIsRightArtinian( S, false );
+    fi;
+    
+    SetIsLeftNoetherian( S, true );
+    SetIsRightNoetherian( S, true );
+    
+    if HasIsIntegralDomain( r ) and IsIntegralDomain( r ) then
+        SetIsIntegralDomain( S, true );
+    fi;
+    
+    if d > 0 then
+        SetIsLeftPrincipalIdealRing( S, false );
+        SetIsRightPrincipalIdealRing( S, false );
+        SetIsPrincipalIdealRing( S, false );
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
 end );
 
