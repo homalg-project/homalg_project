@@ -196,6 +196,69 @@ InstallGlobalFunction( _PrepareInputForExteriorRing,
 end );
 
 ##
+InstallGlobalFunction( _PrepareInputForShiftAlgebra,
+  function( R, indets )
+    local var, nr_var, shift, nr_shift, r, param, base;
+    
+    ## check whether the base ring is polynomial and then extract needed data
+    if IsFreePolynomialRing( R ) then
+        if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+            var := RelativeIndeterminatesOfPolynomialRing( R );
+        else
+            var := IndeterminatesOfPolynomialRing( R );
+        fi;
+        nr_var := Length( var );
+    else
+        Error( "the given ring is not a free polynomial ring" );
+    fi;
+    
+    var := List( var, Name );
+    
+    ## get the new indeterminates (the shifts) for the ring and save them in shift
+    if IsString( indets ) and indets <> "" then
+        shift := SplitString( indets, "," );
+    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
+        shift := indets;
+    else
+        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
+    fi;
+    
+    nr_shift := Length( shift );
+    
+    if nr_var <> nr_shift then
+        Error( "the number of indeterminates of the given polynomial ring is not equal to the number of specified shifts\n" );
+    fi;
+    
+    if Intersection2( shift, var ) <> [ ] then
+        Error( "the following indeterminate(s) are already elements of the polynomial ring: ", Intersection2( shift, var ), "\n" );
+    fi;
+    
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        r := CoefficientsRing( R );
+    else
+        r := R;
+    fi;
+    
+    if HasRationalParameters( r ) then
+        param := Concatenation( ",", JoinStringsWithSeparator( RationalParameters( r ) ) );
+    else
+        param := "";
+    fi;
+    
+    if HasBaseRing( R ) and HasCoefficientsRing( R ) and
+       not IsIdenticalObj( BaseRing( R ), CoefficientsRing( R ) ) and
+       HasIndeterminatesOfPolynomialRing( BaseRing( R ) ) then
+        base := IndeterminatesOfPolynomialRing( BaseRing( R ) );
+        base := List( base, Name );
+    else
+        base := "";
+    fi;
+    
+    return [ r, var, shift, param, base ];
+    
+end );
+
+##
 InstallGlobalFunction( _PrepareInputForPseudoDoubleShiftAlgebra,
   function( R, indets )
     local var, nr_var, shift, nr_shift, r, param, base;

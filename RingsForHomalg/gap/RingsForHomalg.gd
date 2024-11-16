@@ -20,6 +20,8 @@ DeclareGlobalFunction( "_PrepareInputForRingOfDerivations" );
 
 DeclareGlobalFunction( "_PrepareInputForExteriorRing" );
 
+DeclareGlobalFunction( "_PrepareInputForShiftAlgebra" );
+
 DeclareGlobalFunction( "_PrepareInputForPseudoDoubleShiftAlgebra" );
 
 # constructor methods:
