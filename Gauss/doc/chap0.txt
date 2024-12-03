@@ -6,10 +6,10 @@
                      [1X Extended Gauss functionality for [5XGAP[105X [101X
   
   
-                                   2023.08-01
+                                   2024.11-01
   
   
-                                 27 August 2024
+                                3 December 2024
   
   
                                  Simon Görtzen

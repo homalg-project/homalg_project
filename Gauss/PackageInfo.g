@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "Gauss",
 Subtitle := "Extended Gauss functionality for GAP",
-Version := "2023.08-01",
-Date := "2024-08-27",
+Version := "2024.11-01",
+Date := "2024-12-03",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -100,8 +100,7 @@ Dependencies := rec(
 ),
 
 AvailabilityTest := function()
-  if (not("gauss" in SHOW_STAT())) and
-     (Filename(DirectoriesPackagePrograms("gauss"), "gauss.so") = fail) then
+  if not IsKernelExtensionAvailable("gauss") then
     LogPackageLoadingMessage( PACKAGE_INFO, "Gauss C-module was not compiled!", "Gauss" );
     LogPackageLoadingMessage( PACKAGE_INFO, "Gauss will work, but slower.", "Gauss" );
   fi;
