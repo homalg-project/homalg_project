@@ -16,13 +16,9 @@ DeclareGlobalFunction( "_Functor_TateResolution_OnGradedModules" );
 
 DeclareGlobalFunction( "_Functor_TateResolution_OnGradedMaps" );
 
-DeclareGlobalVariable( "Functor_TateResolution_ForGradedModules" );
-
 DeclareGlobalFunction( "_Functor_LinearStrandOfTateResolution_OnGradedModules" );
 
 DeclareGlobalFunction( "_Functor_LinearStrandOfTateResolution_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_LinearStrandOfTateResolution_ForGradedModules" );
 
 
 # basic operations:
