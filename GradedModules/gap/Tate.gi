@@ -440,7 +440,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
     
 end );
 
-InstallValue( Functor_TateResolution_ForGradedModules,
+BindGlobal( "Functor_TateResolution_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "TateResolution" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
@@ -879,7 +879,7 @@ InstallMethod( LinearStrandOfTateResolution,
     
 end );
 
-InstallValue( Functor_LinearStrandOfTateResolution_ForGradedModules,
+BindGlobal( "Functor_LinearStrandOfTateResolution_ForGradedModules",
         CreateHomalgFunctor(
                 [ "name", "LinearStrandOfTateResolution" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],

@@ -134,7 +134,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnMaps, ### defines: DirectSum (morphi
     
 end );
 
-InstallValue( Functor_DirectSum_for_fp_modules,
+BindGlobal( "Functor_DirectSum_for_fp_modules",
         CreateHomalgFunctor(
                 [ "name", "DirectSum" ],
                 [ "category", HOMALG_MODULES.category ],
