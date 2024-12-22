@@ -6,7 +6,7 @@
   [2XCastelnuovoMumfordRegularity[102X 3.4-2 
   [2XCastelnuovoMumfordRegularityOfSheafification[102X 3.4-3 
   [2XGeneratorsOfHomogeneousPart[102X 3.6-3 
-  [5XGradedModules[105X .-2 
+  [5XGradedModules[105X 0.0-2 
   [2XHomogeneousPartOverCoefficientsRing[102X 3.6-9 
   [2XKernelSubobject[102X 2.1-1 
   [2XKoszulRightAdjoint[102X 3.6-8 

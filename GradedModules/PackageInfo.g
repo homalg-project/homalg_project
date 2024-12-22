@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "GradedModules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
-Version := "2024.01-01",
-Date := "2024-01-10",
+Version := "2024.12-01",
+Date := "2024-12-22",
 License := "GPL-2.0-or-later",
 
 Persons := [
