@@ -89,7 +89,7 @@
   [2XLeftSubmodule[102X, constructor for left submodules 7.2-10 
   [2XLTensorProduct[102X 10.4-18 
   [2XModuleOfKaehlerDifferentials[102X 7.4-4 
-  [5XModules[105X .-3 
+  [5XModules[105X 0.0-3 
   [2XNonFlatLocus[102X 7.4-10 
   [2XNumeratorOfHilbertPoincareSeries[102X 7.4-15 
   [2XPreInverse[102X 8.5-2 
