@@ -34,6 +34,16 @@ InstallMethod( Length,
     
 end );
 
+##
+InstallMethod( LastOp,
+        [ IsLazyHListRep ],
+        
+  function( L )
+    
+    return L[Length( L )];
+    
+end );
+
 ## fallback method
 InstallOtherMethod( ListOfValues,
         [ IsList ],
