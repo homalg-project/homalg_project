@@ -636,10 +636,8 @@ proc PartiallyReducedBasisOfColumnModule (matrix M)\n\
     BasisOfRowsCoeff := """
 proc BasisOfRowsCoeff (matrix M)
 {
-  matrix B = BasisOfRowModule(M);
-  option(noredSB);
-  matrix T = lift(M,B);
-  option(redSB);
+  matrix T;
+  matrix B = liftstd(M, T, "std");
   return(B,T);
 }
 
