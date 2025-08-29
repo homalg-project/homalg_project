@@ -99,7 +99,7 @@ Persons := [
     FirstNames    := "Frank",
     IsAuthor      := false,
     IsMaintainer  := false,
-    Email         := "frank.luebeck@@math.rwth-aachen.de",
+    Email         := "frank.luebeck@math.rwth-aachen.de",
     WWWHome       := "http://www.math.rwth-aachen.de/~Frank.Luebeck/",
     PostalAddress := Concatenation( [
                        "Frank Lübeck\n",
