@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "HomalgToCAS",
 Subtitle := "A window to the outer world",
-Version := "2023.11-01",
-Date := "2023-11-30",
+Version := "2025.08-01",
+Date := "2025-09-06",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -99,7 +99,7 @@ Persons := [
     FirstNames    := "Frank",
     IsAuthor      := false,
     IsMaintainer  := false,
-    Email         := "frank.luebeck@@math.rwth-aachen.de",
+    Email         := "frank.luebeck@math.rwth-aachen.de",
     WWWHome       := "http://www.math.rwth-aachen.de/~Frank.Luebeck/",
     PostalAddress := Concatenation( [
                        "Frank Lübeck\n",
