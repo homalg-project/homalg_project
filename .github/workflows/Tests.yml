@@ -20,7 +20,7 @@ jobs:
   test:
     strategy:
       matrix:
-        image: ["ghcr.io/homalg-project/gap-docker:latest", "ghcr.io/homalg-project/gap-docker-master:latest"]
+        image: ["ghcr.io/homalg-project/gap-docker:latest"]
       fail-fast: false
     runs-on: ubuntu-latest
     container:
