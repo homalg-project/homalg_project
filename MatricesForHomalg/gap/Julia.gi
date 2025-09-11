@@ -31,6 +31,17 @@ InstallOtherMethod( \[\],
 end );
 
 ##
+InstallOtherMethod( DiagMat,
+        "for a list of homalg matrices",
+        [ IsJuliaObject ],
+        
+  function( list )
+    
+    return DiagMat( ConvertJuliaToGAP( list ) );
+    
+end );
+
+##
 InstallOtherMethod( CertainRows,
         "for homalg matrices",
         [ IsHomalgMatrix, IsJuliaObject ], 1001,
