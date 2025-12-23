@@ -48,7 +48,6 @@ jobs:
       - name: Prepare environment
         run: |
           cp ./homalg_project/dev/ci_gaprc /home/gap/.gap/gaprc
-          git clone --depth 1 -vv https://github.com/gap-packages/AutoDoc.git
           git clone --depth 1 -vv https://github.com/homalg-project/alcove.git
           git clone --depth 1 -vv https://github.com/homalg-project/alexander.git
           git clone --depth 1 -vv https://github.com/homalg-project/CddInterface.git
@@ -65,11 +64,12 @@ jobs:
           if [ -d "CAP_project/CompilerForCAP" ]; then make -C "CAP_project/CompilerForCAP" doc; fi
           if [ -d "CAP_project/MonoidalCategories" ]; then make -C "CAP_project/MonoidalCategories" doc; fi
           if [ -d "CAP_project/CartesianCategories" ]; then make -C "CAP_project/CartesianCategories" doc; fi
+          if [ -d "CAP_project/AdditiveClosuresForCAP" ]; then make -C "CAP_project/AdditiveClosuresForCAP" doc; fi
           if [ -d "CAP_project/FreydCategoriesForCAP" ]; then make -C "CAP_project/FreydCategoriesForCAP" doc; fi
           if [ -d "HigherHomologicalAlgebra/ToolsForHigherHomologicalAlgebra" ]; then make -C "HigherHomologicalAlgebra/ToolsForHigherHomologicalAlgebra" doc; fi
           if [ -d "homalg_project/homalg" ]; then make -C "homalg_project/homalg" doc; fi
           if [ -d "homalg_project/Modules" ]; then make -C "homalg_project/Modules" doc; fi
-          if [ -d "CategoricalTowers/CategoryConstructor" ]; then make -C "CategoricalTowers/CategoryConstructor" doc; fi
+          if [ -d "CategoricalTowers/ToolsForCategoricalTowers" ]; then make -C "CategoricalTowers/ToolsForCategoricalTowers" doc; fi
           if [ -d "CategoricalTowers/Toposes" ]; then make -C "CategoricalTowers/Toposes" doc; fi
       - name: Test homalg_project
         run: |
@@ -90,7 +90,9 @@ jobs:
             TOKEN="${{ secrets.GITHUB_TOKEN }}" ./dev/simulate_dist.sh; \
           fi
       - name: Upload code coverage
-        if: github.event_name != 'schedule' && matrix.image == 'ghcr.io/homalg-project/gap-docker-master:latest'
+        if: github.event_name != 'schedule' && matrix.image == 'ghcr.io/homalg-project/gap-docker:latest'
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           cd homalg_project
           ./dev/upload_codecov.sh

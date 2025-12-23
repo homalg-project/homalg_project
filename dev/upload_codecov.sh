@@ -21,65 +21,72 @@ curl -O https://uploader.codecov.io/latest/linux/codecov.SHA256SUM.sig
 gpgv codecov.SHA256SUM.sig codecov.SHA256SUM
 shasum -a 256 -c codecov.SHA256SUM
 
+# read the token
+if [ -z "$CODECOV_TOKEN" ]; then
+  echo -e "\033[0;33mCODECOV_TOKEN is not set. Proceeding without token.\033[0m"
+else
+  echo -e "\033[0;32mUsing CODECOV_TOKEN from environment variable.\033[0m"
+fi
+
 # execute
 chmod +x codecov
-while ! ./codecov -Z -v -s ../ -F homalg; do
+while ! ./codecov -Z -v -s ../ -F homalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F 4ti2Interface; do
+while ! ./codecov -Z -v -s ../ -F 4ti2Interface -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F ExamplesForHomalg; do
+while ! ./codecov -Z -v -s ../ -F ExamplesForHomalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F Gauss; do
+while ! ./codecov -Z -v -s ../ -F Gauss -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F GaussForHomalg; do
+while ! ./codecov -Z -v -s ../ -F GaussForHomalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F GradedModules; do
+while ! ./codecov -Z -v -s ../ -F GradedModules -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F GradedRingForHomalg; do
+while ! ./codecov -Z -v -s ../ -F GradedRingForHomalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F HomalgToCAS; do
+while ! ./codecov -Z -v -s ../ -F HomalgToCAS -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F IO_ForHomalg; do
+while ! ./codecov -Z -v -s ../ -F IO_ForHomalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F LocalizeRingForHomalg; do
+while ! ./codecov -Z -v -s ../ -F LocalizeRingForHomalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F MatricesForHomalg; do
+while ! ./codecov -Z -v -s ../ -F MatricesForHomalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F Modules; do
+while ! ./codecov -Z -v -s ../ -F Modules -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F RingsForHomalg; do
+while ! ./codecov -Z -v -s ../ -F RingsForHomalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F SCO; do
+while ! ./codecov -Z -v -s ../ -F SCO -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
-while ! ./codecov -Z -v -s ../ -F ToolsForHomalg; do
+while ! ./codecov -Z -v -s ../ -F ToolsForHomalg -t $CODECOV_TOKEN; do
     echo "Codecov upload failed, retrying in 60s"
     sleep 60
 done
