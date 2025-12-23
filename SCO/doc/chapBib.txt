@@ -2,7 +2,7 @@
   
   [1XReferences[101X
   
-  [[20XBLH20[120X]  [16XBarakat,  M. and Lange-Hegermann, M.[116X, [17XThe mathtthomalg package -- A
+  [[20XBL20[120X]  [16XBarakat,  M.  and Lange-Hegermann, M.[116X, [17XThe mathtthomalg package -- A
   homological   algebra   mathsfGAP4   meta-package   for  computable  Abelian
   categories[117X                                                     (2007--2020),
   ((\url{https://homalg-project.github.io/pkg/homalg})).
