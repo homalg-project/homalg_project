@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "Modules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
-Version := "2024.12-01",
-Date := "2024-12-22",
+Version := "2025.12-01",
+Date := "2025-12-23",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -141,7 +141,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">= 4.12.1",
+  GAP := ">= 4.13.0",
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">=2023.10-01" ],
                    [ "ToolsForHomalg", ">=2013.04.12" ],
