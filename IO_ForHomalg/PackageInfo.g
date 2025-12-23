@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "IO_ForHomalg",
 Subtitle := "IO capabilities for the homalg project",
-Version := "2023.02-04",
-Date := "2023-02-28",
+Version := "2025.12-01",
+Date := "2025-12-23",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -128,7 +128,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">= 4.12.1",
+  GAP := ">= 4.13.0",
   NeededOtherPackages := [ [ "IO", ">= 2.3" ], [ "HomalgToCAS", ">= 2009.06.18" ] ],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
   ExternalConditions := []
