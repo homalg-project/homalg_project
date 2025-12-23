@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "LocalizeRingForHomalg",
 Subtitle := "A Package for Localization of Polynomial Rings",
-Version := "2023.10-01",
-Date := "2023-10-05",
+Version := "2025.12-01",
+Date := "2025-12-23",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -94,7 +94,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">= 4.12.1",
+  GAP := ">= 4.13.0",
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2023.10-01" ],
                    [ "HomalgToCAS", ">= 2023.08-01" ],

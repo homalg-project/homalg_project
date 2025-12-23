@@ -2,11 +2,11 @@
   
   [1XReferences[101X
   
-  [[20XBLH11[120X]  [16XBarakat,  M.  and  Lange-Hegermann,  M.[116X,  [17XAn  axiomatic  setup  for
+  [[20XBL11[120X]   [16XBarakat,  M.  and  Lange-Hegermann,  M.[116X,  [17XAn  axiomatic  setup  for
   algorithmic homological algebra and an alternative approach to localization[117X,
   [18XJ.~Algebra Appl.[118X, [19X10[119X, 2 (2011), 269--293.
   
-  [[20XBLH20[120X]  [16XBarakat,  M. and Lange-Hegermann, M.[116X, [17XThe mathtthomalg package -- A
+  [[20XBL20[120X]  [16XBarakat,  M.  and Lange-Hegermann, M.[116X, [17XThe mathtthomalg package -- A
   homological   algebra   mathsfGAP4   meta-package   for  computable  Abelian
   categories[117X                                                     (2007--2020),
   ((\url{https://homalg-project.github.io/pkg/homalg})).
