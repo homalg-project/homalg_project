@@ -6,10 +6,10 @@
      [1X A homological algebra meta-package for computable Abelian categories [101X
   
   
-                                   2024.01-01
+                                   2025.12-01
   
   
-                                10 January 2024
+                                23 December 2025
   
   
                                 Mohamed Barakat
@@ -107,9 +107,7 @@
   would have remained a core without a body:[133X
   
   [30X    [33X[0;6YThomas                                                         Bächler
-        (
-        https://www.researchgate.net/scientific-contributions/50557632_Thomas_Baechler
-        )[133X
+        ([7Xhttps://www.researchgate.net/scientific-contributions/50557632_Thomas_Baechler[107X)[133X
   
   [30X    [33X[0;6YBarbara Bremer[133X
   

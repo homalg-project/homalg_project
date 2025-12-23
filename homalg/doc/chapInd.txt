@@ -43,7 +43,7 @@
   [2XGrade[102X 3.4-17 
   [2XHasConstantRank[102X 3.3-16 
   [2XHilbertPolynomial[102X 3.4-20 
-  [5Xhomalg[105X .-3 
+  [5Xhomalg[105X 0.0-3 
   [2XHomalgBicomplex[102X, constructor for bicomplexes given a complex of complexes 8.2-1 
   [2XHomalgBigradedObject[102X, constructor for bigraded objects given a bicomplex 9.2-1 
   [2XHomalgChainMorphism[102X, constructor for chain morphisms given a morphism 7.2-1 

@@ -29,10 +29,10 @@
 <h2>A homological algebra meta-package for computable Abelian categories</h2>
 
 <p>
-    2024.01-01</p>
+    2025.12-01</p>
 
 <p>
-    10 January 2024
+    23 December 2025
   </p>
 
 </div>
@@ -74,7 +74,7 @@
 
 <p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
 <h3>Acknowledgements</h3>
-<p><span class="URL"><a href="https://www.arangodb.com/speakers/max-neunhoeffer/">Max Neunhöffer</a></span> not only taught me the philosophy of object-oriented programming in <strong class="pkg">GAP4</strong>, but also to what extent this philosophy is still unique among programming languages (--&gt; <a href="chapB.html#X7D2A5B127A68AB58"><span class="RefLink">Why GAP4?</span></a>). He, <span class="URL"><a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/">Frank Lübeck</a></span>, and <span class="URL"><a href="http://www.math.rwth-aachen.de/~Thomas.Breuer/">Thomas Breuer</a></span> patiently answered trillions of specific questions, even those I was too lazy to look up in the excellent <a href="https://www.gap-system.org/Manuals/doc/ref/chap1.html#X874E1D45845007FE"><span class="RefLink">reference manual</span></a>. Without their continuous and tireless help and advice, not only this package but the as a whole <span class="URL"><a href="https://homalg-project.github.io/homalg_project/">homalg project</a></span> would have remained on my todo list.</p>
+<p><span class="URL"><a href="https://www.arangodb.com/speakers/max-neunhoeffer/">Max Neunhöffer</a></span> not only taught me the philosophy of object-oriented programming in <strong class="pkg">GAP4</strong>, but also to what extent this philosophy is still unique among programming languages (--&gt; <a href="chapB.html#X7D2A5B127A68AB58"><span class="RefLink">Why GAP4?</span></a>). He, <span class="URL"><a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/">Frank Lübeck</a></span>, and <span class="URL"><a href="http://www.math.rwth-aachen.de/~Thomas.Breuer/">Thomas Breuer</a></span> patiently answered trillions of specific questions, even those I was too lazy to look up in the excellent <a href="https://docs.gap-system.org/doc/ref/chap1.html#X874E1D45845007FE"><span class="RefLink">reference manual</span></a>. Without their continuous and tireless help and advice, not only this package but the as a whole <span class="URL"><a href="https://homalg-project.github.io/homalg_project/">homalg project</a></span> would have remained on my todo list.</p>
 
 <p>A lot of <a href="chap1.html#X7DFB63A97E67C0A1"><span class="RefLink">ideas</span></a> that make up this package and the whole <strong class="pkg">homalg</strong> project came out of intensive discussions with <span class="URL"><a href="https://www.plymouth.ac.uk/staff/daniel-robertz">Daniel Robertz</a></span> during our early collaboration, where we developed our philosophy of a meta package for homological algebra and <span class="URL"><a href="https://algebra.mathematik.uni-siegen.de/barakat/homalg_in_maple/">implemented</a></span> it in <strong class="pkg">Maple</strong>. This <strong class="pkg">Maple</strong> package <strong class="pkg">homalg</strong> is <span class="URL"><a href="https://github.com/homalg-project/homalg_project/tree/master/RingsForHomalg/maple">now part of</a></span> the GAP package <strong class="pkg">RingsForHomalg</strong>.</p>
 
@@ -86,7 +86,7 @@
 
 <p>The basic support for <strong class="pkg">Sage</strong> was added by Simon, and the support for <strong class="pkg">Singular</strong> was initiated by <span class="URL"><a href="https://www.th-owl.de/eecs/fachbereich/team/markus-lange-hegermann/">Markus Lange-Hegermann</a></span> and continued by him and Simon, while <span class="URL"><a href="http://www.math.rwth-aachen.de/~Markus.Kirschmer/">Markus Kirschmer</a></span> contributed the complete support for <strong class="pkg">MAGMA</strong>. This formed the beginning of the <strong class="pkg">RingsForHomalg</strong> package. Recently, Daniel added the support for <strong class="pkg">Macaulay2</strong>.</p>
 
-<p>My concerns about how to handle the garbage collection in the external computer algebra systems were evaporated with the idea of Thomas Breuer using the so-called <a href="https://www.gap-system.org/Manuals/doc/ref/chap86.html#X86390538806F67CF"><span class="RefLink">weak pointers</span></a> in <strong class="pkg">GAP4</strong> to keep track of all the external objects that became obsolete for <strong class="pkg">homalg</strong>. This idea took shape in a discussion with him and Frank Lübeck and finally found its way into the package <strong class="pkg">HomalgToCAS</strong>.</p>
+<p>My concerns about how to handle the garbage collection in the external computer algebra systems were evaporated with the idea of Thomas Breuer using the so-called <a href="https://docs.gap-system.org/doc/ref/chap86.html#X86390538806F67CF"><span class="RefLink">weak pointers</span></a> in <strong class="pkg">GAP4</strong> to keep track of all the external objects that became obsolete for <strong class="pkg">homalg</strong>. This idea took shape in a discussion with him and Frank Lübeck and finally found its way into the package <strong class="pkg">HomalgToCAS</strong>.</p>
 
 <p>My gratitude to all with whom I worked together to develop extension packages and those who developed their own packages within the <strong class="pkg">homalg</strong> project (--&gt; Appendix <a href="chapE.html#X849691F37C7AC1B4"><span class="RefLink">E</span></a>). Without their contributions the package <strong class="pkg">homalg</strong> would have remained a core without a body:</p>
 
@@ -123,7 +123,7 @@
 
 </li>
 </ul>
-<p>I would also like to thank <span class="URL"><a href="https://who.rocq.inria.fr/Alban.Quadrat/">Alban Quadrat</a></span> for supporting the <strong class="pkg">homalg</strong> project and for all the wonderful discussions we had. At several places in the code I was happy to add the comment: "I learned this from Alban".</p>
+<p>I would also like to thank <span class="URL"><a href="https://who.rocq.inria.fr/Alban.Quadrat/">Alban Quadrat</a></span> for supporting the <strong class="pkg">homalg</strong> project and for all the wonderful discussions we had. At several places in the code I was happy to add the comment: <q>I learned this from Alban</q>.</p>
 
 <p>My teacher <span class="URL"><a href="https://www.researchgate.net/profile/Wilhelm_Plesken">Wilhelm Plesken</a></span> remains an inexhaustible source of extremely broad and deep knowledge. Thank you for being such a magnificent person.</p>
 
@@ -649,6 +649,6 @@
 <div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
-<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+<p class="foot">generated by <a href="https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
 </body>
 </html>
