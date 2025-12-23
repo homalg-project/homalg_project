@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "4ti2Interface",
 Subtitle := "A link to 4ti2",
-Version := "2024.11-01",
-Date := "2024-11-23",
+Version := "2025.12-01",
+Date := "2025-12-23",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -63,7 +63,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">= 4.12.1",
+  GAP := ">= 4.13.0",
   NeededOtherPackages := [ [ "io", ">=4.2" ] ],
   ExternalConditions := [ [ "4ti2", "https://4ti2.github.io/" ] ],
 ),
