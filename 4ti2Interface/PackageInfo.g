@@ -65,6 +65,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.13.0",
   NeededOtherPackages := [ [ "io", ">=4.2" ] ],
+  NeededSystemPackages := rec( Ubuntu := [["4ti2"]] ),
   ExternalConditions := [ [ "4ti2", "https://4ti2.github.io/" ] ],
 ),
 
