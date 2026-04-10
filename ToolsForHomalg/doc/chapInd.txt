@@ -86,7 +86,7 @@
   [2XIsContainerForPointers[102X, for IsComponentObjectRep 7.2-1 
   [2XIsContainerForWeakPointers[102X, for IsComponentObjectRep 7.1-1 
   [2XIsEqualForCache[102X, for IsObject, IsObject 1.2-3 
-  [2XIsHomalgRingOrModule[102X, for IsStructureObjectOrObject 6.2-5 
+  [2XIsHomalgSemiringOrModule[102X, for IsStructureObjectOrObject 6.2-5 
   [2XIsLazyArray[102X, for IsComponentObjectRep and IsList 2.1-1 
   [2XIsLazyHList[102X, for IsComponentObjectRep and IsList 3.1-1 
   [2XIsListWithAttributes[102X, for IsAttributeStoringRep and IsList 4.1-1 
@@ -132,8 +132,10 @@
   [2XReplace[102X, for IsZFunction, IsInt, IsDenseList 10.2-21 
   [2XReplacedStringViaRecord[102X 8.1-47 
   [2XResetTimer[102X 8.1-50 
-  [2XRingElementFilter[102X, for IsRing 6.3-2 
-  [2XRingFilter[102X, for IsRing 6.3-1 
+  [2XSemiringElementFilter[102X, for IsRing 6.3-4 
+      for IsSemiringElement 6.3-2 
+  [2XSemiringFilter[102X, for IsRing 6.3-3 
+      for IsSemiring 6.3-1 
   [2XSetCacheValue[102X, for IsCachingObject, IsObject, IsObject 1.2-2 
   [2XSetCachingObjectCrisp[102X 1.3-1 
   [2XSetCachingObjectWeak[102X 1.3-2 

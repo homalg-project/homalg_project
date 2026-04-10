@@ -34,13 +34,15 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7A9BB94E7D9F3AB6">6.2-2 IsStructureObjectOrObject</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X85DC9C0A83ADB0C6">6.2-3 IsStructureObject</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7D2734947FBEB2EF">6.2-4 IsStructureObjectMorphism</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8346DBCF876C70F7">6.2-5 IsHomalgRingOrModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80AD13637B44AAC4">6.2-5 IsHomalgSemiringOrModule</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7C701DBF7BAE649A">6.3 <span class="Heading">Attributes</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X791768BD7815B343">6.3-1 RingFilter</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7CB137BC842F454F">6.3-2 RingElementFilter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X869598F378A4F3E6">6.3-1 SemiringFilter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7A863DAB86099D4E">6.3-2 SemiringElementFilter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80EA752E8101F5A5">6.3-3 SemiringFilter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X79068254832A9BC6">6.3-4 SemiringElementFilter</a></span>
 </div></div>
 </div>
 
@@ -65,7 +67,7 @@
 
 <h5>6.2-1 IsStructureObjectOrObjectOrMorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectOrObjectOrMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectOrObjectOrMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
 <p>This is the super super GAP-category which will include the GAP-categories IsStructureObjectOrObject and IsHomalgObjectOrMorphism</p>
@@ -74,54 +76,68 @@
 
 <h5>6.2-2 IsStructureObjectOrObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectOrObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectOrObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
-<p>This is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex</p>
+<p>This is the super GAP-category which will include the GAP-categories IsHomalgSemiring, IsHomalgModule, IsHomalgSemiringOrModule and IsHomalgComplex</p>
 
 <p><a id="X85DC9C0A83ADB0C6" name="X85DC9C0A83ADB0C6"></a></p>
 
 <h5>6.2-3 IsStructureObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
-<p>This is the super GAP-category which will include the GAP-categories IsHomalgRing we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)</p>
+<p>This is the super GAP-category which will include the GAP-categories IsHomalgSemiring we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)</p>
 
 <p><a id="X7D2734947FBEB2EF" name="X7D2734947FBEB2EF"></a></p>
 
 <h5>6.2-4 IsStructureObjectMorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStructureObjectMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
-<p>This is the super GAP-category which will include the GAP-categories IsHomalgRingMap, etc.</p>
+<p>This is the super GAP-category which will include the GAP-categories IsHomalgSemiringMap, etc.</p>
 
-<p><a id="X8346DBCF876C70F7" name="X8346DBCF876C70F7"></a></p>
+<p><a id="X80AD13637B44AAC4" name="X80AD13637B44AAC4"></a></p>
 
-<h5>6.2-5 IsHomalgRingOrModule</h5>
+<h5>6.2-5 IsHomalgSemiringOrModule</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingOrModule</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgSemiringOrModule</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
 
-<p>this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule:</p>
+<p>this is the super GAP-category which will include the GAP-categories IsHomalgSemiring, IsHomalgModule:</p>
 
 <p><a id="X7C701DBF7BAE649A" name="X7C701DBF7BAE649A"></a></p>
 
 <h4>6.3 <span class="Heading">Attributes</span></h4>
 
-<p><a id="X791768BD7815B343" name="X791768BD7815B343"></a></p>
+<p><a id="X869598F378A4F3E6" name="X869598F378A4F3E6"></a></p>
 
-<h5>6.3-1 RingFilter</h5>
+<h5>6.3-1 SemiringFilter</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingFilter</code>( <var class="Arg">ring</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
-<p>A filter inheriting from <code class="code">IsRing</code> which uniquely identifies the ring <var class="Arg">ring</var>. For example, the ring <code class="code">Integers</code> is identified by <code class="code">IsIntegers</code>. If no filter uniquely identifying the ring exists, the most special filter available should be chosen.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiringFilter</code>( <var class="Arg">semiring</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>A filter inheriting from <code class="code">IsSemiring</code> which uniquely identifies the semiring <var class="Arg">semiring</var>. For example, the (semi)ring <code class="code">Integers</code> is identified by <code class="code">IsIntegers</code>. If no filter uniquely identifying the semiring exists, the most special filter available should be chosen.</p>
 
-<p><a id="X7CB137BC842F454F" name="X7CB137BC842F454F"></a></p>
+<p><a id="X7A863DAB86099D4E" name="X7A863DAB86099D4E"></a></p>
 
-<h5>6.3-2 RingElementFilter</h5>
+<h5>6.3-2 SemiringElementFilter</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingElementFilter</code>( <var class="Arg">ring</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiringElementFilter</code>( <var class="Arg">semiring</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>A filter inheriting from <code class="code">IsSemiringElement</code> which uniquely identifies elements of the semiring <var class="Arg">semiring</var>. For example, the elements of the (semi)ring <code class="code">Integers</code> are identified by <code class="code">IsInt</code>. If no filter uniquely identifying the elements of the semiring exists, the most special filter available should be chosen.</p>
+
+<p><a id="X80EA752E8101F5A5" name="X80EA752E8101F5A5"></a></p>
+
+<h5>6.3-3 SemiringFilter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiringFilter</code>( <var class="Arg">ring</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>A filter inheriting from <code class="code">IsRingWithOne</code> which uniquely identifies the ring <var class="Arg">ring</var>. For example, the ring <code class="code">Integers</code> is identified by <code class="code">IsIntegers</code>. If no filter uniquely identifying the ring exists, the most special filter available should be chosen.</p>
+
+<p><a id="X79068254832A9BC6" name="X79068254832A9BC6"></a></p>
+
+<h5>6.3-4 SemiringElementFilter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiringElementFilter</code>( <var class="Arg">ring</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>A filter inheriting from <code class="code">IsRingElement</code> which uniquely identifies elements of the ring <var class="Arg">ring</var>. For example, the elements of the ring <code class="code">Integers</code> are identified by <code class="code">IsInt</code>. If no filter uniquely identifying the elements of the ring exists, the most special filter available should be chosen.</p>
 
 

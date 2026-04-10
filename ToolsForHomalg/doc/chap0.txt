@@ -6,10 +6,10 @@
                [1X Special methods and knowledge propagation tools [101X
   
   
-                                   2026.02-01
+                                   2026.04-01
   
   
-                                24 February 2026
+                                 10 April 2026
   
   
                                 Mohamed Barakat
@@ -135,10 +135,12 @@
       6.2-2 IsStructureObjectOrObject
       6.2-3 IsStructureObject
       6.2-4 IsStructureObjectMorphism
-      6.2-5 IsHomalgRingOrModule
+      6.2-5 IsHomalgSemiringOrModule
     6.3 [33X[0;0YAttributes[133X
-      6.3-1 RingFilter
-      6.3-2 RingElementFilter
+      6.3-1 SemiringFilter
+      6.3-2 SemiringElementFilter
+      6.3-3 SemiringFilter
+      6.3-4 SemiringElementFilter
   7 [33X[0;0YPointers[133X
     7.1 [33X[0;0YWeak pointer objects[133X
       7.1-1 IsContainerForWeakPointers

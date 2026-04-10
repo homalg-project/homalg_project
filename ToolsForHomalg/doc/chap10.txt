@@ -11,14 +11,14 @@
   
   [1X10.1-1 IsZFunction[101X
   
-  [33X[1;0Y[29X[2XIsZFunction[102X( [3Xarg[103X ) [32X filter[133X
+  [33X[1;0Y[29X[2XIsZFunction[102X( [3Xarg[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
   
   [33X[0;0YGap-categories of [23X\mathbb{Z}[123X-functions[133X
   
   [1X10.1-2 IsZFunctionWithInductiveSides[101X
   
-  [33X[1;0Y[29X[2XIsZFunctionWithInductiveSides[102X( [3Xarg[103X ) [32X filter[133X
+  [33X[1;0Y[29X[2XIsZFunctionWithInductiveSides[102X( [3Xarg[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
   
   [33X[0;0YGap-categories of inductive [23X\mathbb{Z}[123X-functions[133X
