@@ -155,14 +155,13 @@
 
 <p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> rings.</p>
 
-<p>(It is a subcategory of the <strong class="pkg">GAP</strong> categories <code class="code">IsStructureObject</code> and <code class="code">IsHomalgRingOrModule</code>.)</p>
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> categories <code class="code">IsStructureObject</code> and <code class="code">IsHomalgSemiringOrModule</code>.)</p>
 
 
 <div class="example"><pre>
 DeclareCategory( "IsHomalgRing",
-        IsStructureObject and
-        IsRingWithOne and
-        IsHomalgRingOrModule );
+        IsHomalgSemiring and
+        IsRingWithOne );
 </pre></div>
 
 <p><a id="X81DC249883163C01" name="X81DC249883163C01"></a></p>
@@ -194,13 +193,9 @@ DeclareCategory( "IsPreHomalgRing",
 
 <div class="example"><pre>
 DeclareCategory( "IsHomalgRingElement",
-        IsExtAElement and
-        IsExtLElement and
-        IsExtRElement and
+        IsHomalgSemiringElement and
         IsAdditiveElementWithInverse and
         IsMultiplicativeElementWithInverse and
-        IsAssociativeElement and
-        IsAdditivelyCommutativeElement and
         ## all the above guarantees IsHomalgRingElement =&gt; IsRingElement (in GAP4)
         IsAttributeStoringRep );
 </pre></div>

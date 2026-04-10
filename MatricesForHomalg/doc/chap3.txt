@@ -12,13 +12,12 @@
   [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X rings.[133X
   
   [33X[0;0Y(It   is   a   subcategory  of  the  [5XGAP[105X  categories  [10XIsStructureObject[110X  and
-  [10XIsHomalgRingOrModule[110X.)[133X
+  [10XIsHomalgSemiringOrModule[110X.)[133X
   
   [4X[32X  Code  [32X[104X
     [4XDeclareCategory( "IsHomalgRing",[104X
-    [4X        IsStructureObject and[104X
-    [4X        IsRingWithOne and[104X
-    [4X        IsHomalgRingOrModule );[104X
+    [4X        IsHomalgSemiring and[104X
+    [4X        IsRingWithOne );[104X
   [4X[32X[104X
   
   [1X3.1-2 IsPreHomalgRing[101X
@@ -48,13 +47,9 @@
   
   [4X[32X  Code  [32X[104X
     [4XDeclareCategory( "IsHomalgRingElement",[104X
-    [4X        IsExtAElement and[104X
-    [4X        IsExtLElement and[104X
-    [4X        IsExtRElement and[104X
+    [4X        IsHomalgSemiringElement and[104X
     [4X        IsAdditiveElementWithInverse and[104X
     [4X        IsMultiplicativeElementWithInverse and[104X
-    [4X        IsAssociativeElement and[104X
-    [4X        IsAdditivelyCommutativeElement and[104X
     [4X        ## all the above guarantees IsHomalgRingElement => IsRingElement (in GAP4)[104X
     [4X        IsAttributeStoringRep );[104X
   [4X[32X[104X
