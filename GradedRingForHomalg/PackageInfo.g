@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "GradedRingForHomalg",
 Subtitle := "Endow Commutative Rings with an Abelian Grading",
-Version := "2025.12-01",
-Date := "2025-12-23",
+Version := "2026.04-01",
+Date := "2026-04-10",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -143,11 +143,11 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.13.0",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2023.08-01" ],
-                   [ "HomalgToCAS", ">= 2023.08-01" ],
+                   [ "MatricesForHomalg", ">= 2026.04-01" ],
+                   [ "HomalgToCAS", ">= 2026.04-01" ],
                    [ "RingsForHomalg", ">= 2023.08-01" ],
-                   [ "Modules", ">= 2023.08-01" ],
                    [ "homalg", ">=2011.08.16" ],
+                   [ "Modules", ">= 2026.04-01" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [
                    [  "NConvex", "2020.03.02" ],
