@@ -15,6 +15,24 @@ DeclareGlobalVariable( "CommonHomalgTableForRings" );
 
 # three new GAP-categories:
 
+##  <#GAPDoc Label="IsHomalgSemiring">
+##  <ManSection>
+##    <Filt Type="Category" Arg="R" Name="IsHomalgSemiring"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; category of &homalg; semirings. <P/>
+##      (It is a subcategory of the &GAP; categories <C>IsStructureObject</C>
+##       and <C>IsHomalgSemiringOrModule</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgSemiring",
+        IsStructureObject and
+        IsSemiringWithOneAndZero and
+        IsHomalgSemiringOrModule );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="IsHomalgRing">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="R" Name="IsHomalgRing"/>
@@ -22,12 +40,11 @@ DeclareGlobalVariable( "CommonHomalgTableForRings" );
 ##    <Description>
 ##      The &GAP; category of &homalg; rings. <P/>
 ##      (It is a subcategory of the &GAP; categories <C>IsStructureObject</C>
-##       and <C>IsHomalgRingOrModule</C>.)
+##       and <C>IsHomalgSemiringOrModule</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgRing",
-        IsStructureObject and
-        IsRingWithOne and
-        IsHomalgRingOrModule );
+        IsHomalgSemiring and
+        IsRingWithOne );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -52,6 +69,21 @@ DeclareCategory( "IsPreHomalgRing",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="IsHomalgSemiringElement">
+##  <ManSection>
+##    <Filt Type="Category" Arg="r" Name="IsHomalgSemiringElement"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; category of elements of &homalg; semirings which are not GAP4 built-in.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgSemiringElement",
+        IsSemiringElementWithOneAndZero and
+        IsAttributeStoringRep );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="IsHomalgRingElement">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="r" Name="IsHomalgRingElement"/>
@@ -60,13 +92,9 @@ DeclareCategory( "IsPreHomalgRing",
 ##      The &GAP; category of elements of &homalg; rings which are not GAP4 built-in.
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgRingElement",
-        IsExtAElement and
-        IsExtLElement and
-        IsExtRElement and
+        IsHomalgSemiringElement and
         IsAdditiveElementWithInverse and
         IsMultiplicativeElementWithInverse and
-        IsAssociativeElement and
-        IsAdditivelyCommutativeElement and
         ## all the above guarantees IsHomalgRingElement => IsRingElement (in GAP4)
         IsAttributeStoringRep );
 ##  ]]></Listing>
@@ -1730,6 +1758,8 @@ DeclareAttribute( "PrimitiveElement",
 # constructors:
 
 DeclareGlobalFunction( "CreateHomalgRing" );
+
+DeclareGlobalFunction( "HomalgSemiringOfNaturalNumbers" );
 
 DeclareGlobalFunction( "HomalgRingOfIntegers" );
 

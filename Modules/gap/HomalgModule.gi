@@ -62,12 +62,12 @@ DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
 ##       which is a subrepresentation of the &GAP; representations
 ##      <C>IsFinitelyPresentedModuleOrSubmoduleRep</C>,
-##      <C>IsStaticFinitelyPresentedObjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsStaticFinitelyPresentedObjectRep</C>, and <C>IsHomalgSemiringOrFinitelyPresentedModuleRep</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsFinitelyPresentedModuleOrSubmoduleRep and
         IsStaticFinitelyPresentedObjectRep and
-        IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations",
           "PresentationMorphisms",
           "Resolutions",
@@ -87,12 +87,12 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
 ##       which is a subrepresentation of the &GAP; representations
 ##      <C>IsFinitelyPresentedModuleOrSubmoduleRep</C>,
-##      <C>IsStaticFinitelyPresentedSubobjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsStaticFinitelyPresentedSubobjectRep</C>, and <C>IsHomalgSemiringOrFinitelyPresentedModuleRep</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
         IsFinitelyPresentedModuleOrSubmoduleRep and
         IsStaticFinitelyPresentedSubobjectRep and
-        IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "map_having_subobject_as_its_image" ] );
 ##  ]]></Listing>
 ##    </Description>

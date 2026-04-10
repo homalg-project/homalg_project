@@ -38,12 +38,12 @@ DeclareCategory( "IsStructureObjectOrObjectOrMorphism",
 
 #! @Description
 #! This is the super GAP-category which will include the GAP-categories
-#! IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex
+#! IsHomalgSemiring, IsHomalgModule, IsHomalgSemiringOrModule and IsHomalgComplex
 DeclareCategory( "IsStructureObjectOrObject",
                  IsStructureObjectOrObjectOrMorphism );
 
 #! @Description
-#! This is the super GAP-category which will include the GAP-categories IsHomalgRing
+#! This is the super GAP-category which will include the GAP-categories IsHomalgSemiring
 #! we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N)
 #! without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)
 DeclareCategory( "IsStructureObject",
@@ -52,14 +52,14 @@ DeclareCategory( "IsStructureObject",
 
 #! @Description
 #! This is the super GAP-category which will include the GAP-categories
-#! IsHomalgRingMap, etc.
+#! IsHomalgSemiringMap, etc.
 DeclareCategory( "IsStructureObjectMorphism",
                  IsAttributeStoringRep );
 
 #! @Description
 #! this is the super GAP-category which will include the GAP-categories
-#! IsHomalgRing, IsHomalgModule:
-DeclareCategory( "IsHomalgRingOrModule",
+#! IsHomalgSemiring, IsHomalgModule:
+DeclareCategory( "IsHomalgSemiringOrModule",
                  IsStructureObjectOrObject );
 
 # a new GAP-category:
@@ -85,12 +85,45 @@ DeclareCategory( "IsContainerForPointers",
 #! @Section Attributes
 
 #! @Description
-#! A filter inheriting from `IsRing` which uniquely identifies the ring <A>ring</A>.
+#! A filter inheriting from `IsSemiring` which uniquely identifies the semiring <A>semiring</A>.
+#! For example, the (semi)ring `Integers` is identified by `IsIntegers`.
+#! If no filter uniquely identifying the semiring exists,
+#! the most special filter available should be chosen.
+#! @Arguments semiring
+DeclareAttribute( "SemiringFilter",
+                  IsSemiring );
+
+if not IsBound( IsSemiringElement ) then
+    DeclareSynonym( "IsSemiringElement", IsAdditiveElement and IsMultiplicativeElement );
+fi;
+
+if not IsBound( IsSemiringElementWithOne ) then
+    DeclareSynonym( "IsSemiringElementWithOne", IsSemiringElement and IsMultiplicativeElementWithOne );
+fi;
+
+if not IsBound( IsSemiringElementWithOneAndZero ) then
+    DeclareSynonym( "IsSemiringElementWithOneAndZero", IsSemiringElementWithOne and IsAdditiveElementWithZero );
+fi;
+
+#! @Description
+#! A filter inheriting from `IsSemiringElement` which uniquely identifies elements of the semiring <A>semiring</A>.
+#! For example, the elements of the (semi)ring `Integers` are identified by `IsInt`.
+#! If no filter uniquely identifying the elements of the semiring exists,
+#! the most special filter available should be chosen.
+#! @Arguments semiring
+DeclareAttribute( "SemiringElementFilter",
+                  IsSemiringElement );
+
+SetSemiringFilter( Integers, IsIntegers );
+SetSemiringElementFilter( Integers, IsInt );
+
+#! @Description
+#! A filter inheriting from `IsRingWithOne` which uniquely identifies the ring <A>ring</A>.
 #! For example, the ring `Integers` is identified by `IsIntegers`.
 #! If no filter uniquely identifying the ring exists,
 #! the most special filter available should be chosen.
 #! @Arguments ring
-DeclareAttribute( "RingFilter",
+DeclareAttribute( "SemiringFilter",
                   IsRing );
 
 #! @Description
@@ -99,14 +132,14 @@ DeclareAttribute( "RingFilter",
 #! If no filter uniquely identifying the elements of the ring exists,
 #! the most special filter available should be chosen.
 #! @Arguments ring
-DeclareAttribute( "RingElementFilter",
+DeclareAttribute( "SemiringElementFilter",
                   IsRing );
 
-SetRingFilter( Integers, IsIntegers );
-SetRingElementFilter( Integers, IsInt );
+SetSemiringFilter( Integers, IsIntegers );
+SetSemiringElementFilter( Integers, IsInt );
 
-SetRingFilter( Rationals, IsRationals );
-SetRingElementFilter( Rationals, IsRat );
+SetSemiringFilter( Rationals, IsRationals );
+SetSemiringElementFilter( Rationals, IsRat );
 
 ####################################
 #

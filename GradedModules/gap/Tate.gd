@@ -28,13 +28,13 @@ DeclareOperation( "MinimizeLowestDegreeMorphism",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "TateResolution",
-        [ IsHomalgRing, IsObject, IsObject, IsHomalgRingOrModule ] );
+        [ IsHomalgRing, IsObject, IsObject, IsHomalgSemiringOrModule ] );
 
 DeclareOperation( "TateResolution",
-        [ IsHomalgRingOrModule, IsHomalgRing, IsObject, IsObject ] );
+        [ IsHomalgSemiringOrModule, IsHomalgRing, IsObject, IsObject ] );
 
 DeclareOperation( "TateResolution",
-        [ IsHomalgRingOrModule, IsObject, IsObject ] );
+        [ IsHomalgSemiringOrModule, IsObject, IsObject ] );
 
 DeclareOperation( "TateResolution",
         [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ] );
@@ -49,13 +49,13 @@ DeclareOperation( "ResolveLinearly",
         [ IsInt, IsHomalgComplex ] );
 
 DeclareOperation( "LinearStrandOfTateResolution",
-        [ IsHomalgRing, IsObject, IsObject, IsHomalgRingOrModule ] );
+        [ IsHomalgRing, IsObject, IsObject, IsHomalgSemiringOrModule ] );
 
 DeclareOperation( "LinearStrandOfTateResolution",
-        [ IsHomalgRingOrModule, IsHomalgRing, IsObject, IsObject ] );
+        [ IsHomalgSemiringOrModule, IsHomalgRing, IsObject, IsObject ] );
 
 DeclareOperation( "LinearStrandOfTateResolution",
-        [ IsHomalgRingOrModule, IsObject, IsObject ] );
+        [ IsHomalgSemiringOrModule, IsObject, IsObject ] );
 
 DeclareOperation( "LinearStrandOfTateResolution",
         [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ] );

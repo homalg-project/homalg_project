@@ -23,7 +23,7 @@ DeclareRepresentation( "IshomalgExternalRingObjectRep",
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsHomalgExternalRingRep",
-        IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgRing and IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
 
 ##  <#GAPDoc Label="IsHomalgExternalRingElementRep">
@@ -501,8 +501,8 @@ InstallGlobalFunction( CreateHomalgExternalRing,
     ## create the external ring
     R :=  CallFuncList( CreateHomalgRing, ar );
     
-    SetRingFilter( R, IsHomalgRing );
-    SetRingElementFilter( R, IsHomalgRingElement );
+    SetSemiringFilter( R, IsHomalgRing );
+    SetSemiringElementFilter( R, IsHomalgRingElement );
     
     ## for the view methods:
     ## <A matrix over an external ring>

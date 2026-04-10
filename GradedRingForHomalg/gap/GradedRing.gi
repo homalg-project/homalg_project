@@ -21,7 +21,7 @@ DeclareRepresentation( "IsHomalgGradedRingOrGradedModuleRep",
 ##    <Description>
 ##      The representation of &homalg; graded rings. <P/>
 ##      (It is a subrepresentation of the &GAP; representation <Br/>
-##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsHomalgSemiringOrFinitelyPresentedModuleRep</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsHomalgGradedRingRep",
         IsHomalgGradedRing and
@@ -780,8 +780,8 @@ InstallMethod( GradedRing,
     ## create the graded ring
     S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgMatrixOverGradedRing" ) ], GradedRingElement, RP );
     
-    SetRingFilter( S, IsHomalgGradedRingRep );
-    SetRingElementFilter( S, IsHomalgGradedRingElementRep );
+    SetSemiringFilter( S, IsHomalgGradedRingRep );
+    SetSemiringElementFilter( S, IsHomalgGradedRingElementRep );
     
     SetConstructorForHomalgMatrices( S,
       function( arg )

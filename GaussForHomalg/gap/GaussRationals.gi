@@ -114,8 +114,8 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     
     R := CreateHomalgRing( Rationals );
     
-    SetRingFilter( R, IsHomalgRing );
-    SetRingElementFilter( R, IsRat );
+    SetSemiringFilter( R, IsHomalgRing );
+    SetSemiringElementFilter( R, IsRat );
     
     SetIsRationalsForHomalg( R, true );
     

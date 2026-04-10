@@ -101,9 +101,9 @@ DeclareOperation( "KoszulCocomplex",
 DeclareAttribute( "GradeIdeal",
         IsHomalgModule );
 DeclareOperation( "GradeIdealOnModule",
-        [ IsHomalgModule, IsHomalgRingOrModule ] );
+        [ IsHomalgModule, IsHomalgSemiringOrModule ] );
 DeclareOperation( "GradeList",
-        [ IsList, IsHomalgRingOrModule ] );
+        [ IsList, IsHomalgSemiringOrModule ] );
 DeclareGlobalFunction( "Grade_UsingKoszulCocomplex" );
 
 
