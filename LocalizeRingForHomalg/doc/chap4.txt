@@ -37,12 +37,12 @@
   [33X[0;0YThe representation of [5Xhomalg[105X local rings.[133X
   
   [33X[0;0Y(It is a subrepresentation of the [5XGAP[105X representation[133X
-  [33X[0;0Y[10XIsHomalgRingOrFinitelyPresentedModuleRep[110X.)[133X
+  [33X[0;0Y[10XIsHomalgSemiringOrFinitelyPresentedModuleRep[110X.)[133X
   
   [4X[32X  Code  [32X[104X
     [4XDeclareRepresentation( "IsHomalgLocalRingRep",[104X
     [4X        IsHomalgRing[104X
-    [4X        and IsHomalgRingOrFinitelyPresentedModuleRep,[104X
+    [4X        and IsHomalgSemiringOrFinitelyPresentedModuleRep,[104X
     [4X        [ "ring" ] );[104X
   [4X[32X[104X
   
