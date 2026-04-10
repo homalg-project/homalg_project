@@ -102,6 +102,7 @@ Dependencies := rec(
                    [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],
+  NeededSystemPackages := rec( Ubuntu := [["singular"]], Homebrew := [["singular"]] ),
   ExternalConditions := []
                       
 ),
