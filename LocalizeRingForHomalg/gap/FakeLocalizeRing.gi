@@ -8,7 +8,7 @@
 
 DeclareRepresentation( "IsHomalgFakeLocalRingRep",
         IsHomalgRing
-        and IsHomalgRingOrFinitelyPresentedModuleRep,
+        and IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "ring" ] );
 
 

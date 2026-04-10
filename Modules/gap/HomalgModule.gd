@@ -21,7 +21,7 @@
 ##    <Description>
 ##      The &GAP; category of &homalg; modules or maps. <P/>
 ##      (It is a subcategory of the &GAP; categories
-##      <C>IsHomalgRingOrModule</C> and <C>IsHomalgStaticObject</C>.)
+##      <C>IsHomalgSemiringOrModule</C> and <C>IsHomalgStaticObject</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgModuleOrMap",
         IsHomalgStaticObjectOrMorphism );
@@ -37,10 +37,10 @@ DeclareCategory( "IsHomalgModuleOrMap",
 ##    <Description>
 ##      The &GAP; category of &homalg; modules. <P/>
 ##      (It is a subcategory of the &GAP; categories
-##      <C>IsHomalgRingOrModule</C> and <C>IsHomalgStaticObject</C>.)
+##      <C>IsHomalgSemiringOrModule</C> and <C>IsHomalgStaticObject</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgModule",
-        IsHomalgRingOrModule and
+        IsHomalgSemiringOrModule and
         IsHomalgModuleOrMap and
         IsHomalgStaticObject );
 ##  ]]></Listing>

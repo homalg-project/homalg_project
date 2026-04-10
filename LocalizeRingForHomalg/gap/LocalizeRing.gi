@@ -13,11 +13,11 @@
 ##    <Description>
 ##      The representation of &homalg; local rings. <P/>
 ##      (It is a subrepresentation of the &GAP; representation <Br/>
-##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsHomalgSemiringOrFinitelyPresentedModuleRep</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsHomalgLocalRingRep",
         IsHomalgRing
-        and IsHomalgRingOrFinitelyPresentedModuleRep,
+        and IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "ring" ] );
 ##  ]]></Listing>
 ##    </Description>

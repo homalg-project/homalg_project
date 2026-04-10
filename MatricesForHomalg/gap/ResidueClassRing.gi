@@ -17,13 +17,13 @@
 ##    <Description>
 ##      The representation of &homalg; residue class rings. <P/>
 ##      (It is a subrepresentation of the &GAP; representation <Br/>
-##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsHomalgSemiringOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsHomalgResidueClassRingRep",
-        IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgRing and IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "ring" ] );
 
 ##  <#GAPDoc Label="IsHomalgResidueClassRingElementRep">
@@ -578,8 +578,8 @@ InstallMethod( \/, ## this operation is declared in the file HomalgRelations.gd
     ## create the residue class ring
     S := CreateHomalgRing( R, [ TheTypeHomalgResidueClassRing, TheTypeHomalgResidueClassMatrix ], HomalgResidueClassRingElement, RP );
     
-    SetRingFilter( S, IsHomalgResidueClassRingRep );
-    SetRingElementFilter( S, IsHomalgResidueClassRingElementRep );
+    SetSemiringFilter( S, IsHomalgResidueClassRingRep );
+    SetSemiringElementFilter( S, IsHomalgResidueClassRingElementRep );
     
     ## the constructor of matrices over residue class rings
     SetConstructorForHomalgMatrices( S,

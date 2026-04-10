@@ -22,7 +22,7 @@
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsHomalgInternalRingRep",
-        IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgRing and IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
 
 ##
@@ -2227,6 +2227,36 @@ InstallGlobalFunction( CreateHomalgRing,
     
 end );
 
+DeclareFilter( "IsHomalgSemiringOfNaturalNumbers" );
+
+##  <#GAPDoc Label="HomalgSemiringOfNaturalNumbers">
+##  <ManSection>
+##    <Func Arg="" Name="HomalgSemiringOfNaturalNumbers" Label="constructor for the integers"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Func Arg="c" Name="HomalgSemiringOfNaturalNumbers" Label="constructor for the residue class rings of the integers"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      Returns the semiring of natural numbers <M>&NN;</M> for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( HomalgSemiringOfNaturalNumbers,
+  function( arg )
+    local R;
+    
+    R := CreateHomalgRing( Integers );
+    homalgTable( R )!.RingName := R -> "N";
+    SetFilterObj( R, IsHomalgSemiringOfNaturalNumbers );
+    SetSemiringFilter( R, IsHomalgSemiring );
+    SetSemiringElementFilter( R, IsInt );
+    
+    SetIsCommutative( R, true );
+    
+    return R;
+    
+end );
+
 ##  <#GAPDoc Label="HomalgRingOfIntegers">
 ##  <ManSection>
 ##    <Func Arg="" Name="HomalgRingOfIntegers" Label="constructor for the integers"/>
@@ -2260,8 +2290,8 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     if nargs = 0 or arg[1] = 0 then
         c := 0;
         R := CreateHomalgRing( Integers );
-        SetRingFilter( R, IsHomalgRing );
-        SetRingElementFilter( R, IsInt );
+        SetSemiringFilter( R, IsHomalgRing );
+        SetSemiringElementFilter( R, IsInt );
     elif IsInt( arg[1] ) then
         c := arg[1];
         if Length( Collected( FactorsInt( c ) ) ) = 1 and IsPackageMarkedForLoading( "GaussForHomalg", ">= 2018.09.20") then
@@ -2289,6 +2319,17 @@ InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
         [ IsInt, IsHomalgInternalRingRep ],
         
   HomalgRingOfIntegers );
+
+##
+InstallOtherMethod( \in,
+        "for an object and a homalg internal ring",
+        [ IsObject, IsHomalgSemiringOfNaturalNumbers ], 10000001,
+        
+  function( r, R )
+    
+    return IsInt( r ) and r >= 0;
+    
+end );
 
 ##
 InstallOtherMethod( \in,

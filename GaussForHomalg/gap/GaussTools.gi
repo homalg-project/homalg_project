@@ -408,8 +408,8 @@ InstallGlobalFunction( HOMALG_RING_OF_INTEGERS_PRIME_POWER_HELPER,
         F := GF( c, d );
         R := CreateHomalgRing( F );
         
-        SetRingFilter( R, IsHomalgRing );
-        SetRingElementFilter( R, IsFFE );
+        SetSemiringFilter( R, IsHomalgRing );
+        SetSemiringElementFilter( R, IsFFE );
         
         R!.NameOfPrimitiveElement := Concatenation( "Z", String( c ), "_", String( d ) );
         SetPrimitiveElement( R, PrimitiveElement( F ) / R );
@@ -418,8 +418,8 @@ InstallGlobalFunction( HOMALG_RING_OF_INTEGERS_PRIME_POWER_HELPER,
     else
         R := CreateHomalgRing( ZmodnZ( c ) );
         
-        SetRingFilter( R, IsHomalgRing );
-        SetRingElementFilter( R, IsZmodnZObj );
+        SetSemiringFilter( R, IsHomalgRing );
+        SetSemiringElementFilter( R, IsZmodnZObj );
     fi;
     return R;
 end );

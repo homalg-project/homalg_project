@@ -304,7 +304,7 @@ end );
 ##
 InstallMethod( TateResolution,
         "for homalg elements",
-        [ IsHomalgRing, IsObject, IsObject, IsHomalgRingOrModule ],
+        [ IsHomalgRing, IsObject, IsObject, IsHomalgSemiringOrModule ],
         
   function( M, degree_lowest, degree_highest, R )
     
@@ -712,7 +712,7 @@ end );
 ##
 InstallMethod( LinearStrandOfTateResolution,
         "for homalg elements",
-        [ IsHomalgRing, IsObject, IsObject, IsHomalgRingOrModule ],
+        [ IsHomalgRing, IsObject, IsObject, IsHomalgSemiringOrModule ],
         
   function( M, degree_lowest, degree_highest, R )
     
@@ -759,7 +759,7 @@ end );
 ##
 InstallMethod( LinearStrandOfTateResolution,
         "for homalg elements",
-        [ IsHomalgRingOrModule, IsHomalgRing, IsObject, IsObject ],
+        [ IsHomalgSemiringOrModule, IsHomalgRing, IsObject, IsObject ],
         
   function( M, R, degree_lowest, degree_highest )
     

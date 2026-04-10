@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 
 PackageName := "HomalgToCAS",
 Subtitle := "A window to the outer world",
-Version := "2025.12-01",
+Version := "2026.04-01",
 Date := (function ( ) if IsBound( GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE ) then return GAPInfo.SystemEnvironment.GAP_PKG_RELEASE_DATE; else return Concatenation( ~.Version{[ 1 .. 4 ]}, "-", ~.Version{[ 6, 7 ]}, "-01" ); fi; end)( ),
 License := "GPL-2.0-or-later",
 
@@ -160,8 +160,8 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.13.0",
   NeededOtherPackages := [
-                [ "ToolsForHomalg", ">= 2023.11-01" ],
-                [ "MatricesForHomalg", ">= 2023.08-01" ],
+                [ "ToolsForHomalg", ">= 2026.04-01" ],
+                [ "MatricesForHomalg", ">= 2026.04-01" ],
                 [ "GAPDoc", ">= 1.0" ]
                 ],
   SuggestedOtherPackages := [
