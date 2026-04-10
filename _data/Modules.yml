@@ -1,7 +1,7 @@
 name: Modules
-version: "2025.12-01"
+version: "2026.04-01"
 license: "GPL-2.0-or-later"
-date: 2025-12-23
+date: 2026-04-10
 description: |
     A homalg based package for the Abelian category of finitely presented modules over computable rings
 
@@ -26,17 +26,17 @@ maintainers:
 GAP: ">= 4.13.0"
 
 needed-pkgs:
-    - name: "MatricesForHomalg"
-      version: ">=2023.10-01"
-      url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
     - name: "ToolsForHomalg"
-      version: ">=2013.04.12"
+      version: ">= 2026.04-01"
       url: "https://homalg-project.github.io/pkg/ToolsForHomalg"
+    - name: "MatricesForHomalg"
+      version: ">= 2026.04-01"
+      url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
     - name: "homalg"
-      version: ">=2022.02-01"
+      version: ">= 2022.02-01"
       url: "https://homalg-project.github.io/pkg/homalg"
     - name: "GaussForHomalg"
-      version: ">=2023.08-01"
+      version: ">= 2026.04-01"
       url: "https://homalg-project.github.io/pkg/GaussForHomalg"
     - name: "GAPDoc"
       version: ">= 1.0"
@@ -48,11 +48,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/Modules/PackageInfo
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2025.12-01/Modules-2025.12-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2026.04-01/Modules-2026.04-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2025.12-01/Modules-2025.12-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2026.04-01/Modules-2026.04-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/Modules-2025.12-01/Modules-2025.12-01-manual.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/Modules-2026.04-01/Modules-2026.04-01-manual.pdf
 
 abstract: |
     The <span class="pkgname">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings
@@ -64,10 +64,10 @@ keywords: |
     modules, module homomorphisms, functor, ext, tor.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BBDGLW23</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Diebold, F., Gutsche, S., Lange-Hegermann, M. and Wagh, V.</b>,
+    [<span class='BibKey'>BBDGLW10</span>]   <b class='BibAuthor'>Bächler, T., Barakat, M., Diebold, F., Gutsche, S., Lange-Hegermann, M. and Wagh, V.</b>,
      <i class='BibTitle'>Modules, A homalg based package for the Abelian category of finitely presented modules over computable rings,
-             Version 2025.12-01</i>
-     (<span class='BibYear'>2-23</span>)<br />
+             Version 2026.04-01</i>
+     (<span class='BibYear'>4-10</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/Modules">https://homalg-project.github.io/pkg/Modules</a></span>.
     </p>
@@ -80,15 +80,15 @@ bibtex: |
                           and Wagh, V.},
       title =            {{Modules},  {A  homalg  based  package for the Abelian
                           category of finitely presented modules over computable
-                          rings}, {V}ersion 2025.12\texttt{\symbol{45}}01},
-      month =            {5\texttt{\symbol{45}}},
-      year =             {2\texttt{\symbol{45}}23},
+                          rings}, {V}ersion 2026.04\texttt{\symbol{45}}01},
+      month =            {6\texttt{\symbol{45}}},
+      year =             {4\texttt{\symbol{45}}10},
       note =             {GAP package},
       howpublished =     {\href   {https://homalg-project.github.io/pkg/Modules}
                           {\texttt{https://homalg\texttt{\symbol{45}}project.github.io/}\discretionary
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{Modules}}},
       keywords =         {modules; module homomorphisms; functor; ext; tor},
-      printedkey =       {BBDGLW23}
+      printedkey =       {BBDGLW10}
     }
 

@@ -117,12 +117,12 @@
 
 <p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> modules.</p>
 
-<p>(It is a subcategory of the <strong class="pkg">GAP</strong> categories <code class="code">IsHomalgRingOrModule</code> and <code class="code">IsHomalgStaticObject</code>.)</p>
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> categories <code class="code">IsHomalgSemiringOrModule</code> and <code class="code">IsHomalgStaticObject</code>.)</p>
 
 
 <div class="example"><pre>
 DeclareCategory( "IsHomalgModule",
-        IsHomalgRingOrModule and
+        IsHomalgSemiringOrModule and
         IsHomalgModuleOrMap and
         IsHomalgStaticObject );
 </pre></div>
@@ -155,14 +155,14 @@ DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
 
 <p>The <strong class="pkg">GAP</strong> representation of finitley presented <strong class="pkg">homalg</strong> modules.</p>
 
-<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgModule</code> (<a href="chap7_mj.html#X8429977B7FD30F32"><span class="RefLink">7.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representations <code class="code">IsFinitelyPresentedModuleOrSubmoduleRep</code>, <code class="code">IsStaticFinitelyPresentedObjectRep</code>, and <code class="code">IsHomalgRingOrFinitelyPresentedModuleRep</code>.)</p>
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgModule</code> (<a href="chap7_mj.html#X8429977B7FD30F32"><span class="RefLink">7.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representations <code class="code">IsFinitelyPresentedModuleOrSubmoduleRep</code>, <code class="code">IsStaticFinitelyPresentedObjectRep</code>, and <code class="code">IsHomalgSemiringOrFinitelyPresentedModuleRep</code>.)</p>
 
 
 <div class="example"><pre>
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsFinitelyPresentedModuleOrSubmoduleRep and
         IsStaticFinitelyPresentedObjectRep and
-        IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations",
           "PresentationMorphisms",
           "Resolutions",
@@ -179,14 +179,14 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 
 <p>The <strong class="pkg">GAP</strong> representation of finitley generated <strong class="pkg">homalg</strong> submodules.</p>
 
-<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgModule</code> (<a href="chap7_mj.html#X8429977B7FD30F32"><span class="RefLink">7.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representations <code class="code">IsFinitelyPresentedModuleOrSubmoduleRep</code>, <code class="code">IsStaticFinitelyPresentedSubobjectRep</code>, and <code class="code">IsHomalgRingOrFinitelyPresentedModuleRep</code>.)</p>
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgModule</code> (<a href="chap7_mj.html#X8429977B7FD30F32"><span class="RefLink">7.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representations <code class="code">IsFinitelyPresentedModuleOrSubmoduleRep</code>, <code class="code">IsStaticFinitelyPresentedSubobjectRep</code>, and <code class="code">IsHomalgSemiringOrFinitelyPresentedModuleRep</code>.)</p>
 
 
 <div class="example"><pre>
 DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
         IsFinitelyPresentedModuleOrSubmoduleRep and
         IsStaticFinitelyPresentedSubobjectRep and
-        IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgSemiringOrFinitelyPresentedModuleRep,
         [ "map_having_subobject_as_its_image" ] );
 </pre></div>
 

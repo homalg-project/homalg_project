@@ -36,12 +36,12 @@
   
   [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X modules.[133X
   
-  [33X[0;0Y(It  is  a  subcategory  of  the  [5XGAP[105X  categories  [10XIsHomalgRingOrModule[110X  and
+  [33X[0;0Y(It  is  a  subcategory  of  the [5XGAP[105X categories [10XIsHomalgSemiringOrModule[110X and
   [10XIsHomalgStaticObject[110X.)[133X
   
   [4X[32X  Code  [32X[104X
     [4XDeclareCategory( "IsHomalgModule",[104X
-    [4X        IsHomalgRingOrModule and[104X
+    [4X        IsHomalgSemiringOrModule and[104X
     [4X        IsHomalgModuleOrMap and[104X
     [4X        IsHomalgStaticObject );[104X
   [4X[32X[104X
@@ -74,13 +74,13 @@
   [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgModule[102X ([14X7.1-1[114X), which is
   a       subrepresentation       of       the       [5XGAP[105X       representations
   [10XIsFinitelyPresentedModuleOrSubmoduleRep[110X, [10XIsStaticFinitelyPresentedObjectRep[110X,
-  and [10XIsHomalgRingOrFinitelyPresentedModuleRep[110X.)[133X
+  and [10XIsHomalgSemiringOrFinitelyPresentedModuleRep[110X.)[133X
   
   [4X[32X  Code  [32X[104X
     [4XDeclareRepresentation( "IsFinitelyPresentedModuleRep",[104X
     [4X        IsFinitelyPresentedModuleOrSubmoduleRep and[104X
     [4X        IsStaticFinitelyPresentedObjectRep and[104X
-    [4X        IsHomalgRingOrFinitelyPresentedModuleRep,[104X
+    [4X        IsHomalgSemiringOrFinitelyPresentedModuleRep,[104X
     [4X        [ "SetsOfGenerators", "SetsOfRelations",[104X
     [4X          "PresentationMorphisms",[104X
     [4X          "Resolutions",[104X
@@ -99,13 +99,13 @@
   a       subrepresentation       of       the       [5XGAP[105X       representations
   [10XIsFinitelyPresentedModuleOrSubmoduleRep[110X,
   [10XIsStaticFinitelyPresentedSubobjectRep[110X,                                   and
-  [10XIsHomalgRingOrFinitelyPresentedModuleRep[110X.)[133X
+  [10XIsHomalgSemiringOrFinitelyPresentedModuleRep[110X.)[133X
   
   [4X[32X  Code  [32X[104X
     [4XDeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",[104X
     [4X        IsFinitelyPresentedModuleOrSubmoduleRep and[104X
     [4X        IsStaticFinitelyPresentedSubobjectRep and[104X
-    [4X        IsHomalgRingOrFinitelyPresentedModuleRep,[104X
+    [4X        IsHomalgSemiringOrFinitelyPresentedModuleRep,[104X
     [4X        [ "map_having_subobject_as_its_image" ] );[104X
   [4X[32X[104X
   
