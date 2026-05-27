@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "LocalizeRingForHomalg",
 Subtitle := "A Package for Localization of Polynomial Rings",
-Version := "2026.04-01",
-Date := "2026-04-10",
+Version := "2026.05-01",
+Date := "2026-05-27",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -99,9 +99,9 @@ Dependencies := rec(
                    [ "MatricesForHomalg", ">= 2026.04-01" ],
                    [ "HomalgToCAS", ">= 2026.04-01" ],
                    [ "Modules", ">= 2026.04-01" ],
-                   [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],
+  NeededSystemPackages := rec( Ubuntu := [["singular"]], Homebrew := [["singular"]] ),
   ExternalConditions := []
                       
 ),
