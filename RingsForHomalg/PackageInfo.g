@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "RingsForHomalg",
 Subtitle := "Dictionaries of external rings",
-Version := "2025.12-01",
-Date := "2025-12-23",
+Version := "2026.05-01",
+Date := "2026-05-27",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -210,9 +210,9 @@ Dependencies := rec(
                    [ "MatricesForHomalg", ">= 2024.11-02" ],
                    [ "HomalgToCAS", ">= 2023.08-01" ],
                    [ "GaussForHomalg", ">= 2023.08-01" ],
-                   [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],
+  NeededSystemPackages := rec( Ubuntu := [["singular"]], Homebrew := [["singular"]] ),
   ExternalConditions := []
                       
 ),
