@@ -99,7 +99,6 @@ Dependencies := rec(
                    [ "MatricesForHomalg", ">= 2026.04-01" ],
                    [ "HomalgToCAS", ">= 2026.04-01" ],
                    [ "Modules", ">= 2026.04-01" ],
-                   [ "GAPDoc", ">= 1.0" ]
                    ],
   SuggestedOtherPackages := [ ],
   NeededSystemPackages := rec( Ubuntu := [["singular"]], Homebrew := [["singular"]] ),
