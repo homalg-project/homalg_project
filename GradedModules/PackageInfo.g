@@ -150,7 +150,7 @@ Dependencies := rec(
                    [ "GradedRingForHomalg", ">= 2023.08-01" ],
                    [ "homalg", ">= 2022.02-01" ],
                    [ "Modules", ">= 2026.04-01" ],
-                   [ "GAPDoc", ">= 1.0" ] ],
+                   ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       
