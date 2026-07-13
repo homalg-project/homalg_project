@@ -197,4 +197,51 @@ ci-test_SCO:
 ci-test_ToolsForHomalg:
 	$(MAKE) -C ToolsForHomalg ci-test
 
+################################
+match_tests_to_examples: match_tests_to_examples_homalg match_tests_to_examples_4ti2Interface match_tests_to_examples_ExamplesForHomalg match_tests_to_examples_Gauss match_tests_to_examples_GaussForHomalg match_tests_to_examples_GradedModules match_tests_to_examples_GradedRingForHomalg match_tests_to_examples_HomalgToCAS match_tests_to_examples_IO_ForHomalg match_tests_to_examples_LocalizeRingForHomalg match_tests_to_examples_MatricesForHomalg match_tests_to_examples_Modules match_tests_to_examples_RingsForHomalg match_tests_to_examples_SCO match_tests_to_examples_ToolsForHomalg
+
+match_tests_to_examples_homalg:
+	$(MAKE) -C homalg match_tests_to_examples
+
+match_tests_to_examples_4ti2Interface:
+	$(MAKE) -C 4ti2Interface match_tests_to_examples
+
+match_tests_to_examples_ExamplesForHomalg:
+	$(MAKE) -C ExamplesForHomalg match_tests_to_examples
+
+match_tests_to_examples_Gauss:
+	$(MAKE) -C Gauss match_tests_to_examples
+
+match_tests_to_examples_GaussForHomalg:
+	$(MAKE) -C GaussForHomalg match_tests_to_examples
+
+match_tests_to_examples_GradedModules:
+	$(MAKE) -C GradedModules match_tests_to_examples
+
+match_tests_to_examples_GradedRingForHomalg:
+	$(MAKE) -C GradedRingForHomalg match_tests_to_examples
+
+match_tests_to_examples_HomalgToCAS:
+	$(MAKE) -C HomalgToCAS match_tests_to_examples
+
+match_tests_to_examples_IO_ForHomalg:
+	$(MAKE) -C IO_ForHomalg match_tests_to_examples
+
+match_tests_to_examples_LocalizeRingForHomalg:
+	$(MAKE) -C LocalizeRingForHomalg match_tests_to_examples
+
+match_tests_to_examples_MatricesForHomalg:
+	$(MAKE) -C MatricesForHomalg match_tests_to_examples
+
+match_tests_to_examples_Modules:
+	$(MAKE) -C Modules match_tests_to_examples
+
+match_tests_to_examples_RingsForHomalg:
+	$(MAKE) -C RingsForHomalg match_tests_to_examples
+
+match_tests_to_examples_SCO:
+	$(MAKE) -C SCO match_tests_to_examples
+
+match_tests_to_examples_ToolsForHomalg:
+	$(MAKE) -C ToolsForHomalg match_tests_to_examples
 # END PACKAGE JANITOR
