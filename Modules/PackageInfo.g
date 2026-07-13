@@ -147,7 +147,7 @@ Dependencies := rec(
                    [ "MatricesForHomalg", ">= 2026.04-01" ],
                    [ "homalg", ">= 2022.02-01" ],
                    [ "GaussForHomalg", ">= 2026.04-01" ],
-                   [ "GAPDoc", ">= 1.0" ] ],
+                   ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       

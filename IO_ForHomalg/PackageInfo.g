@@ -130,7 +130,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.13.0",
   NeededOtherPackages := [ [ "IO", ">= 2.3" ], [ "HomalgToCAS", ">= 2009.06.18" ] ],
-  SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
+  SuggestedOtherPackages := [],
   ExternalConditions := []
                       
 ),

@@ -162,7 +162,6 @@ Dependencies := rec(
   NeededOtherPackages := [
                 [ "ToolsForHomalg", ">= 2026.04-01" ],
                 [ "MatricesForHomalg", ">= 2026.04-01" ],
-                [ "GAPDoc", ">= 1.0" ]
                 ],
   SuggestedOtherPackages := [
                 [ "IO", ">= 2.3" ],

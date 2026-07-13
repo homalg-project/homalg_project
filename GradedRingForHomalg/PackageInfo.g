@@ -148,7 +148,7 @@ Dependencies := rec(
                    [ "RingsForHomalg", ">= 2023.08-01" ],
                    [ "homalg", ">=2011.08.16" ],
                    [ "Modules", ">= 2026.04-01" ],
-                   [ "GAPDoc", ">= 1.0" ] ],
+                   ],
   SuggestedOtherPackages := [
                    [  "NConvex", "2020.03.02" ],
                    [  "4ti2Interface", "2019.09.03" ] ],

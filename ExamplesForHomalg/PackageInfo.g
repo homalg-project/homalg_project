@@ -102,7 +102,7 @@ Dependencies := rec(
                 [ "Modules", ">= 2023.10-01" ],
                 [ "homalg", ">= 2015.06.01" ],
                 [ "GaussForHomalg", ">=2023.08-01" ],
-                [ "GAPDoc", ">= 1.1" ] ],
+                ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       
