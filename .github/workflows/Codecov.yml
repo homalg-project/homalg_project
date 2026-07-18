@@ -1,0 +1,51 @@
+name: Codecov
+
+on:
+  workflow_run:
+    workflows: ["Tests"]
+    types:
+      - completed
+
+jobs:
+  upload:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event != 'schedule'
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: coverage
+          path: /tmp/coverage-artifacts
+          merge-multiple: true
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore coverage files
+        run: |
+          cp -v /tmp/coverage-artifacts/*.json . 2>/dev/null || true
+      - name: Resolve PR number on PR events
+        id: resolve_pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUMBER=""
+          if [ "${{ github.event.workflow_run.event }}" = "pull_request" ]; then
+            HEAD="${{ github.event.workflow_run.head_repository.owner.login }}:${{ github.event.workflow_run.head_branch }}"
+            PR_NUMBER=$(gh api "repos/${{ github.repository }}/pulls?state=all&head=${HEAD}" --jq ".[0].number // empty")
+          fi
+          echo "pr_number=${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "Resolved PR: ${PR_NUMBER:-(none)}"
+      - name: Upload to Codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          CODECOV_COMMIT_SHA: ${{ github.event.workflow_run.head_sha }}
+          CODECOV_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          CODECOV_PR: ${{ steps.resolve_pr.outputs.pr_number }}
+        run: ./dev/upload_codecov.sh

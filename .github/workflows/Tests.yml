@@ -37,9 +37,8 @@ jobs:
         run: |
           curl --fail -X PUT -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/workflows/Tests.yml/enable"
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          # the persisted token interferes with the subsplit token used below
           persist-credentials: false
           fetch-depth: 0
       - name: Move checked out repo to GAP user root dir
@@ -74,10 +73,27 @@ jobs:
       - name: Test homalg_project
         run: |
           make -C homalg_project --trace -j $(nproc) --output-sync ci-test
-      - name: Release package or simulate release
+      - name: Process coverage files
+        if: always() && matrix.image == 'ghcr.io/homalg-project/gap-docker:latest'
         run: |
           cd homalg_project
           python3 dev/process_coverage.py
+      - name: Collect coverage files
+        if: always() && github.event_name != 'schedule' && matrix.image == 'ghcr.io/homalg-project/gap-docker:latest'
+        run: |
+          mkdir -p /tmp/coverage-collect
+          cp homalg_project/coverage*.json /tmp/coverage-collect/ 2>/dev/null || true
+      - name: Upload coverage artifact
+        if: always() && github.event_name != 'schedule' && matrix.image == 'ghcr.io/homalg-project/gap-docker:latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: /tmp/coverage-collect/
+          if-no-files-found: ignore
+          retention-days: 1
+      - name: Release package or simulate release
+        run: |
+          cd homalg_project
           git config --global user.name "Bot"
           git config --global user.email "empty"
           CUR_SHA=$(git rev-parse --verify HEAD)
@@ -89,10 +105,3 @@ jobs:
           else \
             TOKEN="${{ secrets.GITHUB_TOKEN }}" ./dev/simulate_dist.sh; \
           fi
-      - name: Upload code coverage
-        if: github.event_name != 'schedule' && matrix.image == 'ghcr.io/homalg-project/gap-docker:latest'
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: |
-          cd homalg_project
-          ./dev/upload_codecov.sh
