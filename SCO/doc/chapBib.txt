@@ -7,8 +7,8 @@
   categories[117X                                                     (2007--2020),
   ((\url{https://homalg-project.github.io/pkg/homalg})).
   
-  [[20XG\t08[120X]  [16XG\"{o}rtzen,  S.[116X,  [17XSimplicial  cohomology  of  orbifolds[117X,  Master's
-  thesis,           RWTH           Aachen          University          (2008),
+  [[20XG\t08[120X]  [16XG\"ortzen, S.[116X, [17XSimplicial cohomology of orbifolds[117X, Master's thesis,
+  RWTH                 Aachen                University                (2008),
   (\url{https://algebra.mathematik.uni-siegen.de/barakat/goertzen/Diplomarbeit_Simon_Goertzen.pdf}).
   
   [[20XMP99[120X]  [16XMoerdijk,  I.  and Pronk, D. A.[116X, [17XSimplicial cohomology of orbifolds[117X,
