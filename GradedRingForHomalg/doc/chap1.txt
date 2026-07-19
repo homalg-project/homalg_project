@@ -5,7 +5,7 @@
   [1X1.1  [33X[0;0YWhat  is  the  Role  of  the  [5XGradedRingForHomalg[105X[101X[1X Package in the [5Xhomalg[105X[101X[1X[101X
   [1XProject?[133X[101X
   
-  [33X[0;0YThe  [5Xhomalg[105X  project  [hpa10]  aims  at  providing  a  general  and abstract
+  [33X[0;0YThe  [5Xhomalg[105X  project  [{hom}10]  aims  at  providing  a general and abstract
   framework  for  homological  computations.  The  package [5XGradedRingForHomalg[105X
   enables  the  [5Xhomalg[105X  project  to  endow commutative rings in [5Xhomalg[105X with an
   Abelian grading.[133X
