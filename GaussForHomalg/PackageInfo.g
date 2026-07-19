@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "GaussForHomalg",
 Subtitle := "Gauss functionality for the homalg project",
-Version := "2026.04-01",
-Date := "2026-04-10",
+Version := "2026.07-01",
+Date := "2026-07-19",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -83,7 +83,7 @@ Dependencies := rec(
                 [ "ToolsForHomalg", ">= 2026.04-01" ],
                 [ "Gauss", ">= 2021.04-01" ],
                 [ "MatricesForHomalg", ">= 2026.04-01" ],
-                [ "GAPDoc", ">= 1.0" ] ],
+                ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       

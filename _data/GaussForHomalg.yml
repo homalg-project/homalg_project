@@ -1,7 +1,7 @@
 name: GaussForHomalg
-version: "2026.04-01"
+version: "2026.07-01"
 license: "GPL-2.0-or-later"
-date: 2026-04-10
+date: 2026-07-19
 description: |
     Gauss functionality for the homalg project
 
@@ -25,9 +25,6 @@ needed-pkgs:
     - name: "MatricesForHomalg"
       version: ">= 2026.04-01"
       url: "https://homalg-project.github.io/pkg/MatricesForHomalg"
-    - name: "GAPDoc"
-      version: ">= 1.0"
-      url: "https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
 
 www: https://homalg-project.github.io/pkg/GaussForHomalg
 readme: README.md
@@ -35,11 +32,11 @@ packageinfo: https://homalg-project.github.io/homalg_project/GaussForHomalg/Pack
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2026.04-01/GaussForHomalg-2026.04-01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2026.07-01/GaussForHomalg-2026.07-01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2026.04-01/GaussForHomalg-2026.04-01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2026.07-01/GaussForHomalg-2026.07-01.zip
 
-pdf: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2026.04-01/GaussForHomalg-2026.04-01-manual.pdf
+pdf: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2026.07-01/GaussForHomalg-2026.07-01-manual.pdf
 
 abstract: |
     The <span class="pkgname">GaussForHomalg</span> package provides Gauss functionality for <span class="pkgname">homalg</span> using the package <span class="pkgname">Gauss</span>
@@ -51,10 +48,10 @@ keywords: |
     GaussForHomalg, homalg, Gauss.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>GB10</span>]   <b class='BibAuthor'>Görtzen, S. and Barakat, M.</b>,
+    [<span class='BibKey'>Gör19</span>]   <b class='BibAuthor'>Görtzen, S.</b>,
      <i class='BibTitle'>GaussForHomalg, Gauss functionality for the homalg project,
-             Version 2026.04-01</i>
-     (<span class='BibYear'>4-10</span>)<br />
+             Version 2026.07-01</i>
+     (<span class='BibYear'>7-19</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://homalg-project.github.io/pkg/GaussForHomalg">https://homalg-project.github.io/pkg/GaussForHomalg</a></span>.
     </p>
@@ -62,11 +59,11 @@ citeas: |
 
 bibtex: |
     @misc{ GaussForHomalg,
-      author =           {G{\"o}rtzen, S. and Barakat, M.},
+      author =           {G{\"o}rtzen, S.},
       title =            {{GaussForHomalg},  {Gauss functionality for the homalg
-                          project}, {V}ersion 2026.04\texttt{\symbol{45}}01},
+                          project}, {V}ersion 2026.07\texttt{\symbol{45}}01},
       month =            {6\texttt{\symbol{45}}},
-      year =             {4\texttt{\symbol{45}}10},
+      year =             {7\texttt{\symbol{45}}19},
       note =             {GAP package},
       howpublished =     {\href
                           {https://homalg-project.github.io/pkg/GaussForHomalg}
@@ -74,6 +71,6 @@ bibtex: |
                           {}{}{}\texttt{pkg/}\discretionary
                           {}{}{}\texttt{GaussForHomalg}}},
       keywords =         {GaussForHomalg; homalg; Gauss},
-      printedkey =       {GB10}
+      printedkey =       {G{\"o}r19}
     }
 
