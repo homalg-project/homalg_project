@@ -6,10 +6,10 @@
                      [1X Examples for the [5XGAP[105X Package homalg [101X
   
   
-                                   2025.12-01
+                                   2026.07-01
   
   
-                                23 December 2025
+                                  19 July 2026
   
   
                                 Mohamed Barakat

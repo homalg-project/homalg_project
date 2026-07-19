@@ -11,8 +11,8 @@ SetPackageInfo( rec(
 
 PackageName := "ExamplesForHomalg",
 Subtitle := "Examples for the GAP Package homalg",
-Version := "2025.12-01",
-Date := "2025-12-23",
+Version := "2026.07-01",
+Date := "2026-07-19",
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -102,7 +102,7 @@ Dependencies := rec(
                 [ "Modules", ">= 2023.10-01" ],
                 [ "homalg", ">= 2015.06.01" ],
                 [ "GaussForHomalg", ">=2023.08-01" ],
-                [ "GAPDoc", ">= 1.1" ] ],
+                ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       
