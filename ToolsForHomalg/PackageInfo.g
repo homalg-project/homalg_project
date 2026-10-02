@@ -104,6 +104,13 @@ Dependencies := rec(
                       
 ),
 
+Extensions := [
+  rec(
+    needed := [ [ "JuliaInterface", ">= 0.2" ] ],
+    filename := "gap/Julia.gi",
+  ),
+],
+
 AvailabilityTest := function()
     return true;
   end,

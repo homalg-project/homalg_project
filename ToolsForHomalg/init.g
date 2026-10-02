@@ -31,6 +31,5 @@ ReadPackage( "ToolsForHomalg", "gap/ListsWithAttributes.gd" );
 
 ReadPackage( "ToolsForHomalg", "gap/ZFunctions.gd" );
 
-if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ) then
-    ReadPackage( "ToolsForHomalg", "gap/Julia.gd" );
-fi;
+# only declarations, other packages install methods for them
+ReadPackage( "ToolsForHomalg", "gap/Julia.gd" );
